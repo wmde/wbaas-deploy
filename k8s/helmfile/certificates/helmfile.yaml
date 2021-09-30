@@ -1,0 +1,11 @@
+releases:
+- name: wikibase-cloud-certificates
+  namespace: default
+  chart: ./../../../charts/wikibase-cloud-certificates
+  values:
+  - "values.yaml"
+
+environments:
+  default:
+    values:
+      - ./../../../private.yaml
