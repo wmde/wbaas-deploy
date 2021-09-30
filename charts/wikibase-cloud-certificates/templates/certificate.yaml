@@ -1,0 +1,16 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: {{ .Values.name }}  #should be a value
+  namespace: default
+  labels:
+    app.kubernetes.io/managed-by: ManualGit
+spec:
+  commonName: {{ .Values.commonName }}  #should be a value
+  dnsNames: {{- range .Values.dnsNames }}
+  - {{ . | quote }}
+  {{- end }}  #should be a value
+  issuerRef:
+    kind: ClusterIssuer
+    name: letsencrypt-prod
+  secretName: {{ .Values.secretName }} #should be a value

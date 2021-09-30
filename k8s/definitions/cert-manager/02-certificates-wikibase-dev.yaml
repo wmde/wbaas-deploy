@@ -1,0 +1,15 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: wikibase-dev-tls
+  namespace: default
+  labels:
+    app.kubernetes.io/managed-by: ManualGit
+spec:
+  commonName: '*.wikibase.dev'
+  dnsNames:
+  - '*.wikibase.dev'
+  issuerRef:
+    kind: ClusterIssuer
+    name: letsencrypt-prod
+  secretName: wikibase-dev-tls
