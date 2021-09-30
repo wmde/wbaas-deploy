@@ -1,5 +1,15 @@
-name: wikibase-dev-tls
-commonName: wikibase.dev
-dnsNames:
-  - '*.wikibase.dev'
-secretName: wikibase-dev-tls
+certificates:
+  -
+    name: wikibase-cloud-tls
+    commonName: wikibase.cloud
+    dnsNames:
+      - '*.wikibase.cloud'
+    secretName: wikibase-cloud-tls
+    issuerRef: letsencrypt-prod
+  - 
+    name: wikibase-dev-tls
+    commonName: wikibase.dev
+    dnsNames:
+      - '*.wikibase.dev'
+    secretName: wikibase-dev-tls
+    issuerRef: letsencrypt-staging

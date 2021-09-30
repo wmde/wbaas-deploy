@@ -1,5 +1,1 @@
-name: wikibase-cloud-tls
-commonName: wikibase.cloud
-dnsNames:
-  - '*.example.com'
-secretName: wikibase-cloud-tls
+certificates: []
