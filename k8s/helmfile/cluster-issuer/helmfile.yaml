@@ -8,5 +8,5 @@ releases:
 environments:
   default:
     values:
-      - ./../default.yaml
-      - ./../../../../private/helm/private.yaml
+      - ./../../../private.yaml
+      - ./../../../default.yaml

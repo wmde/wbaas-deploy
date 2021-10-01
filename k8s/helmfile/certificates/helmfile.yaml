@@ -3,9 +3,9 @@ releases:
   namespace: default
   chart: ./../../../charts/wikibase-cloud-certificates
   values:
-  - "values.yaml"
+    - values.yaml
 
 environments:
   default:
     values:
-      - ./../../../private.yaml
+      - ./../../../default.yaml

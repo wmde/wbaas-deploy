@@ -28,11 +28,9 @@ spec:
             key: key.json
             name: clouddns-dns01-solver-svc-acct
       selector:
-        dnsNames:
-        - wbstack.com
-        - '*.wbstack.com'
-        - opencura.com
-        - '*.opencura.com'
-        - '*.wiki.opencura.com'
-        - '*.wikibase.opencura.com'
-        - '*.test.opencura.com'
+        dnsNames: 
+        {{- range .Values.cert.dnsNames }}
+          {{- range . }}
+          {{ . | quote }}
+        {{- end }}
+
