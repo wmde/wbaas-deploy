@@ -5,7 +5,7 @@ certificates:
     dnsNames:
       - '*.wikibase.cloud'
     secretName: wikibase-cloud-tls
-    issuerRef: letsencrypt-prod
+    issuerRef: letsencrypt-staging #letsencrypt-prod
   - 
     name: wikibase-dev-tls
     commonName: wikibase.dev

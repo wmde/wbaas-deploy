@@ -9,4 +9,3 @@ environments:
   default:
     values:
       - ./../../../private.yaml
-      - ./../../../default.yaml

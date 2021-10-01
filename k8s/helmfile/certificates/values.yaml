@@ -1,1 +1,0 @@
-certificates: {{ .environments.values.certificates }}

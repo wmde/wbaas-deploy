@@ -29,8 +29,9 @@ spec:
             name: clouddns-dns01-solver-svc-acct
       selector:
         dnsNames: 
-        {{- range .Values.cert.dnsNames }}
-          {{- range . }}
-          {{ . | quote }}
+        {{- range .Values.certificates }}
+          {{- range .dnsNames }}
+            - {{ . | quote }}
+          {{- end }}
         {{- end }}
 
