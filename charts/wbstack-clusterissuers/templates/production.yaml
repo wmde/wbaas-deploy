@@ -22,7 +22,7 @@ spec:
     - dns01:
         cloudDNS:
           # The project in which to update the DNS zone
-          project: wbstack
+          project: wikibase-cloud
           # A secretKeyRef to a google cloud json service account
           serviceAccountSecretRef:
             key: key.json
