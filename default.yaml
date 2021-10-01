@@ -4,6 +4,7 @@ certificates:
     commonName: wikibase.cloud
     dnsNames:
       - '*.wikibase.cloud'
+      - 'wikibase.cloud'
     secretName: wikibase-cloud-tls
     issuerRef: letsencrypt-staging #letsencrypt-prod
   - 
@@ -11,5 +12,6 @@ certificates:
     commonName: wikibase.dev
     dnsNames:
       - '*.wikibase.dev'
+      - 'wikibase.dev'
     secretName: wikibase-dev-tls
     issuerRef: letsencrypt-staging
