@@ -8,4 +8,7 @@ releases:
     chart: stable/nginx-ingress
     version: 1.34.3
     values:
-    - "values.yaml"
+      - "values-{{ .Environment.Name }}.yaml"
+
+environments:
+  dev:
