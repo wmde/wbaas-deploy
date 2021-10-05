@@ -1,12 +1,11 @@
 releases:
 - name: clusterissuers
   namespace: cert-manager
-  chart: ./../../../charts/wbstack-clusterissuers
+  chart: ./../../../charts/wikibase-cloud-clusterissuers
   values:
   - "values.yaml.gotmpl"
 
 environments:
   default:
     values:
-      - ./../default.yaml
-      - ./../../../../private/helm/private.yaml
+      - ./../../../private.yaml
