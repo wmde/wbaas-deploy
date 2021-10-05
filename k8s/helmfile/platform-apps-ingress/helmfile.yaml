@@ -1,0 +1,6 @@
+releases:
+- name: platform-apps-ingress
+  namespace: default
+  chart: ./../../../charts/wikibase-dev-ingress
+  values:
+    - "values.yaml"
