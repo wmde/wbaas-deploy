@@ -17,3 +17,5 @@ certificates:
     issuerRef: letsencrypt-prod
 
 gceProject: wikibase-cloud
+uiHostName: www.wikibase.dev
+tlsSecret: wikibase-dev-tls

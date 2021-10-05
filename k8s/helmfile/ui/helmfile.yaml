@@ -1,0 +1,11 @@
+releases:
+- name: ui
+  namespace: default
+  chart: ./../../../charts/ui
+  values:
+  - "values.yaml.gotmpl"
+
+environments:
+  default:
+    values:
+      - "./../../../default.yaml"
