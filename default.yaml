@@ -15,3 +15,5 @@ certificates:
       - 'wikibase.dev'
     secretName: wikibase-dev-tls
     issuerRef: letsencrypt-staging
+
+gceProject: wikibase-cloud
