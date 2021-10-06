@@ -32,7 +32,7 @@ minikube --profile minikube-wbaas dashboard
 
 ### helmfile
 
-Apply the helmfiles that are setup to work with the lcoal environment with `helmfile --environment local diff/apply`.
+Apply the helmfiles that are setup to work with the local environment with `helmfile --environment local diff/apply` in the `k8s/helmfile` directory.
 
 **Note: This is a work in progress**
 
@@ -44,4 +44,6 @@ Setup a Google cloud project, including GKE cluster out of the box using kind in
 
 ### helmfile
 
-Apply helmfiles from the `k8s/helmfile` directory with either `helmfile diff/apply` or `helmfile --environment production diff/apply`
+Apply helmfiles from the `k8s/helmfile` directory with either `helmfile diff/apply` or `helmfile --environment production diff/apply` in the `k8s/helmfile` directory.
+
+Charts that are not contianed within the root `helmfile.yaml` will still need to be applied seperatly from within each directory.
