@@ -1,4 +1,6 @@
 
+# TODO move ip out of private file...
+ip: ""
 services:
   redis:
     password: a-bad-local-redis-password

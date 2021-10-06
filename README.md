@@ -39,6 +39,20 @@ minikube comes with a nice dahsboard that you can turn on with a simple command.
 minikube --profile minikube-wbaas dashboard
 ```
 
+#### LoadBalancer
+
+minikube does not provision LoadBalancer service IP addresses as part of normal operation.
+It will only do this if you additionally run the `tunnel` command.
+As a result if you provision a LoadBalancer services such as an ingress the `EXTERNAL-IP` will continue to say `<pending>` long after creation.
+
+In order to skip out this LoadBalancer stuff you can get minikube to expose the ingress directly on a port.
+
+```sh
+minikube --profile minikube-wbaas service -n kube-system nginx-ingress-default-backend
+```
+
+Note: There is more to making things work lcoally than this and we either need to setup dynamic DNS, or we need to be editing our hosts file!
+
 ### helmfile
 
 Apply the helmfiles that are setup to work with the local environment with `helmfile --environment local diff/apply` in the `k8s/helmfile` directory.

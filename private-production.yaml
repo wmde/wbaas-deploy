@@ -1,3 +1,5 @@
+# TODO move ip out of private file...
+ip: 34.141.93.67
 services:
   app:
     key: u1r09r190u12r09r21j0r21ji0f90jr01
