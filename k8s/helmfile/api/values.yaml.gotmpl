@@ -52,16 +52,16 @@ ingress:
     nginx.ingress.kubernetes.io/use-regex: "true"
     nginx.ingress.kubernetes.io/rewrite-target: /$2
   hosts:
-  - host: api.wbstack.com
+  - host: api.wikibase.dev
     paths:
     - /()(.*)
-  - host: www.wbstack.com
+  - host: api.wikibase.dev
     paths:
     - /api(/|$)(.*)
   tls:
   - hosts:
-    - wbstack.com
-    secretName: wbstack-com-tls-prod
+    - wikibase.dev
+    secretName: wikibase-dev-tls
 app:
   # TODO should be secret?
   key: {{ .Values.services.app.key }}
@@ -79,7 +79,7 @@ app:
     port: {{ .Values.services.redis.port }}
     db: {{ .Values.services.redis.databases.apiDb }}
     cachedb: {{ .Values.services.redis.databases.apiCacheDb }}
-    prefix: wbstack_api
+    prefix: wikibase_dev_api
   db:
     connection: mysql
     readHost: sql-mariadb-slave.default.svc.cluster.local
@@ -93,8 +93,8 @@ app:
     driver: mailgun
     mailgundomain: {{ .Values.external.mailgun.domain }}
     mailgunsecret: {{ .Values.external.mailgun.secret }}
-    fromaddress: noreply@mail.wbstack.com
-    fromname: WB Stack
+    fromaddress: noreply@mail.wikibase.dev # probably needs an account?
+    fromname: Wikibase-dev
   recaptcha:
     sitekey: {{ .Values.external.recaptcha3.sitekey }}
     secret: {{ .Values.external.recaptcha3.secret }}
