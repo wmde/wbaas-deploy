@@ -6,6 +6,17 @@ releases:
   - "values.yaml.gotmpl"
 
 environments:
+  # Default remains for now to leave peoples workflows intact
   default:
     values:
-      - ./../../../private.yaml
+      - ./../../../private-production.yaml
+  # helmfile --environment production diff/apply
+  production:
+    kubeContext: gke_wikibase-cloud_europe-west3-a_wbaas-1
+    values:
+      - ./../../../private-production.yaml
+  # Targetting the kind k8s cluster that can be setup use terraform
+  local:
+    kubeContext: kind-wbaas-local
+    values:
+      - ./../../../private-local.yaml

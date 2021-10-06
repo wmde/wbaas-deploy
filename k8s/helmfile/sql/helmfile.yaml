@@ -15,4 +15,4 @@ releases:
 environments:
   default:
     values:
-      - ./../../../private.yaml
+      - ./../../../private-production.yaml
