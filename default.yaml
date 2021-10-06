@@ -17,5 +17,36 @@ certificates:
     issuerRef: letsencrypt-prod
 
 gceProject: wikibase-cloud
+gceServiceAccountSecret: secret-wikibase-dev-api
+gcsApiStaticBucket: wikibase-dev-static
+
 uiHostName: www.wikibase.dev
 tlsSecret: wikibase-dev-tls
+
+external:
+  mailgun:
+    domain: "wikibase.dev" # dunno if correct
+    secret: "should be secret!"
+  recaptcha3:
+    sitekey: "dunno"
+    secret: "dunno"
+
+services:
+  app:
+    key: "should be secret!"
+    url: https://api.wikibase.dev
+    jwtSecret: "should be secret!"
+  
+  redis:
+    writeHost: false
+    password: "should be secret!"
+    port: 1234
+    databases:
+            apiDb: "apiDb"
+            apiCacheDb: "apiCacheDb"
+  sql:
+    api:
+      db: apidb
+      user: apiuser
+      passwordSecretName: sql-apiuser
+      passwordSecretKey: password
