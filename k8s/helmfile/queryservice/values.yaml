@@ -1,0 +1,19 @@
+image:
+  repository: ghcr.io/wbstack/queryservice
+  tag: "0.3.6_0.6"
+  pullPolicy: Always
+app:
+  heapSize: 1g
+resources:
+  requests:
+    cpu: 0.1
+    memory: "1000Mi"
+  limits:
+    cpu: 0.5
+    memory: "2072Mi"
+persistence:
+  enabled: true
+  accessMode: ReadWriteOnce
+  storageClass: faster
+  size: 12Gi
+  annotations: {}

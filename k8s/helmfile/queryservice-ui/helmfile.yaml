@@ -1,0 +1,10 @@
+repositories:
+  - name: wbstack-charts
+    url: git+https://github.com/wbstack/deploy/@charts/queryservice-ui?ref=main
+
+releases:
+- name: queryservice-ui
+  namespace: default
+  chart: wbstack-charts/queryservice-ui
+  values:
+  - "values.yaml"
