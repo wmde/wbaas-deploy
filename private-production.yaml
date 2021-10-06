@@ -1,5 +1,7 @@
 # TODO move ip out of private file...
 ip: 34.141.93.67
+# TODO move this out of private file...
+uiHostName: www.wikibase.dev
 services:
   app:
     key: u1r09r190u12r09r21j0r21ji0f90jr01

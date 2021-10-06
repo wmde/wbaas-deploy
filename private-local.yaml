@@ -1,6 +1,8 @@
 
 # TODO move ip out of private file...
 ip: ""
+# TODO move this out of private file...
+uiHostName: www.wbaas.localhost
 services:
   redis:
     password: a-bad-local-redis-password
