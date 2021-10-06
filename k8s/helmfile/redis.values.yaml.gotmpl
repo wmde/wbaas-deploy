@@ -26,25 +26,10 @@ master:
     limits:
       cpu: 50m
       memory: 90Mi
-  ## Enable persistence using Persistent Volume Claims
-  ## ref: http://kubernetes.io/docs/user-guide/persistent-volumes/
-  ##
   persistence:
     enabled: true
-    ## The path the volume will be mounted at, useful when using different
-    ## Redis images.
     path: /data
-    ## The subdirectory of the volume to mount to, useful in dev environments
-    ## and one PV for multiple services.
     subPath: ""
-    ## redis data Persistent Volume Storage Class
-    ## If defined, storageClassName: <storageClass>
-    ## If set to "-", storageClassName: "", which disables dynamic provisioning
-    ## If undefined (the default) or set to null, no storageClassName spec is
-    ##   set, choosing the default provisioner.  (gp2 on AWS, standard on
-    ##   GKE, AWS & OpenStack)
-    ##
-    # storageClass: "-"
     accessModes:
       - ReadWriteOnce
     size: 1Gi
@@ -60,7 +45,6 @@ master:
                   values:
                     - redis
             topologyKey: "kubernetes.io/hostname"
-
 
 slave:
   resources:
@@ -72,25 +56,10 @@ slave:
     limits:
       cpu: 50m
       memory: 90Mi
-  ## Enable persistence using Persistent Volume Claims
-  ## ref: http://kubernetes.io/docs/user-guide/persistent-volumes/
-  ##
   persistence:
     enabled: true
-    ## The path the volume will be mounted at, useful when using different
-    ## Redis images.
     path: /data
-    ## The subdirectory of the volume to mount to, useful in dev environments
-    ## and one PV for multiple services.
     subPath: ""
-    ## redis data Persistent Volume Storage Class
-    ## If defined, storageClassName: <storageClass>
-    ## If set to "-", storageClassName: "", which disables dynamic provisioning
-    ## If undefined (the default) or set to null, no storageClassName spec is
-    ##   set, choosing the default provisioner.  (gp2 on AWS, standard on
-    ##   GKE, AWS & OpenStack)
-    ##
-    # storageClass: "-"
     accessModes:
       - ReadWriteOnce
     size: 1Gi
@@ -106,12 +75,3 @@ slave:
                   values:
                     - redis
             topologyKey: "kubernetes.io/hostname"
-
-# Recommended for production
-# networkPolicy:
-#   enabled: true
-# metrics:
-#   enabled: true
-#   resources:
-#     requests:
-#       cpu: 0m

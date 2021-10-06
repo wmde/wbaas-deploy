@@ -1,4 +1,6 @@
 repositories:
+- name: bitnami
+  url: https://charts.bitnami.com/bitnami
 - name: jetstack
   url: https://charts.jetstack.io
 - name: mittwald
@@ -35,7 +37,7 @@ releases:
   chart: ./../../charts/wikibase-cloud-clusterissuers
   values:
   # TODO current production uses the email foo@bar.com, once that is fixed, remove this hack...
-  - email: {{ if eq .Environment.Name "local" }}{{ .Values.external.letsencrypt.email }}{{else}}foo@bar.com{{end }}
+  - email: {{ if eq .Environment.Name "local" }}{{ .Values.external.letsencrypt.email }}{{ else }}foo@bar.com{{ end }}
   - gceProject: {{ .Values.gceProject }}
   # TODO this chart needs certificates for some reason, i probably shouldn't
   - certificates:
@@ -52,3 +54,11 @@ releases:
   installed: {{ eq .Environment.Name "local" | toYaml }}
   namespace: default
   chart: mittwald/kubernetes-secret-generator
+
+- name: redis
+  # This is in the default namespace, as the default ns implies staging?
+  namespace: default
+  chart: bitnami/redis
+  version: 10.5.14
+  values:
+  - "redis.values.yaml.gotmpl"
