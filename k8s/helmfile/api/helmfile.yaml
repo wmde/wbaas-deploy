@@ -18,4 +18,4 @@ environments:
   default:
     values:
       - ./../../../default.yaml
-      - ./../../../private.yaml
+      - ./../../../private-production.yaml

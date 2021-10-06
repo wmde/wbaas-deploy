@@ -1,0 +1,3 @@
+external:
+  letsencrypt:
+    email: adam.shorland@wikimedia.de
