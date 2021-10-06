@@ -1,0 +1,27 @@
+apiVersion: skaffold/v2beta23
+kind: Config
+profiles:
+- name: local
+  activation:
+    - kubeContext: minikube-wbaas
+build:
+  artifacts:
+    - image: local/skaffold/wbaas/ui
+      context: ./../../ui
+deploy:
+  kubeContext: minikube-wbaas
+  helm:
+    releases:
+      - name: ui
+        chartPath: ./../../deploy/charts/ui
+        valuesFiles:
+          - ".tmp.values.ui.yaml"
+          - NeverPull.yaml
+        artifactOverrides:
+          image: local/skaffold/wbaas/ui
+        imageStrategy:
+          helm: {}
+    hooks:
+      before:
+        - host:
+            command: [ "./helmfile-values", "-e", "local", "-r", "ui", "-n" ]

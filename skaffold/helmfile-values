@@ -1,0 +1,62 @@
+#!/usr/bin/env bash
+
+Help()
+{
+   # Display Help
+   echo "Generates a temporary local values file for a helmfile deployment."
+   echo 
+   echo "This script needs yq installed https://mikefarah.gitbook.io/yq/"
+   echo
+   echo "Syntax: helmfile-values [-h|e|r]"
+   echo "options:"
+   echo "r     Release to target, for example 'ui'."
+   echo "n     Remove the image values from the yaml"
+   echo "e     Environment to run in. 'local' or 'production'."
+   echo "h     Print this Help."
+   echo
+   echo "Examples:"
+   echo "      helmfile-values -e local -r ui"
+}
+
+# Check setup of yq
+yqtest=$(which yq)
+if [ -z $yqtest ]
+then
+   echo "This script needs yq installed https://mikefarah.gitbook.io/yq/"
+    exit 1
+fi
+
+# Set variable defaults
+TARGET_RELEASE="unset"
+TARGET_ENVIRONMENT="unset"
+REMOVE_IMAGE_YAML=0
+
+# Get the options
+while getopts ":r:e:hn" option; do
+   case $option in
+      r)
+         TARGET_RELEASE=$OPTARG;;
+      e)
+         TARGET_ENVIRONMENT=$OPTARG;;
+      n)
+         REMOVE_IMAGE_YAML=1;;
+      h) # display Help
+         Help
+         exit;;
+   esac
+done
+
+SCRIPT_DIR="$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
+OUTPUT_YAML=$SCRIPT_DIR/.tmp.values.$TARGET_RELEASE.yaml
+
+# Run the commands
+echo "Targetting environment: $TARGET_ENVIRONMENT and release: $TARGET_RELEASE"
+cd $SCRIPT_DIR/../k8s/helmfile && \
+helmfile --environment $TARGET_ENVIRONMENT --selector name=$TARGET_RELEASE write-values --skip-deps --output-file-template $OUTPUT_YAML
+
+if [[ "$REMOVE_IMAGE_YAML" == 1 ]]; then
+   yq eval 'del(.image)' --no-colors $OUTPUT_YAML > $OUTPUT_YAML.altered
+   mv $OUTPUT_YAML.altered $OUTPUT_YAML
+fi
+
+cat $SCRIPT_DIR/.tmp.values.$TARGET_RELEASE.yaml

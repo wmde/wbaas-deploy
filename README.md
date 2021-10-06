@@ -8,6 +8,7 @@ This repository covers a production and development setup, held together with te
 - `k8s` - Interaction with [Kubernetes](https://kubernetes.io/)
   - `k8s/helmfile` - Interaction with kubernetes via [helmfile](https://github.com/roboll/helmfile) deployments of [helm](https://helm.sh/) charts
     - `k8s/helmfile/env` - Per environment configuration (local vs prod)
+- `skaffold` - Local development on top of locally deployed kubernetes using [skaffold](https://skaffold.dev/)
 - `tf` - [Terraform](https://www.terraform.io/) environments
   - `tf/env` - Per environment configuration (local vs prod)
 
@@ -62,7 +63,7 @@ In order to skip out this LoadBalancer stuff you can get minikube to expose the 
 But this will expose thing on a different port and you may run into issues.
 
 ```sh
-service -n kube-system nginx-ingress-default-backend
+minikube --profile minikube-wbaas service -n kube-system nginx-ingress-default-backend
 ```
 
 Note: There is more to making things work lcoally than this and we either need to setup dynamic DNS, or we need to be editing our hosts file!
