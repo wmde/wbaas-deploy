@@ -17,6 +17,6 @@ environments:
       - ./../../../private-production.yaml
   # Targetting the kind k8s cluster that can be setup use terraform
   local:
-    kubeContext: kind-wbaas-local
+    kubeContext: minikube-wbaas
     values:
       - ./../../../private-local.yaml

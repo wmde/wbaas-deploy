@@ -19,4 +19,4 @@ environments:
     kubeContext: gke_wikibase-cloud_europe-west3-a_wbaas-1
   # Targetting the kind k8s cluster that can be setup use terraform
   local:
-    kubeContext: kind-wbaas-local
+    kubeContext: minikube-wbaas
