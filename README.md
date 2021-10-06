@@ -36,6 +36,18 @@ Apply the helmfiles that are setup to work with the local environment with `helm
 
 **Note: This is a work in progress**
 
+Once everyting is running, you should be able to see the pods.
+
+```sh
+kubectl --context minikube-wbaas get pods -A
+```
+
+And connect to containers if needed, such as the redis master.
+
+```sh
+./bin/k8s-access -e local -r redis -l role=master
+```
+
 ## Production
 
 ### Terraform

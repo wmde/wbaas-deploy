@@ -1,0 +1,60 @@
+#!/usr/bin/env bash
+
+Help()
+{
+   # Display Help
+   echo "Access shells in kubernetes pods in any namespace easily."
+   echo
+   echo "Syntax: k8s-shell [-h|e|r|l|c|s]"
+   echo "options:"
+   echo "r     Release to target, for example 'redis'."
+   echo "c     Count of the match, incase there are multiple instances, defaults to 0"
+   echo "e     Environment to run in. 'local' or 'production'."
+   echo "l     Additional labels to target (comma seperated), for example 'role=master'"
+   echo "s     Shell to run. 'bash' or 'sh'. Default bash"
+   echo "h     Print this Help."
+   echo
+   echo "Examples:"
+   echo "      k8s-shell -e local -r redis -l role=master"
+}
+
+# Set variable defaults
+TARGET_RELEASE="unset"
+TARGET_COUNT="0"
+TARGET_ENVIRONMENT="unset"
+TARGET_LABELS=""
+TARGET_SHELL="bash"
+
+# Get the options
+while getopts ":r:c:e:l:s:h" option; do
+   case $option in
+      r)
+         TARGET_RELEASE=$OPTARG;;
+      c)
+         TARGET_COUNT=$OPTARG;;
+      e)
+         TARGET_ENVIRONMENT=$OPTARG;;
+      l)
+         TARGET_LABELS=,$OPTARG;;
+      s)
+         TARGET_SHELL=,$OPTARG;;
+      h) # display Help
+         Help
+         exit;;
+   esac
+done
+
+# Parse user input
+K8CONTEXT=$TARGET_ENVIRONMENT
+if [ "$TARGET_ENVIRONMENT" = "production" ]; then
+    K8CONTEXT="gke_wikibase-cloud_europe-west3-a_wbaas-1"
+fi
+if [ "$TARGET_ENVIRONMENT" = "local" ]; then
+    K8CONTEXT="minikube-wbaas"
+fi
+
+# Make the connection
+echo "Targetting environment: $TARGET_ENVIRONMENT. Using k8s context: $K8CONTEXT"
+PODNAME=$(kubectl --context $K8CONTEXT get pods -A -l release=$TARGET_RELEASE$TARGET_LABELS -o jsonpath="{.items[$TARGET_COUNT].metadata.name}")
+echo "Connecting to pod: $PODNAME with shell: $TARGET_SHELL"
+kubectl --context $K8CONTEXT  exec -it $PODNAME -- $TARGET_SHELL
