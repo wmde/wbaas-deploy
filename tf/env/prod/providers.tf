@@ -28,12 +28,3 @@ provider "helm" {
     config_context = "gke_wikibase-cloud_europe-west3-a_wbaas-1"
   }
 }
-
-# terraform {
-#   required_providers {
-#     helmfile = {
-#       source = "mumoshu/helmfile"
-#       version = "0.14.1"
-#     }
-#   }
-# }
