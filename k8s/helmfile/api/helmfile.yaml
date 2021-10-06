@@ -1,0 +1,21 @@
+repositories:
+  - name: wbstack-charts
+    url: git+https://github.com/wbstack/deploy/@charts/api?ref=main
+
+releases:
+- name: api
+  chart: wbstack-charts/api
+  namespace: default
+  set:
+  - name: app.passport.public
+    file: ./../../../oauth-public.key
+  - name: app.passport.private
+    file: ./../../../oauth-private.key
+  values:
+  - "values.yaml.gotmpl"
+
+environments:
+  default:
+    values:
+      - ./../../../default.yaml
+      - ./../../../private.yaml
