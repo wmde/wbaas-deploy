@@ -1,7 +1,11 @@
+repositories:
+  - name: wbstack-charts
+    url: git+https://github.com/wbstack/deploy/@charts/api?ref=main
+
 releases:
 - name: api
+  chart: wbstack-charts/api
   namespace: default
-  chart: ./../../../charts/api
   set:
   - name: app.passport.public
     file: ./../../../oauth-public.key
