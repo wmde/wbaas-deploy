@@ -17,6 +17,7 @@ certificates:
     issuerRef: letsencrypt-prod
 
 gceProject: wikibase-cloud
+
 gceServiceAccountSecret: secret-wikibase-dev-api
 gcsApiStaticBucket: wikibase-dev-static
 
