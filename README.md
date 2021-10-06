@@ -7,7 +7,9 @@ This repository covers a production and development setup, held together with te
 - `gce` - Scripts for manual creation and maintenance of [Google Cloud](https://cloud.google.com/) resources (ideally will transition to terraform)
 - `k8s` - Interaction with [Kubernetes](https://kubernetes.io/)
   - `k8s/helmfile` - Interaction with kubernetes via [helmfile](https://github.com/roboll/helmfile) deployments of [helm](https://helm.sh/) charts
+    - `k8s/helmfile/env` - Per environment configuration (local vs prod)
 - `tf` - [Terraform](https://www.terraform.io/) environments
+  - `tf/env` - Per environment configuration (local vs prod)
 
 ## Development
 
@@ -19,8 +21,10 @@ Install minikube https://minikube.sigs.k8s.io/docs/start/
 
 And start a local k8s cluster for the wbaas project.
 
+Note: 1.21.4 is suggested as this is the currently used prouduction environment.
+
 ```sh
-minikube --profile minikube-wbaas start 
+minikube --profile minikube-wbaas start --kubernetes-version=1.21.4
 ```
 
 Once created, your kubectl context will automaticly switch to `minikube-wbaas`.
@@ -45,10 +49,20 @@ minikube does not provision LoadBalancer service IP addresses as part of normal 
 It will only do this if you additionally run the `tunnel` command.
 As a result if you provision a LoadBalancer services such as an ingress the `EXTERNAL-IP` will continue to say `<pending>` long after creation.
 
-In order to skip out this LoadBalancer stuff you can get minikube to expose the ingress directly on a port.
 
 ```sh
-minikube --profile minikube-wbaas service -n kube-system nginx-ingress-default-backend
+minikube --profile minikube-wbaas tunnel
+```
+
+You should then be able to access the ingress (currently on port 80), and localhost services such as http://www.wbaas.localhost/.
+Most modern browsers will automatically resolve *.localhost to 127.0.0.1.
+If not, you'll need to edit your hosts file.
+
+In order to skip out this LoadBalancer stuff you can get minikube to expose the ingress directly on a port.
+But this will expose thing on a different port and you may run into issues.
+
+```sh
+service -n kube-system nginx-ingress-default-backend
 ```
 
 Note: There is more to making things work lcoally than this and we either need to setup dynamic DNS, or we need to be editing our hosts file!

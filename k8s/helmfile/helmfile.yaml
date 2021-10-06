@@ -1,3 +1,6 @@
+helmDefaults:
+  skipDeps: true
+
 repositories:
 - name: stable
   url: https://charts.helm.sh/stable
@@ -74,9 +77,7 @@ releases:
   - "redis.values.yaml.gotmpl"
 
 - name: ui
-  # Only deploy to production, until we make it work locally too....
-  installed: {{ eq .Environment.Name "production" | toYaml }}
   namespace: default
   chart: wbstack-charts/ui
   values:
-  - "ui.values.yaml.gotmpl"
+  - "env/{{ .Environment.Name }}/ui.values.yaml.gotmpl"
