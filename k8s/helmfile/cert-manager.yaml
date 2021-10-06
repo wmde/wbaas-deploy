@@ -1,0 +1,8 @@
+releases:
+- name: cert-manager
+  namespace: cert-manager
+  chart: jetstack/cert-manager
+  version: v1.5.3
+  set:
+    - name: installCRDs
+      value: true

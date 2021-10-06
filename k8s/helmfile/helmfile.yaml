@@ -1,0 +1,54 @@
+repositories:
+- name: jetstack
+  url: https://charts.jetstack.io
+- name: mittwald
+  url: https://helm.mittwald.de
+
+environments:
+  production:
+    kubeContext: gke_wikibase-cloud_europe-west3-a_wbaas-1
+    values:
+    - ./../../private-production.yaml
+    - ./../../default.yaml
+    - foo: bar
+  local:
+    kubeContext: minikube-wbaas
+    values:
+    - ./../../private-local.yaml
+    # TODO this should be different for local!
+    - ./../../default.yaml
+    - foo: baz
+
+# Path to helmfiles to process BEFORE releases
+# All the nested state files under `helmfiles:` is processed in the order of definition.
+helmfiles:
+- path: cert-manager.yaml
+  values:
+    - foo: null
+
+releases:
+# Only deploy the clusterissuers to production for now, as they won't work locally anyway right now...
+- name: clusterissuers
+  installed: {{ eq .Environment.Name "production" | toYaml }}
+  namespace: cert-manager
+  # TODO use something more generic or from wbstack/charts repo
+  chart: ./../../charts/wikibase-cloud-clusterissuers
+  values:
+  # TODO current production uses the email foo@bar.com, once that is fixed, remove this hack...
+  - email: {{ if eq .Environment.Name "local" }}{{ .Values.external.letsencrypt.email }}{{else}}foo@bar.com{{end }}
+  - gceProject: {{ .Values.gceProject }}
+  # TODO this chart needs certificates for some reason, i probably shouldn't
+  - certificates:
+    - dnsNames:
+        - '*.wikibase.cloud'
+        - 'wikibase.cloud'
+    - dnsNames:
+        - '*.wikibase.dev'
+        - 'wikibase.dev'
+
+# The currenttly used replicated/k8s-secret-generator code is archived and deprecated, so investigate an alternative
+- name: kubernetes-secret-generator
+  # Only deploy locally to start with (while testing)
+  installed: {{ eq .Environment.Name "local" | toYaml }}
+  namespace: default
+  chart: mittwald/kubernetes-secret-generator
