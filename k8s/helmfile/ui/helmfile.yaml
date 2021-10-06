@@ -1,7 +1,11 @@
+repositories:
+  - name: wbstack-charts
+    url: git+https://github.com/wbstack/deploy/@charts/ui?ref=main
+
 releases:
 - name: ui
   namespace: default
-  chart: ./../../../charts/ui
+  chart: wbstack-charts/ui
   values:
   - "values.yaml.gotmpl"
 
