@@ -1,9 +1,0 @@
-resources:
-# https://cloud.google.com/dns/docs/reference/v1/managedZones
-- name: managedzone-wikibase-cloud
-  type: dns.v1.managedZone
-  properties:
-    name: wikibase-cloud-zone
-    description: "Zone for wikibase.cloud"
-    dnsName: wikibase.cloud.
-    visibility: public
