@@ -38,12 +38,11 @@ services:
     jwtSecret: "should be secret!"
   
   redis:
-    writeHost: false
-    password: "should be secret!"
-    port: 1234
+    port: 6379
     databases:
-            apiDb: "apiDb"
-            apiCacheDb: "apiCacheDb"
+      apiDb: 2
+      apiCacheDb: 3
+
   sql:
     api:
       db: apidb
