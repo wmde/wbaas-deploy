@@ -7,6 +7,8 @@ repositories:
   url: https://charts.jetstack.io
 - name: mittwald
   url: https://helm.mittwald.de
+- name: wbstack-charts
+  url: git+https://github.com/wbstack/deploy/@charts/ui?ref=main
 
 environments:
   production:
@@ -70,3 +72,11 @@ releases:
   version: 10.5.14
   values:
   - "redis.values.yaml.gotmpl"
+
+- name: ui
+  # Only deploy to production, until we make it work locally too....
+  installed: {{ eq .Environment.Name "production" | toYaml }}
+  namespace: default
+  chart: wbstack-charts/ui
+  values:
+  - "ui.values.yaml.gotmpl"
