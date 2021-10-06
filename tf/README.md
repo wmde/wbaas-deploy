@@ -10,7 +10,6 @@ Recommended reading:
 **Directories**
 
 - `env`: Various terraformable environemnts
-    - `local-cluster`: Default Local / Dev k8s cluster and infra
-    - `local-dev`: Local / Dev services
-    - `prod`: Production services
+    - `local`: Local infrastructure setup (currently empty)
+    - `prod`: Production infrastructure setup
 - `mod`: terraform modules
