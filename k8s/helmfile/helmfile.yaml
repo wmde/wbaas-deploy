@@ -44,7 +44,7 @@ releases:
   chart: ./../../charts/wikibase-cloud-clusterissuers
   values:
   # TODO current production uses the email foo@bar.com, once that is fixed, remove this hack...
-  - email: {{ if eq .Environment.Name "local" }}{{ .Values.external.letsencrypt.email }}{{ else }}foo@bar.com{{ end }}
+  - email: {{ .Values.external.letsencrypt.email }}
   - gceProject: {{ .Values.gceProject }}
   # TODO this chart needs certificates for some reason, i probably shouldn't
   - certificates:
