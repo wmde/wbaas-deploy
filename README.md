@@ -28,7 +28,7 @@ Note: 1.21.4 is suggested as this is the currently used prouduction environment.
 minikube --profile minikube-wbaas start --kubernetes-version=1.21.4
 ```
 
-Once created, your kubectl context will automaticly switch to `minikube-wbaas`.
+Once created, your kubectl context will automatically switch to `minikube-wbaas`.
 
 If you want to throw the whole cluster away you can delete it:
 
