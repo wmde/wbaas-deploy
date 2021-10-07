@@ -55,6 +55,11 @@ As a result if you provision a LoadBalancer services such as an ingress the `EXT
 minikube --profile minikube-wbaas tunnel
 ```
 
+Running the tunnel on linux might require you to forward the traffic to the cluster IP of the nginx-ingress-controller. This can be done by running the following command. 
+
+```sh
+EXTERNAL_IP=$(minikube --profile minikube-wbaas kubectl -- -n kube-system get service nginx-ingress-controller -o template='{{.spec.clusterIP}}')
+sudo socat tcp-listen:80,reuseaddr,fork tcp:"$EXTERNAL_IP":80
 You should then be able to access the ingress (currently on port 80), and localhost services such as http://www.wbaas.localhost/.
 Most modern browsers will automatically resolve *.localhost to 127.0.0.1.
 If not, you'll need to edit your hosts file.
@@ -66,7 +71,7 @@ But this will expose thing on a different port and you may run into issues.
 minikube --profile minikube-wbaas service -n kube-system nginx-ingress-default-backend
 ```
 
-Note: There is more to making things work lcoally than this and we either need to setup dynamic DNS, or we need to be editing our hosts file!
+Note: There is more to making things work locally than this and we either need to setup dynamic DNS, or we need to be editing our hosts file!
 
 ### helmfile
 
