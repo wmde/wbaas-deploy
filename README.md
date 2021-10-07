@@ -38,7 +38,7 @@ minikube --profile minikube-wbaas delete
 
 #### Dashboard
 
-minikube comes with a nice dahsboard that you can turn on with a simple command.
+minikube comes with a nice dashboard that you can turn on with a simple command.
 
 ```sh
 minikube --profile minikube-wbaas dashboard
