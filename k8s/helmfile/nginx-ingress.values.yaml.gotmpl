@@ -1,6 +1,6 @@
 controller:
   service:
-    loadBalancerIP: 34.141.93.67
+    loadBalancerIP: {{ .Values.ip }}
     externalTrafficPolicy: Local
   resources:
     requests:

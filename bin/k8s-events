@@ -1,0 +1,48 @@
+#!/usr/bin/env bash
+
+Help()
+{
+   # Display Help
+   echo "Access kuberneetes events easily."
+   echo
+   echo "Syntax: k8s-events [-h|e|w]"
+   echo "options:"
+   echo "e     Environment to run in. 'local' or 'production'."
+   echo "w     Watch events, rather than just printing the current set"
+   echo "h     Print this Help."
+   echo
+   echo "Examples:"
+   echo "      k8s-events -e local"
+   echo "      k8s-events -e local -w"
+}
+
+# Set variable defaults
+
+TARGET_ENVIRONMENT="unset"
+OPTIONAL_WATCH=""
+
+# Get the options
+while getopts ":e:wh" option; do
+   case $option in
+      e)
+         TARGET_ENVIRONMENT=$OPTARG;;
+      w)
+         OPTIONAL_WATCH="--watch";;
+      h) # display Help
+         Help
+         exit;;
+   esac
+done
+
+# Parse user input
+K8CONTEXT=$TARGET_ENVIRONMENT
+if [ "$TARGET_ENVIRONMENT" = "production" ]; then
+    K8CONTEXT="gke_wikibase-cloud_europe-west3-a_wbaas-1"
+fi
+if [ "$TARGET_ENVIRONMENT" = "local" ]; then
+    K8CONTEXT="minikube-wbaas"
+fi
+
+# Running the command
+echo "Targetting environment: $TARGET_ENVIRONMENT. Using k8s context: $K8CONTEXT"
+kubectl --context $K8CONTEXT get event $OPTIONAL_WATCH

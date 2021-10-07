@@ -21,7 +21,6 @@ gceProject: wikibase-cloud
 gceServiceAccountSecret: secret-wikibase-dev-api
 gcsApiStaticBucket: wikibase-dev-static
 
-uiHostName: www.wikibase.dev
 tlsSecret: wikibase-dev-tls
 
 external:
