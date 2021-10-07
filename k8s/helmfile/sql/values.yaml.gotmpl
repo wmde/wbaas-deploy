@@ -76,7 +76,7 @@ slave:
     type: seconds_behind
     typeSecondsBehind: 60
   persistence:
-    size: 60Gi
+    size: {{ .Values.services.sql.storageSize | quote }}
     podAntiAffinity:
       preferredDuringSchedulingIgnoredDuringExecution:
         - labelSelector:
@@ -130,7 +130,7 @@ slave:
     pid-file=/opt/bitnami/mariadb/tmp/mysqld.pid
 
 global:
-  storageClass: faster
+  storageClass: {{ .Values.services.sql.storageClass | quote }}
 metrics:
   enabled: false
 db:

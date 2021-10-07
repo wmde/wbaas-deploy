@@ -14,3 +14,12 @@ bash ./serviceaccount/create.sh wikibase-dev-api default
 
 ## add a secret to the cluster
 # kubectl apply -f .serviceaccount/output/secret-wikibase-dev-api.yaml
+
+## localhost alternative
+#
+# kubectl apply -f - <<EOF
+# apiVersion: v1
+# kind: ServiceAccount
+# metadata:
+#   name: wikibase-dev-api
+# EOF

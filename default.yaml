@@ -36,6 +36,7 @@ services:
     key: "should be secret!"
     url: https://api.wikibase.dev
     jwtSecret: "should be secret!"
+    mailer: mailgun
   
   redis:
     port: 6379

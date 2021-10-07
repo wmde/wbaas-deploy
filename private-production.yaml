@@ -6,9 +6,18 @@ services:
   app:
     key: u1r09r190u12r09r21j0r21ji0f90jr01
     jwtSecret: jg9jj98gg09as09sfa0fj0jg0avnmx
+    ingressHosts:
+      - host: api.wikibase.dev
+        paths:
+          - /()(.*)
+      - host: www.wikibase.dev
+        paths:
+          - /api(/|$)(.*)
   sql:
     rootPassword: nevergoingtogiveyouup
     replicationPassword: nevergoingtoletyoudown
+    storageClass: faster
+    storageSize: 60Gi
     api:
       db: apidb
       user: apiuser

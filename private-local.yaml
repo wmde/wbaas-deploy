@@ -1,14 +1,59 @@
 
 # TODO move ip out of private file...
+
 ip: ""
+gceServiceAccountSecret: wikibase-dev-api-token-nrcgm
+gceProject: 'something'
+gcsApiStaticBucket: 'something'
+
+app:
+  mailer: log
+
 # TODO move this out of private file...
 uiHostName: www.wbaas.localhost
 services:
+  app:
+    key: u1r09r190u12r09r21j0r21ji0f90jr01
+    jwtSecret: jg9jj98gg09as09sfa0fj0jg0avnmx
+    url: http://www.wbaas.localhost
+    mailer: log
+    ingressHosts:
+      - host: wbaas.localhost
+        paths:
+          - /()(.*)
+      - host: www.wbaas.localhost
+        paths:
+          - /api(/|$)(.*)
+
   redis:
     password: a-bad-local-redis-password
     # TODO reuse in local and prod? but it has the namespace in it!!!
     readHost: redis-headless.default.svc.cluster.local
     writeHost: redis-master.default.svc.cluster.local
+    port: 6379
+    databases:
+      apiDb: 2
+      apiCacheDb: 3
+
+  sql:
+    rootPassword: nevergoingtogiveyouup
+    replicationPassword: nevergoingtoletyoudown
+    storageClass: standard
+    storageSize: 1Gi
+    api:
+      db: apidb
+      user: apiuser
+      passwordSecretName: sql-apiuser
+      passwordSecretKey: password
+
 external:
+  mailgun:
+    domain: "sandbox53750348684c4187b72f84612a326ab8.mailgun.org" # dunno if correct
+    secret: "c7a1f2abd115032e1bc98d9c346cd4f8-443ec20e-01009dbc"
+  recaptcha3:
+    sitekey: "dunno"
+    secret: "dunno"
   letsencrypt:
     email: adam.shorland@wikimedia.de
+
+

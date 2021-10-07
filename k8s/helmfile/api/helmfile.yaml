@@ -15,7 +15,11 @@ releases:
   - "values.yaml.gotmpl"
 
 environments:
-  default:
+  local:
+    values:
+      - ./../../../private-local.yaml
+
+  production:
     values:
       - ./../../../default.yaml
       - ./../../../private-production.yaml
