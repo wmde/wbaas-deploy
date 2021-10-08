@@ -1,6 +1,6 @@
 repositories:
   - name: wbstack-charts
-    url: git+https://github.com/wbstack/deploy/@charts/api?ref=main
+    url: git+https://github.com/toban/deploy/@charts/api?ref=api-fix
 
 releases:
 - name: api

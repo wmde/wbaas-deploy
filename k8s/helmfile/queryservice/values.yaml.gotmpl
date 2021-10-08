@@ -14,6 +14,6 @@ resources:
 persistence:
   enabled: true
   accessMode: ReadWriteOnce
-  storageClass: faster
-  size: 12Gi
+  storageClass: {{ .Values.services.queryservice.storageClass | quote }}
+  size: {{ .Values.services.queryservice.storageSize | quote }}
   annotations: {}

@@ -4,17 +4,17 @@ metadata:
   name: platform-apps-ingress-wikibase-dev
   annotations:
     kubernetes.io/ingress.class: nginx
-    nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
+    nginx.ingress.kubernetes.io/force-ssl-redirect: "false"
 spec:
   rules:
-  - host: '*.wikibase.dev'
+  - host: '*.wbaas.localhost'
     http:
       paths:
         - path: /
           backend:
             serviceName: platform-nginx
             servicePort: 8080
-  tls:
-  - hosts:
-    - '*.wikibase.dev'
-    secretName: wikibase-dev-tls
+#  tls:
+#  - hosts:
+#    - '*.wikibase.dev'
+#    secretName: wikibase-dev-tls

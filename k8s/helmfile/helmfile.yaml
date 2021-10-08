@@ -31,9 +31,16 @@ environments:
 # Path to helmfiles to process BEFORE releases
 # All the nested state files under `helmfiles:` is processed in the order of definition.
 helmfiles:
-- path: cert-manager.yaml
-  values:
-    - foo: null
+  - path: cert-manager.yaml
+    values:
+      - foo: null
+
+  - path: queryservice/helmfile.yaml
+  - path: queryservice-gateway/helmfile.yaml
+  - path: queryservice-ui/helmfile.yaml
+  - path: queryservice-updater/helmfile.yaml
+
+
 
 releases:
 # Only deploy the clusterissuers to production for now, as they won't work locally anyway right now...

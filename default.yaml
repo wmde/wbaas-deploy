@@ -32,6 +32,11 @@ external:
     secret: "dunno"
 
 services:
+
+  queryservice:
+    storageSize: 12Gi
+    storageClass: faster
+
   app:
     key: "should be secret!"
     url: https://api.wikibase.dev

@@ -7,4 +7,13 @@ releases:
   namespace: default
   chart: wbstack-charts/queryservice
   values:
-  - "values.yaml"
+  - "values.yaml.gotmpl"
+
+environments:
+  production:
+    values:
+      - ./../../../default.yaml
+      - ./../../../private-production.yaml
+  local:
+    values:
+      - ./../../../private-local.yaml

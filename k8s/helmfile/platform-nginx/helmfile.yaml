@@ -9,3 +9,11 @@ releases:
   version: 5.2.4
   values:
   - "values.yaml.gotmpl"
+
+environments:
+  production:
+    values:
+      - ./../../../private-production.yaml
+  local:
+    values:
+      - ./../../../private-local.yaml

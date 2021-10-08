@@ -1,0 +1,10 @@
+repositories:
+  - name: mogaal-adminer
+    url: git+https://github.com/mogaal/helm-charts/@adminer/?ref=main
+
+releases:
+- name: adminer
+  namespace: default
+  chart: mogaal-adminer/adminer
+  values:
+  - "values.yaml"

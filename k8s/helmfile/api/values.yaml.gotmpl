@@ -3,6 +3,18 @@ replicaCount:
   backend: 1
   scheduler: 1
   queue: 1
+
+useProbes: false
+
+image:
+  repository: ghcr.io/toban/api
+  tag:
+    backend: 8x.1.7-shortcut
+    preinstall: 8x.1.7-shortcut
+    web: 8x.1.7-shortcut
+    queue: 8x.1.7-shortcut
+    scheduler: 8x.1.7-shortcut
+
 platform:
   backendMwHost: mediawiki-135-app-backend.default.svc.cluster.local
 # This mw db connection is only used by the queue..
