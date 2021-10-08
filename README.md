@@ -60,6 +60,8 @@ Running the tunnel on linux might require you to forward the traffic to the clus
 ```sh
 EXTERNAL_IP=$(minikube --profile minikube-wbaas kubectl -- -n kube-system get service nginx-ingress-controller -o template='{{.spec.clusterIP}}')
 sudo socat tcp-listen:80,reuseaddr,fork tcp:"$EXTERNAL_IP":80
+```
+
 You should then be able to access the ingress (currently on port 80), and localhost services such as http://www.wbaas.localhost/.
 Most modern browsers will automatically resolve *.localhost to 127.0.0.1.
 If not, you'll need to edit your hosts file.
