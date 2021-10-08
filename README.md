@@ -90,7 +90,7 @@ kubectl --context minikube-wbaas get pods -A
 And connect to containers if needed, such as the redis master.
 
 ```sh
-./bin/k8s-access -e local -r redis -l role=master
+./bin/k8s-shell -e local -r redis -l role=master
 ```
 
 ## Production
