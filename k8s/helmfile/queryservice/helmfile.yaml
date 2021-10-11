@@ -1,11 +1,11 @@
 repositories:
-  - name: wbstack-charts
+  - name: wbstack-charts-qs
     url: git+https://github.com/wbstack/deploy/@charts/queryservice?ref=main
 
 releases:
 - name: queryservice
   namespace: default
-  chart: wbstack-charts/queryservice
+  chart: wbstack-charts-qs/queryservice
   values:
   - "values.yaml.gotmpl"
 

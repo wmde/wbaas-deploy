@@ -1,10 +1,21 @@
 repositories:
-  - name: wbstack-charts
+  - name: wbstack-charts-qs-up
     url: git+https://github.com/wbstack/deploy/@charts/queryservice-updater?ref=main
 
 releases:
 - name: queryservice-updater
   namespace: default
-  chart: wbstack-charts/queryservice-updater
+  chart: wbstack-charts-qs-up/queryservice-updater
   values:
   - "values.yaml"
+
+environments:
+  production:
+    kubeContext: gke_wikibase-cloud_europe-west3-a_wbaas-1
+    values:
+      - ./../../../default.yaml
+      - ./../../../private-production.yaml
+  local:
+    kubeContext: minikube-wbaas
+    values:
+      - ./../../../private-local.yaml
