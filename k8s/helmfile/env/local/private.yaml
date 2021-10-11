@@ -1,25 +1,25 @@
 
-# TODO move ip out of private file...
-
+# TODO google cloud related things probably don't matter to local deploys
 gceServiceAccountSecret: wikibase-dev-api-token-ltjr2
 gceProject: 'something'
 gcsApiStaticBucket: 'something'
 
-# TODO move this out of private file...
+# TODO move this (and many other things) out of private file...
 uiHostName: www.wbaas.localhost
-services:
+tlsSecret: wikibase-dev-tls
 
+services:
   queryservice:
     storageSize: 1Gi
     storageClass: standard
 
   app:
+    url: http://www.wbaas.localhost
     key: base64:J6jYydw3RczHiPFgJt9P5f4uuvEqe84pZsbMgRor4VI=
     jwtSecret: jg9jj98gg09as09sfa0fj0jg0avnmx
-    url: http://www.wbaas.localhost
     mailer: log
     ingressHosts:
-      - host: wbaas.localhost
+      - host: api.wbaas.localhost
         paths:
           - /()(.*)
       - host: www.wbaas.localhost

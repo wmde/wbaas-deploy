@@ -15,11 +15,8 @@ environments:
     values:
     - ./env/production/base.yaml
     - ./env/production/private.yaml
-    - ./../../default.yaml
   local:
     kubeContext: minikube-wbaas
     values:
     - ./env/local/base.yaml
     - ./env/local/private.yaml
-    # TODO this should be different for local!
-    - ./../../default.yaml
