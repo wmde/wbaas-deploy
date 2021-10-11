@@ -1,20 +1,22 @@
 apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
-  name: platform-apps-ingress-wikibase-dev
+  name: platform-apps-ingress-{{ .Values.ingressNameSuffix }}
   annotations:
     kubernetes.io/ingress.class: nginx
-    nginx.ingress.kubernetes.io/force-ssl-redirect: {{ .Values.forceSSL| quote }}
+    nginx.ingress.kubernetes.io/force-ssl-redirect: {{ .Values.forceSSL | quote }}
 spec:
   rules:
-  - host: '*.wbaas.localhost'
+  - host: {{ .Values.ingressHost | quote }}
     http:
       paths:
         - path: /
           backend:
             serviceName: platform-nginx
             servicePort: 8080
-#  tls:
-#  - hosts:
-#    - '*.wikibase.dev'
-#    secretName: wikibase-dev-tls
+{{- if .Values.tls -}}
+tls:
+ - hosts:
+   - {{ .Values.ingressHost | quote }}
+   secretName: {{ .Values.ingressNameSuffix }}-tls
+{{- end -}}

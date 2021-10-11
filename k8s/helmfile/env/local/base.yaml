@@ -1,2 +1,2 @@
 ip: ""
-forceSSL: false
+ingressHost: "*.wbaas.localhost"

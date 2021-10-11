@@ -1,2 +1,2 @@
 ip: 34.141.93.67
-forceSSL: true
+ingressHost: "*.wikibase.dev"

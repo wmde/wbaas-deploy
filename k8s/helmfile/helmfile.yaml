@@ -71,7 +71,7 @@ releases:
   chart: stable/nginx-ingress
   version: 1.34.3
   values:
-  - "nginx-ingress.values.yaml.gotmpl"
+  - "env/{{ .Environment.Name }}/nginx-ingress.values.yaml.gotmpl"
 
 - name: redis
   # This is in the default namespace, as the default ns implies staging?
