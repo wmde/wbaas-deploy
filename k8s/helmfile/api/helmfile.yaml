@@ -1,10 +1,10 @@
 repositories:
-  - name: wbstack-charts
+  - name: wbstack-charts-api
     url: git+https://github.com/wbstack/deploy/@charts/api?ref=main
 
 releases:
 - name: api
-  chart: wbstack-charts/api
+  chart: wbstack-charts-api/api
   namespace: default
   # TODO differ between production and localhost
   set:

@@ -4,8 +4,14 @@ replicaCount:
   scheduler: 1
   queue: 1
 
-# TODO SHOULD BE true in PRODUCTION!!!
+# TODO find out why probs don't work locally?
+{{ if eq .Environment.Name "production" }}
+useProbes: true
+{{- end }}
+{{ if eq .Environment.Name "local" }}
 useProbes: false
+{{- end }}
+
 
 image:
   repository: ghcr.io/toban/api
@@ -73,12 +79,12 @@ ingress:
     {{- end }}
   {{- end }}
   
-{{ if eq .Environment.Name "production" }}
- tls:
- - hosts:
-   - wikibase.dev ## todo should be injected
-   secretName: wikibase-dev-tls
-{{ end }}
+  {{ if eq .Environment.Name "production" }}
+  tls:
+  - hosts:
+    - wikibase.dev ## todo should be injected
+    secretName: wikibase-dev-tls
+  {{ end }}
 app:
   # TODO should be secret?
   key: {{ .Values.services.app.key }}
