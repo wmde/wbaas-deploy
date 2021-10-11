@@ -23,13 +23,13 @@ environments:
     kubeContext: gke_wikibase-cloud_europe-west3-a_wbaas-1
     values:
     - ./env/production/base.yaml
-    - ./../../private-production.yaml
+    - ./env/production/private.yaml
     - ./../../default.yaml
   local:
     kubeContext: minikube-wbaas
     values:
     - ./env/local/base.yaml
-    - ./../../private-local.yaml
+    - ./env/local/private.yaml
     # TODO this should be different for local!
     - ./../../default.yaml
 

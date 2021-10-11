@@ -17,9 +17,9 @@ releases:
 environments:
   local:
     values:
-      - ./../../../private-local.yaml
+      - ./../env/local/private.yaml
 
   production:
     values:
       - ./../../../default.yaml
-      - ./../../../private-production.yaml
+      - ./../env/production/private.yaml

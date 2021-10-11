@@ -13,7 +13,7 @@ environments:
   production:
     values:
       - ./../../../default.yaml
-      - ./../../../private-production.yaml
+      - ./../env/production/private.yaml
   local:
     values:
-      - ./../../../private-local.yaml
+      - ./../env/local/private.yaml
