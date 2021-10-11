@@ -1,11 +1,9 @@
 
 # TODO move ip out of private file...
 
-ip: ""
 gceServiceAccountSecret: wikibase-dev-api-token-ltjr2
 gceProject: 'something'
 gcsApiStaticBucket: 'something'
-forceSSL: false
 
 # TODO move this out of private file...
 uiHostName: www.wbaas.localhost

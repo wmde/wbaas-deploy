@@ -1,6 +1,4 @@
 # TODO move ip out of private file...
-ip: 34.141.93.67
-forceSSL: true
 # TODO move this out of private file...
 uiHostName: www.wikibase.dev
 services:
