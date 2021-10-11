@@ -9,6 +9,8 @@ repositories:
   url: https://helm.mittwald.de
 - name: wbstack-deploy-charts
   url: git+https://github.com/wbstack/deploy/@charts?ref=main
+- name: mogaal-adminer
+  url: git+https://github.com/mogaal/helm-charts/@adminer/?ref=main
 
 environments:
   production:
@@ -97,6 +99,16 @@ releases:
 - name: queryservice-updater
   namespace: default
   chart: wbstack-deploy-charts/queryservice-updater
+  values:
+  - "env/{{ .Environment.Name }}/queryservice-updater.values.yaml.gotmpl"
+
+################################
+# LOCAL ONLY
+################################
+- name: adminer
+  installed: {{ eq .Environment.Name "local" | toYaml }}
+  namespace: default
+  chart: mogaal-adminer/adminer
   values:
   - "env/{{ .Environment.Name }}/queryservice-updater.values.yaml.gotmpl"
 
