@@ -7,16 +7,8 @@ repositories:
   url: https://charts.jetstack.io
 - name: mittwald
   url: https://helm.mittwald.de
-- name: wbstack-charts-ui
-  url: git+https://github.com/wbstack/deploy/@charts/ui?ref=main
-- name: wbstack-charts-qs-ui
-  url: git+https://github.com/wbstack/deploy/@charts/queryservice-ui?ref=main
-- name: wbstack-charts-qs
-  url: git+https://github.com/wbstack/deploy/@charts/queryservice?ref=main
-- name: wbstack-charts-qs-gateway
-  url: git+https://github.com/wbstack/deploy/@charts/queryservice-gateway?ref=main
-- name: wbstack-charts-qs-up
-  url: git+https://github.com/wbstack/deploy/@charts/queryservice-updater?ref=main
+- name: wbstack-deploy-charts
+  url: git+https://github.com/wbstack/deploy/@charts?ref=main
 
 environments:
   production:
@@ -83,28 +75,28 @@ releases:
 
 - name: ui
   namespace: default
-  chart: wbstack-charts-ui/ui
+  chart: wbstack-deploy-charts/ui
   values:
   - "env/{{ .Environment.Name }}/ui.values.yaml.gotmpl"
 
 - name: queryservice-ui
   namespace: default
-  chart: wbstack-charts-qs-ui/queryservice-ui
+  chart: wbstack-deploy-charts/queryservice-ui
   values:
   - "env/{{ .Environment.Name }}/queryservice-ui.values.yaml.gotmpl"
 - name: queryservice
   namespace: default
-  chart: wbstack-charts-qs/queryservice
+  chart: wbstack-deploy-charts/queryservice
   values:
   - "env/{{ .Environment.Name }}/queryservice.values.yaml.gotmpl"
 - name: queryservice-gateway
   namespace: default
-  chart: wbstack-charts-qs-gateway/queryservice-gateway
+  chart: wbstack-deploy-charts/queryservice-gateway
   values:
   - "env/{{ .Environment.Name }}/queryservice-gateway.values.yaml.gotmpl"
 - name: queryservice-updater
   namespace: default
-  chart: wbstack-charts-qs-up/queryservice-updater
+  chart: wbstack-deploy-charts/queryservice-updater
   values:
   - "env/{{ .Environment.Name }}/queryservice-updater.values.yaml.gotmpl"
 
