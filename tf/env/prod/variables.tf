@@ -10,3 +10,9 @@ variable "terraformers" {
       "deniz.erdogan@wikimedia.de",
       ]
 }
+
+variable "mailgun_api_key" {
+  type = string
+  description = "API key to access Mailgun"
+  sensitive = true
+}
