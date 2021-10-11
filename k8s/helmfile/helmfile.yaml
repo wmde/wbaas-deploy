@@ -5,12 +5,17 @@ repositories:
   url: https://charts.bitnami.com/bitnami
 - name: jetstack
   url: https://charts.jetstack.io
-- name: mittwald
-  url: https://helm.mittwald.de
 - name: wbstack-deploy-charts
   url: git+https://github.com/wbstack/deploy/@charts?ref=main
+- name: bitnami
+  url: https://charts.bitnami.com/bitnami
+- name: cetic
+  url: https://cetic.github.io/helm-charts
+# Not used for live deployments
 - name: mogaal-adminer
   url: git+https://github.com/mogaal/helm-charts/@adminer/?ref=main
+- name: mittwald
+  url: https://helm.mittwald.de
 
 environments:
   production:
@@ -64,6 +69,14 @@ releases:
   values:
   - "env/{{ .Environment.Name }}/nginx-ingress.values.yaml.gotmpl"
 
+- name: sql
+  namespace: default
+  # TODO reevaluate upstreaming addshore/bitnami-charts(7.3.16-mariadb-ready-check-seconds) modifications
+  chart: bitnami/mariadb
+  version: 9.6.2
+  values:
+  - "env/{{ .Environment.Name }}/sql.values.yaml.gotmpl"
+
 - name: redis
   # This is in the default namespace, as the default ns implies staging?
   namespace: default
@@ -102,17 +115,26 @@ releases:
 ################################
 # LOCAL ONLY
 ################################
-- name: adminer
+- name: adminer-cetic
   installed: {{ eq .Environment.Name "local" | toYaml }}
   namespace: default
-  chart: mogaal-adminer/adminer
+  chart: cetic/adminer
+  version: v0.1.7
   values:
-  - "env/{{ .Environment.Name }}/queryservice-updater.values.yaml.gotmpl"
+  - "env/{{ .Environment.Name }}/adminer-cetic.values.yaml.gotmpl"
 
 ################################
 # Removed deployments
 # These should be left here for a short while to allow locel setups to have them removed
 ################################
+# Removed 11/10/2021
+- name: adminer
+  installed: false
+  namespace: default
+  chart: mogaal-adminer/adminer
+  # values:
+  # - "env/{{ .Environment.Name }}/adminer.values.yaml.gotmpl"
+# Removed 10/10/2021
 - name: kubernetes-secret-generator
   installed: false
   namespace: default

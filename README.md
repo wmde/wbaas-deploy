@@ -14,7 +14,10 @@ This repository covers a production and development setup, held together with te
 
 ## Development
 
-You can already run a local k8s cluster and some, but not all services.
+Terraform is required to setup some needed dependencies.
+You should be able to apply the needed state with `terraform apply` in `tf/dev/local`.
+
+Terraform interacts with a k8s cluster, that you ideally already need to have created!
 
 ### minikube cluster
 
