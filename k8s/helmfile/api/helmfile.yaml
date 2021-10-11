@@ -15,11 +15,16 @@ releases:
   - "values.yaml.gotmpl"
 
 environments:
-  local:
-    values:
-      - ./../env/local/private.yaml
-
   production:
+    kubeContext: gke_wikibase-cloud_europe-west3-a_wbaas-1
     values:
-      - ./../../../default.yaml
-      - ./../env/production/private.yaml
+    - ./env/production/base.yaml
+    - ./env/production/private.yaml
+    - ./../../default.yaml
+  local:
+    kubeContext: minikube-wbaas
+    values:
+    - ./env/local/base.yaml
+    - ./env/local/private.yaml
+    # TODO this should be different for local!
+    - ./../../default.yaml
