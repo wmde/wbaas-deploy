@@ -10,7 +10,7 @@ repositories:
   url: https://charts.jetstack.io
 - name: mittwald
   url: https://helm.mittwald.de
-- name: wbstack-charts
+- name: wbstack-charts-ui
   url: git+https://github.com/wbstack/deploy/@charts/ui?ref=main
 
 environments:
@@ -85,6 +85,6 @@ releases:
 
 - name: ui
   namespace: default
-  chart: wbstack-charts/ui
+  chart: wbstack-charts-ui/ui
   values:
   - "env/{{ .Environment.Name }}/ui.values.yaml.gotmpl"
