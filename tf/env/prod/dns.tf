@@ -91,8 +91,8 @@ resource "google_dns_record_set" "dev-MailGun-record" {
         for index, record in mailgun_domain.default.sending_records:
         index => record
     }
-    name = "MailGun Record"
+    name = "${each.value.name}."
     managed_zone = google_dns_managed_zone.dev.name
     type = each.value.record_type
-    rrdatas = [ each.value.value ]
+    rrdatas = [ replace("\"${each.value.value}\"", "/^\"eu.mailgun.org\"$/", "eu.mailgun.org." ) ]
 }
