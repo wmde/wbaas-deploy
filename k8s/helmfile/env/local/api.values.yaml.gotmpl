@@ -12,7 +12,6 @@ useProbes: true
 useProbes: false
 {{- end }}
 
-
 image:
   repository: ghcr.io/toban/api
   tag:
@@ -28,11 +27,12 @@ platform:
 queue:
   mw:
     db:
-      readHost: sql-mariadb-slave.default.svc.cluster.local
-      writeHost: sql-mariadb.default.svc.cluster.local
+      readHost: sql-mariadb-secondary.default.svc.cluster.local
+      writeHost: sql-mariadb-primary.default.svc.cluster.local
       # database: someDbName
       username: mediawiki-db-manager
-      passwordSecretName: sql-mediawiki-db-manager
+      passwordSecretName: sql-secrets-init-passwords
+      passwordSecretKey: SQL_INIT_PASSWORD_MW
 resources:
   # The backed is a platform critical element, so make sure it is allowed to be a bit silly...
   backend:
@@ -78,13 +78,7 @@ ingress:
     - {{ . | quote }}
     {{- end }}
   {{- end }}
-  
-  {{ if eq .Environment.Name "production" }}
-  tls:
-  - hosts:
-    - wikibase.dev ## todo should be injected
-    secretName: wikibase-dev-tls
-  {{ end }}
+
 app:
   # TODO should be secret?
   key: {{ .Values.services.app.key }}
@@ -105,13 +99,13 @@ app:
     prefix: wikibase_dev_api
   db:
     connection: mysql
-    readHost: sql-mariadb-slave.default.svc.cluster.local
-    writeHost: sql-mariadb.default.svc.cluster.local
+    readHost: sql-mariadb-secondary.default.svc.cluster.local
+    writeHost: sql-mariadb-primary.default.svc.cluster.local
     port: 3306
     name: {{ .Values.services.sql.api.db }}
     user: {{ .Values.services.sql.api.user }}
-    passwordSecretName: {{ .Values.services.sql.api.passwordSecretName }}
-    passwordSecretKey: {{ .Values.services.sql.api.passwordSecretKey }}
+    passwordSecretName: sql-secrets-init-passwords
+    passwordSecretKey: SQL_INIT_PASSWORD_API
   mail:
     mailer: {{ .Values.services.app.mailer }} # mailgun/log https://laravel.com/docs/8.x/mail
     mailgundomain: {{ .Values.external.mailgun.domain }}
@@ -122,11 +116,13 @@ app:
     sitekey: {{ .Values.external.recaptcha3.sitekey }}
     secret: {{ .Values.external.recaptcha3.secret }}
     badgehide: true
+  # TODO is this needed for local?
   gce:
     projectId: {{ .Values.gceProject }}
-    serviceAccountSecret: {{ .Values.gceServiceAccountSecret }}
+    existingSecret: api-passport-keys
+  # TODO remove this of add something equivillant for local
   gcsPublicStatic:
-    gcsBucket: {{ .Values.gcsApiStaticBucket }} 
+    gcsBucket: {{ .Values.gcsApiStaticBucket }}
   stackdriver:
     enabled: false
     loggingEnabled: true

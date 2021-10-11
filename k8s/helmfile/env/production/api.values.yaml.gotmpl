@@ -1,0 +1,135 @@
+replicaCount:
+  web: 1
+  backend: 1
+  scheduler: 1
+  queue: 1
+
+# TODO find out why probs don't work locally?
+{{ if eq .Environment.Name "production" }}
+useProbes: true
+{{- end }}
+{{ if eq .Environment.Name "local" }}
+useProbes: false
+{{- end }}
+
+image:
+  repository: ghcr.io/toban/api
+  tag:
+    backend: 8x.1.7-shortcut
+    preinstall: 8x.1.7-shortcut
+    web: 8x.1.7-shortcut
+    queue: 8x.1.7-shortcut
+    scheduler: 8x.1.7-shortcut
+
+platform:
+  backendMwHost: mediawiki-135-app-backend.default.svc.cluster.local
+# This mw db connection is only used by the queue..
+queue:
+  mw:
+    db:
+      readHost: sql-mariadb-secondary.default.svc.cluster.local
+      writeHost: sql-mariadb-primary.default.svc.cluster.local
+      # database: someDbName
+      username: mediawiki-db-manager
+      passwordSecretName: sql-secrets-init-passwords
+      passwordSecretKey: SQL_INIT_PASSWORD_MW
+resources:
+  # The backed is a platform critical element, so make sure it is allowed to be a bit silly...
+  backend:
+    requests:
+      cpu: 300m
+      memory: 300Mi
+    limits:
+      cpu: 500m
+      memory: 600Mi
+  web:
+    requests:
+      cpu: 50m
+      memory: 170Mi
+    limits:
+      cpu: 250m
+      memory: 256Mi
+  queue:
+    requests:
+      cpu: 1m
+      memory: 29Mi
+    limits:
+      cpu: 50m
+      memory: 100Mi
+  scheduler:
+    requests:
+      cpu: 5m
+      memory: 20Mi
+    limits:
+      cpu: 40m
+      memory: 80Mi
+
+ingress:
+  enabled: true
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    nginx.ingress.kubernetes.io/use-regex: "true"
+    nginx.ingress.kubernetes.io/rewrite-target: /$2
+  hosts:
+  {{- range .Values.services.app.ingressHosts }}
+  - host: {{ .host }}
+    paths:
+    {{- range .paths }}
+    - {{ . | quote }}
+    {{- end }}
+  {{- end }}
+  
+  {{ if eq .Environment.Name "production" }}
+  tls:
+  - hosts:
+    - wikibase.dev ## todo should be injected
+    secretName: wikibase-dev-tls
+  {{ end }}
+app:
+  # TODO should be secret?
+  key: {{ .Values.services.app.key }}
+  url: {{ .Values.services.app.url }}
+  cacheDriver: redis
+  queueConnection: redis
+  # TODO should be in a k8s secret?
+  jwtSecret: {{ .Values.services.app.jwtSecret }}
+  queryServiceHost: queryservice.default.svc.cluster.local:9999
+  redis:
+    # TODO is it possible to take advantage of slaves here?
+    host: {{ .Values.services.redis.writeHost }}
+    # TODO should be private somewhere?
+    password: {{ .Values.services.redis.password }}
+    port: {{ .Values.services.redis.port }}
+    db: {{ .Values.services.redis.databases.apiDb }}
+    cachedb: {{ .Values.services.redis.databases.apiCacheDb }}
+    prefix: wikibase_dev_api
+  db:
+    connection: mysql
+    readHost: sql-mariadb-secondary.default.svc.cluster.local
+    writeHost: sql-mariadb-primary.default.svc.cluster.local
+    port: 3306
+    name: {{ .Values.services.sql.api.db }}
+    user: {{ .Values.services.sql.api.user }}
+    passwordSecretName: sql-secrets-init-passwords
+    passwordSecretKey: SQL_INIT_PASSWORD_API
+  mail:
+    mailer: {{ .Values.services.app.mailer }} # mailgun/log https://laravel.com/docs/8.x/mail
+    mailgundomain: {{ .Values.external.mailgun.domain }}
+    mailgunsecret: {{ .Values.external.mailgun.secret }}
+    fromaddress: noreply@mail.wikibase.dev # probably needs an account?
+    fromname: Wikibase-dev
+  recaptcha:
+    sitekey: {{ .Values.external.recaptcha3.sitekey }}
+    secret: {{ .Values.external.recaptcha3.secret }}
+    badgehide: true
+  gce:
+    projectId: {{ .Values.gceProject }}
+    serviceAccountSecret: dev-api-serviceaccount
+    existingSecret: api-passport-keys
+  gcsPublicStatic:
+    gcsBucket: {{ .Values.gcsApiStaticBucket }} 
+  stackdriver:
+    enabled: false
+    loggingEnabled: true
+    tracingEnabled: false
+    errorReportingEnabled: true

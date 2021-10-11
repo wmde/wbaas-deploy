@@ -37,15 +37,11 @@ services:
         paths:
           - /api(/|$)(.*)
   sql:
-    rootPassword: nevergoingtogiveyouup
-    replicationPassword: nevergoingtoletyoudown
     storageClass: faster
     storageSize: 60Gi
     api:
       db: apidb
       user: apiuser
-      passwordSecretName: sql-apiuser
-      passwordSecretKey: password
   redis:
     password: nevergoingtoturnaround
     readHost: redis-headless.default.svc.cluster.local
