@@ -104,6 +104,7 @@ releases:
 
 - name: api
   chart: wbstack/api
+  version: 0.2.0
   namespace: default
   values:
   - "env/{{ .Environment.Name }}/api.values.yaml.gotmpl"
@@ -111,49 +112,58 @@ releases:
 - name: ui
   namespace: default
   chart: wbstack/ui
+  version: 0.1.0
   values:
   - "env/{{ .Environment.Name }}/ui.values.yaml.gotmpl"
 
 - name: mediawiki-135
   namespace: default
   chart: wbstack/mediawiki
+  version: 0.1.0
   values:
   - "env/{{ .Environment.Name }}/mediawiki-135.values.yaml.gotmpl"
 
 - name: queryservice-ui
   namespace: default
   chart: wbstack/queryservice-ui
+  version: 0.1.0
   values:
   - "env/{{ .Environment.Name }}/queryservice-ui.values.yaml.gotmpl"
 - name: queryservice
   namespace: default
   chart: wbstack/queryservice
+  version: 0.1.0
   values:
   - "env/{{ .Environment.Name }}/queryservice.values.yaml.gotmpl"
 - name: queryservice-gateway
   namespace: default
   chart: wbstack/queryservice-gateway
+  version: 0.1.0
   values:
   - "env/{{ .Environment.Name }}/queryservice-gateway.values.yaml.gotmpl"
 - name: queryservice-updater
   namespace: default
   chart: wbstack/queryservice-updater
+  version: 0.1.0
   values:
   - "env/{{ .Environment.Name }}/queryservice-updater.values.yaml.gotmpl"
 
 - name: tool-cradle
   namespace: default
   chart: wbstack/tool-cradle
+  version: 0.1.0
   values:
   - "env/{{ .Environment.Name }}/tool-cradle.values.yaml.gotmpl"
 - name: tool-widar
   namespace: default
   chart: wbstack/tool-widar
+  version: 0.1.0
   values:
   - "env/{{ .Environment.Name }}/tool-widar.values.yaml.gotmpl"
 - name: tool-quickstatements
   namespace: default
   chart: wbstack/tool-quickstatements
+  version: 0.1.0
   values:
   - "env/{{ .Environment.Name }}/tool-quickstatements.values.yaml.gotmpl"
 
