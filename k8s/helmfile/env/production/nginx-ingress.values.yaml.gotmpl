@@ -1,3 +1,7 @@
+ingressNameSuffix: wikibase-dev
+ingressHost: "*.wikibase-dev"
+forceSSL: true
+tls: true
 controller:
   service:
     loadBalancerIP: {{ .Values.ip }}

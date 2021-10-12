@@ -1,6 +1,3 @@
-helmDefaults:
-  skipDeps: true
-
 repositories:
 - name: stable
   url: https://charts.helm.sh/stable
@@ -10,32 +7,34 @@ repositories:
   url: https://charts.jetstack.io
 - name: mittwald
   url: https://helm.mittwald.de
-- name: wbstack-charts
-  url: git+https://github.com/wbstack/deploy/@charts/ui?ref=main
+- name: wbstack-deploy-charts
+  url: git+https://github.com/wbstack/deploy/@charts?ref=main
+- name: mogaal-adminer
+  url: git+https://github.com/mogaal/helm-charts/@adminer/?ref=main
 
 environments:
   production:
     kubeContext: gke_wikibase-cloud_europe-west3-a_wbaas-1
     values:
-    - ./../../private-production.yaml
-    - ./../../default.yaml
-    - foo: bar
+    - ./env/production/base.yaml
+    - ./env/production/private.yaml
   local:
     kubeContext: minikube-wbaas
     values:
-    - ./../../private-local.yaml
-    # TODO this should be different for local!
-    - ./../../default.yaml
-    - foo: baz
+    - ./env/local/base.yaml
+    - ./env/local/private.yaml
 
 # Path to helmfiles to process BEFORE releases
 # All the nested state files under `helmfiles:` is processed in the order of definition.
 helmfiles:
-- path: cert-manager.yaml
-  values:
-    - foo: null
+  - path: cert-manager.yaml
+    values:
+      - foo: null
 
 releases:
+################################
+# PRODUCTION ONLY
+################################
 # Only deploy the clusterissuers to production for now, as they won't work locally anyway right now...
 - name: clusterissuers
   installed: {{ eq .Environment.Name "production" | toYaml }}
@@ -55,19 +54,16 @@ releases:
         - '*.wikibase.dev'
         - 'wikibase.dev'
 
-# The currenttly used replicated/k8s-secret-generator code is archived and deprecated, so investigate an alternative
-- name: kubernetes-secret-generator
-  # Only deploy locally to start with (while testing)
-  installed: {{ eq .Environment.Name "local" | toYaml }}
-  namespace: default
-  chart: mittwald/kubernetes-secret-generator
-
+################################
+# ALL ENVIRONMENTS
+################################
 - name: nginx-ingress
   namespace: kube-system
   chart: stable/nginx-ingress
   version: 1.34.3
   values:
-  - "nginx-ingress.values.yaml.gotmpl"
+  - "env/{{ .Environment.Name }}/nginx-ingress.values.yaml.gotmpl"
+
 - name: redis
   # This is in the default namespace, as the default ns implies staging?
   namespace: default
@@ -78,6 +74,46 @@ releases:
 
 - name: ui
   namespace: default
-  chart: wbstack-charts/ui
+  chart: wbstack-deploy-charts/ui
   values:
   - "env/{{ .Environment.Name }}/ui.values.yaml.gotmpl"
+
+- name: queryservice-ui
+  namespace: default
+  chart: wbstack-deploy-charts/queryservice-ui
+  values:
+  - "env/{{ .Environment.Name }}/queryservice-ui.values.yaml.gotmpl"
+- name: queryservice
+  namespace: default
+  chart: wbstack-deploy-charts/queryservice
+  values:
+  - "env/{{ .Environment.Name }}/queryservice.values.yaml.gotmpl"
+- name: queryservice-gateway
+  namespace: default
+  chart: wbstack-deploy-charts/queryservice-gateway
+  values:
+  - "env/{{ .Environment.Name }}/queryservice-gateway.values.yaml.gotmpl"
+- name: queryservice-updater
+  namespace: default
+  chart: wbstack-deploy-charts/queryservice-updater
+  values:
+  - "env/{{ .Environment.Name }}/queryservice-updater.values.yaml.gotmpl"
+
+################################
+# LOCAL ONLY
+################################
+- name: adminer
+  installed: {{ eq .Environment.Name "local" | toYaml }}
+  namespace: default
+  chart: mogaal-adminer/adminer
+  values:
+  - "env/{{ .Environment.Name }}/queryservice-updater.values.yaml.gotmpl"
+
+################################
+# Removed deployments
+# These should be left here for a short while to allow locel setups to have them removed
+################################
+- name: kubernetes-secret-generator
+  installed: false
+  namespace: default
+  chart: mittwald/kubernetes-secret-generator

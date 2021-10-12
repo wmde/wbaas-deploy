@@ -9,3 +9,15 @@ releases:
   version: 5.2.4
   values:
   - "values.yaml.gotmpl"
+
+environments:
+  production:
+    kubeContext: gke_wikibase-cloud_europe-west3-a_wbaas-1
+    values:
+    - ./env/production/base.yaml
+    - ./env/production/private.yaml
+  local:
+    kubeContext: minikube-wbaas
+    values:
+    - ./env/local/base.yaml
+    - ./env/local/private.yaml

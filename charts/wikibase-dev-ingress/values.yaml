@@ -1,0 +1,4 @@
+ingressNameSuffix: main
+ingressHost: "*.testing.localhost"
+forceSSL: false
+#tls: true

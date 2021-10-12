@@ -12,5 +12,4 @@ releases:
 environments:
   default:
     values:
-      - ./../../../default.yaml
       - ./../../../private.yaml

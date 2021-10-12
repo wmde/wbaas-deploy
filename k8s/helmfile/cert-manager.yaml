@@ -6,16 +6,11 @@ environments:
   production:
     kubeContext: gke_wikibase-cloud_europe-west3-a_wbaas-1
     values:
-    - ./../../private-production.yaml
-    - ./../../default.yaml
-    - foo: bar
+    - ./env/production/private.yaml
   local:
     kubeContext: minikube-wbaas
     values:
-    - ./../../private-local.yaml
-    # TODO this should be different for local!
-    - ./../../default.yaml
-    - foo: baz
+    - ./env/local/private.yaml
 
 releases:
 - name: cert-manager

@@ -1,0 +1,66 @@
+
+# TODO google cloud related things probably don't matter to local deploys
+gceServiceAccountSecret: wikibase-dev-api-token-ltjr2
+gceProject: 'something'
+gcsApiStaticBucket: 'something'
+
+# TODO move this (and many other things) out of private file...
+uiHostName: www.wbaas.localhost
+tlsSecret: wikibase-dev-tls
+
+services:
+  queryservice:
+    storageSize: 1Gi
+    storageClass: standard
+
+  app:
+    url: http://www.wbaas.localhost
+    key: base64:J6jYydw3RczHiPFgJt9P5f4uuvEqe84pZsbMgRor4VI=
+    jwtSecret: jg9jj98gg09as09sfa0fj0jg0avnmx
+    mailer: log
+    ingressHosts:
+      - host: api.wbaas.localhost
+        paths:
+          - /()(.*)
+      - host: www.wbaas.localhost
+        paths:
+          - /api(/|$)(.*)
+
+  redis:
+    password: a-bad-local-redis-password
+    readHost: redis-headless.default.svc.cluster.local # TODO reuse in local and prod? but it has the namespace in it!!!
+    writeHost: redis-master.default.svc.cluster.local
+    port: 6379
+    databases:
+      apiDb: 2
+      apiCacheDb: 3
+
+  sql:
+    rootPassword: nevergoingtogiveyouup
+    replicationPassword: nevergoingtoletyoudown
+    storageClass: standard
+    storageSize: 1Gi
+    api:
+      db: apidb
+      user: apiuser
+      passwordSecretName: sql-apiuser
+      passwordSecretKey: password
+
+external:
+
+  mailgun:
+    domain: "sandbox53750348684c4187b72f84612a326ab8.mailgun.org" # dunno if correct
+    secret: "c7a1f2abd115032e1bc98d9c346cd4f8-443ec20e-01009dbc"
+
+  recaptcha3:
+    sitekey: "dunno"
+    secret: "dunno"
+
+  recaptcha2:
+    sitekey: "dunno"
+    secret: "dunno"
+
+  letsencrypt:
+    email: adam.shorland@wikimedia.de
+
+
