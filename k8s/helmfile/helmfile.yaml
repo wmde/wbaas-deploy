@@ -88,6 +88,20 @@ releases:
   values:
   - "env/{{ .Environment.Name }}/redis.values.yaml.gotmpl"
 
+- name: platform-nginx
+  namespace: default
+  chart: bitnami/nginx
+  version: 5.2.4
+  values:
+  - "env/{{ .Environment.Name }}/platform-nginx.values.yaml.gotmpl"
+
+- name: platform-apps-ingress
+  namespace: default
+  chart: ./../../charts/wikibase-dev-ingress
+  values:
+  # TODO use more specific values (what is actually needed?) OR adopt this pattern everywhere
+  - {{ toYaml .Values | nindent 4 }}
+
 - name: api
   chart: wbstack-deploy-charts/api
   namespace: default
