@@ -9,6 +9,7 @@ resource "random_password" "redis-password" {
 resource "kubernetes_secret" "redis-password" {
   metadata {
     name = "redis-password"
+    # Default NS for staging?
     namespace = "default"
   }
 
