@@ -29,6 +29,9 @@ environments:
     - ./env/local/base.yaml
     - ./env/local/private.yaml
 
+helmDefaults:
+  timeout: 600
+
 # Path to helmfiles to process BEFORE releases
 # All the nested state files under `helmfiles:` is processed in the order of definition.
 helmfiles:

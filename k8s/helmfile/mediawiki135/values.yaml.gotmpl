@@ -12,8 +12,9 @@ image:
   pullPolicy: Always
 mw:
   db:
-    master: sql-mariadb.default.svc.cluster.local
-    replica: sql-mariadb-slave.default.svc.cluster.local
+    replica: sql-mariadb-secondary.default.svc.cluster.local
+    master: sql-mariadb-primary.default.svc.cluster.local
+
   redis:
     # TODO fixme, no port injected into deployment...
     # TODO fixme, no "database" ID injected into mediawiki
