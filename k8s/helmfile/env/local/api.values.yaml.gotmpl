@@ -89,10 +89,10 @@ app:
   jwtSecret: {{ .Values.services.app.jwtSecret }}
   queryServiceHost: queryservice.default.svc.cluster.local:9999
   redis:
-    # TODO is it possible to take advantage of slaves here?
+    # TODO is it possible to take advantage of replicas here?
     host: {{ .Values.services.redis.writeHost }}
-    # TODO should be private somewhere?
-    password: {{ .Values.services.redis.password }}
+    passwordSecretName: redis-password
+    passwordSecretKey: password
     port: {{ .Values.services.redis.port }}
     db: {{ .Values.services.redis.databases.apiDb }}
     cachedb: {{ .Values.services.redis.databases.apiCacheDb }}

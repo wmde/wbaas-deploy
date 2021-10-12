@@ -20,6 +20,7 @@ mw:
     # TODO fixme, no "database" ID injected into mediawiki
     readServer: {{ .Values.services.redis.readHost }}
     writeServer: {{ .Values.services.redis.writeHost }}
+    # TODO redis password will need to have chart altered to take value from a secret
     password: {{ .Values.services.redis.password }}
   mailgun:
     apikey: {{ .Values.external.mailgun.secret }}

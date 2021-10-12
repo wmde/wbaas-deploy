@@ -84,12 +84,21 @@ releases:
   # This is in the default namespace, as the default ns implies staging?
   namespace: default
   chart: bitnami/redis
+  {{ if eq .Environment.Name "local" }}
+  # New version currently being test out and setup on local
+  version: 15.4.1
+  {{ else }}
   version: 10.5.14
+  {{ end }}
   values:
-  - "redis.values.yaml.gotmpl"
+  - "env/{{ .Environment.Name }}/redis.values.yaml.gotmpl"
 
 - name: api
+  {{ if eq .Environment.Name "local" }}
+  chart: ./../../../deploy/charts/api
+  {{ else }}
   chart: wbstack-deploy-charts/api
+  {{ end }}
   namespace: default
   values:
   - "env/{{ .Environment.Name }}/api.values.yaml.gotmpl"
