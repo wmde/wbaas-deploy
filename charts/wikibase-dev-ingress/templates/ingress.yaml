@@ -14,9 +14,9 @@ spec:
           backend:
             serviceName: platform-nginx
             servicePort: 8080
-{{- if .Values.tls -}}
-tls:
- - hosts:
-   - {{ .Values.ingressHost | quote }}
-   secretName: {{ .Values.ingressNameSuffix }}-tls
-{{- end -}}
+  {{ if .Values.tls }}
+  tls:
+  - hosts:
+    - {{ .Values.ingressHost | quote }}
+    secretName: {{ .Values.ingressNameSuffix }}-tls
+  {{- end }}

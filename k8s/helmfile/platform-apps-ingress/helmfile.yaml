@@ -3,4 +3,16 @@ releases:
   namespace: default
   chart: ./../../../charts/wikibase-dev-ingress
   values:
-    - "values.yaml"
+  - {{ toYaml .Values | nindent 4 }}
+
+environments:
+  production:
+    kubeContext: gke_wikibase-cloud_europe-west3-a_wbaas-1
+    values:
+    - ../env/production/base.yaml
+    - ../env/production/private.yaml
+  local:
+    kubeContext: minikube-wbaas
+    values:
+    - ../env/local/base.yaml
+    - ../env/local/private.yaml
