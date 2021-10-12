@@ -93,6 +93,8 @@ app:
     host: {{ .Values.services.redis.writeHost }}
     passwordSecretName: redis-password
     passwordSecretKey: password
+    # Default values includes a password right now, so we need to explictly set this as empty
+    password:
     port: {{ .Values.services.redis.port }}
     db: {{ .Values.services.redis.databases.apiDb }}
     cachedb: {{ .Values.services.redis.databases.apiCacheDb }}

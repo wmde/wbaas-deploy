@@ -94,11 +94,7 @@ releases:
   - "env/{{ .Environment.Name }}/redis.values.yaml.gotmpl"
 
 - name: api
-  {{ if eq .Environment.Name "local" }}
-  chart: ./../../../deploy/charts/api
-  {{ else }}
   chart: wbstack-deploy-charts/api
-  {{ end }}
   namespace: default
   values:
   - "env/{{ .Environment.Name }}/api.values.yaml.gotmpl"
