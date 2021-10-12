@@ -80,7 +80,19 @@ Note: There is more to making things work locally than this and we either need t
 
 ### helmfile
 
-Apply the helmfiles that are setup to work with the local environment with `helmfile --environment local diff/apply` in the `k8s/helmfile` directory.
+You can see the changes that helmfile will make to your local k8s cluster with
+
+```sh
+helmfile --environment local diff
+```
+
+To actually make the changes use:
+
+```sh
+helmfile --environment local apply
+```
+
+In order to speed things up you can add `--skip-deps` after the `diff` or `apply` commands if you are not expecting to pull in changes.
 
 **Note: This is a work in progress**
 
