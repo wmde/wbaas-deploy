@@ -128,6 +128,22 @@ releases:
   values:
   - "env/{{ .Environment.Name }}/queryservice-updater.values.yaml.gotmpl"
 
+- name: tool-cradle
+  namespace: default
+  chart: wbstack-deploy-charts/tool-cradle
+  values:
+  - "env/{{ .Environment.Name }}/tool-cradle.values.yaml.gotmpl"
+- name: tool-widar
+  namespace: default
+  chart: wbstack-deploy-charts/tool-widar
+  values:
+  - "env/{{ .Environment.Name }}/tool-widar.values.yaml.gotmpl"
+- name: tool-quickstatements
+  namespace: default
+  chart: wbstack-deploy-charts/tool-quickstatements
+  values:
+  - "env/{{ .Environment.Name }}/tool-quickstatements.values.yaml.gotmpl"
+
 ################################
 # LOCAL ONLY
 ################################
