@@ -5,8 +5,8 @@ repositories:
   url: https://charts.bitnami.com/bitnami
 - name: jetstack
   url: https://charts.jetstack.io
-- name: wbstack-deploy-charts
-  url: git+https://github.com/wbstack/deploy/@charts?ref=main
+- name: wbstack
+  url: https://wbstack.github.io/charts
 - name: bitnami
   url: https://charts.bitnami.com/bitnami
 - name: cetic
@@ -103,57 +103,57 @@ releases:
   - {{ toYaml .Values | nindent 4 }}
 
 - name: api
-  chart: wbstack-deploy-charts/api
+  chart: wbstack/api
   namespace: default
   values:
   - "env/{{ .Environment.Name }}/api.values.yaml.gotmpl"
 
 - name: ui
   namespace: default
-  chart: wbstack-deploy-charts/ui
+  chart: wbstack/ui
   values:
   - "env/{{ .Environment.Name }}/ui.values.yaml.gotmpl"
 
 - name: mediawiki-135
   namespace: default
-  chart: wbstack-deploy-charts/mediawiki
+  chart: wbstack/mediawiki
   values:
   - "env/{{ .Environment.Name }}/mediawiki-135.values.yaml.gotmpl"
 
 - name: queryservice-ui
   namespace: default
-  chart: wbstack-deploy-charts/queryservice-ui
+  chart: wbstack/queryservice-ui
   values:
   - "env/{{ .Environment.Name }}/queryservice-ui.values.yaml.gotmpl"
 - name: queryservice
   namespace: default
-  chart: wbstack-deploy-charts/queryservice
+  chart: wbstack/queryservice
   values:
   - "env/{{ .Environment.Name }}/queryservice.values.yaml.gotmpl"
 - name: queryservice-gateway
   namespace: default
-  chart: wbstack-deploy-charts/queryservice-gateway
+  chart: wbstack/queryservice-gateway
   values:
   - "env/{{ .Environment.Name }}/queryservice-gateway.values.yaml.gotmpl"
 - name: queryservice-updater
   namespace: default
-  chart: wbstack-deploy-charts/queryservice-updater
+  chart: wbstack/queryservice-updater
   values:
   - "env/{{ .Environment.Name }}/queryservice-updater.values.yaml.gotmpl"
 
 - name: tool-cradle
   namespace: default
-  chart: wbstack-deploy-charts/tool-cradle
+  chart: wbstack/tool-cradle
   values:
   - "env/{{ .Environment.Name }}/tool-cradle.values.yaml.gotmpl"
 - name: tool-widar
   namespace: default
-  chart: wbstack-deploy-charts/tool-widar
+  chart: wbstack/tool-widar
   values:
   - "env/{{ .Environment.Name }}/tool-widar.values.yaml.gotmpl"
 - name: tool-quickstatements
   namespace: default
-  chart: wbstack-deploy-charts/tool-quickstatements
+  chart: wbstack/tool-quickstatements
   values:
   - "env/{{ .Environment.Name }}/tool-quickstatements.values.yaml.gotmpl"
 
