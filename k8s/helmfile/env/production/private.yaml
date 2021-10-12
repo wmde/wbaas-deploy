@@ -48,9 +48,12 @@ services:
     readHost: redis-headless.default.svc.cluster.local
     writeHost: redis-master.default.svc.cluster.local
     port: 6379
+    # TODO move these databases out of private
     databases:
       apiDb: 2
       apiCacheDb: 3
+      toolQuickstatements: 10
+      toolWidar: 11
 external:
   letsencrypt:
     email: thomas.arrow_ext@wikimedia.de
