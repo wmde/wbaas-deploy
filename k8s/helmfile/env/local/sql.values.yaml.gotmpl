@@ -1,4 +1,11 @@
-master:
+architecture: replication
+
+auth:
+  forcePassword: true
+  existingSecret: sql-secrets-passwords
+
+primary:
+  extraEnvVarsSecret: sql-secrets-init-passwords
   resources:
     requests:
       cpu: 40m
@@ -7,8 +14,9 @@ master:
       cpu: 750m
       memory: 1000Mi
   persistence:
+    enabled: true
     size: {{ .Values.services.sql.storageSize | quote }}
-  config: |-
+  configuration: |-
     [mysqld]
     skip-name-resolve
     explicit_defaults_for_timestamp
@@ -52,18 +60,8 @@ master:
     socket=/opt/bitnami/mariadb/tmp/mysql.sock
     pid-file=/opt/bitnami/mariadb/tmp/mysqld.pid
 
-    podAntiAffinity:
-      preferredDuringSchedulingIgnoredDuringExecution:
-        - labelSelector:
-            matchExpressions:
-              - key: "release"
-                operator: In
-                values:
-                  - sql
-          topologyKey: "kubernetes.io/hostname"
-
-slave:
-  replicas: 1
+secondary:
+  replicaCount: 1
   resources:
     requests:
       cpu: 100m
@@ -73,21 +71,11 @@ slave:
       memory: 900Mi
   readinessProbe:
     enabled: true
-    type: seconds_behind
-    typeSecondsBehind: 60
   persistence:
+    enabled: true
     size: {{ .Values.services.sql.storageSize | quote }}
-    podAntiAffinity:
-      preferredDuringSchedulingIgnoredDuringExecution:
-        - labelSelector:
-            matchExpressions:
-              - key: "release"
-                operator: In
-                values:
-                  - sql
-          topologyKey: "kubernetes.io/hostname"
 
-  config: |-
+  configuration: |-
     [mysqld]
     skip-name-resolve
     explicit_defaults_for_timestamp
@@ -133,11 +121,42 @@ global:
   storageClass: {{ .Values.services.sql.storageClass | quote }}
 metrics:
   enabled: false
-db:
-  forcePassword: true
-rootUser:
-  password: {{ .Values.services.sql.rootPassword | quote }}
-  forcePassword: true
-replication:
-  password: {{ .Values.services.sql.replicationPassword | quote }}
-  forcePassword: true
+initdbScripts:
+  # https://docs.bitnami.com/kubernetes/infrastructure/mariadb/configuration/customize-new-instance/
+  init-primary-only.sh: |
+    #!/bin/sh
+    if [[ $(hostname) == *primary* ]]; then
+        echo "Primary node, executing"
+    else
+        echo "NOT Primary node, EXITING"
+        exit
+    fi
+
+    # API
+    # TODO tighten up the grants for the api user
+    echo "CREATE USER IF NOT EXISTS 'apiuser'@'%' IDENTIFIED BY '${SQL_INIT_PASSWORD_API}';" >> /tmp/sql-init-cmds-001.txt
+    echo "ALTER USER 'apiuser'@'%' IDENTIFIED BY '${SQL_INIT_PASSWORD_API}';" >> /tmp/sql-init-cmds-001.txt
+    echo "CREATE DATABASE IF NOT EXISTS apidb;" >> /tmp/sql-init-cmds-001.txt
+    echo "GRANT ALL ON apidb.* TO 'apiuser'@'%';" >> /tmp/sql-init-cmds-001.txt
+    echo "GRANT GRANT OPTION ON apidb.* TO 'apiuser'@'%';" >> /tmp/sql-init-cmds-001.txt
+
+    # Mediawiki
+    echo "CREATE USER IF NOT EXISTS 'mediawiki-db-manager'@'%' IDENTIFIED BY '${SQL_INIT_PASSWORD_MW}';" >> /tmp/sql-init-cmds-001.txt
+    echo "ALTER USER 'mediawiki-db-manager'@'%' IDENTIFIED BY '${SQL_INIT_PASSWORD_MW}';" >> /tmp/sql-init-cmds-001.txt
+    echo "CREATE DATABASE IF NOT EXISTS mediawiki;" >> /tmp/sql-init-cmds-001.txt
+    # Needed in order to create new DBs and users and perform updates
+    echo "GRANT ALL ON \`mwdb_%\`.* TO 'mediawiki-db-manager'@'%';" >> /tmp/sql-init-cmds-001.txt
+    echo "GRANT ALL ON \`mediawiki\`.* TO 'mediawiki-db-manager'@'%';" >> /tmp/sql-init-cmds-001.txt
+    # Needed in order to GRANT new users access to their own dbs
+    echo "GRANT GRANT OPTION ON \`mwdb_%\`.* TO 'mediawiki-db-manager'@'%';" >> /tmp/sql-init-cmds-001.txt
+    echo "GRANT GRANT OPTION ON \`mediawiki\`.* TO 'mediawiki-db-manager'@'%';" >> /tmp/sql-init-cmds-001.txt
+    # Needed in order to create new users
+    echo "GRANT CREATE USER ON *.* TO 'mediawiki-db-manager'@'%';" >> /tmp/sql-init-cmds-001.txt
+    # In order to see and grant slave status access
+    echo "GRANT REPLICATION CLIENT ON *.* TO 'mediawiki-db-manager'@'%' WITH GRANT OPTION;" >> /tmp/sql-init-cmds-001.txt
+
+    # Flush privs
+    echo "FLUSH PRIVILEGES;" >> /tmp/sql-init-cmds-001.txt
+
+    mysql -uroot -p${MARIADB_ROOT_PASSWORD} < /tmp/sql-init-cmds-001.txt
+    rm /tmp/sql-init-cmds-001.txt

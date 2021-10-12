@@ -16,3 +16,14 @@ variable "mailgun_api_key" {
   description = "API key to access Mailgun"
   sensitive = true
 }
+
+variable "sql-passwords" {
+  type    = set(string)
+  description = "SQL passwords to create and send to k8s as secrets"
+  default = [
+      "staging-root",
+      "staging-replication",
+      "staging-api",
+      "staging-mediawiki-db-manager",
+      ]
+}

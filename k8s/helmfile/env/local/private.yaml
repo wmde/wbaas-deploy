@@ -1,6 +1,5 @@
 
 # TODO google cloud related things probably don't matter to local deploys
-gceServiceAccountSecret: wikibase-dev-api-token-ltjr2
 gceProject: 'something'
 gcsApiStaticBucket: 'something'
 
@@ -36,15 +35,11 @@ services:
       apiCacheDb: 3
 
   sql:
-    rootPassword: nevergoingtogiveyouup
-    replicationPassword: nevergoingtoletyoudown
     storageClass: standard
     storageSize: 1Gi
     api:
       db: apidb
       user: apiuser
-      passwordSecretName: sql-apiuser
-      passwordSecretKey: password
 
 external:
 

@@ -15,6 +15,18 @@ resource "google_service_account" "dev-api" {
     display_name = "Service Account"
 }
 
-# Does not support import, so would need to be a freshly created key
-# resource "google_service_account_key" "dev-api" {
-# }
+# TODO future regular rotation https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/google_service_account_key#example-usage-creating-and-regularly-rotating-a-key
+resource "google_service_account_key" "dev-api" {
+    service_account_id = google_service_account.dev-api.name
+}
+
+# Deprecated per https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/google_service_account_key#example-usage-save-key-in-kubernetes-secret---deprecated
+# but will do for now...
+resource "kubernetes_secret" "dev-api-serviceaccount" {
+  metadata {
+    name = "dev-api-serviceaccount"
+  }
+  data = {
+    "key.json" = base64decode(google_service_account_key.dev-api.private_key)
+  }
+}
