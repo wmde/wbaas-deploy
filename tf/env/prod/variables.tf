@@ -13,7 +13,7 @@ variable "terraformers" {
 
 variable "mailgun_api_key" {
   type = string
-  description = "API key to access Mailgun"
+  description = "User API key to access Mailgun"
   sensitive = true
 }
 
@@ -26,4 +26,10 @@ variable "sql-passwords" {
       "staging-api",
       "staging-mediawiki-db-manager",
       ]
+}
+
+variable "domain_mailgun_key" {
+  type = string
+  description = "User provided domain key for API"
+  sensitive = true
 }
