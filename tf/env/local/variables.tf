@@ -8,3 +8,10 @@ variable "sql-passwords" {
       "mediawiki-db-manager",
       ]
 }
+
+variable "recaptcha_secret_key" {
+  type = string
+  description = "Secret key to access recaptcha"
+  sensitive = true
+  default = "6Lf7R8ocAAAAAIN80eE-hVb0dw7j5u2FXj3KZwv9"
+}
