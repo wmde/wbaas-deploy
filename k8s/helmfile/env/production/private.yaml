@@ -55,8 +55,8 @@ external:
   letsencrypt:
     email: thomas.arrow_ext@wikimedia.de
   mailgun:
-    domain: wikibase.dev
-    secret: 0262ae9a79e1fb2ce9502c60fd7428d2-2ac825a1-c8588225
+    domain: TODO
+    secret: TODO
   recaptcha2:
     sitekey: TODO
     secret: TODO
