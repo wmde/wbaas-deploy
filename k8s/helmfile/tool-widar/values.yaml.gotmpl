@@ -4,6 +4,7 @@ platform:
   mediawikiBackendHost: mediawiki-135-app-backend.default.svc.cluster.local
 php:
   sessionSaveHandler: redis
+  # TODO redis password will need to have chart altered to take value from a secret
   sessionSavePath: "tcp://{{ .Values.services.redis.writeHost }}:{{ .Values.services.redis.port }}?database={{ .Values.services.redis.databases.toolWidar }}&auth={{ .Values.services.redis.password }}&prefix=session_widar_"
 image:
   repository: ghcr.io/wbstack/widar

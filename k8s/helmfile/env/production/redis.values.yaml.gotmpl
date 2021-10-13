@@ -5,6 +5,7 @@ cluster:
 sentinel:
   enabled: false
 usePassword: true
+# TODO move prod password to come from a secret when upgrading redis
 password: {{ .Values.services.redis.password }}
 configmap: |
   # Enable AOF https://redis.io/topics/persistence#append-only-file
