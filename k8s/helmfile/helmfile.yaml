@@ -94,7 +94,8 @@ releases:
   - "env/{{ .Environment.Name }}/redis.values.yaml.gotmpl"
 
 - name: api
-  chart: wbstack-deploy-charts/api
+  chart: wbstack/api
+  version: 0.3.0
   namespace: default
   values:
   - "env/{{ .Environment.Name }}/api.values.yaml.gotmpl"

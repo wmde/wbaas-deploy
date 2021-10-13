@@ -78,7 +78,7 @@ ingress:
     - {{ . | quote }}
     {{- end }}
   {{- end }}
-  
+
   {{ if eq .Environment.Name "production" }}
   tls:
   - hosts:
@@ -115,7 +115,9 @@ app:
   mail:
     mailer: {{ .Values.services.app.mailer }} # mailgun/log https://laravel.com/docs/8.x/mail
     mailgundomain: {{ .Values.external.mailgun.domain }}
-    mailgunsecret: {{ .Values.external.mailgun.secret }}
+    mailgunsecret:
+    mailgunSecretName: mailgun-api-key
+    mailgunSecretKey: key
     fromaddress: noreply@mail.wikibase.dev # probably needs an account?
     fromname: Wikibase-dev
   recaptcha:
@@ -127,7 +129,7 @@ app:
     serviceAccountSecret: dev-api-serviceaccount
     existingSecret: api-passport-keys
   gcsPublicStatic:
-    gcsBucket: {{ .Values.gcsApiStaticBucket }} 
+    gcsBucket: {{ .Values.gcsApiStaticBucket }}
   stackdriver:
     enabled: false
     loggingEnabled: true
