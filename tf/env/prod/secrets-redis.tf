@@ -9,11 +9,12 @@ resource "random_password" "redis-password" {
 resource "kubernetes_secret" "redis-password" {
   metadata {
     name = "redis-password"
+    # Default NS for staging?
     namespace = "default"
   }
 
-  binary_data = {
-    "password" = base64encode(random_password.redis-password.result)
+  data = {
+    "password" = random_password.redis-password.result
   }
   
 }

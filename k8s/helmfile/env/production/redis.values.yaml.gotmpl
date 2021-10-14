@@ -1,13 +1,12 @@
 redisPort: 6379
-cluster:
-  enabled: true
-  slaveCount: 1
+architecture: "replication"
 sentinel:
   enabled: false
-usePassword: true
-# TODO move prod password to come from a secret when upgrading redis
-password: {{ .Values.services.redis.password }}
-configmap: |
+auth:
+  enabled: true
+  existingSecret: redis-password
+  existingSecretPasswordKey: password
+commonConfiguration: |
   # Enable AOF https://redis.io/topics/persistence#append-only-file
   appendonly yes
   # Disable RDB persistence, AOF persistence already enabled.
@@ -34,20 +33,8 @@ master:
     accessModes:
       - ReadWriteOnce
     size: 1Gi
-  affinity:
-    podAntiAffinity:
-      preferredDuringSchedulingIgnoredDuringExecution:
-        - weight: 100
-          podAffinityTerm:
-            labelSelector:
-              matchExpressions:
-                - key: "release"
-                  operator: In
-                  values:
-                    - redis
-            topologyKey: "kubernetes.io/hostname"
-
-slave:
+replica:
+  replicaCount: 1
   resources:
     requests:
       cpu: 10m
@@ -64,15 +51,3 @@ slave:
     accessModes:
       - ReadWriteOnce
     size: 1Gi
-  affinity:
-    podAntiAffinity:
-      preferredDuringSchedulingIgnoredDuringExecution:
-        - weight: 100
-          podAffinityTerm:
-            labelSelector:
-              matchExpressions:
-                - key: "release"
-                  operator: In
-                  values:
-                    - redis
-            topologyKey: "kubernetes.io/hostname"

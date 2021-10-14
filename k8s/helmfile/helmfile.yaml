@@ -84,12 +84,7 @@ releases:
   # This is in the default namespace, as the default ns implies staging?
   namespace: default
   chart: bitnami/redis
-  {{ if eq .Environment.Name "local" }}
-  # New version currently being test out and setup on local
   version: 15.4.1
-  {{ else }}
-  version: 10.5.14
-  {{ end }}
   values:
   - "env/{{ .Environment.Name }}/redis.values.yaml.gotmpl"
 
