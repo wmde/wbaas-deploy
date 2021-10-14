@@ -14,6 +14,8 @@ repositories:
   url: git+https://github.com/mogaal/helm-charts/@adminer/?ref=main
 - name: mittwald
   url: https://helm.mittwald.de
+- name: elastic
+  url: https://helm.elastic.co
 
 environments:
   production:
@@ -175,6 +177,14 @@ releases:
   version: v0.1.7
   values:
   - "env/{{ .Environment.Name }}/adminer-cetic.values.yaml.gotmpl"
+
+# Local only, before also being deployed to production!
+- name: elasticsearch
+  namespace: default
+  chart: elastic/elasticsearch
+  version: 6.8.18
+  values:
+  - "env/{{ .Environment.Name }}/elasticsearch.values.yaml.gotmpl"
 
 ################################
 # Removed deployments
