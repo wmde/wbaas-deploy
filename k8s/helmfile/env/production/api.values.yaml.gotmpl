@@ -4,22 +4,16 @@ replicaCount:
   scheduler: 1
   queue: 1
 
-# TODO find out why probs don't work locally?
-{{ if eq .Environment.Name "production" }}
 useProbes: true
-{{- end }}
-{{ if eq .Environment.Name "local" }}
-useProbes: false
-{{- end }}
 
 image:
-  repository: ghcr.io/toban/api
+  repository: ghcr.io/wbstack/api
   tag:
-    backend: 8x.1.7-shortcut
-    preinstall: 8x.1.7-shortcut
-    web: 8x.1.7-shortcut
-    queue: 8x.1.7-shortcut
-    scheduler: 8x.1.7-shortcut
+    backend: main
+    preinstall: main
+    web: main
+    queue: main
+    scheduler: main
 
 platform:
   backendMwHost: mediawiki-135-app-backend.default.svc.cluster.local
@@ -78,13 +72,10 @@ ingress:
     - {{ . | quote }}
     {{- end }}
   {{- end }}
-
-  {{ if eq .Environment.Name "production" }}
   tls:
   - hosts:
     - wikibase.dev ## todo should be injected
     secretName: wikibase-dev-tls
-  {{ end }}
 app:
   # TODO should be secret?
   key: {{ .Values.services.app.key }}
@@ -95,7 +86,7 @@ app:
   jwtSecret: {{ .Values.services.app.jwtSecret }}
   queryServiceHost: queryservice.default.svc.cluster.local:9999
   redis:
-    # TODO is it possible to take advantage of slaves here?
+    # TODO is it possible to take advantage of replicas here?
     host: {{ .Values.services.redis.writeHost }}
     passwordSecretName: redis-password
     passwordSecretKey: password
