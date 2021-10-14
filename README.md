@@ -24,7 +24,7 @@ This means if you apply any changes to shared resources (e.g. using helmfile or 
 An alternative is that you should make sure any changes to shared resources are promptly undone and then propose changes as PRs. On merging the PR the person who
 merges it is responsible for applying it to the shared resources.
 
-One shouldn't merge their own PRs. Draft PRs shouldn't be merged.
+One shouldn't merge their own PRs, unless approved by others. Draft PRs shouldn't be merged.
 
 ## Local Development Environment
 
