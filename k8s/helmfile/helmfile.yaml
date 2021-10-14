@@ -82,6 +82,13 @@ releases:
   values:
   - "env/{{ .Environment.Name }}/sql.values.yaml.gotmpl"
 
+- name: elasticsearch
+  namespace: default
+  chart: elastic/elasticsearch
+  version: 6.8.18
+  values:
+  - "env/{{ .Environment.Name }}/elasticsearch.values.yaml.gotmpl"
+
 - name: redis
   # This is in the default namespace, as the default ns implies staging?
   namespace: default
@@ -179,15 +186,6 @@ releases:
   version: v0.1.7
   values:
   - "env/{{ .Environment.Name }}/adminer-cetic.values.yaml.gotmpl"
-
-# Local only, before also being deployed to production!
-- name: elasticsearch
-  installed: {{ eq .Environment.Name "local" | toYaml }}
-  namespace: default
-  chart: elastic/elasticsearch
-  version: 6.8.18
-  values:
-  - "env/{{ .Environment.Name }}/elasticsearch.values.yaml.gotmpl"
 
 ################################
 # Removed deployments
