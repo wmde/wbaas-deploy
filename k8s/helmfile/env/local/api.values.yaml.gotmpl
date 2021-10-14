@@ -13,13 +13,13 @@ useProbes: false
 {{- end }}
 
 image:
-  repository: ghcr.io/toban/api
+  repository: ghcr.io/wbstack/api
   tag:
-    backend: 8x.1.7-shortcut-v2
-    preinstall: 8x.1.7-shortcut-v2
-    web: 8x.1.7-shortcut-v2
-    queue: 8x.1.7-shortcut-v2
-    scheduler: 8x.1.7-shortcut-v2
+    backend: main
+    preinstall: main
+    web: main
+    queue: main
+    scheduler: main
 
 platform:
   backendMwHost: mediawiki-135-app-backend.default.svc.cluster.local
