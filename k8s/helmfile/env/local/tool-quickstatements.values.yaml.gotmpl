@@ -1,0 +1,28 @@
+replicaCount: 1
+
+platform:
+  mediawikiBackendHost: mediawiki-135-app-backend.default.svc.cluster.local
+php:
+  sessionSaveHandler: redis
+  sessionSavePath:
+  sessionSaveRedisHost: {{ .Values.services.redis.writeHost }}
+  sessionSaveRedisPort: {{ .Values.services.redis.port }}
+  sessionSaveRedisDatabase: {{ .Values.services.redis.databases.toolQuickstatements }}
+  sessionSaveRedisAuth:
+  sessionSaveRedisAuthSecretName: redis-password
+  sessionSaveRedisAuthSecretKey: password
+  sessionSaveRedisPrefix: "session_widar_"
+
+image:
+  repository: ghcr.io/wbstack/quickstatements
+  # TODO switch back to release once made that includes https://github.com/wbstack/quickstatements/commit/49d1a2bdb36d06e5849196cb9842fa60d0b6074c
+  tag: "main"
+#  tag: "1.3.3"
+  pullPolicy: Always
+resources:
+  requests:
+    cpu: 1m
+    memory: 40Mi
+  limits:
+    cpu: 30m
+    memory: 100Mi
