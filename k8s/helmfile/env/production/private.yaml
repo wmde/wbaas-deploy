@@ -38,7 +38,7 @@ services:
         paths:
           - /api(/|$)(.*)
   sql:
-    storageClass: faster
+    storageClass: premium-rwo
     storageSize: 60Gi
     api:
       db: apidb
