@@ -1,0 +1,46 @@
+#!/usr/bin/env bash
+
+Help()
+{
+   # Display Help
+   echo "Diff deployment values files between environments."
+   echo
+   echo "Syntax: helmfile-env-diff [-h|e|f|r]"
+   echo "options:"
+   echo "e     First environment to compare"
+   echo "f     Second environment to compare"
+   echo "r     Release to compare"
+   echo "h     Print this Help."
+   echo
+   echo "Examples:"
+   echo "      helmfile-env-diff -e local -f production -r ui"
+   echo "      helmfile-env-diff -e local -f production -r api"
+}
+
+# Set variable defaults
+
+ENVIRONMENT1="unset"
+ENVIRONMENT2="unset"
+RELEASE="unset"
+
+# Get the options
+while getopts ":e:f:r:h" option; do
+   case $option in
+      e)
+         ENVIRONMENT1=$OPTARG;;
+      f)
+         ENVIRONMENT2=$OPTARG;;
+      r)
+         RELEASE=$OPTARG;;
+      h) # display Help
+         Help
+         exit;;
+   esac
+done
+
+SCRIPT_DIR="$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
+HELMFILE_DIR="$SCRIPT_DIR/../k8s/helmfile"
+
+echo "RED is $ENVIRONMENT1, GREEN is $ENVIRONMENT2"
+diff $HELMFILE_DIR/env/$ENVIRONMENT1/$RELEASE.values.yaml.gotmpl $HELMFILE_DIR/env/$ENVIRONMENT2/$RELEASE.values.yaml.gotmpl  --color
+echo "RED is $ENVIRONMENT1, GREEN is $ENVIRONMENT2"
