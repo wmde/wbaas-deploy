@@ -5,6 +5,8 @@ repositories:
   url: https://charts.jetstack.io
 - name: wbstack-deploy-charts
   url: git+https://github.com/wbstack/deploy/@charts?ref=main
+- name: wbstack
+  url: https://wbstack.github.io/charts
 - name: bitnami
   url: https://charts.bitnami.com/bitnami
 - name: cetic
