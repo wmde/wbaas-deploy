@@ -23,6 +23,9 @@ mw:
     password:
     passwordSecretName: redis-password
     passwordSecretKey: password
+  elasticsearch:
+    host: elasticsearch-master.default.svc.cluster.local
+    port: 9200
   mailgun:
     # TODO setup non mailgun emailing for localhost? OR use the testing domain and creds?
     apikey: {{ .Values.external.mailgun.secret }}
