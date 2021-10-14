@@ -17,7 +17,12 @@ commonConfiguration: |
   # Auto AOF file rewriting
   auto-aof-rewrite-percentage 100
   auto-aof-rewrite-min-size 60mb
+
 master:
+  livenessProbe:
+    enabled: false
+  readinessProbe:
+    enabled: false
   resources:
     requests:
       cpu: 10m
@@ -35,6 +40,10 @@ master:
     size: 1Gi
 
 replica:
+  livenessProbe:
+    enabled: false
+  readinessProbe:
+    enabled: false
   replicaCount: 1
   resources:
     requests:
