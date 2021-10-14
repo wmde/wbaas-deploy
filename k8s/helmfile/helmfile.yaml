@@ -101,6 +101,12 @@ releases:
   values:
   - "env/{{ .Environment.Name }}/ui.values.yaml.gotmpl"
 
+- name: mediawiki-135
+  namespace: default
+  chart: wbstack-deploy-charts/mediawiki
+  values:
+  - "env/{{ .Environment.Name }}/mediawiki-135.values.yaml.gotmpl"
+
 - name: queryservice-ui
   namespace: default
   chart: wbstack-deploy-charts/queryservice-ui

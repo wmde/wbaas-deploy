@@ -20,13 +20,16 @@ mw:
     # TODO fixme, no "database" ID injected into mediawiki
     readServer: {{ .Values.services.redis.readHost }}
     writeServer: {{ .Values.services.redis.writeHost }}
-    # TODO redis password will need to have chart altered to take value from a secret
-    password: {{ .Values.services.redis.password }}
+    password:
+    passwordSecretName: redis-password
+    passwordSecretKey: password
   mailgun:
+    # TODO setup non mailgun emailing for localhost? OR use the testing domain and creds?
     apikey: {{ .Values.external.mailgun.secret }}
     domain: {{ .Values.external.mailgun.domain }}
   recaptcha:
     sitekey: {{ .Values.external.recaptcha2.sitekey }}
+    # TODO make this come from a secret
     secretkey: {{ .Values.external.recaptcha2.secret }}
   platform:
     apiBackendHost: api-app-backend.default.svc.cluster.local
