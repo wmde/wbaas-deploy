@@ -130,7 +130,7 @@ releases:
 - name: queryservice
   namespace: default
   chart: wbstack/queryservice
-  version: 0.1.0
+  version: 0.1.1
   values:
   - "env/{{ .Environment.Name }}/queryservice.values.yaml.gotmpl"
 - name: queryservice-gateway
