@@ -182,6 +182,7 @@ releases:
 
 # Local only, before also being deployed to production!
 - name: elasticsearch
+  installed: {{ eq .Environment.Name "local" | toYaml }}
   namespace: default
   chart: elastic/elasticsearch
   version: 6.8.18
