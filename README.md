@@ -29,7 +29,7 @@ One shouldn't merge their own PRs, unless approved by others. Draft PRs shouldn'
 ## Local Development Environment
 
 Terraform is required to setup some needed dependencies.
-You should be able to apply the needed state with `terraform apply` in `tf/dev/local`.
+You should be able to apply the needed state with `terraform apply` in `tf/env/local`.
 
 Terraform interacts with a k8s cluster, that you ideally already need to have created!
 
@@ -129,7 +129,7 @@ wikibase.dev and wikibase.cloud respectively.
 
 ### Terraform
 
-Setup a Google cloud project, including GKE cluster out of the box using kind in the `tf/dev/prod` workspace.
+Setup a Google cloud project, including GKE cluster out of the box using kind in the `tf/env/prod` workspace.
 
 ### helmfile
 
