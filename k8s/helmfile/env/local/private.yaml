@@ -44,6 +44,5 @@ services:
       db: apidb
       user: apiuser
 
-external:
   letsencrypt:
     email: adam.shorland@wikimedia.de
