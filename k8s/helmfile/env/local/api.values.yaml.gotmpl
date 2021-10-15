@@ -109,8 +109,13 @@ app:
     fromaddress: noreply@mail.wikibase.dev # probably needs an account?
     fromname: Wikibase-dev
   recaptcha:
-    sitekey: {{ .Values.external.recaptcha3.sitekey }}
-    secret: {{ .Values.external.recaptcha3.secret }}
+    # TODO take these values from secrets...
+    sitekey:
+    secret:
+    sitekeySecretName: recaptcha-v3-dev-secrets
+    sitekeySecretKey: site_key
+    secretSecretName: recaptcha-v3-dev-secrets
+    secretSecretKey: secret_key
     badgehide: true
   # TODO is this needed for local?
   gce:
