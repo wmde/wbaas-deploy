@@ -58,7 +58,6 @@ external:
     sitekey: "dunno"
     secret: "dunno"
 
-
   letsencrypt:
     email: adam.shorland@wikimedia.de
 
