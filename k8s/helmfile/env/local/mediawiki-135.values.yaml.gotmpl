@@ -28,9 +28,9 @@ mw:
     apikey: {{ .Values.external.mailgun.secret }}
     domain: {{ .Values.external.mailgun.domain }}
   recaptcha:
-    sitekeySecretName: recaptcha-secrets
+    sitekeySecretName: recaptcha-v2-dev-secrets
     sitekeySecretKey: site_key
-    secretkeySecretName: recaptcha-secrets
+    secretkeySecretName: recaptcha-v2-dev-secrets
     secretkeySecretKey: secret_key
   platform:
     apiBackendHost: api-app-backend.default.svc.cluster.local

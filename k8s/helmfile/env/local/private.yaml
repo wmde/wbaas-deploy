@@ -50,14 +50,6 @@ external:
     domain: "sandbox53750348684c4187b72f84612a326ab8.mailgun.org" # dunno if correct
     secret: "c7a1f2abd115032e1bc98d9c346cd4f8-443ec20e-01009dbc"
 
-  recaptcha3:
-    sitekey: "dunno"
-    secret: "dunno"
-
-  recaptcha2:
-    sitekey: "dunno"
-    secret: "dunno"
-
   letsencrypt:
     email: adam.shorland@wikimedia.de
 
