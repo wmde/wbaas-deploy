@@ -29,7 +29,7 @@ mw:
     domain: {{ .Values.external.mailgun.domain }}
   recaptcha:
     sitekey: {{ .Values.external.recaptcha2.sitekey }}
-    # TODO make this come from a secret
+    # TODO get me from a secret
     secretkey: {{ .Values.external.recaptcha2.secret }}
   platform:
     apiBackendHost: api-app-backend.default.svc.cluster.local
