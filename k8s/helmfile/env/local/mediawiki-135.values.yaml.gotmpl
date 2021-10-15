@@ -5,10 +5,10 @@ replicaCount:
   alpha: 1
 image:
   tag:
-    web: "main"
-    webapi: "main"
-    backend: "main"
-    alpha: "main"
+    web: "1.35-7.4-20211015-0"
+    webapi: "1.35-7.4-20211015-0"
+    backend: "1.35-7.4-20211015-0"
+    alpha: "1.35-7.4-20211015-0"
   pullPolicy: Always
 mw:
   db:
@@ -30,6 +30,7 @@ mw:
     # TODO setup non mailgun emailing for localhost? OR use the testing domain and creds?
     apikey: {{ .Values.external.mailgun.secret }}
     domain: {{ .Values.external.mailgun.domain }}
+    endpoint: {{ .Values.external.mailgun.endpoint }}
   recaptcha:
     sitekeySecretName: recaptcha-v2-dev-secrets
     sitekeySecretKey: site_key

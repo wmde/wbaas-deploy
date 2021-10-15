@@ -47,8 +47,9 @@ services:
 external:
 
   mailgun:
-    domain: "sandbox53750348684c4187b72f84612a326ab8.mailgun.org" # dunno if correct
-    secret: "c7a1f2abd115032e1bc98d9c346cd4f8-443ec20e-01009dbc"
+    domain: "sandbox0b712ecfc0d74c7e842bd5b9dfdf719a.mailgun.org" # dunno if correct
+    secret: "c7a1f2abd115032e1bc98d9c346cd4f8-443ec20e-01009dbc" # TODO get a real secret?
+    endpoint: "https://api.mailgun.net"
 
   letsencrypt:
     email: adam.shorland@wikimedia.de
