@@ -16,6 +16,8 @@ repositories:
   url: https://helm.mittwald.de
 
 environments:
+  default:
+    kubeContext: INVALID-ENVIRONMENT
   production:
     kubeContext: gke_wikibase-cloud_europe-west3-a_wbaas-1
     values:
