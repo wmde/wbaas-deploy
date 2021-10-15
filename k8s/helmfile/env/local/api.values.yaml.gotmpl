@@ -116,8 +116,12 @@ app:
     fromname: Wikibase-dev
   recaptcha:
     # TODO take these values from secrets...
-    sitekey: {{ .Values.external.recaptcha3.sitekey }}
-    secret: {{ .Values.external.recaptcha3.secret }}
+    sitekey:
+    secret:
+    sitekeySecretName: recaptcha-v3-dev-secrets
+    sitekeySecretKey: site_key
+    secretSecretName: recaptcha-v3-dev-secrets
+    secretSecretKey: secret_key
     badgehide: true
   # TODO is this needed for local?
   gce:
