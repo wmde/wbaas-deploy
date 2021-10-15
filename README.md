@@ -31,7 +31,7 @@ One shouldn't merge their own PRs, unless approved by others. Draft PRs shouldn'
 Terraform is required to setup some needed dependencies.
 You should be able to apply the needed state with `terraform apply` in `tf/env/local`.
 
-Terraform interacts with a k8s cluster, that you ideally already need to have created!
+Terraform interacts with a k8s cluster, that you need to create beforehand!
 
 ### minikube cluster
 
@@ -39,7 +39,7 @@ Install minikube https://minikube.sigs.k8s.io/docs/start/
 
 And start a local k8s cluster for the wbaas project.
 
-Note: 1.21.4 is suggested as this is the currently used prouduction environment.
+Note: 1.21.4 is suggested as this is the currently used production environment.
 
 ```sh
 minikube --profile minikube-wbaas start --kubernetes-version=1.21.4
@@ -72,7 +72,7 @@ As a result if you provision a LoadBalancer services such as an ingress the `EXT
 minikube --profile minikube-wbaas tunnel
 ```
 
-Running the tunnel on linux might require you to forward the traffic to the cluster IP of the nginx-ingress-controller. This can be done by running the following command. 
+Running the tunnel on linux might require you to forward the traffic to the cluster IP of the nginx-ingress-controller. This can be done by running the following command.
 
 ```sh
 EXTERNAL_IP=$(minikube --profile minikube-wbaas kubectl -- -n kube-system get service nginx-ingress-controller -o template='{{.spec.clusterIP}}')
@@ -84,7 +84,7 @@ Most modern browsers will automatically resolve *.localhost to 127.0.0.1.
 If not, you'll need to edit your hosts file.
 
 In order to skip out this LoadBalancer stuff you can get minikube to expose the ingress directly on a port.
-But this will expose thing on a different port and you may run into issues.
+But this will expose things on a different port and you may run into issues.
 
 ```sh
 minikube --profile minikube-wbaas service -n kube-system nginx-ingress-default-backend
@@ -94,7 +94,7 @@ Note: There is more to making things work locally than this and we either need t
 
 ### helmfile
 
-You can see the changes that helmfile will make to your local k8s cluster with
+You can see the changes that helmfile will make to your local k8s cluster by running the following command in the `k8s/helmfile` directory
 
 ```sh
 helmfile --environment local diff
@@ -110,7 +110,7 @@ In order to speed things up you can add `--skip-deps` after the `diff` or `apply
 
 **Note: This is a work in progress**
 
-Once everyting is running, you should be able to see the pods.
+Once everything is running, you should be able to see the pods.
 
 ```sh
 kubectl --context minikube-wbaas get pods -A
@@ -135,4 +135,4 @@ Setup a Google cloud project, including GKE cluster out of the box using kind in
 
 Apply helmfiles from the `k8s/helmfile` directory with either `helmfile diff/apply` or `helmfile --environment production diff/apply` in the `k8s/helmfile` directory.
 
-Charts that are not contianed within the root `helmfile.yaml` will still need to be applied seperatly from within each directory.
+Charts that are not contained within the root `helmfile.yaml` will still need to be applied separately from within each directory.
