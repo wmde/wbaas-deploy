@@ -60,6 +60,7 @@ external:
   mailgun:
     domain: TODO
     secret: TODO
+    endpoint: "https://api.eu.mailgun.net"
   recaptcha2:
     secretName: recaptcha-v2-staging-secrets
   recaptcha3:
