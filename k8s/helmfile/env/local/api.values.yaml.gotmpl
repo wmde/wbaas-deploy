@@ -4,13 +4,7 @@ replicaCount:
   scheduler: 1
   queue: 1
 
-# TODO find out why probs don't work locally?
-{{ if eq .Environment.Name "production" }}
-useProbes: true
-{{- end }}
-{{ if eq .Environment.Name "local" }}
 useProbes: false
-{{- end }}
 
 image:
   repository: ghcr.io/wbstack/api
@@ -127,7 +121,7 @@ app:
   gce:
     projectId: {{ .Values.gceProject }}
     existingSecret: api-passport-keys
-  # TODO remove this of add something equivillant for local
+  # TODO remove this or add something equivillant for local
   gcsPublicStatic:
     gcsBucket: {{ .Values.gcsApiStaticBucket }}
   stackdriver:

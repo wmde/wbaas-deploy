@@ -93,7 +93,15 @@ minikube --profile minikube-wbaas service -n kube-system nginx-ingress-default-b
 Note: There is more to making things work locally than this and we either need to setup dynamic DNS, or we need to be editing our hosts file!
 
 ### helmfile
-
+> These helm plugins need to be installed:
+> * [diff](https://github.com/databus23/helm-diff) - helmfile needs this to diff resources
+> * [git](https://github.com/aslafy-z/helm-git) - We need this to fetch charts from git
+> 
+> ```sh
+> helm plugin install https://github.com/databus23/helm-diff
+> helm plugin install https://github.com/aslafy-z/helm-git
+> ```
+> 
 You can see the changes that helmfile will make to your local k8s cluster by running the following command in the `k8s/helmfile` directory
 
 ```sh
