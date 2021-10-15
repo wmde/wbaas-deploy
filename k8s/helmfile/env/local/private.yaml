@@ -55,7 +55,9 @@ external:
     secret: "dunno"
 
   recaptcha2:
-    sitekey: "6Lf7R8ocAAAAAJg08-3TQdXQ3iq8uf_S434I45vB"
+    sitekey: "dunno"
+    secret: "dunno"
+
 
   letsencrypt:
     email: adam.shorland@wikimedia.de
