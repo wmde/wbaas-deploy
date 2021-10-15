@@ -4,7 +4,7 @@ repositories:
 - name: jetstack
   url: https://charts.jetstack.io
 - name: wbstack
-  url: https://wbstack.github.io/charts
+  url: git+https://github.com/toban/charts/@charts?ref=add-secret-support-for-site-key 
 - name: bitnami
   url: https://charts.bitnami.com/bitnami
 - name: cetic
@@ -117,7 +117,7 @@ releases:
 - name: mediawiki-135
   namespace: default
   chart: wbstack/mediawiki
-  version: 0.1.0
+  version: 0.1.1
   values:
   - "env/{{ .Environment.Name }}/mediawiki-135.values.yaml.gotmpl"
 
