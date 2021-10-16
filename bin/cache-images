@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+IMAGES=$(minikube --profile minikube-wbaas image ls)
+
+for val in $IMAGES; do
+    minikube --profile minikube-wbaas cache add "$val"
+done
