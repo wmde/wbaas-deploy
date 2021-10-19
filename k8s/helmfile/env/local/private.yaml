@@ -45,12 +45,5 @@ services:
       user: apiuser
 
 external:
-
-  mailgun:
-    # TODO remove me in favour of using a secret from a k8s secret, this is only used by mediawiki right now
-    secret: "c7a1f2abd115032e1bc98d9c346cd4f8-443ec20e-01009dbc"
-
   letsencrypt:
     email: adam.shorland@wikimedia.de
-
-

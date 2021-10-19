@@ -104,11 +104,9 @@ app:
     passwordSecretKey: SQL_INIT_PASSWORD_API
   mail:
     mailer: {{ .Values.services.app.mailer }} # mailgun/log https://laravel.com/docs/8.x/mail
-    mailgundomain: sandbox0b712ecfc0d74c7e842bd5b9dfdf719a.mailgun.org
-    mailgunsecret:
-    mailgunSecretName: TODO
-    mailgunSecretKey: TODO
-    fromaddress: noreply-localdev@sandbox0b712ecfc0d74c7e842bd5b9dfdf719a.mailgun.org
+    mailgundomain: fake.wikibase.dev
+    mailgunsecret: "not needed as log sending is used"
+    fromaddress: noreply-local@fake.wikibase.dev
     fromname: Wikibase-dev
   recaptcha:
     # TODO take these values from secrets...
