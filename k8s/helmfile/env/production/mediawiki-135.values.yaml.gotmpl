@@ -31,9 +31,10 @@ mw:
     apikey: {{ .Values.external.mailgun.secret }}
     domain: {{ .Values.external.mailgun.domain }}
   recaptcha:
-    sitekey: {{ .Values.external.recaptcha2.sitekey }}
-    # TODO get me from a secret
-    secretkey: {{ .Values.external.recaptcha2.secret }}
+    sitekeySecretName: {{ .Values.external.recaptcha2.secretName }}
+    sitekeySecretKey: site_key
+    secretkeySecretName: {{ .Values.external.recaptcha2.secretName }}
+    secretkeySecretKey: secret_key
   platform:
     apiBackendHost: api-app-backend.default.svc.cluster.local
 resources:

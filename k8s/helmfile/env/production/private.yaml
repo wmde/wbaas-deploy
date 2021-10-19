@@ -61,8 +61,6 @@ external:
     domain: TODO
     secret: TODO
   recaptcha2:
-    sitekey: TODO
-    secret: TODO
+    secretName: recaptcha-v2-staging-secrets
   recaptcha3:
-    sitekey: 6Lc8IwEaAAAAAFkYDqWM1lDyDUf_FHsmcHNonaKa
-    secret: 6Lc8IwEaAAAAAI4-IDRlOW2lUdpH25yX7jsJ2E-_
+    secretName: recaptcha-v3-staging-secrets
