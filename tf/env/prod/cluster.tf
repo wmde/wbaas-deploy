@@ -3,7 +3,7 @@ resource "google_container_cluster" "wbaas-1" {
 
     node_pool {
         name                = "default-pool"
-        initial_node_count  = 3
+        initial_node_count  = 4
         node_count          = 4
         max_pods_per_node   = 110
         node_locations      = [
