@@ -47,9 +47,8 @@ services:
 external:
 
   mailgun:
-    domain: "sandbox0b712ecfc0d74c7e842bd5b9dfdf719a.mailgun.org" # dunno if correct
-    secret: "c7a1f2abd115032e1bc98d9c346cd4f8-443ec20e-01009dbc" # This should be replaced by a developer's MailGun secret. TODO: get one automatically
-    endpoint: "https://api.mailgun.net"
+    # TODO remove me in favour of using a secret from a k8s secret, this is only used by mediawiki right now
+    secret: "c7a1f2abd115032e1bc98d9c346cd4f8-443ec20e-01009dbc"
 
   letsencrypt:
     email: adam.shorland@wikimedia.de

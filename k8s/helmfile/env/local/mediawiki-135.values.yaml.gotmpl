@@ -28,9 +28,10 @@ mw:
     port: 9200
   mailgun:
     # TODO setup non mailgun emailing for localhost? OR use the testing domain and creds?
+    # TODO alter the chart to be able to take this from a secret....
     apikey: {{ .Values.external.mailgun.secret }}
-    domain: {{ .Values.external.mailgun.domain }}
-    endpoint: {{ .Values.external.mailgun.endpoint }}
+    domain: sandbox0b712ecfc0d74c7e842bd5b9dfdf719a.mailgun.org
+    endpoint: "https://api.mailgun.net"
   recaptcha:
     sitekeySecretName: recaptcha-v2-dev-secrets
     sitekeySecretKey: site_key
