@@ -1,7 +1,17 @@
 #!/usr/bin/env bash
 
 IMAGES=$(minikube --profile minikube-wbaas image ls)
+CACHED_IMAGES=$(minikube --profile minikube-wbaas cache list)
 
-for val in $IMAGES; do
-    minikube --profile minikube-wbaas cache add "$val"
+for IMAGE in $IMAGES; do
+    if ! [[ ${CACHED_IMAGES[*]} =~ ${IMAGE} ]]; then
+
+        docker image inspect "$IMAGE"
+        if [[ "$?" == "1" ]]; then
+            echo "Skipping $IMAGE"
+            continue;
+        fi
+        echo "Caching $IMAGE"
+        minikube --profile minikube-wbaas cache add "$IMAGE"
+    fi
 done
