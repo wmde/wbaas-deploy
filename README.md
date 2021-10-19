@@ -28,10 +28,50 @@ One shouldn't merge their own PRs, unless approved by others. Draft PRs shouldn'
 
 ## Local Development Environment
 
+Terraform interacts with a k8s cluster, that you need to create beforehand!
+
+### terraform
+
 Terraform is required to setup some needed dependencies.
 You should be able to apply the needed state with `terraform apply` in `tf/env/local`.
 
-Terraform interacts with a k8s cluster, that you need to create beforehand!
+### helmfile
+> These helm plugins need to be installed:
+> * [diff](https://github.com/databus23/helm-diff) - helmfile needs this to diff resources
+> * [git](https://github.com/aslafy-z/helm-git) - We need this to fetch charts from git
+>
+> ```sh
+> helm plugin install https://github.com/databus23/helm-diff
+> helm plugin install https://github.com/aslafy-z/helm-git
+> ```
+>
+You can see the changes that helmfile will make to your local k8s cluster by running the following command in the `k8s/helmfile` directory
+
+```sh
+helmfile --environment local diff
+```
+
+To actually make the changes use:
+
+```sh
+helmfile --environment local apply
+```
+
+In order to speed things up you can add `--skip-deps` after the `diff` or `apply` commands if you are not expecting to pull in changes.
+
+**Note: This is a work in progress**
+
+Once everything is running, you should be able to see the pods.
+
+```sh
+kubectl --context minikube-wbaas get pods -A
+```
+
+And connect to containers if needed, such as the redis master.
+
+```sh
+./bin/k8s-shell -e local -r redis -l role=master
+```
 
 ### minikube cluster
 
@@ -91,44 +131,6 @@ minikube --profile minikube-wbaas service -n kube-system nginx-ingress-default-b
 ```
 
 Note: There is more to making things work locally than this and we either need to setup dynamic DNS, or we need to be editing our hosts file!
-
-### helmfile
-> These helm plugins need to be installed:
-> * [diff](https://github.com/databus23/helm-diff) - helmfile needs this to diff resources
-> * [git](https://github.com/aslafy-z/helm-git) - We need this to fetch charts from git
-> 
-> ```sh
-> helm plugin install https://github.com/databus23/helm-diff
-> helm plugin install https://github.com/aslafy-z/helm-git
-> ```
-> 
-You can see the changes that helmfile will make to your local k8s cluster by running the following command in the `k8s/helmfile` directory
-
-```sh
-helmfile --environment local diff
-```
-
-To actually make the changes use:
-
-```sh
-helmfile --environment local apply
-```
-
-In order to speed things up you can add `--skip-deps` after the `diff` or `apply` commands if you are not expecting to pull in changes.
-
-**Note: This is a work in progress**
-
-Once everything is running, you should be able to see the pods.
-
-```sh
-kubectl --context minikube-wbaas get pods -A
-```
-
-And connect to containers if needed, such as the redis master.
-
-```sh
-./bin/k8s-shell -e local -r redis -l role=master
-```
 
 ## Production
 
