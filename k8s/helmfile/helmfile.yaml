@@ -128,7 +128,7 @@ releases:
 - name: mediawiki-135
   namespace: default
   chart: wbstack/mediawiki
-  version: 0.1.2
+  version: {{ if eq .Environment.Name "local" }}0.2.0{{ else }}0.1.2{{ end }}
   values:
   - "env/{{ .Environment.Name }}/mediawiki-135.values.yaml.gotmpl"
 

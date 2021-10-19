@@ -104,9 +104,9 @@ app:
     passwordSecretKey: SQL_INIT_PASSWORD_API
   mail:
     mailer: {{ .Values.services.app.mailer }} # mailgun/log https://laravel.com/docs/8.x/mail
-    mailgundomain: {{ .Values.external.mailgun.domain }}
-    mailgunsecret: {{ .Values.external.mailgun.secret }}
-    fromaddress: noreply@mail.wikibase.dev # probably needs an account?
+    mailgundomain: fake.wikibase.dev
+    mailgunsecret: "not needed as log sending is used"
+    fromaddress: noreply-local@fake.wikibase.dev
     fromname: Wikibase-dev
   recaptcha:
     # TODO take these values from secrets...
