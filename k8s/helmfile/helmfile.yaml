@@ -5,6 +5,8 @@ repositories:
   url: https://charts.jetstack.io
 - name: wbstack
   url: https://wbstack.github.io/charts
+- name: wbstronk
+  url: git+https://github.com/wbstack/charts/@charts/?ref=add-wikibase-scheme-support
 - name: bitnami
   url: https://charts.bitnami.com/bitnami
 - name: cetic
@@ -152,8 +154,8 @@ releases:
   - "env/{{ .Environment.Name }}/queryservice-gateway.values.yaml.gotmpl"
 - name: queryservice-updater
   namespace: default
-  chart: wbstack/queryservice-updater
-  version: 0.1.0
+  chart: wbstronk/queryservice-updater
+  version: 0.1.1
   values:
   - "env/{{ .Environment.Name }}/queryservice-updater.values.yaml.gotmpl"
 
