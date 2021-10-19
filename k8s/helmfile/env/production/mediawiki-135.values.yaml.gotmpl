@@ -27,9 +27,11 @@ mw:
     host: elasticsearch-master.default.svc.cluster.local
     port: 9200
   mailgun:
-    # TODO get me from a secret
-    apikey: {{ .Values.external.mailgun.secret }}
-    domain: {{ .Values.external.mailgun.domain }}
+    apikey:
+    apikeySecretName: "mailgun-api-key"
+    apikeySecretKey: "key"
+    domain: "wikibase.dev"
+    endpoint: "https://api.eu.mailgun.net"
   recaptcha:
     sitekeySecretName: {{ .Values.external.recaptcha2.secretName }}
     sitekeySecretKey: site_key
