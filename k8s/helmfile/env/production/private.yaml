@@ -57,9 +57,6 @@ services:
 external:
   letsencrypt:
     email: thomas.arrow_ext@wikimedia.de
-  mailgun:
-    domain: TODO
-    secret: TODO
   recaptcha2:
     secretName: recaptcha-v2-staging-secrets
   recaptcha3:

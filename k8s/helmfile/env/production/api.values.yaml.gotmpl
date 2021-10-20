@@ -107,7 +107,7 @@ app:
     passwordSecretKey: SQL_INIT_PASSWORD_API
   mail:
     mailer: {{ .Values.services.app.mailer }} # mailgun/log https://laravel.com/docs/8.x/mail
-    mailgundomain: {{ .Values.external.mailgun.domain }}
+    mailgundomain: wikibase.dev
     mailgunsecret:
     mailgunSecretName: mailgun-api-key
     mailgunSecretKey: key
