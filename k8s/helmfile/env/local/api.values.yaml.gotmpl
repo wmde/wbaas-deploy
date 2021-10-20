@@ -65,7 +65,7 @@ ingress:
   {{- end }}
 
 wbstack:
-  subdomainSuffix: ".wbaas.localhost"
+  subdomainSuffix: {{ .Values.wbstack.subdomainSuffix }}
 
 app:
   # TODO should be secret?
