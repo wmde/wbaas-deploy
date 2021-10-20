@@ -6,15 +6,6 @@ replicaCount:
 
 useProbes: false
 
-image:
-  repository: ghcr.io/wbstack/api
-  tag:
-    backend: main
-    preinstall: main
-    web: main
-    queue: main
-    scheduler: main
-
 platform:
   backendMwHost: mediawiki-135-app-backend.default.svc.cluster.local
 # This mw db connection is only used by the queue..
@@ -72,6 +63,9 @@ ingress:
     - {{ . | quote }}
     {{- end }}
   {{- end }}
+
+wbstack:
+  subdomainSuffix: {{ .Values.wbstack.subdomainSuffix }}
 
 app:
   # TODO should be secret?
