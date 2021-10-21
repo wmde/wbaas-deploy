@@ -1,7 +1,7 @@
 # wbaas-deploy
 
 ## Documentation
-- [Overview](topics/overview.md)
-- [Working with this repository](topics/working-with-this-repo.md)
-- [Local development enviroment](topics/Local-dev-env.md)
-- [Production enviroment](topics/prod-env.md)
+- [Overview](overview.md)
+- [Working with this repository](working-with-this-repo.md)
+- [Local development enviroment](Local-dev-env.md)
+- [Production enviroment](prod-env.md)
