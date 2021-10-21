@@ -19,3 +19,8 @@ ingress:
   - host: {{ .Values.uiHostName }}
     paths:
     - /*
+ui:
+  apiUrl: "/api"
+  subdomainSuffix: ".wbaas.localhost"
+  recaptchaSitekeySecretName: recaptcha-v3-dev-secrets
+  recaptchaSitekeySecretKey: site_key
