@@ -1,7 +1,3 @@
-image:
-  repository: ghcr.io/wmde/wbaas-ui
-  tag: "2.14-shortcut"
-  pullPolicy: Always
 resources:
   requests:
     cpu: 1m
@@ -23,3 +19,8 @@ ingress:
   - hosts:
     - {{ .Values.uiHostName }}
     secretName: {{ .Values.tlsSecret }}
+ui:
+  apiUrl: {{ .Values.services.app.url }}
+  subdomainSuffix: {{ .Values.wbstack.subdomainSuffix }}
+  recaptchaSitekeySecretName: {{ .Values.external.recaptcha3.secretName }}
+  recaptchaSitekeySecretKey: site_key
