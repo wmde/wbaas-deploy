@@ -121,7 +121,7 @@ releases:
 - name: ui
   namespace: default
   chart: wbstack/ui
-  version: {{ if eq .Environment.Name "local" }}0.2.0{{ else }}0.1.0{{ end }}
+  version: {{ if eq .Environment.Name "local" }}0.2.1{{ else }}0.1.0{{ end }}
   values:
   - "env/{{ .Environment.Name }}/ui.values.yaml.gotmpl"
 
