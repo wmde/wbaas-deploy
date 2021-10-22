@@ -111,8 +111,9 @@ app:
     mailgunsecret:
     mailgunSecretName: mailgun-api-key
     mailgunSecretKey: key
-    fromaddress: noreply@mail.wikibase.dev # probably needs an account?
+    fromaddress: noreply@wikibase.dev
     fromname: Wikibase-dev
+    mailgunendpoint: api.eu.mailgun.net
   recaptcha:
     sitekeySecretName: {{ .Values.external.recaptcha3.secretName }}
     sitekeySecretKey: site_key
