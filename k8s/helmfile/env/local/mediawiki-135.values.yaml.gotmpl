@@ -11,6 +11,9 @@ image:
     alpha: "1.35-7.4-20211015-0"
   pullPolicy: Always
 mw:
+  settings:
+    logToStdErr: yes
+
   db:
     replica: sql-mariadb-secondary.default.svc.cluster.local
     master: sql-mariadb-primary.default.svc.cluster.local
