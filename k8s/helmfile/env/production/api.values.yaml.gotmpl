@@ -107,12 +107,13 @@ app:
     passwordSecretKey: SQL_INIT_PASSWORD_API
   mail:
     mailer: {{ .Values.services.app.mailer }} # mailgun/log https://laravel.com/docs/8.x/mail
-    mailgundomain: {{ .Values.external.mailgun.domain }}
+    mailgundomain: wikibase.dev
     mailgunsecret:
     mailgunSecretName: mailgun-api-key
     mailgunSecretKey: key
-    fromaddress: noreply@mail.wikibase.dev # probably needs an account?
+    fromaddress: noreply@wikibase.dev
     fromname: Wikibase-dev
+    mailgunendpoint: api.eu.mailgun.net
   recaptcha:
     sitekeySecretName: {{ .Values.external.recaptcha3.secretName }}
     sitekeySecretKey: site_key
@@ -130,3 +131,5 @@ app:
     loggingEnabled: true
     tracingEnabled: false
     errorReportingEnabled: true
+wbstack:
+  subdomainSuffix: {{ .Values.wbstack.subdomainSuffix }}

@@ -113,7 +113,7 @@ releases:
 
 - name: api
   chart: wbstack/api
-  version: 0.4.0
+  version: 0.6.0
   namespace: default
   values:
   - "env/{{ .Environment.Name }}/api.values.yaml.gotmpl"
@@ -121,7 +121,7 @@ releases:
 - name: ui
   namespace: default
   chart: wbstack/ui
-  version: 0.1.0
+  version: {{ if eq .Environment.Name "local" }}0.2.1{{ else }}0.1.0{{ end }}
   values:
   - "env/{{ .Environment.Name }}/ui.values.yaml.gotmpl"
 
@@ -153,7 +153,7 @@ releases:
 - name: queryservice-updater
   namespace: default
   chart: wbstack/queryservice-updater
-  version: 0.1.0
+  version: {{ if eq .Environment.Name "local" }}0.1.1{{ else }}0.1.0{{ end }}
   values:
   - "env/{{ .Environment.Name }}/queryservice-updater.values.yaml.gotmpl"
 

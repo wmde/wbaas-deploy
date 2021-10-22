@@ -26,7 +26,6 @@ services:
           - /api(/|$)(.*)
 
   redis:
-    password: a-bad-local-redis-password
     readHost: redis-headless.default.svc.cluster.local
     writeHost: redis-master.default.svc.cluster.local
     port: 6379
