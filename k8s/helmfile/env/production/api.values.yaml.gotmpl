@@ -77,6 +77,7 @@ ingress:
     - wikibase.dev ## todo should be injected
     secretName: wikibase-dev-tls
 app:
+  name: WBaaS Wikibase Dev
   # TODO should be secret?
   key: {{ .Values.services.app.key }}
   url: {{ .Values.services.app.url }}

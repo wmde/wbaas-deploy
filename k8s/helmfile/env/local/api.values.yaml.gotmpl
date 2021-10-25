@@ -68,6 +68,7 @@ wbstack:
   subdomainSuffix: {{ .Values.wbstack.subdomainSuffix }}
 
 app:
+  name: WBaaS Localhost
   # TODO should be secret?
   key: {{ .Values.services.app.key }}
   url: {{ .Values.services.app.url }}
