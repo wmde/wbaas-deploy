@@ -20,11 +20,11 @@ repositories:
 environments:
   default:
     kubeContext: INVALID-ENVIRONMENT
-  production:
+  staging:
     kubeContext: gke_wikibase-cloud_europe-west3-a_wbaas-1
     values:
-    - ./env/production/base.yaml
-    - ./env/production/private.yaml
+    - ./env/staging/base.yaml
+    - ./env/staging/private.yaml
   local:
     kubeContext: minikube-wbaas
     values:

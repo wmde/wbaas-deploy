@@ -1,29 +1,3 @@
-gceProject: wikibase-cloud
-gceServiceAccountSecret: secret-wikibase-dev-api
-gcsApiStaticBucket: wikibase-dev-static
-
-certificates:
-  -
-    name: wikibase-cloud-tls
-    commonName: wikibase.cloud
-    dnsNames:
-      - '*.wikibase.cloud'
-      - 'wikibase.cloud'
-    secretName: wikibase-cloud-tls
-    issuerRef: letsencrypt-staging #letsencrypt-prod
-  - 
-    name: wikibase-dev-tls
-    commonName: wikibase.dev
-    dnsNames:
-      - '*.wikibase.dev'
-      - 'wikibase.dev'
-    secretName: wikibase-dev-tls
-    issuerRef: letsencrypt-prod
-
-uiHostName: www.wikibase.dev
-tlsSecret: wikibase-dev-tls # TODO is this not used any more now?
-ingressNameSuffix: wikibase-dev
-
 services:
   app:
     url: https://api.wikibase.dev
