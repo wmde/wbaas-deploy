@@ -4,3 +4,4 @@ tls: true
 forceSSL: true
 wbstack:
   subdomainSuffix: '.wikibase.dev'
+  uiurl: https://wikibase.dev

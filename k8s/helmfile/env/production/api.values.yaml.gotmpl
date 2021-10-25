@@ -76,6 +76,11 @@ ingress:
   - hosts:
     - wikibase.dev ## todo should be injected
     secretName: wikibase-dev-tls
+
+wbstack:
+  subdomainSuffix: {{ .Values.wbstack.subdomainSuffix }}
+  uiurl: {{ .Values.wbstack.uiurl }}
+
 app:
   name: WBaaS Wikibase Dev
   # TODO should be secret?
@@ -132,5 +137,3 @@ app:
     loggingEnabled: true
     tracingEnabled: false
     errorReportingEnabled: true
-wbstack:
-  subdomainSuffix: {{ .Values.wbstack.subdomainSuffix }}
