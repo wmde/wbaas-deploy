@@ -13,10 +13,10 @@ Having 2 cluster, would increase cost by ~75USD per month, with no extra resourc
 
 | Pro                   | Con                   |
 | --------------------- | --------------------- |
-| Simpiler setup to maintain                       | 75USD Manangement fee |
+| Simpler setup to maintain                 | 75USD Manangement fee |
 | Ability to test GKE k8s updates | No ability to share unused resources between clusters |
 | Some services could be shared (like cert-manager) | Need to setup some services like cert-mananger twice |
-| More seperation between staging and production | |
+| More separation between staging and production | |
 | Able to use same namespaces between clusters | |
 
 ## Terraform
