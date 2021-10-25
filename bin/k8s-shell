@@ -16,6 +16,8 @@ Help()
    echo "Examples:"
    echo "      k8s-shell -e local -l release=redis,role=master"
    echo "      k8s-shell -e local -l app.kubernetes.io/instance=sql,app.kubernetes.io/component=primary"
+   echo "      k8s-shell -e local -l app.kubernetes.io/name=api,app.kubernetes.io/component=queue"
+   echo "      k8s-shell -e local -l app.kubernetes.io/name=api,app.kubernetes.io/component=queue"
 }
 
 # Set variable defaults
