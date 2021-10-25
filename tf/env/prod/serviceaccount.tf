@@ -23,6 +23,7 @@ resource "google_service_account_key" "dev-api" {
 # Deprecated per https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/google_service_account_key#example-usage-save-key-in-kubernetes-secret---deprecated
 # but will do for now...
 resource "kubernetes_secret" "dev-api-serviceaccount" {
+  provider = kubernetes.wbaas-1
   metadata {
     name = "dev-api-serviceaccount"
   }

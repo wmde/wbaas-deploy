@@ -7,6 +7,7 @@ resource "random_password" "redis-password" {
 
 # Used by the sql service for initial setup
 resource "kubernetes_secret" "redis-password" {
+  provider = kubernetes.wbaas-1
   metadata {
     name = "redis-password"
     # Default NS for staging?

@@ -11,6 +11,10 @@ variable "terraformers" {
       ]
 }
 
+locals {
+  staging_cluster_name = "wbaas-1"
+}
+
 variable "mailgun_api_key" {
   type = string
   description = "User API key to access Mailgun"

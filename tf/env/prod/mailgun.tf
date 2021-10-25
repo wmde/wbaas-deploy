@@ -6,6 +6,7 @@ resource "mailgun_domain" "default" {
 }
 
 resource "kubernetes_secret" "mailgun-api-key" {
+  provider = kubernetes.wbaas-1
   metadata {
     name = "mailgun-api-key"
     namespace = "default"

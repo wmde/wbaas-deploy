@@ -5,6 +5,7 @@ resource "tls_private_key" "api-passport" {
 }
 
 resource "kubernetes_secret" "api-passport-keys" {
+  provider = kubernetes.wbaas-1
   metadata {
     name = "api-passport-keys"
     # TODO assuming default is staging

@@ -1,4 +1,5 @@
 resource "kubernetes_secret" "recaptcha-v3-staging-secrets" {
+  provider = kubernetes.wbaas-1
   metadata {
     name = "recaptcha-v3-staging-secrets"
     # default as staging
@@ -12,6 +13,7 @@ resource "kubernetes_secret" "recaptcha-v3-staging-secrets" {
 }
 
 resource "kubernetes_secret" "recaptcha-v2-staging-secrets" {
+  provider = kubernetes.wbaas-1
   metadata {
     name = "recaptcha-v2-staging-secrets"
     # default as staging

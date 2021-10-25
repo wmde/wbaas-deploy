@@ -8,6 +8,7 @@ resource "random_password" "sql-passwords" {
 
 # Used by the sql service for initial setup
 resource "kubernetes_secret" "sql-secrets-passwords" {
+  provider = kubernetes.wbaas-1
   metadata {
     name = "sql-secrets-passwords"
     # TODO default? or staging?
@@ -23,6 +24,7 @@ resource "kubernetes_secret" "sql-secrets-passwords" {
 
 # Used by the init script on sql services for user and permissions setup
 resource "kubernetes_secret" "sql-secrets-init-passwords" {
+  provider = kubernetes.wbaas-1
   metadata {
     name = "sql-secrets-init-passwords"
     # TODO default? or staging?

@@ -32,24 +32,6 @@ After import
 
 > As a result of the above command, the resource is recorded in the state file. You can now run terraform plan to see how the configuration compares to the imported resource, and make any adjustments to the configuration to align with the current (or desired) state of the imported object.
 
-#### cluster
-
-Make a cluster.tf file with the following:
-
-```sh
-resource "google_container_cluster" "wbaas-1" {
-  # (resource arguments)
-}
-```
-
-Ran the import command
-
-```sh
-terraform import google_container_cluster.wbaas-1 europe-west3-a/wbaas-1
-```
-
-An added the name to the resource definitions.
-
 #### helm deployment
 
 https://github.com/hashicorp/terraform-provider-helm/pull/394

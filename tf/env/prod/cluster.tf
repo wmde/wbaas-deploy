@@ -1,5 +1,5 @@
 resource "google_container_cluster" "wbaas-1" {
-  name = "wbaas-1"
+  name = local.staging_cluster_name
 
     node_pool {
         name                = "default-pool"
