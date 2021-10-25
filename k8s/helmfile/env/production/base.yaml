@@ -3,4 +3,4 @@ ingressHost: "*.wikibase.dev"
 tls: true
 forceSSL: true
 wbstack:
-  subdomainSuffix: 'wikibase.dev'
+  subdomainSuffix: '.wikibase.dev'
