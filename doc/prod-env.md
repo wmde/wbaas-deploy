@@ -7,7 +7,7 @@ A single Kubernetes cluster was chosen to save on resources and cost, and allow 
 
 A second Kubernetes cluster in the GKE environment would push us over the free tier credits for cluster management.
 https://cloud.google.com/kubernetes-engine/pricing#cluster_management_fee_and_free_tier
-Having 2 cluster, would increase cost by ~75USD per month, with no extra resources availible.
+Having second cluster, would increase cost by ~75USD per month, with no extra resources availible.
 
 ## Pro con list of having 2 clusters
 
@@ -15,7 +15,7 @@ Having 2 cluster, would increase cost by ~75USD per month, with no extra resourc
 | --------------------- | --------------------- |
 | Simpler setup to maintain                 | 75USD Manangement fee |
 | Ability to test GKE k8s updates | No ability to share unused resources between clusters |
-| Some services could be shared (like cert-manager) | Need to setup some services like cert-mananger twice |
+| Some services could be shared (like cert-manager) | Need to setup some services like cert-manager twice |
 | More separation between staging and production | |
 | Able to use same namespaces between clusters | |
 
