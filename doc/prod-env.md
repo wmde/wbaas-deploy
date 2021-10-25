@@ -15,7 +15,7 @@ Having 2 cluster, would increase cost by ~75USD per month, with no extra resourc
 | --------------------- | --------------------- |
 | Simpiler setup to maintain                       | 75USD Manangement fee |
 | Ability to test GKE k8s updates | No ability to share unused resources between clusters |
-| Some services could be shred (like cert-manager) | Need to setup some services like cert-mananger twice |
+| Some services could be shared (like cert-manager) | Need to setup some services like cert-mananger twice |
 | More seperation between staging and production | |
 | Able to use same namespaces between clusters | |
 
