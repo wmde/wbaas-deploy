@@ -3,16 +3,10 @@ replicaCount:
   web: 1
   webapi: 1
   alpha: 1
-
-image: 
-  tag:
-    # Digest built from https://github.com/wbstack/mediawiki/commit/66eca1332c5f3542a5c75d0b30696b5a4309cde0
-    web: "main@sha256:f75aee2d962c4711b414c2a0571568ded9738c39c5d29483d7c7c8f6c8431f23"
-    webapi: "main@sha256:f75aee2d962c4711b414c2a0571568ded9738c39c5d29483d7c7c8f6c8431f23"
-    backend: "main@sha256:f75aee2d962c4711b414c2a0571568ded9738c39c5d29483d7c7c8f6c8431f23"
-    alpha: "main@sha256:f75aee2d962c4711b414c2a0571568ded9738c39c5d29483d7c7c8f6c8431f23"
-  pullPolicy: Always
 mw:
+  settings:
+    logToStdErr: true
+
   db:
     replica: sql-mariadb-secondary.default.svc.cluster.local
     master: sql-mariadb-primary.default.svc.cluster.local
