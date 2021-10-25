@@ -66,8 +66,10 @@ ingress:
 
 wbstack:
   subdomainSuffix: {{ .Values.wbstack.subdomainSuffix }}
+  uiurl: {{ .Values.wbstack.uiurl }}
 
 app:
+  name: WBaaS Localhost
   # TODO should be secret?
   key: {{ .Values.services.app.key }}
   url: {{ .Values.services.app.url }}

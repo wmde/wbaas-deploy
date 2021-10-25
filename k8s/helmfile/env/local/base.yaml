@@ -2,3 +2,4 @@ ip: ""
 ingressHost: "*.wbaas.localhost"
 wbstack:
   subdomainSuffix: ".wbaas.localhost"
+  uiurl: http://wbaas.localhost
