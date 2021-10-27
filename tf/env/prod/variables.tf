@@ -44,21 +44,29 @@ variable "recaptcha_v3_staging_site_key" {
   type = string
   description = "Site key to access recaptcha v3"
   sensitive = true
+  default = "" # apparently this doesn't mean default is empty string but rather default is not defined. This means it won't prompt the user
+  # but also won't override the value that is in the state
 }
 
 variable "recaptcha_v3_staging_secret" {
   type = string
   description = "Secret key to access recaptcha v3"
   sensitive = true
+  default = "" # apparently this doesn't mean default is empty string but rather default is not defined. This means it won't prompt the user
+  # but also won't override the value that is in the state
 }
 variable "recaptcha_v2_staging_site_key" {
   type = string
   description = "Site key to access recaptcha v2"
   sensitive = true
+  default = "" # apparently this doesn't mean default is empty string but rather default is not defined. This means it won't prompt the user
+  # but also won't override the value that is in the state
 }
 
 variable "recaptcha_v2_staging_secret" {
   type = string
   description = "Secret key to access recaptcha v2"
   sensitive = true
+  default = "" # apparently this doesn't mean default is empty string but rather default is not defined. This means it won't prompt the user
+  # but also won't override the value that is in the state
 }
