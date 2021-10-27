@@ -23,7 +23,7 @@ data "google_client_config" "wbaas-1" {
 
 # Defer reading the cluster data until the GKE cluster exists.
 data "google_container_cluster" "wbaas-1" {
-  name = local.staging_cluster_name
+  name = "wbaas-1"
   depends_on = [google_container_cluster.wbaas-1]
 }
 

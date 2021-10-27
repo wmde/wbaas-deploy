@@ -12,7 +12,7 @@ variable "terraformers" {
 }
 
 locals {
-  staging_cluster_name = "wbaas-1"
+  staging_cluster_name = "wbaas-2"
 }
 
 variable "mailgun_api_key" {

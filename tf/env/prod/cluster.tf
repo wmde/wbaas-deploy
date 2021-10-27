@@ -1,5 +1,5 @@
 resource "google_container_cluster" "wbaas-1" {
-  name = local.staging_cluster_name
+  name = "wbaas-1"
 
     node_pool {
         name                = "default-pool"
@@ -89,7 +89,7 @@ resource "google_container_cluster" "wbaas-2" {
         node_config {
             disk_size_gb      = 32
             disk_type         = "pd-standard"
-            machine_type      = ""
+            machine_type      = "e2-standard-2"
             metadata          = {
                 "disable-legacy-endpoints" = "true"
             }
