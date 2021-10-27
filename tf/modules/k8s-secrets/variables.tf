@@ -6,9 +6,15 @@ variable "domain_mailgun_key" {
   # but also won't override the value that is in the state
 }
 
-variable "google_service_account_key" {
+variable "google_service_account_key_api" {
   type = string
-  description = "google service account key"
+  description = "google service account key for use in the api application"
+  sensitive = true
+}
+
+variable "google_service_account_key_dns" {
+  type = string
+  description = "google service account key for use by cert-manager to alter DNS records"
   sensitive = true
 }
 
