@@ -20,11 +20,11 @@ repositories:
 environments:
   default:
     kubeContext: INVALID-ENVIRONMENT
-  production:
-    kubeContext: gke_wikibase-cloud_europe-west3-a_wbaas-1
+  staging:
+    kubeContext: gke_wikibase-cloud_europe-west3-a_wbaas-2
     values:
-    - ./env/production/base.yaml
-    - ./env/production/private.yaml
+    - ./env/staging/base.yaml
+    - ./env/staging/private.yaml
   local:
     kubeContext: minikube-wbaas
     values:
@@ -32,7 +32,7 @@ environments:
     - ./env/local/private.yaml
 
 helmDefaults:
-  timeout: 600
+  timeout: 1200
 
 # Path to helmfiles to process BEFORE releases
 # All the nested state files under `helmfiles:` is processed in the order of definition.
@@ -43,16 +43,15 @@ helmfiles:
 
 releases:
 ################################
-# PRODUCTION ONLY
+# NOT LOCAL
 ################################
-# Only deploy the clusterissuers to production for now, as they won't work locally anyway right now...
+# Only deploy the clusterissuers to production clusters for now, as they won't work locally for now...
 - name: clusterissuers
-  installed: {{ eq .Environment.Name "production" | toYaml }}
+  installed: {{ ne .Environment.Name "local" | toYaml }}
   namespace: cert-manager
   # TODO use something more generic or from wbstack/charts repo
   chart: ./../../charts/wikibase-cloud-clusterissuers
   values:
-  # TODO current production uses the email foo@bar.com, once that is fixed, remove this hack...
   - email: {{ .Values.external.letsencrypt.email }}
   - gceProject: {{ .Values.gceProject }}
   # TODO this chart needs certificates for some reason, i probably shouldn't
@@ -186,20 +185,3 @@ releases:
   version: v0.1.7
   values:
   - "env/{{ .Environment.Name }}/adminer-cetic.values.yaml.gotmpl"
-
-################################
-# Removed deployments
-# These should be left here for a short while to allow locel setups to have them removed
-################################
-# Removed 11/10/2021
-- name: adminer
-  installed: false
-  namespace: default
-  chart: mogaal-adminer/adminer
-  # values:
-  # - "env/{{ .Environment.Name }}/adminer.values.yaml.gotmpl"
-# Removed 10/10/2021
-- name: kubernetes-secret-generator
-  installed: false
-  namespace: default
-  chart: mittwald/kubernetes-secret-generator

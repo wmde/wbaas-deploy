@@ -13,8 +13,8 @@ Help()
    echo "h     Print this Help."
    echo
    echo "Examples:"
-   echo "      helmfile-env-diff -e local -f production -r ui"
-   echo "      helmfile-env-diff -e local -f production -r api"
+   echo "      helmfile-env-diff -e local -f staging -r ui"
+   echo "      helmfile-env-diff -e local -f staging -r api"
 }
 
 # Set variable defaults

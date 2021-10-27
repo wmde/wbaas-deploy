@@ -8,7 +8,7 @@ Help()
    echo "Syntax: k8s-shell [-h|e|r|l|c|s]"
    echo "options:"
    echo "c     Count of the match, incase there are multiple instances, defaults to 0"
-   echo "e     Environment to run in. 'local' or 'production'."
+   echo "e     Environment to run in. 'local' or 'staging'."
    echo "l     Additional labels to target (comma seperated), for example 'role=master'"
    echo "s     Shell to run. 'bash' or 'sh'. Default bash"
    echo "h     Print this Help."
@@ -45,8 +45,8 @@ done
 
 # Parse user input
 K8CONTEXT=$TARGET_ENVIRONMENT
-if [ "$TARGET_ENVIRONMENT" = "production" ]; then
-    K8CONTEXT="gke_wikibase-cloud_europe-west3-a_wbaas-1"
+if [ "$TARGET_ENVIRONMENT" = "staging" ]; then
+    K8CONTEXT="gke_wikibase-cloud_europe-west3-a_wbaas-2"
 fi
 if [ "$TARGET_ENVIRONMENT" = "local" ]; then
     K8CONTEXT="minikube-wbaas"

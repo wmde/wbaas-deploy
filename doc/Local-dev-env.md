@@ -6,7 +6,7 @@ Install minikube https://minikube.sigs.k8s.io/docs/start/
 
 And start a local k8s cluster for the wbaas project.
 
-Note: 1.21.4 is suggested as this is the currently used production environment.
+Note: 1.21.4 is suggested as this is the currently used production environments.
 
 ```sh
 minikube --profile minikube-wbaas start --kubernetes-version=1.21.4

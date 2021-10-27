@@ -7,7 +7,7 @@ Help()
    echo
    echo "Syntax: k8s-events [-h|e|w]"
    echo "options:"
-   echo "e     Environment to run in. 'local' or 'production'."
+   echo "e     Environment to run in. 'local' or 'staging'."
    echo "w     Watch events, rather than just printing the current set"
    echo "h     Print this Help."
    echo
@@ -36,8 +36,8 @@ done
 
 # Parse user input
 K8CONTEXT=$TARGET_ENVIRONMENT
-if [ "$TARGET_ENVIRONMENT" = "production" ]; then
-    K8CONTEXT="gke_wikibase-cloud_europe-west3-a_wbaas-1"
+if [ "$TARGET_ENVIRONMENT" = "staging" ]; then
+    K8CONTEXT="gke_wikibase-cloud_europe-west3-a_wbaas-2"
 fi
 if [ "$TARGET_ENVIRONMENT" = "local" ]; then
     K8CONTEXT="minikube-wbaas"

@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+
+# TODO make this automatically get all cluster creds for all clusters in the project
+gcloud container clusters get-credentials wbaas-2 --zone europe-west3-a
