@@ -1,13 +1,14 @@
 # Production
 
-Production is made up of a single kubernetes cluster that holds both a staging environment and production environment.
+Production will be made up of 2 kubernetes clusters.
+Each one will hold a single environment, staging, or production.
 wikibase.dev and wikibase.cloud respectively.
-
-A single Kubernetes cluster was chosen to save on resources and cost, and allow free resources to be shared between multiple environments.
 
 A second Kubernetes cluster in the GKE environment would push us over the free tier credits for cluster management.
 https://cloud.google.com/kubernetes-engine/pricing#cluster_management_fee_and_free_tier
 Having second cluster, would increase cost by ~75USD per month, with no extra resources availible.
+
+We decide that the seperation, and lower complexity is worth the cost.
 
 ## Pro con list of having 2 clusters
 
