@@ -5,17 +5,3 @@ resource "random_password" "redis-password" {
   override_special = "_%@"
 }
 
-# Used by the sql service for initial setup
-resource "kubernetes_secret" "redis-password" {
-  provider = kubernetes.wbaas-1
-  metadata {
-    name = "redis-password"
-    # Default NS for staging?
-    namespace = "default"
-  }
-
-  data = {
-    "password" = random_password.redis-password.result
-  }
-  
-}
