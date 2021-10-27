@@ -4,7 +4,8 @@ module "wbaas2-k8s-secrets" {
     kubernetes = kubernetes.wbaas-2
   }
   domain_mailgun_key = var.domain_mailgun_key
-  google_service_account_key = google_service_account_key.dev-api.private_key
+  google_service_account_key_api = google_service_account_key.dev-api.private_key
+  google_service_account_key_dns = google_service_account_key.certman-dns01-solver.private_key
   sql_password_root = random_password.sql-passwords["staging-root"].result
   sql_password_replication = random_password.sql-passwords["staging-replication"].result
   sql_password_api = random_password.sql-passwords["staging-api"].result
