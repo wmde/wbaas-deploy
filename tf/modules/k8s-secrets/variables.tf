@@ -12,24 +12,24 @@ variable "google_service_account_key" {
   sensitive = true
 }
 
-variable "sql_password_staging_root" {
+variable "sql_password_root" {
   type = string
   description = "SQL root password for staging cluster"
   sensitive = true
 }
-variable "sql_password_staging_replication" {
+variable "sql_password_replication" {
   type = string
   description = "SQL replication password for staging cluster"
   sensitive = true
 }
 
-variable "sql_password_staging_api" {
+variable "sql_password_api" {
   type = string
   description = "SQL platform api password for staging cluster"
   sensitive = true
 }
 
-variable "sql_password_staging_mediawiki_db_manager" {
+variable "sql_password_mediawiki_db_manager" {
   type = string
   description = "SQL mediawiki db manager password for staging cluster"
   sensitive = true
@@ -41,22 +41,22 @@ variable "redis_password" {
   sensitive = true
 }
 
-variable "recaptcha_v3_staging_site_key" {
+variable "recaptcha_v3_site_key" {
   type = string
-  description = "recaptcha_v3_staging_site_key for staging cluster"
+  description = "recaptcha_v3_site_key for staging cluster"
 }
-variable "recaptcha_v3_staging_secret" {
+variable "recaptcha_v3_secret" {
   type = string
-  description = "recaptcha_v3_staging_secret for staging cluster"
+  description = "recaptcha_v3_secret for staging cluster"
   sensitive = true
 }
-variable "recaptcha_v2_staging_site_key" {
+variable "recaptcha_v2_site_key" {
   type = string
-  description = "recaptcha_v2_staging_site_key for staging cluster"
+  description = "recaptcha_v2_site_key for staging cluster"
 }
-variable "recaptcha_v2_staging_secret" {
+variable "recaptcha_v2_secret" {
   type = string
-  description = "recaptcha_v2_staging_secret for staging cluster"
+  description = "recaptcha_v2_secret for staging cluster"
   sensitive = true
 }
 

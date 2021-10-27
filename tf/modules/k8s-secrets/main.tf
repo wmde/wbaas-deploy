@@ -29,8 +29,8 @@ resource "kubernetes_secret" "sql-secrets-passwords" {
   }
 
   binary_data = {
-    "mariadb-root-password" = base64encode(var.sql_password_staging_root)
-    "mariadb-replication-password" = base64encode(var.sql_password_staging_replication)
+    "mariadb-root-password" = base64encode(var.sql_password_root)
+    "mariadb-replication-password" = base64encode(var.sql_password_replication)
   }
   
 }
@@ -44,8 +44,8 @@ resource "kubernetes_secret" "sql-secrets-init-passwords" {
   }
 
   binary_data = {
-    "SQL_INIT_PASSWORD_API" = base64encode(var.sql_password_staging_api)
-    "SQL_INIT_PASSWORD_MW" = base64encode(var.sql_password_staging_mediawiki_db_manager)
+    "SQL_INIT_PASSWORD_API" = base64encode(var.sql_password_api)
+    "SQL_INIT_PASSWORD_MW" = base64encode(var.sql_password_mediawiki_db_manager)
   }
   
 }
@@ -72,8 +72,8 @@ resource "kubernetes_secret" "recaptcha-v3-staging-secrets" {
   }
 
   data = {
-    "site_key" = var.recaptcha_v3_staging_site_key,
-    "secret_key" = var.recaptcha_v3_staging_secret
+    "site_key" = var.recaptcha_v3_site_key,
+    "secret_key" = var.recaptcha_v3_secret
   }
 }
 
@@ -85,8 +85,8 @@ resource "kubernetes_secret" "recaptcha-v2-staging-secrets" {
   }
 
   data = {
-    "site_key" = var.recaptcha_v2_staging_site_key,
-    "secret_key" = var.recaptcha_v2_staging_secret
+    "site_key" = var.recaptcha_v2_site_key,
+    "secret_key" = var.recaptcha_v2_secret
   }
 }
 
