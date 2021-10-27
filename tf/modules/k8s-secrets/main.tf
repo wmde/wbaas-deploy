@@ -25,6 +25,7 @@ resource "kubernetes_secret" "dev-api-serviceaccount" {
 resource "kubernetes_secret" "clouddns-dns01-solver-svc-acct" {
   metadata {
     name = "clouddns-dns01-solver-svc-acct"
+    namespace = "cert-manager"
   }
   data = {
     "key.json" = base64decode(var.google_service_account_key_dns)
