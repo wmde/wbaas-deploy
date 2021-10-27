@@ -1,7 +1,0 @@
-releases:
-- name: wikibase-cloud-certificates
-  namespace: default
-  chart: ./../../../charts/wikibase-cloud-certificates
-  values:
-    - values.yaml.gotmpl
-

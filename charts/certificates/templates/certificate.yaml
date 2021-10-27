@@ -4,8 +4,6 @@ kind: Certificate
 metadata:
   name: {{ .name }}
   namespace: default
-  labels:
-    app.kubernetes.io/managed-by: ManualGit
 spec:
   commonName: {{ .commonName }}
   dnsNames:

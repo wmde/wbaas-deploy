@@ -63,6 +63,13 @@ releases:
         - '*.wikibase.dev'
         - 'wikibase.dev'
 
+- name: certificates
+  installed: {{ ne .Environment.Name "local" | toYaml }}
+  namespace: default
+  chart: ./../../charts/certificates
+  values:
+  - "env/{{ .Environment.Name }}/certificates.values.yaml.gotmpl"
+
 ################################
 # ALL ENVIRONMENTS
 ################################
