@@ -45,7 +45,6 @@ resource "google_container_cluster" "wbaas-2" {
     node_pool {
         name                = "medium-pool"
         node_count          = 2
-        max_pods_per_node   = 110
         node_locations      = [
             "europe-west3-a",
         ]
@@ -80,7 +79,6 @@ resource "google_container_cluster" "wbaas-2" {
     node_pool {
         name                = "standard-pool"
         node_count          = 2
-        max_pods_per_node   = 110
         node_locations      = [
             "europe-west3-a",
         ]
