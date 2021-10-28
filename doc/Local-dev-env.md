@@ -35,6 +35,14 @@ You should be able to apply the needed state with `terraform apply` in `tf/env/l
 
 Terraform interacts with a k8s cluster, that you need to create beforehand!
 
+For convenience, you can add local secrets to your cluster via `*.tfvars` files in `tf/env/local` (it will get ignored by git). Example for recaptcha keys:
+```
+recaptcha_v3_dev_site_key = "insert actual secret here"
+recaptcha_v3_dev_secret   = "insert actual secret here"
+recaptcha_v2_dev_site_key = "insert actual secret here"
+recaptcha_v2_dev_secret   = "insert actual secret here"
+```
+
 ## helmfile
 > These helm plugins need to be installed:
 > * [diff](https://github.com/databus23/helm-diff) - helmfile needs this to diff resources
