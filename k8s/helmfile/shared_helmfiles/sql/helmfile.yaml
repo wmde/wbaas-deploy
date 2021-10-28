@@ -2,6 +2,20 @@ repositories:
 - name: bitnami
   url: https://charts.bitnami.com/bitnami
 
+environments:
+  default:
+    kubeContext: INVALID-ENVIRONMENT
+  staging:
+    kubeContext: gke_wikibase-cloud_europe-west3-a_wbaas-2
+    values:
+    - ../../env/staging/base.yaml
+    - ./env/staging/private.yaml
+  local:
+    kubeContext: minikube-wbaas
+    values:
+    - ../../env/local/base.yaml
+    - ../../env/local/private.yaml
+
 releases:
   - name: sql
     namespace: default
