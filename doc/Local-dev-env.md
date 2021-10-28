@@ -103,3 +103,58 @@ minikube --profile minikube-wbaas service -n kube-system nginx-ingress-default-b
 ```
 
 Note: There is more to making things work locally than this and we either need to setup dynamic DNS, or we need to be editing our hosts file!
+
+### Using a locally built docker image in minikube
+**Disclaimer**: Use [skaffold](https://github.com/wmde/wbaas-deploy/tree/main/skaffold) instead of this workflow if possible.
+
+1. **Build the local image for minikube's docker daemon**
+
+Run this in the directory that has the docker image you modified:
+```sh
+eval $(minikube -p minikube-wbaas docker-env) # use minikube docker daemon
+docker build -t my-local-wbaas-service . # build the image
+```
+
+2. Modify the helm chart locally if there are any changes corresponding to the ones in the new image
+
+3. **Set the helmfile values to point to the local image (and the local chart)**
+
+You can now modify the helmfile values to use the local image. Note the change in `pullPolicy`, which has to be set to `Never` so that kubernetes doesn't look for it on the internet.
+
+Using the UI as an example, this is what the local diff might look like:
+```diff
+ $ git diff k8s/helmfile/env/local/ui.values.yaml.gotmpl
+
+diff --git a/k8s/helmfile/env/local/ui.values.yaml.gotmpl b/k8s/helmfile/env/local/ui.values.yaml.gotmpl
+index 3d93e16..8bb1a2b 100644
+--- a/k8s/helmfile/env/local/ui.values.yaml.gotmpl
++++ b/k8s/helmfile/env/local/ui.values.yaml.gotmpl
+@@ -1,7 +1,7 @@
+ image:
+-  repository: ghcr.io/wmde/wbaas-ui
+-  tag: "2.14-shortcut"
+-  pullPolicy: Always
++  repository: my-local-wbaas-ui
++  tag: "latest"
++  pullPolicy: Never
+```
+
+If you made changes to the corresponding helm chart, you also need to update the main helmfile to point to its location on your local file system.
+
+```diff
+ $ git diff k8s/helmfile/helmfile.yaml
+
+diff --git a/k8s/helmfile/helmfile.yaml b/k8s/helmfile/helmfile.yaml
+index bbfde7c..5668ef0 100644
+--- a/k8s/helmfile/helmfile.yaml
++++ b/k8s/helmfile/helmfile.yaml
+@@ -120,8 +120,7 @@ releases:
+
+ - name: ui
+   namespace: default
+-  chart: wbstack/ui
+-  version: 0.1.0
++  chart: ./../../../wbstack-charts/charts/ui
+```
+
+Done! Run `helmfile diff` and `helmfile apply`.
