@@ -153,7 +153,7 @@ initdbScripts:
     # Needed in order to create new users
     echo "GRANT CREATE USER ON *.* TO 'mediawiki-db-manager'@'%';" >> /tmp/sql-init-cmds-001.txt
     # In order to see and grant slave status access
-    echo "GRANT REPLICA MONITOR ON *.* TO 'mediawiki-db-manager'@'%' WITH GRANT OPTION;" >> /tmp/sql-init-cmds-001.txt
+    echo "GRANT REPLICA MONITOR, BINLOG MONITOR ON *.* TO 'mediawiki-db-manager'@'%' WITH GRANT OPTION;" >> /tmp/sql-init-cmds-001.txt
 
     # Flush privs
     echo "FLUSH PRIVILEGES;" >> /tmp/sql-init-cmds-001.txt
