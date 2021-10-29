@@ -7,9 +7,9 @@ repositories:
   url: https://wbstack.github.io/charts
 - name: bitnami
   url: https://charts.bitnami.com/bitnami
+# Not used for live deployments
 - name: cetic
   url: https://cetic.github.io/helm-charts
-# Not used for live deployments
 - name: mittwald
   url: https://helm.mittwald.de
 - name: elastic
