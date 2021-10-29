@@ -11,7 +11,7 @@ Help()
    echo "options:"
    echo "r     Release to target, for example 'ui'."
    echo "n     Remove the image values from the yaml"
-   echo "e     Environment to run in. 'local' or 'production'."
+   echo "e     Environment to run in. 'local' or 'staging'."
    echo "h     Print this Help."
    echo
    echo "Examples:"

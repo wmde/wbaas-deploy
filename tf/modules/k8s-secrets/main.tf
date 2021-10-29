@@ -16,7 +16,19 @@ resource "kubernetes_secret" "dev-api-serviceaccount" {
     name = "dev-api-serviceaccount"
   }
   data = {
-    "key.json" = base64decode(var.google_service_account_key)
+    "key.json" = base64decode(var.google_service_account_key_api)
+  }
+}
+
+# Deprecated per https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/google_service_account_key#example-usage-save-key-in-kubernetes-secret---deprecated
+# but will do for now...
+resource "kubernetes_secret" "clouddns-dns01-solver-svc-acct" {
+  metadata {
+    name = "clouddns-dns01-solver-svc-acct"
+    namespace = "cert-manager"
+  }
+  data = {
+    "key.json" = base64decode(var.google_service_account_key_dns)
   }
 }
 
