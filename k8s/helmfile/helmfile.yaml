@@ -10,12 +10,12 @@ repositories:
 - name: cetic
   url: https://cetic.github.io/helm-charts
 # Not used for live deployments
-- name: mogaal-adminer
-  url: git+https://github.com/mogaal/helm-charts/@adminer/?ref=main
 - name: mittwald
   url: https://helm.mittwald.de
 - name: elastic
   url: https://helm.elastic.co
+# - name: wbstack-pr
+#   url: git+https://github.com/wbstack/charts/@charts/?ref=BRANCH_NAME_HERE
 
 environments:
   default:
