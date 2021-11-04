@@ -56,7 +56,7 @@ recaptcha_v2_dev_secret   = "insert actual secret here"
 You can see the changes that helmfile will make to your local k8s cluster by running the following command in the `k8s/helmfile` directory
 
 ```sh
-helmfile --environment local diff
+helmfile --environment local diff --context 5 # shows the diff with 5 lines of context around changes
 ```
 
 To actually make the changes use:
