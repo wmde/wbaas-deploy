@@ -1,0 +1,9 @@
+ingress:
+  enabled: true
+  hosts:
+    - host: mailhog.wbaas.localhost
+      paths:
+        - path: /
+          pathType: Prefix
+serviceAccount:
+  create: false
