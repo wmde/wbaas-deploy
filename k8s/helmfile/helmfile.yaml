@@ -138,6 +138,13 @@ releases:
   values:
   - "env/{{ .Environment.Name }}/mediawiki-135.values.yaml.gotmpl"
 
+- name: mediawiki-136
+  namespace: default
+  chart: wbstack/mediawiki
+  version: 0.3.0
+  values:
+    - "env/{{ .Environment.Name }}/mediawiki-136.values.yaml.gotmpl"
+
 - name: queryservice-ui
   namespace: default
   chart: wbstack/queryservice-ui
