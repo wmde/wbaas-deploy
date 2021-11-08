@@ -23,10 +23,15 @@ mw:
     host: elasticsearch-master.default.svc.cluster.local
     port: 9200
   mailgun:
-    # TODO setup non mailgun emailing for localhost? OR use the testing domain and creds?
+    enabled: false
     apikey: "this is a a fake api key"
     domain: sandbox0b712ecfc0d74c7e842bd5b9dfdf719a.mailgun.org
     endpoint: "https://api.mailgun.net"
+  smtp:
+    enabled: true
+    host: mailhog
+    port: 1025
+    auth: false
   recaptcha:
     sitekeySecretName: recaptcha-v2-dev-secrets
     sitekeySecretKey: site_key
