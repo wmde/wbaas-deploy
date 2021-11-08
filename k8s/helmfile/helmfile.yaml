@@ -9,6 +9,8 @@ repositories:
   url: https://cetic.github.io/helm-charts
 - name: elastic
   url: https://helm.elastic.co
+- name: codecentric
+  url: https://codecentric.github.io/helm-charts
 
 environments:
   default:
@@ -194,3 +196,11 @@ releases:
   version: v0.1.7
   values:
   - "env/{{ .Environment.Name }}/adminer-cetic.values.yaml.gotmpl"
+
+- name: mailhog
+  installed: {{ eq .Environment.Name "local" | toYaml }}
+  namespace: default
+  chart: codecentric/mailhog
+  version: 5.0.1
+  values:
+   - env/local/mailhog.values.yaml
