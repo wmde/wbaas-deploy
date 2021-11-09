@@ -112,6 +112,12 @@ minikube --profile minikube-wbaas service -n kube-system nginx-ingress-default-b
 
 Note: There is more to making things work locally than this and we either need to setup dynamic DNS, or we need to be editing our hosts file!
 
+## Mailhog / Local emails
+
+For the local setup, [Mailhog](https://github.com/mailhog/MailHog) is used to capture outbound emails. 
+
+You can view those emails by going to http://mailhog.wbaas.localhost/
+
 ### Using a locally built docker image in minikube
 **Disclaimer**: Use [skaffold](https://github.com/wmde/wbaas-deploy/tree/main/skaffold) instead of this workflow if possible.
 
