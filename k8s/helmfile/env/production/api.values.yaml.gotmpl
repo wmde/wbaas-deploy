@@ -55,6 +55,9 @@ ingress:
     kubernetes.io/ingress.class: nginx
     nginx.ingress.kubernetes.io/use-regex: "true"
     nginx.ingress.kubernetes.io/rewrite-target: /$2
+    nginx.ingress.kubernetes.io/auth-type: basic
+    nginx.ingress.kubernetes.io/auth-secret: default/basic-auth
+    nginx.ingress.kubernetes.io/auth-realm: "Authentication Required - =]"
   hosts:
   {{- range .Values.services.app.ingressHosts }}
   - host: {{ .host }}

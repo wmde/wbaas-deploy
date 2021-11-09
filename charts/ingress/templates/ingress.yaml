@@ -5,6 +5,9 @@ metadata:
   annotations:
     kubernetes.io/ingress.class: nginx
     nginx.ingress.kubernetes.io/force-ssl-redirect: {{ .Values.forceSSL | quote }}
+  {{- with .Values.ingressExtraAnnotations }}
+    {{- toYaml . | nindent 4 }}
+  {{- end }}
 spec:
   rules:
   - host: {{ .Values.ingressHost | quote }}

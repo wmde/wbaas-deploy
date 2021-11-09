@@ -55,6 +55,7 @@ releases:
   - email: {{ .Values.external.letsencrypt.email }}
   - gceProject: {{ .Values.gceProject }}
   # TODO this chart needs certificates for some reason, i probably shouldn't
+  # TODO this should differ in prod vs staging
   - certificates:
     - dnsNames:
         - '*.wikibase.cloud'
@@ -112,10 +113,9 @@ releases:
 
 - name: platform-apps-ingress
   namespace: default
-  chart: ./../../charts/wikibase-dev-ingress
+  chart: ./../../charts/ingress
   values:
-  # TODO use more specific values (what is actually needed?) OR adopt this pattern everywhere
-  - {{ toYaml .Values | nindent 4 }}
+  - "env/{{ .Environment.Name }}/platform-apps-ingress.values.yaml.gotmpl"
 
 - name: api
   chart: wbstack/api

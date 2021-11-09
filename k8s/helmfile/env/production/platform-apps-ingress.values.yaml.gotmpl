@@ -1,0 +1,8 @@
+ingressNameSuffix: wikibase-cloud
+ingressHost: "*.wikibase.cloud"
+ingressExtraAnnotations:
+  nginx.ingress.kubernetes.io/auth-type: basic
+  nginx.ingress.kubernetes.io/auth-secret: default/basic-auth
+  nginx.ingress.kubernetes.io/auth-realm: "Authentication Required - =]"
+forceSSL: true
+tls: true
