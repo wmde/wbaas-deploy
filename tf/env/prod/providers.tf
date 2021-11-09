@@ -28,6 +28,16 @@ data "google_container_cluster" "wbaas-2" {
   depends_on = [google_container_cluster.wbaas-2]
 }
 
+data "google_client_config" "wbaas-3" {
+  depends_on = [google_container_cluster.wbaas-3]
+}
+
+# Defer reading the cluster data until the GKE cluster exists.
+data "google_container_cluster" "wbaas-3" {
+  name = local.cloud_cluster_name
+  depends_on = [google_container_cluster.wbaas-3]
+}
+
 provider "kubernetes" {
   host  = "https://${data.google_container_cluster.wbaas-2.endpoint}"
   token = data.google_client_config.wbaas-2.access_token
@@ -35,6 +45,15 @@ provider "kubernetes" {
     data.google_container_cluster.wbaas-2.master_auth[0].cluster_ca_certificate,
   )
   alias = "wbaas-2"
+}
+
+provider "kubernetes" {
+  host  = "https://${data.google_container_cluster.wbaas-3.endpoint}"
+  token = data.google_client_config.wbaas-3.access_token
+  cluster_ca_certificate = base64decode(
+    data.google_container_cluster.wbaas-3.master_auth[0].cluster_ca_certificate,
+  )
+  alias = "wbaas-3"
 }
 
 provider "mailgun" {

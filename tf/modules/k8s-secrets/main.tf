@@ -76,6 +76,7 @@ resource "kubernetes_secret" "redis-password" {
   
 }
 
+# TODO this should not be called staging?
 resource "kubernetes_secret" "recaptcha-v3-staging-secrets" {
   metadata {
     name = "recaptcha-v3-staging-secrets"
@@ -89,6 +90,7 @@ resource "kubernetes_secret" "recaptcha-v3-staging-secrets" {
   }
 }
 
+# TODO this should not be called staging?
 resource "kubernetes_secret" "recaptcha-v2-staging-secrets" {
   metadata {
     name = "recaptcha-v2-staging-secrets"

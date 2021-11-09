@@ -1,0 +1,8 @@
+# TODO fill in the IP once it is known (Or make helmfile take it from tf state)
+ip: 1.2.3.4
+ingressHost: "*.wikibase.cloud"
+tls: true
+forceSSL: true
+wbstack:
+  subdomainSuffix: '.wikibase.cloud'
+  uiurl: https://wikibase.cloud

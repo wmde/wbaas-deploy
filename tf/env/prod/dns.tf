@@ -27,6 +27,27 @@ resource "google_dns_record_set" "cloud-SOA" {
     type         = "SOA"
 }
 
+resource "google_dns_record_set" "cloud-A" {
+    managed_zone = google_dns_managed_zone.cloud.name
+    name         = google_dns_managed_zone.cloud.dns_name
+    rrdatas      = [
+        google_compute_address.cloud-ip.address,
+    ]
+    ttl          = 300
+    type         = "A"
+}
+
+resource "google_dns_record_set" "cloud-MailGun-record" {
+    for_each = {
+        for index, record in mailgun_domain.cloud.sending_records:
+        index => record
+    }
+    name = "${each.value.name}."
+    managed_zone = google_dns_managed_zone.cloud.name
+    type = each.value.record_type
+    rrdatas = [ replace("\"${each.value.value}\"", "/^\"eu.mailgun.org\"$/", "eu.mailgun.org." ) ]
+}
+
 resource "google_dns_managed_zone" "dev" {
     description   = "DNS zone for domain: wikibase.dev"
     dns_name      = "wikibase.dev."
@@ -80,7 +101,7 @@ resource "google_dns_record_set" "dev-A" {
     managed_zone = google_dns_managed_zone.dev.name
     name         = google_dns_managed_zone.dev.dns_name
     rrdatas      = [
-        google_compute_address.default.address,
+        google_compute_address.dev-ip.address,
     ]
     ttl          = 300
     type         = "A"
@@ -88,7 +109,7 @@ resource "google_dns_record_set" "dev-A" {
 
 resource "google_dns_record_set" "dev-MailGun-record" {
     for_each = {
-        for index, record in mailgun_domain.default.sending_records:
+        for index, record in mailgun_domain.dev.sending_records:
         index => record
     }
     name = "${each.value.name}."

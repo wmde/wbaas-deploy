@@ -20,3 +20,14 @@ resource "google_service_account" "dev-api" {
 resource "google_service_account_key" "dev-api" {
     service_account_id = google_service_account.dev-api.name
 }
+
+resource "google_service_account" "cloud-api" {
+    account_id   = "wikibase-cloud-api"
+    disabled     = false
+    display_name = "Service Account"
+}
+
+# TODO future regular rotation https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/google_service_account_key#example-usage-creating-and-regularly-rotating-a-key
+resource "google_service_account_key" "cloud-api" {
+    service_account_id = google_service_account.cloud-api.name
+}
