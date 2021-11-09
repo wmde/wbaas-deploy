@@ -126,15 +126,6 @@ releases:
   values:
   - "env/{{ .Environment.Name }}/ui.values.yaml.gotmpl"
 
-{{ if eq .Environment.Name "staging" }}
-- name: mediawiki-135
-  namespace: default
-  chart: wbstack/mediawiki
-  version: 0.3.0
-  values:
-  - "env/{{ .Environment.Name }}/mediawiki-135.values.yaml.gotmpl"
-{{ end }}
-
 - name: mediawiki-136
   namespace: default
   chart: wbstack/mediawiki
