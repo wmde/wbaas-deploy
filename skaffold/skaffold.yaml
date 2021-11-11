@@ -6,30 +6,41 @@ profiles:
     - kubeContext: minikube-wbaas
 build:
   artifacts:
-    - image: local/skaffold/wbaas/ui
-      context: ./../../ui
-    - image: local/skaffold/wbaas/mediawiki
-      context: ./../../mediawiki
+    # - image: local/skaffold/wbaas/ui
+    #   context: ./../../ui
+    # - image: local/skaffold/wbaas/mediawiki
+    #   context: ./../../mediawiki
+    - image: local/skaffold/wbaas/quickstatements
+      context: ./../../quickstatements
 deploy:
   kubeContext: minikube-wbaas
   helm:
     releases:
-      - name: ui
-        chartPath: ./../../charts/charts/ui
+      # - name: ui
+      #   chartPath: ./../../charts/charts/ui
+      #   valuesFiles:
+      #     - ".tmp.values.ui.yaml"
+      #     - NeverPull.yaml
+      #   artifactOverrides:
+      #     image: local/skaffold/wbaas/ui
+      #   imageStrategy:
+      #     helm: {}
+      # - name: mediawiki-136
+      #   chartPath: ./../../charts/charts/mediawiki
+      #   valuesFiles:
+      #     - ".tmp.values.mediawiki-136.yaml"
+      #     - NeverPull.yaml
+      #   artifactOverrides:
+      #     image: local/skaffold/wbaas/mediawiki
+      #   imageStrategy:
+      #     helm: {}
+      - name: tool-quickstatements
+        chartPath: ./../../charts/charts/tool-quickstatements
         valuesFiles:
-          - ".tmp.values.ui.yaml"
+          - ".tmp.values.tool-quickstatements.yaml"
           - NeverPull.yaml
         artifactOverrides:
-          image: local/skaffold/wbaas/ui
-        imageStrategy:
-          helm: {}
-      - name: mediawiki-136
-        chartPath: ./../../charts/charts/mediawiki
-        valuesFiles:
-          - ".tmp.values.mediawiki-136.yaml"
-          - NeverPull.yaml
-        artifactOverrides:
-          image: local/skaffold/wbaas/mediawiki
+          image: local/skaffold/wbaas/quickstatements
         imageStrategy:
           helm: {}
     hooks:
@@ -38,3 +49,5 @@ deploy:
             command: [ "./helmfile-values", "-e", "local", "-r", "ui", "-n" ]
         - host:
             command: [ "./helmfile-values", "-e", "local", "-r", "mediawiki-136", "-n" ]
+        - host:
+            command: [ "./helmfile-values", "-e", "local", "-r", "tool-quickstatements", "-n" ]
