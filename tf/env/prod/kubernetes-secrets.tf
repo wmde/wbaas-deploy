@@ -17,5 +17,7 @@ module "wbaas2-k8s-secrets" {
   recaptcha_v2_secret = var.recaptcha_v2_staging_secret
   api_passport_public_key = tls_private_key.api-passport.public_key_pem
   api_passport_private_key = tls_private_key.api-passport.private_key_pem
+  api_app_key = random_password.api-app-key.result
+  api_app_jwt_secret = random_password.api-app-jwt-secret.result
 }
 

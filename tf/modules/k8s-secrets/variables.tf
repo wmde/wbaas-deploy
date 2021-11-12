@@ -76,3 +76,15 @@ variable "api_passport_private_key" {
   description = "Laravel Passport OAuth Private Key for staging cluster"
   sensitive = true
 }
+
+variable "api_app_key" {
+  type = string
+  description = "Wikibase Cloud API App Key"
+  sensitive = true
+}
+
+variable "api_app_jwt_secret" {
+  type = string
+  description = "Wikibase Cloud API App JWT Secret"
+  sensitive = true
+}
