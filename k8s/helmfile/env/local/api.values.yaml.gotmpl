@@ -101,11 +101,12 @@ app:
     passwordSecretName: sql-secrets-init-passwords
     passwordSecretKey: SQL_INIT_PASSWORD_API
   mail:
-    mailer: {{ .Values.services.app.mailer }} # mailgun/log https://laravel.com/docs/8.x/mail
-    mailgundomain: fake.wikibase.dev
-    mailgunsecret: "not needed as log sending is used"
+    mailer: smtp
     fromaddress: noreply-local@fake.wikibase.dev
     fromname: Wikibase-dev
+    smtphost: mailhog
+    smtpport: 1025
+    smtpencryption: null
   recaptcha:
     # TODO take these values from secrets...
     sitekey:

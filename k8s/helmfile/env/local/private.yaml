@@ -14,7 +14,6 @@ services:
 
   app:
     url: http://www.wbaas.localhost
-    mailer: log
     ingressHosts:
       - host: api.wbaas.localhost
         paths:
