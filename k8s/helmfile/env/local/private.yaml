@@ -14,8 +14,6 @@ services:
 
   app:
     url: http://www.wbaas.localhost
-    key: base64:J6jYydw3RczHiPFgJt9P5f4uuvEqe84pZsbMgRor4VI=
-    jwtSecret: jg9jj98gg09as09sfa0fj0jg0avnmx
     mailer: log
     ingressHosts:
       - host: api.wbaas.localhost

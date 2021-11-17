@@ -27,8 +27,6 @@ ingressNameSuffix: wikibase-dev
 services:
   app:
     url: https://api.wikibase.dev
-    key: base64:J6jYydw3RczHiPFgJt9P5f4uuvEqe84pZsbMgRor4VI=
-    jwtSecret: jg9jj98gg09as09sfa0fj0jg0avnmx
     mailer: mailgun
     ingressHosts:
       - host: api.wikibase.dev
