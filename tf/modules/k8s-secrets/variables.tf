@@ -79,12 +79,12 @@ variable "api_passport_private_key" {
 
 variable "api_app_key" {
   type = string
-  description = "Wikibase Cloud API App Key"
+  description = "Laravel API App API Key"
   sensitive = true
 }
 
 variable "api_app_jwt_secret" {
   type = string
-  description = "Wikibase Cloud API App JWT Secret"
+  description = "Laravel API App JWT Secret"
   sensitive = true
 }
