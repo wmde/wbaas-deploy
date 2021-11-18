@@ -115,3 +115,15 @@ resource "kubernetes_secret" "api-passport-keys" {
   }
   
 }
+
+resource "kubernetes_secret" "api-app-secrets" {
+  metadata {
+    name = "api-app-secrets"
+    namespace = "default"
+  }
+
+  data = {
+    "api-app-key" = var.api_app_key
+    "api-app-jwt-secret" = var.api_app_jwt_secret
+  }
+}

@@ -72,13 +72,13 @@ wbstack:
 
 app:
   name: WBaaS Localhost
-  # TODO should be secret?
-  key: {{ .Values.services.app.key }}
+  keySecretName: api-app-secrets
+  keySecretKey: api-app-key
   url: {{ .Values.services.app.url }}
   cacheDriver: redis
   queueConnection: redis
-  # TODO should be in a k8s secret?
-  jwtSecret: {{ .Values.services.app.jwtSecret }}
+  jwtSecretSecretName: api-app-secrets
+  jwtSecretSecretKey: api-app-jwt-secret
   queryServiceHost: queryservice.default.svc.cluster.local:9999
   redis:
     # TODO is it possible to take advantage of replicas here?
