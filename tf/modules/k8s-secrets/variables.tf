@@ -79,7 +79,7 @@ variable "api_passport_private_key" {
 
 variable "api_app_key" {
   type = string
-  description = "Laravel API App API Key"
+  description = "Laravel API App Key"
   sensitive = true
 }
 
