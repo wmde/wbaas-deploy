@@ -176,3 +176,25 @@ index bbfde7c..5668ef0 100644
 ```
 
 Done! Run `helmfile diff` and `helmfile apply`.
+
+## [Optional] setup bash completion
+Here is how to get have tab completion working for common commands
+
+Note: this was only tested on Ubuntu 20.04
+
+```sh
+# minikube
+sudo sh -c 'minikube completion bash > /usr/share/bash-completion/completions/minikube'
+
+# terraform
+terraform -install-autocomplete
+
+# kubectl
+sudo sh -c 'kubectl completion bash > /usr/share/bash-completion/completions/kubectl'
+
+# helm
+sudo sh -c 'helm completion bash > /usr/share/bash-completion/completions/helm'
+
+# helmfile
+sudo wget https://raw.githubusercontent.com/roboll/helmfile/master/autocomplete/helmfile_bash_autocomplete -O /usr/share/bash-completion/completions/helmfile
+```
