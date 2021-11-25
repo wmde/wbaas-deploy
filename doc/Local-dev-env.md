@@ -1,5 +1,17 @@
 # Local Development Environment
 
+## Requirements
+
+You need the following things installed on your machine:
+* [docker](https://docs.docker.com/engine/install/ubuntu/)
+* [minikube](https://minikube.sigs.k8s.io/docs/start/)
+* [terraform](https://learn.hashicorp.com/tutorials/terraform/install-cli)
+* [helm](https://helm.sh/docs/intro/install/)
+  * diff plugin `helm plugin install https://github.com/databus23/helm-diff`
+  * git plugin `helm plugin install https://github.com/aslafy-z/helm-git`
+* [helmfile](https://github.com/roboll/helmfile#installation)
+* [kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl-linux/)
+
 ## minikube cluster
 
 Install minikube https://minikube.sigs.k8s.io/docs/start/
@@ -44,15 +56,7 @@ recaptcha_v2_dev_secret   = "insert actual secret here"
 ```
 
 ## helmfile
-> These helm plugins need to be installed:
-> * [diff](https://github.com/databus23/helm-diff) - helmfile needs this to diff resources
-> * [git](https://github.com/aslafy-z/helm-git) - We need this to fetch charts from git
->
-> ```sh
-> helm plugin install https://github.com/databus23/helm-diff
-> helm plugin install https://github.com/aslafy-z/helm-git
-> ```
->
+
 You can see the changes that helmfile will make to your local k8s cluster by running the following command in the `k8s/helmfile` directory
 
 ```sh
@@ -114,7 +118,7 @@ Note: There is more to making things work locally than this and we either need t
 
 ## Mailhog / Local emails
 
-For the local setup, [Mailhog](https://github.com/mailhog/MailHog) is used to capture outbound emails. 
+For the local setup, [Mailhog](https://github.com/mailhog/MailHog) is used to capture outbound emails.
 
 You can view those emails by going to http://mailhog.wbaas.localhost/
 
