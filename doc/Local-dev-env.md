@@ -10,7 +10,7 @@ You need the following things installed on your machine:
   * diff plugin `helm plugin install https://github.com/databus23/helm-diff`
   * git plugin `helm plugin install https://github.com/aslafy-z/helm-git`
 * [helmfile](https://github.com/roboll/helmfile#installation)
-* [kubernetes](https://kubernetes.io/docs/tasks/tools/install-kubectl-linux/)
+* [kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl-linux/)
 
 ## minikube cluster
 
