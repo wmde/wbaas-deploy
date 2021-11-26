@@ -18,6 +18,7 @@ Install minikube https://minikube.sigs.k8s.io/docs/start/
 
 And start a local k8s cluster for the wbaas project.
 
+**IMPORTANT: make sure you are NOT connect to the WMDE VPN when creating the minikube profile**.  
 Note: 1.21.4 is suggested as this is the currently used production environments.
 
 ```sh
