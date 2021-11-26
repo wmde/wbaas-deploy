@@ -43,17 +43,26 @@ minikube --profile minikube-wbaas dashboard
 ## terraform
 
 Terraform is required to setup some needed dependencies.
-You should be able to apply the needed state with `terraform apply` in `tf/env/local`.
+
+To initialise terraform and apply the needed state do the following in `tf/env/local`:
+```sh
+terraform init
+terraform apply
+```
 
 Terraform interacts with a k8s cluster, that you need to create beforehand!
 
-For convenience, you can add local secrets to your cluster via a `terraform.tfvars` file in `tf/env/local` (it will get ignored by git). Example for recaptcha keys:
+For convenience, you can add local secrets to your cluster via a `terraform.tfvars` file in `tf/env/local` (it will get ignored by git). Use `terraform apply` to make the changes take effect.
+
+Example for recaptcha keys:
 ```
 recaptcha_v3_dev_site_key = "insert actual secret here"
 recaptcha_v3_dev_secret   = "insert actual secret here"
 recaptcha_v2_dev_site_key = "insert actual secret here"
 recaptcha_v2_dev_secret   = "insert actual secret here"
 ```
+
+Note: you will have to restart the ui pod (delete it with `kubectl delete pod [name of ui pod]` and wait for it to be recreated) for the recaptcha keys to be loaded.
 
 ## helmfile
 
