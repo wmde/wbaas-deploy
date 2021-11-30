@@ -72,13 +72,13 @@ wbstack:
 
 app:
   name: WBaaS Localhost
-  # TODO should be secret?
-  key: {{ .Values.services.app.key }}
+  keySecretName: api-app-secrets
+  keySecretKey: api-app-key
   url: {{ .Values.services.app.url }}
   cacheDriver: redis
   queueConnection: redis
-  # TODO should be in a k8s secret?
-  jwtSecret: {{ .Values.services.app.jwtSecret }}
+  jwtSecretSecretName: api-app-secrets
+  jwtSecretSecretKey: api-app-jwt-secret
   queryServiceHost: queryservice.default.svc.cluster.local:9999
   redis:
     # TODO is it possible to take advantage of replicas here?
@@ -101,11 +101,12 @@ app:
     passwordSecretName: sql-secrets-init-passwords
     passwordSecretKey: SQL_INIT_PASSWORD_API
   mail:
-    mailer: {{ .Values.services.app.mailer }} # mailgun/log https://laravel.com/docs/8.x/mail
-    mailgundomain: fake.wikibase.dev
-    mailgunsecret: "not needed as log sending is used"
+    mailer: smtp
     fromaddress: noreply-local@fake.wikibase.dev
     fromname: Wikibase-dev
+    smtphost: mailhog
+    smtpport: 1025
+    smtpencryption: null
   recaptcha:
     # TODO take these values from secrets...
     sitekey:

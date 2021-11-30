@@ -1,11 +1,24 @@
 # Local Development Environment
 
+## Requirements
+
+You need the following things installed on your machine:
+* [docker](https://docs.docker.com/engine/install/ubuntu/)
+* [minikube](https://minikube.sigs.k8s.io/docs/start/)
+* [terraform](https://learn.hashicorp.com/tutorials/terraform/install-cli)
+* [helm](https://helm.sh/docs/intro/install/)
+  * diff plugin `helm plugin install https://github.com/databus23/helm-diff`
+  * git plugin `helm plugin install https://github.com/aslafy-z/helm-git`
+* [helmfile](https://github.com/roboll/helmfile#installation)
+* [kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl-linux/)
+
 ## minikube cluster
 
 Install minikube https://minikube.sigs.k8s.io/docs/start/
 
 And start a local k8s cluster for the wbaas project.
 
+**IMPORTANT: make sure you are NOT connect to the WMDE VPN when creating the minikube profile**.  
 Note: 1.21.4 is suggested as this is the currently used production environments.
 
 ```sh
@@ -31,11 +44,18 @@ minikube --profile minikube-wbaas dashboard
 ## terraform
 
 Terraform is required to setup some needed dependencies.
-You should be able to apply the needed state with `terraform apply` in `tf/env/local`.
+
+To initialise terraform and apply the needed state do the following in `tf/env/local`:
+```sh
+terraform init
+terraform apply
+```
 
 Terraform interacts with a k8s cluster, that you need to create beforehand!
 
-For convenience, you can add local secrets to your cluster via a `terraform.tfvars` file in `tf/env/local` (it will get ignored by git). Example for recaptcha keys:
+For convenience, you can add local secrets to your cluster via a `terraform.tfvars` file in `tf/env/local` (it will get ignored by git). Use `terraform apply` to make the changes take effect.
+
+Example for recaptcha keys:
 ```
 recaptcha_v3_dev_site_key = "insert actual secret here"
 recaptcha_v3_dev_secret   = "insert actual secret here"
@@ -43,16 +63,10 @@ recaptcha_v2_dev_site_key = "insert actual secret here"
 recaptcha_v2_dev_secret   = "insert actual secret here"
 ```
 
+Note: you will have to restart the ui pod (delete it with `kubectl delete pod [name of ui pod]` and wait for it to be recreated) for the recaptcha keys to be loaded.
+
 ## helmfile
-> These helm plugins need to be installed:
-> * [diff](https://github.com/databus23/helm-diff) - helmfile needs this to diff resources
-> * [git](https://github.com/aslafy-z/helm-git) - We need this to fetch charts from git
->
-> ```sh
-> helm plugin install https://github.com/databus23/helm-diff
-> helm plugin install https://github.com/aslafy-z/helm-git
-> ```
->
+
 You can see the changes that helmfile will make to your local k8s cluster by running the following command in the `k8s/helmfile` directory
 
 ```sh
@@ -114,7 +128,7 @@ Note: There is more to making things work locally than this and we either need t
 
 ## Mailhog / Local emails
 
-For the local setup, [Mailhog](https://github.com/mailhog/MailHog) is used to capture outbound emails. 
+For the local setup, [Mailhog](https://github.com/mailhog/MailHog) is used to capture outbound emails.
 
 You can view those emails by going to http://mailhog.wbaas.localhost/
 
@@ -172,3 +186,25 @@ index bbfde7c..5668ef0 100644
 ```
 
 Done! Run `helmfile diff` and `helmfile apply`.
+
+## [Optional] setup bash completion
+Here is how to get have tab completion working for common commands
+
+Note: this was only tested on Ubuntu 20.04
+
+```sh
+# minikube
+sudo sh -c 'minikube completion bash > /usr/share/bash-completion/completions/minikube'
+
+# terraform
+terraform -install-autocomplete
+
+# kubectl
+sudo sh -c 'kubectl completion bash > /usr/share/bash-completion/completions/kubectl'
+
+# helm
+sudo sh -c 'helm completion bash > /usr/share/bash-completion/completions/helm'
+
+# helmfile
+sudo wget https://raw.githubusercontent.com/roboll/helmfile/master/autocomplete/helmfile_bash_autocomplete -O /usr/share/bash-completion/completions/helmfile
+```
