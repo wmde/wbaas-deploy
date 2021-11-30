@@ -10,6 +10,10 @@ build:
       context: ./../../ui
     - image: local/skaffold/wbaas/mediawiki
       context: ./../../mediawiki
+    - image: local/skaffold/wbaas/api
+      context: ./../../api
+  local:
+    useDockerCLI: true
 deploy:
   kubeContext: minikube-wbaas
   helm:
@@ -32,9 +36,20 @@ deploy:
           image: local/skaffold/wbaas/mediawiki
         imageStrategy:
           helm: {}
+      - name: api
+        chartPath: ./../../charts/charts/api
+        valuesFiles:
+          - ".tmp.values.api.yaml"
+          - NeverPull.yaml
+        artifactOverrides:
+          image: local/skaffold/wbaas/api
+        imageStrategy:
+          helm: {}
     hooks:
       before:
         - host:
             command: [ "./helmfile-values", "-e", "local", "-r", "ui", "-n" ]
         - host:
             command: [ "./helmfile-values", "-e", "local", "-r", "mediawiki-136", "-n" ]
+        - host:
+            command: [ "./helmfile-values", "-e", "local", "-r", "api", "-n" ]
