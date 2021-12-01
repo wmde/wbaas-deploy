@@ -1,7 +1,10 @@
-.PHONY: minikube-start minikube-delete minikube-dashboard minikube-tunnel
+.PHONY: minikube-start minikube-stop minikube-delete minikube-dashboard minikube-tunnel
 
-minikube-start: 
+minikube-start:
 	minikube --profile minikube-wbaas start --kubernetes-version=1.21.4
+
+minikube-stop:
+	minikube --profile minikube-wbaas stop
 
 minikube-delete:
 	minikube --profile minikube-wbaas delete
