@@ -25,7 +25,7 @@ local-diff:
 	cd ./k8s/helmfile && helmfile --environment local diff --context 10 --skip-deps
 local:
 	cd ./tf/env/local && terraform apply
-	cd ./k8s/helmfile && helmfile --environment local diff --interactive --context 10 --skip-deps
+	cd ./k8s/helmfile && helmfile --environment local --interactive apply --context 10 --skip-deps
 
 # Note: the staging command here actually terraform applies all of production
 .PHONY: staging staging-diff
@@ -34,4 +34,4 @@ staging-diff:
 	cd ./k8s/helmfile && helmfile --environment staging diff --context 10 --skip-deps
 staging:
 	cd ./tf/env/prod && terraform apply
-	cd ./k8s/helmfile && helmfile --environment staging diff --interactive --context 10 --skip-deps
+	cd ./k8s/helmfile && helmfile --environment staging --interactive apply --context 10 --skip-deps
