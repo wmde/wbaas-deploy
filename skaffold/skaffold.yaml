@@ -27,10 +27,10 @@ deploy:
           image: local/skaffold/wbaas/ui
         imageStrategy:
           helm: {}
-      - name: mediawiki-136
+      - name: mediawiki-137-fp
         chartPath: ./../../charts/charts/mediawiki
         valuesFiles:
-          - ".tmp.values.mediawiki-136.yaml"
+          - ".tmp.values.mediawiki-137-fp.yaml"
           - NeverPull.yaml
         artifactOverrides:
           image: local/skaffold/wbaas/mediawiki
@@ -50,6 +50,6 @@ deploy:
         - host:
             command: [ "./helmfile-values", "-e", "local", "-r", "ui", "-n" ]
         - host:
-            command: [ "./helmfile-values", "-e", "local", "-r", "mediawiki-136", "-n" ]
+            command: [ "./helmfile-values", "-e", "local", "-r", "mediawiki-137-fp", "-n" ]
         - host:
             command: [ "./helmfile-values", "-e", "local", "-r", "api", "-n" ]
