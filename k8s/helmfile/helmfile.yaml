@@ -126,21 +126,19 @@ releases:
   values:
   - "env/{{ .Environment.Name }}/ui.values.yaml.gotmpl"
 
-# should be removed by nov 22nd
-- name: mediawiki-135
-  installed: false
-  namespace: default
-  chart: wbstack/mediawiki
-  version: 0.3.0
-  values:
-  - "env/{{ .Environment.Name }}/mediawiki-135.values.yaml.gotmpl"
-
 - name: mediawiki-136
   namespace: default
   chart: wbstack/mediawiki
   version: 0.6.0
   values:
   - "env/{{ .Environment.Name }}/mediawiki-136.values.yaml.gotmpl"
+
+- name: mediawiki-137-fp
+  namespace: default
+  chart: wbstack/mediawiki
+  version: 0.7.0
+  values:
+  - "env/{{ .Environment.Name }}/mediawiki-137-fp.values.yaml.gotmpl"
 
 - name: queryservice-ui
   namespace: default
