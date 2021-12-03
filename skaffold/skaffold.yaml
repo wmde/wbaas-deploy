@@ -12,6 +12,8 @@ build:
       context: ./../../mediawiki
     - image: local/skaffold/wbaas/api
       context: ./../../api
+    - image: local/skaffold/wbaas/queryservice-gateway
+      context: ./../../queryservice-gateway
   local:
     useDockerCLI: true
 deploy:
@@ -45,6 +47,15 @@ deploy:
           image: local/skaffold/wbaas/api
         imageStrategy:
           helm: {}
+      - name: queryservice-gateway
+        chartPath: ./../../charts/charts/queryservice-gateway
+        valuesFiles:
+          - ".tmp.values.queryservice-gateway.yaml"
+          - NeverPull.yaml
+        artifactOverrides:
+          image: local/skaffold/wbaas/queryservice-gateway
+        imageStrategy:
+          helm: {}
     hooks:
       before:
         - host:
@@ -53,3 +64,5 @@ deploy:
             command: [ "./helmfile-values", "-e", "local", "-r", "mediawiki-137-fp", "-n" ]
         - host:
             command: [ "./helmfile-values", "-e", "local", "-r", "api", "-n" ]
+        - host:
+            command: [ "./helmfile-values", "-e", "local", "-r", "queryservice-gateway", "-n" ]
