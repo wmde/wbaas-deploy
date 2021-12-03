@@ -207,4 +207,7 @@ sudo sh -c 'helm completion bash > /usr/share/bash-completion/completions/helm'
 
 # helmfile
 sudo wget https://raw.githubusercontent.com/roboll/helmfile/master/autocomplete/helmfile_bash_autocomplete -O /usr/share/bash-completion/completions/helmfile
+
+# skaffold
+sudo sh -c 'skaffold completion bash > /usr/share/bash-completion/completions/skaffold'
 ```
