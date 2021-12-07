@@ -1,0 +1,18 @@
+on: push
+name: Test
+jobs:
+  skaffold-test:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+
+    - uses: actions/setup-node@v2
+
+    - name: Get the skaffold.yaml schema
+      run: wget -O schema.json https://raw.githubusercontent.com/GoogleContainerTools/skaffold/main/docs/content/en/schemas/v2beta23.json
+
+    - name: Fix the skaffold.yaml schema
+      run: sed -i s/json-schema-org/json-schema.org/ schema.json
+
+    - name: Validate skaffold.yaml
+      run: npx --silent -p 'ajv-cli' ajv validate -s schema.json -d skaffold/skaffold.yaml --strict=false
