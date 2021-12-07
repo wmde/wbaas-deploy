@@ -22,19 +22,19 @@ minikube-tunnel:
 helmfile-deps:
 	cd ./k8s/helmfile && helmfile --environment local fetch
 
-.PHONY: local local-diff
-local-diff:
+.PHONY: diff-local apply-local
+diff-local:
 	cd ./tf/env/local && terraform plan
 	cd ./k8s/helmfile && helmfile --environment local diff --context 10 --skip-deps
-local:
+apply-local:
 	cd ./tf/env/local && terraform apply
 	cd ./k8s/helmfile && helmfile --environment local --interactive apply --context 10 --skip-deps
 
 # Note: the staging command here actually terraform applies all of production
-.PHONY: staging staging-diff
-staging-diff:
+.PHONY: diff-staging apply-staging
+diff-staging:
 	cd ./tf/env/prod && terraform plan
 	cd ./k8s/helmfile && helmfile --environment staging diff --context 10 --skip-deps
-staging:
+apply-staging:
 	cd ./tf/env/prod && terraform apply
 	cd ./k8s/helmfile && helmfile --environment staging --interactive apply --context 10 --skip-deps
