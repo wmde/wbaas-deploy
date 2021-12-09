@@ -38,3 +38,7 @@ diff-staging:
 apply-staging:
 	cd ./tf/env/prod && terraform apply
 	cd ./k8s/helmfile && helmfile --environment staging --interactive apply --context 10 --skip-deps
+
+.PHONY: skaffold-run
+skaffold-run:
+	cd ./skaffold && skaffold run --kube-context minikube-wbaas
