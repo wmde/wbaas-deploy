@@ -112,7 +112,7 @@ releases:
     chart: ./../../charts/wikibase-dev-ingress
     values:
       # TODO use more specific values (what is actually needed?) OR adopt this pattern everywhere
-      - {{ toYaml .Values | nindent 4 }}
+      - {{ toYaml .Values | nindent 8 }}
 
   - name: api
     chart: wbstack/api
