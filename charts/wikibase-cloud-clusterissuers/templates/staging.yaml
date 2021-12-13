@@ -13,24 +13,24 @@ spec:
     privateKeySecretRef:
       name: letsencrypt-staging
     solvers:
-    # The solver defined earlier in the list will be used first according to docs:
-    # https://cert-manager.io/docs/release-notes/release-notes-0.9/#dns-zones-support-for-acme-challenge-solver-selector
-    - http01:
-        ingress:
-          class: nginx
-      selector: {}
-    - dns01:
-        cloudDNS:
-          # The project in which to update the DNS zone
-          project: {{ .Values.gceProject }}
-          # A secretKeyRef to a google cloud json service account
-          serviceAccountSecretRef:
-            key: key.json
-            name: clouddns-dns01-solver-svc-acct # TODO THIS SHOULD BE DIFFERENT FOR PROD/STAGING
-      selector:
-        dnsNames: 
-        {{- range .Values.certificates }}
-          {{- range .dnsNames }}
-            - {{ . | quote }}
+      # The solver defined earlier in the list will be used first according to docs:
+      # https://cert-manager.io/docs/release-notes/release-notes-0.9/#dns-zones-support-for-acme-challenge-solver-selector
+      - http01:
+          ingress:
+            class: nginx
+        selector: {}
+      - dns01:
+          cloudDNS:
+            # The project in which to update the DNS zone
+            project: {{ .Values.gceProject }}
+            # A secretKeyRef to a google cloud json service account
+            serviceAccountSecretRef:
+              key: key.json
+              name: clouddns-dns01-solver-svc-acct # TODO THIS SHOULD BE DIFFERENT FOR PROD/STAGING
+        selector:
+          dnsNames:
+          {{- range .Values.certificates }}
+            {{- range .dnsNames }}
+              - {{ . | quote }}
+            {{- end }}
           {{- end }}
-        {{- end }}

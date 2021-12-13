@@ -1,9 +1,9 @@
 apiVersion: skaffold/v2beta23
 kind: Config
 profiles:
-- name: local
-  activation:
-    - kubeContext: minikube-wbaas
+  - name: local
+    activation:
+      - kubeContext: minikube-wbaas
 build:
   artifacts:
     - image: local/skaffold/wbaas/ui

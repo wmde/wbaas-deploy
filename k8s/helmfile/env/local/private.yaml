@@ -1,4 +1,3 @@
-
 # TODO google cloud related things probably don't matter to local deploys
 gceProject: 'something'
 gcsApiStaticBucket: 'something'
