@@ -1,0 +1,15 @@
+extends: default
+
+rules:
+  brackets:
+    min-spaces-inside: 1
+    max-spaces-inside: 1
+    min-spaces-inside-empty: 0
+    max-spaces-inside-empty: 0
+  braces: disable # template curlies (`{{ someValue }}`) make this rule unhappy
+  line-length:
+    max: 100
+
+# Despite being .yaml files, a lot of what's in templates/ isn't valid YAML
+ignore: |
+  templates/
