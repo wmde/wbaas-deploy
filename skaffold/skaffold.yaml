@@ -4,65 +4,65 @@ profiles:
   - name: local
     activation:
       - kubeContext: minikube-wbaas
-build:
-  artifacts:
-    - image: local/skaffold/wbaas/ui
-      context: ./../../ui
-    - image: local/skaffold/wbaas/mediawiki
-      context: ./../../mediawiki
-    - image: local/skaffold/wbaas/api
-      context: ./../../api
-    - image: local/skaffold/wbaas/queryservice-gateway
-      context: ./../../queryservice-gateway
-  local:
-    useDockerCLI: true
-deploy:
-  kubeContext: minikube-wbaas
-  helm:
-    releases:
-      - name: ui
-        chartPath: ./../../charts/charts/ui
-        valuesFiles:
-          - ".tmp.values.ui.yaml"
-          - NeverPull.yaml
-        artifactOverrides:
-          image: local/skaffold/wbaas/ui
-        imageStrategy:
-          helm: {}
-      - name: mediawiki-137-fp
-        chartPath: ./../../charts/charts/mediawiki
-        valuesFiles:
-          - ".tmp.values.mediawiki-137-fp.yaml"
-          - NeverPull.yaml
-        artifactOverrides:
-          image: local/skaffold/wbaas/mediawiki
-        imageStrategy:
-          helm: {}
-      - name: api
-        chartPath: ./../../charts/charts/api
-        valuesFiles:
-          - ".tmp.values.api.yaml"
-          - NeverPull.yaml
-        artifactOverrides:
-          image: local/skaffold/wbaas/api
-        imageStrategy:
-          helm: {}
-      - name: queryservice-gateway
-        chartPath: ./../../charts/charts/queryservice-gateway
-        valuesFiles:
-          - ".tmp.values.queryservice-gateway.yaml"
-          - NeverPull.yaml
-        artifactOverrides:
-          image: local/skaffold/wbaas/queryservice-gateway
-        imageStrategy:
-          helm: {}
-    hooks:
-      before:
-        - host:
-            command: [ "./helmfile-values", "-e", "local", "-r", "ui", "-n" ]
-        - host:
-            command: [ "./helmfile-values", "-e", "local", "-r", "mediawiki-137-fp", "-n" ]
-        - host:
-            command: [ "./helmfile-values", "-e", "local", "-r", "api", "-n" ]
-        - host:
-            command: [ "./helmfile-values", "-e", "local", "-r", "queryservice-gateway", "-n" ]
+    build:
+      artifacts:
+        - image: local/skaffold/wbaas/ui
+          context: ./../../ui
+        - image: local/skaffold/wbaas/mediawiki
+          context: ./../../mediawiki
+        - image: local/skaffold/wbaas/api
+          context: ./../../api
+        - image: local/skaffold/wbaas/queryservice-gateway
+          context: ./../../queryservice-gateway
+      local:
+        useDockerCLI: true
+    deploy:
+      kubeContext: minikube-wbaas
+      helm:
+        releases:
+          - name: ui
+            chartPath: ./../../charts/charts/ui
+            valuesFiles:
+              - ".tmp.values.ui.yaml"
+              - NeverPull.yaml
+            artifactOverrides:
+              image: local/skaffold/wbaas/ui
+            imageStrategy:
+              helm: {}
+          - name: mediawiki-137-fp
+            chartPath: ./../../charts/charts/mediawiki
+            valuesFiles:
+              - ".tmp.values.mediawiki-137-fp.yaml"
+              - NeverPull.yaml
+            artifactOverrides:
+              image: local/skaffold/wbaas/mediawiki
+            imageStrategy:
+              helm: {}
+          - name: api
+            chartPath: ./../../charts/charts/api
+            valuesFiles:
+              - ".tmp.values.api.yaml"
+              - NeverPull.yaml
+            artifactOverrides:
+              image: local/skaffold/wbaas/api
+            imageStrategy:
+              helm: {}
+          - name: queryservice-gateway
+            chartPath: ./../../charts/charts/queryservice-gateway
+            valuesFiles:
+              - ".tmp.values.queryservice-gateway.yaml"
+              - NeverPull.yaml
+            artifactOverrides:
+              image: local/skaffold/wbaas/queryservice-gateway
+            imageStrategy:
+              helm: {}
+        hooks:
+          before:
+            - host:
+                command: [ "./helmfile-values", "-e", "local", "-r", "ui", "-n" ]
+            - host:
+                command: [ "./helmfile-values", "-e", "local", "-r", "mediawiki-137-fp", "-n" ]
+            - host:
+                command: [ "./helmfile-values", "-e", "local", "-r", "api", "-n" ]
+            - host:
+                command: [ "./helmfile-values", "-e", "local", "-r", "queryservice-gateway", "-n" ]
