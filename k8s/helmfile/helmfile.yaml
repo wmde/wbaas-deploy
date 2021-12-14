@@ -111,8 +111,10 @@ releases:
     namespace: default
     chart: ./../../charts/wikibase-dev-ingress
     values:
-      # TODO use more specific values (what is actually needed?) OR adopt this pattern everywhere
-      - {{ toYaml .Values | nindent 8 }}
+      - ingressNameSuffix: {{ .Values.ingressNameSuffix | toYaml }}
+      - ingressHost: {{ .Values.ingressHost | toYaml }}
+      - forceSSL: {{ .Values.forceSSL | toYaml }}
+      - tls: {{ .Values.tls | toYaml }}
 
   - name: api
     chart: wbstack/api
