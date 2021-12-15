@@ -14,6 +14,18 @@ profiles:
           context: ./../../api
         - image: local/skaffold/wbaas/queryservice-gateway
           context: ./../../queryservice-gateway
+        - image: local/skaffold/wbaas/queryservice-ui
+          context: ./../../queryservice-ui
+        - image: local/skaffold/wbaas/queryservice
+          context: ./../../queryservice
+        - image: local/skaffold/wbaas/queryservice-updater
+          context: ./../../queryservice-updater
+        - image: local/skaffold/wbaas/tool-cradle
+          context: ./../../tool-cradle
+        - image: local/skaffold/wbaas/tool-widar
+          context: ./../../tool-widar
+        - image: local/skaffold/wbaas/tool-quickstatements
+          context: ./../../tool-quickstatements
       local:
         useDockerCLI: true
     deploy:
@@ -56,13 +68,79 @@ profiles:
               image: local/skaffold/wbaas/queryservice-gateway
             imageStrategy:
               helm: {}
-        hooks:
-          before:
-            - host:
-                command: [ "./helmfile-values", "-e", "local", "-r", "ui", "-n" ]
-            - host:
-                command: [ "./helmfile-values", "-e", "local", "-r", "mediawiki-137-fp", "-n" ]
-            - host:
-                command: [ "./helmfile-values", "-e", "local", "-r", "api", "-n" ]
-            - host:
-                command: [ "./helmfile-values", "-e", "local", "-r", "queryservice-gateway", "-n" ]
+          - name: queryservice-ui
+            chartPath: ./../../charts/charts/queryservice-ui
+            valuesFiles:
+              - ".tmp.values.queryservice-ui.yaml"
+              - NeverPull.yaml
+            artifactOverrides:
+              image: local/skaffold/wbaas/queryservice-ui
+            imageStrategy:
+              helm: {}
+          - name: queryservice
+            chartPath: ./../../charts/charts/queryservice
+            valuesFiles:
+              - ".tmp.values.queryservice.yaml"
+              - NeverPull.yaml
+            artifactOverrides:
+              image: local/skaffold/wbaas/queryservice
+            imageStrategy:
+              helm: {}
+          - name: queryservice-updater
+            chartPath: ./../../charts/charts/queryservice-updater
+            valuesFiles:
+              - ".tmp.values.queryservice-updater.yaml"
+              - NeverPull.yaml
+            artifactOverrides:
+              image: local/skaffold/wbaas/queryservice-updater
+            imageStrategy:
+              helm: {}
+          - name: tool-cradle
+            chartPath: ./../../charts/charts/tool-cradle
+            valuesFiles:
+              - ".tmp.values.tool-cradle.yaml"
+              - NeverPull.yaml
+            artifactOverrides:
+              image: local/skaffold/wbaas/tool-cradle
+            imageStrategy:
+              helm: {}
+          - name: tool-widar
+            chartPath: ./../../charts/charts/tool-widar
+            valuesFiles:
+              - ".tmp.values.tool-widar.yaml"
+              - NeverPull.yaml
+            artifactOverrides:
+              image: local/skaffold/wbaas/tool-widar
+            imageStrategy:
+              helm: {}
+          - name: tool-quickstatements
+            chartPath: ./../../charts/charts/tool-quickstatements
+            valuesFiles:
+              - ".tmp.values.tool-quickstatements.yaml"
+              - NeverPull.yaml
+            artifactOverrides:
+              image: local/skaffold/wbaas/tool-quickstatements
+            imageStrategy:
+              helm: {}
+      hooks:
+        before:
+          - host:
+              command: [ "./helmfile-values", "-e", "local", "-r", "ui", "-n" ]
+          - host:
+              command: [ "./helmfile-values", "-e", "local", "-r", "mediawiki-137-fp", "-n" ]
+          - host:
+              command: [ "./helmfile-values", "-e", "local", "-r", "api", "-n" ]
+          - host:
+              command: [ "./helmfile-values", "-e", "local", "-r", "queryservice-gateway", "-n" ]
+          - host:
+              command: [ "./helmfile-values", "-e", "local", "-r", "queryservice-ui", "-n" ]
+          - host:
+              command: [ "./helmfile-values", "-e", "local", "-r", "queryservice", "-n" ]
+          - host:
+              command: [ "./helmfile-values", "-e", "local", "-r", "queryservice-updater", "-n" ]
+          - host:
+              command: [ "./helmfile-values", "-e", "local", "-r", "tool-cradle", "-n" ]
+          - host:
+              command: [ "./helmfile-values", "-e", "local", "-r", "tool-widar", "-n" ]
+          - host:
+              command: [ "./helmfile-values", "-e", "local", "-r", "tool-quickstatements", "-n" ]
