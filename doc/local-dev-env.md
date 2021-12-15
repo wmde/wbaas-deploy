@@ -13,50 +13,68 @@ You need the following things installed on your machine:
 * [kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl-linux/)
 * (optional) [yamllint](https://github.com/adrienverge/yamllint#installation)
 
+## Makefile
+This repo has a [`Makefile`](../Makefile) in the root directory which allows us to use the `make` command to speed up common tasks.   
+Usage: `make <command>`. Example: `make minikube-start`.  
+
+This doc will reference the `make` commands where available. View the [`Makefile`](../Makefile) to see all the available commands and what they do.  
+
 ## minikube cluster
 
-Install minikube https://minikube.sigs.k8s.io/docs/start/
+Install minikube (https://minikube.sigs.k8s.io/docs/start/), and start a local k8s cluster for the wbaas project.
 
-And start a local k8s cluster for the wbaas project.
-
-**IMPORTANT: make sure you are NOT connect to the WMDE VPN when creating the minikube profile**.  
-Note: 1.21.4 is suggested as this is the currently used production environments.
+**IMPORTANT: make sure you are NOT connect to the WMDE VPN when starting the minikube cluster**.
 
 ```sh
-minikube --profile minikube-wbaas start --kubernetes-version=1.21.4
+make minikube-start
 ```
 
-Once created, your kubectl context will automatically switch to `minikube-wbaas`.
-
-If you want to throw the whole cluster away you can delete it:
+Once created, your kubectl context will automatically switch to `minikube-wbaas`. You can verify this by running one of the following commands:
 
 ```sh
-minikube --profile minikube-wbaas delete
+$ kubectl config get-contexts
+CURRENT    NAME              CLUSTER           AUTHINFO          NAMESPACE
+*          minikube-wbaas    minikube-wbaas    minikube-wbaas    default
 ```
 
-### Dashboard
+```sh
+$ kubectl config current-context
+minikube-wbaas
+```
 
-minikube comes with a nice dashboard that you can turn on with a simple command.
+You can stop the cluster with:
+```sh
+make minikube-stop
+```
+
+If you want to throw the whole cluster away, you can delete it with:
+```sh
+make minikube-delete
+```
+
+### minikube dashboard
+
+minikube comes with a nice web dashboard that you can turn on with:
 
 ```sh
-minikube --profile minikube-wbaas dashboard
+make minikube-dashboard
 ```
 
 ## terraform
 
-Terraform is required to setup some needed dependencies.
+Terraform is required to setup some needed dependencies. It interacts with a k8s cluster, that you need to have created beforehand (see the [minikube cluster](#minikube-cluster) section)!
 
-To initialise terraform and apply the needed state do the following in `tf/env/local`:
+To initialise terraform for the local environment, run the following in the `tf/env/local` dir:
 ```sh
 terraform init
-terraform apply
 ```
 
-Terraform interacts with a k8s cluster, that you need to create beforehand!
+For convenience, you can store local secrets for the cluster in `.tfvars` files which will be ignored by git. 
 
-For convenience, you can add local secrets to your cluster via a `terraform.tfvars` file in `tf/env/local` (it will get ignored by git). Use `terraform apply` to make the changes take effect.
+Create a `terraform.tfvars` file in `tf/env/local` and add the recaptcha secrets to it. You can use [test keys][test-keys] for the v2 secrets. For v3 you will have to create your own secrets via the [v3 admin console](https://www.google.com/recaptcha/admin).
 
-Example for recaptcha keys:
+[test-keys]: https://developers.google.com/recaptcha/docs/faq#id-like-to-run-automated-tests-with-recaptcha.-what-should-i-do
+
 ```
 recaptcha_v3_dev_site_key = "insert actual secret here"
 recaptcha_v3_dev_secret   = "insert actual secret here"
@@ -64,7 +82,19 @@ recaptcha_v2_dev_site_key = "insert actual secret here"
 recaptcha_v2_dev_secret   = "insert actual secret here"
 ```
 
-Note: you will have to restart the ui pod (delete it with `kubectl delete pod [name of ui pod]` and wait for it to be recreated) for the recaptcha keys to be loaded.
+To review the changes between what is applied to the infrastructure and the current configuration run:
+
+```sh
+terraform plan
+```
+
+The first time the `terraform plan` command is run the whole configuration will be displayed as none of the configuration will have been applied to the infrastructure before.
+
+Once you have reviewed the output of `terraform plan`, you can apply the changes by running:
+
+```sh
+terraform apply
+```
 
 ## helmfile
 
@@ -134,7 +164,7 @@ For the local setup, [Mailhog](https://github.com/mailhog/MailHog) is used to ca
 You can view those emails by going to http://mailhog.wbaas.localhost/
 
 ## [Optional] setup bash completion
-Here is how to get have tab completion working for common commands
+Here is how to get tab completion working for common commands
 
 Note: this was only tested on Ubuntu 20.04
 
@@ -161,3 +191,9 @@ sudo sh -c 'skaffold completion bash > /usr/share/bash-completion/completions/sk
 ## Tests
 
 Run `make test`. This only includes YAML linting for now.
+
+## FAQ / Troubleshooting
+
+**Why aren't my changes taking effect after a `terraform apply`?**  
+Try restarting the pod(s) that are affected by the changed terraform configuration by deleting
+them and waiting for k8s recreate them (`kubectl delete pod <pod_name>`).
