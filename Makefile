@@ -42,3 +42,7 @@ apply-staging:
 .PHONY: skaffold-run
 skaffold-run:
 	cd ./skaffold && skaffold run --kube-context minikube-wbaas
+
+.PHONY: test
+test:
+	yamllint --no-warnings .
