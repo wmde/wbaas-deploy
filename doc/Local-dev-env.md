@@ -11,6 +11,7 @@ You need the following things installed on your machine:
   * git plugin `helm plugin install https://github.com/aslafy-z/helm-git`
 * [helmfile](https://github.com/roboll/helmfile#installation)
 * [kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl-linux/)
+* (optional) [yamllint](https://github.com/adrienverge/yamllint#installation)
 
 ## minikube cluster
 
@@ -211,3 +212,7 @@ sudo wget https://raw.githubusercontent.com/roboll/helmfile/master/autocomplete/
 # skaffold
 sudo sh -c 'skaffold completion bash > /usr/share/bash-completion/completions/skaffold'
 ```
+
+## Tests
+
+Run `make test`. This only includes YAML linting for now.
