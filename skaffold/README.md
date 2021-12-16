@@ -46,6 +46,12 @@ Currently the following services are hooked up to skaffold:
 - [mediawiki-136](https://github.com/wbstack/mediawiki/)
 - [api](https://github.com/wbstack/api)
 - [queryservice-gateway](https://github.com/wbstack/queryservice-gateway)
+- [queryservice-ui](https://github.com/wbstack/queryservice-ui)
+- [queryservice](https://github.com/wbstack/queryservice)
+- [queryservice-updater](https://github.com/wbstack/queryservice-updater)
+- [tool-cradle](https://github.com/wbstack/cradle)
+- [tool-widar](https://github.com/wbstack/widar)
+- [tool-quickstatements](https://github.com/wbstack/quickstatements)
 
 
 ## Reading
