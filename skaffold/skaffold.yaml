@@ -21,11 +21,11 @@ profiles:
         - image: local/skaffold/wbaas/queryservice-updater
           context: ./../../queryservice-updater
         - image: local/skaffold/wbaas/tool-cradle
-          context: ./../../tool-cradle
+          context: ./../../cradle
         - image: local/skaffold/wbaas/tool-widar
-          context: ./../../tool-widar
+          context: ./../../widar
         - image: local/skaffold/wbaas/tool-quickstatements
-          context: ./../../tool-quickstatements
+          context: ./../../quickstatements
       local:
         useDockerCLI: true
     deploy:
@@ -122,25 +122,25 @@ profiles:
               image: local/skaffold/wbaas/tool-quickstatements
             imageStrategy:
               helm: {}
-      hooks:
-        before:
-          - host:
-              command: [ "./helmfile-values", "-e", "local", "-r", "ui", "-n" ]
-          - host:
-              command: [ "./helmfile-values", "-e", "local", "-r", "mediawiki-137-fp", "-n" ]
-          - host:
-              command: [ "./helmfile-values", "-e", "local", "-r", "api", "-n" ]
-          - host:
-              command: [ "./helmfile-values", "-e", "local", "-r", "queryservice-gateway", "-n" ]
-          - host:
-              command: [ "./helmfile-values", "-e", "local", "-r", "queryservice-ui", "-n" ]
-          - host:
-              command: [ "./helmfile-values", "-e", "local", "-r", "queryservice", "-n" ]
-          - host:
-              command: [ "./helmfile-values", "-e", "local", "-r", "queryservice-updater", "-n" ]
-          - host:
-              command: [ "./helmfile-values", "-e", "local", "-r", "tool-cradle", "-n" ]
-          - host:
-              command: [ "./helmfile-values", "-e", "local", "-r", "tool-widar", "-n" ]
-          - host:
-              command: [ "./helmfile-values", "-e", "local", "-r", "tool-quickstatements", "-n" ]
+        hooks:
+          before:
+            - host:
+                command: [ "./helmfile-values", "-e", "local", "-r", "ui", "-n" ]
+            - host:
+                command: [ "./helmfile-values", "-e", "local", "-r", "mediawiki-137-fp", "-n" ]
+            - host:
+                command: [ "./helmfile-values", "-e", "local", "-r", "api", "-n" ]
+            - host:
+                command: [ "./helmfile-values", "-e", "local", "-r", "queryservice-gateway", "-n" ]
+            - host:
+                command: [ "./helmfile-values", "-e", "local", "-r", "queryservice-ui", "-n" ]
+            - host:
+                command: [ "./helmfile-values", "-e", "local", "-r", "queryservice", "-n" ]
+            - host:
+                command: [ "./helmfile-values", "-e", "local", "-r", "queryservice-updater", "-n" ]
+            - host:
+                command: [ "./helmfile-values", "-e", "local", "-r", "tool-cradle", "-n" ]
+            - host:
+                command: [ "./helmfile-values", "-e", "local", "-r", "tool-widar", "-n" ]
+            - host:
+                command: [ "./helmfile-values", "-e", "local", "-r", "tool-quickstatements", "-n" ]
