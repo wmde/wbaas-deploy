@@ -34,10 +34,10 @@ apply-local:
 .PHONY: diff-staging apply-staging
 diff-staging:
 	cd ./tf/env/prod && terraform plan
-	cd ./k8s/helmfile && helmfile --environment staging diff --context 5 --skip-deps
+	cd ./k8s/helmfile && helmfile --environment staging diff --context 5
 apply-staging:
 	cd ./tf/env/prod && terraform apply
-	cd ./k8s/helmfile && helmfile --environment staging --interactive apply --context 5 --skip-deps
+	cd ./k8s/helmfile && helmfile --environment staging --interactive apply --context 5
 
 .PHONY: skaffold-run
 skaffold-run:
