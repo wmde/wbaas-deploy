@@ -23,7 +23,7 @@ This doc will reference the `make` commands where available. View the [`Makefile
 
 Install minikube (https://minikube.sigs.k8s.io/docs/start/), and start a local k8s cluster for the wbaas project.
 
-**IMPORTANT: make sure you are NOT connect to the WMDE VPN when starting the minikube cluster**.
+**IMPORTANT: make sure you are NOT connected to the WMDE VPN when starting the minikube cluster**.
 
 ```sh
 make minikube-start
