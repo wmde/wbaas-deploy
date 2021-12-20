@@ -1,6 +1,7 @@
 .PHONY: minikube-start minikube-stop minikube-delete minikube-dashboard minikube-tunnel
 
 minikube-start:
+	# version 1.21.4 is currently used in the production environments
 	minikube --profile minikube-wbaas start --kubernetes-version=1.21.4
 
 minikube-stop:
