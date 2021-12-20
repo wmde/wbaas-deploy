@@ -195,5 +195,4 @@ Run `make test`. This only includes YAML linting for now.
 ## FAQ / Troubleshooting
 
 **Why aren't my changes taking effect after a `terraform apply`?**  
-Try restarting the pod(s) that are affected by the changed terraform configuration by deleting
-them and waiting for k8s to recreate them (`kubectl delete pod <pod_name>`).
+Try restarting the pod(s) that are affected by the changed terraform configuration by deleting them and waiting for k8s to recreate them (`kubectl delete pod <pod_name>`).
