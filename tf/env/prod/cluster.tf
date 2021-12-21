@@ -1,10 +1,10 @@
-resource "google_container_cluster" "wbaas-2" {
+resource "wbaas-2_google_container_cluster" "wbaas-2" {
   name = "wbaas-2"
   remove_default_node_pool = true
   initial_node_count       = 1
 }
 
-resource "google_container_node_pool" "medium" {
+resource "wbaas-2_google_container_node_pool" "medium" {
     cluster = "wbaas-2"
     name                = "medium-pool"
     node_count          = 2
@@ -41,7 +41,7 @@ resource "google_container_node_pool" "medium" {
 }
 
 
-resource "google_container_node_pool" "standard" {
+resource "wbaas-2_google_container_node_pool" "standard" {
     cluster = "wbaas-2"
     name                = "standard-pool"
     node_count          = 2
