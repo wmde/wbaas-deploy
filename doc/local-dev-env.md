@@ -138,10 +138,10 @@ You should expect to see the following containers with status `Running` (the con
 - api-scheduler
 - elasticsearch-master
 - mailhog
-- mediawiki-<version>-app-alpha
-- mediawiki-<version>-app-api
-- mediawiki-<version>-app-backend
-- mediawiki-<version>-app-web
+- mediawiki-[version]-app-alpha
+- mediawiki-[version]-app-api
+- mediawiki-[version]-app-backend
+- mediawiki-[version]-app-web
 - platform-nginx
 - queryservice
 - queryservice-gateway
