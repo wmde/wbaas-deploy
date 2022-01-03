@@ -21,7 +21,7 @@ This doc will reference the `make` commands where available. View the [`Makefile
 
 ## minikube cluster
 
-Install minikube (https://minikube.sigs.k8s.io/docs/start/), and start a local kuberenetes (k8s) cluster for the wbaas project.
+Install minikube (https://minikube.sigs.k8s.io/docs/start/), and start a local kubernetes (k8s) cluster for the wbaas project.
 
 **IMPORTANT: make sure you are NOT connected to the WMDE VPN when starting the minikube cluster**.
 
@@ -262,7 +262,7 @@ Error: Failed to render chart: exit status 1: Error: failed to download "wbstack
 Error: plugin "diff" exited with error
 ```
 
-it is likely becuase `make diff-local` uses the `--skip-deps` option when executing `helmfile diff` which skips downloading chart dependecies. To force the fetching of dependencies run `make helmfile-deps` before `make diff-local`. 
+it is likely because `make diff-local` uses the `--skip-deps` option when executing `helmfile diff` which skips downloading chart dependencies. To force the fetching of dependencies run `make helmfile-deps` before `make diff-local`. 
 
 ### **Why can't I access [wbaas.localhost](http://www.wbaas.localhost)?**
 Here are a few things to try:
