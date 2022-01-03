@@ -189,34 +189,9 @@ For the local setup, [Mailhog](https://github.com/mailhog/MailHog) is used to ca
 You can view those emails by going to http://mailhog.wbaas.localhost/
 
 ## Create an account on wbaas.localhost
-In order to create an account you will need to `exec` into an api pod and create an invite code.
+To use the local wbaas instance you have just setup, you will need to create an invitation code via the api which is needed when creating an account. Follow the [instructions](https://github.com/wbstack/api/blob/main/docs/invitation-codes.md) documented in the wbaas/api repo.
 
-Find the name of a pod that starts with `api-app` by running `kubectl get pods`. 
-This example uses `api-app-backend-57d896675b-m2l6c`, replace it with the name of your api pod.
-
-Use `kubectl exec` to get a bash shell in the api pod:
-```
-kubectl exec -it api-app-backend-57d896675b-m2l6c -- bash
-```
-
-Create the invite code with the following command:
-```
-php artisan wbs-invitation:create invite1
-```
-You should see the output `Successfully created invitation: invite1`
-
-You can view all invitation codes created (and not used) with: 
-```
-php artisan wbs-invitation:all
-```
-
-And delete invitation codes with:
-
-```
-php artisan wbs-invitation:delete <code>
-```
-
-You can now go to http://www.wbaas.localhost/create-account (or click the create account link in the login form) and create an account with the invite code you just created. All outbound email is captured by Mailhog (see above) so you can use a made up email address (e.g. `test@example.com`). Verify your email address via the "Account Creation Notificaiton" email captured by Mailhog.
+After creating the invitation code, you can visit http://wbaas.localhost/create-account (or click the create account link in the login form) and create an account. All outbound email is captured by Mailhog ([see above](#mailhog--local-emails)) so you can use a made up email address (e.g. `test@example.com`). Verify your email address via the "Account Creation Notificaiton" email captured by Mailhog.
 
 ## [Optional] setup bash completion
 Here is how to get tab completion working for common commands
