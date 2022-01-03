@@ -98,7 +98,7 @@ terraform apply
 
 ## helmfile
 
-Helmfile is a declaraive spec for deploying helm charts to k8s clusters.
+Helmfile is a declarative spec for deploying helm charts to k8s clusters.
 
 You can see the changes that helmfile will make to your local k8s cluster by running the following command in the `k8s/helmfile` directory:
 
