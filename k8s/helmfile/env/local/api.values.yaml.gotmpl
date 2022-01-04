@@ -121,8 +121,6 @@ app:
     projectId: {{ .Values.gceProject }}
     existingSecret: api-passport-keys
   # TODO remove this or add something equivillant for local
-  gcsPublicStatic:
-    gcsBucket: {{ .Values.gcsApiStaticBucket }}
   stackdriver:
     enabled: false
     loggingEnabled: true
