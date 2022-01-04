@@ -123,8 +123,6 @@ app:
     projectId: {{ .Values.gceProject }}
     serviceAccountSecret: dev-api-serviceaccount
     existingSecret: api-passport-keys
-  gcsPublicStatic:
-    gcsBucket: {{ .Values.gcsApiStaticBucket }}
   stackdriver:
     enabled: false
     loggingEnabled: true

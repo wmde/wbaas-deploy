@@ -1,6 +1,5 @@
 gceProject: wikibase-cloud
 gceServiceAccountSecret: secret-wikibase-dev-api
-gcsApiStaticBucket: wikibase-dev-static
 
 certificates:
   -
