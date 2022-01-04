@@ -44,7 +44,7 @@ resource "google_container_node_pool" "medium" {
 resource "google_container_node_pool" "standard" {
     cluster = "wbaas-2"
     name                = "standard-pool"
-    node_count          = 3
+    node_count          = 2
     node_locations      = [
         "europe-west3-a",
     ]
