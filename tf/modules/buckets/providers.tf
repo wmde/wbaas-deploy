@@ -1,6 +1,11 @@
-provider terraform {
+terraform {
   required_providers {
-    google {
-    }   
+    google = {
+      
+    }
+    kubernetes = {
+      source = "hashicorp/kubernetes"
+      version = "2.5.0"
+    }
   }
 }
