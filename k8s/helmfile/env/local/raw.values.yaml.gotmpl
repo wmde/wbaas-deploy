@@ -1,0 +1,17 @@
+resources:
+  - apiVersion: snapscheduler.backube/v1
+    kind: SnapshotSchedule
+    metadata:
+      name: sql-backups
+      namespace: default
+    spec:
+      claimSelector:
+        matchLabels:
+          "app.kubernetes.io/component": "primary"
+          "app.kubernetes.io/instance": "sql"
+          "app.kubernetes.io/name": "mariadb"
+      retention:
+        expires: 48h
+      schedule: "@daily"
+      snapshotTemplate:
+        # snapshotClassName: # TODO set this for the prod snapshots

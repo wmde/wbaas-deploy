@@ -1,0 +1,15 @@
+repositories:
+  - name: backube
+    url: https://backube.github.io/helm-charts/
+
+environments:
+  staging:
+    kubeContext: gke_wikibase-cloud_europe-west3-a_wbaas-2
+  local:
+    kubeContext: minikube-wbaas
+
+releases:
+  - name: snapscheduler
+    namespace: default
+    chart: backube/snapscheduler
+    version: 2.1.0

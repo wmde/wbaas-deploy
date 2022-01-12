@@ -11,6 +11,8 @@ repositories:
     url: https://helm.elastic.co
   - name: codecentric
     url: https://codecentric.github.io/helm-charts
+  - name: bedag
+    url: https://bedag.github.io/helm-charts/
 
 environments:
   default:
@@ -35,6 +37,7 @@ helmfiles:
   - path: cert-manager.yaml
     values:
       - foo: null
+  - path: snapscheduler.yaml
 
 releases:
   ################################
@@ -188,6 +191,13 @@ releases:
     version: 0.2.2
     values:
       - "env/{{ .Environment.Name }}/tool-quickstatements.values.yaml.gotmpl"
+
+  - name: raw-k8s-resources
+    namespace: default
+    chart: bedag/raw
+    version: 1.1.0
+    values:
+      - "env/{{ .Environment.Name }}/raw.values.yaml.gotmpl"
 
   ################################
   # LOCAL ONLY
