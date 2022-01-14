@@ -4,6 +4,9 @@ auth:
   forcePassword: true
   existingSecret: sql-secrets-passwords
 
+volumePermissions:
+  enabled: true # this doesn't seem to actually do what it promises in minikube :(
+
 primary:
   extraEnvVarsSecret: sql-secrets-init-passwords
   resources:
