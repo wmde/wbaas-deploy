@@ -33,7 +33,7 @@ services:
       toolWidar: 11
 
   sql:
-    storageClass: standard
+    storageClass: csi-hostpath-sc
     storageSize: 1Gi
     api:
       db: apidb
