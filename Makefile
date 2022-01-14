@@ -3,6 +3,8 @@
 minikube-start:
 	# version 1.21.4 is currently used in the production environments
 	minikube --profile minikube-wbaas start --kubernetes-version=1.21.4
+	minikube --profile minikube-wbaas addons enable volumesnapshots
+	minikube --profile minikube-wbaas addons enable csi-hostpath-driver
 
 minikube-stop:
 	minikube --profile minikube-wbaas stop
