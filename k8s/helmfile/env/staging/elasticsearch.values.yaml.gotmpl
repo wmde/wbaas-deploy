@@ -1,5 +1,5 @@
 image: "wikibase/elasticsearch"
-imageTag: "6.5.4-wmde.1"
+imageTag: "6.5.4-wmde.4"
 imagePullPolicy: Always
 
 replicas: 1
@@ -8,7 +8,7 @@ minimumMasterNodes: 1
 # For now we don't have enough nodes to have this set to hard
 antiAffinity: soft
 
-esJavaOpts: "-Xms512m -Xmx512m -Dlog4j2.formatMsgNoLookups=true"
+esJavaOpts: "-Xms512m -Xmx512m"
 
 resources:
   requests:
