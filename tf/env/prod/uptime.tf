@@ -64,6 +64,7 @@ resource "google_monitoring_uptime_check_config" "https-content-uptime-check" {
 
   display_name = each.value.name
   timeout = "60s"
+  selected_regions = []
 
   http_check {
     path = each.value.path
@@ -76,6 +77,7 @@ resource "google_monitoring_uptime_check_config" "https-content-uptime-check" {
     type = "uptime_url"
     labels = {
       host = each.value.host
+      project_id = "wikibase-cloud"
     }
   }
 
