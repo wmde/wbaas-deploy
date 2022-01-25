@@ -118,7 +118,7 @@ releases:
 
   - name: api
     chart: wbstack/api
-    version: 0.16.0
+    version: 0.16.1
     namespace: default
     values:
       - "env/{{ .Environment.Name }}/api.values.yaml.gotmpl"
