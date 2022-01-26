@@ -1,6 +1,6 @@
 terraform {
   backend "gcs" {
-    bucket  = "wikibase-cloud-tf-state-prod"
+    bucket  = "wikibase-cloud-tf-state-staging"
     prefix  = "terraform/state"
   }
 }
