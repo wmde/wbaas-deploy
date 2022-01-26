@@ -1,7 +1,7 @@
-## Production
+## Staging
 
-Production Terraform state is held in a Google Cloud bucket.
-Someone that already has access will need to add you to the `terraformers` variable access list and apply this before you can interact with production via terraform.
+Staging Terraform state is held in a Google Cloud bucket.
+Someone that already has access will need to add you to the `terraformers` variable access list and apply this before you can interact with staging via terraform.
 
 ### Getting started
 
