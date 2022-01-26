@@ -130,14 +130,6 @@ releases:
     values:
       - "env/{{ .Environment.Name }}/ui.values.yaml.gotmpl"
 
-  - name: mediawiki-136
-    namespace: default
-    chart: wbstack/mediawiki
-    version: 0.6.0
-    values:
-      - "env/{{ .Environment.Name }}/mediawiki-136.values.yaml.gotmpl"
-    installed: false # TODO remove by 2022-01-10 for people's local dev env to catch up
-
   - name: mediawiki-137-fp
     namespace: default
     chart: wbstack/mediawiki
