@@ -31,13 +31,13 @@ apply-local:
 	cd ./tf/env/local && terraform apply
 	cd ./k8s/helmfile && helmfile --environment local --interactive apply --context 5 --skip-deps
 
-# Note: the staging command here actually terraform applies all of production
+# Note: the staging command here actually terraform applies all of staging
 .PHONY: diff-staging apply-staging
 diff-staging:
-	cd ./tf/env/prod && terraform plan
+	cd ./tf/env/staging && terraform plan
 	cd ./k8s/helmfile && helmfile --environment staging diff --context 5
 apply-staging:
-	cd ./tf/env/prod && terraform apply
+	cd ./tf/env/staging && terraform apply
 	cd ./k8s/helmfile && helmfile --environment staging --interactive apply --context 5
 
 .PHONY: skaffold-run
