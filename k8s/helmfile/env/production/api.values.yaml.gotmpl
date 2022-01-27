@@ -122,7 +122,8 @@ app:
     badgehide: true
   gce:
     projectId: {{ .Values.gceProject }}
-    serviceAccountSecret: production-api-serviceaccount
+    # TODO: This is evil and should be refactored because this is not dev
+    serviceAccountSecret: dev-api-serviceaccount
     existingSecret: api-passport-keys
   stackdriver:
     enabled: false
