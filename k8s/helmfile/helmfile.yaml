@@ -31,6 +31,7 @@ environments:
       - ./env/local/base.yaml
       - ./env/local/private.yaml
 
+# TODO: does this need increasing?
 helmDefaults:
   timeout: 1200
 
