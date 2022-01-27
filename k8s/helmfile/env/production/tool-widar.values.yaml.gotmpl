@@ -1,0 +1,28 @@
+replicaCount: 1
+
+platform:
+  mediawikiBackendHost: mediawiki-137-fp-app-backend.default.svc.cluster.local
+php:
+  sessionSaveHandler: redis
+  sessionSavePath:
+  sessionSaveRedisHost: {{ .Values.services.redis.writeHost }}
+  sessionSaveRedisPort: {{ .Values.services.redis.port }}
+  sessionSaveRedisDatabase: {{ .Values.services.redis.databases.toolWidar }}
+  sessionSaveRedisAuth:
+  sessionSaveRedisAuthSecretName: redis-password
+  sessionSaveRedisAuthSecretKey: password
+  sessionSaveRedisPrefix: "session_widar_"
+
+image:
+  repository: ghcr.io/wbstack/widar
+  # TODO switch back to release once made that includes https://github.com/wbstack/widar/commit/6ebdc585b54191f04ea7c60186839a7dae211869
+  tag: "main"
+#  tag: "1.2.2"
+  pullPolicy: Always
+resources:
+  requests:
+    cpu: 1m
+    memory: 18Mi
+  limits:
+    cpu: 30m
+    memory: 50Mi

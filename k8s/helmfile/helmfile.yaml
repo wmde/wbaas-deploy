@@ -15,6 +15,11 @@ repositories:
 environments:
   default:
     kubeContext: INVALID-ENVIRONMENT
+  production:
+    kubeContext: gke_wikibase-cloud_europe-west3-a_wbaas-3
+    values:
+      - ./env/production/base.yaml
+      - ./env/production/private.yaml
   staging:
     kubeContext: gke_wikibase-cloud_europe-west3-a_wbaas-2
     values:
@@ -26,6 +31,7 @@ environments:
       - ./env/local/base.yaml
       - ./env/local/private.yaml
 
+# TODO: does this need increasing?
 helmDefaults:
   timeout: 1200
 

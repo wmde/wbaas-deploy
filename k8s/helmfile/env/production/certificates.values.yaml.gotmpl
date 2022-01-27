@@ -1,0 +1,9 @@
+certificates:
+  -
+    name: wikibase-production-tls
+    commonName: wikibase.cloud
+    dnsNames:
+      - '*.wikibase.cloud'
+      - 'wikibase.cloud'
+    secretName: wikibase-production-tls
+    issuerRef: letsencrypt-prod

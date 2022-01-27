@@ -3,6 +3,10 @@ repositories:
     url: https://charts.jetstack.io
 
 environments:
+  production:
+    kubeContext: gke_wikibase-cloud_europe-west3-a_wbaas-3
+    values:
+      - ./env/production/private.yaml
   staging:
     kubeContext: gke_wikibase-cloud_europe-west3-a_wbaas-2
     values:
