@@ -15,6 +15,11 @@ repositories:
 environments:
   default:
     kubeContext: INVALID-ENVIRONMENT
+  production:
+    kubeContext: gke_wikibase-cloud_europe-west3-a_wbaas-3
+    values:
+      - ./env/production/base.yaml
+      - ./env/production/private.yaml
   staging:
     kubeContext: gke_wikibase-cloud_europe-west3-a_wbaas-2
     values:
