@@ -1,0 +1,7 @@
+ip: 34.141.76.221
+ingressHost: "*.wikibase.cloud"
+tls: true
+forceSSL: true
+wbstack:
+  subdomainSuffix: '.wikibase.cloud'
+  uiurl: https://wikibase.cloud

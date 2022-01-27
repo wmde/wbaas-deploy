@@ -1,0 +1,26 @@
+resources:
+  requests:
+    cpu: 1m
+    memory: 6Mi
+  limits:
+    cpu: 10m
+    memory: 20Mi
+ingress:
+  enabled: true
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    nginx.ingress.kubernetes.io/use-regex: "true"
+    nginx.ingress.kubernetes.io/from-to-www-redirect: "true"
+  hosts:
+  - host: {{ .Values.uiHostName }}
+    paths:
+    - /*
+  tls:
+  - hosts:
+    - {{ .Values.uiHostName }}
+    secretName: {{ .Values.tlsSecret }}
+ui:
+  apiUrl: {{ .Values.services.app.url }}
+  subdomainSuffix: {{ .Values.wbstack.subdomainSuffix }}
+  recaptchaSitekeySecretName: {{ .Values.external.recaptcha3.secretName }}
+  recaptchaSitekeySecretKey: site_key
