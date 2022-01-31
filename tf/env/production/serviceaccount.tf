@@ -1,3 +1,8 @@
+resource "google_project_iam_member" "certman-dns-cloud-solver" {
+  role    = "roles/dns.admin"
+  member  = "serviceAccount:${google_service_account.certman-dns-cloud-solver.email}"
+}
+
 resource "google_service_account" "certman-dns-cloud-solver" {
     account_id   = "certman-dns-cloud-solver"
     description  = "change dns settings for certman"
