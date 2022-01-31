@@ -46,3 +46,14 @@ resource "google_dns_record_set" "cloud-wildcard-A" {
     ttl          = 300
     type         = "A"
 }
+
+resource "google_dns_record_set" "cloud-MailGun-record" {
+    for_each = {
+        for index, record in mailgun_domain.default.sending_records:
+        index => record
+    }
+    name = "${each.value.name}."
+    managed_zone = google_dns_managed_zone.cloud.name
+    type = each.value.record_type
+    rrdatas = [ replace("\"${each.value.value}\"", "/^\"eu.mailgun.org\"$/", "eu.mailgun.org." ) ]
+}
