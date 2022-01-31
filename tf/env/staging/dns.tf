@@ -57,6 +57,17 @@ resource "google_dns_record_set" "dev-A" {
     type         = "A"
 }
 
+resource "google_dns_record_set" "dev-wildcard-A" {
+    managed_zone = google_dns_managed_zone.dev.name
+    name         = "*.wikibase.dev." # TODO: Make this a variable.
+    rrdatas      = [
+        google_compute_address.default.address,
+    ]
+    ttl          = 300
+    type         = "A"
+}
+
+
 resource "google_dns_record_set" "dev-MailGun-record" {
     for_each = {
         for index, record in mailgun_domain.default.sending_records:
