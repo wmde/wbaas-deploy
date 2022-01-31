@@ -1,6 +1,6 @@
 resource "google_dns_managed_zone" "cloud" {
     description   = "Zone for wikibase.cloud"
-    dns_name      = "wikibase.cloud."
+    dns_name      = "wikibase.cloud." # TODO: Make this a variable.
     name          = "wikibase-cloud-zone"
     visibility    = "public"
 }
@@ -30,6 +30,16 @@ resource "google_dns_record_set" "cloud-SOA" {
 resource "google_dns_record_set" "cloud-A" {
     managed_zone = google_dns_managed_zone.cloud.name
     name         = google_dns_managed_zone.cloud.dns_name
+    rrdatas      = [
+        google_compute_address.default.address,
+    ]
+    ttl          = 300
+    type         = "A"
+}
+
+resource "google_dns_record_set" "cloud-wildcard-A" {
+    managed_zone = google_dns_managed_zone.cloud.name
+    name         = "*.wikibase.cloud." # TODO: Make this a variable.
     rrdatas      = [
         google_compute_address.default.address,
     ]
