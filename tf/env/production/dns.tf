@@ -26,3 +26,13 @@ resource "google_dns_record_set" "cloud-SOA" {
     ttl          = 21600
     type         = "SOA"
 }
+
+resource "google_dns_record_set" "cloud-A" {
+    managed_zone = google_dns_managed_zone.cloud.name
+    name         = google_dns_managed_zone.cloud.dns_name
+    rrdatas      = [
+        google_compute_address.default.address,
+    ]
+    ttl          = 300
+    type         = "A"
+}
