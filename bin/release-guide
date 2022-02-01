@@ -1,0 +1,71 @@
+#!/usr/bin/env bash
+
+# note: this script actually does not execute any commands, it just aids as an interactive checklist.
+# see https://blog.danslimmon.com/2019/07/15/do-nothing-scripting-the-key-to-gradual-automation/
+
+###########################
+
+STEP=1
+
+_do() {
+  echo -n "$STEP. "
+  STEP=$(($STEP + 1))
+
+  for string in "$@"; do 
+    echo "$string"
+  done
+  
+  read
+}
+
+_section() {
+  line="## $1"
+  
+  echo $line
+  for i in $(seq 1 ${#line}) ; do
+    echo -n '-'
+    true
+  done
+  echo
+}
+
+###################################
+
+# To Release...
+# 
+# In the code Repo:
+#  - Pull the latest code of the component
+#  - Write the CHANGELOG for the next version
+#  - Select the version number, adding it to the changelog
+#  - Push the CHANGELOG commit to main
+#  - Tag the CHANGELOG commit with the version number
+#  - Push the tag
+# 
+# In the charts repo:
+#  - Pull the latest charts code
+#  - Bump the image version used in the chart values file
+#  - Bump the version of the chart
+#  - Write the change log
+#  - Make a commit
+#  - Open a PR
+#  - Wait for CI to be green and get it merged
+
+echo "# WBaaS releasing guide"
+echo
+
+_section "A. In the code Repo:"
+_do "Pull the latest code of the component" "> git pull"
+_do "Write the CHANGELOG for the next version"
+_do "Select the version number, adding it to the changelog"
+_do "Push the CHANGELOG commit to main" "> git push"
+_do "Tag the CHANGELOG commit with the version number" "> git tag <tag_name>"
+_do "Push the tag" "> git push origin <tag_name>"
+
+_section "B. In the charts repo:"
+_do "Pull the latest charts code" "> git pull"
+_do "Bump the image version used in the chart values file"
+_do "Bump the version of the chart"
+_do "Write the change log"
+_do "Make a commit"
+_do "Open a PR"
+_do "Wait for CI to be green and get it merged"
