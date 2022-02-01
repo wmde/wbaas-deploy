@@ -66,7 +66,7 @@ ingress:
   tls:
   - hosts:
     - wikibase.cloud ## todo should be injected
-    secretName: wikibase.cloud-tls
+    secretName: wikibase-production-tls
 
 wbstack:
   subdomainSuffix: {{ .Values.wbstack.subdomainSuffix }}
