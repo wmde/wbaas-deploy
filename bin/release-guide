@@ -7,6 +7,7 @@
 
 STEP=1
 
+# prints each argument as its own line
 _do() {
   echo -n "$STEP. "
   STEP=$(($STEP + 1))
@@ -18,8 +19,9 @@ _do() {
   read
 }
 
+# prints arguments as a "section headline"
 _section() {
-  line="## $1"
+  line="## $*"
   
   echo $line
   for i in $(seq 1 ${#line}) ; do
