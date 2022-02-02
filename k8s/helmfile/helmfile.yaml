@@ -183,7 +183,7 @@ releases:
   - name: tool-quickstatements
     namespace: default
     chart: wbstack/tool-quickstatements
-    version: 0.2.2
+    version: 0.2.3
     values:
       - "env/{{ .Environment.Name }}/tool-quickstatements.values.yaml.gotmpl"
 
