@@ -13,12 +13,6 @@ php:
   sessionSaveRedisAuthSecretKey: password
   sessionSaveRedisPrefix: "session_widar_"
 
-image:
-  repository: ghcr.io/wbstack/widar
-  # TODO switch back to release once made that includes https://github.com/wbstack/widar/commit/6ebdc585b54191f04ea7c60186839a7dae211869
-  tag: "main"
-#  tag: "1.2.2"
-  pullPolicy: Always
 resources:
   requests:
     cpu: 1m
