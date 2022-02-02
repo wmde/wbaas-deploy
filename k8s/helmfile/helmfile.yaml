@@ -177,7 +177,7 @@ releases:
   - name: tool-widar
     namespace: default
     chart: wbstack/tool-widar
-    version: '{{ if eq .Environment.Name "production" }}0.1.2{{ else }}0.2.0{{ end }}'
+    version: 0.2.0
     values:
       - "env/{{ .Environment.Name }}/tool-widar.values.yaml.gotmpl"
   - name: tool-quickstatements
