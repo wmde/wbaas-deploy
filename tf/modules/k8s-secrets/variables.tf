@@ -1,3 +1,15 @@
+variable "smtp_username" {
+  type = string
+  description = "username for SMTP server"
+  sensitive = false
+}
+
+variable "smtp_password" {
+  type = string
+  description = "password for SMTP server"
+  sensitive = true
+}
+
 variable "domain_mailgun_key" {
   type = string
   description = "User provided domain key for API"
