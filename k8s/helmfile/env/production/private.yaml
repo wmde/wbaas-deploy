@@ -46,6 +46,6 @@ external:
   letsencrypt:
     email: thomas.arrow_ext@wikimedia.de
   recaptcha2:
-    secretName: recaptcha-v2-staging-secrets
+    secretName: recaptcha-v2-secrets
   recaptcha3:
-    secretName: recaptcha-v3-staging-secrets
+    secretName: recaptcha-v3-secrets
