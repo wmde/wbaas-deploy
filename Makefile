@@ -31,6 +31,11 @@ apply-local:
 	cd ./tf/env/local && terraform apply
 	cd ./k8s/helmfile && helmfile --environment local --interactive apply --context 5 --skip-deps
 
+
+.PHONY: diff apply
+diff: diff-staging diff-production
+apply: apply-staging apply-production
+
 .PHONY: diff-staging apply-staging
 diff-staging:
 	cd ./tf/env/staging && terraform plan
