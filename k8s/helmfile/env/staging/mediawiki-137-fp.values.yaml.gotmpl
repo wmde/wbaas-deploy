@@ -22,15 +22,13 @@ mw:
   mail:
     domain: "wikibase.dev"
   mailgun:
-    enabled: false
-  smtp:
     enabled: true
-    host: smtp.eu.mailgun.org
-    port: 587
-    smtpUserSecretName: smtp-credentials
-    smtpUserSecretKey: username
-    smtpPasswordSecretName: smtp-credentials
-    smtpPasswordSecretKey: password
+    apikey:
+    apikeySecretName: "mailgun-api-key"
+    apikeySecretKey: "key"
+    endpoint: "https://api.eu.mailgun.net"
+  smtp:
+    enabled: false
   recaptcha:
     sitekeySecretName: {{ .Values.external.recaptcha2.secretName }}
     sitekeySecretKey: site_key

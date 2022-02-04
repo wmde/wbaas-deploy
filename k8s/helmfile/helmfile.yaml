@@ -139,7 +139,7 @@ releases:
   - name: mediawiki-137-fp
     namespace: default
     chart: wbstack/mediawiki
-    version: 0.10.0
+    version: 0.9.0
     values:
       - "env/{{ .Environment.Name }}/mediawiki-137-fp.values.yaml.gotmpl"
 
