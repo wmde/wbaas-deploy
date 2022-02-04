@@ -23,8 +23,6 @@ minikube-tunnel:
 helmfile-deps:
 	cd ./k8s/helmfile && helmfile --environment local fetch
 
-
-
 .PHONY: diff-local apply-local
 diff-local:
 	cd ./tf/env/local && terraform plan
