@@ -72,15 +72,3 @@ variable "recaptcha_v2_staging_secret" {
   default = "" # apparently this doesn't mean default is empty string but rather default is not defined. This means it won't prompt the user
   # but also won't override the value that is in the state
 }
-
-variable "smtp_username" {
-  type = string
-  description = "username for SMTP server"
-  sensitive = false
-}
-
-variable "smtp_password" {
-  type = string
-  description = "password for SMTP server"
-  sensitive = true
-}

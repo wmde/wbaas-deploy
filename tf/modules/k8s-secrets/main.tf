@@ -9,18 +9,6 @@ resource "kubernetes_secret" "mailgun-api-key" {
   }
 }
 
-resource "kubernetes_secret" "smtp-credentials" {
-  metadata {
-    name = "smtp-credentials"
-    namespace = "default"
-  }
-
-  data = {
-    "username" = var.smtp_username
-    "password" = var.smtp_password
-  }
-}
-
 # Deprecated per https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/google_service_account_key#example-usage-save-key-in-kubernetes-secret---deprecated
 # but will do for now...
 resource "kubernetes_secret" "dev-api-serviceaccount" {
