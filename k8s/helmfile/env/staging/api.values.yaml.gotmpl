@@ -122,7 +122,7 @@ app:
     badgehide: true
   gce:
     projectId: {{ .Values.gceProject }}
-    serviceAccountSecret: dev-api-serviceaccount
+    serviceAccountSecret: api-serviceaccount
     existingSecret: api-passport-keys
   stackdriver:
     enabled: false

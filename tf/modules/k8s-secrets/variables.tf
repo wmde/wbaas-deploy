@@ -49,20 +49,20 @@ variable "redis_password" {
 
 variable "recaptcha_v3_site_key" {
   type = string
-  description = "recaptcha_v3_site_key for staging cluster"
+  description = "recaptcha_v3_site_key for the environment"
 }
 variable "recaptcha_v3_secret" {
   type = string
-  description = "recaptcha_v3_secret for staging cluster"
+  description = "recaptcha_v3_secret for the environment"
   sensitive = true
 }
 variable "recaptcha_v2_site_key" {
   type = string
-  description = "recaptcha_v2_site_key for staging cluster"
+  description = "recaptcha_v2_site_key for the environment"
 }
 variable "recaptcha_v2_secret" {
   type = string
-  description = "recaptcha_v2_secret for staging cluster"
+  description = "recaptcha_v2_secret for the environment"
   sensitive = true
 }
 

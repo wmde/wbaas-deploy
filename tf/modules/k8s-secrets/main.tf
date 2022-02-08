@@ -22,6 +22,17 @@ resource "kubernetes_secret" "dev-api-serviceaccount" {
 
 # Deprecated per https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/google_service_account_key#example-usage-save-key-in-kubernetes-secret---deprecated
 # but will do for now...
+resource "kubernetes_secret" "api-serviceaccount" {
+  metadata {
+    name = "api-serviceaccount"
+  }
+  data = {
+    "key.json" = base64decode(var.google_service_account_key_api)
+  }
+}
+
+# Deprecated per https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/google_service_account_key#example-usage-save-key-in-kubernetes-secret---deprecated
+# but will do for now...
 resource "kubernetes_secret" "clouddns-dns01-solver-svc-acct" {
   metadata {
     name = "clouddns-dns01-solver-svc-acct"
@@ -93,6 +104,30 @@ resource "kubernetes_secret" "recaptcha-v2-staging-secrets" {
   metadata {
     name = "recaptcha-v2-staging-secrets"
     # default as staging
+    namespace = "default"
+  }
+
+  data = {
+    "site_key" = var.recaptcha_v2_site_key,
+    "secret_key" = var.recaptcha_v2_secret
+  }
+}
+
+resource "kubernetes_secret" "recaptcha-v3-secrets" {
+  metadata {
+    name = "recaptcha-v3-secrets"
+    namespace = "default"
+  }
+
+  data = {
+    "site_key" = var.recaptcha_v3_site_key,
+    "secret_key" = var.recaptcha_v3_secret
+  }
+}
+
+resource "kubernetes_secret" "recaptcha-v2-secrets" {
+  metadata {
+    name = "recaptcha-v2-secrets"
     namespace = "default"
   }
 
