@@ -20,4 +20,3 @@ module "wbaas2-k8s-secrets" {
   api_app_key = random_password.api-app-key.result
   api_app_jwt_secret = random_password.api-app-jwt-secret.result
 }
-
