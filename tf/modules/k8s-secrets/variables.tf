@@ -6,6 +6,17 @@ variable "domain_mailgun_key" {
   # but also won't override the value that is in the state
 }
 
+variable "smtp_username" {
+  type = string
+  description = "Username for SMTP server"
+}
+
+variable "smtp_password" {
+  type = string
+  description = "Password for SMTP server"
+  sensitive = true
+}
+
 variable "google_service_account_key_api" {
   type = string
   description = "google service account key for use in the api application"

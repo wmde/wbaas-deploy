@@ -4,6 +4,8 @@ module "wbaas-k8s-secrets" {
     kubernetes = kubernetes.wbaas-3
   }
   domain_mailgun_key = var.domain_mailgun_key
+  smtp_username = mailgun_domain.default.smtp_login
+  smtp_password = mailgun_domain.default.smtp_password
   google_service_account_key_api = google_service_account_key.api.private_key
   google_service_account_key_dns = google_service_account_key.certman-dns-cloud-solver.private_key
   sql_password_root = random_password.sql-passwords["production-root"].result
