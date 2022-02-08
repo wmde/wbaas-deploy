@@ -15,13 +15,13 @@ resource "google_service_account_key" "certman-dns01-solver" {
     service_account_id = google_service_account.certman-dns01-solver.name
 }
 
-resource "google_service_account" "dev-api" {
-    account_id   = "wikibase-dev-api"
+resource "google_service_account" "api" {
+    account_id   = "wikibase-api"
     disabled     = false
     display_name = "Service Account"
 }
 
 # TODO future regular rotation https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/google_service_account_key#example-usage-creating-and-regularly-rotating-a-key
-resource "google_service_account_key" "dev-api" {
-    service_account_id = google_service_account.dev-api.name
+resource "google_service_account_key" "api" {
+    service_account_id = google_service_account.api.name
 }

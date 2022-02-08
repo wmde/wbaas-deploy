@@ -24,7 +24,7 @@ resource "google_dns_managed_zone" "dev" {
     }
 }
 
-resource "google_dns_record_set" "dev-NS" {
+resource "google_dns_record_set" "NS" {
     managed_zone = google_dns_managed_zone.dev.name
     name         = google_dns_managed_zone.dev.dns_name
     rrdatas      = [
@@ -37,7 +37,7 @@ resource "google_dns_record_set" "dev-NS" {
     type         = "NS"
 }
 
-resource "google_dns_record_set" "dev-SOA" {
+resource "google_dns_record_set" "SOA" {
     managed_zone = google_dns_managed_zone.dev.name
     name         = google_dns_managed_zone.dev.dns_name
     rrdatas      = [
@@ -47,7 +47,7 @@ resource "google_dns_record_set" "dev-SOA" {
     type         = "SOA"
 }
 
-resource "google_dns_record_set" "dev-A" {
+resource "google_dns_record_set" "A" {
     managed_zone = google_dns_managed_zone.dev.name
     name         = google_dns_managed_zone.dev.dns_name
     rrdatas      = [
@@ -57,7 +57,7 @@ resource "google_dns_record_set" "dev-A" {
     type         = "A"
 }
 
-resource "google_dns_record_set" "dev-wildcard-A" {
+resource "google_dns_record_set" "wildcard-A" {
     managed_zone = google_dns_managed_zone.dev.name
     name         = "*.wikibase.dev." # TODO: Make this a variable.
     rrdatas      = [
@@ -68,7 +68,7 @@ resource "google_dns_record_set" "dev-wildcard-A" {
 }
 
 
-resource "google_dns_record_set" "dev-MailGun-record" {
+resource "google_dns_record_set" "MailGun-record" {
     for_each = {
         for index, record in mailgun_domain.default.sending_records:
         index => record

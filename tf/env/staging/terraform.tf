@@ -1,12 +1,12 @@
 terraform {
   backend "gcs" {
-    bucket  = "wikibase-cloud-tf-state-staging"
+    bucket  = "wikibase-cloud-tf-state"
     prefix  = "terraform/state"
   }
 }
 
-resource "google_storage_bucket" "tf-state-staging" {
-  name          = "wikibase-cloud-tf-state-staging"
+resource "google_storage_bucket" "tf-state" {
+  name          = "wikibase-cloud-tf-state"
   location      = "EU"
   force_destroy = false
   uniform_bucket_level_access = true
@@ -16,9 +16,9 @@ resource "google_storage_bucket" "tf-state-staging" {
 }
 
 # Give everyone access to the state bucket
-resource "google_storage_bucket_iam_member" "tf-state-staging-iam-member" {
+resource "google_storage_bucket_iam_member" "tf-state-iam-member" {
   for_each = var.terraformers
-  bucket = google_storage_bucket.tf-state-staging.name
+  bucket = google_storage_bucket.tf-state.name
   role = "roles/storage.objectAdmin"
   member = "user:${each.value}"
 }
