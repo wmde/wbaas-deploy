@@ -11,9 +11,9 @@ resource "kubernetes_secret" "mailgun-api-key" {
 
 # Deprecated per https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/google_service_account_key#example-usage-save-key-in-kubernetes-secret---deprecated
 # but will do for now...
-resource "kubernetes_secret" "dev-api-serviceaccount" {
+resource "kubernetes_secret" "api-serviceaccount" {
   metadata {
-    name = "dev-api-serviceaccount"
+    name = "api-serviceaccount"
   }
   data = {
     "key.json" = base64decode(var.google_service_account_key_api)
@@ -87,9 +87,9 @@ resource "kubernetes_secret" "redis-password" {
   
 }
 
-resource "kubernetes_secret" "recaptcha-v3-staging-secrets" {
+resource "kubernetes_secret" "recaptcha-v3-secrets" {
   metadata {
-    name = "recaptcha-v3-staging-secrets"
+    name = "recaptcha-v3-secrets"
     # default as staging
     namespace = "default"
   }
@@ -100,9 +100,9 @@ resource "kubernetes_secret" "recaptcha-v3-staging-secrets" {
   }
 }
 
-resource "kubernetes_secret" "recaptcha-v2-staging-secrets" {
+resource "kubernetes_secret" "recaptcha-v2-secrets" {
   metadata {
-    name = "recaptcha-v2-staging-secrets"
+    name = "recaptcha-v2-secrets"
     # default as staging
     namespace = "default"
   }
