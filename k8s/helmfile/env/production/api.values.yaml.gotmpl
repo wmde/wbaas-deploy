@@ -107,13 +107,14 @@ app:
     passwordSecretKey: SQL_INIT_PASSWORD_API
   mail:
     mailer: {{ .Values.services.app.mailer }} # mailgun/log https://laravel.com/docs/8.x/mail
-    mailgundomain: wikibase.cloud
-    mailgunsecret:
-    mailgunSecretName: mailgun-api-key
-    mailgunSecretKey: key
     fromaddress: noreply@wikibase.cloud
     fromname: Wikibase Cloud
-    mailgunendpoint: api.eu.mailgun.net
+    smtpUserSecretName: smtp-credentials
+    smtpUserSecretKey: username
+    smtpPasswordSecretName: smtp-credentials
+    smtpPasswordSecretKey: password
+    smtphost: smtp.eu.mailgun.org
+    smtpport: 587
   recaptcha:
     sitekeySecretName: {{ .Values.external.recaptcha3.secretName }}
     sitekeySecretKey: site_key
