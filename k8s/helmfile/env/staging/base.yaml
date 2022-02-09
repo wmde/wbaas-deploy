@@ -5,3 +5,4 @@ forceSSL: true
 wbstack:
   subdomainSuffix: '.wikibase.dev'
   uiurl: https://wikibase.dev
+  cnameRecord: 'something.wikibase.dev'
