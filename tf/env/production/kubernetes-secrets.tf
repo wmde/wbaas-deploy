@@ -11,10 +11,10 @@ module "wbaas-k8s-secrets" {
   sql_password_api = random_password.sql-passwords["production-api"].result
   sql_password_mediawiki_db_manager = random_password.sql-passwords["production-mediawiki-db-manager"].result
   redis_password = random_password.redis-password.result
-  recaptcha_v3_site_key = var.recaptcha_v3_production_site_key
-  recaptcha_v3_secret = var.recaptcha_v3_production_secret
-  recaptcha_v2_site_key = var.recaptcha_v2_production_site_key
-  recaptcha_v2_secret = var.recaptcha_v2_production_secret
+  recaptcha_v3_site_key = var.recaptcha_v3_site_key
+  recaptcha_v3_secret = var.recaptcha_v3_secret
+  recaptcha_v2_site_key = var.recaptcha_v2_site_key
+  recaptcha_v2_secret = var.recaptcha_v2_secret
   api_passport_public_key = tls_private_key.api-passport.public_key_pem
   api_passport_private_key = tls_private_key.api-passport.private_key_pem
   api_app_key = random_password.api-app-key.result
