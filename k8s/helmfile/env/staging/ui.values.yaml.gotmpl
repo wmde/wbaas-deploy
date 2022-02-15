@@ -22,6 +22,5 @@ ingress:
 ui:
   apiUrl: {{ .Values.services.app.url }}
   subdomainSuffix: {{ .Values.wbstack.subdomainSuffix }}
-  cnameRecord: "sites-1.dyna.wikibase.dev"
   recaptchaSitekeySecretName: {{ .Values.external.recaptcha3.secretName }}
   recaptchaSitekeySecretKey: site_key
