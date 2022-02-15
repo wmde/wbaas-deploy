@@ -15,7 +15,6 @@ variable "terraformers" {
 
 locals {
   staging_cluster_name = "wbaas-2"
-  dynamic_dns_host = "sites-1.dyna.wikibase.dev."
 }
 
 variable "mailgun_api_key" {

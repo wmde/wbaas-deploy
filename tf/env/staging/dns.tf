@@ -80,7 +80,7 @@ resource "google_dns_record_set" "dev-MailGun-record" {
 
 resource "google_dns_record_set" "dev-dyna-A" {
     managed_zone = google_dns_managed_zone.dev.name
-    name         = local.dynamic_dns_host
+    name         = module.wbaas-config.cname_record
     rrdatas      = [
         google_compute_address.default.address,
     ]
