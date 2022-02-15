@@ -5,5 +5,4 @@ forceSSL: false
 tls: false
 wbstack:
   subdomainSuffix: ".wbaas.localhost"
-  cnameRecord: 'something.wikibase.cloud'
   uiurl: http://wbaas.localhost

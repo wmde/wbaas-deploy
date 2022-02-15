@@ -4,5 +4,4 @@ tls: true
 forceSSL: true
 wbstack:
   subdomainSuffix: '.wikibase.cloud'
-  cnameRecord: 'something.wikibase.cloud'
   uiurl: https://wikibase.cloud
