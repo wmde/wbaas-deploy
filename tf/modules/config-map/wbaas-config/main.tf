@@ -10,10 +10,10 @@ terraform {
 
 variable "cname_record" {
   type = string
-  description = "CNAME_RECORD used for ui hint"
+  description = "CNAME_RECORD to be used for custom domains"
 }
 
-resource "kubernetes_config_map" "wbaas-config" {
+resource "kubernetes_config_map" "wbaas" {
   metadata {
     name = "wbaas-config"
   }
@@ -23,3 +23,5 @@ resource "kubernetes_config_map" "wbaas-config" {
   }
 
 }
+
+output "cname_record" {  value = var.cname_record }
