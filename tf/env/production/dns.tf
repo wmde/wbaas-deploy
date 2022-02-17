@@ -57,3 +57,13 @@ resource "google_dns_record_set" "cloud-MailGun-record" {
     type = each.value.record_type
     rrdatas = [ replace("\"${each.value.value}\"", "/^\"eu.mailgun.org\"$/", "eu.mailgun.org." ) ]
 }
+
+resource "google_dns_record_set" "cloud-dyna-A" {
+    managed_zone = google_dns_managed_zone.cloud.name
+    name         = module.wbaas-config.cname_record
+    rrdatas      = [
+        google_compute_address.default.address,
+    ]
+    ttl          = 300
+    type         = "A"
+}
