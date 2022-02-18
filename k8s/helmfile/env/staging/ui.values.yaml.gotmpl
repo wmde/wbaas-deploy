@@ -24,3 +24,6 @@ ui:
   subdomainSuffix: {{ .Values.wbstack.subdomainSuffix }}
   recaptchaSitekeySecretName: {{ .Values.external.recaptcha3.secretName }}
   recaptchaSitekeySecretKey: site_key
+  cnameConfigMapKey: cname_record
+  configMapName: wbaas-ui-config
+  
