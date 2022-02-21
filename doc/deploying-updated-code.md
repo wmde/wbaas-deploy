@@ -30,7 +30,7 @@ In the charts repo:
  - Bump the image version used in the chart `values.yaml` file (see the version in the last step)
  - Bump the version of the chart in `Chart.yaml`
  - Write the change log
- - Make a commit, push it and open a PR
+ - Make a commit, push it to a branch and open a PR
  - Wait for CI to be green and get it merged by a colleague
 
  ## Testing and using the new image in all environments
