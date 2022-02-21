@@ -23,7 +23,7 @@ First make sure that all the code you want to deploy is merged into the main bra
  - Push the tag `git push origin main <tag>`
 
  ## Creating a new version of that component's chart
-The following section assumes there apart from the image there an no more changes that need to be made to the chart. For example, you do no
+The following section assumes that apart from the image there are no more changes that need to be made to the chart. For example, you do no
 
 In the charts repo:
  - Pull the latest charts code
