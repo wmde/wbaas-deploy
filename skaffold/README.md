@@ -27,9 +27,6 @@ wbstack/
 
 https://skaffold.dev/docs/install/
 
-This is very much a work in progress & might not work at all and certainly not be fully optimized etc...
-
-
 ## Use with minikube deployed helm charts
 
 Inside the `skaffold/` directory run
@@ -52,6 +49,11 @@ Currently the following services are hooked up to skaffold:
 - [tool-cradle](https://github.com/wbstack/cradle)
 - [tool-widar](https://github.com/wbstack/widar)
 - [tool-quickstatements](https://github.com/wbstack/quickstatements)
+
+These are all configured as seperate modules. To run a single module run
+```sh
+shaffold run -m <module>
+```
 
 
 ## Reading
