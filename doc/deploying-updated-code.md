@@ -9,7 +9,7 @@ changes to charts beyond bumping the version of the image that they use.
 To deploy new code after it has been merged in a component we currently make three steps:
  1. Build a new version of the image
  2. Create a new chart
- - Use that new image and chart in the local, staging and finally production environments by making changes to this repository
+ 3. Use that new image and chart in the local, staging and finally production environments by making changes to this repository
 
  ## Building a new version of the image
 First make sure that all the code you want to deploy is merged into the main branch of the component
