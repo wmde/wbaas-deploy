@@ -33,18 +33,36 @@ In the charts repo:
  - Make a commit, push it to a branch and open a PR
  - Wait for CI to be green and get it merged by a colleague
 
- ## Testing and using the new image in all environments
+## Testing it locally
+ - (Optional) Test unmerged changes by checking them out and run `skaffold run` to apply to the local cluster
+ - Apply the merged changes to the local cluster with `make apply-local`
+ - Go and check your local cluster; see if the new change works
+
+## Deploying the code to staging or production
+
  In this (wbaas-deploy) repo:
+ - Prepare a pull-request for the changes you want to deploy
+ - Ideally it targets one environment at a time
  - Make sure you are using the latest version of the code
- - Let the team know you are starting to do a deploy (mention it in mattermost)
+ - Assign yourself to the task you are about to deploy, should currently be in "Deploy to Staging" / "Deploy to Production".
+ - Let the team know you are planning to deploy by sharing the pull-requests about to be deployed (mention it in mattermost)
  - run `make diff` and check there are no changes to be applied to either staging or production. If there are then this means that someone else might be deploying at the same time. It could also mean that last time someone touched the clusters they forgot to keep them in sync with thie repository. STOP DEPLOYING and communicate with the team.
- - Make a change to `helmfile.yaml` to use the new version of the chart.
- - OPTIONAL Apply this change to the local cluster with `make apply-local`
- - OPTIONAL Go and check your local cluster; see if the new change works
- - Run `make apply`
+ ## Deploying to staging
+
+ - Check out the pull request you announced to be deployed
+ - Run `make apply-staging`
  - Respond `y` if the kubernetes changes on staging look right
  - Check if the new code is working as expected on "wikibase.dev"
+ - Merge the pull request you just deployed into `main`
+ - Move the ticket out of the deployment column and announce that deployment was completed
+ - Get product/UX to check they are happy with the feature or change.
+
+ ## Deploying to Production
+
+ - Check out the pull request you announced to be deployed
+ - Run `make apply-production`
  - Respond `y` if the kubernetes changes on production look right
  - Check if the new code is working as expected on "wikibase.cloud"
- - Commit your changes with something descriptive and push directly to `main`
- - get product/UX to check they are happy with the feature or change.
+ - Merge the pull request you just deployed into `main`
+ - Move the ticket out of the deployment column and announce that deployment was completed
+ - Get product/UX to check they are happy with the feature or change.
