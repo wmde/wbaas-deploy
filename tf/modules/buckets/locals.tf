@@ -1,5 +1,7 @@
+
+data "google_project" "project" {}
 locals {
     gcs_api_static_bucket_name = "${var.project_prefix}-static"
     gcs_api_static_bucket_backup_name = "${var.project_prefix}-static-backup"
-    transfer_service_id = "project-658442145969@storage-transfer-service.iam.gserviceaccount.com"
+    transfer_service_id = "project-${data.google_project.project.number}@storage-transfer-service.iam.gserviceaccount.com"
 }
