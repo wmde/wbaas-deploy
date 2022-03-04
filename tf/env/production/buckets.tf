@@ -5,5 +5,6 @@ module "production-buckets" {
   }
   project_prefix = "wikibase-cloud"
   static_bucket_writer_account = google_service_account.api.email
+  backup_bucket_object_admins = var.terraformers
 }
 

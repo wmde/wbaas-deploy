@@ -41,7 +41,7 @@ data "google_iam_policy" "transfer_job" {
 
 resource "google_storage_bucket_iam_policy" "policy" {
   bucket      = local.gcs_api_static_bucket_backup_name
-  policy_data = "${data.google_iam_policy.transfer_job.policy_data}"
+  policy_data = data.google_iam_policy.transfer_job.policy_data
 }
 
 ## Backup job T302563
