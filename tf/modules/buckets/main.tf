@@ -26,16 +26,15 @@ resource "google_storage_bucket" "static-backup" {
 }
 
 # Backup bucket IAM Policy
-# legacyBucketReader is required to the google service account to move the data
 data "google_iam_policy" "transfer_job" {
   binding {
-    role = "roles/storage.legacyBucketReader"
-    members = local.backup_bucket_service_admins
-  }
+      role = "roles/storage.objectAdmin"
+      members = local.backup_bucket_service_admins
+    }
 
   binding {
-    role = "roles/storage.objectAdmin"
-    members = concat(local.backup_bucket_service_admins, local.backup_bucket_user_admins)
+    role = "roles/storage.admin"
+    members = local.backup_bucket_user_admins
   }
 }
 
