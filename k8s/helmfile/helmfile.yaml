@@ -139,7 +139,7 @@ releases:
   - name: mediawiki-137-fp
     namespace: default
     chart: wbstack/mediawiki
-    version: '{{ if eq .Environment.Name "production" }}0.10.0{{ else }}0.10.1{{ end }}'
+    version: 0.10.1
     values:
       - "env/{{ .Environment.Name }}/mediawiki-137-fp.values.yaml.gotmpl"
 
@@ -164,7 +164,7 @@ releases:
   - name: queryservice-updater
     namespace: default
     chart: wbstack/queryservice-updater
-    version: '{{ if eq .Environment.Name "production" }}0.1.0{{ else }}0.1.2{{ end }}'
+    version: 0.1.2
     values:
       - "env/{{ .Environment.Name }}/queryservice-updater.values.yaml.gotmpl"
 
