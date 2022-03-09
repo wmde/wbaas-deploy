@@ -3,4 +3,3 @@ module "wbaas-config" {
   
   cname_record = "sites-1.dyna.wbaas.localhost."
 }
-
