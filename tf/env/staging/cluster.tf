@@ -1,7 +1,13 @@
+
+data "google_project" "project" {}
+
 resource "google_container_cluster" "wbaas-2" {
   name = "wbaas-2"
   remove_default_node_pool = true
   initial_node_count       = 1
+    workload_identity_config {
+        identity_namespace = "${data.google_project.project.project_id}.svc.id.goog"
+    }
 }
 
 resource "google_container_node_pool" "wbaas-2_medium" {
@@ -31,6 +37,10 @@ resource "google_container_node_pool" "wbaas-2_medium" {
         shielded_instance_config {
             enable_integrity_monitoring = true
             enable_secure_boot          = false
+        }
+
+        workload_metadata_config {
+            node_metadata = "GKE_METADATA_SERVER"
         }
     }
 
@@ -68,6 +78,10 @@ resource "google_container_node_pool" "wbaas-2_standard" {
         shielded_instance_config {
             enable_integrity_monitoring = true
             enable_secure_boot          = false
+        }
+
+        workload_metadata_config {
+            node_metadata = "GKE_METADATA_SERVER"
         }
     }
 

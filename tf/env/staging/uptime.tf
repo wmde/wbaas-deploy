@@ -77,7 +77,7 @@ resource "google_monitoring_uptime_check_config" "https-content-uptime-check" {
     type = "uptime_url"
     labels = {
       host = each.value.host
-      project_id = "wikibase-cloud"
+      project_id = local.project_id
     }
   }
 
