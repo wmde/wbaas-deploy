@@ -11,7 +11,7 @@ In staging this bucket is called `wikibase-dev-static-backup`.
 - Backup buckets are stored in EUROPE-NORTH1 region.
 
 The buckets and the job that transfers the data are defined in [modules/buckets/main.tf](../tf/modules/buckets/main.tf).
-
+Google storage objects can be worked with from the CLI using `gsutil`. The docs for this can be found [online](https://cloud.google.com/storage/docs/gsutil).
 ### Downloading the backup
 
 Download the contents of the `sites/` folder to your local machine
