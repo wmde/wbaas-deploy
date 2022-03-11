@@ -4,7 +4,7 @@ Date: 2022-03-11
 
 ## Status
 
-proposed
+rejected (GKE Backup is still in pre-GA)
 
 ## Context
 
@@ -13,7 +13,7 @@ We are using Google Kubernetes Engine and this is where the MariaDB workload is 
 Google Cloud provides a new-ish [backup utility](https://cloud.google.com/kubernetes-engine/docs/add-on/backup-for-gke/how-to/protected-application).
 One of the example [Backup Strategies](https://cloud.google.com/kubernetes-engine/docs/add-on/backup-for-gke/how-to/protected-application#dump-load) specifically addresses our usecase.
 
-Currently GKE Backup is still in pre-GA mode see: https://cloud.google.com/terms/service-terms#1
+Currently GKE Backup is still in pre-GA mode see: https://cloud.google.com/terms/service-terms#1 which means that it shouldn't be used for personal data.
 
 ## Decision
 
