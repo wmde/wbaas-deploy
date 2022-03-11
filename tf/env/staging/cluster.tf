@@ -33,7 +33,7 @@ resource "google_container_node_pool" "wbaas-2_medium" {
             "https://www.googleapis.com/auth/trace.append",
         ]
         preemptible       = false
-        service_account   = google_service_account.dev-api.account_id
+        service_account   = "default"
         shielded_instance_config {
             enable_integrity_monitoring = true
             enable_secure_boot          = false
@@ -74,7 +74,7 @@ resource "google_container_node_pool" "wbaas-2_standard" {
             "https://www.googleapis.com/auth/trace.append",
         ]
         preemptible       = false
-        service_account   = google_service_account.dev-api.account_id
+        service_account   = "default"
         shielded_instance_config {
             enable_integrity_monitoring = true
             enable_secure_boot          = false
