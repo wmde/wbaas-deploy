@@ -25,15 +25,3 @@ resource "google_service_account" "dev-api" {
 resource "google_service_account_key" "dev-api" {
     service_account_id = google_service_account.dev-api.name
 }
-
-# module "app-dev-workload-identity" {
-#   source                            = "terraform-google-modules/kubernetes-engine/google//modules/workload-identity"
-#   use_existing_gcp_sa               = true
-#   name                              = google_service_account.dev-api.account_id
-#   project_id                        = local.project_id
-#   automount_service_account_token   = true
-
-#   # wait for the custom GSA to have beeen created to force module data source read during apply
-#   # https://github.com/terraform-google-modules/terraform-google-kubernetes-engine/issues/1059
-#   depends_on = [google_service_account.dev-api]
-# }
