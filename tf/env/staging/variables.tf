@@ -15,6 +15,7 @@ variable "terraformers" {
 
 locals {
   staging_cluster_name = "wbaas-2"
+  project_id = "wikibase-cloud"
 }
 
 variable "mailgun_api_key" {
