@@ -3,6 +3,29 @@ locals {
   backup_bucket_user_admins = [for i, username in var.backup_bucket_object_admins : "user:${username}"]
 }
 
+
+## Logical backup bucket
+resource "google_storage_bucket" "sql-backup" {
+  name          = local.gcs_sql_bucket_backup_name
+  location      = "EUROPE-NORTH1"
+  force_destroy = false
+}
+
+
+# SQL Backup bucket IAM Policy
+data "google_iam_policy" "sql-backup-policy" {
+  binding {
+    role = "roles/storage.admin"
+    members = local.backup_bucket_user_admins
+  }
+}
+
+resource "google_storage_bucket_iam_policy" "sql-backup-bucket-policy" {
+  bucket      = local.gcs_sql_bucket_backup_name
+  policy_data = data.google_iam_policy.sql-backup-policy.policy_data
+}
+
+
 ## Backup bucket
 resource "google_storage_bucket" "static-backup" {
   name          = local.gcs_api_static_bucket_backup_name
