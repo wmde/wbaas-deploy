@@ -23,6 +23,9 @@ data "google_iam_policy" "sql-backup-policy" {
 resource "google_storage_bucket_iam_policy" "sql-backup-bucket-policy" {
   bucket      = local.gcs_sql_bucket_backup_name
   policy_data = data.google_iam_policy.sql-backup-policy.policy_data
+  depends_on = [
+    google_storage_bucket.sql-backup,
+  ]
 }
 
 
