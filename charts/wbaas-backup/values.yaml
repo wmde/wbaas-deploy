@@ -9,5 +9,5 @@ db:
   passwordSecretName:
   passwordSecretKey:
   hostname: sql-mariadb-secondary.default.svc.cluster.local
-  username: root
+  username: backup-manager
   port: 3306
