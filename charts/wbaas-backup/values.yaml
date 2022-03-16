@@ -1,0 +1,13 @@
+cronSchedule: "*/30 * * * *"
+
+gcs:
+  bucketName: nacho-cheese
+  serviceAccountSecretName: some-gcs-sa
+  uploadToBucket: true
+
+db:
+  passwordSecretName:
+  passwordSecretKey:
+  hostname: sql-mariadb-secondary.default.svc.cluster.local
+  username: root
+  port: 3306

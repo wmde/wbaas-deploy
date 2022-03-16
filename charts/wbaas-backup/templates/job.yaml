@@ -1,0 +1,51 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: sql-logic-backup
+spec:
+  schedule: {{ .Values.cronSchedule | quote }} 
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: sql-logic-backup
+            image: ghcr.io/wmde/wbaas-backup:v0.1
+            volumeMounts:
+              - name: "service-account-volume"
+                mountPath: "/var/run/secret/cloud.google.com"
+            resources:
+              limits:
+                cpu: 750m
+                memory: 900Mi
+            securityContext:
+              privileged: true
+              capabilities:
+                add:
+                  - SYS_ADMIN
+            env:
+            - name: DB_PASSWORD
+              {{- if .Values.db.passwordSecretName }}
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.db.passwordSecretName | quote }}
+                  key: {{ .Values.db.passwordSecretKey | quote }}
+              {{- end }}
+            - name: DB_USER
+              value: {{ .Values.db.username | quote }}
+            - name: DB_HOST
+              value: {{ .Values.db.hostname | quote }}
+            - name: DB_PORT
+              value: {{ .Values.db.port | quote }}
+            - name: DO_UPLOAD
+              value: {{ if .Values.gcs.uploadToBucket }}"1"{{else}}"0"{{end}}
+            - name: GCS_BUCKET_NAME
+              value: {{ .Values.gcs.bucketName | quote }}
+          restartPolicy: Never
+          volumes:
+            - name: "service-account-volume"
+              secret:
+                secretName: {{ .Values.gcs.serviceAccountSecretName | quote }} 
+
+      backoffLimit: 4
+
