@@ -1,0 +1,14 @@
+
+cronSchedule: "*/30 * * * *"
+
+gcs:
+  bucketName: wikibase-dev-sql-backup
+  serviceAccountSecretName: api-serviceaccount
+  uploadToBucket: true
+
+db:
+  passwordSecretName: sql-secrets-init-passwords
+  passwordSecretKey: SQL_INIT_PASSWORD_MW
+  hostname: sql-mariadb-secondary.default.svc.cluster.local
+  username: root
+  port: 3306

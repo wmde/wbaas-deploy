@@ -187,6 +187,13 @@ releases:
     values:
       - "env/{{ .Environment.Name }}/tool-quickstatements.values.yaml.gotmpl"
 
+  - name: wbaas-backup
+    installed: {{ ne .Environment.Name "production" | toYaml }}
+    namespace: default
+    chart: ./../../charts/wbaas-backup
+    values:
+      - "env/{{ .Environment.Name }}/wbaas-backup.yaml.gotmpl"
+
   ################################
   # LOCAL ONLY
   ################################

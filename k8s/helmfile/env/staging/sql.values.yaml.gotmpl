@@ -74,6 +74,11 @@ secondary:
   persistence:
     enabled: true
     size: {{ .Values.services.sql.storageSize | quote }}
+  extraVolumes:
+    - name: mariadb-backup-pv
+  extraVolumeMounts:
+    - name: mariadb-backup-pv
+      mountPath: /mnt/backup/
 
   configuration: |-
     [mysqld]
