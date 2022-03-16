@@ -8,7 +8,7 @@ variable "static_bucket_writer_account" {
   description = "Google service account that should be granted write access to bucket"
 }
 
-variable "backup_bucket_object_admins" {
+variable "user_object_admins" {
   type = set(string)
-  description = "Users who have access to the backup bucket"
+  description = "Users who have access to the backup buckets"
 }

@@ -5,6 +5,6 @@ module "staging-buckets" {
   }
   project_prefix = "wikibase-dev"
   static_bucket_writer_account = google_service_account.dev-api.email
-  backup_bucket_object_admins = var.terraformers
+  user_object_admins = var.terraformers
 }
 

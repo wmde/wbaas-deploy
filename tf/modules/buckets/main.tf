@@ -1,22 +1,43 @@
 locals {
-  backup_bucket_service_admins = [ "serviceAccount:${local.transfer_service_id}" ]
-  backup_bucket_user_admins = [for i, username in var.backup_bucket_object_admins : "user:${username}"]
+  sql_backup_bucket_service_admins = ["serviceAccount:${var.static_bucket_writer_account}"]
+  static_backup_bucket_service_admins = [ "serviceAccount:${local.transfer_service_id}" ]
+  user_admins = [for i, username in var.user_object_admins : "user:${username}"]
 }
 
 
 ## Logical backup bucket
 resource "google_storage_bucket" "sql-backup" {
   name          = local.gcs_sql_bucket_backup_name
-  location      = "EUROPE-NORTH1"
+  location      = "EUROPE-WEST6"
   force_destroy = false
+
+  #retention_policy {
+  #  is_is_locked = false
+    #retention_period = 60*60*24*7
+  #}
+
+  // only keep versions for N days
+  lifecycle_rule {
+    action {
+      type = "Delete"
+    }
+    condition {
+      age = 7
+    }
+  }
 }
 
 
 # SQL Backup bucket IAM Policy
 data "google_iam_policy" "sql-backup-policy" {
   binding {
+    role = "roles/storage.objectAdmin"
+    members = local.sql_backup_bucket_service_admins
+  }
+
+  binding {
     role = "roles/storage.admin"
-    members = local.backup_bucket_user_admins
+    members = local.user_admins
   }
 }
 
@@ -55,12 +76,12 @@ resource "google_storage_bucket" "static-backup" {
 data "google_iam_policy" "transfer_job" {
   binding {
       role = "roles/storage.objectAdmin"
-      members = local.backup_bucket_service_admins
+      members = local.static_backup_bucket_service_admins
     }
 
   binding {
     role = "roles/storage.admin"
-    members = local.backup_bucket_user_admins
+    members = local.user_admins
   }
 }
 
