@@ -10,10 +10,12 @@ spec:
         spec:
           containers:
           - name: sql-logic-backup
-            image: ghcr.io/wmde/wbaas-backup:v0.1
+            image: ghcr.io/wmde/wbaas-backup:v0.1.1
+            {{- if .Values.gcs.uploadToBucket }}
             volumeMounts:
               - name: "service-account-volume"
                 mountPath: "/var/run/secret/cloud.google.com"
+            {{- end }}
             resources:
               limits:
                 cpu: 750m
@@ -42,10 +44,13 @@ spec:
             - name: GCS_BUCKET_NAME
               value: {{ .Values.gcs.bucketName | quote }}
           restartPolicy: Never
+          {{- if .Values.gcs.uploadToBucket }}
           volumes:
             - name: "service-account-volume"
               secret:
-                secretName: {{ .Values.gcs.serviceAccountSecretName | quote }} 
+                secretName: {{ .Values.gcs.serviceAccountSecretName | quote }}
+          {{- end }}
+
 
       backoffLimit: 4
 
