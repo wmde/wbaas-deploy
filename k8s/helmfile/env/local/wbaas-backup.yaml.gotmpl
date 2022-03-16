@@ -1,12 +1,15 @@
 
-cronSchedule: "0 0 * * *"
+# every five minutes
+# cronSchedule: "*/5 * * * *"
+
+cronSchedule: "*/5 * * * *"
 
 gcs:
   uploadToBucket: false
 
 db:
   passwordSecretName: sql-secrets-init-passwords
-  passwordSecretKey: SQL_INIT_PASSWORD_MW
+  passwordSecretKey: SQL_INIT_PASSWORD_BACKUPS
   hostname: sql-mariadb-secondary.default.svc.cluster.local
-  username: root
+  username: backup-manager
   port: 3306

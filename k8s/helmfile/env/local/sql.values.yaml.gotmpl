@@ -132,6 +132,16 @@ initdbScripts:
         exit
     fi
 
+    # Backup manager / wbaas-backup
+    echo "CREATE USER IF NOT EXISTS 'backup-manager'@'%' IDENTIFIED BY '${SQL_INIT_PASSWORD_BACKUPS}';" >> /tmp/sql-init-cmds-001.txt
+    echo "ALTER USER 'backup-manager'@'%' IDENTIFIED BY '${SQL_INIT_PASSWORD_BACKUPS}';" >> /tmp/sql-init-cmds-001.txt
+
+    # https://docs.pingcap.com/tidb/v4.0/mydumper-overview#required-privileges
+    echo "GRANT SELECT ON *.* TO 'backup-manager'@'%';" >> /tmp/sql-init-cmds-001.txt
+    echo "GRANT RELOAD ON *.* TO 'backup-manager'@'%';" >> /tmp/sql-init-cmds-001.txt
+    echo "GRANT LOCK TABLES ON *.* TO 'backup-manager'@'%';" >> /tmp/sql-init-cmds-001.txt
+    echo "GRANT REPLICATION CLIENT ON *.* TO 'backup-manager'@'%';" >> /tmp/sql-init-cmds-001.txt
+
     # API
     # TODO tighten up the grants for the api user
     echo "CREATE USER IF NOT EXISTS 'apiuser'@'%' IDENTIFIED BY '${SQL_INIT_PASSWORD_API}';" >> /tmp/sql-init-cmds-001.txt

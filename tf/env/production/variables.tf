@@ -32,6 +32,7 @@ variable "sql-passwords" {
       "production-replication",
       "production-api",
       "production-mediawiki-db-manager",
+      "production-backup-manager",
       ]
 }
 

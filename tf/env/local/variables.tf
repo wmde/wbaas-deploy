@@ -6,6 +6,7 @@ variable "sql-passwords" {
       "replication",
       "api",
       "mediawiki-db-manager",
+      "backup-manager",
       ]
 }
 
