@@ -31,7 +31,6 @@ resource "kubernetes_secret" "sql-secrets-init-passwords" {
     "SQL_INIT_PASSWORD_API" = base64encode(random_password.sql-passwords["api"].result)
     "SQL_INIT_PASSWORD_MW" = base64encode(random_password.sql-passwords["mediawiki-db-manager"].result)
     "SQL_INIT_PASSWORD_BACKUPS" = base64encode(random_password.sql-passwords["backup-manager"].result)
-
   }
   
 }
