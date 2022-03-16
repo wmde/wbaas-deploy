@@ -1,4 +1,4 @@
-cronSchedule: "*/30 * * * *"
+cronSchedule: "0 0 * * *"
 
 gcs:
   bucketName: nacho-cheese
