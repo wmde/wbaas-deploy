@@ -57,7 +57,6 @@ variable "sql_password_backup_manager" {
   sensitive = true
 }
 
-
 variable "redis_password" {
   type = string
   description = "redis password for staging cluster"
