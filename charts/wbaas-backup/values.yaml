@@ -1,6 +1,9 @@
 restorePodRunning: false
 cronSchedule: "0 0 * * *"
 
+backupKey:
+backupSecretKey: key
+
 gcs:
   bucketName: nacho-cheese
   serviceAccountSecretName: some-gcs-sa

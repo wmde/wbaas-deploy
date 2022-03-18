@@ -1,13 +1,22 @@
 # every five minutes
 # cronSchedule: "*/5 * * * *"
+restorePodRunning: true
 cronSchedule: "0 0 * * *"
+backupKey: "abc-123"
 
 gcs:
   uploadToBucket: false
 
 db:
-  passwordSecretName: sql-secrets-init-passwords
-  passwordSecretKey: SQL_INIT_PASSWORD_BACKUPS
-  hostname: sql-mariadb-secondary.default.svc.cluster.local
-  username: backup-manager
-  port: 3306
+  load:
+    passwordSecretName: sql-secrets-init-passwords
+    passwordSecretKey: SQL_INIT_PASSWORD_BACKUPS
+    hostname: sql-mariadb-primary.default.svc.cluster.local
+    username: backup-manager
+    port: 3306
+  dump:
+    passwordSecretName: sql-secrets-init-passwords
+    passwordSecretKey: SQL_INIT_PASSWORD_BACKUPS
+    hostname: sql-mariadb-secondary.default.svc.cluster.local
+    username: backup-manager
+    port: 3306

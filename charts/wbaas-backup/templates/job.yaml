@@ -10,7 +10,7 @@ spec:
         spec:
           containers:
           - name: sql-logic-backup
-            image: ghcr.io/wmde/wbaas-backup:v0.1.2
+            image: ghcr.io/wmde/wbaas-backup:v0.1.3
             {{- if .Values.gcs.uploadToBucket }}
             volumeMounts:
               - name: "service-account-volume"
@@ -26,6 +26,11 @@ spec:
                 add:
                   - SYS_ADMIN
             env:
+            - name: BACKUP_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: backup-openssl-key
+                  key: {{ .Values.backupSecretKey }}
             - name: DB_PASSWORD
               {{- if .Values.db.dump.passwordSecretName }}
               valueFrom:
