@@ -10,7 +10,7 @@ spec:
         spec:
           containers:
           - name: sql-logic-backup
-            image: ghcr.io/wmde/wbaas-backup:v0.1.1
+            image: ghcr.io/wmde/wbaas-backup:v0.1.2
             {{- if .Values.gcs.uploadToBucket }}
             volumeMounts:
               - name: "service-account-volume"
@@ -27,18 +27,18 @@ spec:
                   - SYS_ADMIN
             env:
             - name: DB_PASSWORD
-              {{- if .Values.db.passwordSecretName }}
+              {{- if .Values.db.dump.passwordSecretName }}
               valueFrom:
                 secretKeyRef:
-                  name: {{ .Values.db.passwordSecretName | quote }}
-                  key: {{ .Values.db.passwordSecretKey | quote }}
+                  name: {{ .Values.db.dump.passwordSecretName | quote }}
+                  key: {{ .Values.db.dump.passwordSecretKey | quote }}
               {{- end }}
             - name: DB_USER
-              value: {{ .Values.db.username | quote }}
+              value: {{ .Values.db.dump.username | quote }}
             - name: DB_HOST
-              value: {{ .Values.db.hostname | quote }}
+              value: {{ .Values.db.dump.hostname | quote }}
             - name: DB_PORT
-              value: {{ .Values.db.port | quote }}
+              value: {{ .Values.db.dump.port | quote }}
             - name: DO_UPLOAD
               value: {{ if .Values.gcs.uploadToBucket }}"1"{{else}}"0"{{end}}
             - name: GCS_BUCKET_NAME
@@ -50,7 +50,6 @@ spec:
               secret:
                 secretName: {{ .Values.gcs.serviceAccountSecretName | quote }}
           {{- end }}
-
 
       backoffLimit: 4
 

@@ -1,0 +1,52 @@
+{{- if .Values.restorePodRunning }}
+apiVersion: v1
+kind: Pod
+metadata:
+  name: restore-sql-logic-backup
+spec:
+  containers:
+  - name: restore-sql-logic-backup
+    image: ghcr.io/wmde/wbaas-backup:v0.1.2
+    command: [ "/bin/bash", "-c", "--" ]
+    args: [ "while true; do sleep 30; done;" ]
+    {{- if .Values.gcs.uploadToBucket }}
+    volumeMounts:
+      - name: "service-account-volume"
+        mountPath: "/var/run/secret/cloud.google.com"
+    {{- end }}
+    resources:
+      limits:
+        cpu: 750m
+        memory: 900Mi
+    securityContext:
+      privileged: true
+      capabilities:
+        add:
+          - SYS_ADMIN
+    env:
+    - name: DB_PASSWORD
+      {{- if .Values.db.load.passwordSecretName }}
+      valueFrom:
+        secretKeyRef:
+          name: {{ .Values.db.load.passwordSecretName | quote }}
+          key: {{ .Values.db.load.passwordSecretKey | quote }}
+      {{- end }}
+    - name: DB_USER
+      value: {{ .Values.db.load.username | quote }}
+    - name: DB_HOST
+      value: {{ .Values.db.load.hostname | quote }}
+    - name: DB_PORT
+      value: {{ .Values.db.load.port | quote }}
+    - name: DO_UPLOAD
+      value: {{ if .Values.gcs.uploadToBucket }}"1"{{else}}"0"{{end}}
+    - name: GCS_BUCKET_NAME
+      value: {{ .Values.gcs.bucketName | quote }}
+  restartPolicy: Never
+  {{- if .Values.gcs.uploadToBucket }}
+  volumes:
+    - name: "service-account-volume"
+      secret:
+        secretName: {{ .Values.gcs.serviceAccountSecretName | quote }}
+  {{- end }}
+
+{{- end }}
