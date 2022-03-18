@@ -10,51 +10,8 @@ spec:
         spec:
           containers:
           - name: sql-logic-backup
-            image: ghcr.io/wmde/wbaas-backup:v0.1.3
-            {{- if .Values.gcs.uploadToBucket }}
-            volumeMounts:
-              - name: "service-account-volume"
-                mountPath: "/var/run/secret/cloud.google.com"
-            {{- end }}
-            resources:
-              limits:
-                cpu: 750m
-                memory: 900Mi
-            securityContext:
-              privileged: true
-              capabilities:
-                add:
-                  - SYS_ADMIN
-            env:
-            - name: BACKUP_KEY
-              valueFrom:
-                secretKeyRef:
-                  name: backup-openssl-key
-                  key: {{ .Values.backupSecretKey }}
-            - name: DB_PASSWORD
-              {{- if .Values.db.dump.passwordSecretName }}
-              valueFrom:
-                secretKeyRef:
-                  name: {{ .Values.db.dump.passwordSecretName | quote }}
-                  key: {{ .Values.db.dump.passwordSecretKey | quote }}
-              {{- end }}
-            - name: DB_USER
-              value: {{ .Values.db.dump.username | quote }}
-            - name: DB_HOST
-              value: {{ .Values.db.dump.hostname | quote }}
-            - name: DB_PORT
-              value: {{ .Values.db.dump.port | quote }}
-            - name: DO_UPLOAD
-              value: {{ if .Values.gcs.uploadToBucket }}"1"{{else}}"0"{{end}}
-            - name: GCS_BUCKET_NAME
-              value: {{ .Values.gcs.bucketName | quote }}
+            image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+            imagePullPolicy: {{ .Values.image.pullPolicy }}
+{{ include "backup.sharedPodConfiguration" ( dict "db" .Values.db.dump "context" $ ) | nindent 12 }}
           restartPolicy: Never
-          {{- if .Values.gcs.uploadToBucket }}
-          volumes:
-            - name: "service-account-volume"
-              secret:
-                secretName: {{ .Values.gcs.serviceAccountSecretName | quote }}
-          {{- end }}
-
       backoffLimit: 4
-

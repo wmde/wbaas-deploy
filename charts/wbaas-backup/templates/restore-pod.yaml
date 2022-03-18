@@ -6,52 +6,10 @@ metadata:
 spec:
   containers:
   - name: restore-sql-logic-backup
-    image: ghcr.io/wmde/wbaas-backup:v0.1.3
+    image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+    imagePullPolicy: {{ .Values.image.pullPolicy }}
     command: [ "/bin/bash", "-c", "--" ]
     args: [ "while true; do sleep 30; done;" ]
-    {{- if .Values.gcs.uploadToBucket }}
-    volumeMounts:
-      - name: "service-account-volume"
-        mountPath: "/var/run/secret/cloud.google.com"
-    {{- end }}
-    resources:
-      limits:
-        cpu: 750m
-        memory: 900Mi
-    securityContext:
-      privileged: true
-      capabilities:
-        add:
-          - SYS_ADMIN
-    env:
-    - name: BACKUP_KEY
-      valueFrom:
-        secretKeyRef:
-          name: backup-openssl-key
-          key: {{ .Values.backupSecretKey }}
-    - name: DB_PASSWORD
-      {{- if .Values.db.load.passwordSecretName }}
-      valueFrom:
-        secretKeyRef:
-          name: {{ .Values.db.load.passwordSecretName | quote }}
-          key: {{ .Values.db.load.passwordSecretKey | quote }}
-      {{- end }}
-    - name: DB_USER
-      value: {{ .Values.db.load.username | quote }}
-    - name: DB_HOST
-      value: {{ .Values.db.load.hostname | quote }}
-    - name: DB_PORT
-      value: {{ .Values.db.load.port | quote }}
-    - name: DO_UPLOAD
-      value: {{ if .Values.gcs.uploadToBucket }}"1"{{else}}"0"{{end}}
-    - name: GCS_BUCKET_NAME
-      value: {{ .Values.gcs.bucketName | quote }}
+{{ include "backup.sharedPodConfiguration" ( dict "db" .Values.db.load "context" $ ) | nindent 4 }}
   restartPolicy: Never
-  {{- if .Values.gcs.uploadToBucket }}
-  volumes:
-    - name: "service-account-volume"
-      secret:
-        secretName: {{ .Values.gcs.serviceAccountSecretName | quote }}
-  {{- end }}
-
 {{- end }}
