@@ -1,4 +1,12 @@
 {{/* vim: set filetype=mustache: */}}
+{{ define "backup.sharedVolumes" }}
+{{- if .gcs.uploadToBucket }}
+volumes:
+  - name: "service-account-volume"
+    secret:
+      secretName: {{ .gcs.serviceAccountSecretName | quote }}
+{{- end }}
+{{ end }}
 {{- define "backup.sharedPodConfiguration" -}}
 {{- if .context.Values.gcs.uploadToBucket }}
 volumeMounts:
@@ -37,10 +45,4 @@ env:
     secretKeyRef:
       name: backup-openssl-key
       key: {{ .context.Values.backupSecretKey }}
-{{- if .context.Values.gcs.uploadToBucket }}
-volumes:
-  - name: "service-account-volume"
-    secret:
-      secretName: {{ .context.Values.gcs.serviceAccountSecretName | quote }}
-{{- end }}
 {{- end -}}
