@@ -24,6 +24,10 @@ For more information on the contents of this pod see the [wbaas-backup](https://
 
 The backup archives are compressed and encrypted. If you need to decompress locally downloaded archives, use `kubectl` to get the contents of the `backup-openssl-key` secret for that environment.
 
+## Download archives locally
+
+Use the UI to download archives https://console.cloud.google.com/storage/browser/_details/wikibase-dev-sql-backup
+
 ## Restoring both primary and secondary SQL
 
 To restore everything, we make sure the restore-pod is running and get a shell.
