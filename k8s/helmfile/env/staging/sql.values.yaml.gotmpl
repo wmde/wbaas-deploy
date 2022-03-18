@@ -132,6 +132,18 @@ initdbScripts:
         exit
     fi
 
+    # Backup manager / wbaas-backup
+    echo "CREATE USER IF NOT EXISTS 'backup-manager'@'%' IDENTIFIED BY '${SQL_INIT_PASSWORD_BACKUPS}';" >> /tmp/sql-init-cmds-001.txt
+    echo "ALTER USER 'backup-manager'@'%' IDENTIFIED BY '${SQL_INIT_PASSWORD_BACKUPS}';" >> /tmp/sql-init-cmds-001.txt
+
+    # https://docs.pingcap.com/tidb/v4.0/mydumper-overview#required-privileges
+    echo "GRANT SELECT ON *.* TO 'backup-manager'@'%';" >> /tmp/sql-init-cmds-001.txt
+    echo "GRANT RELOAD ON *.* TO 'backup-manager'@'%';" >> /tmp/sql-init-cmds-001.txt
+    echo "GRANT LOCK TABLES ON *.* TO 'backup-manager'@'%';" >> /tmp/sql-init-cmds-001.txt
+    echo "GRANT REPLICATION CLIENT ON *.* TO 'backup-manager'@'%';" >> /tmp/sql-init-cmds-001.txt
+    echo "GRANT SHOW VIEW ON *.* TO 'backup-manager'@'%';" >> /tmp/sql-init-cmds-001.txt
+
+
     # API
     # TODO tighten up the grants for the api user
     echo "CREATE USER IF NOT EXISTS 'apiuser'@'%' IDENTIFIED BY '${SQL_INIT_PASSWORD_API}';" >> /tmp/sql-init-cmds-001.txt
@@ -140,20 +152,25 @@ initdbScripts:
     echo "GRANT ALL ON apidb.* TO 'apiuser'@'%';" >> /tmp/sql-init-cmds-001.txt
     echo "GRANT GRANT OPTION ON apidb.* TO 'apiuser'@'%';" >> /tmp/sql-init-cmds-001.txt
 
+
     # Mediawiki
     echo "CREATE USER IF NOT EXISTS 'mediawiki-db-manager'@'%' IDENTIFIED BY '${SQL_INIT_PASSWORD_MW}';" >> /tmp/sql-init-cmds-001.txt
     echo "ALTER USER 'mediawiki-db-manager'@'%' IDENTIFIED BY '${SQL_INIT_PASSWORD_MW}';" >> /tmp/sql-init-cmds-001.txt
     echo "CREATE DATABASE IF NOT EXISTS mediawiki;" >> /tmp/sql-init-cmds-001.txt
+
     # Needed in order to create new DBs and users and perform updates
     echo "GRANT ALL ON \`mwdb_%\`.* TO 'mediawiki-db-manager'@'%';" >> /tmp/sql-init-cmds-001.txt
     echo "GRANT ALL ON \`mediawiki\`.* TO 'mediawiki-db-manager'@'%';" >> /tmp/sql-init-cmds-001.txt
+
     # Needed in order to GRANT new users access to their own dbs
     echo "GRANT GRANT OPTION ON \`mwdb_%\`.* TO 'mediawiki-db-manager'@'%';" >> /tmp/sql-init-cmds-001.txt
     echo "GRANT GRANT OPTION ON \`mediawiki\`.* TO 'mediawiki-db-manager'@'%';" >> /tmp/sql-init-cmds-001.txt
+
     # Needed in order to create new users
     echo "GRANT CREATE USER ON *.* TO 'mediawiki-db-manager'@'%';" >> /tmp/sql-init-cmds-001.txt
     # In order to see and grant slave status access
     echo "GRANT REPLICA MONITOR, BINLOG MONITOR ON *.* TO 'mediawiki-db-manager'@'%' WITH GRANT OPTION;" >> /tmp/sql-init-cmds-001.txt
+
 
     # Flush privs
     echo "FLUSH PRIVILEGES;" >> /tmp/sql-init-cmds-001.txt

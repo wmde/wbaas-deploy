@@ -52,6 +52,11 @@ variable "sql_password_mediawiki_db_manager" {
   sensitive = true
 }
 
+variable "sql_password_backup_manager" {
+  type = string
+  sensitive = true
+}
+
 variable "redis_password" {
   type = string
   description = "redis password for staging cluster"

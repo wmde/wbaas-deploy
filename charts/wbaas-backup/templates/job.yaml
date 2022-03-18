@@ -1,0 +1,18 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: sql-logic-backup
+spec:
+  schedule: {{ .Values.cronSchedule | quote }} 
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: sql-logic-backup
+            image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+            imagePullPolicy: {{ .Values.image.pullPolicy }}
+{{ include "backup.sharedPodConfiguration" ( dict "db" .Values.db.dump "context" $ ) | nindent 12 }}
+{{ include "backup.sharedVolumes" ( dict "gcs" .Values.gcs ) | nindent 10 }}
+          restartPolicy: Never
+      backoffLimit: 4
