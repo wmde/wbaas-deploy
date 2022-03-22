@@ -26,7 +26,7 @@ The backup archives are compressed and encrypted. If you need to decompress loca
 
 ## Download archives locally
 
-Use the UI to download archives https://console.cloud.google.com/storage/browser/_details/wikibase-dev-sql-backup
+Use the UI to download archives https://console.cloud.google.com/storage/browser/wikibase-dev-sql-backup
 
 ## Restoring both primary and secondary SQL
 
