@@ -5,7 +5,7 @@ module "wbaas2-k8s-secrets" {
   }
   domain_mailgun_key = var.domain_mailgun_key
   smtp_username = mailgun_domain.default.smtp_login
-  smtp_password = mailgun_domain.default.smtp_password
+  smtp_password = random_password.smtp-password.result
   google_service_account_key_api = google_service_account_key.dev-api.private_key
   google_service_account_key_dns = google_service_account_key.certman-dns01-solver.private_key
   sql_password_root = random_password.sql-passwords["staging-root"].result
