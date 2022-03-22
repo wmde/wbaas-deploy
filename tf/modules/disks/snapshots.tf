@@ -33,8 +33,4 @@ data "kubernetes_persistent_volume_claim" "pvc-mariadb-secondary" {
 resource "google_compute_region_disk_resource_policy_attachment" "attachment" {
   name = google_compute_resource_policy.wbcloud-nightly.name
   disk = data.kubernetes_persistent_volume_claim.pvc-mariadb-secondary.spec[0].volume_name
-
-  depends_on = [
-    data.kubernetes_persistent_volume_claim.pvc-mariadb-secondary
-  ]
 }
