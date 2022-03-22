@@ -25,7 +25,7 @@ resource "google_compute_resource_policy" "wbcloud-nightly" {
 
 data "kubernetes_persistent_volume_claim" "pvc-mariadb-secondary" {
   metadata {
-    name = "data-sql-mariadb-secondary-1"
+    name = "data-sql-mariadb-secondary-0"
   }
 }
 
