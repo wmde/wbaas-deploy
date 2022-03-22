@@ -36,7 +36,7 @@ To restore everything, we make sure the restore-pod is running and get a shell.
 kubectl exec -it restore-sql-logic-backup bash
 ```
 
-In a addition to this, it's a good idea to spin up `mysql` clients for both primary and the replica as we will be running some commands to to reset and pause replication.
+In a addition to this, it's a good idea to spin up `mysql` clients for both primary and the replica as we will be running some commands to reset and pause replication.
 
 This is as of writing possible to do by running the following command.
 
