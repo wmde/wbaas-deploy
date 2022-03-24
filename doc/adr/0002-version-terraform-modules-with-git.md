@@ -20,7 +20,7 @@ Module source lines of the form: `git::ssh://git@github.com/wmde/wbaas-deploy//t
 used when calling a module.
 
 ## Consequences
-We wil be able to use explicit versions of terraform modules in different environments.
+We will be able to use explicit versions of terraform modules in different environments.
 Deployers will now need to be able to access the `wbaas-deploy` git repo over ssh when running `terraform init`.
 We will need to tag versions of modules after they have been merged to `main` before using them.
 We may still need to refer to local paths, on staging, while actively writing and experimenting with new modules.
