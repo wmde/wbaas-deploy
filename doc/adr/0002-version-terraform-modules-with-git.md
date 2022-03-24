@@ -16,8 +16,19 @@ Using local paths has resulted in a number of situations where changes that we w
 ## Decision
 We will explicitly version terraform modules using the generic git repository method by tagging commits on the `main` branch of the `wbaas-deploy` (this) git repository. We will use tags of the form `tf-modules-<integer>`.
 
-Module source lines of the form: `git::ssh://git@github.com/wmde/wbaas-deploy//tf//modules/k8s-secrets?ref=tf-modules-1` will be
-used when calling a module.
+Sourceing one of these modules would look like:
+```
+module "production-buckets" {
+  source = "git::ssh://git@github.com/wmde/wbaas-deploy//tf//modules/buckets/?ref=tf-modules-1"
+  providers = {
+    kubernetes = kubernetes.wbaas-3
+  }
+  project_prefix = "wikibase-cloud"
+  static_bucket_writer_account = google_service_account.api.email
+  backup_bucket_object_admins = var.terraformers
+}
+
+```
 
 ## Consequences
 We will be able to use explicit versions of terraform modules in different environments.
