@@ -19,3 +19,27 @@ resource "google_compute_disk" "data-sql-mariadb-secondary" {
         "goog-gke-volume" = ""
     }
 }
+
+resource "kubernetes_persistent_volume" "data-sql-mariadb-secondary" {
+
+    provider = kubernetes.wbaas-2
+  metadata {
+    name = "pv-data-sql-mariadb-secondary-0"
+  }
+  spec {
+    capacity = {
+      storage = "60Gi"
+    }
+    access_modes = ["ReadWriteOnce"]
+
+    claim_ref {
+        name = "data-sql-mariadb-secondary-0"
+        namespace = "default"
+    }
+    persistent_volume_source {
+        gce_persistent_disk {
+          pd_name = google_compute_disk.data-sql-mariadb-secondary.name
+        }
+    }
+  }
+}
