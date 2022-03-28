@@ -60,7 +60,7 @@ resource "google_compute_resource_policy" "wbcloud-nightly" {
   }
 }
 
-resource "google_compute_region_disk_resource_policy_attachment" "attachment" {
+resource "google_compute_disk_resource_policy_attachment" "attachment" {
   name = google_compute_resource_policy.wbcloud-nightly.name
   disk = google_compute_disk.data-sql-mariadb-secondary.name
 }
