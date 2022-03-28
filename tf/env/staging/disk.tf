@@ -3,8 +3,7 @@ resource "google_compute_disk" "data-sql-mariadb-secondary" {
   type  = "pd-ssd"
   zone  = "europe-west3-a"
   size  = 60 # GB
-  physical_block_size_bytes = 4096
-  project = local.project_id
+  
   lifecycle {
     ignore_changes = [ labels, description ]
     prevent_destroy = true
