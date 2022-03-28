@@ -7,6 +7,7 @@ resource "google_compute_disk" "data-sql-mariadb-secondary" {
   project = local.project_id
   lifecycle {
     ignore_changes = [ labels, description ]
+    prevent_destroy = true
   }
 }
 
