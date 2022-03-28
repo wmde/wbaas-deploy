@@ -40,7 +40,7 @@ resource "google_compute_resource_policy" "wbcloud-nightly" {
   name   = "wbcloud-nightly-west-to-north-7d-1"
   description = "A nightly snapshot that is retained for 7 days from europe-west3 to the europe-north1. Snapshots kept on disk deletion."
   region = "europe-west3"
-  
+
   snapshot_schedule_policy {
     schedule {
       daily_schedule {
@@ -62,5 +62,5 @@ resource "google_compute_resource_policy" "wbcloud-nightly" {
 
 resource "google_compute_region_disk_resource_policy_attachment" "attachment" {
   name = google_compute_resource_policy.wbcloud-nightly.name
-  disk = google_compute_disk.data-sql-mariadb-secondary
+  disk = google_compute_disk.data-sql-mariadb-secondary.name
 }
