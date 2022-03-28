@@ -22,8 +22,7 @@ resource "kubernetes_persistent_volume" "data-sql-mariadb-secondary" {
       storage = "60Gi"
     }
     access_modes = ["ReadWriteOnce"]
-    storage_class_name = "premium-rwo"
-    persistent_volume_reclaim_policy = "Delete"
+    persistent_volume_reclaim_policy = "Retain"
 
     claim_ref {
         name = "data-sql-mariadb-secondary-0"
