@@ -21,15 +21,18 @@ resource "kubernetes_persistent_volume" "data-sql-mariadb-secondary" {
       storage = "60Gi"
     }
     access_modes = ["ReadWriteOnce"]
+    storage_class_name = "premium-rwo"
+    persistent_volume_reclaim_policy = "Delete"
 
     claim_ref {
         name = "data-sql-mariadb-secondary-0"
         namespace = "default"
     }
+
     persistent_volume_source {
-        gce_persistent_disk {
-          pd_name = google_compute_disk.data-sql-mariadb-secondary.name
-        }
+      gce_persistent_disk {
+        pd_name = google_compute_disk.data-sql-mariadb-secondary.name
+      }
     }
   }
 }
