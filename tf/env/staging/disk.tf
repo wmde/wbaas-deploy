@@ -12,8 +12,8 @@ resource "google_compute_disk" "data-sql-mariadb-secondary" {
 }
 
 resource "kubernetes_persistent_volume" "data-sql-mariadb-secondary" {
-
-    provider = kubernetes.wbaas-2
+  provider = kubernetes.wbaas-2
+  
   metadata {
     name = "pv-data-sql-mariadb-secondary-0"
   }
