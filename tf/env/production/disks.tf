@@ -46,6 +46,6 @@ resource "kubernetes_persistent_volume" "data-sql-mariadb-secondary" {
 }
 
 resource "google_compute_disk_resource_policy_attachment" "attachment" {
-  name = module.wbaas3-disks.google_compute_resource_policy.wbcloud-nightly.name
+    name = module.wbaas3-disks.resource-policy-snapshot-nightly.name
   disk = google_compute_disk.data-sql-mariadb-secondary.name
 }
