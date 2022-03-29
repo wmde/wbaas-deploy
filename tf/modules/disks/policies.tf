@@ -1,4 +1,4 @@
-resource "google_compute_resource_policy" "wbcloud-nightly" {
+resource "google_compute_resource_policy" "snapshot-nightly" {
   name   = "wbcloud-nightly-west-to-north-7d-1"
   description = "A nightly snapshot that is retained for 7 days from europe-west3 to the europe-north1. Snapshots kept on disk deletion."
   region = "europe-west3"
