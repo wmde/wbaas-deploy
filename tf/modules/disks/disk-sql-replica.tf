@@ -21,6 +21,7 @@ resource "kubernetes_persistent_volume" "sql-replica" {
     capacity = {
       storage = "60Gi"
     }
+    
     access_modes = ["ReadWriteOnce"]
     persistent_volume_reclaim_policy = "Retain"
 
