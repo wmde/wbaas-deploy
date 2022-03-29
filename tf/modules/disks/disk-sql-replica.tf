@@ -14,7 +14,7 @@ resource "kubernetes_persistent_volume" "sql-replica" {
   provider = kubernetes
   
   metadata {
-    name = var.sql-replica-pv-name
+    name = "pv-data-sql-mariadb-secondary-0"
   }
 
   spec {

@@ -6,5 +6,4 @@ module "wbaas3-disks" {
   }
 
   sql-replica-disk-name = "pvc-8c1ba5fc-4447-46ef-a279-656e30636897"
-  sql-replica-pv-name   = "pvc-8c1ba5fc-4447-46ef-a279-656e30636897"
 }
