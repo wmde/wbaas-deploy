@@ -6,5 +6,4 @@ module "wbaas2-disks" {
   }
 
   sql-replica-disk-name = "data-sql-mariadb-secondary-0"
-  sql-replica-pv-name   = "pv-data-sql-mariadb-secondary-0"
 }
