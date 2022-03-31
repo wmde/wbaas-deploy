@@ -16,7 +16,7 @@ resource "google_monitoring_alert_policy" "alert_policy_replica_failure" {
     display_name = "SQL replica errorno 1236"
     condition_threshold {
     # resource.type needed because of https://github.com/hashicorp/terraform-provider-google/issues/4165
-    filter          = "metric.type=\"logging.googleapis.com/user/mariadb-sql-errno-1236-error-count\" AND resource.type=\"global\""
+    filter          = "metric.type=\"logging.googleapis.com/user/mariadb-sql-errno-1236-error-count\" AND resource.type=\"k8s_container\""
     duration        = "60s"
     comparison      = "COMPARISON_GT"
     aggregations {
