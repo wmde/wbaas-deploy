@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+# This script tries to attach a snapshot schedule to the SQL replica disk
+
+PVC="data-sql-mariadb-secondary-0"
+PV=$(kubectl get pvc ${PVC} -o jsonpath="{.spec.volumeName}")
+
+# matches metadata of disks provisioned via helmfile
+DISK=$(kubectl get pv ${PV} -o jsonpath="{.spec.csi.volumeHandle}" | awk -F '/' '{print $NF}')
+
+if [[ -z "$DISK" ]]; then
+    # matches metadata of disks provisioned via terraform
+    DISK=$(kubectl get pv ${PV} -o jsonpath="{.spec.gcePersistentDisk.pdName}")
+fi
+
+LOCATION=$(gcloud compute disks list --filter="name=('${DISK}')" --format='value(location())')
+
+gcloud compute disks add-resource-policies ${DISK} --zone=${LOCATION} --resource-policies=wbcloud-nightly-west-to-north-7d-1
