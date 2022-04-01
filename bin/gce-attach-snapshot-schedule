@@ -20,4 +20,5 @@ echo "context: '$(kubectl config current-context)'"
 echo "disk:    '${DISK}' (located in '${LOCATION}')"
 echo "policy:  '${SNAPSHOT_POLICY}'"
 echo
-echo "command: gcloud compute disks add-resource-policies ${DISK} --zone=${LOCATION} --resource-policies=${SNAPSHOT_POLICY}"
+echo "> gcloud compute disks add-resource-policies ${DISK} --zone=${LOCATION} --resource-policies=${SNAPSHOT_POLICY}"
+echo
