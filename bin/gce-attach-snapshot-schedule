@@ -1,8 +1,12 @@
 #!/usr/bin/env bash
 # This script tries to compose a command for attaching a snapshot schedule to the SQL replica disk
 
-SNAPSHOT_POLICY="wbcloud-nightly-west-to-north-7d-1"
 PVC="data-sql-mariadb-secondary-0"
+
+CONTEXT=$(kubectl config current-context)
+CLUSTER=$(echo $CONTEXT | awk -F '_' '{print $NF}')
+
+SNAPSHOT_POLICY=$(gcloud compute resource-policies list --filter="$CLUSTER" --format='value(name)')
 
 PV=$(kubectl get pvc ${PVC} -o jsonpath="{.spec.volumeName}")
 
@@ -16,7 +20,8 @@ fi
 
 LOCATION=$(gcloud compute disks list --filter="name=('${DISK}')" --format='value(location())')
 
-echo "context: '$(kubectl config current-context)'"
+echo "context: '${CONTEXT}'"
+echo "cluster: '${CLUSTER}'"
 echo "disk:    '${DISK}' (located in '${LOCATION}')"
 echo "policy:  '${SNAPSHOT_POLICY}'"
 echo
