@@ -16,6 +16,7 @@ fi
 
 LOCATION=$(gcloud compute disks list --filter="name=('${DISK}')" --format='value(location())')
 
+echo "context: '$(kubectl config current-context)'"
 echo "disk:    '${DISK}' (located in '${LOCATION}')"
 echo "policy:  '${SNAPSHOT_POLICY}'"
 echo
