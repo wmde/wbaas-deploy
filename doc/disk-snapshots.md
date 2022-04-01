@@ -1,4 +1,4 @@
-# Disk Snapshots
+# Disk snapshots
 List of disks that should get snapshots regularly:
 - sql-mariadb-secondary
 
