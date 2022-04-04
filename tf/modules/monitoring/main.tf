@@ -20,7 +20,7 @@ resource "google_monitoring_alert_policy" "alert_policy_replica_failure" {
     duration        = "60s"
     comparison      = "COMPARISON_GT"
     aggregations {
-      alignment_period     = "60s"
+      alignment_period     = "1200s"
       per_series_aligner   = "ALIGN_RATE"
       cross_series_reducer = "REDUCE_SUM"
     }
