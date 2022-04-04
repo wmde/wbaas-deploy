@@ -11,6 +11,10 @@
   - [Confirming the restore was successful](SQL/logical-sql-restore-confirmation.md)
   - [Manually taking a backup](SQL/logical-sql-manually-taking-a-backup.md)
 
+## Physical SQL Backup
+
+- [Disk snapshots](disk-snapshots.md)
+
 ## Static Bucket Backups
 
 - [Static bucket (user uploads)](static-bucket-backup-recovery.md)
