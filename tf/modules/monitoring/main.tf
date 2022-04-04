@@ -13,7 +13,7 @@ resource "google_monitoring_alert_policy" "alert_policy_replica_failure" {
   combiner     = "OR"
   notification_channels = [ google_monitoring_notification_channel.monitoring_email_group.name ]
   conditions {
-    display_name = "SQL replica errorno 1236"
+    display_name = "(${var.cluster_name}): SQL replica errorno 1236"
     condition_threshold {
     # resource.type needed because of https://github.com/hashicorp/terraform-provider-google/issues/4165
     filter          = "metric.type=\"logging.googleapis.com/user/mariadb-sql-errno-1236-error-count\" AND resource.type=\"k8s_container\""
