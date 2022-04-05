@@ -8,6 +8,7 @@ cronSchedule: "0 0 * * *"
 
 backupKey:
 backupSecretKey: key
+backupSecretName: backup-openssl-key
 
 gcs:
   bucketName: nacho-cheese
