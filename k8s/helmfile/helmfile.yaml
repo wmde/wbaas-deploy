@@ -190,7 +190,8 @@ releases:
   - name: wbaas-backup
     installed: {{ ne .Environment.Name "production" | toYaml }}
     namespace: default
-    chart: ./../../charts/wbaas-backup
+    chart: wbstack/wbaas-backup
+    version: 0.0.1
     values:
       - "env/{{ .Environment.Name }}/wbaas-backup.yaml.gotmpl"
 
