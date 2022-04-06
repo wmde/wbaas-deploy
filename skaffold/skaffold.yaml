@@ -335,3 +335,37 @@ profiles:
                 command: [ "./helmfile-values", "-e", "local", "-r", "tool-quickstatements", "-n" ]
 metadata:
   name: tool-quickstatements
+
+---
+
+apiVersion: skaffold/v2beta23
+kind: Config
+profiles:
+  - name: local
+    activation:
+      - kubeContext: minikube-wbaas
+    build:
+      artifacts:
+        - image: local/skaffold/wbaas/wbaas-backup
+          context: ./../../wbaas-backup
+      local:
+        useDockerCLI: true
+    deploy:
+      kubeContext: minikube-wbaas
+      helm:
+        releases:
+          - name: wbaas-backup
+            chartPath: ./../../charts/charts/wbaas-backup
+            valuesFiles:
+              - ".tmp.values.wbaas-backup.yaml"
+              - NeverPull.yaml
+            artifactOverrides:
+              image: local/skaffold/wbaas/wbaas-backup
+            imageStrategy:
+              helm: {}
+        hooks:
+          before:
+            - host:
+                command: [ "./helmfile-values", "-e", "local", "-r", "wbaas-backup", "-n" ]
+metadata:
+  name: wbaas-backup
