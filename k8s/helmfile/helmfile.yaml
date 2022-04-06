@@ -188,7 +188,6 @@ releases:
       - "env/{{ .Environment.Name }}/tool-quickstatements.values.yaml.gotmpl"
 
   - name: wbaas-backup
-    installed: {{ ne .Environment.Name "production" | toYaml }}
     namespace: default
     chart: wbstack/wbaas-backup
     version: 0.0.1
