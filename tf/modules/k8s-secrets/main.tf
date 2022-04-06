@@ -138,3 +138,15 @@ resource "kubernetes_secret" "api-app-secrets" {
     "api-app-jwt-secret" = var.api_app_jwt_secret
   }
 }
+
+# Used by the wbaas-backup pod/job
+resource "kubernetes_secret" "backup-openssl-key" {
+  metadata {
+    name = "backup-openssl-key"
+    namespace = "default"
+  }
+
+  data = {
+    "key" = var.logical_backup_openssl_secret
+  }
+}

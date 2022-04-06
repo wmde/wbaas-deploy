@@ -49,7 +49,7 @@ env:
 - name: BACKUP_KEY
   valueFrom:
     secretKeyRef:
-      name: backup-openssl-key
+      name: {{ .context.Values.backupSecretName }}
       key: {{ .context.Values.backupSecretKey }}
 {{- end -}}
 

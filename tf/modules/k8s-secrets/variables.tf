@@ -104,3 +104,9 @@ variable "api_app_jwt_secret" {
   description = "Laravel API App JWT Secret"
   sensitive = true
 }
+
+variable "logical_backup_openssl_secret" {
+  type = string
+  description = "Key to encrypt backup tarballs"
+  sensitive = true
+}
