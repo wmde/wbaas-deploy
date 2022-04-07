@@ -40,4 +40,4 @@ The current environments are in flux, and to be detailed here soon.
 
 ## Snapshots
 
-To setup disk snapshots, see [Disk snapshots](disk-snapshots.md)
+To setup disk snapshots, see [Disk snapshots](backups/disk-snapshots.md)
