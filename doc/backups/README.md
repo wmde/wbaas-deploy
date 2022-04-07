@@ -14,6 +14,7 @@
 ## Physical SQL Backup
 
 - [Disk snapshots](disk-snapshots.md)
+  - [Restore SQL replica disk from snapshot](SQL/physical-sql-restore.md)
 
 ## Static Bucket Backups
 
