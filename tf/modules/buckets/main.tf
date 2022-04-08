@@ -11,11 +11,6 @@ resource "google_storage_bucket" "sql-backup" {
   location      = "EUROPE-WEST6"
   force_destroy = false
 
-  retention_policy {
-    is_locked = false
-    retention_period = 604700
-  }
-
   // only keep versions for N days
   lifecycle_rule {
     action {
