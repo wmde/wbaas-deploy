@@ -132,7 +132,7 @@ releases:
   - name: ui
     namespace: default
     chart: wbstack/ui
-    version: '{{ if eq .Environment.Name "production" }}0.2.11{{ else }}0.2.12{{ end }}'
+    version: 0.2.12
     values:
       - "env/{{ .Environment.Name }}/ui.values.yaml.gotmpl"
 
