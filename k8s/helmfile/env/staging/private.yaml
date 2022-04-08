@@ -25,7 +25,8 @@ ingressNameSuffix: wikibase-dev
 
 services:
   app:
-    url: https://api.wikibase.dev
+    url: https://www.wikibase.dev
+    apiUrl: https://api.wikibase.dev
     mailer: smtp
     ingressHosts:
       - host: api.wikibase.dev

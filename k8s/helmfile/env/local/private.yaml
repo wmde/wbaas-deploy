@@ -13,6 +13,7 @@ services:
 
   app:
     url: http://www.wbaas.localhost
+    apiUrl: http://api.wbaas.localhost
     ingressHosts:
       - host: api.wbaas.localhost
         paths:

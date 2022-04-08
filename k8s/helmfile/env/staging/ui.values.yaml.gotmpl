@@ -20,7 +20,7 @@ ingress:
     - {{ .Values.uiHostName }}
     secretName: {{ .Values.tlsSecret }}
 ui:
-  apiUrl: {{ .Values.services.app.url }}
+  apiUrl: {{ .Values.services.app.apiUrl }}
   subdomainSuffix: {{ .Values.wbstack.subdomainSuffix }}
   recaptchaSitekeySecretName: {{ .Values.external.recaptcha3.secretName }}
   recaptchaSitekeySecretKey: site_key
