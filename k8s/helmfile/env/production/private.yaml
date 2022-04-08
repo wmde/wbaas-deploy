@@ -17,7 +17,8 @@ ingressNameSuffix: wikibase-production
 
 services:
   app:
-    url: https://api.wikibase.cloud
+    url: https://www.wikibase.cloud
+    apiUrl: https://api.wikibase.cloud
     mailer: smtp
     ingressHosts:
       - host: api.wikibase.cloud
