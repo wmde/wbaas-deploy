@@ -1,0 +1,22 @@
+shared:
+  services:
+    sql:
+      customReadinessProbe:
+        initialDelaySeconds: 10
+        periodSeconds: 10
+        timeoutSeconds: 5
+        successThreshold: 1
+        failureThreshold: 1
+        exec:
+          command:
+            - /bin/bash
+            - -ec
+            - |
+              REPLICATION_THRESHOLD=60
+              PASSWORD_AUX="${MARIADB_MASTER_ROOT_PASSWORD:-}"
+              if [ -f "${MARIADB_MASTER_ROOT_PASSWORD_FILE:-}" ]; then
+                  PASSWORD_AUX=$(cat $MARIADB_MASTER_ROOT_PASSWORD_FILE)
+              fi
+              SECONDS_BEHIND=$(mysql -e "show slave status\G" -uroot -p$PASSWORD_AUX | grep "Seconds_Behind_Master" | awk '{print $2}')
+              SECONDS_BEHIND=${SECONDS_BEHIND%.*}
+              if [[ ${SECONDS_BEHIND} =~ ^-?[0-9]+$ && $REPLICATION_THRESHOLD -gt ${SECONDS_BEHIND} ]]; then exit 0; else exit 1; fi

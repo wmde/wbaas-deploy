@@ -30,6 +30,8 @@ environments:
     values:
       - ./env/local/base.yaml
       - ./env/local/private.yaml
+      - shared-values.yaml.gotmpl
+
 
 # TODO: does this need increasing?
 helmDefaults:
@@ -85,7 +87,7 @@ releases:
   - name: sql
     namespace: default
     chart: bitnami/mariadb
-    version: 10.5.0
+    version: {{ if eq .Environment.Name "production" }}9.6.2{{ else }}10.5.0{{ end }}
     values:
       - "env/{{ .Environment.Name }}/sql.values.yaml.gotmpl"
 
