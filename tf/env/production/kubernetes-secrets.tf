@@ -1,6 +1,5 @@
 module "wbaas-k8s-secrets" {
-  #source = "git::ssh://git@github.com/wmde/wbaas-deploy//tf//modules/k8s-secrets?ref=<COMMIT_HASH>"
-  source = "./../../modules/k8s-secrets"
+  source = "git::ssh://git@github.com/wmde/wbaas-deploy//tf//modules/k8s-secrets?ref=tf-module-k8s-secrets-0"
   providers = {
     kubernetes = kubernetes.wbaas-3
   }
