@@ -1,6 +1,6 @@
 #https://www.percona.com/blog/2014/10/08/mysql-replication-got-fatal-error-1236-causes-and-cures/
 resource "google_logging_metric" "mariadb-server_errno-1236" {
- name   = "mariadb-sql-errno-1236-error-count"
+ name   = "${var.cluster_name}-mariadb-sql-errno-1236-error-count"
  filter = "resource.labels.cluster_name=\"${var.cluster_name}\" AND resource.labels.container_name=\"mariadb\" AND textPayload:\"server_errno=1236\""
  metric_descriptor {
    metric_kind = "DELTA"
