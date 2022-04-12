@@ -1,6 +1,5 @@
 module "production-buckets" {
-  #source = "git::ssh://git@github.com/wmde/wbaas-deploy//tf//modules/buckets/?ref=<COMMIT_HASH>"
-  source = "./../../modules/buckets"
+  source = "git::ssh://git@github.com/wmde/wbaas-deploy//tf//modules/buckets/?ref=tf-module-buckets-0"
   providers = {
     kubernetes = kubernetes.wbaas-3
   }
