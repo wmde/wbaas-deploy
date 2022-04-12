@@ -12,8 +12,7 @@ resource "google_monitoring_alert_policy" "alert_policy_replica_failure" {
   display_name = "SQL replica error 1236 alert policy"
   combiner     = "OR"
   notification_channels = [ 
-    google_monitoring_notification_channel.monitoring_email_group.name,
-    google_monitoring_notification_channel.monitoring_mattermost_channel.name
+    google_monitoring_notification_channel.monitoring_email_group.name
   ]
   conditions {
     display_name = "(${var.cluster_name}): SQL replica errorno 1236"
@@ -39,13 +38,5 @@ resource "google_monitoring_notification_channel" "monitoring_email_group" {
   type         = "email"
   labels = {
     email_address = "${var.email_group}"
-  }
-}
-
-resource "google_monitoring_notification_channel" "monitoring_mattermost_channel" {
-  display_name = "Wikibase cloud (${var.cluster_name}) Mattermost-Notification Channel"
-  type         = "webhook_tokenauth"
-  labels = {
-    url = "https://mattermost.wikimedia.de/hooks/z618yonbh3rbzfrzi93rr6jsdh"
   }
 }
