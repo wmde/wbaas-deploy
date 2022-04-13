@@ -1,4 +1,4 @@
-.PHONY: minikube-start minikube-stop minikube-delete minikube-dashboard minikube-tunnel
+.PHONY: minikube-start minikube-stop minikube-delete minikube-dashboard minikube-tunnel init-local init-staging init-production
 
 minikube-start:
 	# version 1.21.4 is currently used in the production environments
@@ -30,6 +30,15 @@ diff-local:
 apply-local:
 	cd ./tf/env/local && terraform apply
 	cd ./k8s/helmfile && helmfile --environment local --interactive apply --context 5 --skip-deps
+
+init:
+	cd ./tf/env/${ENVIRONMENT} && terraform init
+init-local:
+	ENVIRONMENT=local make init
+init-staging:
+	ENVIRONMENT=staging make init
+init-production:
+	ENVIRONMENT=production make init
 
 
 .PHONY: diff apply
