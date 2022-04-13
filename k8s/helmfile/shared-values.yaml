@@ -11,7 +11,7 @@ shared:
           command:
             - /bin/bash
             - -ec
-            - |
+            - |-
               REPLICATION_THRESHOLD=60
               PASSWORD_AUX="${MARIADB_MASTER_ROOT_PASSWORD:-}"
               if [ -f "${MARIADB_MASTER_ROOT_PASSWORD_FILE:-}" ]; then
