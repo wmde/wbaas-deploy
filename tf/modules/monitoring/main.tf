@@ -9,7 +9,7 @@ resource "google_logging_metric" "mariadb-server_errno-1236" {
 }
  
 resource "google_monitoring_alert_policy" "alert_policy_replica_failure" {
-  display_name = "SQL replica error 1236 alert policy"
+  display_name = "(${var.cluster_name}): SQL replica error 1236 alert policy"
   combiner     = "OR"
   notification_channels = [ 
     google_monitoring_notification_channel.monitoring_email_group.name
