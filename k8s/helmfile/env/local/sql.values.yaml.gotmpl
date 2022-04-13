@@ -71,10 +71,7 @@ secondary:
       memory: 900Mi
   readinessProbe:
     enabled: false
-  {{- with .Values.shared.services.sql.customReadinessProbe }}
-  customReadinessProbe:
-    {{- toYaml . | nindent 4 }}
-  {{- end }}
+  customReadinessProbe: {{  toYaml .Values.shared.services.sql.customReadinessProbe | nindent 4 }}
   persistence:
     enabled: true
     size: {{ .Values.services.sql.storageSize | quote }}
