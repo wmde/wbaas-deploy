@@ -16,50 +16,7 @@ primary:
   persistence:
     enabled: true
     size: {{ .Values.services.sql.storageSize | quote }}
-  configuration: |-
-    [mysqld]
-    skip-name-resolve
-    explicit_defaults_for_timestamp
-    basedir=/opt/bitnami/mariadb
-    plugin_dir=/opt/bitnami/mariadb/plugin
-    port=3306
-    socket=/opt/bitnami/mariadb/tmp/mysql.sock
-    tmpdir=/opt/bitnami/mariadb/tmp
-    max_allowed_packet=16M
-    bind-address=0.0.0.0
-    pid-file=/opt/bitnami/mariadb/tmp/mysqld.pid
-    log-error=/opt/bitnami/mariadb/logs/mysqld.log
-    character-set-server=UTF8
-    collation-server=utf8_general_ci
-
-    # Custom
-    # 16MB, default is 8MB, bitnami was 128
-    key_buffer_size=16777216
-    # 67MB, default & bitnami was 134MB (134217728)
-    innodb_buffer_pool_size=67108864
-    # 8MB, default & bitnami was 16MB (16777216)
-    tmp_table_size=8388608
-    # 80, default & bitnami was 151
-    max_connections=80
-    # 7 days, default & bitnami is 0 (keep forever.)
-    expire_logs_days=7
-    # 100MB, default & bitnami was 1GB (1073741824)
-    max_binlog_size=107374182
-
-    [mysql]
-    # https://forums.mysql.com/read.php?103,189835,192421#msg-192421
-    default-character-set=UTF8
-
-    [client]
-    port=3306
-    socket=/opt/bitnami/mariadb/tmp/mysql.sock
-    plugin_dir=/opt/bitnami/mariadb/plugin
-
-    [manager]
-    port=3306
-    socket=/opt/bitnami/mariadb/tmp/mysql.sock
-    pid-file=/opt/bitnami/mariadb/tmp/mysqld.pid
-
+  configuration: {{  toYaml .Values.shared.services.sql.primary.configuration | nindent 4 }}
 secondary:
   replicaCount: 1
   resources:
@@ -75,105 +32,9 @@ secondary:
     enabled: true
     size: {{ .Values.services.sql.storageSize | quote }}
 
-  configuration: |-
-    [mysqld]
-    skip-name-resolve
-    explicit_defaults_for_timestamp
-    basedir=/opt/bitnami/mariadb
-    port=3306
-    socket=/opt/bitnami/mariadb/tmp/mysql.sock
-    tmpdir=/opt/bitnami/mariadb/tmp
-    max_allowed_packet=16M
-    bind-address=0.0.0.0
-    pid-file=/opt/bitnami/mariadb/tmp/mysqld.pid
-    log-error=/opt/bitnami/mariadb/logs/mysqld.log
-    character-set-server=UTF8
-    collation-server=utf8_general_ci
-
-    # Custom
-    # 16MB, default is 8MB, bitnami was 128
-    key_buffer_size=16777216
-    # 67MB, default & bitnami was 134MB (134217728)
-    innodb_buffer_pool_size=67108864
-    # 8MB, default & bitnami was 16MB (16777216)
-    tmp_table_size=8388608
-    # 80, default & bitnami was 151
-    max_connections=80
-    # 7 days, default & bitnami is 0 (keep forever.)
-    expire_logs_days=7
-    # 100MB, default & bitnami was 1GB (1073741824)
-    max_binlog_size=107374182
-
-    [mysql]
-    # https://forums.mysql.com/read.php?103,189835,192421#msg-192421
-    default-character-set=UTF8
-
-    [client]
-    port=3306
-    socket=/opt/bitnami/mariadb/tmp/mysql.sock
-
-    [manager]
-    port=3306
-    socket=/opt/bitnami/mariadb/tmp/mysql.sock
-    pid-file=/opt/bitnami/mariadb/tmp/mysqld.pid
-
+  configuration: {{  toYaml .Values.shared.services.sql.secondary.configuration | nindent 4 }}
 global:
   storageClass: {{ .Values.services.sql.storageClass | quote }}
 metrics:
   enabled: false
-initdbScripts:
-  # https://docs.bitnami.com/kubernetes/infrastructure/mariadb/configuration/customize-new-instance/
-  init-primary-only.sh: |
-    #!/bin/sh
-    if [[ $(hostname) == *primary* ]]; then
-        echo "Primary node, executing"
-    else
-        echo "NOT Primary node, EXITING"
-        exit
-    fi
-
-    # Backup manager / wbaas-backup
-    echo "CREATE USER IF NOT EXISTS 'backup-manager'@'%' IDENTIFIED BY '${SQL_INIT_PASSWORD_BACKUPS}';" >> /tmp/sql-init-cmds-001.txt
-    echo "ALTER USER 'backup-manager'@'%' IDENTIFIED BY '${SQL_INIT_PASSWORD_BACKUPS}';" >> /tmp/sql-init-cmds-001.txt
-
-    # https://docs.pingcap.com/tidb/v4.0/mydumper-overview#required-privileges
-    echo "GRANT SELECT ON *.* TO 'backup-manager'@'%';" >> /tmp/sql-init-cmds-001.txt
-    echo "GRANT RELOAD ON *.* TO 'backup-manager'@'%';" >> /tmp/sql-init-cmds-001.txt
-    echo "GRANT LOCK TABLES ON *.* TO 'backup-manager'@'%';" >> /tmp/sql-init-cmds-001.txt
-    echo "GRANT REPLICATION CLIENT ON *.* TO 'backup-manager'@'%';" >> /tmp/sql-init-cmds-001.txt
-    echo "GRANT SHOW VIEW ON *.* TO 'backup-manager'@'%';" >> /tmp/sql-init-cmds-001.txt
-
-
-    # API
-    # TODO tighten up the grants for the api user
-    echo "CREATE USER IF NOT EXISTS 'apiuser'@'%' IDENTIFIED BY '${SQL_INIT_PASSWORD_API}';" >> /tmp/sql-init-cmds-001.txt
-    echo "ALTER USER 'apiuser'@'%' IDENTIFIED BY '${SQL_INIT_PASSWORD_API}';" >> /tmp/sql-init-cmds-001.txt
-    echo "CREATE DATABASE IF NOT EXISTS apidb;" >> /tmp/sql-init-cmds-001.txt
-    echo "GRANT ALL ON apidb.* TO 'apiuser'@'%';" >> /tmp/sql-init-cmds-001.txt
-    echo "GRANT GRANT OPTION ON apidb.* TO 'apiuser'@'%';" >> /tmp/sql-init-cmds-001.txt
-
-
-    # Mediawiki
-    echo "CREATE USER IF NOT EXISTS 'mediawiki-db-manager'@'%' IDENTIFIED BY '${SQL_INIT_PASSWORD_MW}';" >> /tmp/sql-init-cmds-001.txt
-    echo "ALTER USER 'mediawiki-db-manager'@'%' IDENTIFIED BY '${SQL_INIT_PASSWORD_MW}';" >> /tmp/sql-init-cmds-001.txt
-    echo "CREATE DATABASE IF NOT EXISTS mediawiki;" >> /tmp/sql-init-cmds-001.txt
-
-    # Needed in order to create new DBs and users and perform updates
-    echo "GRANT ALL ON \`mwdb_%\`.* TO 'mediawiki-db-manager'@'%';" >> /tmp/sql-init-cmds-001.txt
-    echo "GRANT ALL ON \`mediawiki\`.* TO 'mediawiki-db-manager'@'%';" >> /tmp/sql-init-cmds-001.txt
-
-    # Needed in order to GRANT new users access to their own dbs
-    echo "GRANT GRANT OPTION ON \`mwdb_%\`.* TO 'mediawiki-db-manager'@'%';" >> /tmp/sql-init-cmds-001.txt
-    echo "GRANT GRANT OPTION ON \`mediawiki\`.* TO 'mediawiki-db-manager'@'%';" >> /tmp/sql-init-cmds-001.txt
-
-    # Needed in order to create new users
-    echo "GRANT CREATE USER ON *.* TO 'mediawiki-db-manager'@'%';" >> /tmp/sql-init-cmds-001.txt
-    # In order to see and grant slave status access
-    echo "GRANT REPLICA MONITOR, BINLOG MONITOR ON *.* TO 'mediawiki-db-manager'@'%' WITH GRANT OPTION;" >> /tmp/sql-init-cmds-001.txt
-
-
-    # Flush privs
-    echo "FLUSH PRIVILEGES;" >> /tmp/sql-init-cmds-001.txt
-
-    mysql -uroot -p${MARIADB_ROOT_PASSWORD} < /tmp/sql-init-cmds-001.txt
-    rm /tmp/sql-init-cmds-001.txt
+initdbScripts: {{  toYaml .Values.shared.services.sql.initdbScripts | nindent 4 }}

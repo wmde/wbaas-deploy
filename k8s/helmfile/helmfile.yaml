@@ -20,18 +20,19 @@ environments:
     values:
       - ./env/production/base.yaml
       - ./env/production/private.yaml
+      - shared-values.yaml
   staging:
     kubeContext: gke_wikibase-cloud_europe-west3-a_wbaas-2
     values:
       - ./env/staging/base.yaml
       - ./env/staging/private.yaml
+      - shared-values.yaml
   local:
     kubeContext: minikube-wbaas
     values:
       - ./env/local/base.yaml
       - ./env/local/private.yaml
       - shared-values.yaml
-
 
 # TODO: does this need increasing?
 helmDefaults:
