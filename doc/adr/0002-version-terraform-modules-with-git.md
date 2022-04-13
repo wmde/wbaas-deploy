@@ -4,7 +4,7 @@ Date: 2022-03-22
 
 ## Status
 
-proposed
+accepted
 
 ## Context
 We currently have some Terraform modules created and maintained by us for the purpose of reducing duplication and maintaining consistency between the local, staging and production environments.
@@ -14,7 +14,7 @@ We use the [local paths](https://www.terraform.io/language/modules/sources#local
 Using local paths has resulted in a number of situations where changes that we wish to make only to one environment end up being accidentally applied to other environments. For example, if a new resource is added to a module for use on staging it is difficult to avoid also creating this resource on production if this module is already used in both places.
 
 ## Decision
-When updating modules used by multiple environments we will explicitly version terraform modules using git tags of this repository. When creating tags the format should preferably take the form of `tf-module-<module name>-<integer>` to indicate that the tag is related to a versioned module. We will maintain a CHAMGELOG.md to make it clear what change (compared to the previous tag) this new tag introduces.
+When updating modules used by multiple environments we will explicitly version terraform modules using git tags of this repository. When creating tags the format should preferably take the form of `tf-module-<module name>-<integer>` to indicate that the tag is related to a versioned module. We will maintain a `CHANGELOG.md` to make it clear what change (compared to the previous tag) this new tag introduces.
 
 Sourceing one of these modules would look like:
 ```
