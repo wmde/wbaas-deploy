@@ -36,7 +36,6 @@ services:
   sql:
     storageClass: standard
     storageSize: 1Gi
-    secondaryReplicationThreshold: 60
     api:
       db: apidb
       user: apiuser

@@ -20,4 +20,5 @@ shared:
               fi
               SECONDS_BEHIND=$(mysql -e "show slave status\G" -uroot -p$PASSWORD_AUX | grep "Seconds_Behind_Master" | awk '{print $2}')
               SECONDS_BEHIND=${SECONDS_BEHIND%.*}
+              echo "$SECONDS_BEHIND seconds behind primary"
               if [[ ${SECONDS_BEHIND} =~ ^-?[0-9]+$ && $REPLICATION_THRESHOLD -gt ${SECONDS_BEHIND} ]]; then exit 0; else exit 1; fi
