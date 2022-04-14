@@ -84,7 +84,7 @@ locals {
       name          = "https-${local.target_name}-wikibase-wbgetentities"
       host          = var.target_wiki
       path          = "/w/api.php?action=wbgetentities&format=json&errorformat=plaintext&uselang=en&ids=${var.wikibase_itempage_item}"
-      content      = "success\":1"
+      content      = "${var.wikibase_itempage_content}"
     },
     "https-${local.target_name}-wikibase-itempage" = {
       name          = "https-${local.target_name}-wikibase-itempage"
