@@ -18,6 +18,7 @@ variable "terraformers" {
 # TODO: Actually use this throughout
 locals {
   production_cluster_name = "wbaas-3"
+  project_id = "wikibase-cloud"
 }
 
 variable "mailgun_api_key" {
