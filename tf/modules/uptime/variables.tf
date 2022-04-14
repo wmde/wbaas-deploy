@@ -13,6 +13,17 @@ variable "target_wbaas_hostname" {
   description = "The target wbaas service we check uptime against. Example: wikibase.dev"
 }
 
+variable "wikibase_itempage_item" {
+  type = string
+  description = "The target item we will check. Example: Q1"
+  default = "Q1"
+}
+
+variable "wikibase_itempage_content" {
+  type = string
+  description = "The content we look for rendered when visiting `wikibase_itempage_item_id`."
+}
+
 locals {
   target_name = replace(var.target_wiki, ".", "-")
   target_wbaas_name = replace(var.target_wbaas_hostname, ".", "-")
@@ -72,14 +83,14 @@ locals {
     "https-${local.target_name}-wikibase-wbgetentities" = {
       name          = "https-${local.target_name}-wikibase-wbgetentities"
       host          = var.target_wiki
-      path          = "/w/api.php?action=wbgetentities&format=json&errorformat=plaintext&uselang=en&ids=Q1"
+      path          = "/w/api.php?action=wbgetentities&format=json&errorformat=plaintext&uselang=en&ids=${var.wikibase_itempage_item}"
       content      = "success\":1"
     },
     "https-${local.target_name}-wikibase-itempage" = {
       name          = "https-${local.target_name}-wikibase-itempage"
       host          = var.target_wiki
-      path          = "/wiki/Item:Q1"
-      content      = "I like coffee"
+      path          = "/wiki/Item:${var.wikibase_itempage_item}"
+      content      = "${var.wikibase_itempage_content}"
     }
   }
 }
