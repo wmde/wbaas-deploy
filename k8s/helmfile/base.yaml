@@ -43,15 +43,12 @@ helmfiles:
       - foo: null
 
 releases:
-  ################################
-  # ALL ENVIRONMENTS
-  ################################
   - name: nginx-ingress
     namespace: kube-system
     chart: stable/nginx-ingress
     version: 1.34.3
     values:
-      - "env/{{ .Environment.Name }}/nginx-ingress.values.yaml.gotmpl"
+      - "env/base/nginx-ingress.values.yaml.gotmpl"
 
   - name: sql
     namespace: default

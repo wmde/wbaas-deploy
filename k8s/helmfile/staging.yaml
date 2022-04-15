@@ -22,3 +22,7 @@ releases:
     chart: ./../../charts/certificates
     values:
       - "env/staging/certificates.values.yaml.gotmpl"
+  - name: nginx-ingress
+    chart: stable/nginx-ingress
+    values:
+      - "env/staging/nginx-ingress.values.yaml.gotmpl"

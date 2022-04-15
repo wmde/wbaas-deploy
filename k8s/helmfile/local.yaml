@@ -12,3 +12,7 @@ releases:
     version: 5.0.1
     values:
       - env/local/mailhog.values.yaml
+  - name: nginx-ingress
+    chart: stable/nginx-ingress
+    values:
+      - "env/local/nginx-ingress.values.yaml.gotmpl"
