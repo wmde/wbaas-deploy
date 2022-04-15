@@ -1,0 +1,24 @@
+releases:
+  # Only deploy the clusterissuers to production clusters for now, as they won't
+  # work locally for now...
+  - name: clusterissuers
+    namespace: cert-manager
+    # TODO use something more generic or from wbstack/charts repo
+    chart: ./../../charts/wikibase-cloud-clusterissuers
+    values:
+      - email: {{ .Values.external.letsencrypt.email }}
+      - gceProject: {{ .Values.gceProject }}
+      # TODO this chart needs certificates for some reason, it probably shouldn't
+      - certificates:
+          - dnsNames:
+              - '*.wikibase.cloud'
+              - 'wikibase.cloud'
+          - dnsNames:
+              - '*.wikibase.dev'
+              - 'wikibase.dev'
+
+  - name: certificates
+    namespace: default
+    chart: ./../../charts/certificates
+    values:
+      - "env/production/certificates.values.yaml.gotmpl"
