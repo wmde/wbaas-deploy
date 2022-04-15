@@ -2,13 +2,3 @@ ingressNameSuffix: wikibase-production
 ingressHost: "*.wikibase-production"
 forceSSL: true
 tls: true
-controller:
-  service:
-    loadBalancerIP: {{ .Values.ip }}
-    externalTrafficPolicy: Local
-  resources:
-    requests:
-      cpu: 0.100
-      memory: 150Mi
-  config:
-    block-user-agents: ~*Seekport\sCrawler.*

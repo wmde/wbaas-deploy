@@ -80,6 +80,7 @@ releases:
     chart: stable/nginx-ingress
     version: 1.34.3
     values:
+      - "env/base/nginx-ingress.values.yaml.gotmpl"
       - "env/{{ .Environment.Name }}/nginx-ingress.values.yaml.gotmpl"
 
   - name: sql
@@ -96,6 +97,7 @@ releases:
     chart: elastic/elasticsearch
     version: 6.8.18
     values:
+      - "env/base/elasticsearch.values.yaml.gotmpl"
       - "env/{{ .Environment.Name }}/elasticsearch.values.yaml.gotmpl"
 
   - name: redis
