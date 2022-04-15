@@ -64,7 +64,7 @@ releases:
     chart: elastic/elasticsearch
     version: 6.8.18
     values:
-      - "env/{{ .Environment.Name }}/elasticsearch.values.yaml.gotmpl"
+      - "env/base/elasticsearch.values.yaml.gotmpl"
 
   - name: redis
     # This is in the default namespace, as the default ns implies staging?

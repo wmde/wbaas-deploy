@@ -26,3 +26,7 @@ releases:
     chart: stable/nginx-ingress
     values:
       - "env/production/nginx-ingress.values.yaml.gotmpl"
+  - name: elasticsearch
+    chart: elastic/elasticsearch
+    values:
+      - "env/production/elasticsearch.values.yaml.gotmpl"
