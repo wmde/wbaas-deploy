@@ -164,22 +164,3 @@ releases:
     version: 0.0.3
     values:
       - "env/{{ .Environment.Name }}/wbaas-backup.yaml.gotmpl"
-
-  ################################
-  # LOCAL ONLY
-  ################################
-  - name: adminer-cetic
-    installed: {{ eq .Environment.Name "local" | toYaml }}
-    namespace: default
-    chart: cetic/adminer
-    version: v0.1.7
-    values:
-      - "env/{{ .Environment.Name }}/adminer-cetic.values.yaml.gotmpl"
-
-  - name: mailhog
-    installed: {{ eq .Environment.Name "local" | toYaml }}
-    namespace: default
-    chart: codecentric/mailhog
-    version: 5.0.1
-    values:
-      - env/local/mailhog.values.yaml

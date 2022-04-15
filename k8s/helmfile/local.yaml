@@ -1,0 +1,14 @@
+releases:
+  - name: adminer-cetic
+    namespace: default
+    chart: cetic/adminer
+    version: v0.1.7
+    values:
+      - "env/local/adminer-cetic.values.yaml.gotmpl"
+
+  - name: mailhog
+    namespace: default
+    chart: codecentric/mailhog
+    version: 5.0.1
+    values:
+      - env/local/mailhog.values.yaml
