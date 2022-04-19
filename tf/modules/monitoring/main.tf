@@ -16,13 +16,13 @@ resource "google_monitoring_alert_policy" "alert_policy_replica_failure" {
   ]
   conditions {
     display_name = "(${var.cluster_name}): SQL replica errorno 1236"
-    condition_absent {
+    condition_threshold {
     # resource.type needed because of https://github.com/hashicorp/terraform-provider-google/issues/4165
     filter          = "metric.type=\"logging.googleapis.com/user/${google_logging_metric.mariadb-server_errno-1236.name}\" AND resource.type=\"k8s_container\""
     duration        = "60s"
-
+    comparison      = "COMPARISON_GT"
     aggregations {
-      alignment_period     = "60s"
+      alignment_period     = "1200s"
       per_series_aligner   = "ALIGN_RATE"
       cross_series_reducer = "REDUCE_SUM"
     }
