@@ -85,7 +85,7 @@ releases:
   - name: sql
     namespace: default
     chart: bitnami/mariadb
-    version: '{{ if eq .Environment.Name "production" }} 9.6.2 {{ else }} 10.5.0 {{ end }}'
+    version: 10.5.0
     values:
       - "env/{{ .Environment.Name }}/sql.values.yaml.gotmpl"
 
