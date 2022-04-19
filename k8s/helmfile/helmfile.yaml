@@ -84,10 +84,8 @@ releases:
 
   - name: sql
     namespace: default
-    # TODO reevaluate upstreaming addshore/bitnami-charts(7.3.16-mariadb-ready-check-seconds)
-    # modifications
     chart: bitnami/mariadb
-    version: 9.6.2
+    version: '{{ if eq .Environment.Name "production" }} 9.6.2 {{ else }} 10.5.0 {{ end }}'
     values:
       - "env/{{ .Environment.Name }}/sql.values.yaml.gotmpl"
 
