@@ -1,3 +1,9 @@
+# tf-module-monitoring-3
+- Revert broken changes from tf-module-monitoring-1
+
+# tf-module-monitoring-2
+- Clarify alert policy names
+
 # tf-module-monitoring-1
 - Try to fix automatic resolvement of SQL replica alert
 
