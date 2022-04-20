@@ -72,7 +72,7 @@ secondary:
   readinessProbe:
     enabled: false
   customReadinessProbe:
-        initialDelaySeconds: 10
+        initialDelaySeconds: 20
         periodSeconds: 10
         timeoutSeconds: 5
         successThreshold: 1
@@ -89,8 +89,17 @@ secondary:
               fi
               SECONDS_BEHIND=$(mysql -e "show slave status\G" -uroot -p$PASSWORD_AUX | grep "Seconds_Behind_Master" | awk '{print $2}')
               SECONDS_BEHIND=${SECONDS_BEHIND%.*}
-              echo "$SECONDS_BEHIND seconds behind primary"
-              if [[ ${SECONDS_BEHIND} =~ ^-?[0-9]+$ && $REPLICATION_THRESHOLD -gt ${SECONDS_BEHIND} ]]; then exit 0; else exit 1; fi
+              if [[ $SECONDS_BEHIND = "NULL" ]];
+              then
+                echo "Replication isn't running yet got NULL seconds behind primary!"
+                exit 1;
+              elif [[ ${SECONDS_BEHIND} =~ ^-?[0-9]+$ && $REPLICATION_THRESHOLD -gt ${SECONDS_BEHIND} ]];
+              then
+                exit 0;
+              else
+                echo "More than $REPLICATION_THRESHOLD seconds behind primary"
+                exit 1;
+              fi
   persistence:
     enabled: true
     size: {{ .Values.services.sql.storageSize | quote }}
