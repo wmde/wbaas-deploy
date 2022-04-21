@@ -10,7 +10,7 @@ These are using the [google_monitoring_uptime_check_config](https://registry.ter
 
 For [staging](../tf/env/staging/uptime.tf), a developer has created a wiki like https://coffeebase.wikibase.dev on their own account and created a single item (Q1) with the english label `Arabica`. The uptime checks uses `GET` requests for validating that this and other expected responses is accessible through different endpoints and services.
 
-The full list of checks are defined in the [variable.tf file of the uptime module](../tf/modules/uptime/main.tf).
+The full list of checks are defined in the [variables.tf file of the uptime module](../tf/modules/uptime/variables.tf).
 
 ## Uptime check overview
 
