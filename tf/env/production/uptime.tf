@@ -1,13 +1,13 @@
 module "uptime-checks" {
   source = "git::ssh://git@github.com/wmde/wbaas-deploy//tf//modules/uptime?ref=tf-module-uptime-0"
   providers = {
-    kubernetes = kubernetes.wbaas-2
+    kubernetes = kubernetes.wbaas-3
   }
-  target_wiki = "coffeebase.wikibase.dev"
-  target_wbaas_hostname = "wikibase.dev"
+  target_wiki = "cloud-coffeebase.wikibase.cloud"
+  target_wbaas_hostname = "wikibase.cloud"
 
   wikibase_itempage_item = "Q1"
-  wikibase_itempage_content = "Arabica"
+  wikibase_itempage_content = "I like coffee"
 
   project_id = local.project_id
 }
