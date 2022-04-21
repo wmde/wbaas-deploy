@@ -1,3 +1,6 @@
+# tf-module-uptime-0
+- Add modular uptime checks
+
 # tf-module-monitoring-3
 - Revert broken changes from tf-module-monitoring-1
 
