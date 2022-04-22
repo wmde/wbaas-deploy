@@ -6,11 +6,11 @@ app:
   heapSize: 1g
 resources:
   requests:
-    cpu: 0.1
-    memory: "1000Mi"
-  limits:
     cpu: 0.5
-    memory: "2072Mi"
+    memory: "2048Mi"
+  limits:
+    cpu: 1
+    memory: "3072Mi"
 persistence:
   enabled: true
   accessMode: ReadWriteOnce
