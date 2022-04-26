@@ -14,6 +14,9 @@ resource "google_monitoring_alert_policy" "alert_policy_replica_failure" {
   notification_channels = [ 
     google_monitoring_notification_channel.monitoring_email_group.name
   ]
+  documentation {
+    content = "**Alert trigger when SQL replication fails on the MariaDB replica database with error code 1236.**\nThis error occurs when the slave server required binary log for replication no longer exists on the master database server. In one of the scenarios for this, the slave server is stopped for some reason for a few hours/days and when you resume replication on the slave it fails with the above error. [see](https://www.percona.com/blog/2014/10/08/mysql-replication-got-fatal-error-1236-causes-and-cures/)"
+  }
   conditions {
     display_name = "(${var.cluster_name}): SQL replica errorno 1236"
     condition_threshold {
