@@ -1,3 +1,6 @@
+# tf-module-monitoring-4
+- Add documentation to sql replica alert
+
 # tf-module-uptime-0
 - Add modular uptime checks
 
