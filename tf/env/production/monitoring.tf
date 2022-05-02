@@ -1,5 +1,5 @@
 module "production-monitoring" {
-  source = "git::ssh://git@github.com/wmde/wbaas-deploy//tf//modules/monitoring?ref=tf-module-monitoring-3"
+  source = "git::ssh://git@github.com/wmde/wbaas-deploy//tf//modules/monitoring?ref=tf-module-monitoring-5"
   
   providers = {
     kubernetes = kubernetes.wbaas-3
