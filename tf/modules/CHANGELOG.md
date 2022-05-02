@@ -1,3 +1,7 @@
+tf-module-monitoring-5
+- Add cluster name to logging metric
+- Add documentation to replication lag policy
+
 # tf-module-monitoring-4
 - Add documentation to sql replica alert
 
