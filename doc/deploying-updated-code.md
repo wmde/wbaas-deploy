@@ -49,7 +49,7 @@ We're going to prepare a change that will work locally and on staging.
  - Commit this change to a branch and push it to github and open a pull request
 
 
-## Testing the new chart locally locally
+## Testing the new chart locally, locally
  - Apply the changes to the local cluster with `make apply-local`
  - Go and check your local cluster; see if the new change works
 
