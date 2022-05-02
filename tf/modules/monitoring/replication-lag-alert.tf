@@ -1,6 +1,6 @@
 # see customReadinessProbe on the sql values.yaml
 resource "google_logging_metric" "mariadb-replica-readiness-probe-failure" {
-  name        = "mariadb-replica-readiness-probe-failure"
+  name        = "${var.cluster_name}-mariadb-replica-readiness-probe-failure"
   description = "A log based metric for failures of the replica readiness probe lagging behind the primary"
 
   # Filter for the secondary pod and look for readiness probe failures
