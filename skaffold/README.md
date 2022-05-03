@@ -52,7 +52,7 @@ Currently the following services are hooked up to skaffold:
 
 These are all configured as seperate modules. To run a single module run
 ```sh
-shaffold run -m <module>
+skaffold run -m <module>
 ```
 
 
