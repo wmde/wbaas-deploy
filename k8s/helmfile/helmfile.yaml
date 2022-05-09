@@ -93,7 +93,6 @@ releases:
     namespace: default
     chart: elastic/elasticsearch
     version: 6.8.18
-    installed: {{ ne .Environment.Name "production" | toYaml }}
     values:
       - "env/{{ .Environment.Name }}/elasticsearch.values.yaml.gotmpl"
 
