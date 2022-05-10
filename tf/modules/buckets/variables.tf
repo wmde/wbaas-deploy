@@ -13,7 +13,6 @@ variable "user_object_admins" {
   description = "Users who have access to the backup buckets"
 }
 
-
 variable "gcs_sql_scratch_disk_size_gb" {
   type = number
   description = "Number of gigabytes of disk available for producing backups"
