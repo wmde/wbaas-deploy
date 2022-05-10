@@ -22,6 +22,12 @@ resource "google_storage_bucket" "sql-backup" {
   }
 }
 
+resource "google_compute_disk" "logic-backup-scratch-disk" {
+  name  = local.gcs_sql_scratch_disk_name
+  type  = "pd-ssd"
+  zone  = "europe-west3-a"
+  size = var.gcs_sql_scratch_disk_size_gb
+}
 
 # SQL Backup bucket IAM Policy
 data "google_iam_policy" "sql-backup-policy" {

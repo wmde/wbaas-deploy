@@ -6,5 +6,6 @@ module "staging-buckets" {
   project_prefix = "wikibase-dev"
   static_bucket_writer_account = google_service_account.dev-api.email
   user_object_admins = var.terraformers
+  gcs_sql_scratch_disk_size_gb = 16
 }
 

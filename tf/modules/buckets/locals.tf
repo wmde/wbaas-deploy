@@ -4,5 +4,6 @@ locals {
     gcs_api_static_bucket_name = "${var.project_prefix}-static"
     gcs_api_static_bucket_backup_name = "${var.project_prefix}-static-backup"
     gcs_sql_bucket_backup_name = "${var.project_prefix}-sql-backup"
+    gcs_sql_scratch_disk_name = "${var.project_prefix}-logic-backup-scratch-disk"
     transfer_service_id = "project-${data.google_project.project.number}@storage-transfer-service.iam.gserviceaccount.com"
 }
