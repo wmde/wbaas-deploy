@@ -5,7 +5,9 @@ replicaCount:
   alpha: 1
 mw:
   settings:
-    logToStdErr: true
+    # Enable this to increase verbosity of logging in mw pods
+    # This is very useful when debugging locally but may interfere with jobs
+    logToStdErr: false
 
   db:
     replica: sql-mariadb-secondary.default.svc.cluster.local
