@@ -1,0 +1,19 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  generateName: load-elasticsearch-data-
+spec:
+  template:
+    metadata:
+      name: load-elasticsearch-data
+    spec:
+      containers:
+        - name: import-elasticsearch
+          command:
+            - 'bash'
+            - '-c'
+            - >
+              php artisan wbs-wiki:setSetting id $WIKI_ID wwExtEnableElasticSearch 1 &&
+              php artisan job:dispatchNow CirrusSearch\\ElasticSearchIndexInit $WIKI_ID &&
+              php artisan job:dispatchNow CirrusSearch\\QueueSearchIndexBatches $WIKI_ID
+      restartPolicy: Never
