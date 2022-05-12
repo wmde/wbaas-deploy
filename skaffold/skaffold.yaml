@@ -42,6 +42,11 @@ profiles:
       artifacts:
         - image: local/skaffold/wbaas/mediawiki
           context: ./../../mediawiki
+          docker:
+            buildArgs:
+              LOCALIZATION_CACHE_THREAD_COUNT: 4
+              LOCALIZATION_CACHE_ADDITIONAL_PARAMS: "--lang=en,sv,de"
+              INSTALL_PROFILING_DEPS: 1
       local:
         useDockerCLI: true
     deploy:
