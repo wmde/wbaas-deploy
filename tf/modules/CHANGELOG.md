@@ -1,3 +1,6 @@
+# tf-module-monitoring-6
+- Add monitoring and alerting for SQL logical backup failure.
+
 # tf-module-monitoring-5
 - Add cluster name to logging metric
 - Add documentation to replication lag policy
