@@ -188,6 +188,21 @@ For the local setup, [Mailhog](https://github.com/mailhog/MailHog) is used to ca
 
 You can view those emails by going to http://mailhog.wbaas.localhost/
 
+## Mediawiki debug logging
+
+To increase verbosity of logging in the mediawiki pods you can change the following value in the mediawiki deployment to enable debug logging to appear in all of the pods.
+
+```yml
+mw:
+  settings:
+    logToStdErr: true
+```
+
+Apply the changes to the local cluster 
+```sh
+make apply-local
+```
+
 ## Create an account on wbaas.localhost
 To use the local wbaas instance you have just setup, you will need to create an invitation code via the api which is needed when creating an account. Follow the [instructions](https://github.com/wbstack/api/blob/main/docs/invitation-codes.md) documented in the wbaas/api repo.
 
