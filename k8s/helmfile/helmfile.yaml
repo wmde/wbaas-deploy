@@ -92,7 +92,7 @@ releases:
   - name: elasticsearch
     namespace: default
     chart: elastic/elasticsearch
-    version: 6.8.18
+    version: {{ if eq .Environment.Name "production" }}6.8.18{{ else }}6.8.22{{ end }}
     values:
       - "env/{{ .Environment.Name }}/elasticsearch.values.yaml.gotmpl"
 
