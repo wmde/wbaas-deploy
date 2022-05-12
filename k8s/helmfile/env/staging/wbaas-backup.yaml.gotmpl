@@ -5,8 +5,3 @@ gcs:
   bucketName: wikibase-dev-sql-backup
   serviceAccountSecretName: api-serviceaccount
   uploadToBucket: true
-
-resources:
-  job:
-    requests:
-      ephemeral-storage: 1Gi # TODO REMOVE here just to get it working to debug alerts
