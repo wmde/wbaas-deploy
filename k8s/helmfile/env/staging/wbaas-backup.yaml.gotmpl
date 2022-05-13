@@ -1,9 +1,11 @@
 restorePodRunning: false
-cronSchedule: "0 0 * * *"
+
+job:
+  cronSchedule: "0 0 * * *"
 
 storage:
+  scratchDiskSpace: 8Gi
   gcs:
-    scratchDiskName: wikibase-dev-logic-backup-scratch-disk
     bucketName: wikibase-dev-sql-backup
     serviceAccountSecretName: api-serviceaccount
     uploadToBucket: true
