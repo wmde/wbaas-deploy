@@ -12,25 +12,24 @@ commonConfiguration: |
   # Disable RDB persistence, AOF persistence already enabled.
   save ""
   # Control memory usage
-  maxmemory 75mb
+  maxmemory 50mb
   maxmemory-policy volatile-lru
   # Auto AOF file rewriting
   auto-aof-rewrite-percentage 100
-  auto-aof-rewrite-min-size 85mb
+  auto-aof-rewrite-min-size 60mb
 master:
   resources:
     requests:
-      cpu: 100m
-      memory: 125Mi
-    # Internal limit is 75MB, this for now just stops runaway redis..
+      cpu: 10m
+      memory: 62Mi
+    # Internal limit is 90MB, this for now just stops runaway redis..
     limits:
-      cpu: 200m
-      memory: 150Mi
+      cpu: 50m
+      memory: 90Mi
   persistence:
     enabled: true
     path: /data
     subPath: ""
-    storageClass: premium-rwo
     accessModes:
       - ReadWriteOnce
     size: 1Gi
@@ -38,16 +37,17 @@ replica:
   replicaCount: 1
   resources:
     requests:
-      cpu: 40m
-      memory: 125Mi
+      cpu: 10m
+      # 60Mi based on usage seen on 21 December 2019 (after memory limits in place)
+      memory: 60Mi
+    # Internal limit is 90MB, this for now just stops runaway redis..
     limits:
-      cpu: 80m
-      memory: 150Mi
+      cpu: 50m
+      memory: 90Mi
   persistence:
     enabled: true
     path: /data
     subPath: ""
-    storageClass: premium-rwo
     accessModes:
       - ReadWriteOnce
     size: 1Gi
