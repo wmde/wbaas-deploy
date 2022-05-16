@@ -101,6 +101,7 @@ releases:
     namespace: default
     chart: bitnami/redis
     version: 15.4.1
+    installed: {{ ne .Environment.Name "staging" | toYaml }}
     values:
       - "env/{{ .Environment.Name }}/redis.values.yaml.gotmpl"
 
