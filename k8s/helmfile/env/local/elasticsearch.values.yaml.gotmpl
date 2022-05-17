@@ -2,8 +2,8 @@ image: "wikibase/elasticsearch"
 imageTag: "6.8.23-wmde.6"
 imagePullPolicy: Always
 
-replicas: 1
-minimumMasterNodes: 1
+replicas: 3
+minimumMasterNodes: 2
 
 # For now we don't have enough nodes to have this set to hard
 antiAffinity: soft
