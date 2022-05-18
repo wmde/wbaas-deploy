@@ -1,12 +1,13 @@
 # every five minutes
 # cronSchedule: "*/5 * * * *"
 restorePodRunning: false
-cronSchedule: "0 0 * * *"
 
-gcs:
-  uploadToBucket: false
+job:
+  failedJobsHistoryLimit: 1
+  successfulJobsHistoryLimit: 1
+  cronSchedule: "0 0 * * *"
 
-resources:
-  job:
-    requests:
-      ephemeral-storage: 1Gi
+storage:
+  scratchDiskSpace: 4Gi
+  gcs:
+    uploadToBucket: false

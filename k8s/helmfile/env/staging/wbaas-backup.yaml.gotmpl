@@ -1,7 +1,11 @@
 restorePodRunning: false
-cronSchedule: "0 0 * * *"
 
-gcs:
-  bucketName: wikibase-dev-sql-backup
-  serviceAccountSecretName: api-serviceaccount
-  uploadToBucket: true
+job:
+  cronSchedule: "0 0 * * *"
+
+storage:
+  scratchDiskSpace: 8Gi
+  gcs:
+    bucketName: wikibase-dev-sql-backup
+    serviceAccountSecretName: api-serviceaccount
+    uploadToBucket: true
