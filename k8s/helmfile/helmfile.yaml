@@ -188,7 +188,7 @@ releases:
   - name: wbaas-backup
     namespace: default
     chart: wbstack/wbaas-backup
-    version: '{{ if eq .Environment.Name "production" }}0.0.4{{ else }}0.0.5{{ end }}'
+    version: 0.0.5
     values:
       - "env/{{ .Environment.Name }}/wbaas-backup.yaml.gotmpl"
 
