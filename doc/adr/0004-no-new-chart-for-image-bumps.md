@@ -23,5 +23,6 @@ We will still cut a new chart if we want to change other things e.g. additional 
 
 We will have to cut fewer new charts.
 There will be a smaller overhead to deploying new images.
-We will have to be extra careful that we don't end up inadvertently running different image tags in
+We will have to be extra careful that we don't end up inadvertently running different image tags in.
+Any users of charts will not always receive the latest updates to the images of the applications a chart is for.
 different environments.
