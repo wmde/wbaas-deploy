@@ -8,15 +8,15 @@ minimumMasterNodes: 2
 # For now we don't have enough nodes to have this set to hard
 antiAffinity: soft
 
-esJavaOpts: "-Xms2g -Xmx2g"
+esJavaOpts: "-Xms2600m -Xmx2600m"
 
 resources:
   requests:
     cpu: "500m"
-    memory: "4Gi"
+    memory: "5200Mi"
   limits:
     cpu: "1950m"
-    memory: "4Gi"
+    memory: "5200Mi"
 
 volumeClaimTemplate:
   accessModes: [ "ReadWriteOnce" ]
