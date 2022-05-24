@@ -79,7 +79,7 @@ resource "google_container_node_pool" "wbaas-3_standard" {
 
 resource "google_container_node_pool" "wbaas-3_standard_bigger" {
     cluster = "wbaas-3"
-    name                = "standard-pool"
+    name                = "standard-bigger-pool"
     node_count          = 3
     node_locations      = [
         "europe-west3-a",
