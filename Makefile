@@ -40,7 +40,7 @@ init-staging:
 init-production:
 	ENVIRONMENT=production make init
 
-.PHONY: skaffold skaffold-mediawiki
+.PHONY: skaffold skaffold-mediawiki skaffold-ui
 skaffold:
 	cd ./skaffold && skaffold run -m ${MODULE}
 skaffold-mediawiki:
