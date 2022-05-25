@@ -1,3 +1,6 @@
+# tf-module-monitoring-7
+- Increase the duration time before backup alerts 
+
 # tf-module-monitoring-6
 - Add monitoring and alerting for SQL logical backup failure.
 
