@@ -9,10 +9,12 @@ jobs:
     steps:
       - name: Create the Mattermost Message
         run: >
-          echo "{\"text\":\"Pull request opened: "${{github.event.pull_request.url }}"\"}"
+          echo "{
+          \"text\":\"Pull request opened: "${{github.event.pull_request.url }}"\"
+          \"username\":\"GitHubBot\"
+          \"icon_url\":\"https://github.com/favicon.ico\"
+          }"
           > mattermost.json
       - uses: mattermost/action-mattermost-notify@master
         env:
           MATTERMOST_WEBHOOK_URL: ${{ secrets.MATTERMOST_WEBHOOK_URL }}
-          MATTERMOST_USERNAME: "GithubBot"
-          MATTERMOST_ICON: "https://github.com/favicon.ico"
