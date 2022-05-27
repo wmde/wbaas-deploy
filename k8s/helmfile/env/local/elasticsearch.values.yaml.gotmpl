@@ -10,6 +10,16 @@ antiAffinity: soft
 
 esJavaOpts: "-Xms1g -Xmx1g"
 
+esConfig:
+  elasticsearch.yml: |
+    xpack.ml.enabled: false
+    xpack.monitoring.collection.enabled: false
+    xpack.watcher.enabled: false
+    xpack.security.enabled: false
+    xpack.graph.enabled: false
+    xpack.logstash.enabled: false
+    xpack.ccr.enabled: false
+
 resources:
   requests:
     cpu: "500m"
