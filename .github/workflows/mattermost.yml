@@ -9,7 +9,7 @@ jobs:
     steps:
       - name: Create the Mattermost Message
         run: >
-          echo "{\"text\":\"Pull request opened: ${ github.event.pull_request.pull_request.url }\"}"
+          echo "{\"text\":\"Pull request opened: ${ github.event.url }\"}"
           > mattermost.json
       - uses: mattermost/action-mattermost-notify@master
         env:
