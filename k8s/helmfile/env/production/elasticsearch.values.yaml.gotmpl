@@ -18,6 +18,16 @@ resources:
     cpu: "3950m"
     memory: "8Gi"
 
+esConfig:
+  elasticsearch.yml: |
+    xpack.ml.enabled: false
+    xpack.monitoring.collection.enabled: false
+    xpack.watcher.enabled: false
+    xpack.security.enabled: false
+    xpack.graph.enabled: false
+    xpack.logstash.enabled: false
+    xpack.ccr.enabled: false
+
 volumeClaimTemplate:
   accessModes: [ "ReadWriteOnce" ]
   storageClassName: "premium-rwo"
