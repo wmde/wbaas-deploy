@@ -4,13 +4,15 @@ image:
   pullPolicy: Always
 
 # every five minutes
-# cronSchedule: "*/5 * * * *"
+# "*/5 * * * *"
+# every January first
+# * * 1 1 *
 restorePodRunning: false
 
 job:
   failedJobsHistoryLimit: 1
   successfulJobsHistoryLimit: 1
-  cronSchedule: "0 0 * * *"
+  cronSchedule: "* * 1 1 *"
 
 storage:
   scratchDiskSpace: 4Gi
