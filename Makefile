@@ -47,6 +47,8 @@ skaffold-mediawiki:
 	MODULE=mediawiki-137-fp make skaffold
 skaffold-ui:
 	MODULE=ui make skaffold
+skaffold-api:
+	MODULE=api make skaffold
 
 .PHONY: diff apply
 diff: diff-staging diff-production
