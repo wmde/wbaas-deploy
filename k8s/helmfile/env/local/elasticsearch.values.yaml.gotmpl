@@ -10,8 +10,17 @@ antiAffinity: soft
 
 esJavaOpts: "-Xms1g -Xmx1g"
 
+resources:
+  requests:
+    cpu: "500m"
+    memory: "1Gi"
+  limits:
+    cpu: "1000m"
+    memory: "1.5Gi"
+
 esConfig:
   elasticsearch.yml: |
+    # T309396
     xpack.ml.enabled: false
     xpack.monitoring.collection.enabled: false
     xpack.watcher.enabled: false
@@ -20,13 +29,8 @@ esConfig:
     xpack.logstash.enabled: false
     xpack.ccr.enabled: false
 
-resources:
-  requests:
-    cpu: "500m"
-    memory: "1Gi"
-  limits:
-    cpu: "1000m"
-    memory: "1.5Gi"
+    # T309378
+    action.auto_create_index: false
 
 volumeClaimTemplate:
   accessModes: [ "ReadWriteOnce" ]
