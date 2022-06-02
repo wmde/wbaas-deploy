@@ -19,5 +19,5 @@ resource "google_storage_bucket" "tf-state" {
 resource "google_storage_bucket_iam_member" "tf-state-iam-member" {
   bucket = google_storage_bucket.tf-state.name
   role = "roles/storage.objectAdmin"
-  member = "user:thomas.arrow_ext@wikimedia.de"
+  member = "user:thomas.arrow@wikimedia.de"
 }

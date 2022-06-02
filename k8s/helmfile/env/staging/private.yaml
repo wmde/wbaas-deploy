@@ -53,7 +53,7 @@ services:
       toolWidar: 11
 external:
   letsencrypt:
-    email: thomas.arrow_ext@wikimedia.de
+    email: thomas.arrow@wikimedia.de
   recaptcha2:
     secretName: recaptcha-v2-secrets
   recaptcha3:
