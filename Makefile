@@ -26,10 +26,10 @@ helmfile-deps:
 .PHONY: diff-local apply-local
 diff-local:
 	cd ./tf/env/local && terraform plan
-	cd ./k8s/helmfile && helmfile --environment local diff --context 5 --skip-deps
+	cd ./k8s/helmfile && helmfile --environment local diff --context 5
 apply-local:
 	cd ./tf/env/local && terraform apply
-	cd ./k8s/helmfile && helmfile --environment local --interactive apply --context 5 --skip-deps
+	cd ./k8s/helmfile && helmfile --environment local --interactive apply --context 5
 
 init:
 	cd ./tf/env/${ENVIRONMENT} && terraform init
