@@ -9,7 +9,9 @@ variable "terraformers" {
       "tobias.andersson@wikimedia.de",
       "deniz.erdogan@wikimedia.de",
       "oliver.shotton@wikimedia.de",
-      "dat.nguyen@wikimedia.de"
+      "dat.nguyen@wikimedia.de",
+      "leszek.manicki@wikimedia.de",
+      "conny.kawohl@wikimedia.de"
       ]
 }
 
