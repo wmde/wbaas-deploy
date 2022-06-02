@@ -77,6 +77,40 @@ resource "google_logging_metric" "production-es-gc-time-ms" {
     timeouts {}
 }
 
+resource "google_logging_metric" "production-es-gc-time-seconds" {
+    filter           = <<-EOT
+        resource.type="k8s_container"
+        resource.labels.project_id="wikibase-cloud"
+        resource.labels.location="europe-west3-a"
+        resource.labels.cluster_name="wbaas-3"
+        resource.labels.namespace_name="default"
+        labels.k8s-pod/app="elasticsearch-master" severity>=DEFAULT
+        textPayload:"o.e.m.j.JvmGcMonitorService"
+        textPayload:"[INFO ]"
+    EOT
+    label_extractors = {}
+    name             = "production-es-gc-time-seconds"
+    project          = "wikibase-cloud"
+    value_extractor  = "REGEXP_EXTRACT(textPayload, \"duration \\\\[(\\\\d+\\\\.?\\\\d*||\\\\.\\\\d+)s\\\\]\")"
+
+    bucket_options {
+
+        exponential_buckets {
+            growth_factor      = 2
+            num_finite_buckets = 64
+            scale              = 0.01
+        }
+    }
+
+    metric_descriptor {
+        metric_kind = "DELTA"
+        unit        = "s"
+        value_type  = "DISTRIBUTION"
+    }
+
+    timeouts {}
+}
+
 resource "google_logging_metric" "production-site-request-count" {
     description      = "Count of requests to sites"
     filter           = <<-EOT
