@@ -1,0 +1,33 @@
+#!/usr/bin/env bash
+
+## DELETE QUERY
+#
+# PREFIX wikibase: <http://wikiba.se/ontology#>
+# PREFIX xsd: <http://www.w3.org/2001/XMLSchema#> 
+
+# DELETE DATA
+# {
+# <http://wikiba.se/ontology#Dump>	schema:dateModified	"2022-04"^^xsd:dateTime
+# }
+#
+#
+# This script requires you to pass a file containing a list of the namespaces as the first argument
+
+# SELECT_ALL_QUERY="SELECT+*+WHERE{+?s+?p+?o+}"
+SELECT_QUERY="SELECT+*+WHERE{+wikibase:Dump+schema:dateModified+?o+}"
+
+while read namespace; do
+  echo "Checking $namespace"
+  RESULT=$(curl -X POST http://localhost:9999/bigdata/namespace/$namespace/sparql/ --silent --data-raw "query=$SELECT_QUERY" -H 'Accept: application/sparql-results+json')
+  TIMESTAMP=$(echo $RESULT | jq -r '.results.bindings[0].o.value')
+
+  if [ "$TIMESTAMP" != 'null' ]; then
+      echo "Got dump timestamp: $TIMESTAMP"
+      
+      DELETE_QUERY="PREFIX%20wikibase%3A%20%3Chttp%3A%2F%2Fwikiba.se%2Fontology%23%3E%0APREFIX%20xsd%3A%20%3Chttp%3A%2F%2Fwww.w3.org%2F2001%2FXMLSchema%23%3E%20%0A%0ADELETE%20DATA%0A%7B%0A%3Chttp%3A%2F%2Fwikiba.se%2Fontology%23Dump%3E%09schema%3AdateModified%09%22$TIMESTAMP%22%5E%5Exsd%3AdateTime%0A%7D%0A"
+      RESULT=$(curl -X POST http://localhost:9999/bigdata/namespace/$namespace/sparql/ --silent --data-raw "update=$DELETE_QUERY" -H 'Accept: application/sparql-results+json')
+
+      echo $RESULT
+  fi
+
+done <$1
