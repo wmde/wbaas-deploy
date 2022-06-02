@@ -49,6 +49,14 @@ skaffold-ui:
 	MODULE=ui make skaffold
 skaffold-api:
 	MODULE=api make skaffold
+skaffold-queryservice:
+	MODULE=queryservice make skaffold
+skaffold-queryservice-ui:
+	MODULE=queryservice-ui make skaffold
+skaffold-queryservice-updater:
+	MODULE=queryservice-updater make skaffold
+skaffold-queryservice-gateway:
+	MODULE=queryservice-gateway make skaffold
 
 .PHONY: diff apply
 diff: diff-staging diff-production
