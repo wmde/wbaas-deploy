@@ -4,6 +4,7 @@ repositories:
   - name: wbstack
     url: https://wbstack.github.io/charts
   - name: bitnami
+    # yamllint disable-line rule:line-length
     url: https://raw.githubusercontent.com/bitnami/charts/eb5f9a9513d987b519f0ecd732e7031241c50328/bitnami
   - name: cetic
     url: https://cetic.github.io/helm-charts
