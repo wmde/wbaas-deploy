@@ -11,7 +11,7 @@ resource "google_logging_metric" "elasticsearch-metrics" {
     label_extractors = {
         "Node" = "EXTRACT(jsonPayload.name)"
     }
-    name             = "elasticsearch-metrics-${each.value}"
+    name             = "${var.cluster_name}-elasticsearch-metrics-${each.value}"
     value_extractor  = "REGEXP_EXTRACT(jsonPayload.\"${each.value}\", \"(\\\\d+)\")"
 
     bucket_options {
