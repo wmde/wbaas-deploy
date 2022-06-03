@@ -12,10 +12,10 @@ spec:
         spec:
           containers:
           - name: stats-cron
-            image: ghcr.io/toban/alpine-curl-jq:master
+            image: ghcr.io/wbstack/curl-jq:main
             imagePullPolicy: IfNotPresent
             command:
             - /bin/sh
             - -c
-            - "ASDF=$(curl --silent -H 'Accept: application/json' http://elasticsearch-master.default.svc.cluster.local:9200/_cat/nodes?h=name,heap.percent,ram.percent,disk.used_percent,load_5m&format=json) && echo $ASDF | jq -c '.[]'"
+            - "OUT=$(curl --silent -H 'Accept: application/json' http://elasticsearch-master.default.svc.cluster.local:9200/_cat/nodes?format=json) && echo $OUT | jq -c '.[]'"
           restartPolicy: OnFailure

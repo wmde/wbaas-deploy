@@ -1,3 +1,4 @@
+
 resource "google_logging_metric" "elasticsearch-metrics" {
     for_each = var.elasticsearch_metrics
 
