@@ -20,6 +20,7 @@ resources:
 
 esConfig:
   elasticsearch.yml: |
+    # T309396
     xpack.ml.enabled: false
     xpack.monitoring.collection.enabled: false
     xpack.watcher.enabled: false
@@ -27,6 +28,9 @@ esConfig:
     xpack.graph.enabled: false
     xpack.logstash.enabled: false
     xpack.ccr.enabled: false
+
+    # T309378
+    action.auto_create_index: false
 
 volumeClaimTemplate:
   accessModes: [ "ReadWriteOnce" ]
