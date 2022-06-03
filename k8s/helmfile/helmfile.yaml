@@ -193,6 +193,12 @@ releases:
     values:
       - "env/{{ .Environment.Name }}/wbaas-backup.yaml.gotmpl"
 
+  - name: stats-cron
+    namespace: default
+    chart: ./../../charts/stats-cron
+    values:
+      - "env/{{ .Environment.Name }}/stats-cron.values.yaml.gotmpl"
+
   ################################
   # LOCAL ONLY
   ################################

@@ -1,0 +1,12 @@
+job:
+  failedJobsHistoryLimit: 1
+  successfulJobsHistoryLimit: 1
+  cronSchedule: "*/1 * * * *"
+
+resources:
+  requests:
+    cpu: 10m
+    memory: 50Mi
+  limits:
+    cpu: 100m
+    memory: 100Mi
