@@ -7,3 +7,4 @@
 - [Backups](backups/README.md)
 - [Uptime checks](uptime-checks.md)
 - [Info about minikube's load balancer](minikube-load-balancer.md)
+- [Importing resources into Terraform](importing-resources-into-terraform.md)
