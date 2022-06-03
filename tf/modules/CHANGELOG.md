@@ -1,3 +1,6 @@
+# tf-module-monitoring-8
+- Add log based metrics derived from polling ElasticSearch
+
 # tf-module-monitoring-7
 - Increase the duration time before backup alerts 
 
