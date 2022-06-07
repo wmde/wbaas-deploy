@@ -15,6 +15,6 @@ variable "elasticsearch_metrics" {
       "heap.percent",
       "ram.percent",
       "disk.used_percent",
-      "load_5m"
+      "load_1m"
       ]
 }
