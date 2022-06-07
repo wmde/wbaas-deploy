@@ -196,7 +196,6 @@ releases:
   - name: stats-cron
     namespace: default
     chart: ./../../charts/stats-cron
-    installed: {{ ne .Environment.Name "production" | toYaml }}
     values:
       - "env/{{ .Environment.Name }}/stats-cron.values.yaml.gotmpl"
 
