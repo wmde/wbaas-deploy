@@ -1,3 +1,7 @@
+
+# tf-module-monitoring-9
+- Updated chart for ES monitoring, use load_1m
+
 # tf-module-monitoring-8
 - Add log based metrics derived from polling ElasticSearch
 
