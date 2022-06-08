@@ -23,7 +23,7 @@ while read namespace; do
   if [ "$TIMESTAMP" != 'null' ]; then
       echo "Got dump timestamp: $TIMESTAMP"
       
-      DELETE_QUERY="PREFIX%20wikibase%3A%20%3Chttp%3A%2F%2Fwikiba.se%2Fontology%23%3E%0APREFIX%20xsd%3A%20%3Chttp%3A%2F%2Fwww.w3.org%2F2001%2FXMLSchema%23%3E%20%0A%0ADELETE%20DATA%0A%7B%0A%3Chttp%3A%2F%2Fwikiba.se%2Fontology%23Dump%3E%09schema%3AdateModified%09%22$TIMESTAMP%22%5E%5Exsd%3AdateTime%0A%7D%0A"
+      DELETE_QUERY="DELETE WHERE {<http://wikiba.se/ontology#Dump> <http://schema.org/dateModified> ?time}"
       RESULT=$(curl -X POST http://localhost:9999/bigdata/namespace/$namespace/sparql/ --silent --data-raw "update=$DELETE_QUERY" -H 'Accept: application/sparql-results+json')
 
       echo $RESULT
