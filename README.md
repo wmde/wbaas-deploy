@@ -14,4 +14,4 @@ This repository covers a production and development setup, held together with te
 - `tf` - [Terraform](https://www.terraform.io/) environments
     - `tf/env` - Per environment configuration (local vs prod)
 
-For details on how to work with this repository and set up a developing or production enviroment, see: [doc/index.md](doc/index.md)
+For details on how to work with this repository and set up a developing or production enviroment, see: [doc/README.md](doc/README.md)
