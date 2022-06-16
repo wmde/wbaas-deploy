@@ -7,7 +7,7 @@
 #
 # This scrippt 
 # This script requires port-forwarding from the mediawiki-web pod to port 8080
-# ex: kubectl port-forward mediawiki-137-fp-app-web-57fd675bb7-wddpg 8181:80
+# ex: kubectl port-forward mediawiki-137-fp-app-web-57fd675bb7-wddpg 8080:80
 while read domain; do
 
     echo "---------------------------"
