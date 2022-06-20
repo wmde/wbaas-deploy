@@ -3,7 +3,7 @@
 ## Documentation
 - [Working with this repository](working-with-this-repo.md)
 - [Local development enviroment](local-dev-env.md)
-- [Production enviroments](prod-env.md)
+- [Production environments](prod-env.md)
 - [Deployments](deployments/README.md)
 - [Backups](backups/README.md)
 - [Uptime checks](uptime-checks.md)
