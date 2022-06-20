@@ -9,10 +9,10 @@ primary:
   resources:
     requests:
       cpu: 40m
-      memory: 700Mi
+      memory: 4000Mi
     limits:
       cpu: 750m
-      memory: 1000Mi
+      memory: 4300Mi
   persistence:
     enabled: true
     size: {{ .Values.services.sql.storageSize | quote }}
@@ -65,10 +65,10 @@ secondary:
   resources:
     requests:
       cpu: 100m
-      memory: 660Mi
+      memory: 4000Mi
     limits:
       cpu: 750m
-      memory: 900Mi
+      memory: 4300Mi
   readinessProbe:
     enabled: false
   customReadinessProbe:
