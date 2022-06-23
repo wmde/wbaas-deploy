@@ -201,10 +201,11 @@ releases:
     values:
       - "env/{{ .Environment.Name }}/stats-cron.values.yaml.gotmpl"
 
-  # grafana: admin / prom-operator 
+  # grafana: admin / prom-operator
   # https://github.com/prometheus-operator/prometheus-operator/issues/2359
   - name: kube-prometheus-stack
     namespace: monitoring
+    version: 36.2.0
     chart: prometheus-community/kube-prometheus-stack
     installed: true
     # https://github.com/roboll/helmfile/issues/1124
