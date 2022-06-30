@@ -1,5 +1,5 @@
 image:
-  tag: "8x.9.0"
+  tag: "8x.9.1"
 
 replicaCount:
   web: 1
@@ -32,11 +32,11 @@ resources:
       memory: 600Mi
   web:
     requests:
-      cpu: 50m
-      memory: 170Mi
+      cpu: 100m
+      memory: 340Mi
     limits:
       cpu: 250m
-      memory: 256Mi
+      memory: 400Mi
   queue:
     requests:
       cpu: 1m
