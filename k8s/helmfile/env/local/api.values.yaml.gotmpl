@@ -9,6 +9,30 @@ replicaCount:
 
 useProbes: true
 
+probes:
+  backend:
+    livenessProbe:
+      enabled: false
+      timeoutSeconds: 3
+      periodSeconds: 10
+      initialDelaySeconds: 20
+    readinessProbe:
+      enabled: false
+      timeoutSeconds: 4
+      periodSeconds: 20
+      initialDelaySeconds: 20
+  web:
+    livenessProbe:
+      enabled: true
+      timeoutSeconds: 3
+      periodSeconds: 10
+      initialDelaySeconds: 20
+    readinessProbe:
+      enabled: true
+      timeoutSeconds: 3
+      periodSeconds: 10
+      initialDelaySeconds: 20
+
 platform:
   backendMwHost: mediawiki-137-fp-app-backend.default.svc.cluster.local
 # This mw db connection is only used by the queue..

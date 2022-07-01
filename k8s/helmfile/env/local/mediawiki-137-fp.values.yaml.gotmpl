@@ -1,7 +1,7 @@
 replicaCount:
   backend: 1
   web: 2
-  webapi: 2
+  webapi: 1
   alpha: 1
 mw:
   settings:
@@ -45,18 +45,18 @@ mw:
 resources:
   web:
     requests:
-      cpu: 150m
+      cpu: 500m
       memory: 350Mi
     limits:
-      cpu: 400m
+      cpu: 1000m
       memory: 750Mi
   webapi:
     requests:
-      cpu: 200m
-      memory: 250Mi
-    limits:
       cpu: 500m
-      memory: 600Mi
+      memory: 350Mi
+    limits:
+      cpu: 1000m
+      memory: 750Mi
   alpha:
     requests:
       cpu: 50m
