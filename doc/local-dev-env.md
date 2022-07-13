@@ -188,7 +188,8 @@ For the local setup, [Mailhog](https://github.com/mailhog/MailHog) is used to ca
 
 You can view those emails by going to http://mailhog.wbaas.localhost/
 
-## Mediawiki debug logging
+## Mediawiki debugging 
+### logging
 
 To increase verbosity of logging in the mediawiki pods you can change the following value in the mediawiki deployment to enable debug logging to appear in all of the pods.
 
@@ -202,6 +203,17 @@ Apply the changes to the local cluster
 ```sh
 make apply-local
 ```
+
+### Xdebug
+
+Xdebug can be enabled in your minikube cluster if you use mediawiki image with `skaffold`, it is by default enabled with skaffold but running the cluster with `make apply-local` does not include xdebug by default.
+- You can use Xdebug on your phpstorm IDE by following this steps:
+  * Install xdebug helper extension for your browser.
+  * Toggling the "Listening PHP Debug Connection" button.
+  * Put a breakpoint in the code by clicking on the right of the line number in your IDE 
+  * Load the application on your browser and see the debugging output on your IDE, related to your break point.
+- You can use Xdebug on your VSCode IDE by following these steps:
+  * Follow this tutorial in the section "Debug PHP using Xdebug and VS Code" https://php.tutorials24x7.com/blog/how-to-debug-php-using-xdebug-and-visual-studio-code-on-ubuntu
 
 ## Create an account on wbaas.localhost
 To use the local wbaas instance you have just setup, you will need to create an invitation code via the api which is needed when creating an account. Follow the [instructions](https://github.com/wbstack/api/blob/main/docs/invitation-codes.md) documented in the wbaas/api repo.
