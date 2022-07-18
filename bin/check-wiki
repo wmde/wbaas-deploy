@@ -1,0 +1,31 @@
+#!/usr/bin/env bash
+
+# This script requires you to pass a file containing a list of the domains to check
+#
+# This script requires port-forwarding from the queryservice-gateway to port 8181
+# ex:  kubectl port-forward queryservice-gateway-559cb9fbbc-h4d58 8181:80
+#
+# This scrippt 
+# This script requires port-forwarding from the mediawiki-web pod to port 8080
+# ex: kubectl port-forward mediawiki-137-fp-app-web-57fd675bb7-wddpg 8080:80
+while read domain; do
+
+    echo "---------------------------"
+    echo $domain
+    
+    URL="http://localhost:8080/w/api.php?action=query&meta=siteinfo&siprop=statistics&format=json"
+    RESULT=$(curl $URL -L -H 'Accept: application/json' -H "host: $domain")
+    
+    SEARCH_URL="http://localhost:8080/w/api.php?action=wbsearchentities&search=a&format=json&errorformat=plaintext&language=en&uselang=en&type=item"
+    SEARCH_RESULT=$(curl $SEARCH_URL -H 'Accept: application/json' -H "host: $domain")
+
+    COUNT_QUERY="SELECT (COUNT(?s) AS ?count) WHERE { ?s ?p ?o }"
+    QUERY_RESULT=$(curl -X POST http://localhost:8181 --data-raw "query=$COUNT_QUERY" -H 'Accept: application/json' -H "host: $domain")
+    
+    echo $RESULT | jq
+    echo $SEARCH_RESULT | jq
+    echo $QUERY_RESULT | jq
+
+    sleep 1
+
+done <$1
