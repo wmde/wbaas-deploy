@@ -20,6 +20,7 @@ resource "google_monitoring_alert_policy" "alert_policy_sql_primary_pv_critical_
                 metric.type="kubernetes.io/pod/volume/utilization"
                 resource.label."cluster_name"=${var.cluster_name}
                 resource.label."pod_name"="sql-mariadb-primary-0"
+                resource.type="k8s_pod"
                 metric.label."volume_name"="data"
             EOT
 
@@ -29,7 +30,7 @@ resource "google_monitoring_alert_policy" "alert_policy_sql_primary_pv_critical_
 
       aggregations {
         alignment_period     = "120s"
-        per_series_aligner   = "ALIGN_RATE"
+        per_series_aligner   = "ALIGN_MEAN"
         cross_series_reducer = "REDUCE_SUM"
       }
 
@@ -58,6 +59,7 @@ resource "google_monitoring_alert_policy" "alert_policy_sql_secondary_pv_critica
                 metric.type="kubernetes.io/pod/volume/utilization"
                 resource.label."cluster_name"=${var.cluster_name}
                 resource.label."pod_name"="sql-mariadb-secondary-0"
+                resource.type="k8s_pod"
                 metric.label."volume_name"="data"
             EOT
 
@@ -67,7 +69,7 @@ resource "google_monitoring_alert_policy" "alert_policy_sql_secondary_pv_critica
 
       aggregations {
         alignment_period     = "120s"
-        per_series_aligner   = "ALIGN_RATE"
+        per_series_aligner   = "ALIGN_MEAN"
         cross_series_reducer = "REDUCE_SUM"
       }
 
