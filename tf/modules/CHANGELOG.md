@@ -1,3 +1,5 @@
+# tf-module-monitoring-10
+- Add alert policies for critical PV usage (SQL, ES, QS)
 
 # tf-module-monitoring-9
 - Updated chart for ES monitoring, use load_1m
