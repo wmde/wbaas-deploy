@@ -19,7 +19,7 @@ resource "google_monitoring_alert_policy" "alert_policy_elasticsearch_pv_critica
       filter = <<-EOT
                 metric.type="kubernetes.io/pod/volume/utilization"
                 resource.label."cluster_name"=${var.cluster_name}
-                resource.label."pod_name"=~"elasticsearch-master-.*"
+                resource.label."service_name"="elasticsearch-master"
                 resource.type="k8s_pod"
                 metric.label."volume_name"="elasticsearch-master"
             EOT

@@ -19,7 +19,7 @@ resource "google_monitoring_alert_policy" "alert_policy_queryservice_pv_critical
       filter = <<-EOT
                 metric.type="kubernetes.io/pod/volume/utilization"
                 resource.label."cluster_name"=${var.cluster_name}
-                resource.label."pod_name"=~"queryservice-.*"
+                resource.label."service_name"="queryservice"
                 resource.type="k8s_pod"
                 metric.label."volume_name"="data"
             EOT
