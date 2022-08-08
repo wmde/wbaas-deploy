@@ -18,3 +18,15 @@ variable "elasticsearch_metrics" {
       "load_1m"
       ]
 }
+
+variable "platform_summary_metrics" {
+  type    = set(string)
+  description = "Metrics to look for in the json payload"
+  default = [
+      "active",
+      "total",
+      "deleted",
+      "inactive",
+      "empty"
+      ]
+}

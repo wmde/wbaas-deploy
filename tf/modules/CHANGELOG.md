@@ -1,3 +1,6 @@
+# tf-module-monitoring-11
+- Add platform summary metrics
+
 # tf-module-monitoring-10
 - Add alert policies for critical PV usage (SQL, ES, QS)
 
