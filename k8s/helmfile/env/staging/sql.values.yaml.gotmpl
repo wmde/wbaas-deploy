@@ -132,6 +132,8 @@ secondary:
     expire_logs_days=7
     # 100MB, default & bitnami was 1GB (1073741824)
     max_binlog_size=107374182
+    # Default (2000) (see T314662)
+    table_open_cache=200
 
     [mysql]
     # https://forums.mysql.com/read.php?103,189835,192421#msg-192421
