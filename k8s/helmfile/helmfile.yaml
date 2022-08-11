@@ -201,18 +201,6 @@ releases:
     values:
       - "env/{{ .Environment.Name }}/stats-cron.values.yaml.gotmpl"
 
-  # grafana: admin / prom-operator
-  # https://github.com/prometheus-operator/prometheus-operator/issues/2359
-  - name: kube-prometheus-stack
-    namespace: monitoring
-    version: 36.2.0
-    chart: prometheus-community/kube-prometheus-stack
-    installed: true
-    # https://github.com/roboll/helmfile/issues/1124
-    disableValidation: true
-    values:
-      - "env/{{ .Environment.Name }}/kube-prometheus-stack.yaml.gotmpl"
-
   ################################
   # LOCAL ONLY
   ################################
@@ -231,3 +219,15 @@ releases:
     version: 5.0.1
     values:
       - env/local/mailhog.values.yaml
+
+  # grafana: admin / prom-operator
+  # https://github.com/prometheus-operator/prometheus-operator/issues/2359
+  - name: kube-prometheus-stack
+    namespace: monitoring
+    version: 36.2.0
+    chart: prometheus-community/kube-prometheus-stack
+    installed: {{ eq .Environment.Name "local" | toYaml }}
+    # https://github.com/roboll/helmfile/issues/1124
+    disableValidation: true
+    values:
+      - "env/{{ .Environment.Name }}/kube-prometheus-stack.yaml.gotmpl"
