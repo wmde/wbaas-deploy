@@ -149,7 +149,7 @@ secondary:
 global:
   storageClass: {{ .Values.services.sql.storageClass | quote }}
 metrics:
-  enabled: false
+  enabled: true
 initdbScripts:
   # https://docs.bitnami.com/kubernetes/infrastructure/mariadb/configuration/customize-new-instance/
   init-primary-only.sh: |
