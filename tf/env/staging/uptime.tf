@@ -1,5 +1,5 @@
 module "uptime-checks" {
-  source = "git::ssh://git@github.com/wmde/wbaas-deploy//tf//modules/uptime?ref=tf-module-uptime-0"
+  source = "git::ssh://git@github.com/wmde/wbaas-deploy//tf//modules/uptime?ref=tf-module-uptime-1"
   providers = {
     kubernetes = kubernetes.wbaas-2
   }
