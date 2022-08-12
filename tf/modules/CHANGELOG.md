@@ -1,3 +1,6 @@
+# tf-module-uptime-1
+- Add alerting for uptime checks
+
 # tf-module-monitoring-11
 - Add platform summary metrics
 
