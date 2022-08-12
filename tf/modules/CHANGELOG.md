@@ -1,3 +1,6 @@
+# tf-module-uptime-2
+- Remove undeclared variable
+
 # tf-module-uptime-1
 - Add alerting for uptime checks
 
