@@ -5,12 +5,13 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-
     steps:
       - name: Create the Mattermost Message
+        env:
+          TITLE: ${{ github.event.pull_request.title }}
+          HTML_LINK: ${{github.event.pull_request.html_url }}
         run: >
-          echo "{\"text\":\"Pull request opened: ["${{github.event.pull_request.title }}\
-          "]("${{github.event.pull_request.html_url }}")\"}"
+          echo "{\"text\":\"Pull request opened: [${TITLE}](${HTML_LINK})\"}"
           > mattermost.json
       - uses: mattermost/action-mattermost-notify@master
         env:
