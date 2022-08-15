@@ -11,5 +11,6 @@ Recommended reading:
 
 - `env`: Various terraformable environemnts
     - `local`: Local infrastructure setup (currently empty)
-    - `prod`: Production infrastructure setup
-- `mod`: terraform modules
+    - `production`: Production infrastructure setup
+    - `staging`: Staging infrastructure setup
+- `modules`: terraform modules
