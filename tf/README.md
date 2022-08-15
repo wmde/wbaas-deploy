@@ -9,7 +9,7 @@ Recommended reading:
 
 **Directories**
 
-- `env`: Various terraformable environemnts
+- `env`: Various terraformable environments
     - `local`: Local infrastructure setup (currently empty)
     - `production`: Production infrastructure setup
     - `staging`: Staging infrastructure setup
