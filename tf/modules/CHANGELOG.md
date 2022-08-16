@@ -1,3 +1,6 @@
+# tf-module-monitoring-12
+- Add user and page totals to platform summary metrics
+
 # tf-module-uptime-1
 - Add alerting for uptime checks
 
