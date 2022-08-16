@@ -27,6 +27,10 @@ variable "platform_summary_metrics" {
       "total",
       "deleted",
       "inactive",
-      "empty"
+      "empty",
+      "total_non_deleted_users",
+      "total_non_deleted_active_users",
+      "total_non_deleted_pages",
+      "total_non_deleted_edits",
       ]
 }
