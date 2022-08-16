@@ -72,7 +72,7 @@ ingress:
     secretName: wikibase-production-tls
 
 wbstack:
-  maxWikisPerUser: 1
+  maxWikisPerUser: 6
   monitoringEmail: "wb-cloud-monitoring@wikimedia.de"
   subdomainSuffix: {{ .Values.wbstack.subdomainSuffix }}
   uiurl: {{ .Values.wbstack.uiurl }}
