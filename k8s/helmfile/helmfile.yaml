@@ -90,6 +90,13 @@ releases:
     values:
       - "env/{{ .Environment.Name }}/sql.values.yaml.gotmpl"
 
+  - name: sql-dump-replica
+    namespace: default
+    chart: bitnami/mariadb
+    version: 10.5.0
+    values:
+      - "env/{{ .Environment.Name }}/sql-dump-replica.values.yaml.gotmpl"
+
   - name: elasticsearch
     namespace: default
     chart: elastic/elasticsearch
