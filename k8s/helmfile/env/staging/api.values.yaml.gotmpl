@@ -72,7 +72,7 @@ ingress:
     secretName: wikibase-dev-tls
 
 wbstack:
-  maxWikisPerUser: 1
+  maxWikisPerUser: 6
   subdomainSuffix: {{ .Values.wbstack.subdomainSuffix }}
   uiurl: {{ .Values.wbstack.uiurl }}
   wikiDbProvisionVersion: mw1.37-fp-wbs1
