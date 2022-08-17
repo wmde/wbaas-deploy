@@ -1,3 +1,6 @@
+# tf-module-uptime-2
+- Remove uptime_monitoring_email_group resource from uptime
+
 # tf-module-monitoring-14
 - Remove monitoring_email_group resource from monitoring module
 

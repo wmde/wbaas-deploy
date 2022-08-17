@@ -55,14 +55,6 @@ resource "google_monitoring_alert_policy" "alert_policy_https-content-uptime-che
   }
   combiner = "OR"
   notification_channels = [
-    google_monitoring_notification_channel.uptime_monitoring_email_group.name
+    "${var.monitoring_email_group_name}"
   ]
-}
-
-resource "google_monitoring_notification_channel" "uptime_monitoring_email_group" {
-  display_name = "Wikibase cloud (${var.cluster_name}) Email-Notification Channel"
-  type         = "email"
-  labels = {
-    email_address = "wb-cloud-monitoring@wikimedia.de"
-  }
 }

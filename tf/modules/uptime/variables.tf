@@ -13,6 +13,11 @@ variable "target_wbaas_hostname" {
   description = "The target wbaas service we check uptime against. Example: wikibase.dev"
 }
 
+variable "monitoring_email_group_name" {
+  type = string
+  description = "Name of the monitoring resource that will receive alerts"
+}
+
 variable "wikibase_itempage_item" {
   type = string
   description = "The target item we will check. Example: Q1"
