@@ -16,7 +16,7 @@ resource "google_monitoring_alert_policy" "alert_policy_replica_readiniess_failu
   display_name = "(${var.cluster_name}): SQL replica readiness probe failure"
   combiner     = "OR"
   notification_channels = [
-    google_monitoring_notification_channel.monitoring_email_group.name
+    "${var.monitoring_email_group_name}"
   ]
   documentation {
     content = "Alert triggers when the replica state is lagging behind the master state by more than 60 seconds.\n For what are possible causes of a replication lag see [here](https://blogs.oracle.com/mysql/post/what-causes-replication-lag) "

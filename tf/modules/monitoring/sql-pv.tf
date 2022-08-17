@@ -6,7 +6,7 @@ resource "google_monitoring_alert_policy" "alert_policy_sql_primary_pv_critical_
   display_name = "(${var.cluster_name}): critical SQL primary PV utilization"
   combiner     = "OR"
   notification_channels = [
-    google_monitoring_notification_channel.monitoring_email_group.name
+    "${var.monitoring_email_group_name}"
   ]
 
   documentation {
@@ -45,7 +45,7 @@ resource "google_monitoring_alert_policy" "alert_policy_sql_secondary_pv_critica
   display_name = "(${var.cluster_name}): critical SQL secondary PV utilization"
   combiner     = "OR"
   notification_channels = [
-    google_monitoring_notification_channel.monitoring_email_group.name
+    "${var.monitoring_email_group_name}"
   ]
 
   documentation {
