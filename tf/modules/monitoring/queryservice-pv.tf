@@ -6,7 +6,7 @@ resource "google_monitoring_alert_policy" "alert_policy_queryservice_pv_critical
   display_name = "(${var.cluster_name}): critical Query Service PV utilization"
   combiner     = "OR"
   notification_channels = [
-    google_monitoring_notification_channel.monitoring_email_group.name
+    "${var.monitoring_email_group_name}"
   ]
 
   documentation {

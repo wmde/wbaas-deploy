@@ -3,9 +3,9 @@ variable "cluster_name" {
   description = "Name of the cluster"
 }
 
-variable "email_group" {
+variable "monitoring_email_group_name" {
   type = string
-  description = "Google Group that will receive alerts"
+  description = "Name of the monitoring resource that will receive alerts"
 }
 
 variable "elasticsearch_metrics" {

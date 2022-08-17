@@ -1,3 +1,6 @@
+# tf-module-monitoring-14
+- Remove monitoring_email_group resource from monitoring module
+
 # tf-module-monitoring-13
 - Add user and page totals to platform summary metrics
 
