@@ -19,6 +19,7 @@ variable "terraformers" {
 locals {
   production_cluster_name = "wbaas-3"
   project_id = "wikibase-cloud"
+  email_group = "wb-cloud-monitoring@wikimedia.de"
 }
 
 variable "mailgun_api_key" {
