@@ -76,3 +76,8 @@ variable "recaptcha_v2_secret" {
   default = "" # apparently this doesn't mean default is empty string but rather default is not defined. This means it won't prompt the user
   # but also won't override the value that is in the state
 }
+
+variable "email_group" {
+  type = string
+  description = "Google Group that will receive alerts"
+}
