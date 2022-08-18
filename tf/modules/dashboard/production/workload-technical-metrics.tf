@@ -1,4 +1,4 @@
-resource "google_monitoring_dashboard" "platform-summary-prod" {
+resource "google_monitoring_dashboard" "workload-technical-metrics-staging" {
   dashboard_json = <<EOF
 {
   "category": "CUSTOM",

@@ -1,10 +1,10 @@
-resource "google_monitoring_dashboard" "request-latency-staging" {
+resource "google_monitoring_dashboard" "uptime-and-latency-prod" {
   dashboard_json = <<EOF
 {
   "category": "CUSTOM",
-  "displayName": "Uptime and Latency (Staging)",
+  "displayName": "Uptime and Latency (Production)",
   "labels": {
-    "staging": ""
+    "production": ""
   },
   "mosaicLayout": {
     "columns": 12,
@@ -12,7 +12,7 @@ resource "google_monitoring_dashboard" "request-latency-staging" {
       {
         "height": 4,
         "widget": {
-          "title": "Request latency",
+          "title": "Request Latency of the platform API health endpoint",
           "xyChart": {
             "chartOptions": {
               "mode": "COLOR"
@@ -27,13 +27,55 @@ resource "google_monitoring_dashboard" "request-latency-staging" {
                   "timeSeriesFilter": {
                     "aggregation": {
                       "alignmentPeriod": "60s",
-                      "crossSeriesReducer": "REDUCE_SUM",
+                      "crossSeriesReducer": "REDUCE_MEAN",
                       "groupByFields": [
-                        "resource.label.\"host\""
+                        "metric.label.\"check_id\"",
+                        "metric.label.\"checker_location\""
                       ],
                       "perSeriesAligner": "ALIGN_MEAN"
                     },
-                    "filter": "metric.type=\"monitoring.googleapis.com/uptime_check/request_latency\" resource.type=\"uptime_url\" resource.label.\"host\"!=\"api.wikibase.cloud\" resource.label.\"host\"!=\"cloud-coffeebase.wikibase.cloud\" resource.label.\"host\"!=\"coffeebase.wikibase.dev\" resource.label.\"host\"!=\"www.wikibase.cloud\""
+                    "filter": "metric.type=\"monitoring.googleapis.com/uptime_check/request_latency\" metric.label.\"check_id\"=\"https-www-wikibase-cloud-api-health\""
+                  }
+                }
+              }
+            ],
+            "timeshiftDuration": "0s",
+            "yAxis": {
+              "label": "y1Axis",
+              "scale": "LINEAR"
+            }
+          }
+        },
+        "width": 6,
+        "xPos": 6,
+        "yPos": 0
+      },
+      {
+        "height": 4,
+        "widget": {
+          "title": "Request Latency of Mediawiki API",
+          "xyChart": {
+            "chartOptions": {
+              "mode": "COLOR"
+            },
+            "dataSets": [
+              {
+                "minAlignmentPeriod": "60s",
+                "plotType": "LINE",
+                "targetAxis": "Y1",
+                "timeSeriesQuery": {
+                  "apiSource": "DEFAULT_CLOUD",
+                  "timeSeriesFilter": {
+                    "aggregation": {
+                      "alignmentPeriod": "60s",
+                      "crossSeriesReducer": "REDUCE_MEAN",
+                      "groupByFields": [
+                        "metric.label.\"check_id\"",
+                        "metric.label.\"checker_location\""
+                      ],
+                      "perSeriesAligner": "ALIGN_MEAN"
+                    },
+                    "filter": "metric.type=\"monitoring.googleapis.com/uptime_check/request_latency\" metric.label.\"check_id\"=\"https-cloud-coffeebase-wikibase-cloud-wikibase-wbgetentities\""
                   }
                 }
               }
@@ -52,7 +94,7 @@ resource "google_monitoring_dashboard" "request-latency-staging" {
       {
         "height": 4,
         "widget": {
-          "title": "Request latency of the platform API health",
+          "title": "Request latency of Queryservice",
           "xyChart": {
             "chartOptions": {
               "mode": "COLOR"
@@ -74,89 +116,7 @@ resource "google_monitoring_dashboard" "request-latency-staging" {
                       ],
                       "perSeriesAligner": "ALIGN_MEAN"
                     },
-                    "filter": "metric.type=\"monitoring.googleapis.com/uptime_check/request_latency\" metric.label.\"check_id\"=\"https-www-wikibase-dev-api-health-HJMz2B61RxQ\""
-                  }
-                }
-              }
-            ],
-            "timeshiftDuration": "0s",
-            "yAxis": {
-              "label": "y1Axis",
-              "scale": "LINEAR"
-            }
-          }
-        },
-        "width": 6,
-        "xPos": 6,
-        "yPos": 4
-      },
-      {
-        "height": 4,
-        "widget": {
-          "title": "Request Latency of Queryservice",
-          "xyChart": {
-            "chartOptions": {
-              "mode": "COLOR"
-            },
-            "dataSets": [
-              {
-                "minAlignmentPeriod": "60s",
-                "plotType": "LINE",
-                "targetAxis": "Y1",
-                "timeSeriesQuery": {
-                  "apiSource": "DEFAULT_CLOUD",
-                  "timeSeriesFilter": {
-                    "aggregation": {
-                      "alignmentPeriod": "60s",
-                      "crossSeriesReducer": "REDUCE_MEAN",
-                      "groupByFields": [
-                        "metric.label.\"check_id\"",
-                        "metric.label.\"checker_location\""
-                      ],
-                      "perSeriesAligner": "ALIGN_MEAN"
-                    },
-                    "filter": "metric.type=\"monitoring.googleapis.com/uptime_check/request_latency\" metric.label.\"check_id\"=\"https-coffeebase-wikibase-dev-query-sparql-ckVjQhmXqDg\""
-                  }
-                }
-              }
-            ],
-            "timeshiftDuration": "0s",
-            "yAxis": {
-              "label": "y1Axis",
-              "scale": "LINEAR"
-            }
-          }
-        },
-        "width": 6,
-        "xPos": 0,
-        "yPos": 8
-      },
-      {
-        "height": 4,
-        "widget": {
-          "title": "Request latency of Mediawiki API",
-          "xyChart": {
-            "chartOptions": {
-              "mode": "COLOR"
-            },
-            "dataSets": [
-              {
-                "minAlignmentPeriod": "60s",
-                "plotType": "LINE",
-                "targetAxis": "Y1",
-                "timeSeriesQuery": {
-                  "apiSource": "DEFAULT_CLOUD",
-                  "timeSeriesFilter": {
-                    "aggregation": {
-                      "alignmentPeriod": "60s",
-                      "crossSeriesReducer": "REDUCE_MEAN",
-                      "groupByFields": [
-                        "metric.label.\"check_id\"",
-                        "metric.label.\"checker_location\""
-                      ],
-                      "perSeriesAligner": "ALIGN_MEAN"
-                    },
-                    "filter": "metric.type=\"monitoring.googleapis.com/uptime_check/request_latency\" metric.label.\"check_id\"=\"https-coffeebase-wikibase-dev-wikibase-wbgetentities-ADerz9_UmdY\""
+                    "filter": "metric.type=\"monitoring.googleapis.com/uptime_check/request_latency\" metric.label.\"check_id\"=\"https-cloud-coffeebase-wikibase-cloud-query-sparql\""
                   }
                 }
               }
@@ -197,7 +157,7 @@ resource "google_monitoring_dashboard" "request-latency-staging" {
                       ],
                       "perSeriesAligner": "ALIGN_MEAN"
                     },
-                    "filter": "metric.type=\"monitoring.googleapis.com/uptime_check/request_latency\" metric.label.\"check_id\"=\"https-coffeebase-wikibase-dev-wikibase-itempage-NRffch1fFzI\""
+                    "filter": "metric.type=\"monitoring.googleapis.com/uptime_check/request_latency\" metric.label.\"check_id\"=\"https-cloud-coffeebase-wikibase-cloud-wikibase-itempage\""
                   }
                 }
               }
@@ -211,54 +171,12 @@ resource "google_monitoring_dashboard" "request-latency-staging" {
         },
         "width": 6,
         "xPos": 6,
-        "yPos": 8
+        "yPos": 4
       },
       {
         "height": 4,
         "widget": {
-          "title": "Uptime Check",
-          "xyChart": {
-            "chartOptions": {
-              "mode": "COLOR"
-            },
-            "dataSets": [
-              {
-                "minAlignmentPeriod": "60s",
-                "plotType": "LINE",
-                "targetAxis": "Y1",
-                "timeSeriesQuery": {
-                  "apiSource": "DEFAULT_CLOUD",
-                  "timeSeriesFilter": {
-                    "aggregation": {
-                      "alignmentPeriod": "60s",
-                      "crossSeriesReducer": "REDUCE_NONE",
-                      "perSeriesAligner": "ALIGN_FRACTION_TRUE"
-                    },
-                    "filter": "metric.type=\"monitoring.googleapis.com/uptime_check/check_passed\" resource.type=\"uptime_url\" resource.label.\"host\"!=\"api.wikibase.cloud\" resource.label.\"host\"!=\"cloud-coffeebase.wikibase.dev\" resource.label.\"host\"!=\"cloud-coffeebase.wikibase.cloud\" resource.label.\"host\"!=\"www.wikibase.cloud\"",
-                    "secondaryAggregation": {
-                      "alignmentPeriod": "60s",
-                      "crossSeriesReducer": "REDUCE_NONE",
-                      "perSeriesAligner": "ALIGN_MEAN"
-                    }
-                  }
-                }
-              }
-            ],
-            "timeshiftDuration": "0s",
-            "yAxis": {
-              "label": "y1Axis",
-              "scale": "LINEAR"
-            }
-          }
-        },
-        "width": 6,
-        "xPos": 6,
-        "yPos": 0
-      },
-      {
-        "height": 4,
-        "widget": {
-          "title": "Request latency of Special Version",
+          "title": "Request latency of Mediawiki Web Pod - Special:Version",
           "xyChart": {
             "chartOptions": {
               "mode": "COLOR"
@@ -280,7 +198,7 @@ resource "google_monitoring_dashboard" "request-latency-staging" {
                       ],
                       "perSeriesAligner": "ALIGN_MEAN"
                     },
-                    "filter": "metric.type=\"monitoring.googleapis.com/uptime_check/request_latency\" metric.label.\"check_id\"=\"https-coffeebase-wikibase-dev-7AbaoNv-B3U\""
+                    "filter": "metric.type=\"monitoring.googleapis.com/uptime_check/request_latency\" metric.label.\"check_id\"=\"https-cloud-coffeebase-wikibase-cloud\""
                   }
                 }
               }
@@ -294,7 +212,7 @@ resource "google_monitoring_dashboard" "request-latency-staging" {
         },
         "width": 6,
         "xPos": 0,
-        "yPos": 12
+        "yPos": 8
       },
       {
         "height": 4,
@@ -321,7 +239,7 @@ resource "google_monitoring_dashboard" "request-latency-staging" {
                       ],
                       "perSeriesAligner": "ALIGN_NEXT_OLDER"
                     },
-                    "filter": "metric.type=\"monitoring.googleapis.com/uptime_check/check_passed\" resource.type=\"uptime_url\" metric.label.\"check_id\"=\"https-coffeebase-wikibase-dev-wikibase-wbgetentities-ADerz9_UmdY\""
+                    "filter": "metric.type=\"monitoring.googleapis.com/uptime_check/check_passed\" resource.type=\"uptime_url\" metric.label.\"check_id\"=\"https-cloud-coffeebase-wikibase-cloud-wikibase-wbgetentities\""
                   }
                 }
               }
@@ -335,7 +253,7 @@ resource "google_monitoring_dashboard" "request-latency-staging" {
         },
         "width": 6,
         "xPos": 6,
-        "yPos": 12
+        "yPos": 8
       },
       {
         "height": 4,
@@ -362,7 +280,7 @@ resource "google_monitoring_dashboard" "request-latency-staging" {
                       ],
                       "perSeriesAligner": "ALIGN_NEXT_OLDER"
                     },
-                    "filter": "metric.type=\"monitoring.googleapis.com/uptime_check/check_passed\" resource.type=\"uptime_url\" metric.label.\"check_id\"=\"https-www-wikibase-dev-api-health-HJMz2B61RxQ\""
+                    "filter": "metric.type=\"monitoring.googleapis.com/uptime_check/check_passed\" resource.type=\"uptime_url\" metric.label.\"check_id\"=\"https-www-wikibase-cloud-api-health\""
                   }
                 }
               }
@@ -376,7 +294,7 @@ resource "google_monitoring_dashboard" "request-latency-staging" {
         },
         "width": 6,
         "xPos": 0,
-        "yPos": 16
+        "yPos": 12
       },
       {
         "height": 4,
@@ -403,7 +321,7 @@ resource "google_monitoring_dashboard" "request-latency-staging" {
                       ],
                       "perSeriesAligner": "ALIGN_NEXT_OLDER"
                     },
-                    "filter": "metric.type=\"monitoring.googleapis.com/uptime_check/check_passed\" resource.type=\"uptime_url\" metric.label.\"check_id\"=\"https-coffeebase-wikibase-dev-query-sparql-ckVjQhmXqDg\""
+                    "filter": "metric.type=\"monitoring.googleapis.com/uptime_check/check_passed\" resource.type=\"uptime_url\" metric.label.\"check_id\"=\"https-cloud-coffeebase-wikibase-cloud-query-sparql\""
                   }
                 }
               }
@@ -417,7 +335,7 @@ resource "google_monitoring_dashboard" "request-latency-staging" {
         },
         "width": 6,
         "xPos": 6,
-        "yPos": 16
+        "yPos": 12
       },
       {
         "height": 4,
@@ -444,7 +362,7 @@ resource "google_monitoring_dashboard" "request-latency-staging" {
                       ],
                       "perSeriesAligner": "ALIGN_NEXT_OLDER"
                     },
-                    "filter": "metric.type=\"monitoring.googleapis.com/uptime_check/check_passed\" resource.type=\"uptime_url\" metric.label.\"check_id\"=\" https-coffeebase-wikibase-dev-wikibase-itempage-NRffch1fFzI\""
+                    "filter": "metric.type=\"monitoring.googleapis.com/uptime_check/check_passed\" resource.type=\"uptime_url\" metric.label.\"check_id\"=\"https-cloud-coffeebase-wikibase-cloud-wikibase-itempage\""
                   }
                 }
               }
@@ -458,7 +376,7 @@ resource "google_monitoring_dashboard" "request-latency-staging" {
         },
         "width": 6,
         "xPos": 0,
-        "yPos": 20
+        "yPos": 16
       },
       {
         "height": 4,
@@ -485,7 +403,7 @@ resource "google_monitoring_dashboard" "request-latency-staging" {
                       ],
                       "perSeriesAligner": "ALIGN_NEXT_OLDER"
                     },
-                    "filter": "metric.type=\"monitoring.googleapis.com/uptime_check/check_passed\" resource.type=\"uptime_url\" metric.label.\"check_id\"=\"https-coffeebase-wikibase-dev-7AbaoNv-B3U\""
+                    "filter": "metric.type=\"monitoring.googleapis.com/uptime_check/check_passed\" resource.type=\"uptime_url\" metric.label.\"check_id\"=\"https-cloud-coffeebase-wikibase-cloud\""
                   }
                 }
               }
@@ -499,7 +417,7 @@ resource "google_monitoring_dashboard" "request-latency-staging" {
         },
         "width": 6,
         "xPos": 6,
-        "yPos": 20
+        "yPos": 16
       }
     ]
   }
