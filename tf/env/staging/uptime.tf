@@ -1,5 +1,5 @@
 module "uptime-checks" {
-  source = "git::ssh://git@github.com/wmde/wbaas-deploy//tf//modules/uptime?ref=tf-module-uptime-0"
+  source = "git::ssh://git@github.com/wmde/wbaas-deploy//tf//modules/uptime?ref=tf-module-uptime-2"
   providers = {
     kubernetes = kubernetes.wbaas-2
   }
@@ -10,4 +10,5 @@ module "uptime-checks" {
   wikibase_itempage_content = "Arabica"
 
   project_id = local.project_id
+  monitoring_email_group_name = google_monitoring_notification_channel.monitoring_email_group.name
 }
