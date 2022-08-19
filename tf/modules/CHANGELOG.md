@@ -1,3 +1,6 @@
+# tf-module-uptime-3
+- Increase alignment period for alert
+
 # tf-module-uptime-2
 - Remove uptime_monitoring_email_group resource from uptime
 
