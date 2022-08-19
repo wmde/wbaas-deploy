@@ -13,6 +13,12 @@ minikube-delete:
 minikube-dashboard:
 	minikube --profile minikube-wbaas dashboard
 
+minikube-pause:
+	minikube --profile minikube-wbaas pause -A
+
+minikube-unpause:
+	minikube --profile minikube-wbaas unpause -A
+
 minikube-tunnel:
 	./bin/minikube-tunnel
 
