@@ -2,7 +2,6 @@ resource "google_monitoring_dashboard" "platform-summary" {
   dashboard_json = jsonencode(
     {
       displayName  = "Platform Summary (Staging)"
-      etag         = "c4583004aa4e4f6105c6fc36abe4c719"
       labels       = {
         staging = ""
       }
