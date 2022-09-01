@@ -2,7 +2,6 @@ resource "google_monitoring_dashboard" "error-rate" {
     dashboard_json = jsonencode(
         {
             displayName  = "Error Rate (Staging)"
-            etag         = "58e4f79dea96612bad02be1c22db0ea9"
             labels       = {
                 staging = ""
             }

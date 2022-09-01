@@ -2,7 +2,6 @@ resource "google_monitoring_dashboard" "uptime-latency" {
   dashboard_json = jsonencode(
     {
       displayName  = "Uptime and Latency (Staging)"
-      etag         = "6355646c279d185f85553f0f9237a220"
       labels       = {
         staging = ""
       }
