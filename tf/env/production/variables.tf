@@ -6,7 +6,6 @@ variable "terraformers" {
       "thomas.arrow@wikimedia.de",
       "perside.rosalie@wikimedia.de",
       "jakob.warkotsch@wikimedia.de",
-      "tobias.andersson@wikimedia.de",
       "deniz.erdogan@wikimedia.de",
       "oliver.shotton@wikimedia.de",
       "dat.nguyen@wikimedia.de",
