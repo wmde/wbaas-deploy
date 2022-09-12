@@ -1,3 +1,5 @@
+# tf-module-update-4
+- Increase duration to 5mins for alert
 # tf-module-uptime-3
 - Increase alignment period for alert
 

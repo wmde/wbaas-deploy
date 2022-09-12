@@ -37,7 +37,7 @@ resource "google_monitoring_alert_policy" "alert_policy_https-content-uptime-che
     condition_threshold {
       filter = "resource.type = \"uptime_url\" AND metric.type = \"monitoring.googleapis.com/uptime_check/check_passed\" AND metric.labels.check_id = ${each.value.uptime_check_id}"
       aggregations {
-           alignment_period = "18000s" # 5hours
+          alignment_period = "18000s" # 5hours
           cross_series_reducer = "REDUCE_COUNT_FALSE"
           group_by_fields = [
             "resource.label.project_id",
@@ -46,7 +46,7 @@ resource "google_monitoring_alert_policy" "alert_policy_https-content-uptime-che
           per_series_aligner = "ALIGN_NEXT_OLDER"
       }
         comparison = "COMPARISON_GT"
-        duration = "60s"
+        duration = "300s"
         trigger {
           count = 1
         }
