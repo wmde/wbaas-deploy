@@ -1,4 +1,4 @@
-# tf-module-update-4
+# tf-module-uptime-4
 - Increase duration to 5mins for alert
 
 # tf-module-uptime-3
