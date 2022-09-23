@@ -1,10 +1,10 @@
-# N) Commit Hash based reference to UI image {#adr_0005}
+# 5) Commit Hash based reference to UI image {#adr_0005}
 
 Date: 2022-09-09
 
 ## Status
 
-proposed
+accepted
 
 ## Context
 
