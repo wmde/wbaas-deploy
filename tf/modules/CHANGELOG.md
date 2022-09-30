@@ -1,3 +1,5 @@
+# tf-module-k8s-secrets-1 - September 23 2022
+- Remove unused Mailgun API key
 # tf-module-uptime-4
 - Increase duration to 5mins for alert
 
