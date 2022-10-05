@@ -34,4 +34,4 @@ This builds and submits a kubernetes job to change unit quantities from one pref
 
 The job is built from a combination of `rebuildQuantityUnitsJob.yaml` and the container env variables and image taken from the running backend mediawiki pod
 
-For example run `WBS_DOMAIN="wikifcd.wikibase.cloud" WBS_UNIT_FROM WBS_UNIT_TO="http"  ./rebuildQuantityUnitsJob.sh`
+For example run `WBS_DOMAIN="wikifcd.wikibase.cloud" WBS_UNIT_FROM="https" WBS_UNIT_TO="http"  ./rebuildQuantityUnitsJob.sh`
