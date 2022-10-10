@@ -24,4 +24,7 @@ resource "google_service_account" "dev-api" {
 # TODO future regular rotation https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/google_service_account_key#example-usage-creating-and-regularly-rotating-a-key
 resource "google_service_account_key" "dev-api" {
     service_account_id = google_service_account.dev-api.name
+    keepers = {
+        rotate = 1
+    }
 }
