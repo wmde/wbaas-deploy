@@ -13,6 +13,10 @@ resource "google_service_account" "certman-dns-cloud-solver" {
 # TODO future regular rotation https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/google_service_account_key#example-usage-creating-and-regularly-rotating-a-key
 resource "google_service_account_key" "certman-dns-cloud-solver" {
     service_account_id = google_service_account.certman-dns-cloud-solver.name
+
+    keepers = {
+        rotate = 1
+    }
 }
 
 resource "google_service_account" "api" {
