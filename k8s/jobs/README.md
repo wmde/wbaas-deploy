@@ -26,3 +26,12 @@ Uses the ENV `WBS_DOMAIN`.
 This builds and submits a kubernetes job to flush a given wiki's job queue in batches of a thousand.
 
 The job is built from a combination of `runAllMWJobsJob.yaml` and the container env variables and image are taken from the running backend mediawiki pod.
+
+## rebuildQuantityUnits.sh
+Uses the ENV `WBS_DOMAIN`, `WBS_UNIT_FROM` and `WBS_UNIT_TO`
+
+This builds and submits a kubernetes job to change unit quantities from one prefix to another.
+
+The job is built from a combination of `rebuildQuantityUnitsJob.yaml` and the container env variables and image taken from the running backend mediawiki pod
+
+For example run `WBS_DOMAIN="wikifcd.wikibase.cloud" WBS_UNIT_FROM="https" WBS_UNIT_TO="http"  ./rebuildQuantityUnitsJob.sh`
