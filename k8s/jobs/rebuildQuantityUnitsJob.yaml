@@ -14,7 +14,8 @@ spec:
             - '-c'
             - >
                 MW_INSTALL_PATH=/var/www/html/w/
-                php /var/www/html/w/extensions/Wikibase/repo/maintenance/rebuildEntityQuantityUnit.php
+                php
+                /var/www/html/w/extensions/Wikibase/repo/maintenance/rebuildEntityQuantityUnit.php
                 --from-value="${WBS_UNIT_FROM}"
                 --to-value="${WBS_UNIT_TO}"
       restartPolicy: Never
