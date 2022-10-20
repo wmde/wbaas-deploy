@@ -1,9 +1,8 @@
 module "wbaas2-k8s-secrets" {
-  source = "git::ssh://git@github.com/wmde/wbaas-deploy//tf//modules/k8s-secrets?ref=tf-module-k8s-secrets-0"
+  source = "git::ssh://git@github.com/wmde/wbaas-deploy//tf//modules/k8s-secrets?ref=tf-module-k8s-secrets-1"
   providers = {
     kubernetes = kubernetes.wbaas-2
   }
-  domain_mailgun_key = var.domain_mailgun_key
   smtp_username = mailgun_domain.default.smtp_login
   smtp_password = random_password.smtp-password.result
   google_service_account_key_api = google_service_account_key.dev-api.private_key
