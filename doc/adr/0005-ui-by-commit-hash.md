@@ -9,7 +9,7 @@ accepted
 ## Context
 
 We need to refer to specific OCI images for use locally as well as in production environments.
-The status quo is using version numbers that superficially represent <major>.<minor> but this has not been strictly adhered to.
+The status quo is using version numbers that superficially represent \<major>.\<minor> but this has not been strictly adhered to.
 These versions are specified by tagging a given commit with a version number. For example 3.14.
 
 The current process involves writing a CHANGELOG entry with an incremented version number and the changes since the last version.
