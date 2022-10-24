@@ -4,6 +4,9 @@ resource "random_password" "sql-passwords" {
   length           = 32
   special          = true
   override_special = "_%@"
+  keepers = {
+        rotate = 2
+  }
 }
 
 # Used by the sql service for initial setup
