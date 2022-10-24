@@ -41,16 +41,3 @@ resource "random_password" "sql-root-password-new" {
   special          = true
   override_special = "_%@"
 }
-
-# Used by the sql service for initial setup
-resource "kubernetes_secret" "sql-root-password-old" {
-  metadata {
-    name = "sql-root-password-old"
-    namespace = "default"
-  }
-
-  binary_data = {
-    "mariadb-root-password" = base64encode(random_password.sql-passwords["root"].result)
-  }
-
-}
