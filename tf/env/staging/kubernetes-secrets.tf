@@ -7,7 +7,7 @@ module "wbaas2-k8s-secrets" {
   smtp_password = random_password.smtp-password.result
   google_service_account_key_api = google_service_account_key.dev-api.private_key
   google_service_account_key_dns = google_service_account_key.certman-dns01-solver.private_key
-  sql_password_root = random_password.sql-passwords["staging-root"].result
+  sql_password_root = random_password.sql-root-password.result
   sql_password_replication = random_password.sql-passwords["staging-replication"].result
   sql_password_api = random_password.sql-passwords["staging-api"].result
   sql_password_mediawiki_db_manager = random_password.sql-passwords["staging-mediawiki-db-manager"].result
