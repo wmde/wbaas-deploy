@@ -35,3 +35,16 @@ This builds and submits a kubernetes job to change unit quantities from one pref
 The job is built from a combination of `rebuildQuantityUnitsJob.yaml` and the container env variables and image taken from the running backend mediawiki pod
 
 For example run `WBS_DOMAIN="wikifcd.wikibase.cloud" WBS_UNIT_FROM="https" WBS_UNIT_TO="http"  ./rebuildQuantityUnitsJob.sh`
+
+## resetRootSqlSecretJob.yaml
+Uses no env variables from your local shell.
+Should be submitted to the correct cluster using `kubectl create -f resetRootSqlSecretJob.yaml`.
+
+This resets the root sql password from a k8s secret called `sql-root-password-old` to what is currently defined in `sql-secrets-passwords`.
+
+## resetOtherSqlSecretsJob.yaml
+Uses no env variables from your local shell.
+Should be submitted to the correct cluster using `kubectl create -f resetOtherSqlSecretsJob.yaml`.
+
+This resets the none root sql passwords to what is currently defined in `sql-secrets-init-passwords` and `sql-secrets-passwords`.
+This is done by logging in using the root sql password.
