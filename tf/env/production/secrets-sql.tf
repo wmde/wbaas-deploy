@@ -5,3 +5,9 @@ resource "random_password" "sql-passwords" {
   special          = true
   override_special = "_%@"
 }
+
+resource "random_password" "sql-root-password" {
+  length           = 32
+  special          = true
+  override_special = "_%@"
+}
