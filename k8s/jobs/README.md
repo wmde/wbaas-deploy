@@ -46,5 +46,5 @@ This resets the root sql password from a k8s secret called `sql-root-password-ol
 Uses no env variables from your local shell.
 Should be submitted to the correct cluster using `kubectl create -f resetOtherSqlSecretsJob.yaml`.
 
-This resets the none root sql passwords to what is currently defined in `sql-secrets-init-passwords` and `sql-secrets-passwords`.
+This resets the non-root sql passwords to what is currently defined in `sql-secrets-init-passwords` and `sql-secrets-passwords`.
 This is done by logging in using the root sql password.
