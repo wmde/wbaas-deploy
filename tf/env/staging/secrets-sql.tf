@@ -12,10 +12,10 @@ resource "random_password" "sql-root-password" {
   override_special = "_%@"
 }
 
-resource "kubernetes_secret" "sql-root-old-secret-password" {
+resource "kubernetes_secret" "sql-root-password-old" {
   provider = kubernetes.wbaas-2
   metadata {
-    name = "sql-root-old-secret-password"
+    name = "sql-root-password-old"
     namespace = "default"
   }
 
