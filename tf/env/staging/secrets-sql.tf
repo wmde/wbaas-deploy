@@ -5,7 +5,7 @@ resource "random_password" "sql-passwords" {
   special          = true
   override_special = "_%@"
   keepers = {
-      rotate = 1
+      rotate = 2
     }
 }
 resource "random_password" "sql-root-password" {
