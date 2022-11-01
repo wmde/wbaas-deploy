@@ -1,14 +1,13 @@
 module "wbaas-k8s-secrets" {
-  source = "git::ssh://git@github.com/wmde/wbaas-deploy//tf//modules/k8s-secrets?ref=tf-module-k8s-secrets-0"
+  source = "git::ssh://git@github.com/wmde/wbaas-deploy//tf//modules/k8s-secrets?ref=tf-module-k8s-secrets-1"
   providers = {
     kubernetes = kubernetes.wbaas-3
   }
-  domain_mailgun_key = var.domain_mailgun_key
   smtp_username = mailgun_domain.default.smtp_login
   smtp_password = random_password.smtp-password.result
   google_service_account_key_api = google_service_account_key.api.private_key
   google_service_account_key_dns = google_service_account_key.certman-dns-cloud-solver.private_key
-  sql_password_root = random_password.sql-passwords["production-root"].result
+  sql_password_root = random_password.sql-root-password.result
   sql_password_replication = random_password.sql-passwords["production-replication"].result
   sql_password_api = random_password.sql-passwords["production-api"].result
   sql_password_mediawiki_db_manager = random_password.sql-passwords["production-mediawiki-db-manager"].result

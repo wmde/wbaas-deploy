@@ -1,3 +1,6 @@
+# tf-module-monitoring-15
+- Fix repeated alerts were fired for SQL replication failing
+
 # tf-module-k8s-secrets-1 - September 23 2022
 - Remove unused Mailgun API key
 # tf-module-uptime-4
