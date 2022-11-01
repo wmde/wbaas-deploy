@@ -10,8 +10,6 @@ resource "random_password" "sql-passwords" {
   }
 }
 
-}
-
 resource "random_password" "sql-root-password" {
   length           = 32
   special          = true
