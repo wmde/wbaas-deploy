@@ -31,7 +31,6 @@ variable "sql-passwords" {
   type    = set(string)
   description = "SQL passwords to create and send to k8s as secrets"
   default = [
-      "production-root",
       "production-replication",
       "production-api",
       "production-mediawiki-db-manager",
