@@ -21,6 +21,6 @@ resource "kubernetes_secret" "sql-root-password-old" {
   }
 
   binary_data = {
-    "mariadb-root-password" = base64encode(random_password.sql-passwords["staging-root"].result)
+    "mariadb-root-password" = base64encode(random_password.sql-passwords["production-root"].result)
   }
 }
