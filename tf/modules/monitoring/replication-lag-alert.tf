@@ -25,11 +25,11 @@ resource "google_monitoring_alert_policy" "alert_policy_replica_readiniess_failu
     display_name = "(${var.cluster_name}): SQL replica readiness probe failure"
     condition_threshold {
       filter     = "metric.type=\"logging.googleapis.com/user/${google_logging_metric.mariadb-replica-readiness-probe-failure.name}\" AND resource.type=\"k8s_pod\""
-      duration   = "60s"
+      duration   = "0s"
       comparison = "COMPARISON_GT"
       aggregations {
-        alignment_period     = "120s"
-        per_series_aligner   = "ALIGN_RATE"
+        alignment_period     = "300s"
+        per_series_aligner   = "ALIGN_SUM"
         cross_series_reducer = "REDUCE_SUM"
       }
       trigger {
