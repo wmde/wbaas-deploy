@@ -4,6 +4,8 @@ repositories:
   - name: wbstack
     url: https://wbstack.github.io/charts
   - name: bitnami
+    url: https://charts.bitnami.com/bitnami
+  - name: bitnami-legacy
     # yamllint disable-line rule:line-length
     url: https://raw.githubusercontent.com/bitnami/charts/eb5f9a9513d987b519f0ecd732e7031241c50328/bitnami
   - name: cetic
@@ -85,7 +87,7 @@ releases:
 
   - name: sql
     namespace: default
-    chart: bitnami/mariadb
+    chart: bitnami-legacy/mariadb
     version: 10.5.0
     values:
       - "env/{{ .Environment.Name }}/sql.values.yaml.gotmpl"
@@ -100,14 +102,14 @@ releases:
   - name: redis
     # This is in the default namespace, as the default ns implies staging?
     namespace: default
-    chart: bitnami/redis
+    chart: bitnami-legacy/redis
     version: 15.4.1
     values:
       - "env/{{ .Environment.Name }}/redis.values.yaml.gotmpl"
 
   - name: platform-nginx
     namespace: default
-    chart: bitnami/nginx
+    chart: bitnami-legacy/nginx
     version: 5.2.4
     values:
       - "env/{{ .Environment.Name }}/platform-nginx.values.yaml.gotmpl"
