@@ -116,7 +116,7 @@ releases:
 
   - name: platform-apps-ingress
     namespace: default
-    chart: ./../../charts/wikibase-ingress
+    chart: wbstack/wikibase-ingress
     values:
       - ingressNameSuffix: {{ .Values.ingressNameSuffix | toYaml }}
       - ingressHost: {{ .Values.ingressHost | toYaml }}
