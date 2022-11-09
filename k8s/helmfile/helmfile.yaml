@@ -93,7 +93,7 @@ releases:
     chart: ingress-nginx/ingress-nginx
     version: 4.2.5
     values:
-     - "env/{{ .Environment.Name }}/ingress-nginx.values.yaml.gotmpl"
+      - "env/{{ .Environment.Name }}/ingress-nginx.values.yaml.gotmpl"
 
   - name: sql
     namespace: default
