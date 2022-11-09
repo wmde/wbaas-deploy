@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-EXTERNAL_IP=$(minikube --profile minikube-wbaas kubectl -- -n kube-system get service nginx-ingress-controller -o template='{{.spec.clusterIP}}')
+EXTERNAL_IP=$(minikube --profile minikube-wbaas kubectl -- -n kube-system get service ingress-nginx-controller -o template='{{.spec.clusterIP}}')
 
 trap 'kill -15 $kids; exit 143' TERM
 
