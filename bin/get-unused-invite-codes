@@ -1,0 +1,26 @@
+#!/bin/bash
+
+# - outputs the current unused invite codes from wikibase.cloud
+# - switches to the production kubectl context automatically and
+#   back if another context was active before
+
+CONTEXT=$(kubectl config current-context)
+NEEDED_CONTEXT="gke_wikibase-cloud_europe-west3-a_wbaas-3"
+CONTEXT_CHANGED=$(false)
+
+if [[ "$CONTEXT" != "$NEEDED_CONTEXT" ]]; then
+	kubectl config use-context "$NEEDED_CONTEXT"   
+	CONTEXT_CHANGED=$(true)
+fi
+
+echo
+kubectl exec -ti deployments/api-app-backend -- php artisan wbs-invitation:all | grep wbcloud-
+
+echo
+echo "https://docs.google.com/spreadsheets/d/1EpQ2LYRfmDlu9ZfuPX5dRwo1nLmg3cBs3-g6CMvZ2xQ/edit#gid=1599155349"
+echo
+
+if $CONTEXT_CHANGED; then
+	kubectl config use-context "$CONTEXT"
+fi
+
