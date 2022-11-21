@@ -116,8 +116,7 @@ releases:
 
   - name: platform-apps-ingress
     namespace: default
-    # yamllint disable-line rule:line-length
-    chart: '{{ if eq .Environment.Name "production" }}./../../charts/wikibase-ingress{{ else }}wbstack/wikibase-ingress{{ end }}'
+    chart: wbstack/wikibase-ingress
     values:
       - ingressNameSuffix: {{ .Values.ingressNameSuffix | toYaml }}
       - ingressHost: {{ .Values.ingressHost | toYaml }}
