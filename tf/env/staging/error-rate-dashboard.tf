@@ -165,7 +165,7 @@ resource "google_monitoring_dashboard" "error-rate" {
                     {
                         height = 4
                         widget = {
-                            title   = "nginx-ingress-controller error rate"
+                            title   = "ingress-nginx-controller error rate"
                             xyChart = {
                                 chartOptions      = {
                                     mode = "COLOR"
@@ -185,7 +185,7 @@ resource "google_monitoring_dashboard" "error-rate" {
                                                     ]
                                                     perSeriesAligner   = "ALIGN_RATE"
                                                 }
-                                                filter      = "metric.type=\"logging.googleapis.com/log_entry_count\" resource.type=\"k8s_container\" metric.label.\"severity\"=\"ERROR\" resource.label.\"pod_name\"=monitoring.regex.full_match(\"nginx-ingress-controller-.+\") resource.label.\"cluster_name\"=\"wbaas-2\""
+                                                filter      = "metric.type=\"logging.googleapis.com/log_entry_count\" resource.type=\"k8s_container\" metric.label.\"severity\"=\"ERROR\" resource.label.\"pod_name\"=monitoring.regex.full_match(\"ingress-nginx-controller-.+\") resource.label.\"cluster_name\"=\"wbaas-2\""
                                             }
                                         }
                                     },

@@ -114,7 +114,7 @@ resource "google_logging_metric" "production-es-gc-time-seconds" {
 resource "google_logging_metric" "production-site-request-count" {
     description      = "Count of requests to sites"
     filter           = <<-EOT
-        resource.labels.container_name="nginx-ingress-controller"
+        resource.labels.container_name="ingress-nginx-controller"
         resource.type="k8s_container"
         -textPayload:"GoogleStackdriverMonitoring"
         -textPayload:"cert-manager"
