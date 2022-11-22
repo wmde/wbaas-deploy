@@ -81,6 +81,14 @@ releases:
   ################################
   # ALL ENVIRONMENTS
   ################################
+  - name: nginx-ingress
+    installed: false
+    namespace: kube-system
+    chart: stable/nginx-ingress
+    version: 1.34.3
+    values:
+      - "env/{{ .Environment.Name }}/nginx-ingress.values.yaml.gotmpl"
+
   - name: ingress-nginx
     namespace: kube-system
     chart: ingress-nginx/ingress-nginx
