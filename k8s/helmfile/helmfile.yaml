@@ -208,10 +208,10 @@ releases:
   # LOCAL ONLY
   ################################
   - name: adminer-cetic
-    installed: {{ eq .Environment.Name "local" | toYaml }}
     namespace: default
+    installed: {{ eq .Environment.Name "local" | toYaml }}
     chart: cetic/adminer
-    version: v0.1.7
+    version: v0.2.1
     values:
       - "env/{{ .Environment.Name }}/adminer-cetic.values.yaml.gotmpl"
 
