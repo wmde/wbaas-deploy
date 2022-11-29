@@ -1,11 +1,17 @@
 # Working with this Repository
 
-This repository needs to reflect the state of any shared resources;
-otherwise it will block other people from also altering those shared resources.
+### This repository needs to reflect the state of any shared resources
+If it does not it will block other people from also altering those shared resources or may even result in unintentional destructive actions.
 
-This means if you apply any changes to shared resources (e.g. using helmfile or Terraform) you should directly commit to `main` and push within a reasonable timeframe (say 10 mins). Shared resources are any infrastructure items that are touched by more than one person. For example, anything in our GCE project or our MailGun account. It does not include any local development clusters we may have setup.
+This means if you apply any changes to shared resources (e.g. using helmfile or Terraform) the changed state needs to make it to `main` within a reasonable timeframe (say 10 mins). Shared resources are any infrastructure items that are touched by more than one person. For example, anything in our GCE project or our MailGun account. It does not include any local development clusters we may have setup.
 
-An alternative is that you should make sure any changes to shared resources are promptly undone and then propose changes as PRs. On merging the PR the person who
-merges it is responsible for applying it to the shared resources.
+### All changes to `main` should be prepared as PRs.
 
-One shouldn't merge their own PRs, unless approved by others. Draft PRs shouldn't be merged.
+In an ideal world they should be approved by a second engineer before merging. However, this isn't always possible. If an urgent change needs to be made (e.g. to fix production) it's more important that `main` reflacts the reality of the cluster than that the PR is review before merging. Engineers can always ask for review from their colleagues after merging or seek external review in these edge cases where there is no-one in the team at the time.
+
+### Principles for merging PRs
+- If one merges a PR it must be immediately deployed.
+- One should try to avoid merging their own PRs until they are approved by others.
+- If a PR fails to deploy it should be reverted.
+- The revert can be merged without approval.
+- Draft PRs shouldn't be merged without carefully checking they are now actually ready.
