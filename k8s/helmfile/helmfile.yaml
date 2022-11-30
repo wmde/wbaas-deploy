@@ -105,8 +105,8 @@ releases:
   - name: redis
     # This is in the default namespace, as the default ns implies staging?
     namespace: default
-    chart: bitnami-legacy/redis
-    version: 15.4.1
+    chart: bitnami/redis
+    version: 17.3.8
     values:
       - "env/{{ .Environment.Name }}/redis.values.yaml.gotmpl"
 
