@@ -1,3 +1,6 @@
+# tf-module-buckets-1
+- Re-add retention policy on backup bucket
+
 # tf-module-monitoring-15
 - Fix repeated alerts were fired for SQL replication failing
 

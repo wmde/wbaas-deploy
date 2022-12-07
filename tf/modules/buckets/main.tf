@@ -20,6 +20,11 @@ resource "google_storage_bucket" "sql-backup" {
       age = 7
     }
   }
+
+  retention_policy {
+    is_locked = false
+    retention_period = 604800 # 7 days in seconds
+  }
 }
 
 
@@ -65,6 +70,10 @@ resource "google_storage_bucket" "static-backup" {
     }
   }
 
+  retention_policy {
+    is_locked = true
+    retention_period = 604800 # 7 days in seconds
+  }
 }
 
 # Backup bucket IAM Policy
