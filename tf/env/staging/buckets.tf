@@ -1,5 +1,5 @@
 module "staging-buckets" {
-  source = "git::ssh://git@github.com/wmde/wbaas-deploy//tf//modules/buckets?ref=tf-module-buckets-0"
+  source = "git::ssh://git@github.com/wmde/wbaas-deploy//tf//modules/buckets?ref=tf-module-buckets-2"
   providers = {
     kubernetes = kubernetes.wbaas-2
   }
