@@ -71,7 +71,7 @@ resource "google_storage_bucket" "static-backup" {
   }
 
   retention_policy {
-    is_locked = false
+    is_locked = true
     retention_period = 604800 # 7 days in seconds
   }
 }
