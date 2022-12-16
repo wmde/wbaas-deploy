@@ -20,11 +20,6 @@ resource "google_storage_bucket" "sql-backup" {
       age = 7
     }
   }
-
-  retention_policy {
-    is_locked = false
-    retention_period = 604800 # 7 days in seconds
-  }
 }
 
 
@@ -68,11 +63,6 @@ resource "google_storage_bucket" "static-backup" {
     condition {
       days_since_noncurrent_time = 7
     }
-  }
-
-  retention_policy {
-    is_locked = false
-    retention_period = 604800 # 7 days in seconds
   }
 }
 
