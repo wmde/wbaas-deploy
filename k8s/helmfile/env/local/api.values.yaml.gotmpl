@@ -1,5 +1,5 @@
 image:
-  tag: "8x.9.10"
+  tag: "8x.9.11"
 
 replicaCount:
   web: 1
@@ -72,6 +72,10 @@ wbstack:
   uiurl: {{ .Values.wbstack.uiurl }}
   wikiDbProvisionVersion: mw1.37-fp-wbs1
   wikiDbUseVersion: mw1.37-fp-wbs1
+  contact:
+    mail:
+      recipient: someone@wikimedia.de
+      sender: contact-<subject>@wikibase.cloud
 
 app:
   name: WBaaS Localhost
