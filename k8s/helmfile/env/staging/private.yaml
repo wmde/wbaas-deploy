@@ -37,7 +37,7 @@ services:
           - /api(/|$)(.*)
   sql:
     storageClass: premium-rwo
-    storageSize: 60Gi
+    storageSize: 61Gi
     api:
       db: apidb
       user: apiuser
