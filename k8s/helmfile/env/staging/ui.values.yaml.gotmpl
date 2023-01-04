@@ -1,6 +1,5 @@
 image:
   tag: "sha-b037dac"
-
 resources:
   requests:
     cpu: 1m
@@ -15,18 +14,17 @@ ingress:
     nginx.ingress.kubernetes.io/use-regex: "true"
     nginx.ingress.kubernetes.io/from-to-www-redirect: "true"
   hosts:
-  - host: {{ .Values.uiHostName }}
-    paths:
-    - /*
+    - host: {? {.Values.uiHostName: ''} : ''}
+      paths:
+        - /*
   tls:
-  - hosts:
-    - {{ .Values.uiHostName }}
-    secretName: {{ .Values.tlsSecret }}
+    - hosts:
+        - {? {.Values.uiHostName: ''} : ''}
+      secretName: {? {.Values.tlsSecret: ''} : ''}
 ui:
-  apiUrl: {{ .Values.services.app.apiUrl }}
-  subdomainSuffix: {{ .Values.wbstack.subdomainSuffix }}
-  recaptchaSitekeySecretName: {{ .Values.external.recaptcha3.secretName }}
+  apiUrl: {? {.Values.services.app.apiUrl: ''} : ''}
+  subdomainSuffix: {? {.Values.wbstack.subdomainSuffix: ''} : ''}
+  recaptchaSitekeySecretName: {? {.Values.external.recaptcha3.secretName: ''} : ''}
   recaptchaSitekeySecretKey: site_key
   cnameConfigMapKey: cname_record
   configMapName: wbaas-ui-config
-  
