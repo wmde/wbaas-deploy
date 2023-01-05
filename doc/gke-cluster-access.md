@@ -60,7 +60,7 @@ To use these contexts, use `kubectl config set`.
 E.g. in order to point your `kubectl` at staging, run:
 
 ```
-kubectl config set-context gke_wikibase-cloud_europe-west3-a_wbaas-2
+kubectl config use-context gke_wikibase-cloud_europe-west3-a_wbaas-2
 ```
 
 Note that the context names do not reuse names provided when calling `get-credentials`, but add a prefix.
