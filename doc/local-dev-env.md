@@ -76,10 +76,10 @@ Create a `terraform.tfvars` file in `tf/env/local` and add the recaptcha secrets
 [test-keys]: https://developers.google.com/recaptcha/docs/faq#id-like-to-run-automated-tests-with-recaptcha.-what-should-i-do
 
 ```
-recaptcha_v3_site_key = "insert actual secret here"
-recaptcha_v3_secret   = "insert actual secret here"
-recaptcha_v2_site_key = "insert actual secret here"
-recaptcha_v2_secret   = "insert actual secret here"
+recaptcha_v3_dev_site_key = "insert actual secret here"
+recaptcha_v3_dev_secret   = "insert actual secret here"
+recaptcha_v2_dev_site_key = "insert actual secret here"
+recaptcha_v2_dev_secret   = "insert actual secret here"
 ```
 
 To review the changes between what is applied to the infrastructure and the current configuration run:
