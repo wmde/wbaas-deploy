@@ -9,9 +9,9 @@ jobs:
       - name: Create the Mattermost Message
         env:
           TITLE: ${{ github.event.pull_request.title }}
-          HTML_LINK: ${{github.event.pull_request.html_url }}
+          HTML_LINK: ${{ github.event.pull_request.html_url }}
         run: >
-          echo "{\"text\":\"Pull request opened: [${TITLE}](${HTML_LINK})\"}"
+          echo "{\"text\":\"Pull request opened: [$(printf "%q" $TITLE)](${HTML_LINK}\"}"
           > mattermost.json
       - uses: mattermost/action-mattermost-notify@master
         env:
