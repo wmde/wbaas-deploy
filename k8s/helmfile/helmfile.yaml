@@ -1,7 +1,4 @@
 repositories:
-    # This is now deprecated remove once no longer used
-  - name: stable
-    url: https://charts.helm.sh/stable
   - name: wbstack
     url: https://wbstack.github.io/charts
   - name: bitnami
