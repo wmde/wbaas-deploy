@@ -45,6 +45,13 @@ helmfiles:
     values:
       - foo: null
 
+templates:
+  default: &default_release
+    missingFileHandler: Warn
+    values:
+      - env/common/{{`{{ .Release.Name }}`}}.values.yaml.gotmpl
+      - env/{{`{{ .Environment.Name }}`}}/{{`{{ .Release.Name }}`}}.values.yaml.gotmpl
+
 releases:
   ################################
   # NOT LOCAL
@@ -72,8 +79,7 @@ releases:
     installed: {{ ne .Environment.Name "local" | toYaml }}
     namespace: default
     chart: ./../../charts/certificates
-    values:
-      - "env/{{ .Environment.Name }}/certificates.values.yaml.gotmpl"
+    <<: *default_release
 
   ################################
   # ALL ENVIRONMENTS
@@ -82,37 +88,35 @@ releases:
     namespace: kube-system
     chart: ingress-nginx/ingress-nginx
     version: 4.2.5
-    values:
-      - "env/{{ .Environment.Name }}/ingress-nginx.values.yaml.gotmpl"
+    # TODO: future releases of `helmfile` will bring an `inherit` feature
+    # that can be used instead of YAML anchors. When upgrading helmfile, check
+    # if we can use this feature here instead.
+    <<: *default_release
 
   - name: sql
     namespace: default
     chart: bitnami-legacy/mariadb
     version: 10.5.0
-    values:
-      - "env/{{ .Environment.Name }}/sql.values.yaml.gotmpl"
+    <<: *default_release
 
   - name: elasticsearch
     namespace: default
     chart: elastic/elasticsearch
     version: 6.8.22
-    values:
-      - "env/{{ .Environment.Name }}/elasticsearch.values.yaml.gotmpl"
+    <<: *default_release
 
   - name: redis
     # This is in the default namespace, as the default ns implies staging?
     namespace: default
     chart: bitnami/redis
     version: 17.3.8
-    values:
-      - "env/{{ .Environment.Name }}/redis.values.yaml.gotmpl"
+    <<: *default_release
 
   - name: platform-nginx
     namespace: default
     chart: bitnami-legacy/nginx
     version: 5.2.4
-    values:
-      - "env/{{ .Environment.Name }}/platform-nginx.values.yaml.gotmpl"
+    <<: *default_release
 
   - name: platform-apps-ingress
     namespace: default
@@ -127,79 +131,72 @@ releases:
     chart: wbstack/api
     version: 0.20.1
     namespace: default
-    values:
-      - "env/{{ .Environment.Name }}/api.values.yaml.gotmpl"
+    <<: *default_release
 
   - name: ui
     namespace: default
     chart: wbstack/ui
     version: 0.3.0
-    values:
-      - "env/{{ .Environment.Name }}/ui.values.yaml.gotmpl"
+    <<: *default_release
 
   - name: mediawiki-137-fp
     namespace: default
     chart: wbstack/mediawiki
     version: 0.10.6
-    values:
-      - "env/{{ .Environment.Name }}/mediawiki-137-fp.values.yaml.gotmpl"
+    <<: *default_release
 
   - name: queryservice-ui
     namespace: default
     chart: wbstack/queryservice-ui
     version: '0.2.0'
-    values:
-      - "env/{{ .Environment.Name }}/queryservice-ui.values.yaml.gotmpl"
+    <<: *default_release
+
   - name: queryservice
     namespace: default
     chart: wbstack/queryservice
     version: 0.2.0
-    values:
-      - "env/{{ .Environment.Name }}/queryservice.values.yaml.gotmpl"
+    <<: *default_release
+
   - name: queryservice-gateway
     namespace: default
     chart: wbstack/queryservice-gateway
     version: 0.1.2
-    values:
-      - "env/{{ .Environment.Name }}/queryservice-gateway.values.yaml.gotmpl"
+    <<: *default_release
+
   - name: queryservice-updater
     namespace: default
     chart: wbstack/queryservice-updater
     version: 0.1.2
-    values:
-      - "env/{{ .Environment.Name }}/queryservice-updater.values.yaml.gotmpl"
+    <<: *default_release
 
   - name: tool-cradle
     namespace: default
     chart: wbstack/tool-cradle
     version: 0.1.2
-    values:
-      - "env/{{ .Environment.Name }}/tool-cradle.values.yaml.gotmpl"
+    <<: *default_release
+
   - name: tool-widar
     namespace: default
     chart: wbstack/tool-widar
     version: 0.2.0
-    values:
-      - "env/{{ .Environment.Name }}/tool-widar.values.yaml.gotmpl"
+    <<: *default_release
+
   - name: tool-quickstatements
     namespace: default
     chart: wbstack/tool-quickstatements
     version: 0.2.3
-    values:
-      - "env/{{ .Environment.Name }}/tool-quickstatements.values.yaml.gotmpl"
+    <<: *default_release
 
   - name: wbaas-backup
     namespace: default
     chart: wbstack/wbaas-backup
     version: 0.0.5
-    values:
-      - "env/{{ .Environment.Name }}/wbaas-backup.yaml.gotmpl"
+    <<: *default_release
 
   - name: stats-cron
     namespace: default
     chart: ./../../charts/stats-cron
-    values:
-      - "env/{{ .Environment.Name }}/stats-cron.values.yaml.gotmpl"
+    <<: *default_release
 
   ################################
   # LOCAL ONLY
@@ -209,13 +206,11 @@ releases:
     installed: {{ eq .Environment.Name "local" | toYaml }}
     chart: cetic/adminer
     version: v0.2.1
-    values:
-      - "env/{{ .Environment.Name }}/adminer-cetic.values.yaml.gotmpl"
+    <<: *default_release
 
   - name: mailhog
     installed: {{ eq .Environment.Name "local" | toYaml }}
     namespace: default
     chart: codecentric/mailhog
     version: 5.0.1
-    values:
-      - env/local/mailhog.values.yaml
+    <<: *default_release
