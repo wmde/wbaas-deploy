@@ -1,14 +1,3 @@
-image:
-  repository: ghcr.io/wmde/wbaas-backup
-  tag: v0.1.10
-  pullPolicy: Always
-
-# every five minutes
-# "*/5 * * * *"
-# every January first
-# * * 1 1 *
-restorePodRunning: false
-
 job:
   failedJobsHistoryLimit: 1
   successfulJobsHistoryLimit: 1
