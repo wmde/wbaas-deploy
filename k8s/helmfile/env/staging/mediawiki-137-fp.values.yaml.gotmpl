@@ -1,32 +1,14 @@
 image:
   tag: "1.37-7.4-20230112-fp-beta-0"
 
-replicaCount:
-  backend: 1
-  web: 2
-  webapi: 2
-  alpha: 1
 mw:
   settings:
     allowedProxyCidr: "10.112.0.0/14"
   db:
     replica: sql-mariadb-secondary.default.svc.cluster.local
     master: sql-mariadb-primary.default.svc.cluster.local
-  redis:
-    # TODO fixme, no port injected into deployment...
-    # TODO fixme, no "database" ID injected into mediawiki
-    readServer: {{ .Values.services.redis.readHost }}
-    writeServer: {{ .Values.services.redis.writeHost }}
-    password:
-    passwordSecretName: redis-password
-    passwordSecretKey: password
-  elasticsearch:
-    host: elasticsearch-master.default.svc.cluster.local
-    port: 9200
   mail:
     domain: "wikibase.dev"
-  mailgun:
-    enabled: false
   smtp:
     enabled: true
     smtpUserSecretName: smtp-credentials
@@ -40,8 +22,7 @@ mw:
     sitekeySecretKey: site_key
     secretkeySecretName: {{ .Values.external.recaptcha2.secretName }}
     secretkeySecretKey: secret_key
-  platform:
-    apiBackendHost: api-app-backend.default.svc.cluster.local
+
 resources:
   web:
     requests:
