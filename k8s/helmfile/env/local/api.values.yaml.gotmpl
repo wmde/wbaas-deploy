@@ -1,26 +1,6 @@
 image:
   tag: "8x.9.11"
 
-replicaCount:
-  web: 1
-  backend: 1
-  scheduler: 1
-  queue: 1
-
-useProbes: true
-
-platform:
-  backendMwHost: mediawiki-137-fp-app-backend.default.svc.cluster.local
-# This mw db connection is only used by the queue..
-queue:
-  mw:
-    db:
-      readHost: sql-mariadb-secondary.default.svc.cluster.local
-      writeHost: sql-mariadb-primary.default.svc.cluster.local
-      # database: someDbName
-      username: mediawiki-db-manager
-      passwordSecretName: sql-secrets-init-passwords
-      passwordSecretKey: SQL_INIT_PASSWORD_MW
 resources:
   # The backed is a platform critical element, so make sure it is allowed to be a bit silly...
   backend:
@@ -52,26 +32,7 @@ resources:
       cpu: 40m
       memory: 80Mi
 
-ingress:
-  enabled: true
-  annotations:
-    kubernetes.io/ingress.class: nginx
-    nginx.ingress.kubernetes.io/use-regex: "true"
-    nginx.ingress.kubernetes.io/rewrite-target: /$2
-  hosts:
-  {{- range .Values.services.app.ingressHosts }}
-  - host: {{ .host }}
-    paths:
-    {{- range .paths }}
-    - {{ . | quote }}
-    {{- end }}
-  {{- end }}
-
 wbstack:
-  subdomainSuffix: {{ .Values.wbstack.subdomainSuffix }}
-  uiurl: {{ .Values.wbstack.uiurl }}
-  wikiDbProvisionVersion: mw1.37-fp-wbs1
-  wikiDbUseVersion: mw1.37-fp-wbs1
   contact:
     mail:
       recipient: someone@wikimedia.de
@@ -79,35 +40,8 @@ wbstack:
 
 app:
   name: WBaaS Localhost
-  keySecretName: api-app-secrets
-  keySecretKey: api-app-key
-  url: {{ .Values.services.app.url }}
-  cacheDriver: redis
-  queueConnection: redis
-  jwtSecretSecretName: api-app-secrets
-  jwtSecretSecretKey: api-app-jwt-secret
-  queryServiceHost: queryservice.default.svc.cluster.local:9999
-  elasticSearchHost: elasticsearch-master.default.svc.cluster.local:9200
   redis:
-    # TODO is it possible to take advantage of replicas here?
-    host: {{ .Values.services.redis.writeHost }}
-    passwordSecretName: redis-password
-    passwordSecretKey: password
-    # Default values includes a password right now, so we need to explictly set this as empty
-    password:
-    port: {{ .Values.services.redis.port }}
-    db: {{ .Values.services.redis.databases.apiDb }}
-    cachedb: {{ .Values.services.redis.databases.apiCacheDb }}
     prefix: wikibase_dev_api
-  db:
-    connection: mysql
-    readHost: sql-mariadb-secondary.default.svc.cluster.local
-    writeHost: sql-mariadb-primary.default.svc.cluster.local
-    port: 3306
-    name: {{ .Values.services.sql.api.db }}
-    user: {{ .Values.services.sql.api.user }}
-    passwordSecretName: sql-secrets-init-passwords
-    passwordSecretKey: SQL_INIT_PASSWORD_API
   mail:
     mailer: smtp
     fromaddress: noreply-local@fake.wikibase.dev
