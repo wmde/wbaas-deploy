@@ -1,0 +1,11 @@
+replicaCount: 1
+
+image:
+  repository: ghcr.io/wbstack/queryservice-updater
+  pullPolicy: Always
+
+app:
+  sleepTime: 5
+  loopLimit: 100
+  getBatchesEndpoint: http://api-app-backend.default.svc.cluster.local/backend/qs/getBatches
+  wikibaseScheme: http
