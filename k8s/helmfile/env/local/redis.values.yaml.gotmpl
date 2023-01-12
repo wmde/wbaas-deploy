@@ -1,11 +1,3 @@
-redisPort: 6379
-architecture: "replication"
-sentinel:
-  enabled: false
-auth:
-  enabled: true
-  existingSecret: redis-password
-  existingSecretPasswordKey: password
 commonConfiguration: |
   # Enable AOF https://redis.io/topics/persistence#append-only-file
   appendonly yes
@@ -31,20 +23,12 @@ master:
     limits:
       cpu: 50m
       memory: 90Mi
-  persistence:
-    enabled: true
-    path: /data
-    subPath: ""
-    accessModes:
-      - ReadWriteOnce
-    size: 1Gi
 
 replica:
   livenessProbe:
     enabled: false
   readinessProbe:
     enabled: false
-  replicaCount: 1
   resources:
     requests:
       cpu: 10m
@@ -54,10 +38,3 @@ replica:
     limits:
       cpu: 50m
       memory: 90Mi
-  persistence:
-    enabled: true
-    path: /data
-    subPath: ""
-    accessModes:
-      - ReadWriteOnce
-    size: 1Gi

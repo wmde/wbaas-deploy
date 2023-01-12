@@ -1,11 +1,3 @@
-redisPort: 6379
-architecture: "replication"
-sentinel:
-  enabled: false
-auth:
-  enabled: true
-  existingSecret: redis-password
-  existingSecretPasswordKey: password
 commonConfiguration: |
   # Enable AOF https://redis.io/topics/persistence#append-only-file
   appendonly yes
@@ -17,7 +9,10 @@ commonConfiguration: |
   # Auto AOF file rewriting
   auto-aof-rewrite-percentage 100
   auto-aof-rewrite-min-size 85mb
+
 master:
+  persistence:
+    storageClass: premium-rwo
   resources:
     requests:
       cpu: 100m
@@ -26,15 +21,10 @@ master:
     limits:
       cpu: 200m
       memory: 150Mi
-  persistence:
-    enabled: true
-    path: /data
-    subPath: ""
-    storageClass: premium-rwo
-    accessModes:
-      - ReadWriteOnce
-    size: 1Gi
+
 replica:
+  persistence:
+    storageClass: premium-rwo
   replicaCount: 1
   resources:
     requests:
@@ -43,11 +33,3 @@ replica:
     limits:
       cpu: 80m
       memory: 150Mi
-  persistence:
-    enabled: true
-    path: /data
-    subPath: ""
-    storageClass: premium-rwo
-    accessModes:
-      - ReadWriteOnce
-    size: 1Gi
