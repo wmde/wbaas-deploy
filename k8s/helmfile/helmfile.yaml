@@ -206,11 +206,13 @@ releases:
     installed: {{ eq .Environment.Name "local" | toYaml }}
     chart: cetic/adminer
     version: v0.2.1
-    <<: *default_release
+    values:
+      - env/local/adminer-cetic.values.yaml.gotmpl
 
   - name: mailhog
     installed: {{ eq .Environment.Name "local" | toYaml }}
     namespace: default
     chart: codecentric/mailhog
     version: 5.0.1
-    <<: *default_release
+    values:
+      - env/local/mailhog.values.yaml.gotmpl
