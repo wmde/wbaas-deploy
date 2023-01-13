@@ -44,11 +44,17 @@ minikube-tunnel: # @HELP Open a tunnel to the local cluster and expose it on an 
 minikube-tunnel:
 	./bin/minikube-tunnel
 
+.PHONY: helmfile-fetch
+helmfile-fetch: # @HELP Fetch all charts defined in the Helmfile. This works across all environments
+helmfile-fetch:
+# local environment is used (as one is needed), and any will do
+	cd ./k8s/helmfile && helmfile --environment local fetch
+
 .PHONY: helmfile-deps
 helmfile-deps: # @HELP Fetch all deps defined in the Helmfile. This works across all environments
 helmfile-deps:
 # local environment is used (as one is needed), and any will do
-	cd ./k8s/helmfile && helmfile --environment local fetch
+	cd ./k8s/helmfile && helmfile --environment local deps
 
 PHONY: init-%
 init-local: # @HELP Initialize terraform state for your local setup. This does not create any resources
