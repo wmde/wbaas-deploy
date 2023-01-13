@@ -1,0 +1,24 @@
+resources:
+  requests:
+    cpu: 1m
+    memory: 6Mi
+  limits:
+    cpu: 10m
+    memory: 20Mi
+ingress:
+  enabled: true
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    nginx.ingress.kubernetes.io/use-regex: "true"
+    nginx.ingress.kubernetes.io/from-to-www-redirect: "true"
+  hosts:
+  - host: {{ .Values.uiHostName }}
+    paths:
+    - /*
+
+ui:
+  apiUrl: {{ .Values.services.app.apiUrl }}
+  subdomainSuffix: {{ .Values.wbstack.subdomainSuffix }}
+  cnameConfigMapKey: cname_record
+  configMapName: wbaas-ui-config
+  
