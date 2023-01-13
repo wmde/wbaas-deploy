@@ -1,12 +1,4 @@
-image: "wikibase/elasticsearch"
 imageTag: "6.8.23-wmde.6"
-imagePullPolicy: Always
-
-replicas: 3
-minimumMasterNodes: 2
-
-# For now we don't have enough nodes to have this set to hard
-antiAffinity: soft
 
 esJavaOpts: "-Xms4g -Xmx4g"
 
@@ -17,20 +9,6 @@ resources:
   limits:
     cpu: "3950m"
     memory: "8Gi"
-
-esConfig:
-  elasticsearch.yml: |
-    # T309396
-    xpack.ml.enabled: false
-    xpack.monitoring.collection.enabled: false
-    xpack.watcher.enabled: false
-    xpack.security.enabled: false
-    xpack.graph.enabled: false
-    xpack.logstash.enabled: false
-    xpack.ccr.enabled: false
-
-    # T309378
-    action.auto_create_index: false
 
 volumeClaimTemplate:
   accessModes: [ "ReadWriteOnce" ]
