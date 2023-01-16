@@ -5,7 +5,6 @@ auth:
   existingSecret: sql-secrets-passwords
 
 primary:
-  extraEnvVarsSecret: sql-secrets-init-passwords
   resources:
     requests:
       cpu: 40m
@@ -13,9 +12,7 @@ primary:
     limits:
       cpu: 750m
       memory: 1000Mi
-  persistence:
-    enabled: true
-    size: {{ .Values.services.sql.storageSize | quote }}
+    # storage: 1Gi
   configuration: |-
     [mysqld]
     skip-name-resolve
@@ -100,10 +97,6 @@ secondary:
                 echo "More than $REPLICATION_THRESHOLD seconds behind primary"
                 exit 1;
               fi
-  persistence:
-    enabled: true
-    size: {{ .Values.services.sql.storageSize | quote }}
-
   configuration: |-
     [mysqld]
     skip-name-resolve
@@ -145,59 +138,3 @@ secondary:
     port=3306
     socket=/opt/bitnami/mariadb/tmp/mysql.sock
     pid-file=/opt/bitnami/mariadb/tmp/mysqld.pid
-
-global:
-  storageClass: {{ .Values.services.sql.storageClass | quote }}
-metrics:
-  enabled: false
-initdbScripts:
-  # https://docs.bitnami.com/kubernetes/infrastructure/mariadb/configuration/customize-new-instance/
-  init-primary-only.sh: |
-    #!/bin/sh
-    if [[ $(hostname) == *primary* ]]; then
-        echo "Primary node, executing"
-    else
-        echo "NOT Primary node, EXITING"
-        exit
-    fi
-
-    # Backup manager / wbaas-backup
-    echo "CREATE USER IF NOT EXISTS 'backup-manager'@'%' IDENTIFIED BY '${SQL_INIT_PASSWORD_BACKUPS}';" >> /tmp/sql-init-cmds-001.txt
-    echo "ALTER USER 'backup-manager'@'%' IDENTIFIED BY '${SQL_INIT_PASSWORD_BACKUPS}';" >> /tmp/sql-init-cmds-001.txt
-
-    # https://docs.pingcap.com/tidb/v4.0/mydumper-overview#required-privileges
-    echo "GRANT SELECT ON *.* TO 'backup-manager'@'%';" >> /tmp/sql-init-cmds-001.txt
-    echo "GRANT RELOAD ON *.* TO 'backup-manager'@'%';" >> /tmp/sql-init-cmds-001.txt
-    echo "GRANT LOCK TABLES ON *.* TO 'backup-manager'@'%';" >> /tmp/sql-init-cmds-001.txt
-    echo "GRANT REPLICATION CLIENT ON *.* TO 'backup-manager'@'%';" >> /tmp/sql-init-cmds-001.txt
-    echo "GRANT SHOW VIEW ON *.* TO 'backup-manager'@'%';" >> /tmp/sql-init-cmds-001.txt
-    echo "GRANT SLAVE MONITOR ON *.* TO 'backup-manager'@'%';" >> /tmp/sql-init-cmds-001.txt
-
-    # API
-    # TODO tighten up the grants for the api user
-    echo "CREATE USER IF NOT EXISTS 'apiuser'@'%' IDENTIFIED BY '${SQL_INIT_PASSWORD_API}';" >> /tmp/sql-init-cmds-001.txt
-    echo "ALTER USER 'apiuser'@'%' IDENTIFIED BY '${SQL_INIT_PASSWORD_API}';" >> /tmp/sql-init-cmds-001.txt
-    echo "CREATE DATABASE IF NOT EXISTS apidb;" >> /tmp/sql-init-cmds-001.txt
-    echo "GRANT ALL ON apidb.* TO 'apiuser'@'%';" >> /tmp/sql-init-cmds-001.txt
-    echo "GRANT GRANT OPTION ON apidb.* TO 'apiuser'@'%';" >> /tmp/sql-init-cmds-001.txt
-
-    # Mediawiki
-    echo "CREATE USER IF NOT EXISTS 'mediawiki-db-manager'@'%' IDENTIFIED BY '${SQL_INIT_PASSWORD_MW}';" >> /tmp/sql-init-cmds-001.txt
-    echo "ALTER USER 'mediawiki-db-manager'@'%' IDENTIFIED BY '${SQL_INIT_PASSWORD_MW}';" >> /tmp/sql-init-cmds-001.txt
-    echo "CREATE DATABASE IF NOT EXISTS mediawiki;" >> /tmp/sql-init-cmds-001.txt
-    # Needed in order to create new DBs and users and perform updates
-    echo "GRANT ALL ON \`mwdb_%\`.* TO 'mediawiki-db-manager'@'%';" >> /tmp/sql-init-cmds-001.txt
-    echo "GRANT ALL ON \`mediawiki\`.* TO 'mediawiki-db-manager'@'%';" >> /tmp/sql-init-cmds-001.txt
-    # Needed in order to GRANT new users access to their own dbs
-    echo "GRANT GRANT OPTION ON \`mwdb_%\`.* TO 'mediawiki-db-manager'@'%';" >> /tmp/sql-init-cmds-001.txt
-    echo "GRANT GRANT OPTION ON \`mediawiki\`.* TO 'mediawiki-db-manager'@'%';" >> /tmp/sql-init-cmds-001.txt
-    # Needed in order to create new users
-    echo "GRANT CREATE USER ON *.* TO 'mediawiki-db-manager'@'%';" >> /tmp/sql-init-cmds-001.txt
-    # In order to see and grant slave status access
-    echo "GRANT REPLICA MONITOR, BINLOG MONITOR ON *.* TO 'mediawiki-db-manager'@'%' WITH GRANT OPTION;" >> /tmp/sql-init-cmds-001.txt
-
-    # Flush privs
-    echo "FLUSH PRIVILEGES;" >> /tmp/sql-init-cmds-001.txt
-
-    mysql -uroot -p${MARIADB_ROOT_PASSWORD} < /tmp/sql-init-cmds-001.txt
-    rm /tmp/sql-init-cmds-001.txt
