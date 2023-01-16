@@ -30,7 +30,7 @@ minikube-pause:
 	minikube --profile minikube-wbaas pause -A
 
 .PHONY: minikube-unpause
-minikube-unpause: # @HELP Pause the local minikube cluster
+minikube-unpause: # @HELP Unpause the local minikube cluster
 minikube-unpause:
 	minikube --profile minikube-wbaas unpause -A
 
@@ -57,9 +57,9 @@ helmfile-deps:
 	cd ./k8s/helmfile && helmfile --environment local deps
 
 PHONY: init-%
-init-local: # @HELP Initialize terraform state for your local setup. This does not create any resources
-init-staging: # @HELP Initialize terraform state for staging. This does not create any resources
-init-production: # @HELP Initialize terraform state for production. This does not create any resources
+init-local: # @HELP Initialize terraform state for your local setup. This does not create any resources. It also downloads any new modules
+init-staging: # @HELP Initialize terraform state for staging. This does not create any resources. It also downloads any new modules
+init-production: # @HELP Initialize terraform state for production. This does not create any resources. It also downloads any new modules
 init-%: ENV=$*
 init-%:
 	cd ./tf/env/$(ENV) && terraform init
@@ -88,7 +88,7 @@ apply: # @HELP Run apply for both staging and production
 apply: apply-staging apply-production
 
 .PHONY: test
-test: # @HELP Run yamllint tests against the repsoitory
+test: # @HELP Run yamllint tests against the repository
 test:
 	yamllint --no-warnings .
 
