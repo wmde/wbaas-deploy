@@ -11,7 +11,6 @@ help:
 .PHONY: minikube-start
 minikube-start: # @HELP Start a local k8s cluster using minikube
 minikube-start:
-# version 1.21.4 is currently used in the production environments
 	minikube --profile minikube-wbaas start --kubernetes-version=1.22.15
 
 .PHONY: minikube-stop
@@ -93,17 +92,17 @@ test:
 	yamllint --no-warnings .
 
 skaffold-mediawiki: skaffold-mediawiki-137-fp
-skaffold-mediawiki: # @HELP Run the local mediawiki module using skaffold
-skaffold-ui: # @HELP Run the local ui module using skaffold
-skaffold-api: # @HELP Run the api module using skaffold
-skaffold-queryservice: # @HELP  Run the local queryservice module using skaffold
-skaffold-queryservice-ui: # @HELP Run the local queryservice-ui module using skaffold
-skaffold-queryservice-updater: # @HELP Run the local queryservice-updater module using skaffold
-skaffold-queryservice-gateway: # @HELP Run the local queryservice-gateway module using skaffold
+skaffold-mediawiki: # @HELP Deploy the local mediawiki image using skaffold
+skaffold-ui: # @HELP Deploy the local ui image using skaffold
+skaffold-api: # @HELP Deploy the api image using skaffold
+skaffold-queryservice: # @HELP  Deploy the local queryservice image using skaffold
+skaffold-queryservice-ui: # @HELP Deploy the local queryservice-ui image using skaffold
+skaffold-queryservice-updater: # @HELP Deploy the local queryservice-updater image using skaffold
+skaffold-queryservice-gateway: # @HELP Deploy the local queryservice-gateway image using skaffold
 .PHONY: skaffold-%
 skaffold-%: MODULE=$*
 skaffold-%:
-	cd ./skaffold && skaffold run -m $(MODULE)
+	cd ./skaffold && skaffold run --kube-context minikube-wbaas -m $(MODULE)
 
 .PHONY: skaffold-run
 skaffold-run: # @HELP Run all local modules using skaffold
