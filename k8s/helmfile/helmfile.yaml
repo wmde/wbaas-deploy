@@ -178,19 +178,19 @@ releases:
     namespace: default
     chart: wbstack/tool-cradle
     version: 0.1.2
-    <<: *common_release
+    <<: *default_release
 
   - name: tool-widar
     namespace: default
     chart: wbstack/tool-widar
     version: 0.2.0
-    <<: *common_release
+    <<: *default_release
 
   - name: tool-quickstatements
     namespace: default
     chart: wbstack/tool-quickstatements
     version: 0.2.3
-    <<: *common_release
+    <<: *default_release
 
   - name: wbaas-backup
     namespace: default
@@ -201,7 +201,7 @@ releases:
   - name: stats-cron
     namespace: default
     chart: ./../../charts/stats-cron
-    <<: *common_release
+    <<: *default_release
 
   ################################
   # LOCAL ONLY
