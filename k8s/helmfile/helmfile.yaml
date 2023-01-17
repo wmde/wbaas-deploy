@@ -121,7 +121,7 @@ releases:
     namespace: default
     chart: bitnami-legacy/nginx
     version: 5.2.4
-    <<: *common_release
+    <<: *default_release
 
   - name: platform-apps-ingress
     namespace: default
