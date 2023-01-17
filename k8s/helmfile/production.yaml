@@ -1,0 +1,28 @@
+templates:
+  default: &default_release
+    missingFileHandler: Warn
+    values:
+      - env/common/{{`{{ .Release.Name }}`}}.values.yaml.gotmpl
+      - env/{{`{{ .Environment.Name }}`}}/{{`{{ .Release.Name }}`}}.values.yaml.gotmpl
+
+releases:
+  - name: clusterissuers
+    installed: {{ ne .Environment.Name "local" | toYaml }}
+    namespace: cert-manager
+    chart: ./../../charts/wikibase-cloud-clusterissuers
+    values:
+      - email: {{ .Values.external.letsencrypt.email }}
+      - gceProject: {{ .Values.gceProject }}
+      - certificates:
+          - dnsNames:
+              - '*.wikibase.cloud'
+              - 'wikibase.cloud'
+          - dnsNames:
+              - '*.wikibase.dev'
+              - 'wikibase.dev'
+
+  - name: certificates
+    installed: {{ ne .Environment.Name "local" | toYaml }}
+    namespace: default
+    chart: ./../../charts/certificates
+    <<: *default_release
