@@ -136,7 +136,7 @@ releases:
     chart: wbstack/api
     version: 0.20.1
     namespace: default
-    <<: *common_release
+    <<: *default_release
 
   - name: ui
     namespace: default

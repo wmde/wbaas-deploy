@@ -12,6 +12,7 @@ services:
     storageClass: standard
 
   app:
+    mailer: smtp
     url: http://www.wbaas.localhost
     apiUrl: http://api.wbaas.localhost
     ingressHosts:
@@ -42,4 +43,8 @@ services:
 
 external:
   letsencrypt:
-    email: adam.shorland@wikimedia.de
+    email: thomas.arrow@wikimedia.de
+  recaptcha2:
+    secretName: recaptcha-v2-secrets
+  recaptcha3:
+    secretName: recaptcha-v3-secrets
