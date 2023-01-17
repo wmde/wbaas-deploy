@@ -142,7 +142,7 @@ releases:
     namespace: default
     chart: wbstack/ui
     version: 0.3.0
-    <<: *common_release
+    <<: *default_release
 
   - name: mediawiki-137-fp
     namespace: default

@@ -1,14 +1,9 @@
 image:
   tag: "sha-702b390"
 
-resources:
-  requests:
-    cpu: 1m
-    memory: 6Mi
-  limits:
-    cpu: 10m
-    memory: 20Mi
-
 ui:
   recaptchaSitekeySecretName: recaptcha-v3-dev-secrets
   recaptchaSitekeySecretKey: site_key
+
+ingress:
+  tls: null
