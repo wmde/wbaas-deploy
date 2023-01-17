@@ -1,9 +1,7 @@
-job:
-  cronSchedule: "0 0 * * *"
+image:
+  tag: v0.1.10
 
 storage:
   scratchDiskSpace: 8Gi
   gcs:
     bucketName: wikibase-dev-sql-backup
-    serviceAccountSecretName: api-serviceaccount
-    uploadToBucket: true

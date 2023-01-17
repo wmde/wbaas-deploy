@@ -52,7 +52,7 @@ templates:
       - env/common/{{`{{ .Release.Name }}`}}.values.yaml.gotmpl
       - env/{{`{{ .Environment.Name }}`}}/{{`{{ .Release.Name }}`}}.values.yaml.gotmpl
   default: &default_release
-    missingFileHandler: Warn
+    missingFileHandler: Error
     values:
       - env/production/{{`{{ .Release.Name }}`}}.values.yaml.gotmpl
       - env/{{`{{ .Environment.Name }}`}}/{{`{{ .Release.Name }}`}}.values.yaml.gotmpl
@@ -196,7 +196,7 @@ releases:
     namespace: default
     chart: wbstack/wbaas-backup
     version: 0.0.5
-    <<: *common_release
+    <<: *default_release
 
   - name: stats-cron
     namespace: default
