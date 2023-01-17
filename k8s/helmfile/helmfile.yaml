@@ -46,10 +46,15 @@ helmfiles:
       - foo: null
 
 templates:
-  default: &default_release
+  common: &common_release
     missingFileHandler: Warn
     values:
       - env/common/{{`{{ .Release.Name }}`}}.values.yaml.gotmpl
+      - env/{{`{{ .Environment.Name }}`}}/{{`{{ .Release.Name }}`}}.values.yaml.gotmpl
+  default: &default_release
+    missingFileHandler: Warn
+    values:
+      - env/production/{{`{{ .Release.Name }}`}}.values.yaml.gotmpl
       - env/{{`{{ .Environment.Name }}`}}/{{`{{ .Release.Name }}`}}.values.yaml.gotmpl
 
 releases:
@@ -79,7 +84,7 @@ releases:
     installed: {{ ne .Environment.Name "local" | toYaml }}
     namespace: default
     chart: ./../../charts/certificates
-    <<: *default_release
+    <<: *common_release
 
   ################################
   # ALL ENVIRONMENTS
@@ -91,19 +96,19 @@ releases:
     # TODO: future releases of `helmfile` will bring an `inherit` feature
     # that can be used instead of YAML anchors. When upgrading helmfile, check
     # if we can use this feature here instead.
-    <<: *default_release
+    <<: *common_release
 
   - name: sql
     namespace: default
     chart: bitnami-legacy/mariadb
     version: 10.5.0
-    <<: *default_release
+    <<: *common_release
 
   - name: elasticsearch
     namespace: default
     chart: elastic/elasticsearch
     version: 6.8.22
-    <<: *default_release
+    <<: *common_release
 
   - name: redis
     # This is in the default namespace, as the default ns implies staging?
@@ -116,7 +121,7 @@ releases:
     namespace: default
     chart: bitnami-legacy/nginx
     version: 5.2.4
-    <<: *default_release
+    <<: *common_release
 
   - name: platform-apps-ingress
     namespace: default
@@ -131,72 +136,72 @@ releases:
     chart: wbstack/api
     version: 0.20.1
     namespace: default
-    <<: *default_release
+    <<: *common_release
 
   - name: ui
     namespace: default
     chart: wbstack/ui
     version: 0.3.0
-    <<: *default_release
+    <<: *common_release
 
   - name: mediawiki-137-fp
     namespace: default
     chart: wbstack/mediawiki
     version: 0.10.6
-    <<: *default_release
+    <<: *common_release
 
   - name: queryservice-ui
     namespace: default
     chart: wbstack/queryservice-ui
     version: '0.2.0'
-    <<: *default_release
+    <<: *common_release
 
   - name: queryservice
     namespace: default
     chart: wbstack/queryservice
     version: 0.2.0
-    <<: *default_release
+    <<: *common_release
 
   - name: queryservice-gateway
     namespace: default
     chart: wbstack/queryservice-gateway
     version: 0.1.2
-    <<: *default_release
+    <<: *common_release
 
   - name: queryservice-updater
     namespace: default
     chart: wbstack/queryservice-updater
     version: 0.1.2
-    <<: *default_release
+    <<: *common_release
 
   - name: tool-cradle
     namespace: default
     chart: wbstack/tool-cradle
     version: 0.1.2
-    <<: *default_release
+    <<: *common_release
 
   - name: tool-widar
     namespace: default
     chart: wbstack/tool-widar
     version: 0.2.0
-    <<: *default_release
+    <<: *common_release
 
   - name: tool-quickstatements
     namespace: default
     chart: wbstack/tool-quickstatements
     version: 0.2.3
-    <<: *default_release
+    <<: *common_release
 
   - name: wbaas-backup
     namespace: default
     chart: wbstack/wbaas-backup
     version: 0.0.5
-    <<: *default_release
+    <<: *common_release
 
   - name: stats-cron
     namespace: default
     chart: ./../../charts/stats-cron
-    <<: *default_release
+    <<: *common_release
 
   ################################
   # LOCAL ONLY
