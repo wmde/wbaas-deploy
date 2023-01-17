@@ -1,4 +1,4 @@
-# N) No new chart cuts just for a new image version {#adr_0004}
+# 4) No new chart cuts just for a new image version {#adr_0004}
 
 Date: 2022-05-18
 

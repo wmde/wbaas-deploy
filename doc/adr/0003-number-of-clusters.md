@@ -1,4 +1,4 @@
-# 2) Use two clusters
+# 3) Use two clusters
 
 Date: 2021-10-29
 
