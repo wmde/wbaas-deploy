@@ -84,7 +84,7 @@ releases:
     installed: {{ ne .Environment.Name "local" | toYaml }}
     namespace: default
     chart: ./../../charts/certificates
-    <<: *common_release
+    <<: *default_release
 
   ################################
   # ALL ENVIRONMENTS
@@ -96,7 +96,7 @@ releases:
     # TODO: future releases of `helmfile` will bring an `inherit` feature
     # that can be used instead of YAML anchors. When upgrading helmfile, check
     # if we can use this feature here instead.
-    <<: *common_release
+    <<: *default_release
 
   - name: sql
     namespace: default
