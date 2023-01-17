@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Usage: ./update-toc.sh [target=index.md] [docs_pattern=0*.md] [marker=toc]
+# Usage: ./update-toc [target=index.md] [docs_pattern=0*.md] [marker=toc]
 
 # This script can be used to generate a Markdown TOC for a directory
 # containing markdown files and inject/update it into another document.
@@ -18,7 +18,7 @@ marker=${3:-toc}
 
 generate_toc () {
   for doc in $docs_pattern; do
-    title=$(cat $doc | grep "^#\s.*" | sed 's/# //' | sed 's/{#.*}//' | head -n 1)
+    title=$(cat $doc | grep "^#\s.*" | sed 's/# //' | sed 's/[[:blank:]]*{#.*}//' | head -n 1)
     echo -n "- [$title]($doc)\n"
   done
 }
