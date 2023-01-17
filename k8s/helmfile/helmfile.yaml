@@ -148,7 +148,7 @@ releases:
     namespace: default
     chart: wbstack/mediawiki
     version: 0.10.6
-    <<: *common_release
+    <<: *default_release
 
   - name: queryservice-ui
     namespace: default
