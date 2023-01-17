@@ -46,7 +46,7 @@ Such a layout would look like this:
         └── app.values.yml.gotmpl <-- staging overrides only
 ```
 
-Example values for a hyptothetical app could look like this:
+Example values for a hypothetical app could look like this:
 
 ```yml
 # production defines a full configuration
