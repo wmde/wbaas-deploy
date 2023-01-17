@@ -108,7 +108,7 @@ releases:
     namespace: default
     chart: elastic/elasticsearch
     version: 6.8.22
-    <<: *common_release
+    <<: *default_release
 
   - name: redis
     # This is in the default namespace, as the default ns implies staging?

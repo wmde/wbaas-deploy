@@ -9,10 +9,3 @@ resources:
   limits:
     cpu: "1950m"
     memory: "4Gi"
-
-volumeClaimTemplate:
-  accessModes: [ "ReadWriteOnce" ]
-  storageClassName: "premium-rwo"
-  resources:
-    requests:
-      storage: 10Gi
