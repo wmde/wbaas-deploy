@@ -22,7 +22,7 @@ Instead, we'd like to end up in a situation where every helmfile release uses th
 
 ## Decision
 
-Instead of defining [a least common set of values for a service in a `base` case][helmfile-docs], and then apply per-environment changes on top of this base case, __we want to always use the values for production as the base case__ and then define overrides per staging and production.
+Instead of defining [a common set of values for a service in a `base` case][helmfile-docs], and then apply per-environment changes on top of this base case, __we want to always use the values for production as the base case__ and then define overrides per staging and production.
 
 ### Exception: image tag values
 
