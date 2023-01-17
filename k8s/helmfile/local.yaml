@@ -1,3 +1,9 @@
+templates:
+  default: &default_release
+    missingFileHandler: Warn
+    values:
+      - env/common/{{`{{ .Release.Name }}`}}.values.yaml.gotmpl
+      - env/{{`{{ .Environment.Name }}`}}/{{`{{ .Release.Name }}`}}.values.yaml.gotmpl
 releases:
   - name: adminer-cetic
     namespace: default
@@ -14,3 +20,9 @@ releases:
     version: 5.0.1
     values:
       - env/local/mailhog.values.yaml.gotmpl
+  
+  - name: sql
+    namespace: default
+    chart: bitnami-legacy/mariadb
+    version: 10.5.1
+    <<: *default_release
