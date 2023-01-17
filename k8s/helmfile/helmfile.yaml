@@ -102,7 +102,7 @@ releases:
     namespace: default
     chart: bitnami-legacy/mariadb
     version: 10.5.0
-    <<: *common_release
+    <<: *default_release
 
   - name: elasticsearch
     namespace: default
