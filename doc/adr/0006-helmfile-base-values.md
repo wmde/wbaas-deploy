@@ -55,6 +55,9 @@ image:
 port: 8080
 replicas: 4 
 forceSsl: true
+tlsConfig:
+  domains:
+    - example.com
 ```
 
 ```yml
@@ -62,6 +65,9 @@ forceSsl: true
 image:
   tag: 1.2.0
 replicas: 1 
+tlsConfig:
+  domains:
+    - staging.example.com
 ```
 
 ```yml
@@ -71,6 +77,7 @@ image:
   tag: 1.2.1
 replicas: 1
 forceSsl: false
+tlsConfig: null # keys are deleted by passing null
 ```
 
 ## Consequences
