@@ -1,6 +1,5 @@
 image:
   tag: "sha-10fa149"
-
 resources:
   requests:
     cpu: 1m
@@ -8,12 +7,11 @@ resources:
   limits:
     cpu: 10m
     memory: 20Mi
-
 ingress:
   tls:
-  - hosts:
-    - {{ .Values.uiHostName }}
-    secretName: {{ .Values.tlsSecret }}
+    - hosts:
+        - {? {.Values.uiHostName: ''} : ''}
+      secretName: {? {.Values.tlsSecret: ''} : ''}
 ui:
-  recaptchaSitekeySecretName: {{ .Values.external.recaptcha3.secretName }}
+  recaptchaSitekeySecretName: {? {.Values.external.recaptcha3.secretName: ''} : ''}
   recaptchaSitekeySecretKey: site_key
