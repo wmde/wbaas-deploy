@@ -1,37 +1,6 @@
 image:
   tag: "8x.9.11"
 
-resources:
-  # The backed is a platform critical element, so make sure it is allowed to be a bit silly...
-  backend:
-    requests:
-      cpu: 300m
-      memory: 300Mi
-    limits:
-      cpu: 500m
-      memory: 600Mi
-  web:
-    requests:
-      cpu: 100m
-      memory: 340Mi
-    limits:
-      cpu: 250m
-      memory: 400Mi
-  queue:
-    requests:
-      cpu: 1m
-      memory: 29Mi
-    limits:
-      cpu: 50m
-      memory: 100Mi
-  scheduler:
-    requests:
-      cpu: 5m
-      memory: 20Mi
-    limits:
-      cpu: 40m
-      memory: 80Mi
-
 ingress:
   tls:
   - hosts:
@@ -39,7 +8,6 @@ ingress:
     secretName: wikibase-dev-tls
 
 wbstack:
-  maxWikisPerUser: 6
   monitoringEmail: "wb-cloud-monitoring+staging@wikimedia.de"
   contact:
     mail:
@@ -60,18 +28,3 @@ app:
     smtpPasswordSecretKey: password
     smtphost: smtp.eu.mailgun.org
     smtpport: 587
-  recaptcha:
-    sitekeySecretName: {{ .Values.external.recaptcha3.secretName }}
-    sitekeySecretKey: site_key
-    secretSecretName: {{ .Values.external.recaptcha3.secretName }}
-    secretSecretKey: secret_key
-    badgehide: true
-  gce:
-    projectId: {{ .Values.gceProject }}
-    serviceAccountSecret: api-serviceaccount
-    existingSecret: api-passport-keys
-  stackdriver:
-    enabled: false
-    loggingEnabled: true
-    tracingEnabled: false
-    errorReportingEnabled: true

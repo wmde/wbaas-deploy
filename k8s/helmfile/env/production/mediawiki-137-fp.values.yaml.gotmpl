@@ -1,7 +1,28 @@
 image:
   tag: "1.37-7.4-20230112-fp-beta-0"
 
+replicaCount:
+  backend: 1
+  web: 2
+  webapi: 2
+  alpha: 1
+
 mw:
+  redis:
+    # TODO fixme, no port injected into deployment...
+    # TODO fixme, no "database" ID injected into mediawiki
+    readServer: {{ .Values.services.redis.readHost }}
+    writeServer: {{ .Values.services.redis.writeHost }}
+    password:
+    passwordSecretName: redis-password
+    passwordSecretKey: password
+  elasticsearch:
+    host: elasticsearch-master.default.svc.cluster.local
+    port: 9200
+  mailgun:
+    enabled: false
+  platform:
+    apiBackendHost: api-app-backend.default.svc.cluster.local
   settings:
     allowedProxyCidr: "10.108.0.0/14"
   db:

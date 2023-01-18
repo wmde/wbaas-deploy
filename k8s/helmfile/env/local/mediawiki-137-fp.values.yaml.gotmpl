@@ -6,9 +6,7 @@ mw:
     # Enable this to increase verbosity of logging in mw pods
     # This is very useful when debugging locally but may interfere with jobs
     logToStdErr: false
-  db:
-    replica: sql-mariadb-secondary.default.svc.cluster.local
-    master: sql-mariadb-primary.default.svc.cluster.local
+    allowedProxyCidr: null
   mail:
     domain: examplemaildomain.localhost
   smtp:
@@ -16,38 +14,10 @@ mw:
     host: mailhog
     port: 1025
     auth: false
+    smtpUserSecretName: null
+    smtpPasswordSecretName: null
   recaptcha:
     sitekeySecretName: recaptcha-v2-dev-secrets
     sitekeySecretKey: site_key
     secretkeySecretName: recaptcha-v2-dev-secrets
     secretkeySecretKey: secret_key
-
-resources:
-  web:
-    requests:
-      cpu: 150m
-      memory: 350Mi
-    limits:
-      cpu: 400m
-      memory: 750Mi
-  webapi:
-    requests:
-      cpu: 200m
-      memory: 250Mi
-    limits:
-      cpu: 500m
-      memory: 600Mi
-  alpha:
-    requests:
-      cpu: 50m
-      memory: 40Mi
-    limits:
-      cpu: 500m
-      memory: 600Mi
-  backend:
-    requests:
-      cpu: 500m
-      memory: 600Mi
-    limits:
-      cpu: 1000m
-      memory: 1200Mi

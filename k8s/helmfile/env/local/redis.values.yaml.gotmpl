@@ -11,6 +11,8 @@ commonConfiguration: |
   auto-aof-rewrite-min-size 60mb
 
 master:
+  persistence:
+    storageClass: null
   livenessProbe:
     enabled: false
   readinessProbe:
@@ -25,6 +27,8 @@ master:
       memory: 90Mi
 
 replica:
+  persistence:
+    storageClass: null
   livenessProbe:
     enabled: false
   readinessProbe:

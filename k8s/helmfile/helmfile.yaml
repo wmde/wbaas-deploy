@@ -47,9 +47,9 @@ helmfiles:
 
 templates:
   default: &default_release
-    missingFileHandler: Warn
+    missingFileHandler: Error
     values:
-      - env/common/{{`{{ .Release.Name }}`}}.values.yaml.gotmpl
+      - env/production/{{`{{ .Release.Name }}`}}.values.yaml.gotmpl
       - env/{{`{{ .Environment.Name }}`}}/{{`{{ .Release.Name }}`}}.values.yaml.gotmpl
 
 releases:

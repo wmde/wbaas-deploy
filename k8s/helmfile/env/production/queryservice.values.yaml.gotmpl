@@ -1,5 +1,7 @@
 image:
   tag: "0.3.6_0.6"
+  repository: ghcr.io/wbstack/queryservice
+  pullPolicy: Always
 
 app:
   heapSize: 2g
@@ -13,6 +15,8 @@ resources:
     memory: "4072Mi"
 
 persistence:
+  enabled: true
+  annotations: {}
   accessMode: ReadWriteOnce
   storageClass: "premium-rwo"
   size: "20Gi"

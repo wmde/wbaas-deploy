@@ -1,38 +1,11 @@
 image:
   tag: "8x.9.11"
 
-resources:
-  # The backed is a platform critical element, so make sure it is allowed to be a bit silly...
-  backend:
-    requests:
-      cpu: 300m
-      memory: 300Mi
-    limits:
-      cpu: 500m
-      memory: 600Mi
-  web:
-    requests:
-      cpu: 100m
-      memory: 340Mi
-    limits:
-      cpu: 250m
-      memory: 400Mi
-  queue:
-    requests:
-      cpu: 1m
-      memory: 29Mi
-    limits:
-      cpu: 50m
-      memory: 100Mi
-  scheduler:
-    requests:
-      cpu: 5m
-      memory: 20Mi
-    limits:
-      cpu: 40m
-      memory: 80Mi
+ingress:
+  tls: null
 
 wbstack:
+  maxWikisPerUser: null
   contact:
     mail:
       recipient: someone@wikimedia.de
@@ -43,12 +16,15 @@ app:
   redis:
     prefix: wikibase_dev_api
   mail:
-    mailer: smtp
     fromaddress: noreply-local@fake.wikibase.dev
     fromname: Wikibase-dev
     smtphost: mailhog
     smtpport: 1025
     smtpencryption: null
+    smtpUserSecretName: null
+    smtpUserSecretKey: username
+    smtpPasswordSecretName: null
+    smtpPasswordSecretKey: password
   recaptcha:
     # TODO take these values from secrets...
     sitekey:
@@ -60,11 +36,11 @@ app:
     badgehide: true
   # TODO is this needed for local?
   gce:
-    projectId: {{ .Values.gceProject }}
-    existingSecret: api-passport-keys
-  # TODO remove this or add something equivillant for local
-  stackdriver:
-    enabled: false
-    loggingEnabled: true
-    tracingEnabled: false
-    errorReportingEnabled: true
+    serviceAccountSecret: null
+external:
+  letsencrypt:
+    email: thomas.arrow@wikimedia.de
+  recaptcha2:
+    secretName: recaptcha-v2-secrets
+  recaptcha3:
+    secretName: recaptcha-v3-secrets
