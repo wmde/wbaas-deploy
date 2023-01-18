@@ -39,11 +39,11 @@ Such a layout would look like this:
 .
 └── env
     ├── local
-    │    └── app.values.yml.gotmpl <-- local overrides only, plus image tag if applicable
+    │    └── app.values.yaml.gotmpl <-- local overrides only, plus image tag if applicable
     ├── production
-    │    └── app.values.yml.gotmpl <-- base case, containing a full configuration
+    │    └── app.values.yaml.gotmpl <-- base case, containing a full configuration
     └── staging
-        └── app.values.yml.gotmpl <-- staging overrides only, plus image tag if applicable
+        └── app.values.yaml.gotmpl <-- staging overrides only, plus image tag if applicable
 ```
 
 Example values for a hypothetical app could look like this:
