@@ -1,5 +1,5 @@
 image:
-  tag: "sha-702b390"
+  tag: sha-0c3ee47
 
 resources:
   requests:
@@ -13,21 +13,21 @@ ingress:
   enabled: true
   annotations:
     kubernetes.io/ingress.class: nginx
-    nginx.ingress.kubernetes.io/use-regex: "true"
-    nginx.ingress.kubernetes.io/from-to-www-redirect: "true"
+    nginx.ingress.kubernetes.io/use-regex: 'true'
+    nginx.ingress.kubernetes.io/from-to-www-redirect: 'true'
   hosts:
-  - host: {{ .Values.uiHostName }}
+  - host: {{.Values.uiHostName: null}: null}
     paths:
     - /*
   tls:
   - hosts:
-    - {{ .Values.uiHostName }}
-    secretName: {{ .Values.tlsSecret }}
+    - {{.Values.uiHostName: null}: null}
+    secretName: {{.Values.tlsSecret: null}: null}
 
 ui:
-  apiUrl: {{ .Values.services.app.apiUrl }}
-  subdomainSuffix: {{ .Values.wbstack.subdomainSuffix }}
+  apiUrl: {{.Values.services.app.apiUrl: null}: null}
+  subdomainSuffix: {{.Values.wbstack.subdomainSuffix: null}: null}
   cnameConfigMapKey: cname_record
   configMapName: wbaas-ui-config
-  recaptchaSitekeySecretName: {{ .Values.external.recaptcha3.secretName }}
+  recaptchaSitekeySecretName: {{.Values.external.recaptcha3.secretName: null}: null}
   recaptchaSitekeySecretKey: site_key
