@@ -2,15 +2,15 @@ image: "wikibase/elasticsearch"
 imagePullPolicy: Always
 imageTag: "6.8.23-wmde.6"
 
-esJavaOpts: "-Xms4g -Xmx4g"
+esJavaOpts: "-Xms32g -Xmx32g"
 
 resources:
   requests:
-    cpu: "500m"
-    memory: "8Gi"
+    cpu: "10"
+    memory: "64Gi"
   limits:
-    cpu: "3950m"
-    memory: "8Gi"
+    cpu: "10"
+    memory: "64Gi"
 
 volumeClaimTemplate:
   accessModes: [ "ReadWriteOnce" ]
@@ -22,8 +22,7 @@ volumeClaimTemplate:
 replicas: 3
 minimumMasterNodes: 2
 
-# For now we don't have enough nodes to have this set to hard
-antiAffinity: soft
+antiAffinity: hard
 
 esConfig:
   elasticsearch.yml: |
