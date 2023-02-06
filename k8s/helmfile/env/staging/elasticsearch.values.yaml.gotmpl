@@ -26,7 +26,7 @@ esConfig:
     # T309378
     action.auto_create_index: false
 
-    # according to https://discuss.elastic.co/t/slow-cluster-startup-again/13870
+    # according to https://fdv.github.io/running-elasticsearch-fun-profit/006-operating-daily/006-operating-daily.html
     # this is supposed to speed up node recovery
     # the value of 20 is just a guess right now
-    cluster.routing.allocation.node_concurrent_recoveries: 20
+    cluster.routing.allocation.node_initial_primaries_recoveries: 20
