@@ -2,6 +2,10 @@ imageTag: "6.8.23-wmde.6"
 
 esJavaOpts: "-Xms1g -Xmx1g"
 
+# hard affinity won't work locally as there is just a single
+# node running minikube
+antiAffinity: soft
+
 resources:
   requests:
     cpu: "500m"
