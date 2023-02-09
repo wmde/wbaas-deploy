@@ -12,6 +12,8 @@ resources:
 
 esConfig:
   elasticsearch.yml: |
+    indices.memory.index_buffer_size: 50%
+
     # each package from https://github.com/elastic/elasticsearch/tree/b29399e2daa56afc926d610f8e0e59274a5ed952/server/src/main/java/org/elasticsearch
     # wants to have its log level set
     logger.org.elasticsearch.discovery: DEBUG
