@@ -12,6 +12,43 @@ resources:
 
 esConfig:
   elasticsearch.yml: |
+    # each package from https://github.com/elastic/elasticsearch/tree/b29399e2daa56afc926d610f8e0e59274a5ed952/server/src/main/java/org/elasticsearch
+    # wants to have its log level set
+    logger.org.elasticsearch.discovery: DEBUG
+    logger.org.elasticsearch.shutdown: DEBUG
+    logger.org.elasticsearch.plugins: DEBUG
+    logger.org.elasticsearch.repositories: DEBUG
+    logger.org.elasticsearch.usage: DEBUG
+    logger.org.elasticsearch.upgrades: DEBUG
+    logger.org.elasticsearch.script: DEBUG
+    logger.org.elasticsearch.persistent: DEBUG
+    logger.org.elasticsearch.gateway: DEBUG
+    logger.org.elasticsearch.rest: DEBUG
+    logger.org.elasticsearch.tracing: DEBUG
+    logger.org.elasticsearch.threadpool: DEBUG
+    logger.org.elasticsearch.node: DEBUG
+    logger.org.elasticsearch.health: DEBUG
+    logger.org.elasticsearch.index: DEBUG
+    logger.org.elasticsearch.lucene: DEBUG
+    logger.org.elasticsearch.snapshots: DEBUG
+    logger.org.elasticsearch.readiness: DEBUG
+    logger.org.elasticsearch.env: DEBUG
+    logger.org.elasticsearch.http: DEBUG
+    logger.org.elasticsearch.timeseries: DEBUG
+    logger.org.elasticsearch.action: DEBUG
+    logger.org.elasticsearch.client: DEBUG
+    logger.org.elasticsearch.common: DEBUG
+    logger.org.elasticsearch.watcher: DEBUG
+    logger.org.elasticsearch.monitor: DEBUG
+    logger.org.elasticsearch.search: DEBUG
+    logger.org.elasticsearch.ingest: DEBUG
+    logger.org.elasticsearch.indices: DEBUG
+    logger.org.elasticsearch.bootstrap: DEBUG
+    logger.org.elasticsearch.tasks: DEBUG
+    logger.org.elasticsearch.reservedstate: DEBUG
+    logger.org.elasticsearch.transport: DEBUG
+    logger.org.elasticsearch.cluster: DEBUG
+
     # T309396
     xpack.ml.enabled: false
     xpack.monitoring.collection.enabled: false
