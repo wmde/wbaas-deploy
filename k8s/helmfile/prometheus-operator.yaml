@@ -1,0 +1,4 @@
+releases:
+  - name: prometheus-operator-crds
+    chart: prometheus-community/prometheus-operator-crds
+    installed: {{ eq .Environment.Name "local" | toYaml }}

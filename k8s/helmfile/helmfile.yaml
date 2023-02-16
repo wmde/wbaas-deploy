@@ -46,6 +46,9 @@ helmfiles:
   - path: cert-manager.yaml
     values:
       - foo: null
+  - path: prometheus-operator.yaml
+    values:
+      - foo: null
 
 templates:
   default: &default_release
@@ -209,6 +212,13 @@ releases:
   ################################
   # LOCAL ONLY
   ################################
+  - name: kube-prometheus-stack
+    namespace: default
+    chart: prometheus-community/kube-prometheus-stack
+    installed: {{ eq .Environment.Name "local" | toYaml }}
+    # https://github.com/roboll/helmfile/issues/1124
+    disableValidation: true
+
   - name: adminer-cetic
     namespace: default
     installed: {{ eq .Environment.Name "local" | toYaml }}
@@ -224,11 +234,3 @@ releases:
     version: 5.0.1
     values:
       - env/local/mailhog.values.yaml.gotmpl
-
-  - name: prometheus
-    installed: {{ eq .Environment.Name "local" | toYaml }}
-    namespace: default
-    chart: prometheus-community/prometheus
-    version: 19.6.0
-    values:
-      - env/local/prometheus.values.yaml.gotmpl
