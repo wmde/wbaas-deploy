@@ -203,6 +203,7 @@ releases:
   - name: prometheus-elasticsearch-exporter
     namespace: default
     chart: prometheus-community/prometheus-elasticsearch-exporter
+    version: 5.0.0
     <<: *default_release
 
   ################################
@@ -223,3 +224,11 @@ releases:
     version: 5.0.1
     values:
       - env/local/mailhog.values.yaml.gotmpl
+
+  - name: prometheus
+    installed: {{ eq .Environment.Name "local" | toYaml }}
+    namespace: default
+    chart: prometheus-community/prometheus
+    version: 19.6.0
+    values:
+      - env/local/prometheus.values.yaml.gotmpl
