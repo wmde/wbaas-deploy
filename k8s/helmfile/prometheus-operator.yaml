@@ -1,4 +1,25 @@
+repositories:
+  - name: prometheus-community
+    url: https://prometheus-community.github.io/helm-charts
+
+environments:
+  production:
+    kubeContext: gke_wikibase-cloud_europe-west3-a_wbaas-3
+    values:
+      - ./env/production/private.yaml
+  staging:
+    kubeContext: gke_wikibase-cloud_europe-west3-a_wbaas-2
+    values:
+      - ./env/staging/private.yaml
+  local:
+    kubeContext: minikube-wbaas
+    values:
+      - ./env/local/private.yaml
+
 releases:
   - name: prometheus-operator-crds
     chart: prometheus-community/prometheus-operator-crds
     installed: {{ eq .Environment.Name "local" | toYaml }}
+    set:
+      - name: installCRDs
+        value: true
