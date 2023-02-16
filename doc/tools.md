@@ -2,6 +2,17 @@
 
 This is a collection of some useful tools to interface with our k8s clusters. It's not mandatory to use them, but they can be helpful.
 
+## kubie
+- https://blog.sbstp.ca/introducing-kubie/
+- https://github.com/sbstp/kubie
+
+> kubie is an alternative to kubectx, kubens and the k on prompt modification script. It offers context switching, namespace switching and prompt modification in a way that makes each shell independent from others.
+
+### Basic usage
+Run `kubie ctx` to get a selection of available contexts to choose from and select one with enter. A subshell is spawned with the chosen context, limited to that subshell.
+
+Since switching the kube context can happen quite frequently it can be useful to bind it to a keystroke, for example via your `~/.inputrc` with an entry like `Control-k: "kubie ctx\n"`.
+
 ## k9s
 - https://k9scli.io/
 - https://github.com/derailed/k9s
@@ -56,3 +67,4 @@ $ kubeshark tap
 ```
 
 A browser tab with the interface will open.
+
