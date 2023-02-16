@@ -204,7 +204,7 @@ releases:
     <<: *default_release
 
   - name: prometheus-elasticsearch-exporter
-    namespace: default
+    namespace: monitoring
     chart: prometheus-community/prometheus-elasticsearch-exporter
     version: 5.0.0
     <<: *default_release
@@ -213,7 +213,8 @@ releases:
   # LOCAL ONLY
   ################################
   - name: kube-prometheus-stack
-    namespace: default
+    namespace: monitoring
+    version: 45.1.1
     chart: prometheus-community/kube-prometheus-stack
     installed: {{ eq .Environment.Name "local" | toYaml }}
     # https://github.com/roboll/helmfile/issues/1124
