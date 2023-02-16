@@ -1,7 +1,5 @@
 es:
   uri: http://elasticsearch-master.default.svc.cluster.local:9200
 
-podAnnotations:
-  prometheus.io/scrape: 'true'
-  prometheus.io/path: /metrics
-  prometheus.io/port: '9108'
+serviceMonitor:
+  enabled: true
