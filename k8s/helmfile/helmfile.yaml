@@ -218,6 +218,8 @@ releases:
     installed: {{ eq .Environment.Name "local" | toYaml }}
     # https://github.com/roboll/helmfile/issues/1124
     disableValidation: true
+    values:
+      - env/local/kube-prometheus-stack.values.yaml
 
   - name: adminer-cetic
     namespace: default
