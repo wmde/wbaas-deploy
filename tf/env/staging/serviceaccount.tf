@@ -1,6 +1,7 @@
 resource "google_project_iam_member" "certman-dns01-solver" {
   role    = "roles/dns.admin"
   member  = "serviceAccount:${google_service_account.certman-dns01-solver.email}"
+  project = local.project_id
 }
 
 resource "google_service_account" "certman-dns01-solver" {

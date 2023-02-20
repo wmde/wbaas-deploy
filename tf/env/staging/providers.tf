@@ -14,18 +14,20 @@ terraform {
       source = "wgebis/mailgun"
       version = "0.6.1"
     }
+    google = {
+      source = "hashicorp/google"
+      version = "4.53.1"
+    }
   }
 }
 
 
 data "google_client_config" "wbaas-2" {
-  depends_on = [google_container_cluster.wbaas-2]
 }
 
 # Defer reading the cluster data until the GKE cluster exists.
 data "google_container_cluster" "wbaas-2" {
   name = local.staging_cluster_name
-  depends_on = [google_container_cluster.wbaas-2]
 }
 
 provider "kubernetes" {
