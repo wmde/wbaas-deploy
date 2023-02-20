@@ -14,6 +14,10 @@ terraform {
       source = "wgebis/mailgun"
       version = "0.6.1"
     }
+    google = {
+      source = "hashicorp/google"
+      version = "4.53.1"
+    }
   }
 }
 
