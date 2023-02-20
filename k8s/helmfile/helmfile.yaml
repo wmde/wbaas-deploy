@@ -203,15 +203,17 @@ releases:
     chart: ./../../charts/stats-cron
     <<: *default_release
 
-  - name: prometheus-elasticsearch-exporter
-    namespace: monitoring
-    chart: prometheus-community/prometheus-elasticsearch-exporter
-    version: 5.0.0
-    <<: *default_release
 
   ################################
   # LOCAL ONLY
   ################################
+  - name: prometheus-elasticsearch-exporter
+    namespace: monitoring
+    chart: prometheus-community/prometheus-elasticsearch-exporter
+    version: 5.0.0
+    installed: {{ eq .Environment.Name "local" | toYaml }}
+    <<: *default_release
+
   - name: kube-prometheus-stack
     namespace: monitoring
     version: 45.1.1
