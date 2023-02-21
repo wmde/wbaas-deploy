@@ -1,0 +1,6 @@
+releases:
+  - name: prometheus-operator-crds
+    namespace: monitoring
+    version: 2.0.0
+    chart: prometheus-community/prometheus-operator-crds
+    installed: {{ eq .Environment.Name "local" | toYaml }}

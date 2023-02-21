@@ -14,6 +14,8 @@ repositories:
     url: https://codecentric.github.io/helm-charts
   - name: ingress-nginx
     url: https://kubernetes.github.io/ingress-nginx
+  - name: prometheus-community
+    url: https://prometheus-community.github.io/helm-charts
 
 environments:
   default:
@@ -42,6 +44,9 @@ helmDefaults:
 # All the nested state files under `helmfiles:` is processed in the order of definition.
 helmfiles:
   - path: cert-manager.yaml
+    values:
+      - foo: null
+  - path: prometheus-operator.yaml
     values:
       - foo: null
 
@@ -198,9 +203,27 @@ releases:
     chart: ./../../charts/stats-cron
     <<: *default_release
 
+
   ################################
   # LOCAL ONLY
   ################################
+  - name: prometheus-elasticsearch-exporter
+    namespace: monitoring
+    chart: prometheus-community/prometheus-elasticsearch-exporter
+    version: 5.0.0
+    installed: {{ eq .Environment.Name "local" | toYaml }}
+    <<: *default_release
+
+  - name: kube-prometheus-stack
+    namespace: monitoring
+    version: 45.1.1
+    chart: prometheus-community/kube-prometheus-stack
+    installed: {{ eq .Environment.Name "local" | toYaml }}
+    # https://github.com/roboll/helmfile/issues/1124
+    disableValidation: true
+    values:
+      - env/local/kube-prometheus-stack.values.yaml.gotmpl
+
   - name: adminer-cetic
     namespace: default
     installed: {{ eq .Environment.Name "local" | toYaml }}
