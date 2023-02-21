@@ -218,11 +218,10 @@ releases:
     namespace: monitoring
     version: 45.1.1
     chart: prometheus-community/kube-prometheus-stack
-    installed: {{ eq .Environment.Name "local" | toYaml }}
+    installed: {{ ne .Environment.Name "production" | toYaml }}
     # https://github.com/roboll/helmfile/issues/1124
     disableValidation: true
-    values:
-      - env/local/kube-prometheus-stack.values.yaml.gotmpl
+    <<: *default_release
 
   - name: adminer-cetic
     namespace: default
