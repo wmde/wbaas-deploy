@@ -1,0 +1,22 @@
+prometheus:
+  prometheusSpec:
+    image:
+      registry: gke.gcr.io
+      repository: prometheus-engine/prometheus
+      tag: v2.35.0-gmp.2-gke.0
+
+alertmanager:
+  enabled: false
+
+nodeExporter:
+  enabled: false
+
+kubeStateMetrics:
+  enabled: false
+
+grafana:
+  enabled: false
+
+# turning this off as it introduces no-op changes on every apply
+kubeScheduler:
+  enabled: false
