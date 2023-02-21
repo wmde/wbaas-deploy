@@ -211,7 +211,7 @@ releases:
     namespace: monitoring
     chart: prometheus-community/prometheus-elasticsearch-exporter
     version: 5.0.0
-    installed: {{ eq .Environment.Name "local" | toYaml }}
+    installed: {{ ne .Environment.Name "production" | toYaml }}
     <<: *default_release
 
   - name: kube-prometheus-stack
