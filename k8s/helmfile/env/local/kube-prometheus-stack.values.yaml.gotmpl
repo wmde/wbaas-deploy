@@ -1,3 +1,12 @@
+alertmanager:
+  enabled: false
+
+nodeExporter:
+  enabled: false
+
+kubeStateMetrics:
+  enabled: false
+
 grafana:
   ingress:
     enabled: true
@@ -18,10 +27,3 @@ prometheus:
       - /
     annotations:
       kubernetes.io/ingress.class: nginx
-
-kubeScheduler:
-  service:
-    port: 10257
-    targetPort: 10257
-  serviceMonitor:
-    https: false
