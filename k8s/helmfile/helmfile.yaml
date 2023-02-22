@@ -211,16 +211,15 @@ releases:
     disableValidation: true
     <<: *default_release
 
-  ################################
-  # LOCAL ONLY
-  ################################
   - name: prometheus-elasticsearch-exporter
     namespace: monitoring
     chart: prometheus-community/prometheus-elasticsearch-exporter
     version: 5.0.0
-    installed: {{ ne .Environment.Name "production" | toYaml }}
     <<: *default_release
 
+  ################################
+  # LOCAL ONLY
+  ################################
 
   - name: adminer-cetic
     namespace: default
