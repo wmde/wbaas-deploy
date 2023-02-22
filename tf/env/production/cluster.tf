@@ -2,6 +2,12 @@ resource "google_container_cluster" "wbaas-3" {
   name = "wbaas-3"
   remove_default_node_pool = true
   initial_node_count       = 1
+  monitoring_config {
+    enable_components = [ "SYSTEM_COMPONENTS" ]
+    managed_prometheus {
+      enabled = true
+    }
+  }
 }
 
 resource "google_container_node_pool" "wbaas-3_highmem-16" {
