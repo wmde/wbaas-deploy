@@ -3,4 +3,3 @@ releases:
     namespace: monitoring
     version: 2.0.0
     chart: prometheus-community/prometheus-operator-crds
-    installed: {{ ne .Environment.Name "production" | toYaml }}
