@@ -8,15 +8,30 @@ prometheus:
 alertmanager:
   enabled: false
 
-nodeExporter:
-  enabled: false
-
-kubeStateMetrics:
-  enabled: false
-
 grafana:
   enabled: false
 
-# turning this off as it introduces no-op changes on every apply
+# turning off all k8s component scraping as we are not
+# interested right now
 kubeScheduler:
+  enabled: false
+kubeApiServer:
+  enabled: false
+kubelet:
+  enabled: false
+kubeControllerManager:
+  enabled: false
+coreDns:
+  enabled: false
+kubeDns:
+  enabled: false
+kubeEtcd:
+  enabled: false
+kubeProxy:
+  enabled: false
+kubeStateMetrics:
+  enabled: false
+nodeExporter:
+  enabled: false
+kubeStateMetrics:
   enabled: false
