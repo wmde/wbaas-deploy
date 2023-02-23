@@ -5,3 +5,8 @@ serviceMonitor:
   enabled: true
   labels:
     release: kube-prometheus-stack
+  metricRelabelings:
+    - sourceLabels: [cluster]
+      targetLabel: es_cluster
+    - regex: ^cluster$
+      action: labeldrop
