@@ -1,5 +1,6 @@
 prometheus:
   prometheusSpec:
+    scrapeTimeout: 60s
     image:
       registry: gke.gcr.io
       repository: prometheus-engine/prometheus
