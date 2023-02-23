@@ -203,6 +203,13 @@ releases:
     chart: ./../../charts/stats-cron
     <<: *default_release
 
+  - name: kube-prometheus-stack
+    namespace: monitoring
+    version: 45.1.1
+    chart: prometheus-community/kube-prometheus-stack
+    # https://github.com/roboll/helmfile/issues/1124
+    disableValidation: true
+    <<: *default_release
 
   ################################
   # LOCAL ONLY
@@ -214,14 +221,6 @@ releases:
     installed: {{ ne .Environment.Name "production" | toYaml }}
     <<: *default_release
 
-  - name: kube-prometheus-stack
-    namespace: monitoring
-    version: 45.1.1
-    chart: prometheus-community/kube-prometheus-stack
-    installed: {{ ne .Environment.Name "production" | toYaml }}
-    # https://github.com/roboll/helmfile/issues/1124
-    disableValidation: true
-    <<: *default_release
 
   - name: adminer-cetic
     namespace: default
