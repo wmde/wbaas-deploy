@@ -3,6 +3,8 @@ es:
   timeout: 90s
 
 serviceMonitor:
+  scrapeTimeout: 50s
+  interval: 60s
   enabled: true
   labels:
     release: kube-prometheus-stack
