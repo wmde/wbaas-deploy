@@ -2,6 +2,14 @@ es:
   uri: http://elasticsearch-master.default.svc.cluster.local:9200
   timeout: 90s
 
+resources:
+  requests:
+    cpu: 100m
+    memory: 256Mi
+  limits:
+    cpu: 100m
+    memory: 256Mi
+
 serviceMonitor:
   scrapeTimeout: 50s
   interval: 60s
