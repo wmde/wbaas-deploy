@@ -19,6 +19,13 @@ alertmanager:
 
 grafana:
   enabled: false
+  resources:
+    limits:
+      cpu: 100m
+      memory: 128Mi
+    requests:
+      cpu: 100m
+      memory: 128Mi
 
 # turning off all k8s component scraping as we are not
 # interested right now
