@@ -21,6 +21,13 @@ grafana:
 
 prometheus:
   prometheusSpec:
+    resources:
+      requests:
+        cpu: "100m"
+        memory: "0.1Gi"
+      limits:
+        cpu: "100m"
+        memory: "0.1Gi"
     image:
       registry: quay.io
       repository: prometheus/prometheus
