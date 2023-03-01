@@ -18,6 +18,7 @@ Current ADRs include:
 - [4) No new chart cuts just for a new image version](0004-no-new-chart-for-image-bumps.md)
 - [5) Commit Hash based reference to UI image](0005-ui-by-commit-hash.md)
 - [6) Production as the configuration base case for helmfile values](0006-helmfile-base-values.md)
+- [7) Application level monitoring using Prometheus](0007-monitoring-prometheus.md)
 <!-- toc-end -->
 
 ---
