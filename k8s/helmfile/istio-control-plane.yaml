@@ -1,0 +1,7 @@
+releases:
+  - name: istio-base
+    namespace: istio-system
+    chart: istio/base
+    set:
+      - name: installCRDs
+        value: true

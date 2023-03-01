@@ -1,0 +1,6 @@
+apiVersion: v2
+name: istio-monitors
+description: Create Pod and Service monitoring objects for the Istio service mesh
+type: application
+version: 0.1.0
+appVersion: "1.0.0"

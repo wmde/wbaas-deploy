@@ -1,0 +1,70 @@
+version: 0.149.0
+dependencies:
+  - name: adminer
+    repository: https://cetic.github.io/helm-charts
+    version: 0.2.1
+  - name: api
+    repository: https://wbstack.github.io/charts
+    version: 0.20.2
+  - name: elasticsearch
+    repository: https://helm.elastic.co
+    version: 6.8.22
+  - name: ingress-nginx
+    repository: https://kubernetes.github.io/ingress-nginx
+    version: 4.2.5
+  - name: istiod
+    repository: https://istio-release.storage.googleapis.com/charts
+    version: 1.17.1
+  - name: kube-prometheus-stack
+    repository: https://prometheus-community.github.io/helm-charts
+    version: 45.1.1
+  - name: mailhog
+    repository: https://codecentric.github.io/helm-charts
+    version: 5.0.1
+  - name: mariadb
+    repository: https://raw.githubusercontent.com/bitnami/charts/eb5f9a9513d987b519f0ecd732e7031241c50328/bitnami
+    version: 10.5.0
+  - name: mediawiki
+    repository: https://wbstack.github.io/charts
+    version: 0.10.6
+  - name: nginx
+    repository: https://raw.githubusercontent.com/bitnami/charts/eb5f9a9513d987b519f0ecd732e7031241c50328/bitnami
+    version: 5.2.4
+  - name: prometheus-elasticsearch-exporter
+    repository: https://prometheus-community.github.io/helm-charts
+    version: 5.0.0
+  - name: queryservice
+    repository: https://wbstack.github.io/charts
+    version: 0.2.0
+  - name: queryservice-gateway
+    repository: https://wbstack.github.io/charts
+    version: 0.1.2
+  - name: queryservice-ui
+    repository: https://wbstack.github.io/charts
+    version: 0.2.0
+  - name: queryservice-updater
+    repository: https://wbstack.github.io/charts
+    version: 0.1.2
+  - name: redis
+    repository: https://charts.bitnami.com/bitnami
+    version: 17.3.8
+  - name: tool-cradle
+    repository: https://wbstack.github.io/charts
+    version: 0.1.2
+  - name: tool-quickstatements
+    repository: https://wbstack.github.io/charts
+    version: 0.2.3
+  - name: tool-widar
+    repository: https://wbstack.github.io/charts
+    version: 0.2.0
+  - name: ui
+    repository: https://wbstack.github.io/charts
+    version: 0.3.0
+  - name: wbaas-backup
+    repository: https://wbstack.github.io/charts
+    version: 0.0.5
+  - name: wikibase-ingress
+    repository: https://wbstack.github.io/charts
+    version: 0.1.1
+digest: sha256:62c999d5a548e17fc62186b8760d34d67fcd93c96296b9042e073a84a30d6134
+generated: "2023-03-01T11:48:46.769986165+01:00"
