@@ -1,11 +1,11 @@
 apiVersion: monitoring.coreos.com/v1
 kind: PodMonitor
 metadata:
-  name: envoy-stats-monitor
-  namespace: istio-system
+  name: {{ .Values.podMonitor.name }}
+  namespace: {{ .Values.podMonitor.namespace }}
   labels:
     monitoring: istio-proxies
-    release: kube-prometheus-stack
+    {{- .Values.podMonitor.additionalLabels | toYaml | nindent 4 }}
 spec:
   selector:
     matchExpressions:
@@ -15,7 +15,7 @@ spec:
   jobLabel: envoy-stats
   podMetricsEndpoints:
   - path: /stats/prometheus
-    interval: 15s
+    interval: {{ .Values.podMonitor.interval }}
     relabelings:
     - action: keep
       sourceLabels: [__meta_kubernetes_pod_container_name]

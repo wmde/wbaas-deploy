@@ -1,11 +1,11 @@
 apiVersion: monitoring.coreos.com/v1
 kind: ServiceMonitor
 metadata:
-  name: istio-component-monitor
-  namespace: istio-system
+  name: {{ .Values.serviceMonitor.name }}
+  namespace: {{ .Values.serviceMonitor.namespace }}
   labels:
     monitoring: istio-components
-    release: kube-prometheus-stack
+    {{ .Values.serviceMonitor.additionalLabels | toYaml | nindent 4 }}
 spec:
   jobLabel: istio
   targetLabels: [app]
@@ -16,4 +16,4 @@ spec:
     any: true
   endpoints:
   - port: http-monitoring
-    interval: 15s
+    interval: {{ .Values.serviceMonitor.interval }}

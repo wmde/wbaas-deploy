@@ -1,0 +1,13 @@
+podMonitor:
+  name: envoy-stats-monitor
+  namespace: istio-system
+  interval: 15s
+  additionalLabels:
+    release: istio
+
+serviceMonitor:
+  name: istio-component-monitor
+  namespace: istio-system
+  interval: 15s
+  additionalLabels:
+    release: istio
