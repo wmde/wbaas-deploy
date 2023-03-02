@@ -4,7 +4,7 @@ jobs:
   lint:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-
-      - name: yamllint
+      - name: Check out repository
+        uses: actions/checkout@v3
+      - name: Lint YAML files
         uses: ibiqlik/action-yamllint@v3
