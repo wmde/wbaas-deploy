@@ -1,0 +1,21 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: stats-cron
+spec:
+  schedule: {{ .Values.job.cronSchedule | quote }}
+  successfulJobsHistoryLimit: {{ .Values.job.successfulJobsHistoryLimit }}
+  failedJobsHistoryLimit: {{ .Values.job.failedJobsHistoryLimit }}
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: stats-cron
+            image: ghcr.io/wbstack/curl-jq:main
+            imagePullPolicy: IfNotPresent
+            command:
+            - /bin/sh
+            - -c
+            - "OUT=$(curl --silent -H 'Accept: application/json' http://elasticsearch-master.default.svc.cluster.local:9200/_cat/nodes?h=name,heap.percent,ram.percent,disk.used_percent,load_1m&format=json) && echo $OUT | jq -c '.[]'"
+          restartPolicy: OnFailure
