@@ -200,6 +200,7 @@ releases:
 
   - name: stats-cron
     namespace: default
+    installed: false
     chart: ./../../charts/stats-cron
     <<: *default_release
 
