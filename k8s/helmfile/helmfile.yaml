@@ -226,6 +226,7 @@ releases:
     namespace: istio-system
     chart: istio/istiod
     version: 1.17.1
+    installed: {{ ne .Environment.Name "production" | toYaml }}
     <<: *default_release
 
   - name: istio-monitors
