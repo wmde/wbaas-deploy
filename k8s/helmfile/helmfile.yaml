@@ -198,6 +198,11 @@ releases:
     version: 0.0.5
     <<: *default_release
 
+  - name: stats-cron
+    namespace: default
+    chart: ./../../charts/stats-cron
+    <<: *default_release
+
   - name: kube-prometheus-stack
     namespace: monitoring
     version: 45.1.1
