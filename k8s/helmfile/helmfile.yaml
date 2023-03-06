@@ -222,16 +222,10 @@ releases:
     version: 5.0.0
     <<: *default_release
 
-  - name: istiod
+  - name: istio-service-mesh
     namespace: istio-system
-    chart: istio/istiod
-    version: 1.17.1
     installed: {{ ne .Environment.Name "production" | toYaml }}
-    <<: *default_release
-
-  - name: istio-monitors
-    namespace: istio-systems
-    chart: ./../../charts/istio-monitors
+    chart: ./../../charts/istio-service-mesh
     <<: *default_release
 
   ################################
