@@ -1,0 +1,22 @@
+podMonitor:
+  namespace: monitoring
+  additionalLabels:
+    release: kube-prometheus-stack
+
+serviceMonitor:
+  enabled: false
+  namespace: monitoring
+
+istiod:
+  pilot:
+    resources:
+      requests:
+        cpu: 250m
+        memory: 1Gi
+
+  global:
+    proxy:
+      resources:
+        limits:
+          cpu: 250m
+          memory: 0.5Gi

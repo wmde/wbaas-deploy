@@ -16,6 +16,8 @@ repositories:
     url: https://kubernetes.github.io/ingress-nginx
   - name: prometheus-community
     url: https://prometheus-community.github.io/helm-charts
+  - name: istio
+    url: https://istio-release.storage.googleapis.com/charts
 
 environments:
   default:
@@ -47,6 +49,9 @@ helmfiles:
     values:
       - foo: null
   - path: prometheus-operator.yaml
+    values:
+      - foo: null
+  - path: istio-control-plane.yaml
     values:
       - foo: null
 
@@ -210,6 +215,12 @@ releases:
     namespace: monitoring
     chart: prometheus-community/prometheus-elasticsearch-exporter
     version: 5.0.0
+    <<: *default_release
+
+  - name: istio-service-mesh
+    namespace: istio-system
+    installed: {{ ne .Environment.Name "production" | toYaml }}
+    chart: ./../../charts/istio-service-mesh
     <<: *default_release
 
   ################################

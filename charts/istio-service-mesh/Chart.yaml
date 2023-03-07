@@ -1,0 +1,10 @@
+apiVersion: v2
+name: istio-service-mesh
+description: Create istiod as well as Pod and Service monitoring objects
+type: application
+version: 0.0.1
+appVersion: "1.0.0"
+dependencies:
+  - name: istiod
+    version: 1.17.1
+    repository: https://istio-release.storage.googleapis.com/charts
