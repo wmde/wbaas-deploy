@@ -219,7 +219,6 @@ releases:
 
   - name: istio-service-mesh
     namespace: istio-system
-    installed: {{ ne .Environment.Name "production" | toYaml }}
     chart: ./../../charts/istio-service-mesh
     <<: *default_release
 
