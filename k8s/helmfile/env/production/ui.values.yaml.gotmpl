@@ -31,3 +31,6 @@ ui:
   configMapName: wbaas-ui-config
   recaptchaSitekeySecretName: {{ .Values.external.recaptcha3.secretName }}
   recaptchaSitekeySecretKey: site_key
+
+podLabels:
+  sidecar.istio.io/inject: "true"
