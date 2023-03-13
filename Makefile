@@ -55,6 +55,11 @@ helmfile-deps:
 # local environment is used (as one is needed), and any will do
 	cd ./k8s/helmfile && helmfile --environment local deps
 
+.PHONY: helmfile-sync
+helmfile-sync: # @HELP Sync all resources defined in the Helmfile. This can help if an initial apply-local didn't complete.
+helmfile-sync:
+	cd ./k8s/helmfile && helmfile --environment local sync
+
 PHONY: init-%
 init-local: # @HELP Initialize terraform state for your local setup. This does not create any resources. It also downloads any new modules
 init-staging: # @HELP Initialize terraform state for staging. This does not create any resources. It also downloads any new modules

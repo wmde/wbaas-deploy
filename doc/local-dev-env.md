@@ -272,3 +272,6 @@ Here are a few things to try:
   - make sure the minikube tunnel is running `make minikube-tunnel`
   - make sure you are using http:// and not https:// (there are no TLS certificates)
   - check the health of your pods `kubectl --profile minikube-wbaas get pods`
+
+### **API isn't running // Some pods are missing**
+While running an initial `helmfile apply` for setting up all the k8s resources, it can happen that it doesn't complete all deployments, but helm thinks it did. To make sure everything that should be deployed was actually deployed, you can run `make helmfile-sync`.
