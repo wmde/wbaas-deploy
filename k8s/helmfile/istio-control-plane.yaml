@@ -2,7 +2,6 @@ releases:
   - name: istio-base
     namespace: istio-system
     chart: istio/base
-    installed: {{ ne .Environment.Name "production" | toYaml }}
     set:
       - name: installCRDs
         value: true
