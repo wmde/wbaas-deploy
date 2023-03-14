@@ -16,3 +16,19 @@ volumeClaimTemplate:
   resources:
     requests:
       storage: 10.1Gi
+
+esConfig:
+  elasticsearch.yml: |
+    # T309396
+    xpack.ml.enabled: false
+    xpack.monitoring.collection.enabled: false
+    xpack.watcher.enabled: false
+    xpack.security.enabled: false
+    xpack.graph.enabled: false
+    xpack.logstash.enabled: false
+    xpack.ccr.enabled: false
+
+    # T309378
+    action.auto_create_index: false
+
+    thread_pool.fetch_shard_store.max: 100
