@@ -18,7 +18,6 @@ For the time being, the main entry point for querying this data is GCP's "Metric
 
 <!-- /MarkdownTOC -->
 
-
 ## Introduction to basic concepts used in Prometheus
 
 [Prometheus][prom] is a database ecosystem designed specifically for storing and querying timeseries data emitted by monitoring systems.
@@ -61,6 +60,7 @@ db_rows{table="users"} 44
 db_rows{table="users"} 50 # 6 users have been added since the last datapoint
 db_rows{table="users"} 48 # 2 users have been deleted since the last datapoint
 ```
+
 #### Distributions
 
 Distributions (also called Histograms) samples a metric and distributes the values in configurable buckets.
