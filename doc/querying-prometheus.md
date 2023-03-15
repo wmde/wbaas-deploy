@@ -29,7 +29,7 @@ For the time being, the main entry point for querying this data is GCP's "Metric
 Each datapoint in a time series is a timestamped tuple of a metric name and a numeric (float64) value.
 In addition to that, labels (arbitrary key value pairs) can be applied to a datapoint.
 
-For example, a HTTP server that has since start served 2.319 GET requests with a 200 status code, could emit data like this: 
+For example, a HTTP server that has since start served 2,319 GET requests with a 200 status code, could emit data like this: 
 
 ```
 # metric_name{label_name=label_value, ...} value
@@ -77,7 +77,7 @@ Distributions are a good fit for describing sampled data like response times.
 ### Prometheus Query Language
 
 Prometheus comes with a language for querying data called [PromQL][promql].
-In its most simple form, its syntax resembles a datpoint without a value:
+In its most simple form, its syntax resembles a datapoint without a value:
 
 ```
 db_rows{table="beeps"} # query for the number of beeps in the database
@@ -132,7 +132,7 @@ sum by (gc) (
 
 ### Istio Service Mesh
 
-#### ElasticSearch error rate in perecent
+#### ElasticSearch error rate in percent
 
 ```promql
 (
