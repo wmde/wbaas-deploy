@@ -107,7 +107,7 @@ histogram_quantile(0.95, rate(response_time_bucket{}[1m])) by (le))
 
 ## Getting relevant KPIs for Wikibase.cloud
 
-Applying the above to our setup, the following relevant queries can be used for observing our services in the [Metrics Explorer].
+Applying the above to our setup, the following relevant queries can be used for observing our services in the [Metrics Explorer][metrics-explorer].
 Note that these are just examples to get you started and more services might have been made available since the time of writing this document.
 
 [metrics-explorer]: https://console.cloud.google.com/monitoring/metrics-explorer?project=wikibase-cloud
