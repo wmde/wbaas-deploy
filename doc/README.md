@@ -9,3 +9,4 @@
 - [Info about minikube's load balancer](minikube-load-balancer.md)
 - [Importing resources into Terraform](importing-resources-into-terraform.md)
 - [Setting up local access to GKE cluster](gke-cluster-access.md)
+- [Querying Prometheus using the Google Cloud Console](querying-prometheus.md)
