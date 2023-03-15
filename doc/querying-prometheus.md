@@ -80,7 +80,7 @@ Prometheus comes with a language for querying data called [PromQL][promql].
 In its most simple form, its syntax resembles a datpoint without a value:
 
 ```
-db_rows{table="boops"} # query for the number of boops in the database
+db_rows{table="beeps"} # query for the number of beeps in the database
 ```
 
 Label selectors can be filtered:
