@@ -5,6 +5,20 @@ For the time being, the main entry point for querying this data is GCP's "Metric
 
 [managed-prom]: https://cloud.google.com/stackdriver/docs/managed-prometheus
 
+<!-- MarkdownTOC -->
+
+- [Introduction to basic concepts used in Prometheus](#introduction-to-basic-concepts-used-in-prometheus)
+    - [Labeled timeseries data](#labeled-timeseries-data)
+    - [Relevant metric types](#relevant-metric-types)
+    - [Prometheus Query Language](#prometheus-query-language)
+- [Getting relevant KPIs for Wikibase.cloud](#getting-relevant-kpis-for-wikibasecloud)
+    - [ElasticSearch](#elasticsearch)
+    - [Istio Service Mesh](#istio-service-mesh)
+    - [Nginx Ingress Controller](#nginx-ingress-controller)
+
+<!-- /MarkdownTOC -->
+
+
 ## Introduction to basic concepts used in Prometheus
 
 [Prometheus][prom] is a database ecosystem designed specifically for storing and querying timeseries data emitted by monitoring systems.
