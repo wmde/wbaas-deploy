@@ -116,7 +116,7 @@ Note that these are just examples to get you started and more services might hav
 
 #### Thread Pools by Type
 
-```
+```promql
 sum by (type) (
   elasticsearch_thread_pool_threads_count{cluster="wbaas-3"}
 )
@@ -124,7 +124,7 @@ sum by (type) (
 
 #### Time spent garbage collecting
 
-```
+```promql
 sum by (gc) (
   increase(elasticsearch_jvm_gc_collection_seconds_count{cluster="wbaas-3"}[1m])
 )
@@ -134,7 +134,7 @@ sum by (gc) (
 
 #### ElasticSearch error rate in perecent
 
-```
+```promql
 (
   sum(increase(istio_requests_total{cluster="wbaas-3", destination_canonical_service="elasticsearch-master", response_code=~"5.+"}[1m]))
   /
@@ -146,7 +146,7 @@ sum by (gc) (
 
 #### ElasticSearch average response time in seconds
 
-```
+```promql
 (
   sum(increase(istio_request_duration_milliseconds_sum{cluster="wbaas-3", destination_canonical_service="elasticsearch-master"}[1m]))
   /
@@ -158,7 +158,7 @@ sum by (gc) (
 
 #### ElasticSearch response times 95th percentile
 
-```
+```promql
 histogram_quantile(
   0.95,
   sum(
@@ -171,7 +171,7 @@ histogram_quantile(
 
 #### Requests per second
 
-```
+```promql
 sum(
   rate(nginx_ingress_controller_requests{cluster="wbaas-3"}[1m])
 )
@@ -179,7 +179,7 @@ sum(
 
 #### Error rate in percent
 
-```
+```promql
 (
   sum(increase(nginx_ingress_controller_requests{cluster="wbaas-3", status=~"5.+"}[1m]))
   /
