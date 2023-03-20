@@ -1,0 +1,23 @@
+#!/bin/bash
+set -euo pipefail
+
+WIKIS=$(kubectl exec -ti sql-mariadb-secondary-0 -- bash -c 'echo "use apidb; SELECT * FROM wiki_dbs LEFT JOIN wiki_domains ON wiki_domains.wiki_id = wiki_dbs.wiki_id;" | mysql -N -u root -p${MARIADB_MASTER_ROOT_PASSWORD}')
+DOMAINS=""
+QUERY=""
+
+while IFS= read -r line; do
+    DB_NAME=$(echo "$line" | awk -F'\t' 'BEGIN {OFS = FS} {print $2}')
+    DB_PREFIX=$(echo "$line" | awk -F'\t' 'BEGIN {OFS = FS} {print $3}')
+    DOMAIN=$(echo "$line" | awk -F'\t' 'BEGIN {OFS = FS} {print $11}')
+
+    if [[ "$DOMAIN" == "NULL" ]]; then
+        continue;
+    fi
+
+    QUERY="$QUERY SELECT * FROM ${DB_NAME}.${DB_PREFIX}_site_stats;"
+    DOMAINS="$DOMAINS $DOMAIN"
+done <<< "$WIKIS"
+
+for domain in $DOMAINS; do echo "$domain"; done
+echo
+echo "$QUERY"
