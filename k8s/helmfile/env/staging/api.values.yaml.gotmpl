@@ -1,5 +1,5 @@
 image:
-  tag: "8x.9.12"
+  tag: "8x.10.0"
 
 ingress:
   tls:
@@ -7,7 +7,12 @@ ingress:
     - wikibase.dev ## todo should be injected
     secretName: wikibase-dev-tls
 
+platform:
+  backendMwHost: mediawiki-138-app-backend.default.svc.cluster.local
+
 wbstack:
+  wikiDbProvisionVersion: mw1.38-wbs1
+  wikiDbUseVersion: mw1.38-wbs1
   monitoringEmail: "wb-cloud-monitoring+staging@wikimedia.de"
   elasticSearch:
     enabledByDefault: true
