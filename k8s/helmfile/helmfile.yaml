@@ -153,6 +153,7 @@ releases:
     namespace: default
     chart: wbstack/mediawiki
     version: 0.10.6
+    installed: {{ ne .Environment.Name "staging" | toYaml }}
     <<: *default_release
 
   - name: mediawiki-138
