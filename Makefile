@@ -96,7 +96,7 @@ test: # @HELP Run yamllint tests against the repository
 test:
 	yamllint --no-warnings .
 
-skaffold-mediawiki: skaffold-mediawiki-137-fp
+skaffold-mediawiki: skaffold-mediawiki-138
 skaffold-mediawiki: # @HELP Deploy the local mediawiki image using skaffold
 skaffold-ui: # @HELP Deploy the local ui image using skaffold
 skaffold-api: # @HELP Deploy the api image using skaffold
