@@ -160,7 +160,6 @@ releases:
     namespace: default
     chart: wbstack/mediawiki
     version: 0.10.6
-    installed: {{ eq .Environment.Name "staging" | toYaml }}
     <<: *default_release
 
   - name: queryservice-ui
