@@ -149,13 +149,6 @@ releases:
     version: 0.3.1
     <<: *default_release
 
-  - name: mediawiki-137-fp
-    namespace: default
-    chart: wbstack/mediawiki
-    version: 0.10.6
-    installed: false
-    <<: *default_release
-
   - name: mediawiki-138
     namespace: default
     chart: wbstack/mediawiki
