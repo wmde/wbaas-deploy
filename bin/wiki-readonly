@@ -3,8 +3,8 @@
 ## wiki-readonly.sh
 # Sets or unsets the read-only setting for a list of wikis.
 #
-# -v can be used to set the value of the `wgReadOnly` setting (Default is "Maintenance")
-# -u: removes the setting for a wiki 
+# -v: sets the value of the `wgReadOnly` setting (default is "Maintenance")
+# -u: removes the setting for a wiki
 #
 # note: last provided option "wins" :P
 
