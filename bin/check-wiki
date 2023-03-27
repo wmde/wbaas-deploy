@@ -3,11 +3,10 @@
 # This script requires you to pass a file containing a list of the domains to check
 #
 # This script requires port-forwarding from the queryservice-gateway to port 8181
-# ex:  kubectl port-forward queryservice-gateway-559cb9fbbc-h4d58 8181:80
+# ex:  kubectl port-forward deployments/queryservice-gateway 8181:80
 #
-# This scrippt 
-# This script requires port-forwarding from the mediawiki-web pod to port 8080
-# ex: kubectl port-forward mediawiki-137-fp-app-web-57fd675bb7-wddpg 8080:80
+# This script requires port-forwarding from a mediawiki-web pod to port 8080
+# ex: kubectl port-forward deployments/mediawiki-138-app-web 8080:80
 while read domain; do
 
     echo "---------------------------"
