@@ -1,5 +1,8 @@
 #!/bin/bash
-#
+set -eu
+
+[ -t 0 ] && echo "Error: please pipe a \n separeted list of wiki domains into this script. example: 'cat domains.txt | $0'" && exit 1
+
 ## wiki-readonly.sh
 # Sets or unsets the read-only setting for a list of wikis.
 #
@@ -7,8 +10,6 @@
 # -u: removes the setting for a wiki
 #
 # note: last provided option "wins" :P
-
-set -eu
 
 set_readonly() {
     WIKI_DOMAIN="$1"
@@ -36,13 +37,12 @@ while getopts "v::u" option; do
             VALUE="$OPTARG";;
         u)
             VALUE="";;
-        *)
-            echo "Error: invalid option"
+        \?)
             echo
             echo "Available options:"
             echo "  -u (optional, removes the read-only setting)"
             echo "  -s <wgReadOnlyValue> (optional, default: '$DEFAULT_VALUE')"
-            exit 1;;
+            exit 2;;
    esac
 done
 

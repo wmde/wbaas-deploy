@@ -1,4 +1,7 @@
 #!/bin/bash
+set -eu
+
+[ -t 0 ] && echo "Error: please pipe a \n separeted list of wiki domains into this script. example: 'cat domains.txt | $0'" && exit 1
 
 ## wiki-upgrade.sh
 # Dispatches the MediawikiUpdate Job for a list of individual wiki databases.
@@ -11,13 +14,15 @@
 # -t <db_version_to>
 # -b <mw_backend>
 
-set -e
+DEFAULT_DB_VERSION_FROM='mw1.38-wbs1'
+DEFAULT_DB_VERSION_TO='mw1.39-wbs1'
+DEFAULT_MW_BACKEND='mediawiki-138'
 
-DB_VERSION_FROM=${DB_VERSION_FROM:-mw1.38-wbs1}
-DB_VERSION_TO=${DB_VERSION_TO:-mw1.39-wbs1}
-MW_BACKEND=${MW_BACKEND:-mediawiki-138}
+DB_VERSION_FROM=${DB_VERSION_FROM:-$DEFAULT_DB_VERSION_FROM}
+DB_VERSION_TO=${DB_VERSION_TO:-$DEFAULT_DB_VERSION_TO}
+MW_BACKEND=${MW_BACKEND:-$DEFAULT_MW_BACKEND}
 
-while getopts ":f:t:b:" option; do 
+while getopts "f:t:b:" option; do 
     case $option in
         f)
             DB_VERSION_FROM="${OPTARG}";;
@@ -25,9 +30,13 @@ while getopts ":f:t:b:" option; do
             DB_VERSION_TO="${OPTARG}";;
         b)
             MW_BACKEND="${OPTARG}";;
-        \?)
-            echo "Error: Invalid option"
-            exit 1;;
+        *)
+            echo
+            echo "Available options:"
+            echo "  -f <db_version_from> (optional, default: '$DEFAULT_DB_VERSION_FROM')"
+            echo "  -t <db_version_to>  (optional, default: '$DEFAULT_DB_VERSION_TO')"
+            echo "  -b <mw_backend>  (optional, default: '$DEFAULT_MW_BACKEND')"
+            exit 2;;
    esac
 done
 
