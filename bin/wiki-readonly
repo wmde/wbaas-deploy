@@ -37,7 +37,7 @@ while getopts "v::u" option; do
             VALUE="$OPTARG";;
         u)
             VALUE="";;
-        \?)
+        *)
             echo
             echo "Available options:"
             echo "  -u (optional, removes the read-only setting)"
