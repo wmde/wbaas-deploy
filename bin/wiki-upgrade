@@ -1,0 +1,87 @@
+#!/bin/bash
+
+# This script can be used to run the APIs MediawikiUpdate Job for individual mediawiki databases
+# 
+# After this script is finished, you have to point the wikis to the new mediawiki backends.
+# Then you can remove the read-only mode again by calling the script `wiki-readonly -u` with a list of wiki domains
+#
+# -f <db_version_from>
+# -t <db_version_to>
+# -b <mw_backend>
+
+set -e
+
+DB_VERSION_FROM=${DB_VERSION_FROM:-mw1.38-wbs1}
+DB_VERSION_TO=${DB_VERSION_TO:-mw1.39-wbs1}
+MW_BACKEND=${MW_BACKEND:-mediawiki-138}
+
+while getopts ":f:t:b:" option; do 
+    case $option in
+        f)
+            DB_VERSION_FROM="${OPTARG}";;
+        t)
+            DB_VERSION_TO="${OPTARG}";;
+        b)
+            MW_BACKEND="${OPTARG}";;
+        \?)
+            echo "Error: Invalid option"
+            exit 1;;
+   esac
+done
+
+dispatch_MediawikiUpdate() {
+    WIKI_DOMAIN="$1"
+    DB_VERSION_FROM="$2"
+    DB_VERSION_TO="$3"
+    MW_BACKEND="$4"
+
+    echo "Dispatching MediawikiUpdate Job for wiki '${WIKI_DOMAIN}'"
+    set -x
+    time kubectl exec -t deployments/api-scheduler -- bash -c "php artisan job:dispatchNow MediawikiUpdate wikis.domain ${WIKI_DOMAIN} ${DB_VERSION_FROM} ${DB_VERSION_TO} ${MW_BACKEND}"
+
+    # Undoing `set -x`: output gets messy quickly and for ops we are mainly interested in what we actually run with kubectl
+    { set +x; } 2>/dev/null
+}
+
+date_echo() {
+    echo -n "$(date --rfc-3339=seconds); "
+    echo $1
+}
+
+echo "DB_VERSION_FROM = ${DB_VERSION_FROM}"
+echo "DB_VERSION_TO = ${DB_VERSION_TO}"
+echo "MW_BACKEND = ${MW_BACKEND}"
+echo
+
+echo "This script will attempt to upgrade the following wikis:"
+
+WIKI_DOMAINS=''
+while read WIKI_DOMAIN; do
+    echo "${WIKI_DOMAIN}"
+    WIKI_DOMAINS="$WIKI_DOMAINS $WIKI_DOMAIN"
+done
+
+echo
+echo -n "Waiting 10 seconds ... "
+sleep 10
+echo "starting upgrade loop."
+echo
+date_echo "Starting upgrade loop"
+
+for WIKI_DOMAIN in ${WIKI_DOMAINS}; do
+    echo "----------------------------------------------------------------"
+    date_echo "Starting process for '${WIKI_DOMAIN}'"
+    echo
+
+    echo "${WIKI_DOMAIN}" | ./wiki-readonly -v 'Mediawiki-Upgrade'
+    echo
+
+    dispatch_MediawikiUpdate "${WIKI_DOMAIN}" "${DB_VERSION_FROM}" "${DB_VERSION_TO}" "${MW_BACKEND}"
+done
+
+echo "----------------------------------------------------------------"
+date_echo "Finished upgrade loop"
+echo
+echo "You can now point the upgraded wikis to the new mediawiki backends."
+echo "Then you can disable the read-only mode again by running the script \`wiki-readonly\` with the -u option and a list of wiki domains"
+echo

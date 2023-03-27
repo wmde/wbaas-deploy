@@ -1,0 +1,51 @@
+#!/bin/bash
+#
+## wiki-readonly.sh
+# This script can be used to set or unset the read-only setting for a list of wikis.
+#
+# -v can be used to set the value of the `wgReadOnly` setting (Default is "Maintenance")
+# -u: removes the setting for a wiki 
+#
+# note: last provided option "wins" :P
+
+set -eu
+
+set_readonly() {
+    WIKI_DOMAIN="$1"
+    VALUE="$2"
+
+    if [ -z "$VALUE" ]; then
+        echo "Unsetting wgReadOnly for wiki: $1"
+    else
+        echo "Setting wgReadOnly ('$2') for wiki: $1"
+    fi
+
+    set -x
+    kubectl exec -t deployment/api-app-backend -- bash -c "php artisan wbs-wiki:setSetting domain ${WIKI_DOMAIN} wgReadOnly ${VALUE}"
+    
+    # Undoing `set -x`: output gets messy quickly and for ops we are mainly interested in what we actually run with kubectl
+    { set +x; } 2>/dev/null
+}
+
+DEFAULT_VALUE='Maintenance'
+VALUE=${DEFAULT_VALUE}
+
+while getopts "v::u" option; do 
+    case $option in
+        v)
+            VALUE="$OPTARG";;
+        u)
+            VALUE="";;
+        *)
+            echo "Error: invalid option"
+            echo
+            echo "Available options:"
+            echo "  -u (optional, removes the read-only setting)"
+            echo "  -s <wgReadOnlyValue> (optional, default: '$DEFAULT_VALUE')"
+            exit 1;;
+   esac
+done
+
+while read WIKI_DOMAIN; do
+    set_readonly "$WIKI_DOMAIN" "$VALUE"
+done
