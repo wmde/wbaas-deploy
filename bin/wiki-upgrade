@@ -81,7 +81,6 @@ done
 echo
 echo -n "Waiting 10 seconds ... "
 sleep 10
-echo "starting upgrade loop."
 echo
 date_echo "Starting upgrade loop"
 
