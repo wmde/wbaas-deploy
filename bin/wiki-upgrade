@@ -1,6 +1,8 @@
 #!/bin/bash
 
-# This script can be used to run the APIs MediawikiUpdate Job for individual mediawiki databases
+## wiki-upgrade.sh
+# Dispatches the MediawikiUpdate Job for a list of individual wiki databases.
+# Also enables wgReadOnly setting for each wiki.
 # 
 # After this script is finished, you have to point the wikis to the new mediawiki backends.
 # Then you can remove the read-only mode again by calling the script `wiki-readonly -u` with a list of wiki domains
