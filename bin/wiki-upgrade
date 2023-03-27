@@ -1,7 +1,7 @@
 #!/bin/bash
 set -eu
 
-[ -t 0 ] && echo "Error: please pipe a \n separeted list of wiki domains into this script. example: 'cat domains.txt | $0'" && exit 1
+[ -t 0 ] && echo "Error: please pipe a \n separated list of wiki domains into this script. example: 'cat domains.txt | $0'" && exit 1
 
 ## wiki-upgrade.sh
 # Dispatches the MediawikiUpdate Job for a list of individual wiki databases.
