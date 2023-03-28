@@ -21,7 +21,6 @@ Help() {
     echo "example 1: 'cat domains.txt | ./wiki-readonly'"
     echo "example 2: 'echo foobar.wikibase.cloud | ./wiki-readonly'"
     echo
-
 }
 
 while getopts "d:v:u" option; do 

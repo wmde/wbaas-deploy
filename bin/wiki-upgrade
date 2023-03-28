@@ -88,7 +88,7 @@ for WIKI_DOMAIN in $WIKI_DOMAINS; do
 done
 
 echo
-echo -n "Waiting 10 seconds ... "
+echo "Waiting 10 seconds ..."
 echo
 
 sleep 10
