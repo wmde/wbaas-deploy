@@ -1,36 +1,40 @@
 #!/bin/bash
 set -eu
 
-[ -t 0 ] && echo "Error: please pipe a list of wiki domains (separated by newline) into this script. example: 'cat domains.txt | $0'" && exit 1
-
-## wiki-readonly.sh
-# Sets or unsets the read-only setting for a list of wikis.
-#
-# Usage: pipe a newline separated list of wiki domains into this script.
-# example 1: 'cat domains.txt | ./wiki-readonly'
-# example 2: 'echo foobar.wikibase.cloud | ./wiki-readonly'
-#
-# Available options (see below for defaults):
-# -v: sets the value of the `wgReadOnly` setting
-# -u: removes the setting for a wiki
-#
-# note: last provided option "wins" :P
-
 DEFAULT_VALUE='Maintenance'
 VALUE=${DEFAULT_VALUE}
+WIKI_DOMAINS=''
 
-while getopts "v::u" option; do 
+Help() {
+    echo "wiki-readonly.sh: Sets or unsets the read-only setting for a list of wikis."
+    echo
+    echo "Usage: wiki-readonly [-d <wiki_domain>] [-u|-v <setting_value>]"
+    echo
+    echo "Available options (see below for defaults):"
+    echo "  -d <wiki_domain>: specifies the wiki domain to be used"
+    echo "  -v <setting_value>: sets the value of the \`wgReadOnly\` setting (default: '${DEFAULT_VALUE}')"
+    echo "  -u: removes the setting for a wiki"
+    echo
+    echo "note: -u and -v cancel each other, the last provided option 'wins'."
+    echo
+    echo "Instead of specifying only one wiki domain with -d, you can also pipe a newline separated list of wiki domains into this script:"
+    echo "example 1: 'cat domains.txt | ./wiki-readonly'"
+    echo "example 2: 'echo foobar.wikibase.cloud | ./wiki-readonly'"
+    echo
+
+}
+
+while getopts "d:v:u" option; do 
     case $option in
+        d)
+            WIKI_DOMAINS="${OPTARG}";;
         v)
-            VALUE="$OPTARG";;
+            VALUE="${OPTARG}";;
         u)
             VALUE="";;
         *)
-            echo
-            echo "Available options:"
-            echo "  -u (optional, removes the read-only setting)"
-            echo "  -s <wgReadOnlyValue> (optional, default: '$DEFAULT_VALUE')"
-            exit 2;;
+            Help
+            exit 1;;
    esac
 done
 
@@ -51,6 +55,14 @@ set_readonly() {
     { set +x; } 2>/dev/null
 }
 
-while read WIKI_DOMAIN; do
+# loop through stdin if no wiki domain was provided via -d
+if [ -z "$WIKI_DOMAINS" ]; then
+    echo "reading wiki domains from stdin"
+    while read WIKI_DOMAIN; do
+        WIKI_DOMAINS="${WIKI_DOMAINS} ${WIKI_DOMAIN}"
+    done
+fi
+
+for WIKI_DOMAIN in $WIKI_DOMAINS; do
     set_readonly "$WIKI_DOMAIN" "$VALUE"
 done
