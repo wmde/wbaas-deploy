@@ -1,10 +1,15 @@
 image:
-  tag: "8x.10.1"
+  tag: "8x.11.0"
 
 ingress:
   tls: null
 
+platform:
+  backendMwHost: mediawiki-139-app-backend.default.svc.cluster.local
+
 wbstack:
+  wikiDbProvisionVersion: mw1.39-wbs1
+  wikiDbUseVersion: mw1.39-wbs1
   maxWikisPerUser: null
   elasticSearch:
     enabledByDefault: true
