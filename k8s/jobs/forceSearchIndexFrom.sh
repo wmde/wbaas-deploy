@@ -1,3 +1,7 @@
+
+# WBS_FORCE_SEARCH_INDEX_FROM should be set to time to reindex from (exclusive) in YYYY-mm-ddTHH:mm:ssZ format
+# WBS_DOMAIN should be set to the domain to reindex
+
 tmp_file=$(mktemp --suffix=.json)
 
 MW_POD=$(kubectl get pods --field-selector='status.phase=Running' -l app.kubernetes.io/name=mediawiki,app.kubernetes.io/component=app-backend -o jsonpath="{.items[0].metadata.name}")
