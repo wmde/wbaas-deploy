@@ -1,5 +1,5 @@
 image:
-  tag: "8x.11.0"
+  tag: "8x.10.1"
 
 ingress:
   tls:
@@ -8,11 +8,11 @@ ingress:
     secretName: wikibase-dev-tls
 
 platform:
-  backendMwHost: mediawiki-139-app-backend.default.svc.cluster.local
+  backendMwHost: mediawiki-138-app-backend.default.svc.cluster.local
 
 wbstack:
-  wikiDbProvisionVersion: mw1.39-wbs1
-  wikiDbUseVersion: mw1.39-wbs1
+  wikiDbProvisionVersion: mw1.38-wbs1
+  wikiDbUseVersion: mw1.38-wbs1
   monitoringEmail: "wb-cloud-monitoring+staging@wikimedia.de"
   elasticSearch:
     enabledByDefault: true
