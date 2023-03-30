@@ -1,3 +1,8 @@
+labels:
+  sidecar.istio.io/inject: "true"
+  traffic.sidecar.istio.io/excludeInboundPorts: "9300"
+  traffic.sidecar.istio.io/excludeOutboundPorts: "9300"
+
 imageTag: "6.8.23-wmde.6"
 
 esJavaOpts: "-Xms2g -Xmx2g"
