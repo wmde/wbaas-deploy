@@ -1,0 +1,20 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  generateName: force-search-index-from-
+spec:
+  template:
+    metadata:
+      name: force-search-index-from
+    spec:
+      containers:
+        - name: force-search-index-from
+          command:
+            - 'bash'
+            - '-c'
+            - >
+                MW_INSTALL_PATH=/var/www/html/w/
+                php
+                /var/www/html/w/extensions/CirrusSearch/maintenance/ForceSearchIndex.php
+                --from="${WBS_FORCE_SEARCH_INDEX_FROM}"
+      restartPolicy: Never
