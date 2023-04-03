@@ -14,5 +14,7 @@ serviceMonitor:
   additionalLabels:
     release: istio
 
-mtls:
-  mode: PERMISSIVE
+peerAuthentication:
+  enabled: false
+  mtls:
+    mode: PERMISSIVE
