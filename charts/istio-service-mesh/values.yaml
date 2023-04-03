@@ -13,3 +13,6 @@ serviceMonitor:
   interval: 15s
   additionalLabels:
     release: istio
+
+mtls:
+  mode: PERMISSIVE
