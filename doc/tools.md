@@ -108,6 +108,8 @@ $ curl -s http://localhost:9200/_cluster/health?pretty
 
 Instead of querying the APIs manually with `curl`, ElasticHQ offers a web interface that you can use to explore the state of ElasticSearch.
 
+#### Basic usage
+
 ElasticHQ can be run via docker:
 ```
 $ docker run --network host elastichq/elasticsearch-hq
