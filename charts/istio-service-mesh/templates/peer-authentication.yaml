@@ -1,0 +1,8 @@
+{{ if .Values.peerAuthentication.enabled }}
+{{- range .Values.peerAuthentication.objects }}
+apiVersion: security.istio.io/v1beta1
+kind: PeerAuthentication
+{{- toYaml . | nindent 0 }}
+---
+{{- end }}
+{{ end }}

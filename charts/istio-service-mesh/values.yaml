@@ -13,3 +13,7 @@ serviceMonitor:
   interval: 15s
   additionalLabels:
     release: istio
+
+peerAuthentication:
+  enabled: false
+  objects: []

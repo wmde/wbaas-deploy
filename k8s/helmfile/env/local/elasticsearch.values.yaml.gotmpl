@@ -2,6 +2,13 @@ imageTag: "6.8.23-wmde.6"
 
 esJavaOpts: "-Xms1g -Xmx1g"
 
+labels:
+  sidecar.istio.io/inject: "true"
+
+podAnnotations:
+  traffic.sidecar.istio.io/includeInboundPorts: "*"
+  traffic.sidecar.istio.io/excludeOutboundPorts: "9300"
+  traffic.sidecar.istio.io/excludeInboundPorts: "9300"
 # hard affinity won't work locally as there is just a single
 # node running minikube
 antiAffinity: soft
