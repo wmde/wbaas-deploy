@@ -1,10 +1,8 @@
 {{ if .Values.peerAuthentication.enabled }}
+{{- range .Values.peerAuthentication.objects }}
 apiVersion: security.istio.io/v1beta1
 kind: PeerAuthentication
-metadata:
-  name: default
-  namespace: istio-system
-spec:
-  mtls:
-    mode: {{ .Values.peerAuthentication.mtls.mode }}
+{{- toYaml . | nindent 0 }}
+---
+{{- end }}
 {{ end }}

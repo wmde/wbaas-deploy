@@ -16,5 +16,4 @@ serviceMonitor:
 
 peerAuthentication:
   enabled: false
-  mtls:
-    mode: PERMISSIVE
+  objects: []

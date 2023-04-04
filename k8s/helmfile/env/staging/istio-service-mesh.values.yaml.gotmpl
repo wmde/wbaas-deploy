@@ -1,4 +1,9 @@
 peerAuthentication:
   enabled: true
-  mtls:
-    mode: DISABLE
+  objects:
+    - metadata:
+        name: disable-mtls
+        namespace: default
+      spec:
+        mtls:
+          mode: DISABLE
