@@ -65,7 +65,7 @@ kubeshark is an API Traffic Viewer for kubernetes. Can be useful if you want ins
 #### Basic usage
 
 ```
-$ kubeshark tap
+kubeshark tap
 ```
 
 A browser tab with the interface will open.
@@ -73,7 +73,7 @@ A browser tab with the interface will open.
 ## ElasticSearch
 ### Port forwarding
 ```
-$ kubectl port-forward statefulsets/elasticsearch-master 9200
+kubectl port-forward statefulsets/elasticsearch-master 9200
 ```
 
 In general you can interface with ES via different REST APIs ([6.8 docs](https://www.elastic.co/guide/en/elasticsearch/reference/6.8/index.html)). One way to get access to them is exposing the port 9200 via `kubectl`.
@@ -112,7 +112,7 @@ Instead of querying the APIs manually with `curl`, ElasticHQ offers a web interf
 
 ElasticHQ can be run via docker:
 ```
-$ docker run --network host elastichq/elasticsearch-hq
+docker run --network host elastichq/elasticsearch-hq
 ```
 
 It is then accessible in your browser: http://localhost:5000
