@@ -155,6 +155,13 @@ releases:
     version: 0.10.6
     <<: *default_release
 
+  - name: mediawiki-139
+    namespace: default
+    chart: wbstack/mediawiki
+    version: 0.10.6
+    installed: {{ ne .Environment.Name "production" | toYaml }}
+    <<: *default_release
+
   - name: queryservice-ui
     namespace: default
     chart: wbstack/queryservice-ui
