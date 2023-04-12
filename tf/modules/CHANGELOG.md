@@ -1,3 +1,6 @@
+# tf-module-uptime-5
+- Add uptime check for cirrussearch backed mediawiki api endpoint
+
 # tf-module-buckets-1
 - Re-add retention policy on backup bucket
 
