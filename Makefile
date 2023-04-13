@@ -96,8 +96,8 @@ test: # @HELP Run yamllint tests against the repository
 test:
 	yamllint --no-warnings .
 
-skaffold-mediawiki: skaffold-mediawiki-138
-skaffold-mediawiki: # @HELP Deploy the local mediawiki image using skaffold
+skaffold-mediawiki-138: # @HELP Deploy the local mediawiki 1.38 image using skaffold
+skaffold-mediawiki-139: # @HELP Deploy the local mediawiki 1.39 image using skaffold
 skaffold-ui: # @HELP Deploy the local ui image using skaffold
 skaffold-api: # @HELP Deploy the api image using skaffold
 skaffold-queryservice: # @HELP  Deploy the local queryservice image using skaffold
