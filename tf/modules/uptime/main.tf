@@ -22,6 +22,14 @@ resource "google_monitoring_uptime_check_config" "https-content-uptime-check" {
 
   content_matchers {
     content = each.value.content
+    matcher = each.value.matcher
+    dynamic "json_path_matcher" {
+      for_each = each.value.matcher == "NOT_MATCHES_JSON_PATH" ? toset([1]) : toset([])
+      content {
+         json_matcher = each.value.json_matcher
+         json_path = each.value.json_path
+      }
+    }
   }
 }
 
