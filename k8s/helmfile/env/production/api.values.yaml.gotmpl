@@ -1,5 +1,5 @@
 image:
-  tag: "8x.10.1"
+  tag: "8x.11.0"
 
 replicaCount:
   web: 1
@@ -10,7 +10,7 @@ replicaCount:
 useProbes: true
 
 platform:
-  backendMwHost: mediawiki-138-app-backend.default.svc.cluster.local
+  backendMwHost: mediawiki-139-app-backend.default.svc.cluster.local
 
 # This mw db connection is only used by the queue..
 queue:
@@ -45,8 +45,8 @@ ingress:
 wbstack:
   subdomainSuffix: {{ .Values.wbstack.subdomainSuffix }}
   uiurl: {{ .Values.wbstack.uiurl }}
-  wikiDbProvisionVersion: mw1.38-wbs1
-  wikiDbUseVersion: mw1.38-wbs1
+  wikiDbProvisionVersion: mw1.39-wbs1
+  wikiDbUseVersion: mw1.39-wbs1
   maxWikisPerUser: 6
   monitoringEmail: "wb-cloud-monitoring@wikimedia.de"
   elasticSearch:
