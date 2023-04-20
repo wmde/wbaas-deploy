@@ -17,15 +17,13 @@ locals {
   alarms = {
     "es-cluster-health-${var.environment}" = {
       display_name            = "Elasticsearch Cluster Health Status"
-      filter                  = "metric.type = \"prometheus.googleapis.com/elasticsearch_cluster_health_status/gauge\" AND metric.labels.color != \"green\""
-      comparison              = "COMPARISON_GT"
+      filter                  = "metric.type = \"prometheus.googleapis.com/elasticsearch_cluster_health_status/gauge\" AND metric.labels.color = \"green\""
+      comparison              = "COMPARISON_LT"
       evaluation_missing_data = "EVALUATION_MISSING_DATA_ACTIVE"
       trigger_count           = 1
-      threshold_value         = 0
+      threshold_value         = 1
       duration                = "60s"
-      alignment_period        = "60s"
-      cross_series_reducer    = "REDUCE_NONE"
-      per_series_aligner      = "ALIGN_NEXT_OLDER"
+      condition_absent        = "120s"
     },
   }
 }

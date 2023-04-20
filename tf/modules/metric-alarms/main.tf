@@ -12,17 +12,19 @@ resource "google_monitoring_alert_policy" "alert_policy_prometheus_metric" {
     condition_threshold {
       filter                  = "resource.type = \"prometheus_target\" AND resource.labels.cluster = \"${var.cluster_name}\" AND ${each.value.filter}"
       evaluation_missing_data = each.value.evaluation_missing_data
-      aggregations {
-        alignment_period     = each.value.alignment_period
-        cross_series_reducer = each.value.cross_series_reducer
-        per_series_aligner   = each.value.per_series_aligner
-      }
       comparison = each.value.comparison
       duration   = each.value.duration
       trigger {
         count = each.value.trigger_count
       }
       threshold_value = each.value.threshold_value
+    }
+  }
+  conditions {
+    display_name = "${each.value.display_name} absent"
+    condition_absent {
+      duration = each.value.condition_absent
+      filter   = "resource.type = \"prometheus_target\" AND resource.labels.cluster = \"${var.cluster_name}\" AND ${each.value.filter}"
     }
   }
   combiner = "OR"
