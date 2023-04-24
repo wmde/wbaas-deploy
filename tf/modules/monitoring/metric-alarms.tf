@@ -8,7 +8,7 @@ locals {
       trigger_count           = 1
       threshold_value         = 1
       duration                = "60s"
-      condition_absent        = "120s"
+      condition_absent        = "300s"
     },
   }
 }
