@@ -1,3 +1,6 @@
+# tf-module-monitoring-16
+- Add alarm for ElasticSearch cluster health
+
 # tf-module-uptime-5
 - Add uptime check for cirrussearch backed mediawiki api endpoint
 
