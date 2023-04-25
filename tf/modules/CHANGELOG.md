@@ -1,3 +1,6 @@
+# tf-module-monitoring-17
+- Raise limit for ES metric absence alarm
+
 # tf-module-monitoring-16
 - Add alarm for ElasticSearch cluster health
 
