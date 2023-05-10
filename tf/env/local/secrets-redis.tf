@@ -7,13 +7,14 @@ resource "random_password" "redis-password" {
 
 # Used by the sql service for initial setup
 resource "kubernetes_secret" "redis-password" {
+  for_each = toset(["default", "api-jobs"])
   metadata {
-    name = "redis-password"
-    namespace = "default"
+    name      = "redis-password"
+    namespace = each.value
   }
 
   binary_data = {
     "password" = base64encode(random_password.redis-password.result)
   }
-  
+
 }

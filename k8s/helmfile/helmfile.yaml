@@ -147,7 +147,7 @@ releases:
       - tls: {{ .Values.tls | toYaml }}
 
   - name: api
-    chart: wbstack/api
+    chart: ./../../../charts/charts/api
     version: 0.20.2
     namespace: default
     <<: *default_release
@@ -160,7 +160,7 @@ releases:
 
   - name: mediawiki-139
     namespace: default
-    chart: wbstack/mediawiki
+    chart: ./../../../charts/charts/mediawiki
     version: 0.10.6
     <<: *default_release
 

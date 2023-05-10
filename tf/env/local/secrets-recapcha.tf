@@ -1,8 +1,9 @@
 resource "kubernetes_secret" "recaptcha-v3-dev-secrets" {
+  for_each = toset(["default", "api-jobs"])
   metadata {
     name = "recaptcha-v3-dev-secrets"
     # default as staging
-    namespace = "default"
+    namespace = each.value
   }
 
   data = {
@@ -12,10 +13,11 @@ resource "kubernetes_secret" "recaptcha-v3-dev-secrets" {
 }
 
 resource "kubernetes_secret" "recaptcha-v2-dev-secrets" {
+  for_each = toset(["default", "api-jobs"])
   metadata {
     name = "recaptcha-v2-dev-secrets"
     # default as staging
-    namespace = "default"
+    namespace = each.value
   }
 
   data = {
