@@ -115,7 +115,7 @@ releases:
     version: 6.8.22
     <<: *default_release
 
-  - name: elasticsearch-primary
+  - name: elasticsearch-honey
     namespace: default
     chart: elastic/elasticsearch
     version: 7.10.2
