@@ -119,7 +119,6 @@ releases:
     namespace: default
     chart: elastic/elasticsearch
     version: 7.10.2
-    installed: {{ ne .Environment.Name "production" | toYaml }}
     <<: *default_release
 
   - name: redis
