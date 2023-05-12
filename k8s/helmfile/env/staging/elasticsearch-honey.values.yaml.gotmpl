@@ -1,0 +1,26 @@
+labels:
+  sidecar.istio.io/inject: "true"
+
+podAnnotations:
+  traffic.sidecar.istio.io/includeInboundPorts: "*"
+  traffic.sidecar.istio.io/excludeOutboundPorts: "9300"
+  traffic.sidecar.istio.io/excludeInboundPorts: "9300"
+
+imageTag: "7.10.2-wmde.11"
+
+esJavaOpts: "-Xms2g -Xmx2g"
+
+resources:
+  requests:
+    cpu: "500m"
+    memory: "4Gi"
+  limits:
+    cpu: "2000m"
+    memory: "4Gi"
+
+volumeClaimTemplate:
+  accessModes: [ "ReadWriteOnce" ]
+  storageClassName: "premium-rwo"
+  resources:
+    requests:
+      storage: 10.1Gi

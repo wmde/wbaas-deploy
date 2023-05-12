@@ -115,6 +115,13 @@ releases:
     version: 6.8.22
     <<: *default_release
 
+  - name: elasticsearch-honey
+    namespace: default
+    chart: elastic/elasticsearch
+    version: 7.10.2
+    installed: {{ ne .Environment.Name "production" | toYaml }}
+    <<: *default_release
+
   - name: redis
     # This is in the default namespace, as the default ns implies staging?
     namespace: default
