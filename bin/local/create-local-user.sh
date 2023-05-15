@@ -29,12 +29,15 @@ echo "> Creating local invite code '${USER_CODE}' ..."
 kubectl --context ${KUBE_CONTEXT} exec deployments/api-queue -- php artisan wbs-invitation:create ${USER_CODE}
 
 echo "> Registering local user '${USER_MAIL}' ..."
-curl "http://api.wbaas.localhost/user/register" \ 
-    -X POST \ 
-    -H "Content-Type: application/json" \ 
-    --data-raw "{"email":"${USER_MAIL}","password":"${USER_PASS}","invite":"${USER_CODE}","recaptcha":"localdebug"}"
 
+curl 'http://api.wbaas.localhost/user/register' \
+    -X POST \
+    -H 'Content-Type: application/json' \
+    -H 'Accept: application/json' \
+    --data-raw "{\"email\":\"${USER_MAIL}\",\"password\":\"${USER_PASS}\",\"invite\":\"${USER_CODE}\",\"recaptcha\":\"localdebug\"}"
+
+echo
 echo "> Verifying local user '${USER_MAIL}' ..."
-kubectl --context ${KUBE_CONTEXT} exec deployments/api-app-backend -- \ 
-    php artisan tinker --execute \ 
-        "User::firstWhere(["email" => "${USER_MAIL}"])->update(["verified" => 1])"'
+kubectl --context ${KUBE_CONTEXT} exec deployments/api-app-backend -- \
+    php artisan tinker --execute \
+        "User::firstWhere(['email' => '${USER_MAIL}'])->update(['verified' => 1])"
