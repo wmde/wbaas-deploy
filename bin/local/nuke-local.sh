@@ -15,15 +15,19 @@ fi
 
 # This script should re-create your local minikube cluster without requiring any additional input (can take about ~20 minutes)
 
+WBAAS_DEPLOY_DIR=$(realpath $(dirname $0)/../../)
+
 echo "⚠️ ☠️  NUKING your local cluster in 10 seconds ... all data will be lost! (press ctrl+c NOW to cancel) ☠️ ⚠️"
 sleep 10
 
+cd "$WBAAS_DEPLOY_DIR"
 make minikube-delete
 make minikube-start
 
-cd tf/env/local/ && terraform apply -auto-approve # bad practice - you won't have a second chance to check for destructive actions
+cd "$WBAAS_DEPLOY_DIR/tf/env/local/"
+terraform apply -auto-approve # bad practice - you won't have a second chance to check for destructive actions
 
-cd ../../../k8s/helmfile/
+cd "$WBAAS_DEPLOY_DIR/k8s/helmfile/"
 # very bad practice - infinite `y` gets spammed to helmfile so we just blindly agree to any prompts
 set +e # disable exit on error for this one, see next step
 yes y | helmfile -e local apply 
