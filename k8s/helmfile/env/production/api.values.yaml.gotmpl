@@ -78,7 +78,6 @@ app:
     port: {{ .Values.services.redis.port }}
     db: {{ .Values.services.redis.databases.apiDb }}
     cachedb: {{ .Values.services.redis.databases.apiCacheDb }}
-    prefix: wikibase_production_api
   db:
     connection: mysql
     readHost: sql-mariadb-secondary.default.svc.cluster.local
