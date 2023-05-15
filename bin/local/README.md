@@ -18,10 +18,11 @@ It does this in three steps:
         - via a PHP snippet executed with artisan tinker (dirty)
 
 #### Default credentials
+You can use environment variables to overwrite the defaults:
 ```bash
-USER_CODE="create-local-user"
-USER_MAIL="jane.doe@wikimedia.de"
-USER_PASS="wikiwikiwiki"
+USER_CODE="${USER_CODE:-create-local-user}"
+USER_MAIL="${USER_MAIL:-jane.doe@wikimedia.de}"
+USER_PASS="${USER_PASS:-wikiwikiwiki}"
 ```
 
 ## Adding new scripts
