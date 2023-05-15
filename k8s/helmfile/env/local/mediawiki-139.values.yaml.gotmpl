@@ -12,6 +12,11 @@ mw:
       host: elasticsearch-master.default.svc.cluster.local
       port: 9200
       es6: true
+    secondary:
+      enabled: true
+      host: elasticsearch-honey-master.default.svc.cluster.local
+      port: 9200
+      es6: false
   mail:
     domain: examplemaildomain.localhost
   smtp:
