@@ -15,9 +15,9 @@ fi
 
 # This script should create and verify a user account on a local wbaas cluster with the credentials below. Do not use this in production! 
 
-USER_CODE="create-local-user"
-USER_MAIL="jane.doe@wikimedia.de"
-USER_PASS="wikiwikiwiki"
+USER_CODE="${USER_CODE:-create-local-user}"
+USER_MAIL="${USER_MAIL:-jane.doe@wikimedia.de}"
+USER_PASS="${USER_PASS:-wikiwikiwiki}"
 
 TEST_RESPONSE=$(curl -s http://api.wbaas.localhost/healthz)
 if [[ "${TEST_RESPONSE}" != "It's Alive" ]]; then
