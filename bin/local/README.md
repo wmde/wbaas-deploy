@@ -2,9 +2,6 @@
 The purpose of the scripts in this directory is to improve and speed up the workflow with the local minikube setup. They are mostly quick and dirty hacks but serve the purpose.
 
 ## Scripts
-### Usage
-The scripts assume you run them from the root of the `wbaas-deploy` repository.
-
 ### [`nuke-local.sh`](./nuke-local.sh)
 Deletes and tries to re-initiate the local minikube cluster in an unattended fashion (no user input/prompt approval required) by applying our terraform and helmfile configuration. It can take like ~20 minutes to finish. All data inside the local cluster will be lost. Please report if your cluster is not in a useable state after running this script, so we can improve it.
 
