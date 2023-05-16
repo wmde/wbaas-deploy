@@ -3,3 +3,16 @@ resource "kubernetes_namespace" "api-job-namespace" {
     name = "api-jobs"
   }
 }
+
+resource "kubernetes_resource_quota" "api-jobs-podquota" {
+  metadata {
+    name      = "api-jobs-podquota"
+    namespace = kubernetes_namespace.api-job-namespace.metadata[0].name
+  }
+  spec {
+    hard = {
+      pods = 2
+    }
+    scopes = ["BestEffort"]
+  }
+}
