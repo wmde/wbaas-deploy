@@ -1,8 +1,9 @@
 # wbaas-deploy
+Welcome to the Wikibase.Cloud deployment repository. This is used for the infrastructure as code defintions of Wikibase Cloud. It deploys a number of components from a number of differnet repositories. This includes repositories owned by both the WMDE and WBStack github organisation. 
 
 ## Overview
 
-This repository covers a production and development setup, held together with terraform, helmfile and the odd bash script.
+This repository covers a production (wikibase.cloud) and development (wikibase.dev) setup, held together with terraform, helmfile and the odd bash script.
 
 - `bin` - Contains helpful scripts for interacting with deployments
 - `charts` - Contains any custom [helm](https://helm.sh/) charts not taken from other repositories or [wbstack charts](https://github.com/wbstack/charts) / [deploy](https://github.com/wbstack/deploy)
