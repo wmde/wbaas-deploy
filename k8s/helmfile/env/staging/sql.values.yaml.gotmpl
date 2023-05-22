@@ -51,7 +51,8 @@ primary:
     pid-file=/opt/bitnami/mariadb/tmp/mysqld.pid
 
 secondary:
-  command: sleep
+  command:
+    - sleep
   replicaCount: 1
   resources:
     requests:
