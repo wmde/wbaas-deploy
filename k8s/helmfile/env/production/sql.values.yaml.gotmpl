@@ -6,12 +6,9 @@ auth:
 
 primary:
   resources:
-    requests:
-      cpu: 40m
-      memory: 4000Mi
     limits:
-      cpu: 750m
-      memory: 4300Mi
+      cpu: 2000m
+      memory: 8Gi
   persistence:
     enabled: true
     size: {{ .Values.services.sql.storageSize | quote }}
