@@ -18,7 +18,11 @@ resource "kubernetes_secret" "sql-secrets-passwords" {
     "mariadb-root-password"        = base64encode(random_password.sql-passwords["root"].result)
     "mariadb-replication-password" = base64encode(random_password.sql-passwords["replication"].result)
   }
+}
 
+moved {
+  from = kubernetes_secret.sql-secrets-passwords
+  to   = kubernetes_secret.sql-secrets-passwords["default"]
 }
 
 # Used by the init script on sql services for user and permissions setup
@@ -35,4 +39,9 @@ resource "kubernetes_secret" "sql-secrets-init-passwords" {
     "SQL_INIT_PASSWORD_BACKUPS" = base64encode(random_password.sql-passwords["backup-manager"].result)
   }
 
+}
+
+moved {
+  from = kubernetes_secret.sql-secrets-init-passwords
+  to   = kubernetes_secret.sql-secrets-init-passwords["default"]
 }

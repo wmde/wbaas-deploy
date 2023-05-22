@@ -40,3 +40,8 @@ resource "kubernetes_secret" "api-app-secrets" {
     "api-app-jwt-secret" = random_password.api-app-jwt-secret.result
   }
 }
+
+moved {
+  from = kubernetes_secret.api-app-secrets
+  to   = kubernetes_secret.api-app-secrets["default"]
+}

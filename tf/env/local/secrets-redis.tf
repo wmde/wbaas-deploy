@@ -18,3 +18,8 @@ resource "kubernetes_secret" "redis-password" {
   }
 
 }
+
+moved {
+  from = kubernetes_secret.redis-password
+  to   = kubernetes_secret.redis-password["default"]
+}
