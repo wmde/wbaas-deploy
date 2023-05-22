@@ -46,7 +46,11 @@ resource "kubernetes_secret" "sql-secrets-passwords" {
     "mariadb-root-password"        = base64encode(var.sql_password_root)
     "mariadb-replication-password" = base64encode(var.sql_password_replication)
   }
+}
 
+moved {
+  from = kubernetes_secret.sql-secrets-password
+  to   = kubernetes_secret.sql-secrets-password["default"]
 }
 
 # Used by the init script on sql services for user and permissions setup
@@ -66,6 +70,11 @@ resource "kubernetes_secret" "sql-secrets-init-passwords" {
 
 }
 
+moved {
+  from = kubernetes_secret.sql-secrets-init-password
+  to   = kubernetes_secret.sql-secrets-init-password["default"]
+}
+
 # Used by the sql service for initial setup
 resource "kubernetes_secret" "redis-password" {
   for_each = toset(var.mediawiki_secret_namespaces)
@@ -81,6 +90,11 @@ resource "kubernetes_secret" "redis-password" {
 
 }
 
+moved {
+  from = kubernetes_secret.redis-password
+  to   = kubernetes_secret.redis-password["default"]
+}
+
 resource "kubernetes_secret" "recaptcha-v3-secrets" {
   for_each = toset(var.mediawiki_secret_namespaces)
   metadata {
@@ -94,6 +108,11 @@ resource "kubernetes_secret" "recaptcha-v3-secrets" {
   }
 }
 
+moved {
+  from = kubernetes_secret.recaptcha-v3-secrets
+  to   = kubernetes_secret.recaptcha-v3-secrets["default"]
+}
+
 resource "kubernetes_secret" "recaptcha-v2-secrets" {
   for_each = toset(var.mediawiki_secret_namespaces)
   metadata {
@@ -105,6 +124,11 @@ resource "kubernetes_secret" "recaptcha-v2-secrets" {
     "site_key"   = var.recaptcha_v2_site_key,
     "secret_key" = var.recaptcha_v2_secret
   }
+}
+
+moved {
+  from = kubernetes_secret.recaptcha-v2-secrets
+  to   = kubernetes_secret.recaptcha-v2-secrets["default"]
 }
 
 resource "kubernetes_secret" "api-passport-keys" {
@@ -122,6 +146,11 @@ resource "kubernetes_secret" "api-passport-keys" {
 
 }
 
+moved {
+  from = kubernetes_secret.api-passport-keys
+  to   = kubernetes_secret.api-passport-keys["default"]
+}
+
 resource "kubernetes_secret" "api-app-secrets" {
   for_each = toset(var.mediawiki_secret_namespaces)
   metadata {
@@ -133,6 +162,11 @@ resource "kubernetes_secret" "api-app-secrets" {
     "api-app-key"        = var.api_app_key
     "api-app-jwt-secret" = var.api_app_jwt_secret
   }
+}
+
+moved {
+  from = kubernetes_secret.api-app-secrets
+  to   = kubernetes_secret.api-app-secrets["default"]
 }
 
 # Used by the wbaas-backup pod/job
