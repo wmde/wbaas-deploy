@@ -209,7 +209,7 @@ releases:
   - name: wbaas-backup
     namespace: default
     chart: wbstack/wbaas-backup
-    version: 0.0.5
+    version: 0.0.6
     <<: *default_release
 
   - name: kube-prometheus-stack
