@@ -7,10 +7,10 @@ auth:
 primary:
   resources:
     requests:
-      cpu: '2'
+      cpu: '4'
       memory: 8Gi
     limits:
-      cpu: '2'
+      cpu: '4'
       memory: 8Gi
   persistence:
     enabled: true
@@ -64,10 +64,10 @@ secondary:
   replicaCount: 1
   resources:
     requests:
-      cpu: '2'
+      cpu: '4'
       memory: 8Gi
     limits:
-      cpu: '2'
+      cpu: '4'
       memory: 8Gi
   readinessProbe:
     enabled: true
