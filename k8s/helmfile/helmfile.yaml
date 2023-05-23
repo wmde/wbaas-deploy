@@ -55,6 +55,8 @@ helmfiles:
     values:
       - foo: null
 
+---
+
 templates:
   default: &default_release
     missingFileHandler: Error

@@ -16,6 +16,8 @@ environments:
     values:
       - ./env/local/private.yaml
 
+---
+
 releases:
   - name: cert-manager
     namespace: cert-manager
