@@ -16,7 +16,7 @@ platform:
 queue:
   mw:
     db:
-      readHost: sql-mariadb-secondary.default.svc.cluster.local
+      readHost: sql-mariadb-primary.default.svc.cluster.local # FIXME: point back to replica when working
       writeHost: sql-mariadb-primary.default.svc.cluster.local
       # database: someDbName
       username: mediawiki-db-manager
@@ -80,7 +80,7 @@ app:
     cachedb: {{ .Values.services.redis.databases.apiCacheDb }}
   db:
     connection: mysql
-    readHost: sql-mariadb-secondary.default.svc.cluster.local
+    readHost: sql-mariadb-primary.default.svc.cluster.local # FIXME: point back to replica when working
     writeHost: sql-mariadb-primary.default.svc.cluster.local
     port: 3306
     name: {{ .Values.services.sql.api.db }}
