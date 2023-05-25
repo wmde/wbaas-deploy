@@ -28,12 +28,14 @@ cd "$WBAAS_DEPLOY_DIR/tf/env/local/"
 terraform apply -auto-approve # bad practice - you won't have a second chance to check for destructive actions
 
 cd "$WBAAS_DEPLOY_DIR/k8s/helmfile/"
+helmfile --environment local deps
+
 # very bad practice - infinite `y` gets spammed to helmfile so we just blindly agree to any prompts
 set +e # disable exit on error for this one, see next step
-yes y | helmfile -e local apply 
+yes y | helmfile --environment local apply
 set -e
 
-helmfile -e local sync # workaround in anticipation of apply not finishing up for some reason (happens sometimes on some machines)
+helmfile --environment local sync # workaround in anticipation of apply not finishing up for some reason (happens sometimes on some machines)
 
 echo
 echo "Finished re-initializing local cluster."
