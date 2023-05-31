@@ -14,10 +14,3 @@ resource "google_storage_bucket" "tf-state" {
       enabled = true
   }
 }
-
-# Give adam (or someone) initial access
-resource "google_storage_bucket_iam_member" "tf-state-iam-member" {
-  bucket = google_storage_bucket.tf-state.name
-  role = "roles/storage.objectAdmin"
-  member = "user:adam.shorland@wikimedia.de"
-}
