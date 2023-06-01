@@ -6,12 +6,12 @@ resource "tls_private_key" "api-passport" {
 
 resource "kubernetes_secret" "api-passport-keys" {
   metadata {
-    name      = "api-passport-keys"
+    name = "api-passport-keys"
     namespace = "default"
   }
 
   binary_data = {
-    "oauth-public.key"  = base64encode(tls_private_key.api-passport.public_key_pem)
+    "oauth-public.key" = base64encode(tls_private_key.api-passport.public_key_pem)
     "oauth-private.key" = base64encode(tls_private_key.api-passport.private_key_pem)
   }
 }
@@ -29,19 +29,13 @@ resource "random_password" "api-app-jwt-secret" {
 }
 
 resource "kubernetes_secret" "api-app-secrets" {
-  for_each = toset(["default", "api-jobs"])
   metadata {
-    name      = "api-app-secrets"
-    namespace = each.value
+    name = "api-app-secrets"
+    namespace = "default"
   }
 
   data = {
-    "api-app-key"        = random_password.api-app-key.result
+    "api-app-key" = random_password.api-app-key.result
     "api-app-jwt-secret" = random_password.api-app-jwt-secret.result
   }
-}
-
-moved {
-  from = kubernetes_secret.api-app-secrets
-  to   = kubernetes_secret.api-app-secrets["default"]
 }
