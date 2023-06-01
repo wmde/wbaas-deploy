@@ -49,8 +49,8 @@ resource "kubernetes_secret" "sql-secrets-passwords" {
 }
 
 moved {
-  from = kubernetes_secret.sql-secrets-password
-  to   = kubernetes_secret.sql-secrets-password["default"]
+  from = kubernetes_secret.sql-secrets-passwords
+  to   = kubernetes_secret.sql-secrets-passwords["default"]
 }
 
 # Used by the init script on sql services for user and permissions setup
@@ -71,8 +71,8 @@ resource "kubernetes_secret" "sql-secrets-init-passwords" {
 }
 
 moved {
-  from = kubernetes_secret.sql-secrets-init-password
-  to   = kubernetes_secret.sql-secrets-init-password["default"]
+  from = kubernetes_secret.sql-secrets-init-passwords
+  to   = kubernetes_secret.sql-secrets-init-passwords["default"]
 }
 
 # Used by the sql service for initial setup
