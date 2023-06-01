@@ -148,7 +148,7 @@ releases:
 
   - name: api
     chart: wbstack/api
-    version: {{ ternary "0.21.0" "0.20.2" (ne .Environment.Name "production") }}
+    version: 0.20.2
     namespace: default
     <<: *default_release
 
