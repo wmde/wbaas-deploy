@@ -1,6 +1,6 @@
 resource "kubernetes_secret" "smtp-credentials" {
   metadata {
-    name = "smtp-credentials"
+    name      = "smtp-credentials"
     namespace = "default"
   }
 
@@ -25,7 +25,7 @@ resource "kubernetes_secret" "api-serviceaccount" {
 # but will do for now...
 resource "kubernetes_secret" "clouddns-dns01-solver-svc-acct" {
   metadata {
-    name = "clouddns-dns01-solver-svc-acct"
+    name      = "clouddns-dns01-solver-svc-acct"
     namespace = "cert-manager"
   }
   data = {
@@ -35,103 +35,144 @@ resource "kubernetes_secret" "clouddns-dns01-solver-svc-acct" {
 
 # Used by the sql service for initial setup
 resource "kubernetes_secret" "sql-secrets-passwords" {
+  for_each = toset(var.mediawiki_secret_namespaces)
   metadata {
     name = "sql-secrets-passwords"
     # TODO default? or staging?
-    namespace = "default"
+    namespace = each.value
   }
 
   binary_data = {
-    "mariadb-root-password" = base64encode(var.sql_password_root)
+    "mariadb-root-password"        = base64encode(var.sql_password_root)
     "mariadb-replication-password" = base64encode(var.sql_password_replication)
   }
-  
+}
+
+moved {
+  from = kubernetes_secret.sql-secrets-password
+  to   = kubernetes_secret.sql-secrets-password["default"]
 }
 
 # Used by the init script on sql services for user and permissions setup
 resource "kubernetes_secret" "sql-secrets-init-passwords" {
+  for_each = toset(var.mediawiki_secret_namespaces)
   metadata {
     name = "sql-secrets-init-passwords"
     # TODO default? or staging?
-    namespace = "default"
+    namespace = each.value
   }
 
   binary_data = {
-    "SQL_INIT_PASSWORD_API" = base64encode(var.sql_password_api)
-    "SQL_INIT_PASSWORD_MW" = base64encode(var.sql_password_mediawiki_db_manager)
+    "SQL_INIT_PASSWORD_API"     = base64encode(var.sql_password_api)
+    "SQL_INIT_PASSWORD_MW"      = base64encode(var.sql_password_mediawiki_db_manager)
     "SQL_INIT_PASSWORD_BACKUPS" = base64encode(var.sql_password_backup_manager)
   }
-  
+
+}
+
+moved {
+  from = kubernetes_secret.sql-secrets-init-password
+  to   = kubernetes_secret.sql-secrets-init-password["default"]
 }
 
 # Used by the sql service for initial setup
 resource "kubernetes_secret" "redis-password" {
+  for_each = toset(var.mediawiki_secret_namespaces)
   metadata {
     name = "redis-password"
     # Default NS for staging?
-    namespace = "default"
+    namespace = each.value
   }
 
   data = {
     "password" = var.redis_password
   }
-  
+
+}
+
+moved {
+  from = kubernetes_secret.redis-password
+  to   = kubernetes_secret.redis-password["default"]
 }
 
 resource "kubernetes_secret" "recaptcha-v3-secrets" {
+  for_each = toset(var.mediawiki_secret_namespaces)
   metadata {
-    name = "recaptcha-v3-secrets"
-    namespace = "default"
+    name      = "recaptcha-v3-secrets"
+    namespace = each.value
   }
 
   data = {
-    "site_key" = var.recaptcha_v3_site_key,
+    "site_key"   = var.recaptcha_v3_site_key,
     "secret_key" = var.recaptcha_v3_secret
   }
 }
 
+moved {
+  from = kubernetes_secret.recaptcha-v3-secrets
+  to   = kubernetes_secret.recaptcha-v3-secrets["default"]
+}
+
 resource "kubernetes_secret" "recaptcha-v2-secrets" {
+  for_each = toset(var.mediawiki_secret_namespaces)
   metadata {
-    name = "recaptcha-v2-secrets"
-    namespace = "default"
+    name      = "recaptcha-v2-secrets"
+    namespace = each.value
   }
 
   data = {
-    "site_key" = var.recaptcha_v2_site_key,
+    "site_key"   = var.recaptcha_v2_site_key,
     "secret_key" = var.recaptcha_v2_secret
   }
 }
 
+moved {
+  from = kubernetes_secret.recaptcha-v2-secrets
+  to   = kubernetes_secret.recaptcha-v2-secrets["default"]
+}
+
 resource "kubernetes_secret" "api-passport-keys" {
+  for_each = toset(var.mediawiki_secret_namespaces)
   metadata {
     name = "api-passport-keys"
     # TODO assuming default is staging
-    namespace = "default"
+    namespace = each.value
   }
 
   binary_data = {
-    "oauth-public.key" = base64encode(var.api_passport_public_key)
+    "oauth-public.key"  = base64encode(var.api_passport_public_key)
     "oauth-private.key" = base64encode(var.api_passport_private_key)
   }
-  
+
+}
+
+moved {
+  from = kubernetes_secret.api-passport-keys
+  to   = kubernetes_secret.api-passport-keys["default"]
 }
 
 resource "kubernetes_secret" "api-app-secrets" {
+  for_each = toset(var.mediawiki_secret_namespaces)
   metadata {
-    name = "api-app-secrets"
-    namespace = "default"
+    name      = "api-app-secrets"
+    namespace = each.value
   }
 
   data = {
-    "api-app-key" = var.api_app_key
+    "api-app-key"        = var.api_app_key
     "api-app-jwt-secret" = var.api_app_jwt_secret
   }
+}
+
+moved {
+  from = kubernetes_secret.api-app-secrets
+  to   = kubernetes_secret.api-app-secrets["default"]
 }
 
 # Used by the wbaas-backup pod/job
 resource "kubernetes_secret" "backup-openssl-key" {
   metadata {
-    name = "backup-openssl-key"
+    name      = "backup-openssl-key"
     namespace = "default"
   }
 

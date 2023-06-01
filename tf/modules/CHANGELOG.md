@@ -1,3 +1,6 @@
+# tf-module-k8s-secrets-2
+- Allow consumers to export secrets used by `api` to multiple namespaces
+
 # tf-module-monitoring-17
 - Raise limit for ES metric absence alarm
 
