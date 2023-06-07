@@ -11,7 +11,7 @@ help:
 .PHONY: minikube-start
 minikube-start: # @HELP Start a local k8s cluster using minikube
 minikube-start:
-	minikube --profile minikube-wbaas start --kubernetes-version=1.22.15
+	minikube --profile minikube-wbaas start --kubernetes-version=1.25.8
 
 .PHONY: minikube-stop
 minikube-stop: # @HELP Stop the local minikube cluster
