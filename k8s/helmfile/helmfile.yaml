@@ -113,15 +113,8 @@ releases:
 
   - name: elasticsearch
     namespace: default
-    chart: elastic/elasticsearch
-    version: 6.8.22
-    <<: *default_release
-
-  - name: elasticsearch-honey
-    namespace: default
-    chart: elastic/elasticsearch
-    version: 7.10.2
-    installed: {{ ne .Environment.Name "production" | toYaml }}
+    chart: wbstack/elasticsearch
+    version: 6.8.22-wmde1
     <<: *default_release
 
   - name: redis
