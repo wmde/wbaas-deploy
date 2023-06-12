@@ -1,13 +1,19 @@
 resource "kubernetes_secret" "smtp-credentials" {
+  for_each = toset(var.mediawiki_secret_namespaces)
   metadata {
     name      = "smtp-credentials"
-    namespace = "default"
+    namespace = each.value
   }
 
   data = {
     "username" = var.smtp_username
     "password" = var.smtp_password
   }
+}
+
+moved {
+  from = kubernetes_secret.smtp-credentials
+  to   = kubernetes_secret.smtp-credentials["default"]
 }
 
 # Deprecated per https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/google_service_account_key#example-usage-save-key-in-kubernetes-secret---deprecated

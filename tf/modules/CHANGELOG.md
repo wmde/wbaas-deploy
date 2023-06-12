@@ -1,3 +1,6 @@
+# tf-module-k8s-secrets-3
+- Export missing `smtp-credentials` secret to all given namespaces
+
 # tf-module-k8s-secrets-2
 - Allow consumers to export secrets used by `api` to multiple namespaces
 
