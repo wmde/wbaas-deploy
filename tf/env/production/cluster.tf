@@ -8,6 +8,14 @@ resource "google_container_cluster" "wbaas-3" {
       enabled = true
     }
   }
+
+  maintenance_policy {
+    recurring_window {
+      start_time = "2023-06-14T08:00:00Z"
+      end_time   = "2023-06-14T14:00:00Z"
+      recurrence = "FREQ=WEEKLY;BYDAY=MO"
+    }
+  }
 }
 
 resource "google_container_node_pool" "wbaas-3_highmem-16" {
