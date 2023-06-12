@@ -1,5 +1,5 @@
 module "wbaas2-k8s-secrets" {
-  source = "git::ssh://git@github.com/wmde/wbaas-deploy//tf//modules/k8s-secrets?ref=tf-module-k8s-secrets-2"
+  source = "git::ssh://git@github.com/wmde/wbaas-deploy//tf//modules/k8s-secrets?ref=tf-module-k8s-secrets-3"
   providers = {
     kubernetes = kubernetes.wbaas-2
   }
