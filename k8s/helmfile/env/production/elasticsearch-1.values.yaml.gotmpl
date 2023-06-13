@@ -1,0 +1,39 @@
+version: 7.10.2
+image: wikibase/elasticsearch:7.10.2-wmde.11
+
+labels:
+  sidecar.istio.io/inject: "false"
+
+annotations:
+  eck.k8s.elastic.co/license: "basic"
+
+#resources:
+#  requests:
+#    cpu: "10"
+#    memory: "64Gi"
+#  limits:
+#    cpu: "10"
+#    memory: "64Gi"
+
+#volumeClaimTemplate:
+#  accessModes: [ "ReadWriteOnce" ]
+#  storageClassName: "premium-rwo"
+#  resources:
+#    requests:
+#      storage: 50Gi
+
+#nodeSets:
+#  - name: default
+#    count: 1
+#    config:
+#      # T309396
+#      xpack.ml.enabled: false
+#      xpack.monitoring.collection.enabled: false
+#      xpack.watcher.enabled: false
+#      xpack.security.enabled: false
+#      xpack.graph.enabled: false
+#      xpack.logstash.enabled: false
+#      xpack.ccr.enabled: false
+#
+#      # T309378
+#      action.auto_create_index: false

@@ -1,0 +1,23 @@
+labels:
+  sidecar.istio.io/inject: "true"
+
+annotations:
+  traffic.sidecar.istio.io/includeInboundPorts: "*"
+  traffic.sidecar.istio.io/excludeOutboundPorts: "9300"
+  traffic.sidecar.istio.io/excludeInboundPorts: "9300"
+  eck.k8s.elastic.co/license: "basic"
+
+#resources:
+#  requests:
+#    cpu: "500m"
+#    memory: "4Gi"
+#  limits:
+#    cpu: "2000m"
+#    memory: "4Gi"
+
+#volumeClaimTemplate:
+#  accessModes: [ "ReadWriteOnce" ]
+#  storageClassName: "premium-rwo"
+#  resources:
+#    requests:
+#      storage: 10.1Gi
