@@ -27,7 +27,7 @@ grafana:
       cpu: 100m
       memory: 128Mi
 
-# turning off all k8s component scraping as we are not
+# turning off most k8s component scraping as we are not
 # interested right now
 kubeScheduler:
   enabled: false
@@ -46,8 +46,6 @@ kubeEtcd:
 kubeProxy:
   enabled: false
 kubeStateMetrics:
-  enabled: false
+  enabled: true
 nodeExporter:
-  enabled: false
-kubeStateMetrics:
   enabled: false
