@@ -1,8 +1,11 @@
 image:
-  tag: "8x.12.0"
+  tag: "8x.12.1"
 
 ingress:
   tls: null
+
+replicaCount:
+  queue: 1
 
 platform:
   backendMwHost: mediawiki-139-app-backend.default.svc.cluster.local
