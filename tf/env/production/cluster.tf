@@ -13,8 +13,8 @@ resource "google_container_cluster" "wbaas-3" {
     recurring_window {
       # timezone: UTC
       # "Every monday between 04.00 and 16.00 Berlin time"
-      start_time = "2023-06-14T02:00:00Z"
-      end_time   = "2023-06-14T14:00:00Z"
+      start_time = "1970-01-01T02:00:00Z"
+      end_time   = "1970-01-01T14:00:00Z"
       recurrence = "FREQ=WEEKLY;BYDAY=MO"
     }
   }
