@@ -1,3 +1,6 @@
+# tf--module-monitoring-18
+- Change QueryService PV alert alignment from sum to none
+
 # tf-module-k8s-secrets-3
 - Export missing `smtp-credentials` secret to all given namespaces
 
