@@ -55,14 +55,4 @@ resource "google_container_node_pool" "wbaas-2_large" {
         max_surge       = 1
         max_unavailable = 0
     }
-
-    maintenance_policy {
-        recurring_window {
-            # timezone: UTC
-            # "Every monday between 04.00 and 16.00 Berlin time"
-            start_time = "1970-01-01T02:00:00Z"
-            end_time   = "1970-01-01T14:00:00Z"
-            recurrence = "FREQ=WEEKLY;BYDAY=MO"
-        }
-    }
 }
