@@ -13,6 +13,9 @@ if [[ "${KUBE_CONTEXT}" != "minikube-wbaas" ]]; then
 fi
 #####################################################################################
 
+[[ $(type -P "jq") ]] || { echo "error: 'jq' is not installed." 1>&2; exit 1; }
+[[ $(type -P "jo") ]] || { echo "error: 'jo' is not installed." 1>&2; exit 1; }
+
 # This script should create and verify a user account on a local wbaas cluster with the credentials below. Do not use this in production! 
 
 USER_CODE="${USER_CODE:-create-local-user}"
@@ -30,11 +33,12 @@ kubectl --context ${KUBE_CONTEXT} exec deployments/api-queue -- php artisan wbs-
 
 echo "> Registering local user '${USER_MAIL}' ..."
 
-curl 'http://api.wbaas.localhost/user/register' \
+CREATE_USER_DATA=$(jo email="${USER_MAIL}" password="${USER_PASS}" invite="${USER_CODE}" recaptcha="localdebug")
+curl -s 'http://api.wbaas.localhost/user/register' \
     -X POST \
     -H 'Content-Type: application/json' \
     -H 'Accept: application/json' \
-    --data-raw "{\"email\":\"${USER_MAIL}\",\"password\":\"${USER_PASS}\",\"invite\":\"${USER_CODE}\",\"recaptcha\":\"localdebug\"}"
+    --data-raw "${CREATE_USER_DATA}"
 
 echo
 echo "> Verifying local user '${USER_MAIL}' ..."
