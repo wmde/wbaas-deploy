@@ -1,4 +1,4 @@
-# tf--module-monitoring-18
+# tf-module-monitoring-18
 - Change QueryService PV alert alignment from sum to none
 
 # tf-module-k8s-secrets-3
