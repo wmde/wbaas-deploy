@@ -1,0 +1,58 @@
+image:
+  tag: "7.17.10-debian-11-r13"
+
+labels:
+  sidecar.istio.io/inject: "false"
+
+extraConfig:
+  # T309396
+  xpack.ml.enabled: false
+  xpack.monitoring.collection.enabled: false
+  xpack.watcher.enabled: false
+  xpack.security.enabled: false
+  xpack.graph.enabled: false
+  xpack.logstash.enabled: false
+  xpack.ccr.enabled: false
+
+  # T309378
+  action.auto_create_index: false
+
+master:
+  resources:
+    requests:
+      cpu: "2"
+      memory: "4Gi"
+    limits:
+      cpu: "2"
+      memory: "4Gi"
+  persistence:
+    enabled: true
+    accessModes: [ "ReadWriteOnce" ]
+    storageClass: "premium-rwo"
+    size: 5Gi
+
+data:
+  resources:
+    requests:
+      cpu: "10"
+      memory: "64Gi"
+    limits:
+      cpu: "10"
+      memory: "64Gi"
+  persistence:
+    enabled: true
+    accessModes: [ "ReadWriteOnce" ]
+    storageClass: "premium-rwo"
+    size: 50Gi
+
+coordinating:
+  resources:
+    requests:
+      cpu: "2"
+      memory: "4Gi"
+    limits:
+      cpu: "2"
+      memory: "4Gi"
+
+ingest:
+  enabled: false
