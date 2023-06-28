@@ -43,6 +43,9 @@ ingress:
   {{- end }}
 
 wbstack:
+  summarySignupRanges:
+    - 'PT24H'
+    - 'P30D'
   subdomainSuffix: {{ .Values.wbstack.subdomainSuffix }}
   uiurl: {{ .Values.wbstack.uiurl }}
   wikiDbProvisionVersion: mw1.39-wbs1

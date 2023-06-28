@@ -1,3 +1,20 @@
+variable "platform_summary_metrics" {
+  type        = set(string)
+  default = [
+    "active",
+    "total",
+    "deleted",
+    "inactive",
+    "empty",
+    "total_non_deleted_users",
+    "total_non_deleted_active_users",
+    "total_non_deleted_pages",
+    "total_non_deleted_edits",
+    "new_wikis_PT24H",
+    "new_wikis_P30D",
+  ]
+}
+
 resource "google_monitoring_dashboard" "platform-summary" {
   dashboard_json = jsonencode(
     {
