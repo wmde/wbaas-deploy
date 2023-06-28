@@ -1,5 +1,5 @@
 variable "platform_summary_metrics" {
-  type        = set(string)
+  type = set(string)
   default = [
     "active",
     "total",
@@ -18,37 +18,37 @@ variable "platform_summary_metrics" {
 resource "google_monitoring_dashboard" "platform-summary" {
   dashboard_json = jsonencode(
     {
-      displayName  = "Platform Summary (Staging)"
-      labels       = {
+      displayName = "Platform Summary (Staging)"
+      labels = {
         staging = ""
       }
       mosaicLayout = {
         columns = 12
-        tiles   = [
+        tiles = [
           {
             height = 4
             widget = {
-              title   = "wikis"
+              title = "wikis"
               xyChart = {
-                chartOptions      = {
+                chartOptions = {
                   mode = "COLOR"
                 }
-                dataSets          = [
+                dataSets = [
                   {
                     minAlignmentPeriod = "86400s"
                     plotType           = "LINE"
                     targetAxis         = "Y1"
-                    timeSeriesQuery    = {
+                    timeSeriesQuery = {
                       timeSeriesFilter = {
                         aggregation = {
                           alignmentPeriod    = "86400s"
                           crossSeriesReducer = "REDUCE_MEAN"
-                          groupByFields      = [
+                          groupByFields = [
                             "metric.label.\"cluster\"",
                           ]
-                          perSeriesAligner   = "ALIGN_DELTA"
+                          perSeriesAligner = "ALIGN_DELTA"
                         }
-                        filter      = "metric.type=\"logging.googleapis.com/user/wbaas-2-platform-summary-deleted\" resource.type=\"k8s_container\""
+                        filter = "metric.type=\"logging.googleapis.com/user/wbaas-2-platform-summary-deleted\" resource.type=\"k8s_container\""
                       }
                     }
                   },
@@ -56,14 +56,14 @@ resource "google_monitoring_dashboard" "platform-summary" {
                     minAlignmentPeriod = "86400s"
                     plotType           = "LINE"
                     targetAxis         = "Y1"
-                    timeSeriesQuery    = {
+                    timeSeriesQuery = {
                       timeSeriesFilter = {
                         aggregation = {
                           alignmentPeriod    = "86400s"
                           crossSeriesReducer = "REDUCE_MEAN"
                           perSeriesAligner   = "ALIGN_DELTA"
                         }
-                        filter      = "metric.type=\"logging.googleapis.com/user/wbaas-2-platform-summary-empty\" resource.type=\"k8s_container\""
+                        filter = "metric.type=\"logging.googleapis.com/user/wbaas-2-platform-summary-empty\" resource.type=\"k8s_container\""
                       }
                     }
                   },
@@ -71,14 +71,14 @@ resource "google_monitoring_dashboard" "platform-summary" {
                     minAlignmentPeriod = "86400s"
                     plotType           = "LINE"
                     targetAxis         = "Y1"
-                    timeSeriesQuery    = {
+                    timeSeriesQuery = {
                       timeSeriesFilter = {
                         aggregation = {
                           alignmentPeriod    = "86400s"
                           crossSeriesReducer = "REDUCE_MEAN"
                           perSeriesAligner   = "ALIGN_DELTA"
                         }
-                        filter      = "metric.type=\"logging.googleapis.com/user/wbaas-2-platform-summary-active\" resource.type=\"k8s_container\""
+                        filter = "metric.type=\"logging.googleapis.com/user/wbaas-2-platform-summary-active\" resource.type=\"k8s_container\""
                       }
                     }
                   },
@@ -86,14 +86,14 @@ resource "google_monitoring_dashboard" "platform-summary" {
                     minAlignmentPeriod = "86400s"
                     plotType           = "LINE"
                     targetAxis         = "Y1"
-                    timeSeriesQuery    = {
+                    timeSeriesQuery = {
                       timeSeriesFilter = {
                         aggregation = {
                           alignmentPeriod    = "86400s"
                           crossSeriesReducer = "REDUCE_MEAN"
                           perSeriesAligner   = "ALIGN_DELTA"
                         }
-                        filter      = "metric.type=\"logging.googleapis.com/user/wbaas-2-platform-summary-inactive\" resource.type=\"k8s_container\""
+                        filter = "metric.type=\"logging.googleapis.com/user/wbaas-2-platform-summary-inactive\" resource.type=\"k8s_container\""
                       }
                     }
                   },
@@ -101,27 +101,27 @@ resource "google_monitoring_dashboard" "platform-summary" {
                     minAlignmentPeriod = "86400s"
                     plotType           = "LINE"
                     targetAxis         = "Y1"
-                    timeSeriesQuery    = {
+                    timeSeriesQuery = {
                       timeSeriesFilter = {
                         aggregation = {
                           alignmentPeriod    = "86400s"
                           crossSeriesReducer = "REDUCE_MEAN"
                           perSeriesAligner   = "ALIGN_DELTA"
                         }
-                        filter      = "metric.type=\"logging.googleapis.com/user/wbaas-2-platform-summary-total\" resource.type=\"k8s_container\""
+                        filter = "metric.type=\"logging.googleapis.com/user/wbaas-2-platform-summary-total\" resource.type=\"k8s_container\""
                       }
                     }
                   },
                 ]
                 timeshiftDuration = "0s"
-                yAxis             = {
+                yAxis = {
                   label = "y1Axis"
                   scale = "LINEAR"
                 }
               }
             }
-            width  = 3
-            yPos   = 4
+            width = 3
+            yPos  = 4
           },
           {
             height = 2
@@ -134,13 +134,13 @@ resource "google_monitoring_dashboard" "platform-summary" {
                       crossSeriesReducer = "REDUCE_MEAN"
                       perSeriesAligner   = "ALIGN_DELTA"
                     }
-                    filter      = "metric.type=\"logging.googleapis.com/user/wbaas-2-platform-summary-total\" resource.type=\"k8s_container\""
+                    filter = "metric.type=\"logging.googleapis.com/user/wbaas-2-platform-summary-total\" resource.type=\"k8s_container\""
                   }
                 }
               }
-              title     = "total wikis"
+              title = "total wikis"
             }
-            width  = 2
+            width = 2
           },
           {
             height = 2
@@ -153,14 +153,14 @@ resource "google_monitoring_dashboard" "platform-summary" {
                       crossSeriesReducer = "REDUCE_MEAN"
                       perSeriesAligner   = "ALIGN_DELTA"
                     }
-                    filter      = "metric.type=\"logging.googleapis.com/user/wbaas-2-platform-summary-active\" resource.type=\"k8s_container\""
+                    filter = "metric.type=\"logging.googleapis.com/user/wbaas-2-platform-summary-active\" resource.type=\"k8s_container\""
                   }
                 }
               }
-              title     = "active wikis"
+              title = "active wikis"
             }
-            width  = 2
-            xPos   = 2
+            width = 2
+            xPos  = 2
           },
           {
             height = 2
@@ -173,14 +173,14 @@ resource "google_monitoring_dashboard" "platform-summary" {
                       crossSeriesReducer = "REDUCE_MEAN"
                       perSeriesAligner   = "ALIGN_DELTA"
                     }
-                    filter      = "metric.type=\"logging.googleapis.com/user/wbaas-2-platform-summary-deleted\" resource.type=\"k8s_container\""
+                    filter = "metric.type=\"logging.googleapis.com/user/wbaas-2-platform-summary-deleted\" resource.type=\"k8s_container\""
                   }
                 }
               }
-              title     = "deleted wikis"
+              title = "deleted wikis"
             }
-            width  = 2
-            xPos   = 6
+            width = 2
+            xPos  = 6
           },
           {
             height = 2
@@ -193,14 +193,14 @@ resource "google_monitoring_dashboard" "platform-summary" {
                       crossSeriesReducer = "REDUCE_MEAN"
                       perSeriesAligner   = "ALIGN_DELTA"
                     }
-                    filter      = "metric.type=\"logging.googleapis.com/user/wbaas-2-platform-summary-inactive\" resource.type=\"k8s_container\""
+                    filter = "metric.type=\"logging.googleapis.com/user/wbaas-2-platform-summary-inactive\" resource.type=\"k8s_container\""
                   }
                 }
               }
-              title     = "inactive wikis"
+              title = "inactive wikis"
             }
-            width  = 2
-            xPos   = 8
+            width = 2
+            xPos  = 8
           },
           {
             height = 2
@@ -213,19 +213,19 @@ resource "google_monitoring_dashboard" "platform-summary" {
                       crossSeriesReducer = "REDUCE_MEAN"
                       perSeriesAligner   = "ALIGN_DELTA"
                     }
-                    filter      = "metric.type=\"logging.googleapis.com/user/wbaas-2-platform-summary-empty\" resource.type=\"k8s_container\""
+                    filter = "metric.type=\"logging.googleapis.com/user/wbaas-2-platform-summary-empty\" resource.type=\"k8s_container\""
                   }
                 }
               }
-              title     = "empty wikis"
+              title = "empty wikis"
             }
-            width  = 2
-            xPos   = 4
+            width = 2
+            xPos  = 4
           },
           {
             height = 8
             widget = {
-              text  = {
+              text = {
                 content = <<-EOT
                                     ##### Active wikis
                                     Edits made in the last 90 days
@@ -243,8 +243,8 @@ resource "google_monitoring_dashboard" "platform-summary" {
               }
               title = "Legend"
             }
-            width  = 2
-            xPos   = 10
+            width = 2
+            xPos  = 10
           },
           {
             height = 2
@@ -257,14 +257,14 @@ resource "google_monitoring_dashboard" "platform-summary" {
                       crossSeriesReducer = "REDUCE_MEAN"
                       perSeriesAligner   = "ALIGN_DELTA"
                     }
-                    filter      = "metric.type=\"logging.googleapis.com/user/wbaas-2-platform-summary-total_non_deleted_pages\" resource.type=\"k8s_container\""
+                    filter = "metric.type=\"logging.googleapis.com/user/wbaas-2-platform-summary-total_non_deleted_pages\" resource.type=\"k8s_container\""
                   }
                 }
               }
-              title     = "total pages"
+              title = "total pages"
             }
-            width  = 2
-            yPos   = 2
+            width = 2
+            yPos  = 2
           },
           {
             height = 2
@@ -277,15 +277,15 @@ resource "google_monitoring_dashboard" "platform-summary" {
                       crossSeriesReducer = "REDUCE_MEAN"
                       perSeriesAligner   = "ALIGN_DELTA"
                     }
-                    filter      = "metric.type=\"logging.googleapis.com/user/wbaas-2-platform-summary-total_non_deleted_active_users\" resource.type=\"k8s_container\""
+                    filter = "metric.type=\"logging.googleapis.com/user/wbaas-2-platform-summary-total_non_deleted_active_users\" resource.type=\"k8s_container\""
                   }
                 }
               }
-              title     = "total active editors"
+              title = "total active editors"
             }
-            width  = 2
-            xPos   = 6
-            yPos   = 2
+            width = 2
+            xPos  = 6
+            yPos  = 2
           },
           {
             height = 2
@@ -298,15 +298,15 @@ resource "google_monitoring_dashboard" "platform-summary" {
                       crossSeriesReducer = "REDUCE_MEAN"
                       perSeriesAligner   = "ALIGN_DELTA"
                     }
-                    filter      = "metric.type=\"logging.googleapis.com/user/wbaas-2-platform-summary-total_non_deleted_users\" resource.type=\"k8s_container\""
+                    filter = "metric.type=\"logging.googleapis.com/user/wbaas-2-platform-summary-total_non_deleted_users\" resource.type=\"k8s_container\""
                   }
                 }
               }
-              title     = "total editors"
+              title = "total editors"
             }
-            width  = 2
-            xPos   = 8
-            yPos   = 2
+            width = 2
+            xPos  = 8
+            yPos  = 2
           },
           {
             height = 2
@@ -319,37 +319,37 @@ resource "google_monitoring_dashboard" "platform-summary" {
                       crossSeriesReducer = "REDUCE_MEAN"
                       perSeriesAligner   = "ALIGN_DELTA"
                     }
-                    filter      = "metric.type=\"logging.googleapis.com/user/wbaas-2-platform-summary-total_non_deleted_edits\" resource.type=\"k8s_container\""
+                    filter = "metric.type=\"logging.googleapis.com/user/wbaas-2-platform-summary-total_non_deleted_edits\" resource.type=\"k8s_container\""
                   }
                 }
               }
-              title     = "total edits"
+              title = "total edits"
             }
-            width  = 2
-            xPos   = 2
-            yPos   = 2
+            width = 2
+            xPos  = 2
+            yPos  = 2
           },
           {
             height = 4
             widget = {
-              title   = "editors"
+              title = "editors"
               xyChart = {
-                chartOptions      = {
+                chartOptions = {
                   mode = "COLOR"
                 }
-                dataSets          = [
+                dataSets = [
                   {
                     minAlignmentPeriod = "86400s"
                     plotType           = "LINE"
                     targetAxis         = "Y1"
-                    timeSeriesQuery    = {
+                    timeSeriesQuery = {
                       timeSeriesFilter = {
                         aggregation = {
                           alignmentPeriod    = "86400s"
                           crossSeriesReducer = "REDUCE_MEAN"
                           perSeriesAligner   = "ALIGN_DELTA"
                         }
-                        filter      = "metric.type=\"logging.googleapis.com/user/wbaas-2-platform-summary-total_non_deleted_active_users\""
+                        filter = "metric.type=\"logging.googleapis.com/user/wbaas-2-platform-summary-total_non_deleted_active_users\""
                       }
                     }
                   },
@@ -357,50 +357,50 @@ resource "google_monitoring_dashboard" "platform-summary" {
                     minAlignmentPeriod = "86400s"
                     plotType           = "LINE"
                     targetAxis         = "Y1"
-                    timeSeriesQuery    = {
+                    timeSeriesQuery = {
                       timeSeriesFilter = {
                         aggregation = {
                           alignmentPeriod    = "86400s"
                           crossSeriesReducer = "REDUCE_MEAN"
                           perSeriesAligner   = "ALIGN_DELTA"
                         }
-                        filter      = "metric.type=\"logging.googleapis.com/user/wbaas-2-platform-summary-total_non_deleted_users\""
+                        filter = "metric.type=\"logging.googleapis.com/user/wbaas-2-platform-summary-total_non_deleted_users\""
                       }
                     }
                   },
                 ]
                 timeshiftDuration = "0s"
-                yAxis             = {
+                yAxis = {
                   label = "y1Axis"
                   scale = "LINEAR"
                 }
               }
             }
-            width  = 3
-            xPos   = 3
-            yPos   = 4
+            width = 3
+            xPos  = 3
+            yPos  = 4
           },
           {
             height = 4
             widget = {
-              title   = "edits & pages"
+              title = "edits & pages"
               xyChart = {
-                chartOptions      = {
+                chartOptions = {
                   mode = "COLOR"
                 }
-                dataSets          = [
+                dataSets = [
                   {
                     minAlignmentPeriod = "86400s"
                     plotType           = "LINE"
                     targetAxis         = "Y1"
-                    timeSeriesQuery    = {
+                    timeSeriesQuery = {
                       timeSeriesFilter = {
                         aggregation = {
                           alignmentPeriod    = "86400s"
                           crossSeriesReducer = "REDUCE_MEAN"
                           perSeriesAligner   = "ALIGN_DELTA"
                         }
-                        filter      = "metric.type=\"logging.googleapis.com/user/wbaas-2-platform-summary-total_non_deleted_edits\""
+                        filter = "metric.type=\"logging.googleapis.com/user/wbaas-2-platform-summary-total_non_deleted_edits\""
                       }
                     }
                   },
@@ -408,35 +408,56 @@ resource "google_monitoring_dashboard" "platform-summary" {
                     minAlignmentPeriod = "86400s"
                     plotType           = "LINE"
                     targetAxis         = "Y1"
-                    timeSeriesQuery    = {
+                    timeSeriesQuery = {
                       timeSeriesFilter = {
                         aggregation = {
                           alignmentPeriod    = "86400s"
                           crossSeriesReducer = "REDUCE_MEAN"
                           perSeriesAligner   = "ALIGN_DELTA"
                         }
-                        filter      = "metric.type=\"logging.googleapis.com/user/wbaas-2-platform-summary-total_non_deleted_pages\""
+                        filter = "metric.type=\"logging.googleapis.com/user/wbaas-2-platform-summary-total_non_deleted_pages\""
                       }
                     }
                   },
                 ]
                 timeshiftDuration = "0s"
-                yAxis             = {
+                yAxis = {
                   label = "y1Axis"
                   scale = "LINEAR"
                 }
               }
             }
-            width  = 4
-            xPos   = 6
-            yPos   = 4
+            width = 4
+            xPos  = 6
+            yPos  = 4
+          },
+          {
+            height = 2
+            widget = {
+              scorecard = {
+                timeSeriesQuery = {
+                  timeSeriesFilter = {
+                    aggregation = {
+                      alignmentPeriod    = "60s"
+                      crossSeriesReducer = "REDUCE_MEAN"
+                      perSeriesAligner   = "ALIGN_MEAN"
+                    }
+                    filter = "metric.type=\"logging.googleapis.com/user/wbaas-2-platform-summary-new_wikis_PT24H\""
+                  }
+                }
+              }
+              title = "signup rate"
+            }
+            width = 2
+            xPos  = 4
+            yPos  = 2
           },
         ]
       }
-      name         = "projects/658442145969/dashboards/0936efa3-16b4-4a05-824a-08baf0268787"
+      name = "projects/658442145969/dashboards/0936efa3-16b4-4a05-824a-08baf0268787"
     }
   )
-  project        = "wikibase-cloud"
+  project = "wikibase-cloud"
 
   timeouts {}
 }
