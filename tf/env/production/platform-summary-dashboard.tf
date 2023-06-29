@@ -10,8 +10,10 @@ variable "platform_summary_metrics" {
     "total_non_deleted_active_users",
     "total_non_deleted_pages",
     "total_non_deleted_edits",
-    "new_wikis_PT24H",
-    "new_wikis_P30D",
+    "wikis_created_PT24H",
+    "wikis_created_P30D",
+    "users_created_PT24H",
+    "users_created_P30D",
   ]
 }
 
@@ -442,11 +444,11 @@ resource "google_monitoring_dashboard" "platform-summary" {
                       crossSeriesReducer = "REDUCE_MEAN"
                       perSeriesAligner   = "ALIGN_MEAN"
                     }
-                    filter = "metric.type=\"logging.googleapis.com/user/wbaas-3-platform-summary-new_wikis_PT24H\""
+                    filter = "metric.type=\"logging.googleapis.com/user/wbaas-3-platform-summary-wikis_created_PT24H\""
                   }
                 }
               }
-              title = "signup rate"
+              title = "wikis created in the last 24h"
             }
             width = 2
             xPos  = 4
