@@ -444,11 +444,11 @@ resource "google_monitoring_dashboard" "platform-summary" {
                       crossSeriesReducer = "REDUCE_MEAN"
                       perSeriesAligner   = "ALIGN_MEAN"
                     }
-                    filter = "metric.type=\"logging.googleapis.com/user/wbaas-3-platform-summary-wikis_created_PT24H\""
+                    filter = "metric.type=\"logging.googleapis.com/user/wbaas-3-platform-summary-users_created_PT24H\""
                   }
                 }
               }
-              title = "wikis created in the last 24h"
+              title = "sign up rate"
             }
             width = 2
             xPos  = 4
