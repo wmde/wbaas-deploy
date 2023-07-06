@@ -113,8 +113,8 @@ releases:
 
   - name: elasticsearch
     namespace: default
-    chart: wbstack/elasticsearch
-    version: 6.8.22-wmde1
+    chart: wbstack/elasticsearch-legacy
+    version: 6.8.22-wmde2
     <<: *default_release
 
   - name: elasticsearch-1
