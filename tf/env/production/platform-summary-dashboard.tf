@@ -426,7 +426,7 @@ resource "google_monitoring_dashboard" "platform-summary" {
                     aggregation = {
                       alignmentPeriod    = "86400s"
                       crossSeriesReducer = "REDUCE_MEAN"
-                      perSeriesAligner   = "ALIGN_MEAN"
+                      perSeriesAligner   = "ALIGN_DELTA"
                     }
                     filter = "metric.type=\"logging.googleapis.com/user/wbaas-3-platform-summary-users_created_PT24H\""
                   }
