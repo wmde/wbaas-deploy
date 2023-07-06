@@ -9,11 +9,11 @@ annotations:
 master:
   resources:
     requests:
-      cpu: "1"
-      memory: "1Gi"
+      cpu: "200m"
+      memory: "512Mi"
     limits:
-      cpu: "1"
-      memory: "1Gi"
+      cpu: "300m"
+      memory: "750Mi"
   persistence:
     enabled: true
     accessModes: [ "ReadWriteOnce" ]
@@ -23,11 +23,11 @@ master:
 data:
   resources:
     requests:
-      cpu: "2"
-      memory: "4Gi"
+      cpu: "200m"
+      memory: "512Mi"
     limits:
-      cpu: "2"
-      memory: "4Gi"
+      cpu: "300m"
+      memory: "750Mi"
   persistence:
     enabled: true
     accessModes: [ "ReadWriteOnce" ]
@@ -37,8 +37,8 @@ data:
 coordinating:
   resources:
     requests:
-      cpu: "1"
-      memory: "1Gi"
+      cpu: "200m"
+      memory: "256Mi"
     limits:
-      cpu: "1"
-      memory: "1Gi"
+      cpu: "250m"
+      memory: "512Mi"
