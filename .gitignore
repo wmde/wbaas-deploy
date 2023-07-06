@@ -1,0 +1,2 @@
+!k8s/helmfile/cert-manager.lock
+!k8s/helmfile/helmfile.lock
