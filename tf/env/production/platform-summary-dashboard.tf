@@ -221,6 +221,9 @@ resource "google_monitoring_dashboard" "platform-summary" {
 
                                     ##### Active editors
                                     performed an action in the last 30 days
+
+                                    ##### Sign up rate
+                                    number of users created in the last 24 hours
                                 EOT
                 format  = "MARKDOWN"
               }
@@ -421,7 +424,7 @@ resource "google_monitoring_dashboard" "platform-summary" {
                 timeSeriesQuery = {
                   timeSeriesFilter = {
                     aggregation = {
-                      alignmentPeriod    = "60s"
+                      alignmentPeriod    = "86400s"
                       crossSeriesReducer = "REDUCE_MEAN"
                       perSeriesAligner   = "ALIGN_MEAN"
                     }
