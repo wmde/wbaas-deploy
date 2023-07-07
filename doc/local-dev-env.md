@@ -9,7 +9,7 @@ You need the following things installed on your machine:
 * [helm](https://helm.sh/docs/intro/install/)
   * diff plugin `helm plugin install https://github.com/databus23/helm-diff`
   * git plugin `helm plugin install https://github.com/aslafy-z/helm-git`
-* [helmfile](https://github.com/roboll/helmfile#installation)
+* [helmfile](https://github.com/helmfile/helmfile#installation)
 * [kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl-linux/)
 * (optional) [yamllint](https://github.com/adrienverge/yamllint#installation)
 
