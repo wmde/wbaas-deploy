@@ -1,5 +1,5 @@
 image:
-  tag: 8x.14.0
+  tag: 8x.15.0
 
 replicaCount:
   web: 1
@@ -43,6 +43,8 @@ ingress:
   {{- end }}
 
 wbstack:
+  signupThrottlingRange: 'PT24H'
+  signupThrottlingLimit: 10
   summaryCreationRateRanges:
     - 'PT24H'
     - 'P30D'
