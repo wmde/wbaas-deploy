@@ -121,7 +121,6 @@ releases:
     namespace: default
     chart: bitnami/elasticsearch
     version: 19.10.2
-    installed: {{ ne .Environment.Name "production" | toYaml }}
     <<: *default_release
 
   - name: redis
