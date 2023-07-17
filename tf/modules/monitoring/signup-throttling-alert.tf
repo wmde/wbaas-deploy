@@ -3,7 +3,7 @@ resource "google_logging_metric" "api_signup_throttling_applied" {
   description = "A log based metric that detects when api was throttling sign up attempts"
 
   # Filter for the secondary pod and look for readiness probe failures
-  filter = "resource.labels.cluster_name=\"${var.cluster_name}\" AND resource.labels.pod_name:\"api-app-\" AND resource.type=\"k8s_pod\" AND severity=WARNING AND jsonPayload.message:\"WARN_SIGNUP_THROTTLED\""
+  filter = "resource.labels.cluster_name=\"${var.cluster_name}\" AND resource.labels.container_name:\"api-\" AND severity=ERROR AND resource.type=\"k8s_container\" AND textPayload:\"WARN_SIGNUP_THROTTLED\""
 
   metric_descriptor {
     metric_kind = "DELTA"
