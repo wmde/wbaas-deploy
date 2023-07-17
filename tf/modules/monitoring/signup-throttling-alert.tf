@@ -23,7 +23,7 @@ resource "google_monitoring_alert_policy" "alert_api_signup_throttling_applied" 
   conditions {
     display_name = "(${var.cluster_name}): Signup was throttled"
     condition_threshold {
-      filter     = "metric.type=\"logging.googleapis.com/user/${google_logging_metric.api_signup_throttling_applied.name}\" AND resource.type=\"k8s_pod\""
+      filter     = "metric.type=\"logging.googleapis.com/user/${google_logging_metric.api_signup_throttling_applied.name}\" AND resource.type=\"k8s_container\""
       duration   = "0s"
       comparison = "COMPARISON_GT"
       aggregations {
