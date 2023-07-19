@@ -161,7 +161,7 @@ releases:
   - name: mediawiki-139
     namespace: default
     chart: wbstack/mediawiki
-    version: 0.10.6
+    version: 0.11.0
     <<: *default_release
 
   - name: queryservice-ui
