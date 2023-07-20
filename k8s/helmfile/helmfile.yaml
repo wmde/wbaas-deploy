@@ -223,7 +223,7 @@ releases:
   - name: prometheus-elasticsearch-exporter
     namespace: monitoring
     chart: prometheus-community/prometheus-elasticsearch-exporter
-    version: 5.0.0
+    version: 5.2.0
     <<: *default_release
 
   - name: istio-service-mesh
