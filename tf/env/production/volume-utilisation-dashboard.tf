@@ -10,9 +10,6 @@ resource "google_monitoring_dashboard" "volume-utilisation" {
                         widget = {
                             title   = "Production QueryService"
                             xyChart = {
-                                chartOptions      = {
-                                    mode = "COLOR"
-                                }
                                 dataSets          = [
                                     {
                                         minAlignmentPeriod = "300s"
@@ -44,9 +41,6 @@ resource "google_monitoring_dashboard" "volume-utilisation" {
                         widget = {
                             title   = "production sql"
                             xyChart = {
-                                chartOptions      = {
-                                    mode = "COLOR"
-                                }
                                 dataSets          = [
                                     {
                                         minAlignmentPeriod = "300s"
@@ -78,9 +72,6 @@ resource "google_monitoring_dashboard" "volume-utilisation" {
                         widget = {
                             title   = "Production Elasticsearch"
                             xyChart = {
-                                chartOptions      = {
-                                    mode = "COLOR"
-                                }
                                 dataSets          = [
                                     {
                                         minAlignmentPeriod = "300s"
@@ -112,9 +103,6 @@ resource "google_monitoring_dashboard" "volume-utilisation" {
                         widget = {
                             title   = "sql-logic-backup scratch-disk space"
                             xyChart = {
-                                chartOptions      = {
-                                    mode = "COLOR"
-                                }
                                 dataSets          = [
                                     {
                                         legendTemplate  = "Used"

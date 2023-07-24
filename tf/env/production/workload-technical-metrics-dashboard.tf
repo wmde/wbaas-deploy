@@ -13,9 +13,6 @@ resource "google_monitoring_dashboard" "workload-technical-metrics" {
                         widget = {
                             title   = "Mediawiki - Max CPU Limit Utilization"
                             xyChart = {
-                                chartOptions      = {
-                                    mode = "COLOR"
-                                }
                                 dataSets          = [
                                     {
                                         minAlignmentPeriod = "60s"
@@ -51,9 +48,6 @@ resource "google_monitoring_dashboard" "workload-technical-metrics" {
                         widget = {
                             title   = "API - Memory Limit Utilization "
                             xyChart = {
-                                chartOptions      = {
-                                    mode = "COLOR"
-                                }
                                 dataSets          = [
                                     {
                                         minAlignmentPeriod = "60s"
@@ -90,9 +84,6 @@ resource "google_monitoring_dashboard" "workload-technical-metrics" {
                         widget = {
                             title   = "SQL/Redis/ElasticSearch/Queryservice - Max Memory Limit Utilization "
                             xyChart = {
-                                chartOptions      = {
-                                    mode = "COLOR"
-                                }
                                 dataSets          = [
                                     {
                                         minAlignmentPeriod = "60s"
@@ -132,9 +123,6 @@ resource "google_monitoring_dashboard" "workload-technical-metrics" {
                         widget = {
                             title   = "SQL/Redis/ElasticSearch/Queryservice - Max Cpu Limit Utilization "
                             xyChart = {
-                                chartOptions      = {
-                                    mode = "COLOR"
-                                }
                                 dataSets          = [
                                     {
                                         minAlignmentPeriod = "60s"
@@ -170,9 +158,6 @@ resource "google_monitoring_dashboard" "workload-technical-metrics" {
                         widget = {
                             title   = "logging/user/production-site-request-count (filtered) [SUM]"
                             xyChart = {
-                                chartOptions      = {
-                                    mode = "COLOR"
-                                }
                                 dataSets          = [
                                     {
                                         minAlignmentPeriod = "60s"
@@ -207,9 +192,6 @@ resource "google_monitoring_dashboard" "workload-technical-metrics" {
                         widget = {
                             title   = "Mediawiki - Max Memory Limit Utilization"
                             xyChart = {
-                                chartOptions      = {
-                                    mode = "COLOR"
-                                }
                                 dataSets          = [
                                     {
                                         minAlignmentPeriod = "60s"
@@ -246,9 +228,6 @@ resource "google_monitoring_dashboard" "workload-technical-metrics" {
                         widget = {
                             title   = "API - Max CPU Limit Utilization "
                             xyChart = {
-                                chartOptions      = {
-                                    mode = "COLOR"
-                                }
                                 dataSets          = [
                                     {
                                         minAlignmentPeriod = "60s"

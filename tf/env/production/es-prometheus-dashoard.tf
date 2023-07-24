@@ -191,9 +191,6 @@ resource "google_monitoring_dashboard" "elasticsearch-prometheus" {
                         widget = {
                             title   = "OS Load Average over 15min"
                             xyChart = {
-                                chartOptions      = {
-                                    mode = "COLOR"
-                                }
                                 dataSets          = [
                                     {
                                         plotType        = "LINE"
@@ -217,9 +214,6 @@ resource "google_monitoring_dashboard" "elasticsearch-prometheus" {
                         widget = {
                             title   = "CPU Usage % "
                             xyChart = {
-                                chartOptions      = {
-                                    mode = "COLOR"
-                                }
                                 dataSets          = [
                                     {
                                         plotType        = "LINE"
@@ -244,9 +238,6 @@ resource "google_monitoring_dashboard" "elasticsearch-prometheus" {
                         widget = {
                             title   = "JVM Memory Pool Peak Used Bytes"
                             xyChart = {
-                                chartOptions      = {
-                                    mode = "COLOR"
-                                }
                                 dataSets          = [
                                     {
                                         plotType        = "LINE"
@@ -278,9 +269,6 @@ resource "google_monitoring_dashboard" "elasticsearch-prometheus" {
                         widget = {
                             title   = "Disk Usage %"
                             xyChart = {
-                                chartOptions      = {
-                                    mode = "COLOR"
-                                }
                                 dataSets          = [
                                     {
                                         plotType        = "LINE"
@@ -304,9 +292,6 @@ resource "google_monitoring_dashboard" "elasticsearch-prometheus" {
                         widget = {
                             title   = "Network Usage"
                             xyChart = {
-                                chartOptions      = {
-                                    mode = "COLOR"
-                                }
                                 dataSets          = [
                                     {
                                         plotType        = "LINE"
@@ -338,9 +323,6 @@ resource "google_monitoring_dashboard" "elasticsearch-prometheus" {
                         widget = {
                             title   = "Thread Pool Operations Rejected"
                             xyChart = {
-                                chartOptions      = {
-                                    mode = "COLOR"
-                                }
                                 dataSets          = [
                                     {
                                         plotType        = "LINE"

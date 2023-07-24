@@ -13,9 +13,6 @@ resource "google_monitoring_dashboard" "workload-technical-metrics" {
             widget = {
               title   = "logging/user/staging-site-request-count (filtered) by label.domain [SUM]"
               xyChart = {
-                chartOptions      = {
-                  mode = "COLOR"
-                }
                 dataSets          = [
                   {
                     minAlignmentPeriod = "60s"
@@ -54,9 +51,6 @@ resource "google_monitoring_dashboard" "workload-technical-metrics" {
             widget = {
               title   = "Mediawiki - Max CPU limit utilization "
               xyChart = {
-                chartOptions      = {
-                  mode = "COLOR"
-                }
                 dataSets          = [
                   {
                     minAlignmentPeriod = "60s"
@@ -93,9 +87,6 @@ resource "google_monitoring_dashboard" "workload-technical-metrics" {
             widget = {
               title   = "Mediawiki - Max Memory limit utilization "
               xyChart = {
-                chartOptions      = {
-                  mode = "COLOR"
-                }
                 dataSets          = [
                   {
                     minAlignmentPeriod = "60s"
@@ -131,9 +122,6 @@ resource "google_monitoring_dashboard" "workload-technical-metrics" {
             widget = {
               title   = "API - Max CPU limit utilization"
               xyChart = {
-                chartOptions      = {
-                  mode = "COLOR"
-                }
                 dataSets          = [
                   {
                     minAlignmentPeriod = "60s"
@@ -170,9 +158,6 @@ resource "google_monitoring_dashboard" "workload-technical-metrics" {
             widget = {
               title   = "APi - Memory limit utilization "
               xyChart = {
-                chartOptions      = {
-                  mode = "COLOR"
-                }
                 dataSets          = [
                   {
                     minAlignmentPeriod = "60s"
@@ -208,9 +193,6 @@ resource "google_monitoring_dashboard" "workload-technical-metrics" {
             widget = {
               title   = "SQL/Redis/ElasticSearch/Queryservice - Max CPU limit utilization "
               xyChart = {
-                chartOptions      = {
-                  mode = "COLOR"
-                }
                 dataSets          = [
                   {
                     minAlignmentPeriod = "60s"
@@ -247,9 +229,6 @@ resource "google_monitoring_dashboard" "workload-technical-metrics" {
             widget = {
               title   = "SQL/Redis/ElasticSearch/Queryservice - Max Memory Limit Utilization "
               xyChart = {
-                chartOptions      = {
-                  mode = "COLOR"
-                }
                 dataSets          = [
                   {
                     minAlignmentPeriod = "60s"

@@ -13,9 +13,6 @@ resource "google_monitoring_dashboard" "platform-summary" {
             widget = {
               title = "wikis"
               xyChart = {
-                chartOptions = {
-                  mode = "COLOR"
-                }
                 dataSets = [
                   {
                     minAlignmentPeriod = "86400s"
@@ -320,9 +317,6 @@ resource "google_monitoring_dashboard" "platform-summary" {
             widget = {
               title = "editors"
               xyChart = {
-                chartOptions = {
-                  mode = "COLOR"
-                }
                 dataSets = [
                   {
                     minAlignmentPeriod = "86400s"
@@ -371,9 +365,6 @@ resource "google_monitoring_dashboard" "platform-summary" {
             widget = {
               title = "edits & pages"
               xyChart = {
-                chartOptions = {
-                  mode = "COLOR"
-                }
                 dataSets = [
                   {
                     minAlignmentPeriod = "86400s"
