@@ -10,9 +10,6 @@ resource "google_monitoring_dashboard" "incoming-traffic" {
                         widget = {
                             title   = "Incoming Requests"
                             xyChart = {
-                                chartOptions      = {
-                                    mode = "COLOR"
-                                }
                                 dataSets          = [
                                     {
                                         minAlignmentPeriod = "60s"
@@ -43,9 +40,6 @@ resource "google_monitoring_dashboard" "incoming-traffic" {
                         widget = {
                             title   = "Incoming requests by domain"
                             xyChart = {
-                                chartOptions      = {
-                                    mode = "COLOR"
-                                }
                                 dataSets          = [
                                     {
                                         minAlignmentPeriod = "60s"
@@ -81,9 +75,6 @@ resource "google_monitoring_dashboard" "incoming-traffic" {
                         widget = {
                             title   = "Incoming requests by httpMethod"
                             xyChart = {
-                                chartOptions      = {
-                                    mode = "COLOR"
-                                }
                                 dataSets          = [
                                     {
                                         minAlignmentPeriod = "60s"
@@ -119,9 +110,6 @@ resource "google_monitoring_dashboard" "incoming-traffic" {
                         widget = {
                             title   = "internal server error (5XX) response count"
                             xyChart = {
-                                chartOptions      = {
-                                    mode = "COLOR"
-                                }
                                 dataSets          = [
                                     {
                                         minAlignmentPeriod = "60s"

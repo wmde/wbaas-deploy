@@ -13,9 +13,6 @@ resource "google_monitoring_dashboard" "error-rate" {
                         widget = {
                             title   = "api error-rate"
                             xyChart = {
-                                chartOptions      = {
-                                    mode = "COLOR"
-                                }
                                 dataSets          = [
                                     {
                                         minAlignmentPeriod = "60s"
@@ -52,9 +49,6 @@ resource "google_monitoring_dashboard" "error-rate" {
                         widget = {
                             title   = "mediawiki pod error rate"
                             xyChart = {
-                                chartOptions      = {
-                                    mode = "COLOR"
-                                }
                                 dataSets          = [
                                     {
                                         minAlignmentPeriod = "60s"
@@ -90,9 +84,6 @@ resource "google_monitoring_dashboard" "error-rate" {
                         widget = {
                             title   = "mediawiki error rate"
                             xyChart = {
-                                chartOptions      = {
-                                    mode = "COLOR"
-                                }
                                 dataSets          = [
                                     {
                                         minAlignmentPeriod = "60s"
@@ -129,9 +120,6 @@ resource "google_monitoring_dashboard" "error-rate" {
                         widget = {
                             title   = "queryservice error rate"
                             xyChart = {
-                                chartOptions      = {
-                                    mode = "COLOR"
-                                }
                                 dataSets          = [
                                     {
                                         minAlignmentPeriod = "60s"
@@ -167,9 +155,6 @@ resource "google_monitoring_dashboard" "error-rate" {
                         widget = {
                             title   = "ingress-nginx-controller error rate"
                             xyChart = {
-                                chartOptions      = {
-                                    mode = "COLOR"
-                                }
                                 dataSets          = [
                                     {
                                         minAlignmentPeriod = "60s"
@@ -206,9 +191,6 @@ resource "google_monitoring_dashboard" "error-rate" {
                         widget = {
                             title   = "platform-nginx error rate"
                             xyChart = {
-                                chartOptions      = {
-                                    mode = "COLOR"
-                                }
                                 dataSets          = [
                                     {
                                         minAlignmentPeriod = "60s"
@@ -244,9 +226,6 @@ resource "google_monitoring_dashboard" "error-rate" {
                         widget = {
                             title   = "mariadb error rate"
                             xyChart = {
-                                chartOptions      = {
-                                    mode = "COLOR"
-                                }
                                 dataSets          = [
                                     {
                                         minAlignmentPeriod = "60s"
@@ -282,9 +261,6 @@ resource "google_monitoring_dashboard" "error-rate" {
                         widget = {
                             title   = "tool pod error rate"
                             xyChart = {
-                                chartOptions      = {
-                                    mode = "COLOR"
-                                }
                                 dataSets          = [
                                     {
                                         minAlignmentPeriod = "60s"
@@ -338,9 +314,6 @@ resource "google_monitoring_dashboard" "error-rate" {
                         widget = {
                             title   = "ui pod error rate"
                             xyChart = {
-                                chartOptions      = {
-                                    mode = "COLOR"
-                                }
                                 dataSets          = [
                                     {
                                         minAlignmentPeriod = "60s"

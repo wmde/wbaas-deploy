@@ -13,9 +13,6 @@ resource "google_monitoring_dashboard" "uptime-latency" {
             widget = {
               title   = "Request latency of the platform API health"
               xyChart = {
-                chartOptions      = {
-                  mode = "COLOR"
-                }
                 dataSets          = [
                   {
                     minAlignmentPeriod = "60s"
@@ -52,9 +49,6 @@ resource "google_monitoring_dashboard" "uptime-latency" {
             widget = {
               title   = "Request Latency of Queryservice"
               xyChart = {
-                chartOptions      = {
-                  mode = "COLOR"
-                }
                 dataSets          = [
                   {
                     minAlignmentPeriod = "60s"
@@ -91,9 +85,6 @@ resource "google_monitoring_dashboard" "uptime-latency" {
             widget = {
               title   = "Request latency of Mediawiki API"
               xyChart = {
-                chartOptions      = {
-                  mode = "COLOR"
-                }
                 dataSets          = [
                   {
                     minAlignmentPeriod = "60s"
@@ -129,9 +120,6 @@ resource "google_monitoring_dashboard" "uptime-latency" {
             widget = {
               title   = "Request latency of Mediawiki Web Pod - Item"
               xyChart = {
-                chartOptions      = {
-                  mode = "COLOR"
-                }
                 dataSets          = [
                   {
                     minAlignmentPeriod = "60s"
@@ -169,9 +157,6 @@ resource "google_monitoring_dashboard" "uptime-latency" {
             widget = {
               title   = "Request latency of Special Version"
               xyChart = {
-                chartOptions      = {
-                  mode = "COLOR"
-                }
                 dataSets          = [
                   {
                     minAlignmentPeriod = "60s"
@@ -208,9 +193,6 @@ resource "google_monitoring_dashboard" "uptime-latency" {
             widget = {
               title   = "Count of \"down\" checks of Mediawiki API"
               xyChart = {
-                chartOptions      = {
-                  mode = "COLOR"
-                }
                 dataSets          = [
                   {
                     minAlignmentPeriod = "60s"
@@ -248,9 +230,6 @@ resource "google_monitoring_dashboard" "uptime-latency" {
             widget = {
               title   = "Count of \"down\" checks of The platform API health endpoint"
               xyChart = {
-                chartOptions      = {
-                  mode = "COLOR"
-                }
                 dataSets          = [
                   {
                     minAlignmentPeriod = "60s"
@@ -287,9 +266,6 @@ resource "google_monitoring_dashboard" "uptime-latency" {
             widget = {
               title   = "Count of \"down\" checks of Queryservice"
               xyChart = {
-                chartOptions      = {
-                  mode = "COLOR"
-                }
                 dataSets          = [
                   {
                     minAlignmentPeriod = "60s"
@@ -327,9 +303,6 @@ resource "google_monitoring_dashboard" "uptime-latency" {
             widget = {
               title   = "Count of \"down\" checks of Mediawiki Web Pod - Item"
               xyChart = {
-                chartOptions      = {
-                  mode = "COLOR"
-                }
                 dataSets          = [
                   {
                     minAlignmentPeriod = "60s"
@@ -366,9 +339,6 @@ resource "google_monitoring_dashboard" "uptime-latency" {
             widget = {
               title   = "Count of \"down\" checks of Mediawiki Web Pod - Special:Version"
               xyChart = {
-                chartOptions      = {
-                  mode = "COLOR"
-                }
                 dataSets          = [
                   {
                     minAlignmentPeriod = "60s"
