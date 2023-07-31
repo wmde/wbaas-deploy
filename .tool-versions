@@ -1,6 +1,6 @@
-kubectl 1.27.4
-minikube 1.31.1
-terraform 1.5.4
-helm 3.12.2
-helmfile 0.153.1
-skaffold 2.6.2
+kubectl 1.27.4 system
+minikube 1.31.1 system
+terraform 1.5.4 system
+helm 3.12.2 system
+helmfile 0.153.1 system
+skaffold 2.6.2 system
