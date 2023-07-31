@@ -20,11 +20,6 @@ wbstack:
     mail:
       recipient: contact.wikibase@wikimedia.de
       sender: contact-<subject>@wikibase.dev
-  stackdriver:
-    enabled: true
-    loggingEnabled: false
-    tracingEnabled: false
-    errorReportingEnabled: true
 
 app:
   name: WBaaS Wikibase Dev
@@ -40,3 +35,8 @@ app:
     smtpPasswordSecretKey: password
     smtphost: smtp.eu.mailgun.org
     smtpport: 587
+  stackdriver:
+    enabled: true
+    loggingEnabled: false
+    tracingEnabled: false
+    errorReportingEnabled: true
