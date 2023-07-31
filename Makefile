@@ -12,6 +12,7 @@ asdf-install: # @HELP Install the currently recommended versions of runtime tool
 asdf-install:
 	./bin/local/asdf-add-plugins.sh
 	asdf install
+	./bin/local/asdf-global-fallback.sh
 
 .PHONY: minikube-start
 minikube-start: # @HELP Start a local k8s cluster using minikube
