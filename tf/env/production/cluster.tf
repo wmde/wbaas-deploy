@@ -48,6 +48,7 @@ resource "google_container_node_pool" "wbaas-3_highmem-16" {
             enable_integrity_monitoring = true
             enable_secure_boot          = false
         }
+        logging_variant = "MAX_THROUGHPUT"
     }
 
     upgrade_settings {
