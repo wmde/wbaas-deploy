@@ -7,6 +7,11 @@ help:
 	        BEGIN {FS = ": *# *@HELP"};           \
 	        { printf "  %-20s %s\n", $$1, $$2 };  \
 	    '
+.PHONY: asdf-install
+asdf-install: # @HELP Install the currently recommended versions of runtime tools via asdf
+asdf-install:
+	./bin/local/asdf-add-plugins.sh
+	asdf install
 
 .PHONY: minikube-start
 minikube-start: # @HELP Start a local k8s cluster using minikube
