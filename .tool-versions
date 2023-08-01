@@ -4,3 +4,4 @@ terraform 1.5.4 system
 helm 3.12.2 system
 helmfile 0.153.1 system
 skaffold 2.6.2 system
+gcloud 440.0.0 system
