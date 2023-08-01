@@ -9,10 +9,10 @@ annotations:
 master:
   resources:
     requests:
-      cpu: "1"
+      cpu: "0.5"
       memory: "1Gi"
     limits:
-      cpu: "1"
+      cpu: "0.5"
       memory: "1Gi"
   persistence:
     enabled: true
@@ -23,10 +23,10 @@ master:
 data:
   resources:
     requests:
-      cpu: "2"
+      cpu: "1"
       memory: "4Gi"
     limits:
-      cpu: "2"
+      cpu: "1"
       memory: "4Gi"
   persistence:
     enabled: true
@@ -37,8 +37,8 @@ data:
 coordinating:
   resources:
     requests:
-      cpu: "1"
+      cpu: "0.5"
       memory: "1Gi"
     limits:
-      cpu: "1"
+      cpu: "0.5"
       memory: "1Gi"
