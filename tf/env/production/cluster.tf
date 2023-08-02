@@ -20,6 +20,9 @@ resource "google_container_cluster" "wbaas-3" {
   }
 }
 
+# Be careful altering node pools. If your change results in recreation then there will be a time
+# when there are no nodes in the pool. You may wish to create a new node pool first and then
+# delete the old one.
 resource "google_container_node_pool" "wbaas-3_highmem-16" {
     cluster = "wbaas-3"
     name                = "n2-highmem-16-pool"
