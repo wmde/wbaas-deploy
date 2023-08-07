@@ -1,5 +1,5 @@
 resource "kubernetes_secret" "recaptcha-v3-dev-secrets" {
-  for_each = toset(["default", "api-jobs"])
+  for_each = toset(["default", "api-jobs", "adhoc-jobs"])
   metadata {
     name = "recaptcha-v3-dev-secrets"
     # default as staging
@@ -18,7 +18,7 @@ moved {
 }
 
 resource "kubernetes_secret" "recaptcha-v2-dev-secrets" {
-  for_each = toset(["default", "api-jobs"])
+  for_each = toset(["default", "api-jobs", "adhoc-jobs"])
   metadata {
     name = "recaptcha-v2-dev-secrets"
     # default as staging

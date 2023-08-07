@@ -2,6 +2,7 @@ apiVersion: batch/v1
 kind: Job
 metadata:
   generateName: force-search-index-from-
+  namespace: adhoc-jobs
 spec:
   template:
     metadata:

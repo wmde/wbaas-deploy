@@ -2,6 +2,7 @@ apiVersion: batch/v1
 kind: Job
 metadata:
   generateName: load-elasticsearch-data-
+  namespace: adhoc-jobs
 spec:
   template:
     metadata:

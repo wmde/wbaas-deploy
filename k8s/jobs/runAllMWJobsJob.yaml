@@ -2,6 +2,7 @@ apiVersion: batch/v1
 kind: Job
 metadata:
   generateName: run-all-mw-jobs-
+  namespace: adhoc-jobs
 spec:
   template:
     metadata:

@@ -8,7 +8,7 @@ resource "random_password" "sql-passwords" {
 
 # Used by the sql service for initial setup
 resource "kubernetes_secret" "sql-secrets-passwords" {
-  for_each = toset(["default", "api-jobs"])
+  for_each = toset(["default", "api-jobs", "adhoc-jobs"])
   metadata {
     name      = "sql-secrets-passwords"
     namespace = each.value
@@ -27,7 +27,7 @@ moved {
 
 # Used by the init script on sql services for user and permissions setup
 resource "kubernetes_secret" "sql-secrets-init-passwords" {
-  for_each = toset(["default", "api-jobs"])
+  for_each = toset(["default", "api-jobs", "adhoc-jobs"])
   metadata {
     name      = "sql-secrets-init-passwords"
     namespace = each.value
