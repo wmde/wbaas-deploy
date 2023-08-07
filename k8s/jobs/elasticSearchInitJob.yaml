@@ -1,0 +1,20 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  generateName: elasticsearch-init-job-
+  namespace: adhoc-jobs
+spec:
+  template:
+    metadata:
+      name: elasticsearch-init-job
+    spec:
+      containers:
+        - name: elasticsearch-init-job
+          command:
+            - 'bash'
+            - '-c'
+            - |
+                MW_INSTALL_PATH=/var/www/html/w/ php \
+                  /var/www/html/w/extensions/CirrusSearch/maintenance/UpdateSearchIndexConfig.php \
+                  --cluster="${CLUSTER_NAME:-all}"
+          restartPolicy: Never
