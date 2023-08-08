@@ -17,4 +17,4 @@ spec:
                 MW_INSTALL_PATH=/var/www/html/w/ php \
                   /var/www/html/w/extensions/CirrusSearch/maintenance/UpdateSearchIndexConfig.php \
                   --cluster="${CLUSTER_NAME:-all}"
-          restartPolicy: Never
+      restartPolicy: OnFailure
