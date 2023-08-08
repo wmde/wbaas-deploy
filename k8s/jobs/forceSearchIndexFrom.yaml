@@ -7,6 +7,7 @@ spec:
     metadata:
       name: force-search-index-from
     spec:
+      ttlSecondsAfterFinished: 18144000
       containers:
         - name: force-search-index-from
           command:
