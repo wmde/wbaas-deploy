@@ -7,7 +7,7 @@ spec:
     metadata:
       name: run-all-mw-jobs
     spec:
-      ttlSecondsAfterFinished: 18144000
+      ttlSecondsAfterFinished: 604800
       containers:
         - name: run-all-mw-jobs
           command:
