@@ -7,6 +7,7 @@ spec:
     metadata:
       name: rebuild-quantity-units
     spec:
+      ttlSecondsAfterFinished: 604800
       containers:
         - name: rebuild-quantity-units
           command:
