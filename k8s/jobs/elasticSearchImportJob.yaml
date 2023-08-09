@@ -5,6 +5,7 @@ metadata:
   namespace: adhoc-jobs
 spec:
   template:
+    ttlSecondsAfterFinished: 604800
     metadata:
       name: load-elasticsearch-data
     spec:
