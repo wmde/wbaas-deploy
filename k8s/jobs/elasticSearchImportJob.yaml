@@ -11,7 +11,7 @@ spec:
         - name: import-elasticsearch
           command:
             - 'bash'
-            - '-c'
+            - '-cv'
             - >
               php artisan wbs-wiki:setSetting id $WIKI_ID wwExtEnableElasticSearch 1 &&
               php artisan job:dispatchNow CirrusSearch\\ElasticSearchIndexInit $WIKI_ID &&

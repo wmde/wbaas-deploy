@@ -11,7 +11,7 @@ spec:
         - name: run-all-mw-jobs
           command:
             - 'bash'
-            - '-c'
+            - '-cv'
             - |
                 JOBS_TO_GO=1
                 while [ "$JOBS_TO_GO" != "0" ]

@@ -11,7 +11,7 @@ spec:
         - name: force-search-index-from
           command:
             - 'bash'
-            - '-c'
+            - '-cv'
             - >
                 MW_INSTALL_PATH=/var/www/html/w/
                 php
