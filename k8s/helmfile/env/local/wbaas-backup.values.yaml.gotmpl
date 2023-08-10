@@ -1,13 +1,20 @@
 image:
-  tag: v0.2.0
+  tag: v0.3.0
 
 job:
   failedJobsHistoryLimit: 1
   successfulJobsHistoryLimit: 1
   cronSchedule: "* * 1 1 *"
 
+scratchDiskSpace: 4Gi
+
+restorePodRunning: false
+
 storage:
-  scratchDiskSpace: 4Gi
-  gcs:
-    bucketName: nacho-cheese
-    uploadToBucket: false
+  bucketName: backups
+  uploadToBucket: true
+  accessKeySecretName: minio-credentials
+  accessKeySecretKey: rootUser
+  secretKeySecretName: minio-credentials
+  secretKeySecretKey: rootPassword
+  endpoint: http://minio.default.svc.cluster.local:9000
