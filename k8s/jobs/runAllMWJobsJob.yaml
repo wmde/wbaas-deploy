@@ -2,8 +2,10 @@ apiVersion: batch/v1
 kind: Job
 metadata:
   generateName: run-all-mw-jobs-
+  namespace: adhoc-jobs
 spec:
   template:
+    ttlSecondsAfterFinished: 604800
     metadata:
       name: run-all-mw-jobs
     spec:
