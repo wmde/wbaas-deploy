@@ -1,3 +1,6 @@
+# tf-module-monitoring-19
+- Change prometheus-elasticsearch metric alerts to group by cluster
+
 # tf-module-monitoring-18
 - Change QueryService PV alert alignment from sum to none
 
