@@ -223,6 +223,7 @@ resource "google_monitoring_dashboard" "platform-summary" {
                                     number of users created in the last 24 hours
                                 EOT
                 format  = "MARKDOWN"
+                style = {}
               }
               title = "Legend"
             }
