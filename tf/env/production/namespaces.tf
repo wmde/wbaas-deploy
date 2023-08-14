@@ -35,7 +35,7 @@ resource "kubernetes_resource_quota" "adhoc-jobs-podquota" {
 
   metadata {
     name      = "adhoc-jobs-podquota"
-    namespace = kubernetes_namespace.api-job-namespace.metadata[0].name
+    namespace = kubernetes_namespace.adhoc-job-namespace.metadata[0].name
   }
   spec {
     hard = {
