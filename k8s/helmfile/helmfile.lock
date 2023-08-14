@@ -1,4 +1,4 @@
-version: 0.155.1
+version: 0.153.1
 dependencies:
 - name: adminer
   repository: https://cetic.github.io/helm-charts
@@ -66,5 +66,5 @@ dependencies:
 - name: wikibase-ingress
   repository: https://wbstack.github.io/charts
   version: 0.1.1
-digest: sha256:54fea4a4974bd44774c41be7ec01e229ca5fa0c60d5c223000ca572653ffad95
-generated: "2023-07-26T16:27:24.752832829+02:00"
+digest: sha256:0de128d282ecdf8468e53ec8cb6b7765ab830ea8ba1fbd3a0e9965c2de074baf
+generated: "2023-08-14T18:39:28.79083793+02:00"
