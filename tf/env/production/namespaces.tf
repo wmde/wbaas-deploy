@@ -23,7 +23,7 @@ resource "kubernetes_resource_quota" "api-jobs-podquota" {
 
 
 resource "kubernetes_namespace" "adhoc-job-namespace" {
-  provider = kubernetes.wbaas-2
+  provider = kubernetes.wbaas-3
 
   metadata {
     name = "adhoc-jobs"
@@ -31,7 +31,7 @@ resource "kubernetes_namespace" "adhoc-job-namespace" {
 }
 
 resource "kubernetes_resource_quota" "adhoc-jobs-podquota" {
-  provider = kubernetes.wbaas-2
+  provider = kubernetes.wbaas-3
 
   metadata {
     name      = "adhoc-jobs-podquota"
