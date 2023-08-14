@@ -4,12 +4,11 @@ metadata:
   generateName: rebuild-quantity-units-
   namespace: adhoc-jobs
 spec:
+  ttlSecondsAfterFinished: 604800
   template:
-    ttlSecondsAfterFinished: 604800
     metadata:
       name: rebuild-quantity-units
     spec:
-      ttlSecondsAfterFinished: 604800
       containers:
         - name: rebuild-quantity-units
           command:

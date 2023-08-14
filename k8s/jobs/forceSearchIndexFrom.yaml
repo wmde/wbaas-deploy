@@ -4,12 +4,11 @@ metadata:
   generateName: force-search-index-from-
   namespace: adhoc-jobs
 spec:
+  ttlSecondsAfterFinished: 604800
   template:
-    ttlSecondsAfterFinished: 604800
     metadata:
       name: force-search-index-from
     spec:
-      ttlSecondsAfterFinished: 604800
       containers:
         - name: force-search-index-from
           command:
