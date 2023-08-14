@@ -26,7 +26,7 @@ resource "kubernetes_namespace" "adhoc-job-namespace" {
 
 resource "kubernetes_resource_quota" "adhoc-jobs-podquota" {
   metadata {
-    name      = "api-jobs-podquota"
+    name      = "adhoc-jobs-podquota"
     namespace = kubernetes_namespace.api-job-namespace.metadata[0].name
   }
   spec {
