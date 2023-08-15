@@ -1,16 +1,17 @@
 image:
   repository: ghcr.io/wmde/wbaas-backup
-  tag: v0.3.0
+  tag: v0.2.0
   pullPolicy: Always
 
 job:
   cronSchedule: "0 0 * * *"
 
-scratchDiskSpace: 64Gi
-
 storage:
-  bucketName: wikibase-cloud-sql-backup
-  uploadToBucket: true
+  scratchDiskSpace: 64Gi
+  gcs:
+    bucketName: wikibase-cloud-sql-backup
+    serviceAccountSecretName: api-serviceaccount
+    uploadToBucket: true
 
 db:
   load:
