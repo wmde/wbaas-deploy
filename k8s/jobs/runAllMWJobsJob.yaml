@@ -4,12 +4,11 @@ metadata:
   generateName: run-all-mw-jobs-
   namespace: adhoc-jobs
 spec:
+  ttlSecondsAfterFinished: 604800
   template:
-    ttlSecondsAfterFinished: 604800
     metadata:
       name: run-all-mw-jobs
     spec:
-      ttlSecondsAfterFinished: 604800
       containers:
         - name: run-all-mw-jobs
           command:
