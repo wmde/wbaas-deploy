@@ -4,8 +4,8 @@ metadata:
   generateName: elasticsearch-init-job-
   namespace: adhoc-jobs
 spec:
+  ttlSecondsAfterFinished: 604800
   template:
-    ttlSecondsAfterFinished: 604800
     metadata:
       name: elasticsearch-init-job
     spec:
