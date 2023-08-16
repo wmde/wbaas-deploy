@@ -211,7 +211,7 @@ releases:
   - name: wbaas-backup
     namespace: default
     chart: wbstack/wbaas-backup
-    version: {{ ternary "0.1.0" "0.0.6" (ne .Environment.Name "production") }}
+    version: 0.1.0
     <<: *default_release
 
   - name: kube-prometheus-stack
