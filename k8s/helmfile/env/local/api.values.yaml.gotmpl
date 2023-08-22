@@ -20,6 +20,7 @@ wbstack:
 
 app:
   name: WBaaS Localhost
+  logLevel: debug
   redis:
     prefix: wikibase_dev_api
   mail:
@@ -33,14 +34,9 @@ app:
     smtpPasswordSecretName: null
     smtpPasswordSecretKey: password
   recaptcha:
-    # TODO take these values from secrets...
-    sitekey:
-    secret:
-    sitekeySecretName: recaptcha-v3-dev-secrets
-    sitekeySecretKey: site_key
+    minScore: 0.6
     secretSecretName: recaptcha-v3-dev-secrets
     secretSecretKey: secret_key
-    badgehide: true
   # TODO is this needed for local?
   gce:
     serviceAccountSecret: null
