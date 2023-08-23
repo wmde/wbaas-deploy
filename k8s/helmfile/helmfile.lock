@@ -5,7 +5,7 @@ dependencies:
   version: 0.2.1
 - name: api
   repository: https://wbstack.github.io/charts
-  version: 0.23.0
+  version: 0.24.0
 - name: elasticsearch
   repository: https://charts.bitnami.com/bitnami
   version: 19.10.2
@@ -26,10 +26,16 @@ dependencies:
   version: 10.5.0
 - name: mediawiki
   repository: https://wbstack.github.io/charts
-  version: 0.11.0
+  version: 0.11.1
+- name: minio
+  repository: https://charts.min.io
+  version: 5.0.13
 - name: nginx
   repository: https://raw.githubusercontent.com/bitnami/charts/eb5f9a9513d987b519f0ecd732e7031241c50328/bitnami
   version: 5.2.4
+- name: prometheus-elasticsearch-exporter
+  repository: https://prometheus-community.github.io/helm-charts
+  version: 5.2.0
 - name: prometheus-elasticsearch-exporter
   repository: https://prometheus-community.github.io/helm-charts
   version: 5.2.0
@@ -62,9 +68,9 @@ dependencies:
   version: 0.3.1
 - name: wbaas-backup
   repository: https://wbstack.github.io/charts
-  version: 0.0.6
+  version: 0.1.0
 - name: wikibase-ingress
   repository: https://wbstack.github.io/charts
   version: 0.1.1
-digest: sha256:0de128d282ecdf8468e53ec8cb6b7765ab830ea8ba1fbd3a0e9965c2de074baf
-generated: "2023-08-14T18:39:28.79083793+02:00"
+digest: sha256:3b4ce1875d87a6bdbc3b801bec2ffedf58e40c265842a28276c8f69d01dbdc6f
+generated: "2023-08-23T13:51:49.963622529+02:00"
