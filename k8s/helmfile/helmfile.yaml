@@ -150,7 +150,7 @@ releases:
 
   - name: api
     chart: wbstack/api
-    version: 0.24.0
+    version: 0.25.0
     namespace: default
     <<: *default_release
 
