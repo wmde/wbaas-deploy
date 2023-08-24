@@ -1,5 +1,5 @@
 image:
-  tag: 8x.20.0
+  tag: 8x.21.0
 
 ingress:
   tls:
@@ -35,3 +35,6 @@ app:
     smtpPasswordSecretKey: password
     smtphost: smtp.eu.mailgun.org
     smtpport: 587
+
+trustedProxy:
+  proxies: ['10.108.0.0/14']
