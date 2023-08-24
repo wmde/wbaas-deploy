@@ -59,3 +59,13 @@ resource "google_container_node_pool" "wbaas-3_highmem-16" {
         max_unavailable = 0
     }
 }
+
+resource "kubernetes_config_map" "cluster" {
+  metadata {
+    name = "cluster-config-map"
+  }
+
+  data = {
+    ipv4_range = google_container_cluster.wbaas-3.cluster_ipv4_cidr
+  }
+}
