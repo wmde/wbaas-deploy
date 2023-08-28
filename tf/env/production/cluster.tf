@@ -60,9 +60,9 @@ resource "google_container_node_pool" "wbaas-3_highmem-16" {
     }
 }
 
-resource "kubernetes_config_map" "cluster" {
+resource "kubernetes_config_map" "cluster_config_map" {
   metadata {
-    name = "cluster-config-map"
+    name = "cluster"
   }
 
   data = {

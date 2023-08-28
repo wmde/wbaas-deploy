@@ -1,6 +1,6 @@
-resource "kubernetes_config_map" "cluster" {
+resource "kubernetes_config_map" "cluster_config_map" {
   metadata {
-    name = "cluster-config-map"
+    name = "cluster"
   }
 
   data = {
