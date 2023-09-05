@@ -1,5 +1,5 @@
 image:
-  tag: 8x.21.3
+  tag: 8x.22.0
 
 ingress:
   tls:
@@ -23,6 +23,7 @@ wbstack:
 
 app:
   name: WBaaS Wikibase Dev
+  logLevel: info
   redis:
     prefix: wikibase_dev_api
   mail:
@@ -35,6 +36,10 @@ app:
     smtpPasswordSecretKey: password
     smtphost: smtp.eu.mailgun.org
     smtpport: 587
+  recaptcha:
+    minScore: 0.5
+    secretSecretName: recaptcha-v3-dev-secrets
+    secretSecretKey: secret_key
 
 trustedProxy:
   proxies: ['10.112.0.0/14']
