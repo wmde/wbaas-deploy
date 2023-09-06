@@ -64,6 +64,8 @@ wbstack:
 
 app:
   name: WBaaS Wikibase Production
+  env: production
+  logLevel: info
   keySecretName: api-app-secrets
   keySecretKey: api-app-key
   url: {{ .Values.services.app.url }}
