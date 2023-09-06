@@ -5,7 +5,7 @@ dependencies:
   version: 0.2.1
 - name: api
   repository: https://wbstack.github.io/charts
-  version: 0.25.0
+  version: 0.26.0
 - name: elasticsearch
   repository: https://charts.bitnami.com/bitnami
   version: 19.10.2
@@ -72,5 +72,5 @@ dependencies:
 - name: wikibase-ingress
   repository: https://wbstack.github.io/charts
   version: 0.1.1
-digest: sha256:ba6ea2b96887d99402016858c0c3cdf355adb75ab77ebc047a5381b6d6354c56
-generated: "2023-08-24T11:52:35.668808266+02:00"
+digest: sha256:c88dab37085284c7ad1c034cb3f90f84d3fc2e6fb5c5ab3ab011359641c62fb7
+generated: "2023-09-06T13:04:29.540979384+02:00"
