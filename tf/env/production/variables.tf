@@ -1,71 +1,71 @@
 variable "terraformers" {
-  type    = set(string)
+  type        = set(string)
   description = "People with access to Terraform state"
   default = [
-      "thomas.arrow@wikimedia.de",
-      "perside.rosalie@wikimedia.de",
-      "jakob.warkotsch@wikimedia.de",
-      "deniz.erdogan@wikimedia.de",
-      "oliver.shotton@wikimedia.de",
-      "dat.nguyen@wikimedia.de",
-      "leszek.manicki@wikimedia.de",
-      "conny.kawohl@wikimedia.de",
-      "andrew.kostka@wikimedia.de",
-      "frederik.ring@wikimedia.de"
-      ]
+    "thomas.arrow@wikimedia.de",
+    "perside.rosalie@wikimedia.de",
+    "jakob.warkotsch@wikimedia.de",
+    "deniz.erdogan@wikimedia.de",
+    "oliver.shotton@wikimedia.de",
+    "dat.nguyen@wikimedia.de",
+    "leszek.manicki@wikimedia.de",
+    "conny.kawohl@wikimedia.de",
+    "andrew.kostka@wikimedia.de",
+    "frederik.ring@wikimedia.de"
+  ]
 }
 
 # TODO: Actually use this throughout
 locals {
   production_cluster_name = "wbaas-3"
-  project_id = "wikibase-cloud"
-  email_group = "wb-cloud-monitoring@wikimedia.de"
+  project_id              = "wikibase-cloud"
+  email_group             = "wb-cloud-monitoring@wikimedia.de"
 }
 
 variable "mailgun_api_key" {
-  type = string
+  type        = string
   description = "User API key to access Mailgun"
-  sensitive = true
+  sensitive   = true
 }
 
 variable "sql-passwords" {
-  type    = set(string)
+  type        = set(string)
   description = "SQL passwords to create and send to k8s as secrets"
   default = [
-      "production-replication",
-      "production-api",
-      "production-mediawiki-db-manager",
-      "production-backup-manager",
-      ]
+    "production-replication",
+    "production-api",
+    "production-mediawiki-db-manager",
+    "production-backup-manager",
+  ]
 }
 
 variable "recaptcha_v3_site_key" {
-  type = string
+  type        = string
   description = "Site key to access recaptcha v3"
-  sensitive = true
-  default = "" # apparently this doesn't mean default is empty string but rather default is not defined. This means it won't prompt the user
+  sensitive   = true
+  default     = "" # apparently this doesn't mean default is empty string but rather default is not defined. This means it won't prompt the user
   # but also won't override the value that is in the state
 }
 
 variable "recaptcha_v3_secret" {
-  type = string
+  type        = string
   description = "Secret key to access recaptcha v3"
-  sensitive = true
-  default = "" # apparently this doesn't mean default is empty string but rather default is not defined. This means it won't prompt the user
+  sensitive   = true
+  default     = "" # apparently this doesn't mean default is empty string but rather default is not defined. This means it won't prompt the user
   # but also won't override the value that is in the state
 }
 variable "recaptcha_v2_site_key" {
-  type = string
+  type        = string
   description = "Site key to access recaptcha v2"
-  sensitive = true
-  default = "" # apparently this doesn't mean default is empty string but rather default is not defined. This means it won't prompt the user
+  sensitive   = true
+  default     = "" # apparently this doesn't mean default is empty string but rather default is not defined. This means it won't prompt the user
   # but also won't override the value that is in the state
 }
 
 variable "recaptcha_v2_secret" {
-  type = string
+  type        = string
   description = "Secret key to access recaptcha v2"
-  sensitive = true
-  default = "" # apparently this doesn't mean default is empty string but rather default is not defined. This means it won't prompt the user
+  sensitive   = true
+  default     = "" # apparently this doesn't mean default is empty string but rather default is not defined. This means it won't prompt the user
   # but also won't override the value that is in the state
 }

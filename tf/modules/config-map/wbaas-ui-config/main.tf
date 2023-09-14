@@ -9,4 +9,4 @@ resource "kubernetes_config_map" "wbaas" {
 
 }
 
-output "cname_record" {  value = var.cname_record }
+output "cname_record" { value = var.cname_record }

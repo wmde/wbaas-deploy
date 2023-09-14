@@ -7,7 +7,7 @@ resource "kubernetes_secret" "recaptcha-v3-dev-secrets" {
   }
 
   data = {
-    "site_key" = var.recaptcha_v3_dev_site_key,
+    "site_key"   = var.recaptcha_v3_dev_site_key,
     "secret_key" = var.recaptcha_v3_dev_secret
   }
 }
@@ -26,7 +26,7 @@ resource "kubernetes_secret" "recaptcha-v2-dev-secrets" {
   }
 
   data = {
-    "site_key" = var.recaptcha_v2_dev_site_key,
+    "site_key"   = var.recaptcha_v2_dev_site_key,
     "secret_key" = var.recaptcha_v2_dev_secret
   }
 }

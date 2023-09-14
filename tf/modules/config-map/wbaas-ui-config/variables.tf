@@ -1,4 +1,4 @@
 variable "cname_record" {
-  type = string
+  type        = string
   description = "CNAME_RECORD to be used for custom domains"
 }

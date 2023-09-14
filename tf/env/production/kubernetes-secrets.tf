@@ -26,6 +26,6 @@ module "wbaas-k8s-secrets" {
     kubernetes_namespace.api-job-namespace.metadata[0].name,
     kubernetes_namespace.adhoc-job-namespace.metadata[0].name
   ]
-  logical_backup_openssl_secret     = random_password.logical_backup_random_password.result
+  logical_backup_openssl_secret = random_password.logical_backup_random_password.result
 }
 
