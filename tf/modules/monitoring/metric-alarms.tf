@@ -35,12 +35,12 @@ resource "google_monitoring_alert_policy" "alert_policy_prometheus_metric" {
       }
       threshold_value = each.value.threshold_value
       aggregations {
-                  alignment_period     = "300s"
-                  cross_series_reducer = "REDUCE_MIN"
-                  group_by_fields      = [
-                      each.value.min_group_by,
-                    ]
-                  per_series_aligner   = "ALIGN_MEAN"
+        alignment_period     = "300s"
+        cross_series_reducer = "REDUCE_MIN"
+        group_by_fields = [
+          each.value.min_group_by,
+        ]
+        per_series_aligner = "ALIGN_MEAN"
       }
     }
   }
@@ -50,12 +50,12 @@ resource "google_monitoring_alert_policy" "alert_policy_prometheus_metric" {
       duration = each.value.condition_absent
       filter   = "resource.type = \"prometheus_target\" AND resource.labels.cluster = \"${var.cluster_name}\" AND ${each.value.filter}"
       aggregations {
-                  alignment_period     = "300s"
-                  cross_series_reducer = "REDUCE_MIN"
-                  group_by_fields      = [
-                      each.value.min_group_by,
-                    ]
-                  per_series_aligner   = "ALIGN_MEAN"
+        alignment_period     = "300s"
+        cross_series_reducer = "REDUCE_MIN"
+        group_by_fields = [
+          each.value.min_group_by,
+        ]
+        per_series_aligner = "ALIGN_MEAN"
       }
     }
   }

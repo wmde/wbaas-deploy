@@ -1,5 +1,5 @@
 on: push
-name: Test
+name: Lint
 jobs:
   lint:
     runs-on: ubuntu-latest
@@ -8,3 +8,7 @@ jobs:
         uses: actions/checkout@v3
       - name: Lint YAML files
         uses: ibiqlik/action-yamllint@v3
+      - name: Install Terraform
+        uses: hashicorp/setup-terraform@v2
+      - name: Check if Terraform files are properly formatted
+        run: terraform fmt -recursive -check tf
