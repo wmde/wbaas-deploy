@@ -39,7 +39,7 @@ app:
     smtpport: 587
   recaptcha:
     minScore: 0.5
-    secretSecretName: recaptcha-v3-secrets
+    secretSecretName: {{ .Values.external.recaptcha3.secretName }}
     secretSecretKey: secret_key
 
 trustedProxy:

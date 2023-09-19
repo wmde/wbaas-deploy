@@ -106,8 +106,6 @@ app:
     smtphost: smtp.eu.mailgun.org
     smtpport: 587
   recaptcha:
-    sitekeySecretName: {{ .Values.external.recaptcha3.secretName }}
-    sitekeySecretKey: site_key
     secretSecretName: {{ .Values.external.recaptcha3.secretName }}
     secretSecretKey: secret_key
     badgehide: true

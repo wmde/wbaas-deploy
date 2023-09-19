@@ -17,9 +17,9 @@ mw:
     smtpUserSecretName: null
     smtpPasswordSecretName: null
   recaptcha:
-    sitekeySecretName: recaptcha-v2-dev-secrets
+    sitekeySecretName: {{ .Values.external.recaptcha2.secretName }}
     sitekeySecretKey: site_key
-    secretkeySecretName: recaptcha-v2-dev-secrets
+    secretkeySecretName: {{ .Values.external.recaptcha2.secretName }}
     secretkeySecretKey: secret_key
 
 replicaCount:
