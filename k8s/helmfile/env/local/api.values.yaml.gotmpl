@@ -36,20 +36,13 @@ app:
     smtpPasswordSecretKey: password
   recaptcha:
     minScore: 0.5
-    secretSecretName: recaptcha-v3-dev-secrets
+    secretSecretName: {{ .Values.external.recaptcha3.secretName }}
     secretSecretKey: secret_key
   # TODO is this needed for local?
   gce:
     serviceAccountSecret: null
   stackdriver:
     enabled: false
-external:
-  letsencrypt:
-    email: thomas.arrow@wikimedia.de
-  recaptcha2:
-    secretName: recaptcha-v2-secrets
-  recaptcha3:
-    secretName: recaptcha-v3-secrets
 
 replicaCount:
   web: 1
