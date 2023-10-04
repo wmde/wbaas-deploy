@@ -31,7 +31,7 @@ resource "google_container_node_pool" "wbaas-3_highmem-16" {
     "europe-west3-a",
   ]
   node_config {
-    disk_size_gb = 100
+    disk_size_gb = 64
     disk_type    = "pd-standard"
     machine_type = "n2-highmem-16"
     metadata = {
