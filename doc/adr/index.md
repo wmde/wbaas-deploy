@@ -21,6 +21,7 @@ Current ADRs include:
 - [7) Application level monitoring using Prometheus](0007-monitoring-prometheus.md)
 - [8) Deploying a service mesh to the Kubernetes Cluster](0008-service-mesh.md)
 - [9) Terraform style conventions](0009-terraform-style-conventions.md)
+- [11) Handling FQDNs](0011-handling-fqdns.md)
 <!-- toc-end -->
 
 ---
