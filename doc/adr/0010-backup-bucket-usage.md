@@ -28,6 +28,6 @@ To access an backup file that is older than the current one, you have to navigat
 
 
 
-[1] https://github.com/wmde/wbaas-backup/blob/0544201f8e7503cf4f14453c40118146611baf46/src/backup.sh#L10
-[2] https://github.com/wmde/wbaas-deploy/blob/ced10b0f561321b1f1f6651ecaf5b0a392157698/tf/modules/buckets/main.tf#L8
-[3] https://cloud.google.com/storage/docs/control-data-lifecycles
+- [1] https://github.com/wmde/wbaas-backup/blob/0544201f8e7503cf4f14453c40118146611baf46/src/backup.sh#L10
+- [2] https://github.com/wmde/wbaas-deploy/blob/ced10b0f561321b1f1f6651ecaf5b0a392157698/tf/modules/buckets/main.tf#L8
+- [3] https://cloud.google.com/storage/docs/control-data-lifecycles
