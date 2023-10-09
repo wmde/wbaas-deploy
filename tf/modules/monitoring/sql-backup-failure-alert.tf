@@ -1,4 +1,3 @@
-## success logs
 resource "google_logging_metric" "sql_logical_backup_success" {
   name        = "${var.cluster_name}-sql-logic-backup"
   description = "A log based metric for monitoring sql logical backups."
@@ -32,59 +31,39 @@ resource "google_monitoring_alert_policy" "alert_policy_sql_logical_backup_failu
   }
 }
 
-## disk usage logs
-resource "google_logging_metric" "sql_logical_backup_disk_usage" {
-  name        = "${var.cluster_name}-sql-logic-backup-disk-usage"
-  description = "A log based metric for monitoring sql logical backups disk usage."
-  filter          = <<-EOT
-        resource.type="k8s_container"
-        resource.labels.cluster_name="${var.cluster_name}"
-        resource.labels.pod_name:"sql-logic-backup"
-        jsonPayload.wbaas_backup_scratch_disk_log="v1"
-    EOT
-
-  value_extractor = "REGEXP_EXTRACT(jsonPayload.diskUsage, \"(\\\\d+)\")" 
-
-  metric_descriptor {
-    metric_kind = "DELTA"
-    value_type  = "DISTRIBUTION"
-  }
-
-  bucket_options {
-    exponential_buckets {
-      growth_factor      = 2
-      num_finite_buckets = 64
-      scale              = 0.01
-    }
-  }
-}
-
 locals {
-  sql_backup_disk_critical_usage_threshold = 0.80 # 80%, alert triggers if metric is above this value
+  sql_backup_disk_critical_usage_threshold = 0.8 # 80%, alert triggers if metric is above this value
 }
 
-resource "google_monitoring_alert_policy" "alert_policy_sql_logical_backup_high_disk_usage" {
-  display_name = "(${var.cluster_name}): High disk usage for SQL logical backup"
+resource "google_monitoring_alert_policy" "alert_policy_sql_logical_backup_pv_critical_utilization" {
+  display_name = "(${var.cluster_name}): critical SQL logical backup PV utilization"
   combiner     = "OR"
   notification_channels = [
     "${var.monitoring_email_group_name}"
   ]
+
   documentation {
-    content = "Alert fires when the scratch disk used for the SQL backups runs on a high disk space usage (Above 80%)."
+    content = "Alert fires when the PV used for the SQL backups is reaching a critical level (above ${local.sql_backup_disk_critical_usage_threshold * 100}%)."
   }
 
   conditions {
-    display_name = "(${var.cluster_name}): High disk usage for SQL logical backup"
+    display_name = "(${var.cluster_name}): critical SQL logical backup PV utilization"
     condition_threshold {
-      filter   = "metric.type=\"logging.googleapis.com/user/${google_logging_metric.sql_logical_backup_disk_usage.name}\" AND resource.type=\"k8s_container\""
-      duration = "88200s"
-      comparison = "COMPARISON_GT"
-      threshold_value = local.sql_backup_disk_critical_usage_threshold
+      filter = <<-EOT
+                metric.type="kubernetes.io/pod/volume/utilization"
+                resource.type="k8s_pod"
+                resource.label."cluster_name"="${var.cluster_name}"
+                resource.label."pod_name"=starts_with("sql-logic-backup-")
+            EOT
+
+      duration        = "86400s"
+      comparison      = "COMPARISON_GT"
+      threshold_value = local.sql_pv_critical_utilization_threshold
 
       aggregations {
         alignment_period     = "120s"
-        per_series_aligner   = "ALIGN_PERCENTILE_50"
-        cross_series_reducer = "REDUCE_NONE"
+        per_series_aligner   = "ALIGN_MAX"
+        cross_series_reducer = "REDUCE_MAX"
       }
 
       trigger {
