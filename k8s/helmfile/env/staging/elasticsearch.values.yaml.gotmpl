@@ -10,6 +10,10 @@ imageTag: "6.8.23-wmde.6"
 
 esJavaOpts: "-Xms2g -Xmx2g"
 
+esConfig:
+  elasticsearch.yml: |
+    cluster.info.update.timeout: 20s
+
 resources:
   requests:
     cpu: "500m"
