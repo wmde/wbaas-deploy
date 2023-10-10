@@ -10,6 +10,7 @@ imageTag: "6.8.23-wmde.6"
 
 esJavaOpts: "-Xms2g -Xmx2g"
 
+# this section can be removed once #1186 is merged
 esConfig:
   elasticsearch.yml: |
     cluster.info.update.timeout: 20s
