@@ -53,7 +53,7 @@ resource "google_monitoring_alert_policy" "alert_policy_sql_logical_backup_pv_cr
                 metric.type="kubernetes.io/pod/volume/utilization"
                 resource.type="k8s_pod"
                 resource.label."cluster_name"="${var.cluster_name}"
-                resource.label."pod_name"=starts_with("sql-logic-backup-")
+                resource.label."pod_name".starts_with("sql-logic-backup-")
             EOT
 
       duration        = "86400s"
