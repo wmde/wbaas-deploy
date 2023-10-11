@@ -1,3 +1,6 @@
+# tf-module-monitoring-20
+- Add alert policy for critical PV usage (Logical SQL Backup)
+
 # tf-module-monitoring-19
 - Change prometheus-elasticsearch metric alerts to group by cluster
 
