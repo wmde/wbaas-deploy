@@ -52,13 +52,13 @@ resource "google_monitoring_alert_policy" "alert_policy_sql_logical_backup_pv_cr
       filter = <<-EOT
                 metric.type="kubernetes.io/pod/volume/utilization"
                 resource.type="k8s_pod"
-                resource.label."cluster_name"="${var.cluster_name}"
-                resource.label."pod_name".starts_with("sql-logic-backup-")
+                resource.label.cluster_name="${var.cluster_name}"
+                resource.label.pod_name=starts_with("sql-logic-backup-")
             EOT
 
-      duration        = "86400s"
+      duration        = "60s"
       comparison      = "COMPARISON_GT"
-      threshold_value = local.sql_pv_critical_utilization_threshold
+      threshold_value = local.sql_backup_disk_critical_usage_threshold
 
       aggregations {
         alignment_period     = "120s"
