@@ -17,7 +17,7 @@ Wikibase.cloud allows it's users to create wikis with subdomains on `wikibase.cl
 
 ## Decision
 
-To circumvent current and future troubles with non-ASCII domain names, from the moment the system receives the name during creation of a wiki, it gets encoded to punycode[4] (an encoding allowing unicode via ascii representation), and gets handled only in that format internally. As soon as the value leaves the internal API, it gets decoded to it's original representation in unicode.
+To circumvent current and future troubles with non-ASCII domain names, from the moment the system receives the name during creation of a wiki, it gets encoded to punycode[4] (an encoding allowing unicode via ascii representation), and gets handled only in that format internally; the platform api will also output this format; in this case the consumer must decide how to format it correctly e.g. to decode it back to unicode if desired.
 
 ## Consequences
 
