@@ -23,7 +23,7 @@ To circumvent current and future troubles with non-ASCII domain names, from the 
 
 - An ASCII-only representation like punycode should fix and not cause any more troubles with special characters in FQDNs
 - Existing values need to be converted in the database
-- Endpoint implementations in the Platform API need to be careful about providing the right value - in the best case they provide both
+- Endpoint implementations in the Platform API need to be careful about actually providing both formats
 
 - [1] - https://phabricator.wikimedia.org/T345139
 - [2] - https://www.rfc-editor.org/rfc/rfc1123
