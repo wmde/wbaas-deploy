@@ -8,7 +8,7 @@ Date: 2023-10-04
 
 ## Status
 
-proposed
+accepted
 
 ## Context
 (FQDN = Fully qualified domain name)
@@ -17,7 +17,7 @@ Wikibase.cloud allows it's users to create wikis with subdomains on `wikibase.cl
 
 ## Decision
 
-To circumvent current and future troubles with non-ASCII domain names, from the moment the system receives the name during creation of a wiki, it gets encoded to punycode[4] (an encoding allowing unicode via ascii representation), and gets handled only in that format internally; the platform api will also output this format; in this case the consumer must decide how to format it correctly e.g. to decode it back to unicode if desired.
+To circumvent current and future troubles with non-ASCII domain names, from the moment the system receives the name during creation of a wiki, it gets encoded to the "Internationalized domain name" (IDN) format[4] (an encoding allowing Unicode via ASCII representation), and gets handled only in that format internally; the platform api will also output this format; in this case the consumer must decide how to format it correctly e.g. to decode it back to unicode if desired.
 
 ## Consequences
 
@@ -27,4 +27,4 @@ To circumvent current and future troubles with non-ASCII domain names, from the 
 - [1] - https://phabricator.wikimedia.org/T345139
 - [2] - https://www.rfc-editor.org/rfc/rfc1123
 - [3] - `"message": "Invalid value: \"então.carolinadoran.com\": a lowercase RFC 1123 subdomain must consist of lower case alphanumeric characters, '-' or '.', and must start and end with an alphanumeric character (e.g. 'example.com', regex used for validation is '[a-z0-9]([-a-z0-9]*[a-z0-9])?(\\.[a-z0-9]([-a-z0-9]*[a-z0-9])?)*')"`
-- [4] - https://en.wikipedia.org/wiki/Punycode
+- [4] - https://en.wikipedia.org/wiki/Internationalized_domain_name
