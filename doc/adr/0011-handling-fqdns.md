@@ -17,12 +17,13 @@ Wikibase.cloud allows it's users to create wikis with subdomains on `wikibase.cl
 
 ## Decision
 
-To circumvent current and future troubles with non-ASCII domain names, from the moment the system receives the name during creation of a wiki, it gets encoded to the "Internationalized domain name" (IDN) format[4] (an encoding allowing Unicode via ASCII representation), and gets handled only in that format internally; the platform api will also output this format; in this case the consumer must decide how to format it correctly e.g. to decode it back to unicode if desired.
+To circumvent current and future troubles with non-ASCII domain names, from the moment the system receives the name during creation of a wiki, it gets encoded to the "Internationalized domain name" (IDN) format[4] (an encoding allowing Unicode via ASCII representation), and gets handled only in that format internally; the platform api will also output this format, alongside a decoded variant in Unicode representation.
 
 ## Consequences
 
 - An ASCII-only representation like punycode should fix and not cause any more troubles with special characters in FQDNs
 - Existing values need to be converted in the database
+- Endpoint implementations in the Platform API need to be careful about providing the right value - in the best case they provide both
 
 - [1] - https://phabricator.wikimedia.org/T345139
 - [2] - https://www.rfc-editor.org/rfc/rfc1123
