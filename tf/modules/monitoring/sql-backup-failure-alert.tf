@@ -23,7 +23,7 @@ resource "google_monitoring_alert_policy" "alert_policy_sql_logical_backup_failu
     display_name = "(${var.cluster_name}): SQL logical backup failure"
     condition_absent {
       filter   = "metric.type=\"logging.googleapis.com/user/${google_logging_metric.sql_logical_backup_success.name}\" AND resource.type=\"k8s_container\""
-      duration = "88200s"
+      duration = "86400s"
       trigger {
         count = 1
       }
