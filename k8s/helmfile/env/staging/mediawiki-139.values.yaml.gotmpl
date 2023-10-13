@@ -6,6 +6,10 @@ mw:
     allowedProxyCidr: "10.112.0.0/14"
   mail:
     domain: "wikibase.dev"
+  writeOnlyElasticsearch:
+    host: elasticsearch-1-master-hl.default.svc.cluster.local
+    port: 9200
+    es6: false
 
 resources:
   web:
