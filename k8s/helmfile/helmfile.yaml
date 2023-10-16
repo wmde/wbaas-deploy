@@ -117,6 +117,7 @@ releases:
     namespace: default
     chart: wbstack/elasticsearch-legacy
     version: 6.8.22-wmde2
+    installed: {{ ne .Environment.Name "local" | toYaml }}
     <<: *default_release
 
   - name: elasticsearch-1
