@@ -7,6 +7,7 @@ annotations:
   traffic.sidecar.istio.io/excludeInboundPorts: "9300"
 
 master:
+  heapSize: 512m
   resources:
     requests:
       cpu: "1"
@@ -21,6 +22,7 @@ master:
     size: 5Gi
 
 data:
+  heapSize: 2048m
   resources:
     requests:
       cpu: "1"
@@ -35,6 +37,7 @@ data:
     size: 10Gi
 
 coordinating:
+  heapSize: 512m
   resources:
     requests:
       cpu: "0.5"
