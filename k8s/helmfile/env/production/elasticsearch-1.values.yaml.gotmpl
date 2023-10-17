@@ -11,6 +11,7 @@ extraConfig:
   action.auto_create_index: false
 
 master:
+  heapSize: 2048m
   resources:
     requests:
       cpu: "2"
@@ -25,6 +26,7 @@ master:
     size: 5Gi
 
 data:
+  heapSize: 32768m
   resources:
     requests:
       cpu: "10"
@@ -39,6 +41,7 @@ data:
     size: 50Gi
 
 coordinating:
+  heapSize: 2048m
   resources:
     requests:
       cpu: "2"
