@@ -41,6 +41,7 @@ app:
     minScore: 0.5
     secretSecretName: {{ .Values.external.recaptcha3.secretName }}
     secretSecretKey: secret_key
+  elasticSearchHost: elasticsearch-master.default.svc.cluster.local:9200,elasticsearch-1.default.svc.cluster.local:9200
 
 trustedProxy:
   proxies: ['10.112.0.0/14']
