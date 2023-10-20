@@ -1,3 +1,10 @@
+# tf-module-monitoring-20
+- Add alert policy for critical PV usage (Logical SQL Backup)
+- Fix failed logcial SQL backup alert policy by setting duration to 24h instead of 24h 30m
+
+# tf-module-monitoring-19
+- Change prometheus-elasticsearch metric alerts to group by cluster
+
 # tf-module-monitoring-18
 - Change QueryService PV alert alignment from sum to none
 

@@ -1,9 +1,9 @@
 image:
-  tag: 8x.14.0
+  tag: 8x.25.1
 
 replicaCount:
   web: 1
-  backend: 1
+  backend: 2
   scheduler: 1
   queue: 1
 
@@ -22,6 +22,7 @@ queue:
       username: mediawiki-db-manager
       passwordSecretName: sql-secrets-init-passwords
       passwordSecretKey: SQL_INIT_PASSWORD_MW
+  backoff: [10,60,300,900,1500] # 10s, 1m, 5m, 15m, 30m
 
 ingress:
   tls:
@@ -43,6 +44,8 @@ ingress:
   {{- end }}
 
 wbstack:
+  signupThrottlingRange: 'PT24H'
+  signupThrottlingLimit: 20
   summaryCreationRateRanges:
     - 'PT24H'
     - 'P30D'
@@ -61,6 +64,8 @@ wbstack:
 
 app:
   name: WBaaS Wikibase Production
+  env: production
+  logLevel: info
   keySecretName: api-app-secrets
   keySecretKey: api-app-key
   url: {{ .Values.services.app.url }}
@@ -101,8 +106,6 @@ app:
     smtphost: smtp.eu.mailgun.org
     smtpport: 587
   recaptcha:
-    sitekeySecretName: {{ .Values.external.recaptcha3.secretName }}
-    sitekeySecretKey: site_key
     secretSecretName: {{ .Values.external.recaptcha3.secretName }}
     secretSecretKey: secret_key
     badgehide: true
@@ -111,10 +114,13 @@ app:
     serviceAccountSecret: api-serviceaccount
     existingSecret: api-passport-keys
   stackdriver:
-    enabled: false
-    loggingEnabled: true
+    enabled: true
+    loggingEnabled: false
     tracingEnabled: false
     errorReportingEnabled: true
+
+trustedProxy:
+  proxies: ['10.108.0.0/14']
 
 resources:
   # The backed is a platform critical element, so make sure it is allowed to be a bit silly...

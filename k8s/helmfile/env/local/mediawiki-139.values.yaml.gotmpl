@@ -1,5 +1,5 @@
 image:
-  tag: "1.39-7.4-20230522-0"
+  tag: 1.39-7.4-20231004-0
 
 mw:
   settings:
@@ -17,7 +17,17 @@ mw:
     smtpUserSecretName: null
     smtpPasswordSecretName: null
   recaptcha:
-    sitekeySecretName: recaptcha-v2-dev-secrets
+    sitekeySecretName: {{ .Values.external.recaptcha2.secretName }}
     sitekeySecretKey: site_key
-    secretkeySecretName: recaptcha-v2-dev-secrets
+    secretkeySecretName: {{ .Values.external.recaptcha2.secretName }}
     secretkeySecretKey: secret_key
+  elasticsearch:
+    host: elasticsearch-1.default.svc.cluster.local
+    port: 9200
+    es6: false
+
+replicaCount:
+  backend: 1
+  web: 1
+  webapi: 1
+  alpha: 1

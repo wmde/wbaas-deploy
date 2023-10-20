@@ -1,5 +1,5 @@
 image:
-  tag: 8x.14.0
+  tag: 8x.25.1
 
 ingress:
   tls: null
@@ -20,6 +20,8 @@ wbstack:
 
 app:
   name: WBaaS Localhost
+  env: local
+  logLevel: debug
   redis:
     prefix: wikibase_dev_api
   mail:
@@ -33,21 +35,21 @@ app:
     smtpPasswordSecretName: null
     smtpPasswordSecretKey: password
   recaptcha:
-    # TODO take these values from secrets...
-    sitekey:
-    secret:
-    sitekeySecretName: recaptcha-v3-dev-secrets
-    sitekeySecretKey: site_key
-    secretSecretName: recaptcha-v3-dev-secrets
+    minScore: 0.5
+    secretSecretName: {{ .Values.external.recaptcha3.secretName }}
     secretSecretKey: secret_key
-    badgehide: true
   # TODO is this needed for local?
   gce:
     serviceAccountSecret: null
-external:
-  letsencrypt:
-    email: thomas.arrow@wikimedia.de
-  recaptcha2:
-    secretName: recaptcha-v2-secrets
-  recaptcha3:
-    secretName: recaptcha-v3-secrets
+  stackdriver:
+    enabled: false
+  elasticSearchHost: elasticsearch-1.default.svc.cluster.local:9200
+
+replicaCount:
+  web: 1
+  backend: 1
+  scheduler: 1
+  queue: 1
+
+trustedProxy:
+  proxies: ['*']

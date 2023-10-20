@@ -1,5 +1,5 @@
 image:
-  tag: 8x.14.0
+  tag: 8x.25.1
 
 ingress:
   tls:
@@ -23,6 +23,8 @@ wbstack:
 
 app:
   name: WBaaS Wikibase Dev
+  env: staging
+  logLevel: info
   redis:
     prefix: wikibase_dev_api
   mail:
@@ -35,3 +37,11 @@ app:
     smtpPasswordSecretKey: password
     smtphost: smtp.eu.mailgun.org
     smtpport: 587
+  recaptcha:
+    minScore: 0.5
+    secretSecretName: {{ .Values.external.recaptcha3.secretName }}
+    secretSecretKey: secret_key
+  elasticSearchHost: elasticsearch-master.default.svc.cluster.local:9200,elasticsearch-1.default.svc.cluster.local:9200
+
+trustedProxy:
+  proxies: ['10.112.0.0/14']

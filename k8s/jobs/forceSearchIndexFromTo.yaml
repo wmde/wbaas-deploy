@@ -1,14 +1,16 @@
 apiVersion: batch/v1
 kind: Job
 metadata:
-  generateName: force-search-index-from-
+  generateName: force-search-index-from-to-
+  namespace: adhoc-jobs
 spec:
+  ttlSecondsAfterFinished: 604800
   template:
     metadata:
-      name: force-search-index-from
+      name: force-search-index-from-to
     spec:
       containers:
-        - name: force-search-index-from
+        - name: force-search-index-from-to
           command:
             - 'bash'
             - '-c'
@@ -16,5 +18,7 @@ spec:
                 MW_INSTALL_PATH=/var/www/html/w/
                 php
                 /var/www/html/w/extensions/CirrusSearch/maintenance/ForceSearchIndex.php
+                --cluster="${CLUSTER_NAME:-all}"
                 --from="${WBS_FORCE_SEARCH_INDEX_FROM}"
+                --to="${WBS_FORCE_SEARCH_INDEX_TO}"
       restartPolicy: Never

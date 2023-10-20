@@ -29,7 +29,7 @@ resource "random_password" "api-app-jwt-secret" {
 }
 
 resource "kubernetes_secret" "api-app-secrets" {
-  for_each = toset(["default", "api-jobs"])
+  for_each = toset(["default", "api-jobs", "adhoc-jobs"])
   metadata {
     name      = "api-app-secrets"
     namespace = each.value

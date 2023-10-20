@@ -13,9 +13,6 @@ resource "google_monitoring_dashboard" "platform-summary" {
             widget = {
               title = "wikis"
               xyChart = {
-                chartOptions = {
-                  mode = "COLOR"
-                }
                 dataSets = [
                   {
                     minAlignmentPeriod = "86400s"
@@ -226,6 +223,7 @@ resource "google_monitoring_dashboard" "platform-summary" {
                                     number of users created in the last 24 hours
                                 EOT
                 format  = "MARKDOWN"
+                style   = {}
               }
               title = "Legend"
             }
@@ -320,9 +318,6 @@ resource "google_monitoring_dashboard" "platform-summary" {
             widget = {
               title = "editors"
               xyChart = {
-                chartOptions = {
-                  mode = "COLOR"
-                }
                 dataSets = [
                   {
                     minAlignmentPeriod = "86400s"
@@ -371,9 +366,6 @@ resource "google_monitoring_dashboard" "platform-summary" {
             widget = {
               title = "edits & pages"
               xyChart = {
-                chartOptions = {
-                  mode = "COLOR"
-                }
                 dataSets = [
                   {
                     minAlignmentPeriod = "86400s"

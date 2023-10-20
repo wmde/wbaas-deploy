@@ -21,6 +21,10 @@ module "wbaas2-k8s-secrets" {
   api_passport_private_key          = tls_private_key.api-passport.private_key_pem
   api_app_key                       = random_password.api-app-key.result
   api_app_jwt_secret                = random_password.api-app-jwt-secret.result
-  mediawiki_secret_namespaces       = ["default", kubernetes_namespace.api-job-namespace.metadata[0].name]
-  logical_backup_openssl_secret     = random_password.logical_backup_random_password.result
+  mediawiki_secret_namespaces = [
+    "default",
+    kubernetes_namespace.api-job-namespace.metadata[0].name,
+    kubernetes_namespace.adhoc-job-namespace.metadata[0].name
+  ]
+  logical_backup_openssl_secret = random_password.logical_backup_random_password.result
 }

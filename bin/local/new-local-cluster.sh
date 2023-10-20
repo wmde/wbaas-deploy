@@ -17,7 +17,7 @@ fi
 
 WBAAS_DEPLOY_DIR=$(realpath $(dirname $0)/../../)
 
-echo "⚠️ ☠️  NUKING your local cluster in 10 seconds ... all data will be lost! (press ctrl+c NOW to cancel) ☠️ ⚠️"
+echo "⚠️ DELETING your local cluster in 10 seconds ... all data will be lost! (press ctrl+c NOW to cancel) ⚠️"
 sleep 10
 
 cd "$WBAAS_DEPLOY_DIR"
@@ -30,12 +30,13 @@ terraform apply -auto-approve # bad practice - you won't have a second chance to
 cd "$WBAAS_DEPLOY_DIR/k8s/helmfile/"
 helmfile --environment local deps
 
-# very bad practice - infinite `y` gets spammed to helmfile so we just blindly agree to any prompts
 set +e # disable exit on error for this one, see next step
-yes y | helmfile --environment local apply
+helmfile --environment local apply
 set -e
 
-helmfile --environment local sync # workaround in anticipation of apply not finishing up for some reason (happens sometimes on some machines)
+# workaround in anticipation of apply not finishing up for some reason (happens sometimes on some machines)
+sleep 60
+helmfile --environment local sync
 
 echo
 echo "Finished re-initializing local cluster."

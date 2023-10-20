@@ -1,7 +1,7 @@
 image:
   registry: ghcr.io
   repository: wbstack/elasticsearch
-  tag: 7.10.2-20230628-0
+  tag: 7.10.2-20231013-0
 
 labels:
   sidecar.istio.io/inject: "false"
@@ -11,6 +11,7 @@ extraConfig:
   action.auto_create_index: false
 
 master:
+  heapSize: 2048m
   resources:
     requests:
       cpu: "2"
@@ -23,8 +24,13 @@ master:
     accessModes: [ "ReadWriteOnce" ]
     storageClass: "premium-rwo"
     size: 5Gi
+  livenessProbe:
+    initialDelaySeconds: 600
+  readinessProbe:
+    initialDelaySeconds: 600
 
 data:
+  heapSize: 32768m
   resources:
     requests:
       cpu: "10"
@@ -37,8 +43,13 @@ data:
     accessModes: [ "ReadWriteOnce" ]
     storageClass: "premium-rwo"
     size: 50Gi
+  livenessProbe:
+    initialDelaySeconds: 600
+  readinessProbe:
+    initialDelaySeconds: 600
 
 coordinating:
+  heapSize: 2048m
   resources:
     requests:
       cpu: "2"
@@ -46,6 +57,12 @@ coordinating:
     limits:
       cpu: "2"
       memory: "4Gi"
+  livenessProbe:
+    initialDelaySeconds: 600
+  readinessProbe:
+    initialDelaySeconds: 600
 
 ingest:
   enabled: false
+
+clusterName: {{ .Release.Name }}
