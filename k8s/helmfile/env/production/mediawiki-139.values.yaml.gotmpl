@@ -19,6 +19,11 @@ mw:
   elasticsearch:
     host: elasticsearch-master.default.svc.cluster.local
     port: 9200
+    es6: true
+  writeOnlyElasticsearch:
+    host: elasticsearch-1.default.svc.cluster.local
+    port: 9200
+    es6: false
   mailgun:
     enabled: false
   platform:
