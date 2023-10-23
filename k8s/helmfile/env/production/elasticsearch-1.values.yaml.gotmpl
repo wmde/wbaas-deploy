@@ -25,9 +25,9 @@ master:
     storageClass: "premium-rwo"
     size: 5Gi
   livenessProbe:
-    initialDelaySeconds: 1800
+    enabled: false
   readinessProbe:
-    initialDelaySeconds: 1800
+    enabled: false
 
 data:
   heapSize: 32768m
@@ -44,9 +44,9 @@ data:
     storageClass: "premium-rwo"
     size: 50Gi
   livenessProbe:
-    initialDelaySeconds: 600
+    enabled: false
   readinessProbe:
-    initialDelaySeconds: 600
+    enabled: false
 
 coordinating:
   heapSize: 2048m
