@@ -11,14 +11,14 @@ extraConfig:
   action.auto_create_index: false
 
 master:
-  heapSize: 2048m
+  heapSize: 4096m
   resources:
     requests:
       cpu: "2"
-      memory: "4Gi"
+      memory: "8Gi"
     limits:
       cpu: "2"
-      memory: "4Gi"
+      memory: "8Gi"
   persistence:
     enabled: true
     accessModes: [ "ReadWriteOnce" ]
