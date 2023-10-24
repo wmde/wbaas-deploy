@@ -25,9 +25,9 @@ master:
     storageClass: "premium-rwo"
     size: 5Gi
   livenessProbe:
-    enabled: false
+    initialDelaySeconds: 14400
   readinessProbe:
-    enabled: false
+    initialDelaySeconds: 14400
 
 data:
   heapSize: 32768m
@@ -44,9 +44,9 @@ data:
     storageClass: "premium-rwo"
     size: 50Gi
   livenessProbe:
-    enabled: false
+    initialDelaySeconds: 14400
   readinessProbe:
-    enabled: false
+    initialDelaySeconds: 14400
 
 coordinating:
   heapSize: 4096m
@@ -58,9 +58,9 @@ coordinating:
       cpu: "2"
       memory: "8Gi"
   livenessProbe:
-    initialDelaySeconds: 600
+    initialDelaySeconds: 14400
   readinessProbe:
-    initialDelaySeconds: 600
+    initialDelaySeconds: 14400
 
 ingest:
   enabled: false
