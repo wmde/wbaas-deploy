@@ -39,7 +39,7 @@ resource "kubernetes_resource_quota" "adhoc-jobs-podquota" {
   }
   spec {
     hard = {
-      pods = 4
+      pods = 6
     }
     scopes = ["BestEffort"]
   }
