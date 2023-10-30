@@ -8,6 +8,8 @@ app:
   sleepTime: 5
   loopLimit: 100
   getBatchesEndpoint: http://api-app-backend.default.svc.cluster.local/backend/qs/getBatches
+  markDoneEndpoint: http://api-app-backend.default.svc.cluster.local/backend/qs/markDone
+  markFailedEndpoint: http://api-app-backend.default.svc.cluster.local/backend/qs/markFailed
   wikibaseScheme: http
   extraJvmOpts: "-XshowSettings:vm -XX:+UseContainerSupport -XX:+ExitOnOutOfMemoryError -Xms64m -Xmx128m -XX:MetaspaceSize=20m -XX:MaxMetaspaceSize=30m"
 
