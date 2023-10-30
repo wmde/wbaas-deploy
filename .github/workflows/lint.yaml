@@ -9,6 +9,6 @@ jobs:
       - name: Lint YAML files
         uses: ibiqlik/action-yamllint@v3
       - name: Install Terraform
-        uses: hashicorp/setup-terraform@v2
+        uses: hashicorp/setup-terraform@v3
       - name: Check if Terraform files are properly formatted
         run: terraform fmt -recursive -check tf
