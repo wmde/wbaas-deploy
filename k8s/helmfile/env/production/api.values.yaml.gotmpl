@@ -44,6 +44,8 @@ ingress:
   {{- end }}
 
 wbstack:
+  qsBatchesMarkFailedAfter: 3
+  qsBatchesRetryAfter: 'PT300S'
   signupThrottlingRange: 'PT24H'
   signupThrottlingLimit: 20
   summaryCreationRateRanges:
