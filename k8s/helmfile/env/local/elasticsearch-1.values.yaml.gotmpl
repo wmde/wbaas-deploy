@@ -19,6 +19,10 @@ master:
     enabled: true
     storageClass: "standard"
     size: 1Gi
+  livenessProbe:
+    initialDelaySeconds: 180
+  readinessProbe:
+    initialDelaySeconds: 90
 
 data:
   heapSize: 512m
@@ -33,6 +37,10 @@ data:
     enabled: true
     storageClass: "standard"
     size: 2Gi
+  livenessProbe:
+    initialDelaySeconds: 180
+  readinessProbe:
+    initialDelaySeconds: 90
 
 coordinating:
   heapSize: 256m
@@ -43,3 +51,7 @@ coordinating:
     limits:
       cpu: "500m"
       memory: "512Mi"
+  livenessProbe:
+    initialDelaySeconds: 180
+  readinessProbe:
+    initialDelaySeconds: 90
