@@ -1,5 +1,5 @@
 image:
-  tag: 8x.25.7
+  tag: 8x.26.0
 
 ingress:
   tls:
@@ -11,6 +11,8 @@ platform:
   backendMwHost: mediawiki-139-app-backend.default.svc.cluster.local
 
 wbstack:
+  qsBatchMarkFailedAfter: 3
+  qsBatchPendingTimeout: 'PT300S'
   wikiDbProvisionVersion: mw1.39-wbs1
   wikiDbUseVersion: mw1.39-wbs1
   monitoringEmail: "wb-cloud-monitoring+staging@wikimedia.de"
