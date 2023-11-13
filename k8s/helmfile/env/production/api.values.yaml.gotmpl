@@ -1,5 +1,5 @@
 image:
-  tag: 8x.25.7
+  tag: 8x.26.0
 
 replicaCount:
   web: 1
@@ -44,6 +44,8 @@ ingress:
   {{- end }}
 
 wbstack:
+  qsBatchMarkFailedAfter: 3
+  qsBatchPendingTimeout: 'PT300S'
   signupThrottlingRange: 'PT24H'
   signupThrottlingLimit: 20
   summaryCreationRateRanges:
