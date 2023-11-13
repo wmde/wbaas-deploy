@@ -3,11 +3,14 @@ replicaCount: 1
 image:
   repository: ghcr.io/wbstack/queryservice-updater
   pullPolicy: Always
+  tag: 0.3.84_3.10
 
 app:
   sleepTime: 5
   loopLimit: 100
   getBatchesEndpoint: http://api-app-backend.default.svc.cluster.local/backend/qs/getBatches
+  markDoneEndpoint: http://api-app-backend.default.svc.cluster.local/backend/qs/markDone
+  markNotDoneEndpoint: http://api-app-backend.default.svc.cluster.local/backend/qs/markNotDone
   wikibaseScheme: http
   extraJvmOpts: "-XshowSettings:vm -XX:+UseContainerSupport -XX:+ExitOnOutOfMemoryError -Xms64m -Xmx128m -XX:MetaspaceSize=20m -XX:MaxMetaspaceSize=30m"
 
