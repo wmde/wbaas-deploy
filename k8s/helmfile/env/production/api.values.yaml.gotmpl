@@ -1,5 +1,5 @@
 image:
-  tag: 8x.25.1
+  tag: 8x.26.0
 
 replicaCount:
   web: 1
@@ -44,6 +44,8 @@ ingress:
   {{- end }}
 
 wbstack:
+  qsBatchMarkFailedAfter: 3
+  qsBatchPendingTimeout: 'PT300S'
   signupThrottlingRange: 'PT24H'
   signupThrottlingLimit: 20
   summaryCreationRateRanges:
@@ -74,7 +76,7 @@ app:
   jwtSecretSecretName: api-app-secrets
   jwtSecretSecretKey: api-app-jwt-secret
   queryServiceHost: queryservice.default.svc.cluster.local:9999
-  elasticSearchHost: elasticsearch-master.default.svc.cluster.local:9200
+  elasticSearchHost: elasticsearch-master.default.svc.cluster.local:9200,elasticsearch-1.default.svc.cluster.local:9200
   redis:
     prefix: wikibase_production_api
     # TODO is it possible to take advantage of replicas here?

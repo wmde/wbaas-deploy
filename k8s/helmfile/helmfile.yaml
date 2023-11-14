@@ -124,7 +124,6 @@ releases:
     namespace: default
     chart: bitnami/elasticsearch
     version: 19.10.2
-    installed: {{ ne .Environment.Name "production" | toYaml }}
     <<: *default_release
 
   - name: redis
@@ -151,7 +150,7 @@ releases:
 
   - name: api
     chart: wbstack/api
-    version: 0.26.1
+    version: "0.27.0"
     namespace: default
     <<: *default_release
 
@@ -188,7 +187,7 @@ releases:
   - name: queryservice-updater
     namespace: default
     chart: wbstack/queryservice-updater
-    version: 0.1.2
+    version: "0.3.0"
     <<: *default_release
 
   - name: tool-cradle

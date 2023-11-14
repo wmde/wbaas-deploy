@@ -1,5 +1,5 @@
 image:
-  tag: 1.39-7.4-20231004-0
+  tag: 1.39-7.4-20231113-0
 
 replicaCount:
   backend: 2
@@ -16,9 +16,14 @@ mw:
     password:
     passwordSecretName: redis-password
     passwordSecretKey: password
-  elasticsearch:
+  writeOnlyElasticsearch:
     host: elasticsearch-master.default.svc.cluster.local
     port: 9200
+    es6: true
+  elasticsearch:
+    host: elasticsearch-1.default.svc.cluster.local
+    port: 9200
+    es6: false
   mailgun:
     enabled: false
   platform:
@@ -47,11 +52,11 @@ mw:
 resources:
   web:
     requests:
-      cpu: 150m
-      memory: 350Mi
+      cpu: 500m
+      memory: 1600Mi
     limits:
-      cpu: 400m
-      memory: 750Mi
+      cpu: '1'
+      memory: 2800Mi
   webapi:
     requests:
       cpu: 200m

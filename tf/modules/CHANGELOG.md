@@ -1,3 +1,6 @@
+# tf-module-monitoring-21
+- Attempt to fix the failed logical SQL backup alerting policy
+
 # tf-module-monitoring-20
 - Add alert policy for critical PV usage (Logical SQL Backup)
 - Fix failed logcial SQL backup alert policy by setting duration to 24h instead of 24h 30m

@@ -11,25 +11,26 @@ extraConfig:
   action.auto_create_index: false
 
 master:
-  heapSize: 2048m
+  heapSize: 4096m
   resources:
     requests:
       cpu: "2"
-      memory: "4Gi"
+      memory: "8Gi"
     limits:
       cpu: "2"
-      memory: "4Gi"
+      memory: "8Gi"
   persistence:
     enabled: true
     accessModes: [ "ReadWriteOnce" ]
     storageClass: "premium-rwo"
     size: 5Gi
   livenessProbe:
-    initialDelaySeconds: 600
+    initialDelaySeconds: 14400
   readinessProbe:
-    initialDelaySeconds: 600
+    initialDelaySeconds: 14400
 
 data:
+  replicaCount: 3
   heapSize: 32768m
   resources:
     requests:
@@ -44,23 +45,23 @@ data:
     storageClass: "premium-rwo"
     size: 50Gi
   livenessProbe:
-    initialDelaySeconds: 600
+    initialDelaySeconds: 14400
   readinessProbe:
-    initialDelaySeconds: 600
+    initialDelaySeconds: 14400
 
 coordinating:
-  heapSize: 2048m
+  heapSize: 4096m
   resources:
     requests:
       cpu: "2"
-      memory: "4Gi"
+      memory: "8Gi"
     limits:
       cpu: "2"
-      memory: "4Gi"
+      memory: "8Gi"
   livenessProbe:
-    initialDelaySeconds: 600
+    initialDelaySeconds: 14400
   readinessProbe:
-    initialDelaySeconds: 600
+    initialDelaySeconds: 14400
 
 ingest:
   enabled: false

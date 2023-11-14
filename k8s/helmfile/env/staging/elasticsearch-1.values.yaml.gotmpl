@@ -20,8 +20,13 @@ master:
     accessModes: [ "ReadWriteOnce" ]
     storageClass: "premium-rwo"
     size: 5Gi
+  livenessProbe:
+    initialDelaySeconds: 1800
+  readinessProbe:
+    initialDelaySeconds: 1800
 
 data:
+  replicaCount: 2
   heapSize: 4096m
   resources:
     requests:
@@ -35,6 +40,10 @@ data:
     accessModes: [ "ReadWriteOnce" ]
     storageClass: "premium-rwo"
     size: 10Gi
+  livenessProbe:
+    initialDelaySeconds: 600
+  readinessProbe:
+    initialDelaySeconds: 600
 
 coordinating:
   heapSize: 512m
@@ -45,3 +54,7 @@ coordinating:
     limits:
       cpu: "0.5"
       memory: "1Gi"
+  livenessProbe:
+    initialDelaySeconds: 600
+  readinessProbe:
+    initialDelaySeconds: 600
