@@ -42,17 +42,3 @@ data:
     initialDelaySeconds: 180
   readinessProbe:
     initialDelaySeconds: 90
-
-coordinating:
-  heapSize: 256m
-  resources:
-    requests:
-      cpu: "250m"
-      memory: "512Mi"
-    limits:
-      cpu: "500m"
-      memory: "512Mi"
-  livenessProbe:
-    initialDelaySeconds: 180
-  readinessProbe:
-    initialDelaySeconds: 90
