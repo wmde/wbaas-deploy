@@ -51,18 +51,7 @@ data:
     initialDelaySeconds: 14400
 
 coordinating:
-  heapSize: 4096m
-  resources:
-    requests:
-      cpu: "2"
-      memory: "8Gi"
-    limits:
-      cpu: "2"
-      memory: "8Gi"
-  livenessProbe:
-    initialDelaySeconds: 14400
-  readinessProbe:
-    initialDelaySeconds: 14400
+  replicaCount: 0
 
 ingest:
   enabled: false
