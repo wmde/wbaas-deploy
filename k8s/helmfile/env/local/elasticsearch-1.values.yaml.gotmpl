@@ -19,10 +19,6 @@ master:
     enabled: true
     storageClass: "standard"
     size: 1Gi
-  livenessProbe:
-    initialDelaySeconds: 180
-  readinessProbe:
-    initialDelaySeconds: 90
 
 data:
   replicaCount: 2
@@ -38,7 +34,3 @@ data:
     enabled: true
     storageClass: "standard"
     size: 2Gi
-  livenessProbe:
-    initialDelaySeconds: 180
-  readinessProbe:
-    initialDelaySeconds: 90
