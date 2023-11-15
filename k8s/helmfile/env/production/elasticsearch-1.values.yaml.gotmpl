@@ -34,10 +34,10 @@ data:
   heapSize: 32768m
   resources:
     requests:
-      cpu: "2"
+      cpu: "4"
       memory: "64Gi"
     limits:
-      cpu: "4"
+      cpu: "8"
       memory: "64Gi"
   persistence:
     enabled: true
@@ -53,10 +53,10 @@ coordinating:
   heapSize: 4096m
   resources:
     requests:
-      cpu: "500m"
+      cpu: "1"
       memory: "8Gi"
     limits:
-      cpu: "1"
+      cpu: "2"
       memory: "8Gi"
   livenessProbe:
     initialDelaySeconds: 14400
