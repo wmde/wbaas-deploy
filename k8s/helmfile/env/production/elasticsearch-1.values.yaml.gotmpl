@@ -1,6 +1,7 @@
 image:
   registry: ghcr.io
   repository: wbstack/elasticsearch
+  # TODO: Update with new Elasticsearch image
   tag: 7.10.2-20231013-0
 
 labels:
@@ -45,10 +46,15 @@ data:
     accessModes: [ "ReadWriteOnce" ]
     storageClass: "premium-rwo"
     size: 50Gi
-  startupProbe:
-    enabled: true
+  customStartupProbe:
     periodSeconds: 10
     failureThreshold: 1440
+    initialDelaySeconds: 90
+    timeoutSeconds: 5
+    successThreshold: 1
+    exec:
+      command:
+        - /opt/bitnami/scripts/elasticsearch/healthcheck-cluster.sh
 
 coordinating:
   replicaCount: 0
