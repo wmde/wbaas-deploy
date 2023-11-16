@@ -1,7 +1,7 @@
 image:
   registry: ghcr.io
   repository: wbstack/elasticsearch
-  tag: 7.10.2-20231013-0
+  tag: 7.10.2-20231116-0
 
 labels:
   sidecar.istio.io/inject: "false"
@@ -45,10 +45,15 @@ data:
     accessModes: [ "ReadWriteOnce" ]
     storageClass: "premium-rwo"
     size: 50Gi
-  startupProbe:
-    enabled: true
+  customStartupProbe:
     periodSeconds: 10
     failureThreshold: 1440
+    initialDelaySeconds: 90
+    timeoutSeconds: 5
+    successThreshold: 1
+    exec:
+      command:
+        - /opt/bitnami/scripts/elasticsearch/healthcheck-cluster.sh
 
 coordinating:
   replicaCount: 0
