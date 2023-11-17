@@ -113,13 +113,6 @@ releases:
     version: 10.5.0
     <<: *default_release
 
-  - name: elasticsearch
-    namespace: default
-    chart: wbstack/elasticsearch-legacy
-    version: 6.8.22-wmde2
-    installed: false
-    <<: *default_release
-
   - name: elasticsearch-1
     namespace: default
     chart: bitnami/elasticsearch
