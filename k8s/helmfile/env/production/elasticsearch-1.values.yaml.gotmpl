@@ -1,7 +1,7 @@
 image:
   registry: ghcr.io
   repository: wbstack/elasticsearch
-  tag: 7.10.2-20231013-0
+  tag: 7.10.2-20231116-0
 
 labels:
   sidecar.istio.io/inject: "false"
@@ -11,10 +11,11 @@ extraConfig:
   action.auto_create_index: false
 
 master:
+  replicaCount: 3
   heapSize: 4096m
   resources:
     requests:
-      cpu: "2"
+      cpu: "1"
       memory: "8Gi"
     limits:
       cpu: "2"
@@ -24,44 +25,38 @@ master:
     accessModes: [ "ReadWriteOnce" ]
     storageClass: "premium-rwo"
     size: 5Gi
-  livenessProbe:
-    initialDelaySeconds: 14400
-  readinessProbe:
-    initialDelaySeconds: 14400
+  startupProbe:
+    enabled: true
+    periodSeconds: 10
+    failureThreshold: 1440
 
 data:
   replicaCount: 3
   heapSize: 32768m
   resources:
     requests:
-      cpu: "10"
+      cpu: "4"
       memory: "64Gi"
     limits:
-      cpu: "10"
+      cpu: "8"
       memory: "64Gi"
   persistence:
     enabled: true
     accessModes: [ "ReadWriteOnce" ]
     storageClass: "premium-rwo"
     size: 50Gi
-  livenessProbe:
-    initialDelaySeconds: 14400
-  readinessProbe:
-    initialDelaySeconds: 14400
+  customStartupProbe:
+    periodSeconds: 10
+    failureThreshold: 1440
+    initialDelaySeconds: 90
+    timeoutSeconds: 5
+    successThreshold: 1
+    exec:
+      command:
+        - /opt/bitnami/scripts/elasticsearch/healthcheck-cluster.sh
 
 coordinating:
-  heapSize: 4096m
-  resources:
-    requests:
-      cpu: "2"
-      memory: "8Gi"
-    limits:
-      cpu: "2"
-      memory: "8Gi"
-  livenessProbe:
-    initialDelaySeconds: 14400
-  readinessProbe:
-    initialDelaySeconds: 14400
+  replicaCount: 0
 
 ingest:
   enabled: false
