@@ -36,6 +36,7 @@ Otherwise, skip creating a new chart and update the docker image used by alterin
  - Assign yourself to the task you are about to deploy, should currently be in "Deploy to Staging"
  - Let the team know you are planning to deploy by sharing the pull-request about to be deployed (mention it in mattermost)
  - Make sure you are using the latest version of the `main` wbaas-deploy code
+ - Switch to the appropriate cluster context: `kubectl config use-context gke_wikibase-cloud_europe-west3-a_wbaas-2`
  - run `make diff` and check there are no changes to be applied to either staging or production. If there are then this means that someone else might be deploying at the same time. It could also mean that last time someone touched the clusters they forgot to keep them in sync with thie repository. STOP DEPLOYING and communicate with the team.
  - Rebase the pull request you want to deploy onto main. e.g. `git rebase add-concept-uri-staging`
  - Run `make diff-production` and check there are no changes to the production cluster.
@@ -51,6 +52,7 @@ Otherwise, skip creating a new chart and update the docker image used by alterin
  - Assign yourself to the task you are about to deploy, should currently be in "Deploy to production"
  - Let the team know you are planning to deploy by sharing the pull-request about to be deployed (mention it in mattermost)
  - Make sure you are using the latest version of the `main` wbaas-deploy code
+ - Switch to the appropriate cluster context: `kubectl config use-context gke_wikibase-cloud_europe-west3-a_wbaas-3`
  - run `make diff` and check there are no changes to be applied to either staging or production. If there are then this means that someone else might be deploying at the same time. It could also mean that last time someone touched the clusters they forgot to keep them in sync with thie repository. STOP DEPLOYING and communicate with the team.
  - Rebase the pull request you want to deploy onto main. e.g. `git rebase add-concept-uri-scheme-production`
  - Run `make diff-staging` and check there are no changes to the staging cluster.
