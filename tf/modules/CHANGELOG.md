@@ -1,3 +1,6 @@
+# tf-module-monitoring-22
+- Improve logical SQL backup alerting policy (alignment period 60s -> 1h)
+
 # tf-module-monitoring-21
 - Attempt to fix the failed logical SQL backup alerting policy
 

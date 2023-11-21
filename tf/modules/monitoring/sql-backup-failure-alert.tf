@@ -28,7 +28,7 @@ resource "google_monitoring_alert_policy" "alert_policy_sql_logical_backup_failu
       aggregations {
         cross_series_reducer = "REDUCE_COUNT"
         per_series_aligner   = "ALIGN_COUNT"
-        alignment_period     = "60s"
+        alignment_period     = "3600s"
         group_by_fields = [
           "resource.labels.container_name",
         ]
