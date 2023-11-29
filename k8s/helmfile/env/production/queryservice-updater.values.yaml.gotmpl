@@ -3,11 +3,11 @@ replicaCount: 3
 image:
   repository: ghcr.io/wbstack/queryservice-updater
   pullPolicy: Always
-  tag: 0.3.84_3.10
+  tag: 0.3.84_3.11
 
 app:
   sleepTime: 5
-  loopLimit: 100
+  loopLimit: -1
   getBatchesEndpoint: http://api-app-backend.default.svc.cluster.local/backend/qs/getBatches
   markDoneEndpoint: http://api-app-backend.default.svc.cluster.local/backend/qs/markDone
   markNotDoneEndpoint: http://api-app-backend.default.svc.cluster.local/backend/qs/markNotDone
