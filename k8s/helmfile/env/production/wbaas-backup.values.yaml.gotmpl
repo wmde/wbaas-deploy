@@ -3,9 +3,8 @@ image:
   tag: v0.3.1
   pullPolicy: Always
 
-#changed to test if the SQL logical backups still work after T349817, change back later
 job:
-  cronSchedule: "0 0 28 * *"
+  cronSchedule: "0 0 * * *"
 
 scratchDiskSpace: 128Gi
 
