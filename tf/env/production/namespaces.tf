@@ -44,3 +44,26 @@ resource "kubernetes_resource_quota" "adhoc-jobs-podquota" {
     scopes = ["BestEffort"]
   }
 }
+
+resource "kubernetes_namespace" "qs-job-namespace" {
+  provider = kubernetes.wbaas-3
+
+  metadata {
+    name = "qs-jobs"
+  }
+}
+
+resource "kubernetes_resource_quota" "qs-jobs-podquota" {
+  provider = kubernetes.wbaas-3
+
+  metadata {
+    name      = "qs-jobs-podquota"
+    namespace = kubernetes_namespace.qs-job-namespace.metadata[0].name
+  }
+  spec {
+    hard = {
+      pods = 4
+    }
+    scopes = ["BestEffort"]
+  }
+}
