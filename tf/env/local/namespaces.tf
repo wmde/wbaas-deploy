@@ -43,10 +43,10 @@ resource "kubernetes_namespace" "qs-job-namespace" {
   }
 }
 
-resource "kubernetes_resource_quota" "api-jobs-podquota" {
+resource "kubernetes_resource_quota" "qs-jobs-podquota" {
   metadata {
-    name      = "api-jobs-podquota"
-    namespace = kubernetes_namespace.api-job-namespace.metadata[0].name
+    name      = "qs-jobs-podquota"
+    namespace = kubernetes_namespace.qs-job-namespace.metadata[0].name
   }
   spec {
     hard = {
