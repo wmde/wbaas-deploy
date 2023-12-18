@@ -7,6 +7,9 @@ ingress:
 platform:
   backendMwHost: mediawiki-139-app-backend.default.svc.cluster.local
 
+queue:
+  queueNames: ['default', 'manual-intervention']
+
 wbstack:
   wikiDbProvisionVersion: mw1.39-wbs1
   wikiDbUseVersion: mw1.39-wbs1
