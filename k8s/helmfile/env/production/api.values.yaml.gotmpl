@@ -12,8 +12,9 @@ useProbes: true
 platform:
   backendMwHost: mediawiki-139-app-backend.default.svc.cluster.local
 
-# This mw db connection is only used by the queue..
 queue:
+  queueNames: ['default', 'manual-intervention']
+  # This mw db connection is only used by the queue..
   mw:
     db:
       readHost: sql-mariadb-secondary.default.svc.cluster.local
