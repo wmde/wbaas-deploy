@@ -5,7 +5,7 @@ resource "google_logging_metric" "platform-summary-metrics" {
         resource.type="k8s_container"
         resource.labels.cluster_name="${var.cluster_name}"
         resource.labels.namespace_name="default"
-        labels.k8s-pod/app_kubernetes_io/component="queue"
+        labels.k8s-pod/app_kubernetes_io/component="queue-default"
         labels.k8s-pod/app_kubernetes_io/instance="api"
         labels.k8s-pod/app_kubernetes_io/name="api" severity>=DEFAULT
         jsonPayload.platform_summary_version="v1"
