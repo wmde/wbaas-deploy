@@ -1,3 +1,6 @@
+# tf-module-monitoring-24
+- Fix log group lookup for platform summary dashboard
+
 # tf-module-monitoring-23
 - Attempt to fix logical SQL backup alerting policy (alignment period 1h -> 15m)
 
