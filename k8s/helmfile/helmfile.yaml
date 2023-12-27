@@ -224,7 +224,6 @@ releases:
   - name: prometheus-elasticsearch-exporter-1
     namespace: monitoring
     chart: prometheus-community/prometheus-elasticsearch-exporter
-    installed: {{ ne .Environment.Name "production" | toYaml }}
     version: 5.2.0
     <<: *default_release
 
