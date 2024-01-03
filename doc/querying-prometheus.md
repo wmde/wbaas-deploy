@@ -188,3 +188,10 @@ sum(
   *
 100
 ```
+
+### Kubernetes Jobs
+
+#### Count of completed QueryService Jobs
+```promql
+sum(kube_job_status_succeeded{namespace="qs-jobs", cluster="wbaas-3"})
+```
