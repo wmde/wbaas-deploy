@@ -62,7 +62,7 @@ resource "kubernetes_resource_quota" "qs-jobs-podquota" {
   }
   spec {
     hard = {
-      pods = 4
+      pods = 1
     }
     scopes = ["BestEffort"]
   }
