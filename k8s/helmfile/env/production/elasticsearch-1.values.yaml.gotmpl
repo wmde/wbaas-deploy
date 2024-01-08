@@ -12,14 +12,14 @@ extraConfig:
 
 master:
   replicaCount: 3
-  heapSize: 4096m
+  heapSize: 5096m
   resources:
     requests:
       cpu: "1"
-      memory: "8Gi"
+      memory: "10Gi"
     limits:
       cpu: "2"
-      memory: "8Gi"
+      memory: "10Gi"
   persistence:
     enabled: true
     accessModes: [ "ReadWriteOnce" ]
