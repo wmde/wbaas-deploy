@@ -1,5 +1,5 @@
 image:
-  tag: 8x.33.0
+  tag: 8x.34.0
 
 ingress:
   tls: null
@@ -50,6 +50,15 @@ replicaCount:
   backend: 1
   scheduler: 1
   queue: 1
+
+storage:
+  bucketName: api-assets
+  accessKeySecretName: minio-credentials
+  accessKeySecretKey: rootUser
+  secretKeySecretName: minio-credentials
+  secretKeySecretKey: rootPassword
+  endpoint: http://minio.default.svc.cluster.local:9000
+  url: http://minio.wbaas.localhost/api-assets
 
 trustedProxy:
   proxies: ['*']
