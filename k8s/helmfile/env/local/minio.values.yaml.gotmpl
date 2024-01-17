@@ -13,7 +13,28 @@ persistence:
 buckets:
   - name: backups
     policy: public
+  - name: api-assets
+    policy: public
 
 resources:
   requests:
     memory: 0.5Gi
+
+consoleService:
+  port: "80"
+
+consoleIngress:
+  enabled: true
+  path: /
+  hosts:
+    - minio-console.wbaas.localhost
+  annotations:
+    kubernetes.io/ingress.class: nginx
+
+ingress:
+  enabled: true
+  path: /
+  hosts:
+    - minio.wbaas.localhost
+  annotations:
+    kubernetes.io/ingress.class: nginx
