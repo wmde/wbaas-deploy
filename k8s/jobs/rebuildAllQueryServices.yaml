@@ -15,5 +15,5 @@ spec:
             - 'bash'
             - '-c'
             - >
-              php -d memory_limit=-1 artisan wbs-qs:rebuild
+              php -d memory_limit=-1 artisan wbs-qs:rebuild --chunkSize 100
       restartPolicy: Never
