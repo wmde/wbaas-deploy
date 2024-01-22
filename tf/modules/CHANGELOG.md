@@ -1,3 +1,6 @@
+# tf-module-buckets-2
+- Add iam members and hmac keys for static assets in module
+
 # tf-module-monitoring-24
 - Fix log group lookup for platform summary dashboard
 
