@@ -1,4 +1,4 @@
-# tf-module-buckets-2
+# tf-module-buckets-3
 - Add iam members and hmac keys for static assets in module
 
 # tf-module-monitoring-24
