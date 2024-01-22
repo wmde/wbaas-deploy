@@ -137,6 +137,26 @@ resource "google_storage_bucket_access_control" "static-writer" {
   entity = "user-${var.static_bucket_writer_account}"
 }
 
+resource "google_storage_bucket_iam_member" "public-assets-upload" {
+  role   = "roles/storage.admin"
+  member = "serviceAccount:${var.static_bucket_writer_account}"
+  bucket = google_storage_bucket.static.name
+}
+
+resource "google_storage_hmac_key" "public-assets-upload-key" {
+  service_account_email = var.static_bucket_writer_account
+}
+
+resource "kubernetes_secret" "gcs-hmac-key" {
+  metadata {
+    name = "public-assets-hmac-key"
+  }
+  data = {
+    "access-key" = google_storage_hmac_key.public-assets-upload-key.access_id
+    "secret-key" = google_storage_hmac_key.public-assets-upload-key.secret
+  }
+}
+
 resource "kubernetes_config_map" "storage-bucket" {
   metadata {
     name = "storage-bucket"
