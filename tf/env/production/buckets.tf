@@ -7,4 +7,3 @@ module "production-buckets" {
   static_bucket_writer_account = google_service_account.api.email
   user_object_admins           = var.terraformers
 }
-
