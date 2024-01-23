@@ -96,7 +96,7 @@ resource "google_storage_bucket_iam_member" "backup-upload" {
 
 resource "kubernetes_secret" "backup-hmac-key" {
   metadata {
-    name = "gcs-hmac-key"
+    name = "backup-hmac-key"
   }
   data = {
     "access-key" = google_storage_hmac_key.backup-upload-key.access_id
