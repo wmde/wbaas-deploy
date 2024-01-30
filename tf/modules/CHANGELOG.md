@@ -1,6 +1,3 @@
-# tf-module-buckets-4
-- Add iam members and hmac keys for SQL backups in buckets module
-
 # tf-module-buckets-3
 - Add iam members and hmac keys for static assets in module
 

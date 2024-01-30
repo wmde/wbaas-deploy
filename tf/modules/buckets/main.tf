@@ -84,26 +84,6 @@ resource "google_storage_bucket_iam_policy" "policy" {
   policy_data = data.google_iam_policy.transfer_job.policy_data
 }
 
-resource "google_storage_hmac_key" "backup-upload-key" {
-  service_account_email = google_service_account.dev-backup-upload.email
-}
-
-resource "google_storage_bucket_iam_member" "backup-upload" {
-  role   = "roles/storage.admin"
-  member = "serviceAccount:${google_service_account.dev-backup-upload.email}"
-  bucket = local.gcs_sql_bucket_backup_name
-}
-
-resource "kubernetes_secret" "gcs-hmac-key" {
-  metadata {
-    name = "gcs-hmac-key"
-  }
-  data = {
-    "access-key" = google_storage_hmac_key.backup-upload-key.access_id
-    "secret-key" = google_storage_hmac_key.backup-upload-key.secret
-  }
-}
-
 ## Backup job T302563
 resource "google_storage_transfer_job" "static-bucket-nightly-backup" {
   description = "Nightly backup of static bucket"
