@@ -27,6 +27,9 @@ grafana:
       cpu: 100m
       memory: 128Mi
 
+kube-state-metrics:
+  namespacesDenylist: 'qs-jobs'
+
 # turning off most k8s component scraping as we are not
 # interested right now
 kubeScheduler:
