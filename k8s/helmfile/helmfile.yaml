@@ -18,6 +18,8 @@ repositories:
     url: https://istio-release.storage.googleapis.com/charts
   - name: minio
     url: https://charts.min.io
+  - name: argo-cd
+    url: https://argoproj.github.io/argo-helm
 
 environments:
   default:
@@ -56,7 +58,9 @@ helmfiles:
   - path: istio-control-plane.yaml
     values:
       - foo: null
-
+  - path: argo-cd.yaml
+    values:
+      - foo: null
 ---
 
 templates:
