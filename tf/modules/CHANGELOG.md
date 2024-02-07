@@ -1,3 +1,6 @@
+# tf-module-monitoring-24
+- Add alarm on low number of available ES shards
+
 # tf-module-buckets-3
 - Add iam members and hmac keys for static assets in module
 

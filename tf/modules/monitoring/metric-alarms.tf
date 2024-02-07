@@ -11,6 +11,19 @@ locals {
       condition_absent        = "300s"
       min_group_by            = "metric.label.es_cluster"
     },
+    "es-cluster-available-shards-${var.environment}" = {
+      display_name            = "Elasticsearch Cluster available shards"
+      filter                  = "metric.type = \"prometheus.googleapis.com/elasticsearch_node_shards_total/gauge\""
+      comparison              = "COMPARISON_GT"
+      evaluation_missing_data = "EVALUATION_MISSING_DATA_ACTIVE"
+      trigger_count           = 1
+      # Currently there is a hard limit of 800 shards per node set via REST API.
+      # The alarm is expected to trigger on 90% usage
+      threshold_value  = 720
+      duration         = "60s"
+      condition_absent = "300s"
+      min_group_by     = "metric.label.es_cluster"
+    },
   }
 }
 
