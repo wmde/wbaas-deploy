@@ -220,6 +220,7 @@ releases:
     chart: prometheus-community/prometheus-elasticsearch-exporter
     version: 5.2.0
     <<: *default_release
+    installed: false
 
   - name: prometheus-elasticsearch-exporter-1
     namespace: monitoring
