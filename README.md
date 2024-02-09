@@ -1,3 +1,6 @@
+> ℹ️ Issues for this repository are tracked on [Phabricator](https://phabricator.wikimedia.org/project/board/5563/) - ([Click here to open a new one](https://phabricator.wikimedia.org/maniphest/task/edit/form/1/?tags=wikibase_cloud
+))
+
 # wbaas-deploy
 Welcome to the Wikibase.Cloud deployment repository. This is used for the infrastructure as code defintions of Wikibase Cloud. It deploys a number of components from a number of differnet repositories. This includes repositories owned by both the WMDE and WBStack github organisation. 
 
