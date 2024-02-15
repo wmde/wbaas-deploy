@@ -8,8 +8,6 @@ repositories:
     url: https://raw.githubusercontent.com/bitnami/charts/eb5f9a9513d987b519f0ecd732e7031241c50328/bitnami
   - name: cetic
     url: https://cetic.github.io/helm-charts
-  - name: elastic
-    url: https://helm.elastic.co
   - name: codecentric
     url: https://codecentric.github.io/helm-charts
   - name: ingress-nginx
