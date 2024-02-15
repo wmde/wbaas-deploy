@@ -22,5 +22,5 @@ environments:
 releases:
   - name: prometheus-operator-crds
     namespace: monitoring
-    version: '{{ if eq .Environment.Name "production" }} 2.0.0 {{ else }} 9.0.0 {{ end }}'
+    version: '9.0.0'
     chart: prometheus-community/prometheus-operator-crds
