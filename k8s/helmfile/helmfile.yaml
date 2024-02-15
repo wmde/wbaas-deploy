@@ -207,7 +207,7 @@ releases:
 
   - name: kube-prometheus-stack
     namespace: monitoring
-    version: '{{ if eq .Environment.Name "production" }} 45.1.1 {{ else }} 56.6.2 {{ end }}'
+    version: '56.6.2'
     chart: prometheus-community/kube-prometheus-stack
     # https://github.com/roboll/helmfile/issues/1124
     disableValidation: true
