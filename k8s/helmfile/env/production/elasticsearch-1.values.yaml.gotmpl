@@ -28,7 +28,7 @@ master:
   startupProbe:
     enabled: true
     periodSeconds: 10
-    failureThreshold: 1440
+    failureThreshold: 2160
 
 data:
   replicaCount: 4
@@ -45,15 +45,10 @@ data:
     accessModes: [ "ReadWriteOnce" ]
     storageClass: "premium-rwo"
     size: 50Gi
-  customStartupProbe:
+  startupProbe:
+    enabled: true
     periodSeconds: 10
-    failureThreshold: 2160
-    initialDelaySeconds: 90
-    timeoutSeconds: 5
-    successThreshold: 1
-    exec:
-      command:
-        - /opt/bitnami/scripts/elasticsearch/healthcheck-cluster.sh
+    failureThreshold: 2880
 
 coordinating:
   replicaCount: 0
