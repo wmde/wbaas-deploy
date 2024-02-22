@@ -2,5 +2,4 @@ releases:
   - name: argo-cd-base
     namespace: argocd
     chart: argo-cd/argo-cd
-    version: 5.53.14
-    installed: {{ eq .Environment.Name "local" | toYaml }}
+    version: '{{ if eq .Environment.Name "local" }} 5.53.14 {{ end }}'
