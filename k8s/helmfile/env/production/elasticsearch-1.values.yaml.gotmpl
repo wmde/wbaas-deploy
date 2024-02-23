@@ -32,14 +32,14 @@ master:
 
 data:
   replicaCount: 4
-  heapSize: 32768m
+  heapSize: 30000m
   resources:
     requests:
       cpu: "4"
-      memory: "64Gi"
+      memory: "60Gi"
     limits:
       cpu: "8"
-      memory: "64Gi"
+      memory: "60Gi"
   persistence:
     enabled: true
     accessModes: [ "ReadWriteOnce" ]
