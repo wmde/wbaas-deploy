@@ -63,6 +63,7 @@ resource "google_container_node_pool" "wbaas-3_highmem-16" {
 resource "google_container_node_pool" "wbaas-3_search-data-pool" {
   cluster    = "wbaas-3"
   name       = "search-data-pool"
+  version    = "1.26.12-gke.1111000"
   node_count = 1
   node_locations = [
     "europe-west3-a",
@@ -101,8 +102,5 @@ resource "google_container_node_pool" "wbaas-3_search-data-pool" {
         effect = "NO_SCHEDULE"
       }
     ]
-  }
-  management {
-    auto_upgrade = false
   }
 }
