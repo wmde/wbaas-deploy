@@ -41,6 +41,8 @@ environments:
 # TODO: does this need increasing?
 helmDefaults:
   timeout: 1200
+  diffArgs:
+    - "--api-versions=discovery.k8s.io/v1/EndpointSlice" # See T358468
 
 # Path to helmfiles to process BEFORE releases
 # All the nested state files under `helmfiles:` is processed in the order of definition.
