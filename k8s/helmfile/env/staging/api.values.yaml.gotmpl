@@ -21,6 +21,15 @@ wbstack:
       recipient: contact.wikibase@wikimedia.de
       sender: contact-<subject>@wikibase.dev
 
+queue:
+  queueNames:
+    - 'default'
+    - 'provisioning'
+    - 'queryservice'
+    - 'cleanup'
+    - 'statistics'
+    - 'recurring'
+    - 'mw-jobs'
 app:
   name: WBaaS Wikibase Dev
   env: staging

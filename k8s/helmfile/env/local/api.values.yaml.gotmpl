@@ -18,6 +18,16 @@ wbstack:
       recipient: someone@wikimedia.de
       sender: contact-<subject>@wikibase.cloud
 
+queue:
+  queueNames:
+    - 'default'
+    - 'provisioning'
+    - 'queryservice'
+    - 'cleanup'
+    - 'statistics'
+    - 'recurring'
+    - 'mw-jobs'
+
 app:
   name: WBaaS Localhost
   env: local
