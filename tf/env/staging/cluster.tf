@@ -98,12 +98,13 @@ resource "google_container_node_pool" "wbaas-2_search-data-pool" {
         effect = "NO_SCHEDULE"
       }
     ]
-    upgrade_settings {
-      blue_green_settings {
-        standard_rollout_policy {
-          batch_node_count    = 1
-          batch_soak_duration = 28800
-        }
+  }
+  upgrade_settings {
+    strategy = "BLUE_GREEN"
+    blue_green_settings {
+      standard_rollout_policy {
+        batch_node_count    = 1
+        batch_soak_duration = "28800s"
       }
     }
   }
