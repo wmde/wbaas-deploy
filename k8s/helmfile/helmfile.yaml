@@ -18,8 +18,6 @@ repositories:
     url: https://istio-release.storage.googleapis.com/charts
   - name: minio
     url: https://charts.min.io
-  - name: argo-cd
-    url: https://argoproj.github.io/argo-helm
 
 environments:
   default:

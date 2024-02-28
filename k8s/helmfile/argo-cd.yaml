@@ -1,5 +1,29 @@
+environments:
+  default:
+    kubeContext: INVALID-ENVIRONMENT
+  production:
+    kubeContext: gke_wikibase-cloud_europe-west3-a_wbaas-3
+    values:
+      - ./env/production/base.yaml
+      - ./env/production/private.yaml
+  staging:
+    kubeContext: gke_wikibase-cloud_europe-west3-a_wbaas-2
+    values:
+      - ./env/staging/base.yaml
+      - ./env/staging/private.yaml
+  local:
+    kubeContext: minikube-wbaas
+    values:
+      - ./env/local/base.yaml
+      - ./env/local/private.yaml
+
+---
+repositories:
+  - name: argo-cd
+    url: https://argoproj.github.io/argo-helm
 releases:
   - name: argo-cd-base
     namespace: argocd
     chart: argo-cd/argo-cd
-    version: '{{ if eq .Environment.Name "local" }} 5.53.14 {{ end }}'
+    version: '5.53.14'
+    installed: {{ eq .Environment.Name "local" | toYaml }}
