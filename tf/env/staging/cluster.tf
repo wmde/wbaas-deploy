@@ -85,7 +85,6 @@ resource "google_container_node_pool" "wbaas-2_search-data-pool" {
       enable_integrity_monitoring = true
       enable_secure_boot          = false
     }
-    logging_variant = "MAX_THROUGHPUT"
     taint = [
       {
         key    = "app.kubernetes.io/component"
