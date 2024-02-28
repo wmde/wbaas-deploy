@@ -85,15 +85,13 @@ resource "google_container_node_pool" "wbaas-2_search-data-pool" {
       enable_integrity_monitoring = true
       enable_secure_boot          = false
     }
+    labels = {
+      "wbaas/pool" = "search-data"
+    }
     taint = [
       {
-        key    = "app.kubernetes.io/component"
-        value  = "data"
-        effect = "NO_SCHEDULE"
-      },
-      {
-        key    = "app.kubernetes.io/name"
-        value  = "elasticsearch"
+        key    = "wbaas/pool"
+        value  = "search-data"
         effect = "NO_SCHEDULE"
       }
     ]
