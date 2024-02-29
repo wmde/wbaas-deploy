@@ -20,12 +20,6 @@ master:
     accessModes: [ "ReadWriteOnce" ]
     storageClass: "premium-rwo"
     size: 5Gi
-  nodeSelector:
-    wbaas/pool: search-master
-  tolerations:
-    - key: wbaas/pool
-      value: search-master
-      effect: NoSchedule
 
 data:
   replicaCount: 2
