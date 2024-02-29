@@ -56,7 +56,9 @@ helmfiles:
   - path: istio-control-plane.yaml
     values:
       - foo: null
-
+  - path: argo-cd.yaml
+    values:
+      - foo: null
 ---
 
 templates:
