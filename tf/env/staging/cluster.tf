@@ -67,7 +67,7 @@ resource "google_container_node_pool" "wbaas-2_compute-pool" {
   node_config {
     disk_size_gb = 32
     disk_type    = "pd-standard"
-    machine_type = "n2-highcpu-8"
+    machine_type = "n2-standard-4"
     metadata = {
       "disable-legacy-endpoints" = "true"
     }
