@@ -85,7 +85,6 @@ resource "google_container_node_pool" "wbaas-2_compute-pool" {
       enable_integrity_monitoring = true
       enable_secure_boot          = false
     }
-    logging_variant = "MAX_THROUGHPUT"
   }
   upgrade_settings {
     max_surge       = 1
