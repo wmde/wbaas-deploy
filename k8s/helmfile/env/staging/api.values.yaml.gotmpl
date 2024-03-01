@@ -1,6 +1,12 @@
 image:
   tag: 10x.0.0
 
+replicaCount:
+  web: 1
+  backend: 2
+  scheduler: 1
+  queue: 1
+
 ingress:
   tls:
   - hosts:
