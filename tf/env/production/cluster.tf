@@ -60,9 +60,9 @@ resource "google_container_node_pool" "wbaas-3_highmem-16" {
   }
 }
 
-resource "google_container_node_pool" "wbaas-3_search-master-pool" {
+resource "google_container_node_pool" "wbaas-3_search-master-pool-1" {
   cluster    = "wbaas-3"
-  name       = "search-master-pool"
+  name       = "search-master-pool-1"
   node_count = 3
   node_locations = [
     "europe-west3-a",
