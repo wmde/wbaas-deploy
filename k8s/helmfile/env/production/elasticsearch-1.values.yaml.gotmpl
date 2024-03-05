@@ -54,6 +54,12 @@ data:
     exec:
       command:
         - /opt/bitnami/scripts/elasticsearch/healthcheck-cluster.sh
+  nodeSelector:
+    wbaas/pool: search-data
+  tolerations:
+    - key: wbaas/pool
+      value: search-data
+      effect: NoSchedule
 
 coordinating:
   replicaCount: 0
