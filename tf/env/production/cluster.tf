@@ -26,7 +26,7 @@ resource "google_container_cluster" "wbaas-3" {
 resource "google_container_node_pool" "wbaas-3_highmem-16" {
   cluster    = "wbaas-3"
   name       = "n2-highmem-16-pool"
-  node_count = 1
+  node_count = 0
   node_locations = [
     "europe-west3-a",
   ]
