@@ -99,7 +99,7 @@ resource "google_container_node_pool" "wbaas-2_search-master-pool" {
     blue_green_settings {
       standard_rollout_policy {
         batch_node_count    = 1
-        batch_soak_duration = "16200s"
+        batch_soak_duration = "16200s" # 30mins longer than https://github.com/wmde/wbaas-deploy/blob/main/k8s/helmfile/env/production/elasticsearch-1.values.yaml.gotmpl#L31
       }
     }
   }
