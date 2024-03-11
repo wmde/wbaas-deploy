@@ -99,7 +99,7 @@ resource "google_container_node_pool" "wbaas-2_search-master-pool" {
     blue_green_settings {
       standard_rollout_policy {
         batch_node_count    = 1
-        batch_soak_duration = "28800s"
+        batch_soak_duration = "16200s" # 30mins longer than https://github.com/wmde/wbaas-deploy/blob/main/k8s/helmfile/env/production/elasticsearch-1.values.yaml.gotmpl#L31
       }
     }
   }
@@ -149,7 +149,7 @@ resource "google_container_node_pool" "wbaas-2_search-data-pool" {
     blue_green_settings {
       standard_rollout_policy {
         batch_node_count    = 1
-        batch_soak_duration = "28800s"
+        batch_soak_duration = "23400s" # 30mins longer than https://github.com/wmde/wbaas-deploy/blob/db105181696f9dc17060bab618b69d3097688140/k8s/helmfile/env/production/elasticsearch-1.values.yaml.gotmpl#L56
       }
     }
   }
