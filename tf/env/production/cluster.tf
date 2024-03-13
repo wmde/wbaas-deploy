@@ -113,7 +113,7 @@ resource "google_container_node_pool" "wbaas-3_search-master-pool-1" {
 resource "google_container_node_pool" "wbaas-3_search-data-pool-1" {
   cluster    = "wbaas-3"
   name       = "search-data-pool-1"
-  node_count = 4
+  node_count = 5
   node_locations = [
     "europe-west3-a",
   ]
