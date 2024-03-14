@@ -1,5 +1,5 @@
 image:
-  tag: 10x.0.0
+  tag: 10x.1.0
 
 ingress:
   tls: null
@@ -49,7 +49,7 @@ replicaCount:
   web: 1
   backend: 1
   scheduler: 1
-  queue: 1
+  queue: 2
 
 storage:
   accessKeySecretName: minio-credentials
@@ -61,3 +61,9 @@ storage:
 
 trustedProxy:
   proxies: ['*']
+
+queue:
+  queueNames: ['default']
+  horizon:
+    enabled: true
+    queueNames: ['default', 'manual-intervention']

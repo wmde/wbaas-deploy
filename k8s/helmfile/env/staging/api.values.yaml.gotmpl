@@ -1,5 +1,5 @@
 image:
-  tag: 10x.0.0
+  tag: 10x.1.0
 
 replicaCount:
   web: 1
@@ -56,3 +56,12 @@ storage:
   url: https://storage.googleapis.com/wikibase-dev-static
   accessKeySecretName: public-assets-hmac-key
   secretKeySecretName: public-assets-hmac-key
+
+queue:
+  queueNames: ['default']
+  horizon:
+    enabled: true
+    queueNames: ['default', 'manual-intervention']
+
+replicaCount:
+  queue: 2
