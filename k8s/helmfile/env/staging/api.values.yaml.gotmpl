@@ -58,9 +58,9 @@ storage:
   secretKeySecretName: public-assets-hmac-key
 
 queue:
-  queueNames: ['default', 'manual-intervention']
+  queueNames: ['default']
   horizon:
-    enabled: false
+    enabled: true
     queueNames: ['default', 'manual-intervention']
 
 replicaCount:
