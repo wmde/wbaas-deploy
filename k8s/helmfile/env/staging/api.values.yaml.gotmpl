@@ -1,5 +1,5 @@
 image:
-  tag: 10x.1.0
+  tag: 10x.1.1
 
 replicaCount:
   web: 1
@@ -58,9 +58,9 @@ storage:
   secretKeySecretName: public-assets-hmac-key
 
 queue:
-  queueNames: ['default', 'manual-intervention']
+  queueNames: ['default']
   horizon:
-    enabled: false
+    enabled: true
     queueNames: ['default', 'manual-intervention']
 
 replicaCount:
