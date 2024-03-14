@@ -23,7 +23,7 @@ resource "google_container_cluster" "wbaas-2" {
 resource "google_container_node_pool" "wbaas-2_compute-pool" {
   cluster    = "wbaas-2"
   name       = "compute-pool"
-  node_count = 2
+  node_count = 3
   node_locations = [
     "europe-west3-a",
   ]
