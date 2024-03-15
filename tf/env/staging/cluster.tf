@@ -58,7 +58,7 @@ resource "google_container_node_pool" "wbaas-2_compute-pool" {
 resource "google_container_node_pool" "wbaas-2_search-master-pool" {
   cluster    = "wbaas-2"
   name       = "search-master-pool"
-  node_count = 3
+  node_count = 6
   node_locations = [
     "europe-west3-a",
   ]
@@ -108,7 +108,7 @@ resource "google_container_node_pool" "wbaas-2_search-master-pool" {
 resource "google_container_node_pool" "wbaas-2_search-data-pool" {
   cluster    = "wbaas-2"
   name       = "search-data-pool"
-  node_count = 2
+  node_count = 4
   node_locations = [
     "europe-west3-a",
   ]
