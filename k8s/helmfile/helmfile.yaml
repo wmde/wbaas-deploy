@@ -121,6 +121,13 @@ releases:
     version: 19.10.2
     <<: *default_release
 
+  - name: elasticsearch-2
+    namespace: default
+    chart: bitnami/elasticsearch
+    version: 19.10.2
+    <<: *default_release
+    installed: {{ eq .Environment.Name "staging" | toYaml }}
+
   - name: redis
     # This is in the default namespace, as the default ns implies staging?
     namespace: default
