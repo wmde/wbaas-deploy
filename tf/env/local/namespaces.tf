@@ -55,3 +55,9 @@ resource "kubernetes_resource_quota" "qs-jobs-podquota" {
     scopes = ["BestEffort"]
   }
 }
+
+resource "kubernetes_namespace" "superset-namespace" {
+  metadata {
+    name = "superset"
+  }
+}

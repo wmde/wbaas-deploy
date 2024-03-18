@@ -18,6 +18,8 @@ repositories:
     url: https://istio-release.storage.googleapis.com/charts
   - name: minio
     url: https://charts.min.io
+  - name: superset
+    url: https://apache.github.io/superset
 
 environments:
   default:
@@ -240,6 +242,13 @@ releases:
   - name: istio-service-mesh
     namespace: istio-system
     chart: ./../../charts/istio-service-mesh
+    <<: *default_release
+
+  - name: superset
+    namespace: superset
+    chart: superset/superset
+    version: 0.12.6
+    installed: true
     <<: *default_release
 
   ################################
