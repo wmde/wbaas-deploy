@@ -27,6 +27,11 @@ wbstack:
       recipient: contact.wikibase@wikimedia.de
       sender: contact-<subject>@wikibase.dev
 
+serviceMonitor:
+  enabled: true
+  additionalLabels:
+    release: kube-prometheus-stack
+
 app:
   name: WBaaS Wikibase Dev
   env: staging
