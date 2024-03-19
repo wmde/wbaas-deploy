@@ -61,12 +61,12 @@ helmfile-sync:
 	cd ./k8s/helmfile && helmfile --environment local sync
 
 PHONY: init-%
-init-local: # @HELP Initialize terraform state for your local setup. This does not create any resources. It also downloads any new modules
-init-staging: # @HELP Initialize terraform state for staging. This does not create any resources. It also downloads any new modules
-init-production: # @HELP Initialize terraform state for production. This does not create any resources. It also downloads any new modules
+init-local: # @HELP Initialize tf state for your local setup. This does not create any resources. It also downloads any new modules
+init-staging: # @HELP Initialize tf state for staging. This does not create any resources. It also downloads any new modules
+init-production: # @HELP Initialize tf state for production. This does not create any resources. It also downloads any new modules
 init-%: ENV=$*
 init-%:
-	cd ./tf/env/$(ENV) && terraform init
+	cd ./tf/env/$(ENV) && tofu init
 
 .PHONY: diff-%
 diff-local: # @HELP Diff the repository against the state of your local cluster
@@ -74,7 +74,7 @@ diff-staging: # @HELP Diff the repository against the state of the staging clust
 diff-production: # @HELP Diff the repository against the state of the production cluster
 diff-%: ENV=$*
 diff-%:
-	cd ./tf/env/$(ENV) && terraform plan
+	cd ./tf/env/$(ENV) && tofu plan
 	cd ./k8s/helmfile && helmfile --environment $(ENV) diff --context 5
 
 .PHONY: apply-%
@@ -83,7 +83,7 @@ apply-staging: # @HELP Apply changes in the repository to the staging cluster
 apply-production: # @HELP Apply changes in the repository to the production cluster
 apply-%: ENV=$*
 apply-%:
-	cd ./tf/env/$(ENV) && terraform apply
+	cd ./tf/env/$(ENV) && tofu apply
 	cd ./k8s/helmfile && helmfile --environment $(ENV) --interactive apply --context 5
 
 diff: # @HELP Run diff for both staging and production

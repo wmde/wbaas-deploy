@@ -2,13 +2,11 @@
 
 Install minikube
 
-Unfortunatly this can not be done using terraform at this time...
+Unfortunately this can not be done using opentofu at this time...
 
 In the local dir:
 
 ```sh
-terraform init
-terraform apply
+tofu init
+tofu apply
 ```
-
-Everything should be green and not error, although nothing will actually be applied by terraform at this time.

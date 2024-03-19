@@ -2,7 +2,7 @@
 
 This is a guide to deploying changes to components.
 
-It does not describe how to make terraform changes or how to make
+It does not describe how to make opentofu changes or how to make
 changes to charts beyond bumping the version of the image that they use.
 
 ## The big picture
