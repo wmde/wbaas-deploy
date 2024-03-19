@@ -27,11 +27,6 @@ wbstack:
       recipient: contact.wikibase@wikimedia.de
       sender: contact-<subject>@wikibase.dev
 
-serviceMonitor:
-  enabled: true
-  additionalLabels:
-    release: kube-prometheus-stack
-
 app:
   name: WBaaS Wikibase Dev
   env: staging
@@ -62,8 +57,11 @@ storage:
   accessKeySecretName: public-assets-hmac-key
   secretKeySecretName: public-assets-hmac-key
 
-queue:
-  queueNames: ['default']
-  horizon:
-    enabled: true
-    queueNames: ['default', 'manual-intervention']
+resources:
+  queue:
+    requests:
+      cpu: 100m
+      memory: 256Mi
+    limits:
+      cpu: 250m
+      memory: 512Mi
