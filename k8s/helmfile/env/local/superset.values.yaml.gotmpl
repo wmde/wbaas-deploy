@@ -19,3 +19,13 @@ global:
 configOverrides:
   secret: |
     SECRET_KEY = os.getenv("SUPERSET_SECRET_KEY")
+  proxy_fix: |
+    # This will make sure the redirect_uri is properly computed, even with SSL offloading
+    ENABLE_PROXY_FIX = True
+  smtp: |
+    SMTP_HOST = "mailhog"
+    SMTP_STARTTLS = False
+    SMTP_SSL = False
+    SMTP_USER = "superset"
+    SMTP_PORT = 1025
+    SMTP_PASSWORD = None
