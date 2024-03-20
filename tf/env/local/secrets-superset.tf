@@ -10,6 +10,6 @@ resource "kubernetes_secret" "superset-secrets" {
     namespace = "superset"
   }
   data = {
-    SECRET_KEY = random_password.superset-secret-key.result
+    SUPERSET_SECRET_KEY = random_password.superset-secret-key.result
   }
 }
