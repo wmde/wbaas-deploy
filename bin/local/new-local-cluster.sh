@@ -25,7 +25,7 @@ make minikube-delete
 make minikube-start
 
 cd "$WBAAS_DEPLOY_DIR/tf/env/local/"
-terraform apply -auto-approve # bad practice - you won't have a second chance to check for destructive actions
+tofu apply -auto-approve # bad practice - you won't have a second chance to check for destructive actions
 
 cd "$WBAAS_DEPLOY_DIR/k8s/helmfile/"
 helmfile --environment local deps
