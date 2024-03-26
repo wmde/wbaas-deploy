@@ -18,6 +18,13 @@ environments:
       - ./env/local/private.yaml
 
 ---
+templates:
+  default: &default_release
+    missingFileHandler: Error
+    values:
+      - env/production/{{`{{ .Release.Name }}`}}.values.yaml.gotmpl
+      - env/{{`{{ .Environment.Name }}`}}/{{`{{ .Release.Name }}`}}.values.yaml.gotmpl
+
 repositories:
   - name: argo-cd
     url: https://argoproj.github.io/argo-helm
@@ -27,3 +34,4 @@ releases:
     chart: argo-cd/argo-cd
     version: '5.53.14'
     installed: {{ ne .Environment.Name "production" | toYaml }}
+    <<: *default_release
