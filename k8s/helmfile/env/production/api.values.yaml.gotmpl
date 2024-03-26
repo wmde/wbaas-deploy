@@ -1,11 +1,11 @@
 image:
-  tag: 10x.0.0
+  tag: 10x.1.2
 
 replicaCount:
   web: 1
   backend: 4
   scheduler: 1
-  queue: 1
+  queue: 2
 
 useProbes: true
 
@@ -13,7 +13,10 @@ platform:
   backendMwHost: mediawiki-139-app-backend.default.svc.cluster.local
 
 queue:
-  queueNames: ['default', 'manual-intervention']
+  queueNames: ['default']
+  horizon:
+    enabled: true
+    queueNames: ['default', 'manual-intervention']
   # This mw db connection is only used by the queue..
   mw:
     db:
@@ -24,6 +27,11 @@ queue:
       passwordSecretName: sql-secrets-init-passwords
       passwordSecretKey: SQL_INIT_PASSWORD_MW
   backoff: [10,60,300,900,1500] # 10s, 1m, 5m, 15m, 30m
+
+serviceMonitor:
+  enabled: true
+  additionalLabels:
+    release: kube-prometheus-stack
 
 ingress:
   tls:
@@ -148,11 +156,11 @@ resources:
       memory: 400Mi
   queue:
     requests:
-      cpu: 100m
-      memory: 256Mi
-    limits:
-      cpu: 250m
+      cpu: 500m
       memory: 512Mi
+    limits:
+      cpu: 1000m
+      memory: 1024Mi
   scheduler:
     requests:
       cpu: 5m
