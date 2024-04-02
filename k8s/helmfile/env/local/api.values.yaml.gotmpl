@@ -43,7 +43,9 @@ app:
     serviceAccountSecret: null
   stackdriver:
     enabled: false
-  elasticSearchHost: elasticsearch-1.default.svc.cluster.local:9200
+  elasticSearchHost: elasticsearch-2.default.svc.cluster.local:9200
+  elasticSearchSharedIndex: wiki_1
+  elasticSearchClusterToIndex: write-only
 
 replicaCount:
   web: 1
