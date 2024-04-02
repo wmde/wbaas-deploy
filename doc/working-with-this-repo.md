@@ -3,7 +3,7 @@
 ### This repository needs to reflect the state of any shared resources
 If it does not it will block other people from also altering those shared resources or may even result in unintentional destructive actions.
 
-This means if you apply any changes to shared resources (e.g. using helmfile or Terraform) the changed state needs to make it to `main` within a reasonable timeframe (say 10 mins). Shared resources are any infrastructure items that are touched by more than one person. For example, anything in our GCE project or our MailGun account. It does not include any local development clusters we may have setup.
+This means if you apply any changes to shared resources (e.g. using helmfile or Opentofu) the changed state needs to make it to `main` within a reasonable timeframe (say 10 mins). Shared resources are any infrastructure items that are touched by more than one person. For example, anything in our GCE project or our MailGun account. It does not include any local development clusters we may have setup.
 
 ### All changes to `main` should be prepared as PRs.
 

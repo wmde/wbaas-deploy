@@ -5,7 +5,7 @@
 You need the following things installed on your machine:
 * [docker](https://docs.docker.com/engine/install/ubuntu/)
 * [minikube](https://minikube.sigs.k8s.io/docs/start/)
-* [terraform](https://learn.hashicorp.com/tutorials/terraform/install-cli)
+* [opentofu](https://opentofu.org/docs/intro/install/)
 * [helm](https://helm.sh/docs/intro/install/)
   * diff plugin `helm plugin install https://github.com/databus23/helm-diff`
   * git plugin `helm plugin install https://github.com/aslafy-z/helm-git`
@@ -60,13 +60,13 @@ minikube comes with a nice web dashboard that you can turn on with:
 make minikube-dashboard
 ```
 
-## terraform
+## opentofu
 
-Terraform is required to setup some needed dependencies. It interacts with a k8s cluster, that you need to have created beforehand (see the [minikube cluster](#minikube-cluster) section)!
+Opentofu is required to setup some needed dependencies. It interacts with a k8s cluster, that you need to have created beforehand (see the [minikube cluster](#minikube-cluster) section)!
 
-To initialise terraform for the local environment, run the following in the `tf/env/local` dir:
+To initialise opentofu for the local environment, run the following in the `tf/env/local` dir:
 ```sh
-terraform init
+tofu init
 ```
 
 For convenience, you can store local secrets for the cluster in `.tfvars` files which will be ignored by git. 
@@ -85,15 +85,15 @@ recaptcha_v2_dev_secret   = "insert actual secret here"
 To review the changes between what is applied to the infrastructure and the current configuration run:
 
 ```sh
-terraform plan
+tofu plan
 ```
 
-The first time the `terraform plan` command is run the whole configuration will be displayed as none of the configuration will have been applied to the infrastructure before.
+The first time the `tofu plan` command is run the whole configuration will be displayed as none of the configuration will have been applied to the infrastructure before.
 
-Once you have reviewed the output of `terraform plan`, you can apply the changes by running:
+Once you have reviewed the output of `tofu plan`, you can apply the changes by running:
 
 ```sh
-terraform apply
+tofu apply
 ```
 
 ## helmfile
@@ -116,8 +116,8 @@ In order to speed things up you can add `--skip-deps` after the `diff` or `apply
 
 > **NOTE** \
 > For convenience, you can (from the root of the repository) run:
-> - `make diff-local` - which will do a `terraform plan` followed by a `helmfile diff`
-> - `make apply-local` - which will do a  `terraform apply` followed by a `helmfile apply`
+> - `make diff-local` - which will do a `tofu plan` followed by a `helmfile diff`
+> - `make apply-local` - which will do a  `tofu apply` followed by a `helmfile apply`
 >
 > Be aware that both these commands run `helmfile` with the `--skip-deps` option. If you need to fetch any changes, make sure to do a `make helmfile-deps` beforehand.
 
@@ -229,8 +229,8 @@ Note: this was only tested on Ubuntu 20.04
 # minikube
 sudo sh -c 'minikube completion bash > /usr/share/bash-completion/completions/minikube'
 
-# terraform
-terraform -install-autocomplete
+# opentofu
+tofu -install-autocomplete
 
 # kubectl
 sudo sh -c 'kubectl completion bash > /usr/share/bash-completion/completions/kubectl'
@@ -253,8 +253,8 @@ sudo sh -c 'skaffold completion bash > /usr/share/bash-completion/completions/sk
 Run `make test`. This only includes YAML linting for now.
 
 ## FAQ / Troubleshooting
-### **Why aren't my changes taking effect after a `terraform apply`?**
-Try restarting the pod(s) that are affected by the changed terraform configuration by deleting them and waiting for k8s to recreate them (`kubectl delete pod <pod_name>`).
+### **Why aren't my changes taking effect after a `tofu apply`?**
+Try restarting the pod(s) that are affected by the changed opentofu configuration by deleting them and waiting for k8s to recreate them (`kubectl delete pod <pod_name>`).
 
 ### **Why did `make diff-local` fail to download a chart?**
 If you get an error similar to this:

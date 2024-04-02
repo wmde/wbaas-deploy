@@ -3,7 +3,7 @@ The purpose of the scripts in this directory is to improve and speed up the work
 
 ## Scripts
 ### [`new-local-cluster.sh`](./new-local-cluster.sh)
-Deletes and tries to re-initiate the local minikube cluster in an unattended fashion (no user input/prompt approval required) by applying our terraform and helmfile configuration. It can take like ~20 minutes to finish. All data inside the local cluster will be lost. Please report if your cluster is not in a useable state after running this script, so we can improve it.
+Deletes and tries to re-initiate the local minikube cluster in an unattended fashion (no user input/prompt approval required) by applying our opentofu and helmfile configuration. It can take like ~20 minutes to finish. All data inside the local cluster will be lost. Please report if your cluster is not in a useable state after running this script, so we can improve it.
 
 ### [`create-local-user.sh`](./create-local-user.sh)
 Creates a local user account that can be used immediately. The minikube tunnel needs to be open for this to work (`make minikube-tunnel`).

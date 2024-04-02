@@ -13,7 +13,7 @@ PV=$(kubectl get pvc ${PVC} -o jsonpath="{.spec.volumeName}")
 # matches metadata of disks provisioned via bitnami mariadb chart
 DISK=$(kubectl get pv ${PV} -o jsonpath="{.spec.csi.volumeHandle}" | awk -F '/' '{print $NF}')
 
-# if the $DISK is empty, check if it was provisioned by terraform
+# if the $DISK is empty, check if it was provisioned by opentofu
 if [[ -z "$DISK" ]]; then
     DISK=$(kubectl get pv ${PV} -o jsonpath="{.spec.gcePersistentDisk.pdName}")
 fi
