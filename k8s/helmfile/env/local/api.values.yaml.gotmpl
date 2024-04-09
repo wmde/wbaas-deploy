@@ -44,8 +44,9 @@ app:
   stackdriver:
     enabled: false
   elasticSearchHost: elasticsearch-2.default.svc.cluster.local:9200
-  elasticSearchSharedIndex: wiki_1
-  elasticSearchClusterToIndex: write-only
+  elasticSearchSharedIndexHost: elasticsearch-2.default.svc.cluster.local:9200
+  elasticSearchSharedIndexPrefix: wiki_1
+  elasticSearchClusterWithoutSharedIndex: write-only
 
 replicaCount:
   web: 1
