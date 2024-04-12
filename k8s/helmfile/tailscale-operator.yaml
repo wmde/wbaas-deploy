@@ -1,0 +1,10 @@
+repositories:
+  - name: tailscale
+    url: https://pkgs.tailscale.com/helmcharts
+
+releases:
+  - name: tailscale
+    namespace: tailscale
+    chart: tailscale/tailscale-operator
+    version: 1.62.1
+    installed: {{ eq .Environment.Name "staging" | toYaml }}

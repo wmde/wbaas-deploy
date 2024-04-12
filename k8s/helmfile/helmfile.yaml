@@ -59,6 +59,9 @@ helmfiles:
   - path: argo-cd.yaml
     values:
       - foo: null
+  - path: tailscale-operator.yaml
+    values:
+      - foo: null
 ---
 
 templates:

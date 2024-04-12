@@ -66,3 +66,9 @@ resource "kubernetes_resource_quota" "qs-jobs-podquota" {
     scopes = ["BestEffort"]
   }
 }
+
+resource "kubernetes_namespace" "tailscale-namespace" {
+  metadata {
+    name = "tailscale"
+  }
+}

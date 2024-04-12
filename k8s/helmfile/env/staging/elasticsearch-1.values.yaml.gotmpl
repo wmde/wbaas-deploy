@@ -6,6 +6,10 @@ annotations:
   traffic.sidecar.istio.io/excludeOutboundPorts: "9300"
   traffic.sidecar.istio.io/excludeInboundPorts: "9300"
 
+service:
+  annotations:
+    tailscale.com/expose: "true"
+
 master:
   heapSize: 512m
   resources:
@@ -20,6 +24,8 @@ master:
     accessModes: [ "ReadWriteOnce" ]
     storageClass: "premium-rwo"
     size: 5Gi
+  networkPolicy:
+    allowExternalEgress: false
 
 data:
   replicaCount: 2
@@ -36,3 +42,5 @@ data:
     accessModes: [ "ReadWriteOnce" ]
     storageClass: "premium-rwo"
     size: 10Gi
+  networkPolicy:
+    allowExternalEgress: false
