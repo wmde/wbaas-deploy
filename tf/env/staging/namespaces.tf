@@ -68,6 +68,8 @@ resource "kubernetes_resource_quota" "qs-jobs-podquota" {
 }
 
 resource "kubernetes_namespace" "tailscale-namespace" {
+  provider = kubernetes.wbaas-2
+
   metadata {
     name = "tailscale"
   }
