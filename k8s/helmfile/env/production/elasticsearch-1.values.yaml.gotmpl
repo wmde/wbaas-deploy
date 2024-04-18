@@ -10,6 +10,10 @@ extraConfig:
   # T309378
   action.auto_create_index: false
 
+service:
+  annotations:
+    tailscale.com/expose: "true"
+
 master:
   replicaCount: 3
   heapSize: 13000m
@@ -35,6 +39,8 @@ master:
     - key: wbaas/pool
       value: search-master
       effect: NoSchedule
+  networkPolicy:
+    allowExternalEgress: false
 
 data:
   replicaCount: 5
@@ -61,6 +67,8 @@ data:
     - key: wbaas/pool
       value: search-data
       effect: NoSchedule
+  networkPolicy:
+    allowExternalEgress: false
 
 coordinating:
   replicaCount: 0
