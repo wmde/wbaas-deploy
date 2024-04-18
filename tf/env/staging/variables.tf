@@ -68,3 +68,17 @@ variable "recaptcha_v2_secret" {
   default     = "" # apparently this doesn't mean default is empty string but rather default is not defined. This means it won't prompt the user
   # but also won't override the value that is in the state
 }
+
+variable "tailscale_client_id" {
+  type        = string
+  description = "Client id for Tailscale access"
+  sensitive   = true
+  default     = ""
+}
+
+variable "tailscale_client_secret" {
+  type        = string
+  description = "Client secret for Tailscale access"
+  sensitive   = true
+  default     = ""
+}
