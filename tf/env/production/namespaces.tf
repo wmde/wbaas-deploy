@@ -67,3 +67,11 @@ resource "kubernetes_resource_quota" "qs-jobs-podquota" {
     scopes = ["BestEffort"]
   }
 }
+
+resource "kubernetes_namespace" "tailscale-namespace" {
+  provider = kubernetes.wbaas-3
+
+  metadata {
+    name = "tailscale"
+  }
+}
