@@ -34,5 +34,5 @@ releases:
     namespace: tailscale
     chart: tailscale/tailscale-operator
     version: 1.62.1
-    installed: {{ eq .Environment.Name "staging" | toYaml }}
+    installed: {{ ne .Environment.Name "local" | toYaml }}
     <<: *default_release
