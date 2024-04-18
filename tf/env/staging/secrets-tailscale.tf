@@ -1,4 +1,6 @@
 resource "kubernetes_secret" "tailscale-secret" {
+  provider = kubernetes.wbaas-2
+
   metadata {
     name      = "operator-oauth"
     namespace = "tailscale"
