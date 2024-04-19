@@ -1,0 +1,36 @@
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: local
+  namespace: argocd
+  # labels:
+  #   app.kubernetes.io/managed-by: Helm
+  #   meta.helm.sh/release-name: app-of-apps
+  # annotations:
+  #   meta.helm.sh/release-name: app-of-apps
+  #   meta.helm.sh/release-namespace: argocd
+spec:
+  description: The local minikube deployment of wikibase.cloud
+  destinations:
+  - name: in-cluster
+    namespace: dena
+    server: https://kubernetes.default.svc
+  # Deny all cluster-scoped resources from being created, except for Namespace
+  clusterResourceWhitelist:
+  - group: ''
+    kind: Namespace
+  # Allow all namespaced-scoped resources to be created, except for ResourceQuota, LimitRange, NetworkPolicy
+  namespaceResourceBlacklist:
+  - group: ''
+    kind: ResourceQuota
+  - group: ''
+    kind: LimitRange
+  - group: ''
+    kind: NetworkPolicy
+  # Deny all namespaced-scoped resources from being created, except for Deployment and StatefulSet
+  namespaceResourceWhitelist:
+  - group: 'apps'
+    kind: Deployment
+  - group: 'apps'
+    kind: StatefulSet
+

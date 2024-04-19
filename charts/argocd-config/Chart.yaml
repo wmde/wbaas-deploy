@@ -1,0 +1,6 @@
+apiVersion: v2
+name: argocd-conf
+description: the argo-cd configuratio for wikibase.cloud
+type: application
+version: 0.1.0
+appVersion: "0.0.1"

@@ -1,0 +1,137 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: app-of-apps
+  namespace: argocd
+spec:
+  destination:
+    server: https://kubernetes.default.svc
+  project: local
+  source:
+    path: .
+    repoURL: https://github.com/deer-wmde/example-app-of-apps/
+    targetRevision: HEAD
+  syncPolicy:
+    automated: {}
+# status:
+#   controllerNamespace: argocd
+#   health:
+#     status: Healthy
+#   history:
+#   - deployStartedAt: "2024-04-16T13:23:06Z"
+#     deployedAt: "2024-04-16T13:23:07Z"
+#     id: 0
+#     revision: 52621587126c6c47d601d6be43f694aa2704ec50
+#     source:
+#       path: .
+#       repoURL: https://github.com/deer-wmde/example-app-of-apps/
+#       targetRevision: HEAD
+#   operationState:
+#     finishedAt: "2024-04-16T13:23:07Z"
+#     message: successfully synced (all tasks run)
+#     operation:
+#       initiatedBy:
+#         username: admin
+#       retry: {}
+#       sync:
+#         revision: 52621587126c6c47d601d6be43f694aa2704ec50
+#         syncStrategy:
+#           hook: {}
+#     phase: Succeeded
+#     startedAt: "2024-04-16T13:23:06Z"
+#     syncResult:
+#       resources:
+#       - group: argoproj.io
+#         hookPhase: Running
+#         kind: Application
+#         message: application.argoproj.io/tool-cradle created
+#         name: tool-cradle
+#         namespace: argocd
+#         status: Synced
+#         syncPhase: Sync
+#         version: v1alpha1
+#       - group: argoproj.io
+#         hookPhase: Running
+#         kind: Application
+#         message: application.argoproj.io/wbaas-api created
+#         name: wbaas-api
+#         namespace: argocd
+#         status: Synced
+#         syncPhase: Sync
+#         version: v1alpha1
+#       - group: argoproj.io
+#         hookPhase: Running
+#         kind: Application
+#         message: application.argoproj.io/tool-widar created
+#         name: tool-widar
+#         namespace: argocd
+#         status: Synced
+#         syncPhase: Sync
+#         version: v1alpha1
+#       - group: argoproj.io
+#         hookPhase: Running
+#         kind: Application
+#         message: application.argoproj.io/tool-quickstatements created
+#         name: tool-quickstatements
+#         namespace: argocd
+#         status: Synced
+#         syncPhase: Sync
+#         version: v1alpha1
+#       - group: argoproj.io
+#         hookPhase: Running
+#         kind: Application
+#         message: application.argoproj.io/ui created
+#         name: ui
+#         namespace: argocd
+#         status: Synced
+#         syncPhase: Sync
+#         version: v1alpha1
+#       revision: 52621587126c6c47d601d6be43f694aa2704ec50
+#       source:
+#         path: .
+#         repoURL: https://github.com/deer-wmde/example-app-of-apps/
+#         targetRevision: HEAD
+#   reconciledAt: "2024-04-16T13:28:37Z"
+#   resources:
+#   - group: argoproj.io
+#     kind: Application
+#     name: tool-cradle
+#     namespace: argocd
+#     status: Synced
+#     version: v1alpha1
+#   - group: argoproj.io
+#     kind: Application
+#     name: tool-quickstatements
+#     namespace: argocd
+#     status: Synced
+#     version: v1alpha1
+#   - group: argoproj.io
+#     kind: Application
+#     name: tool-widar
+#     namespace: argocd
+#     status: Synced
+#     version: v1alpha1
+#   - group: argoproj.io
+#     kind: Application
+#     name: ui
+#     namespace: argocd
+#     status: Synced
+#     version: v1alpha1
+#   - group: argoproj.io
+#     kind: Application
+#     name: wbaas-api
+#     namespace: argocd
+#     status: Synced
+#     version: v1alpha1
+#   sourceType: Helm
+#   summary: {}
+#   sync:
+#     comparedTo:
+#       destination:
+#         server: https://kubernetes.default.svc
+#       source:
+#         path: .
+#         repoURL: https://github.com/deer-wmde/example-app-of-apps/
+#         targetRevision: HEAD
+#     revision: 52621587126c6c47d601d6be43f694aa2704ec50
+#     status: Synced
