@@ -1,0 +1,22 @@
+configs:
+  cm:
+    ui.cssurl: "./custom/production.css"
+    ui.bannercontent: "PRODUCTION"
+    ui.bannerurl: "https://wikibase.cloud/"
+    ui.bannerpermanent: true
+    ui.bannerposition: "both"
+
+    admin.enabled: false
+
+server:
+  volumes:
+    - name: styles
+      configMap:
+        name: argocd-styles-cm
+  volumeMounts:
+    - mountPath: /shared/app/custom
+      name: styles
+
+# https://argocd-operator.readthedocs.io/en/latest/usage/dex/
+dex:
+  enabled: false
