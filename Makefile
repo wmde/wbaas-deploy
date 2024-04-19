@@ -11,7 +11,7 @@ help:
 .PHONY: minikube-start
 minikube-start: # @HELP Start a local k8s cluster using minikube
 minikube-start:
-	minikube --profile minikube-wbaas start --kubernetes-version=1.26.5
+	minikube --profile minikube-wbaas start --kubernetes-version=1.26.14
 
 .PHONY: minikube-stop
 minikube-stop: # @HELP Stop the local minikube cluster
@@ -42,6 +42,11 @@ minikube-dashboard:
 minikube-tunnel: # @HELP Open a tunnel to the local cluster and expose it on an IP on the host system
 minikube-tunnel:
 	./bin/minikube-tunnel
+
+.PHONY: argocd-port-forward
+argocd-port-forward: # @HELP Forward port 8080 of argocd-server to access it on the host system
+argocd-port-forward:
+	kubectl -n argocd port-forward deployments/argo-cd-base-argocd-server 8080
 
 .PHONY: helmfile-fetch
 helmfile-fetch: # @HELP Fetch all charts defined in the Helmfile. This works across all environments
