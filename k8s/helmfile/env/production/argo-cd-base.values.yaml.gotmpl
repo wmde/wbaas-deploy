@@ -1,22 +1,27 @@
-configs:
-  cm:
-    ui.cssurl: "./custom/production.css"
-    ui.bannercontent: "PRODUCTION"
-    ui.bannerurl: "https://wikibase.cloud/"
-    ui.bannerpermanent: true
-    ui.bannerposition: "both"
-
-    admin.enabled: false
-
-server:
-  volumes:
-    - name: styles
-      configMap:
-        name: argocd-styles-cm
-  volumeMounts:
-    - mountPath: /shared/app/custom
-      name: styles
-
 # https://argocd-operator.readthedocs.io/en/latest/usage/dex/
 dex:
   enabled: false
+
+# https://argo-cd.readthedocs.io/en/stable/user-guide/application-set/
+applicationSet:
+  enabled: false
+
+configs:
+  cm:
+    admin.enabled: false
+
+    # cluster.inClusterEnabled indicates whether to allow in-cluster server address. Enabled by default.
+    cluster.inClusterEnabled: "true"
+
+    ui.bannerpermanent: true
+    ui.bannercontent: "PRODUCTION"
+    ui.bannerurl: "https://wikibase.cloud/"
+
+  styles: |
+    .ui-banner {
+        background-color:#d93f4a;
+
+        a {
+          color:white;
+        }
+    }
