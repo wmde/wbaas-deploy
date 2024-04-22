@@ -1,0 +1,13 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: app-of-apps
+  namespace: default
+spec:
+  destination:
+    server: https://kubernetes.default.svc
+  project: local
+  source:
+    path: .
+    repoURL: https://github.com/deer-wmde/example-app-of-apps/
+    targetRevision: HEAD
