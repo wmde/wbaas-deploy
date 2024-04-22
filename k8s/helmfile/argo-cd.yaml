@@ -17,7 +17,3 @@ releases:
     version: '5.53.14'
     installed: {{ eq .Environment.Name "local" | toYaml }}
     <<: *default_release
-
-  - name: app-of-apps
-    namespace: argocd
-    chart: ../../charts/argocd-config/
