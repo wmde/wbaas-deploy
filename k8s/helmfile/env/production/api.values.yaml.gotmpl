@@ -1,5 +1,5 @@
 image:
-  tag: 10x.1.2
+  tag: 10x.3.0
 
 replicaCount:
   web: 1
@@ -86,6 +86,7 @@ app:
   jwtSecretSecretKey: api-app-jwt-secret
   queryServiceHost: queryservice.default.svc.cluster.local:9999
   elasticSearchHost: elasticsearch-1.default.svc.cluster.local:9200
+  elasticSearchClusterWithoutSharedIndex: all
   redis:
     prefix: wikibase_production_api
     # TODO is it possible to take advantage of replicas here?

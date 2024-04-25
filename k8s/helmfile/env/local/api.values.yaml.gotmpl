@@ -1,5 +1,5 @@
 image:
-  tag: 10x.1.2
+  tag: 10x.3.0
 
 ingress:
   tls: null
@@ -44,6 +44,7 @@ app:
   stackdriver:
     enabled: false
   elasticSearchHost: elasticsearch-1.default.svc.cluster.local:9200
+  elasticSearchClusterWithoutSharedIndex: all
 
 replicaCount:
   web: 1

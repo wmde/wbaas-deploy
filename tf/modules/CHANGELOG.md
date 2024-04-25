@@ -1,3 +1,6 @@
+# tf-module-monitoring-26
+- Add alarm on Queryservice Batches Backpressure
+
 # tf-module-monitoring-25
 - Add alarm on low number of available ES shards
 

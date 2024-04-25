@@ -24,6 +24,17 @@ locals {
       condition_absent = "300s"
       min_group_by     = "metric.label.es_cluster"
     },
+    "api-qs-batches-backpressure-${var.environment}" = {
+      display_name            = "Platform API Queryservice Batches Backpressure"
+      filter                  = "metric.type = \"prometheus.googleapis.com/platform_api_qs_batches_pending_batches/gauge\""
+      comparison              = "COMPARISON_GT"
+      evaluation_missing_data = "EVALUATION_MISSING_DATA_ACTIVE"
+      trigger_count           = 1
+      threshold_value         = 100
+      duration                = "60s"
+      condition_absent        = "300s"
+      min_group_by            = "metric.label.cluster"
+    },
   }
 }
 

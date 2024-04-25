@@ -1,4 +1,3 @@
-
 repositories:
   - name: argo-cd
     url: https://argoproj.github.io/argo-helm
@@ -17,4 +16,3 @@ releases:
     version: '5.53.14'
     installed: {{ ne .Environment.Name "production" | toYaml }}
     <<: *default_release
- 
