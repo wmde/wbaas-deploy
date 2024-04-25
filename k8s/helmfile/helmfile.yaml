@@ -242,10 +242,6 @@ releases:
     chart: ./../../charts/istio-service-mesh
     <<: *default_release
 
-  - name: app-of-apps
-    namespace: argocd
-    chart: ../../charts/argocd-config/
-
   ################################
   # LOCAL ONLY
   ################################
