@@ -15,7 +15,7 @@ service:
     tailscale.com/expose: "true"
 
 master:
-  replicaCount: 0
+  replicaCount: 3
   heapSize: 13000m
   resources:
     requests:
@@ -43,7 +43,7 @@ master:
     allowExternalEgress: false
 
 data:
-  replicaCount: 0
+  replicaCount: 5
   heapSize: 28000m
   resources:
     requests:
