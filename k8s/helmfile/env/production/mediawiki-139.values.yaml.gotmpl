@@ -17,9 +17,11 @@ mw:
     passwordSecretName: redis-password
     passwordSecretKey: password
   elasticsearch:
-    host: elasticsearch-1.default.svc.cluster.local
+    host: elasticsearch-2.default.svc.cluster.local
     port: 9200
     es6: false
+  cirrussearch:
+    prefixIds: true
   mailgun:
     enabled: false
   platform:
