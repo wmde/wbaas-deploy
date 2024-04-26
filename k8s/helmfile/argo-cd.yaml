@@ -8,6 +8,8 @@ environments:
   local:
     kubeContext: minikube-wbaas
 
+---
+
 repositories:
   - name: argo-cd
     url: https://argoproj.github.io/argo-helm
