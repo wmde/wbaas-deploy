@@ -43,11 +43,6 @@ minikube-tunnel: # @HELP Open a tunnel to the local cluster and expose it on an 
 minikube-tunnel:
 	./bin/minikube-tunnel
 
-.PHONY: argocd-port-forward
-argocd-port-forward: # @HELP Forward port 8080 of argocd-server to access it on the host system
-argocd-port-forward:
-	kubectl -n argocd port-forward deployments/argo-cd-base-argocd-server 8080
-
 .PHONY: helmfile-fetch
 helmfile-fetch: # @HELP Fetch all charts defined in the Helmfile. This works across all environments
 helmfile-fetch:
