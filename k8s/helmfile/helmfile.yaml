@@ -123,6 +123,7 @@ releases:
     chart: bitnami/elasticsearch
     version: 19.10.2
     <<: *default_release
+    installed: {{ ne .Environment.Name "production" | toYaml }}
 
   - name: elasticsearch-2
     namespace: default
