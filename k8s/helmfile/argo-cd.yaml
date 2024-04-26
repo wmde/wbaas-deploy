@@ -1,3 +1,13 @@
+environments:
+  default:
+    kubeContext: INVALID-ENVIRONMENT
+  production:
+    kubeContext: gke_wikibase-cloud_europe-west3-a_wbaas-3
+  staging:
+    kubeContext: gke_wikibase-cloud_europe-west3-a_wbaas-2
+  local:
+    kubeContext: minikube-wbaas
+
 repositories:
   - name: argo-cd
     url: https://argoproj.github.io/argo-helm
