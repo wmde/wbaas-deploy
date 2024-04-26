@@ -1,1 +1,18 @@
-# local uses production configuration so this is an empty file
+configs:
+  params:
+    server.insecure: "true"
+
+  cm:
+    admin.enabled: "true"
+
+    ui.bannercontent: "LOCAL"
+    ui.bannerurl: "http://wikibase.localhost"
+
+  styles: |
+    .ui-banner {
+        background-color:#6d7f8b;
+
+        a {
+          color:white;
+        }
+    }

@@ -3,21 +3,15 @@ environments:
     kubeContext: INVALID-ENVIRONMENT
   production:
     kubeContext: gke_wikibase-cloud_europe-west3-a_wbaas-3
-    values:
-      - ./env/production/base.yaml
-      - ./env/production/private.yaml
   staging:
     kubeContext: gke_wikibase-cloud_europe-west3-a_wbaas-2
-    values:
-      - ./env/staging/base.yaml
-      - ./env/staging/private.yaml
   local:
     kubeContext: minikube-wbaas
-    values:
-      - ./env/local/base.yaml
-      - ./env/local/private.yaml
 
----
+repositories:
+  - name: argo-cd
+    url: https://argoproj.github.io/argo-helm
+
 templates:
   default: &default_release
     missingFileHandler: Error
@@ -25,13 +19,10 @@ templates:
       - env/production/{{`{{ .Release.Name }}`}}.values.yaml.gotmpl
       - env/{{`{{ .Environment.Name }}`}}/{{`{{ .Release.Name }}`}}.values.yaml.gotmpl
 
-repositories:
-  - name: argo-cd
-    url: https://argoproj.github.io/argo-helm
 releases:
   - name: argo-cd-base
     namespace: argocd
     chart: argo-cd/argo-cd
-    version: '5.53.14'
+    version: '6.7.15'
     installed: {{ ne .Environment.Name "production" | toYaml }}
     <<: *default_release

@@ -1,7 +1,27 @@
 ## Argo CD configuration
-## Ref: https://github.com/argoproj/argo-cd
-## https://raw.githubusercontent.com/argoproj/argo-helm/main/charts/argo-cd/values.yaml
-##
+## https://github.com/argoproj/argo-helm/tree/main/charts/argo-cd#general-parameters
+
+# dex currently not used
+# https://argocd-operator.readthedocs.io/en/latest/usage/dex/
+dex:
+  enabled: false
+
+configs:
+  cm:
+    admin.enabled: false
+
+    ui.bannerpermanent: true
+    ui.bannercontent: "PRODUCTION"
+    ui.bannerurl: "https://wikibase.cloud/"
+
+  styles: |
+    .ui-banner {
+        background-color:#d93f4a;
+
+        a {
+          color:white;
+        }
+    }
 
 controller:
   resources:
