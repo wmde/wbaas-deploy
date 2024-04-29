@@ -8,5 +8,5 @@ spec:
   project: default
   source:
     path: .
-    repoURL: {{ .Values.repoUrls.example }}
+    repoURL: {{ .Values.repoUrls.main }}
     targetRevision: HEAD
