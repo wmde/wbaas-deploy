@@ -239,7 +239,6 @@ releases:
     chart: prometheus-community/prometheus-elasticsearch-exporter
     version: 5.2.0
     <<: *default_release
-    installed: {{ ne .Environment.Name "production" | toYaml }}
 
   - name: istio-service-mesh
     namespace: istio-system
