@@ -16,14 +16,14 @@ service:
 
 master:
   replicaCount: 3
-  heapSize: 5500m
+  heapSize: 2000m
   resources:
     requests:
       cpu: "1000m"
-      memory: "11Gi"
+      memory: "4Gi"
     limits:
       cpu: "1500m"
-      memory: "11Gi"
+      memory: "4Gi"
   persistence:
     enabled: true
     accessModes: [ "ReadWriteOnce" ]
