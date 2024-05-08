@@ -33,12 +33,6 @@ master:
     enabled: true
     periodSeconds: 10
     failureThreshold: 1440
-  nodeSelector:
-    wbaas/pool: search-master
-  tolerations:
-    - key: wbaas/pool
-      value: search-master
-      effect: NoSchedule
   pdb:
     create: true
     minAvailable: 2
