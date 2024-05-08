@@ -16,6 +16,7 @@ service:
 
 master:
   replicaCount: 3
+  podAntiAffinityPreset: hard
   heapSize: 4000m
   resources:
     requests:
