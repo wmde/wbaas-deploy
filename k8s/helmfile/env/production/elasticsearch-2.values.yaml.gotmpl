@@ -39,6 +39,9 @@ master:
     - key: wbaas/pool
       value: search-master
       effect: NoSchedule
+  pdb:
+    create: true
+    minAvailable: 2
 
 data:
   replicaCount: 2
@@ -70,6 +73,9 @@ data:
     - key: wbaas/pool
       value: search-data
       effect: NoSchedule
+  pdb:
+    create: true
+    minAvailable: 1
 
 coordinating:
   replicaCount: 0
