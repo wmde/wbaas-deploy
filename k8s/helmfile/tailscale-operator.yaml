@@ -33,6 +33,6 @@ releases:
   - name: tailscale
     namespace: tailscale
     chart: tailscale/tailscale-operator
-    version: 1.62.1
+    version: {{ if eq .Environment.Name "staging" }}"1.64.2"{{ else }}"1.62.1"{{ end }}
     installed: {{ ne .Environment.Name "local" | toYaml }}
     <<: *default_release
