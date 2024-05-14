@@ -49,22 +49,23 @@ resource "google_monitoring_dashboard" "elasticsearch-prometheus" {
             widget = {
               scorecard = {
                 gaugeView = {
-                  upperBound = 100
+                  lowerBound = 0,
+                  upperBound = 15
                 }
                 thresholds = [
                   {
                     color     = "RED"
                     direction = "ABOVE"
-                    value     = 50
+                    value     = 10
                   },
                   {
                     color     = "YELLOW"
                     direction = "ABOVE"
-                    value     = 30
+                    value     = 5
                   },
                 ]
                 timeSeriesQuery = {
-                  prometheusQuery = "count(elasticsearch_breakers_tripped{$${Cluster},$${Location},$${Namespace}})"
+                  prometheusQuery = "sum(increase(elasticsearch_breakers_tripped{$${Cluster},$${Location},$${Namespace}}[3600s]))"
                 }
               }
               title = "Tripped Breakers"
