@@ -1,28 +1,26 @@
 locals {
   alarms = {
-    "es-cluster-health-${var.environment}" = {
-      display_name            = "Elasticsearch Cluster Health Status"
-      filter                  = "metric.type = \"prometheus.googleapis.com/elasticsearch_cluster_health_status/gauge\" AND metric.labels.color = \"green\""
-      comparison              = "COMPARISON_LT"
-      evaluation_missing_data = "EVALUATION_MISSING_DATA_ACTIVE"
-      trigger_count           = 1
-      threshold_value         = 1
-      duration                = "60s"
-      condition_absent        = "300s"
-      min_group_by            = "metric.label.es_cluster"
-    },
-    "es-cluster-available-shards-${var.environment}" = {
-      display_name            = "Elasticsearch Cluster available shards"
-      filter                  = "metric.type = \"prometheus.googleapis.com/elasticsearch_node_shards_total/gauge\""
+    "es-cluster-yellow-${var.environment}" = {
+      display_name            = "Elasticsearch Cluster Health Yellow"
+      filter                  = "metric.type = \"prometheus.googleapis.com/elasticsearch_cluster_health_status/gauge\" AND metric.labels.color = \"yellow\""
       comparison              = "COMPARISON_GT"
       evaluation_missing_data = "EVALUATION_MISSING_DATA_ACTIVE"
       trigger_count           = 1
-      # Currently there is a hard limit of 800 shards per node set via REST API.
-      # The alarm is expected to trigger on 90% usage
-      threshold_value  = 720
-      duration         = "60s"
-      condition_absent = "300s"
-      min_group_by     = "metric.label.es_cluster"
+      threshold_value         = 0
+      duration                = "900s"
+      condition_absent        = "300s"
+      min_group_by            = "metric.label.es_cluster"
+    },
+    "es-cluster-red-${var.environment}" = {
+      display_name            = "Elasticsearch Cluster Health Red"
+      filter                  = "metric.type = \"prometheus.googleapis.com/elasticsearch_cluster_health_status/gauge\" AND metric.labels.color = \"red\""
+      comparison              = "COMPARISON_GT"
+      evaluation_missing_data = "EVALUATION_MISSING_DATA_ACTIVE"
+      trigger_count           = 1
+      threshold_value         = 0
+      duration                = "60s"
+      condition_absent        = "300s"
+      min_group_by            = "metric.label.es_cluster"
     },
     "api-qs-batches-backpressure-${var.environment}" = {
       display_name            = "Platform API Queryservice Batches Backpressure"
