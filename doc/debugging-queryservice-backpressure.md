@@ -6,7 +6,7 @@ This document is intended to give a general overview of the existing pipeline wh
 
 When an update in MediaWiki is happening, the following steps will be taken until it's present in the QueryService:
 
-1. MediaWiki calls the Platform API's `/event/pageUpdate` endpoint, pushing information about the change. The Platform API persists these changes in the `event_page_updates` table.
+1. Custom `wbstack` code in MediaWiki calls the Platform API's `/event/pageUpdate` endpoint, pushing information about the change. The Platform API persists these changes in the `event_page_updates` table.
 2. The Platform API will repeatedly run the `CreateQueryserviceBatchesJob` which will:
 	1. Filter all events from the `event_page_updates` table and select those with relevant namespace IDs (i.e. entities, properties, lexemes)
 	2. Group these events by wiki domain and create sets of batches for each wiki. If a batch for a wiki already exists, try to append new items to these batches if possible.
@@ -18,17 +18,18 @@ When an update in MediaWiki is happening, the following steps will be taken unti
 ## Possible failure scenarios
 
 Currently, feature health is measured by counting the number of unprocessed batches in the Platform API.
-A healthy system will rarely see this value go above a lower two-digit number.
+A healthy system will rarely see this value go above a value in the range between 15 and 50.
 If it goes above this, it could be caused by the following:
 
 ### Failures in Platform API
 
-If the Platform API is ingesting events, but fails to dispense them to the updater, the number of batches grows continuously
+If the Platform API is ingesting events, but fails to follow the expected protocol when exchanging data with the updater, the number of batches grows continuously.
 This could be caused by the following (non-exhaustive) list of problems:
 
 - The batch payload schemas expected by Platform API and the QueryService Updater have diverged
 - Unrelated changes to the HTTP stack in Laravel are making the `/qs/getBatches` endpoint error out
 - The Platform API fails to successfully mark batches as done, even when receiving a signal from the QueryService Updater
+- The Platform API erroneously omits batches that should be processed, returning `[]`
 
 ### Failures in the QueryService Updater
 
