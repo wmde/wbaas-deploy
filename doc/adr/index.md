@@ -22,6 +22,7 @@ Current ADRs include:
 - [8) Deploying a service mesh to the Kubernetes Cluster](0008-service-mesh.md)
 - [9) Terraform style conventions](0009-terraform-style-conventions.md)
 - [11) Handling FQDNs](0011-handling-fqdns.md)
+- [12) Stop versioning Terraform modules with git](0012-stop-versioning-terraform-modules-with-git.md)
 <!-- toc-end -->
 
 ---

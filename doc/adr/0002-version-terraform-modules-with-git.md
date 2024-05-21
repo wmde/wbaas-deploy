@@ -4,7 +4,7 @@ Date: 2022-03-22
 
 ## Status
 
-accepted
+superceeded by [ADR 12](0012-stop-versioning-terraform-modules-with-git.md)
 
 ## Context
 We currently have some Terraform modules created and maintained by us for the purpose of reducing duplication and maintaining consistency between the local, staging and production environments.
