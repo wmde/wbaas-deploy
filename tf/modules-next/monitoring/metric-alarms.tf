@@ -198,3 +198,60 @@ resource "google_monitoring_alert_policy" "alert_policy_prometheus_metric_elasti
     "${var.monitoring_email_group_name}"
   ]
 }
+
+resource "google_monitoring_alert_policy" "alert_policy_prometheus_metric_elasticsearch_breakers" {
+  display_name = "Metric check failed (${var.environment}): Elasticsearch Breakers Tripped"
+
+  documentation {
+    content = "This alert fires if the metric Elasticsearch Breakers Tripped does not meet its expected status."
+  }
+
+  conditions {
+    display_name = "Elasticsearch Breakers Tripped"
+    condition_threshold {
+      evaluation_missing_data = "EVALUATION_MISSING_DATA_ACTIVE"
+      comparison              = "COMPARISON_GT"
+      duration                = "3600s"
+      filter = join(" AND ", [
+        "resource.type = \"prometheus_target\"",
+        "resource.labels.cluster = \"${var.cluster_name}\"",
+        "metric.type = \"prometheus.googleapis.com/elasticsearch_breakers_tripped/counter\""
+      ])
+      trigger {
+        count = 1
+      }
+      threshold_value = 10
+      aggregations {
+        alignment_period     = "3600s"
+        cross_series_reducer = "REDUCE_SUM"
+        group_by_fields = [
+          "metric.label.es_cluster",
+        ]
+        per_series_aligner = "ALIGN_DELTA"
+      }
+    }
+  }
+  conditions {
+    display_name = "Elasticsearch Breakers Tripped absent"
+    condition_absent {
+      duration = "300s"
+      filter = join(" AND ", [
+        "resource.type = \"prometheus_target\"",
+        "resource.labels.cluster = \"${var.cluster_name}\"",
+        "metric.type = \"prometheus.googleapis.com/elasticsearch_breakers_tripped/counter\""
+      ])
+      aggregations {
+        alignment_period     = "3600s"
+        cross_series_reducer = "REDUCE_SUM"
+        group_by_fields = [
+          "metric.label.es_cluster",
+        ]
+        per_series_aligner = "ALIGN_DELTA"
+      }
+    }
+  }
+  combiner = "OR"
+  notification_channels = [
+    "${var.monitoring_email_group_name}"
+  ]
+}
