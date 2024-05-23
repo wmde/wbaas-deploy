@@ -1,29 +1,5 @@
 locals {
   alarms = {
-    "es-cluster-health-${var.environment}" = {
-      display_name            = "Elasticsearch Cluster Health Status"
-      filter                  = "metric.type = \"prometheus.googleapis.com/elasticsearch_cluster_health_status/gauge\" AND metric.labels.color = \"green\""
-      comparison              = "COMPARISON_LT"
-      evaluation_missing_data = "EVALUATION_MISSING_DATA_ACTIVE"
-      trigger_count           = 1
-      threshold_value         = 1
-      duration                = "60s"
-      condition_absent        = "300s"
-      min_group_by            = "metric.label.es_cluster"
-    },
-    "es-cluster-available-shards-${var.environment}" = {
-      display_name            = "Elasticsearch Cluster available shards"
-      filter                  = "metric.type = \"prometheus.googleapis.com/elasticsearch_node_shards_total/gauge\""
-      comparison              = "COMPARISON_GT"
-      evaluation_missing_data = "EVALUATION_MISSING_DATA_ACTIVE"
-      trigger_count           = 1
-      # Currently there is a hard limit of 800 shards per node set via REST API.
-      # The alarm is expected to trigger on 90% usage
-      threshold_value  = 720
-      duration         = "60s"
-      condition_absent = "300s"
-      min_group_by     = "metric.label.es_cluster"
-    },
     "api-qs-batches-backpressure-${var.environment}" = {
       display_name            = "Platform API Queryservice Batches Backpressure"
       filter                  = "metric.type = \"prometheus.googleapis.com/platform_api_qs_batches_pending_batches/gauge\""
@@ -80,6 +56,82 @@ resource "google_monitoring_alert_policy" "alert_policy_prometheus_metric" {
           each.value.min_group_by,
         ]
         per_series_aligner = "ALIGN_MEAN"
+      }
+    }
+  }
+  combiner = "OR"
+  notification_channels = [
+    "${var.monitoring_email_group_name}"
+  ]
+}
+
+locals {
+  elasticsearch = {
+    "es-cluster-yellow-${var.environment}" = {
+      display_name = "Elasticsearch Cluster Health Yellow"
+      color        = "yellow"
+      duration     = "900s"
+    },
+    "es-cluster-red-${var.environment}" = {
+      display_name = "Elasticsearch Cluster Health Red"
+      color        = "red"
+      duration     = "60s"
+    }
+  }
+}
+
+resource "google_monitoring_alert_policy" "alert_policy_prometheus_metric_elasticsearch_health" {
+  for_each = local.elasticsearch
+
+  display_name = "Metric check failed (${var.environment}): ${each.value.display_name}"
+
+  documentation {
+    content = "This alert fires if the metric ${each.value.display_name} does not meet its expected status."
+  }
+
+  conditions {
+    display_name = each.value.display_name
+    condition_threshold {
+      evaluation_missing_data = "EVALUATION_MISSING_DATA_ACTIVE"
+      comparison              = "COMPARISON_GT"
+      duration                = each.value.duration
+      filter = join(" AND ", [
+        "resource.type = \"prometheus_target\"",
+        "resource.labels.cluster = \"${var.cluster_name}\"",
+        "metric.type = \"prometheus.googleapis.com/elasticsearch_cluster_health_status/gauge\"",
+        "metric.labels.color = \"${each.value.color}\""
+      ])
+      trigger {
+        count = 1
+      }
+      threshold_value = 0
+      aggregations {
+        alignment_period     = "300s"
+        cross_series_reducer = "REDUCE_MAX"
+        group_by_fields = [
+          "metric.label.es_cluster",
+        ]
+        per_series_aligner = "ALIGN_MAX"
+      }
+    }
+  }
+  conditions {
+    display_name = "${each.value.display_name} absent"
+    condition_absent {
+      duration = "300s"
+      filter = join(" AND ", [
+        "resource.type = \"prometheus_target\"",
+        "resource.labels.cluster = \"${var.cluster_name}\"",
+        "metric.type = \"prometheus.googleapis.com/elasticsearch_cluster_health_status/gauge\"",
+        "metric.labels.color = \"${each.value.color}\""
+      ])
+      aggregations {
+        alignment_period     = "300s"
+        cross_series_reducer = "REDUCE_MAX"
+        group_by_fields = [
+          "metric.label.es_cluster",
+        ]
+        per_series_aligner = "ALIGN_MAX"
       }
     }
   }
