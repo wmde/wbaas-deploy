@@ -32,13 +32,13 @@ locals {
         display_name = "Elasticsearch Document Count"
         metric       = "elasticsearch_indices_shards_docs"
         # 75% of the 200M max documents per shard recommendation
-        threshold    = "150000000"
+        threshold = "150000000"
       },
       "shard-size-${var.environment}" = {
         display_name = "Elasticsearch Shard Size"
         metric       = "elasticsearch_indices_shards_store_size_in_bytes"
         # 75% of the 50GB max shard size recommendation
-        threshold    = "37500000000"
+        threshold = "37500000000"
       }
     }
   }
