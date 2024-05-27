@@ -118,13 +118,6 @@ releases:
     version: 10.5.0
     <<: *default_release
 
-  - name: elasticsearch-1
-    namespace: default
-    chart: bitnami/elasticsearch
-    version: 19.10.2
-    <<: *default_release
-    installed: false
-
   - name: elasticsearch-2
     namespace: default
     chart: bitnami/elasticsearch
@@ -226,13 +219,6 @@ releases:
     # https://github.com/roboll/helmfile/issues/1124
     disableValidation: true
     <<: *default_release
-
-  - name: prometheus-elasticsearch-exporter-1
-    namespace: monitoring
-    chart: prometheus-community/prometheus-elasticsearch-exporter
-    version: 5.2.0
-    <<: *default_release
-    installed: false
 
   - name: prometheus-elasticsearch-exporter-2
     namespace: monitoring
