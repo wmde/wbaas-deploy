@@ -180,6 +180,14 @@ resource "google_monitoring_alert_policy" "alert_policy_prometheus_metric_elasti
         count = 1
       }
       threshold_value = each.value.threshold
+      aggregations {
+        alignment_period     = "300s"
+        cross_series_reducer = "REDUCE_MAX"
+        group_by_fields = [
+          "metric.label.es_cluster",
+        ]
+        per_series_aligner = "ALIGN_MAX"
+      }
     }
   }
   conditions {
@@ -191,6 +199,14 @@ resource "google_monitoring_alert_policy" "alert_policy_prometheus_metric_elasti
         "resource.labels.cluster = \"${var.cluster_name}\"",
         "metric.type = \"prometheus.googleapis.com/${each.value.metric}/gauge\""
       ])
+      aggregations {
+        alignment_period     = "300s"
+        cross_series_reducer = "REDUCE_MAX"
+        group_by_fields = [
+          "metric.label.es_cluster",
+        ]
+        per_series_aligner = "ALIGN_MAX"
+      }
     }
   }
   combiner = "OR"
