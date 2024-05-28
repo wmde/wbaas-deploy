@@ -1,5 +1,5 @@
 module "staging-monitoring" {
-  source = "../../modules-next/monitoring"
+  source = "../../modules/monitoring"
   providers = {
     kubernetes = kubernetes.wbaas-2
   }
