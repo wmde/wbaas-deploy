@@ -100,9 +100,16 @@ releases:
     chart: ./../../charts/certificates
     <<: *default_release
 
+
   ################################
   # ALL ENVIRONMENTS
   ################################
+  - name: redirects
+    namespace: default
+    installed: {{ ne .Environment.Name "production" | toYaml }}
+    chart: ./../../charts/redirects
+    <<: *default_release
+
   - name: ingress-nginx
     namespace: kube-system
     chart: ingress-nginx/ingress-nginx
