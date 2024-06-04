@@ -1,3 +1,5 @@
 redirects:
   - host: status.wikibase.dev
     toLocation: https://wmde.github.io/wikibase-cloud-status
+    tlsName: {{ .Values.ingressNameSuffix | toYaml }}
+    statusCode: 302

@@ -21,8 +21,10 @@ spec:
             name: example1
             port:
               number: 80
+  {{ if .tlsName }}
   tls:
   - hosts:
     - {{ .host | quote }}
-    secretName: redirect-ingress-{{ .host }}-tls
+    secretName: {{ .tlsName }}-tls
+  {{- end }}
 {{- end }}
