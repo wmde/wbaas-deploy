@@ -106,7 +106,6 @@ releases:
   ################################
   - name: redirects
     namespace: default
-    installed: {{ ne .Environment.Name "production" | toYaml }}
     chart: ./../../charts/redirects
     <<: *default_release
 
