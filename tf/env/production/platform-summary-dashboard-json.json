@@ -1,523 +1,574 @@
 {
-    "displayName": "Platform Summary (Production)",
-    "dashboardFilters": [],
-    "mosaicLayout": {
-      "columns": 48,
-      "tiles": [
-        {
-          "yPos": 24,
-          "width": 20,
-          "height": 15,
-          "widget": {
-            "title": "wikis",
-            "xyChart": {
-              "chartOptions": {
-                "mode": "COLOR"
+  "displayName": "Platform Summary (Production)",
+  "dashboardFilters": [],
+  "mosaicLayout": {
+    "columns": 48,
+    "tiles": [
+      {
+        "yPos": 24,
+        "width": 20,
+        "height": 15,
+        "widget": {
+          "title": "wikis",
+          "xyChart": {
+            "chartOptions": {
+              "mode": "COLOR"
+            },
+            "dataSets": [
+              {
+                "breakdowns": [],
+                "dimensions": [],
+                "legendTemplate": "Deleted Wikis",
+                "measures": [],
+                "minAlignmentPeriod": "86400s",
+                "plotType": "LINE",
+                "targetAxis": "Y1",
+                "timeSeriesQuery": {
+                  "timeSeriesFilter": {
+                    "aggregation": {
+                      "alignmentPeriod": "86400s",
+                      "crossSeriesReducer": "REDUCE_MEAN",
+                      "groupByFields": [
+                        "metric.label.\"cluster\""
+                      ],
+                      "perSeriesAligner": "ALIGN_DELTA"
+                    },
+                    "filter": "metric.type=\"logging.googleapis.com/user/wbaas-3-platform-summary-deleted\" resource.type=\"k8s_container\""
+                  }
+                }
               },
-              "dataSets": [
-                {
-                  "legendTemplate": "Deleted Wikis",
-                  "minAlignmentPeriod": "86400s",
-                  "plotType": "LINE",
-                  "targetAxis": "Y1",
-                  "timeSeriesQuery": {
-                    "timeSeriesFilter": {
-                      "aggregation": {
-                        "alignmentPeriod": "86400s",
-                        "crossSeriesReducer": "REDUCE_MEAN",
-                        "groupByFields": [
-                          "metric.label.\"cluster\""
-                        ],
-                        "perSeriesAligner": "ALIGN_DELTA"
-                      },
-                      "filter": "metric.type=\"logging.googleapis.com/user/wbaas-3-platform-summary-deleted\" resource.type=\"k8s_container\""
-                    }
-                  }
-                },
-                {
-                  "legendTemplate": "Empty Wikis",
-                  "minAlignmentPeriod": "86400s",
-                  "plotType": "LINE",
-                  "targetAxis": "Y1",
-                  "timeSeriesQuery": {
-                    "timeSeriesFilter": {
-                      "aggregation": {
-                        "alignmentPeriod": "86400s",
-                        "crossSeriesReducer": "REDUCE_MEAN",
-                        "groupByFields": [],
-                        "perSeriesAligner": "ALIGN_DELTA"
-                      },
-                      "filter": "metric.type=\"logging.googleapis.com/user/wbaas-3-platform-summary-empty\" resource.type=\"k8s_container\""
-                    }
-                  }
-                },
-                {
-                  "legendTemplate": "Edited last 90 days Wikis",
-                  "minAlignmentPeriod": "86400s",
-                  "plotType": "LINE",
-                  "targetAxis": "Y1",
-                  "timeSeriesQuery": {
-                    "timeSeriesFilter": {
-                      "aggregation": {
-                        "alignmentPeriod": "86400s",
-                        "crossSeriesReducer": "REDUCE_MEAN",
-                        "groupByFields": [],
-                        "perSeriesAligner": "ALIGN_DELTA"
-                      },
-                      "filter": "metric.type=\"logging.googleapis.com/user/wbaas-3-platform-summary-edited_last_90_days\" resource.type=\"k8s_container\""
-                    }
-                  }
-                },
-                {
-                  "legendTemplate": "Not Edited last 90 days Wikis",
-                  "minAlignmentPeriod": "86400s",
-                  "plotType": "LINE",
-                  "targetAxis": "Y1",
-                  "timeSeriesQuery": {
-                    "timeSeriesFilter": {
-                      "aggregation": {
-                        "alignmentPeriod": "86400s",
-                        "crossSeriesReducer": "REDUCE_MEAN",
-                        "groupByFields": [],
-                        "perSeriesAligner": "ALIGN_DELTA"
-                      },
-                      "filter": "metric.type=\"logging.googleapis.com/user/wbaas-3-platform-summary-not_edited_last_90_days\" resource.type=\"k8s_container\""
-                    }
-                  }
-                },
-                {
-                  "legendTemplate": "Total Wikis",
-                  "minAlignmentPeriod": "86400s",
-                  "plotType": "LINE",
-                  "targetAxis": "Y1",
-                  "timeSeriesQuery": {
-                    "timeSeriesFilter": {
-                      "aggregation": {
-                        "alignmentPeriod": "86400s",
-                        "crossSeriesReducer": "REDUCE_MEAN",
-                        "groupByFields": [],
-                        "perSeriesAligner": "ALIGN_DELTA"
-                      },
-                      "filter": "metric.type=\"logging.googleapis.com/user/wbaas-3-platform-summary-total\" resource.type=\"k8s_container\""
-                    }
+              {
+                "breakdowns": [],
+                "dimensions": [],
+                "legendTemplate": "Empty Wikis",
+                "measures": [],
+                "minAlignmentPeriod": "86400s",
+                "plotType": "LINE",
+                "targetAxis": "Y1",
+                "timeSeriesQuery": {
+                  "timeSeriesFilter": {
+                    "aggregation": {
+                      "alignmentPeriod": "86400s",
+                      "crossSeriesReducer": "REDUCE_MEAN",
+                      "groupByFields": [],
+                      "perSeriesAligner": "ALIGN_DELTA"
+                    },
+                    "filter": "metric.type=\"logging.googleapis.com/user/wbaas-3-platform-summary-empty\" resource.type=\"k8s_container\""
                   }
                 }
-              ],
-              "thresholds": [],
-              "timeshiftDuration": "0s",
-              "yAxis": {
-                "label": "y1Axis",
-                "scale": "LINEAR"
-              }
-            }
-          }
-        },
-        {
-          "width": 8,
-          "height": 8,
-          "widget": {
-            "title": "total wikis",
-            "scorecard": {
-              "thresholds": [],
-              "timeSeriesQuery": {
-                "timeSeriesFilter": {
-                  "aggregation": {
-                    "alignmentPeriod": "86400s",
-                    "crossSeriesReducer": "REDUCE_MEAN",
-                    "groupByFields": [],
-                    "perSeriesAligner": "ALIGN_DELTA"
-                  },
-                  "filter": "metric.type=\"logging.googleapis.com/user/wbaas-3-platform-summary-total\" resource.type=\"k8s_container\""
-                }
-              }
-            }
-          }
-        },
-        {
-          "xPos": 8,
-          "width": 8,
-          "height": 8,
-          "widget": {
-            "title": "edited last 90 days",
-            "scorecard": {
-              "thresholds": [],
-              "timeSeriesQuery": {
-                "outputFullDuration": true,
-                "timeSeriesFilter": {
-                  "aggregation": {
-                    "alignmentPeriod": "86400s",
-                    "crossSeriesReducer": "REDUCE_MEAN",
-                    "groupByFields": [],
-                    "perSeriesAligner": "ALIGN_DELTA"
-                  },
-                  "filter": "metric.type=\"logging.googleapis.com/user/wbaas-3-platform-summary-edited_last_90_days\" resource.type=\"k8s_container\""
-                }
-              }
-            }
-          }
-        },
-        {
-          "xPos": 24,
-          "width": 8,
-          "height": 8,
-          "widget": {
-            "title": "deleted wikis",
-            "scorecard": {
-              "thresholds": [],
-              "timeSeriesQuery": {
-                "timeSeriesFilter": {
-                  "aggregation": {
-                    "alignmentPeriod": "86400s",
-                    "crossSeriesReducer": "REDUCE_MEAN",
-                    "groupByFields": [],
-                    "perSeriesAligner": "ALIGN_DELTA"
-                  },
-                  "filter": "metric.type=\"logging.googleapis.com/user/wbaas-3-platform-summary-deleted\" resource.type=\"k8s_container\""
-                }
-              }
-            }
-          }
-        },
-        {
-          "xPos": 32,
-          "width": 8,
-          "height": 8,
-          "widget": {
-            "title": "not edited last 90 days",
-            "scorecard": {
-              "thresholds": [],
-              "timeSeriesQuery": {
-                "timeSeriesFilter": {
-                  "aggregation": {
-                    "alignmentPeriod": "86400s",
-                    "crossSeriesReducer": "REDUCE_MEAN",
-                    "groupByFields": [],
-                    "perSeriesAligner": "ALIGN_DELTA"
-                  },
-                  "filter": "metric.type=\"logging.googleapis.com/user/wbaas-3-platform-summary-not_edited_last_90_days\" resource.type=\"k8s_container\""
-                }
-              }
-            }
-          }
-        },
-        {
-          "xPos": 16,
-          "width": 8,
-          "height": 8,
-          "widget": {
-            "title": "empty wikis",
-            "scorecard": {
-              "thresholds": [],
-              "timeSeriesQuery": {
-                "timeSeriesFilter": {
-                  "aggregation": {
-                    "alignmentPeriod": "86400s",
-                    "crossSeriesReducer": "REDUCE_MEAN",
-                    "groupByFields": [],
-                    "perSeriesAligner": "ALIGN_DELTA"
-                  },
-                  "filter": "metric.type=\"logging.googleapis.com/user/wbaas-3-platform-summary-empty\" resource.type=\"k8s_container\""
-                }
-              }
-            }
-          }
-        },
-        {
-          "xPos": 40,
-          "width": 8,
-          "height": 32,
-          "widget": {
-            "title": "Legend",
-            "text": {
-              "content": "##### edited last 90 days\ncount of wikis that were edited in the last 90 days\n\n##### no edited last 90 days\ncount of wikis that were not edited in the last 90 days\n\n##### Deleted wikis\nSoft-deleted wikis to be deleted\n\n##### Active editors\nperformed an action in the last 30 days\n\n##### Sign up rate\nnumber of users created in the last 24 hours\n",
-              "format": "MARKDOWN",
-              "style": {
-                "backgroundColor": "#FFFFFF",
-                "fontSize": "FS_LARGE",
-                "horizontalAlignment": "H_LEFT",
-                "padding": "P_EXTRA_SMALL",
-                "pointerLocation": "POINTER_LOCATION_UNSPECIFIED",
-                "textColor": "#212121",
-                "verticalAlignment": "V_TOP"
-              }
-            }
-          }
-        },
-        {
-          "yPos": 8,
-          "width": 8,
-          "height": 8,
-          "widget": {
-            "title": "total pages",
-            "scorecard": {
-              "thresholds": [],
-              "timeSeriesQuery": {
-                "timeSeriesFilter": {
-                  "aggregation": {
-                    "alignmentPeriod": "86400s",
-                    "crossSeriesReducer": "REDUCE_MEAN",
-                    "groupByFields": [],
-                    "perSeriesAligner": "ALIGN_DELTA"
-                  },
-                  "filter": "metric.type=\"logging.googleapis.com/user/wbaas-3-platform-summary-total_non_deleted_pages\" resource.type=\"k8s_container\""
-                }
-              }
-            }
-          }
-        },
-        {
-          "xPos": 24,
-          "yPos": 8,
-          "width": 8,
-          "height": 8,
-          "widget": {
-            "title": "total active editors",
-            "scorecard": {
-              "thresholds": [],
-              "timeSeriesQuery": {
-                "timeSeriesFilter": {
-                  "aggregation": {
-                    "alignmentPeriod": "86400s",
-                    "crossSeriesReducer": "REDUCE_MEAN",
-                    "groupByFields": [],
-                    "perSeriesAligner": "ALIGN_DELTA"
-                  },
-                  "filter": "metric.type=\"logging.googleapis.com/user/wbaas-3-platform-summary-total_non_deleted_active_users\" resource.type=\"k8s_container\""
-                }
-              }
-            }
-          }
-        },
-        {
-          "xPos": 32,
-          "yPos": 8,
-          "width": 8,
-          "height": 8,
-          "widget": {
-            "title": "total editors",
-            "scorecard": {
-              "thresholds": [],
-              "timeSeriesQuery": {
-                "timeSeriesFilter": {
-                  "aggregation": {
-                    "alignmentPeriod": "86400s",
-                    "crossSeriesReducer": "REDUCE_MEAN",
-                    "groupByFields": [],
-                    "perSeriesAligner": "ALIGN_DELTA"
-                  },
-                  "filter": "metric.type=\"logging.googleapis.com/user/wbaas-3-platform-summary-total_non_deleted_users\" resource.type=\"k8s_container\""
-                }
-              }
-            }
-          }
-        },
-        {
-          "xPos": 8,
-          "yPos": 8,
-          "width": 8,
-          "height": 8,
-          "widget": {
-            "title": "total edits",
-            "scorecard": {
-              "thresholds": [],
-              "timeSeriesQuery": {
-                "timeSeriesFilter": {
-                  "aggregation": {
-                    "alignmentPeriod": "86400s",
-                    "crossSeriesReducer": "REDUCE_MEAN",
-                    "groupByFields": [],
-                    "perSeriesAligner": "ALIGN_DELTA"
-                  },
-                  "filter": "metric.type=\"logging.googleapis.com/user/wbaas-3-platform-summary-total_non_deleted_edits\" resource.type=\"k8s_container\""
-                }
-              }
-            }
-          }
-        },
-        {
-          "xPos": 20,
-          "yPos": 24,
-          "width": 20,
-          "height": 15,
-          "widget": {
-            "title": "editors",
-            "xyChart": {
-              "chartOptions": {
-                "mode": "COLOR"
               },
-              "dataSets": [
-                {
-                  "legendTemplate": "Total non-deleted active users",
-                  "minAlignmentPeriod": "86400s",
-                  "plotType": "LINE",
-                  "targetAxis": "Y1",
-                  "timeSeriesQuery": {
-                    "timeSeriesFilter": {
-                      "aggregation": {
-                        "alignmentPeriod": "86400s",
-                        "crossSeriesReducer": "REDUCE_MEAN",
-                        "groupByFields": [],
-                        "perSeriesAligner": "ALIGN_DELTA"
-                      },
-                      "filter": "metric.type=\"logging.googleapis.com/user/wbaas-3-platform-summary-total_non_deleted_active_users\""
-                    }
-                  }
-                },
-                {
-                  "legendTemplate": "Total non-deleted users",
-                  "minAlignmentPeriod": "86400s",
-                  "plotType": "LINE",
-                  "targetAxis": "Y1",
-                  "timeSeriesQuery": {
-                    "timeSeriesFilter": {
-                      "aggregation": {
-                        "alignmentPeriod": "86400s",
-                        "crossSeriesReducer": "REDUCE_MEAN",
-                        "groupByFields": [],
-                        "perSeriesAligner": "ALIGN_DELTA"
-                      },
-                      "filter": "metric.type=\"logging.googleapis.com/user/wbaas-3-platform-summary-total_non_deleted_users\""
-                    }
+              {
+                "breakdowns": [],
+                "dimensions": [],
+                "legendTemplate": "Edited last 90 days Wikis",
+                "measures": [],
+                "minAlignmentPeriod": "86400s",
+                "plotType": "LINE",
+                "targetAxis": "Y1",
+                "timeSeriesQuery": {
+                  "timeSeriesFilter": {
+                    "aggregation": {
+                      "alignmentPeriod": "86400s",
+                      "crossSeriesReducer": "REDUCE_MEAN",
+                      "groupByFields": [],
+                      "perSeriesAligner": "ALIGN_DELTA"
+                    },
+                    "filter": "metric.type=\"logging.googleapis.com/user/wbaas-3-platform-summary-edited_last_90_days\" resource.type=\"k8s_container\""
                   }
                 }
-              ],
-              "thresholds": [],
-              "timeshiftDuration": "0s",
-              "yAxis": {
-                "label": "y1Axis",
-                "scale": "LINEAR"
-              }
-            }
-          }
-        },
-        {
-          "xPos": 12,
-          "yPos": 39,
-          "width": 16,
-          "height": 16,
-          "widget": {
-            "title": "edits & pages",
-            "xyChart": {
-              "chartOptions": {
-                "mode": "COLOR"
               },
-              "dataSets": [
-                {
-                  "legendTemplate": "Total non-deleted edits",
-                  "minAlignmentPeriod": "86400s",
-                  "plotType": "LINE",
-                  "targetAxis": "Y1",
-                  "timeSeriesQuery": {
-                    "timeSeriesFilter": {
-                      "aggregation": {
-                        "alignmentPeriod": "86400s",
-                        "crossSeriesReducer": "REDUCE_MEAN",
-                        "groupByFields": [],
-                        "perSeriesAligner": "ALIGN_DELTA"
-                      },
-                      "filter": "metric.type=\"logging.googleapis.com/user/wbaas-3-platform-summary-total_non_deleted_edits\""
-                    }
+              {
+                "breakdowns": [],
+                "dimensions": [],
+                "legendTemplate": "Not Edited last 90 days Wikis",
+                "measures": [],
+                "minAlignmentPeriod": "86400s",
+                "plotType": "LINE",
+                "targetAxis": "Y1",
+                "timeSeriesQuery": {
+                  "timeSeriesFilter": {
+                    "aggregation": {
+                      "alignmentPeriod": "86400s",
+                      "crossSeriesReducer": "REDUCE_MEAN",
+                      "groupByFields": [],
+                      "perSeriesAligner": "ALIGN_DELTA"
+                    },
+                    "filter": "metric.type=\"logging.googleapis.com/user/wbaas-3-platform-summary-not_edited_last_90_days\" resource.type=\"k8s_container\""
                   }
+                }
+              },
+              {
+                "breakdowns": [],
+                "dimensions": [],
+                "legendTemplate": "Total Wikis",
+                "measures": [],
+                "minAlignmentPeriod": "86400s",
+                "plotType": "LINE",
+                "targetAxis": "Y1",
+                "timeSeriesQuery": {
+                  "timeSeriesFilter": {
+                    "aggregation": {
+                      "alignmentPeriod": "86400s",
+                      "crossSeriesReducer": "REDUCE_MEAN",
+                      "groupByFields": [],
+                      "perSeriesAligner": "ALIGN_DELTA"
+                    },
+                    "filter": "metric.type=\"logging.googleapis.com/user/wbaas-3-platform-summary-total\" resource.type=\"k8s_container\""
+                  }
+                }
+              }
+            ],
+            "thresholds": [],
+            "timeshiftDuration": "0s",
+            "yAxis": {
+              "label": "y1Axis",
+              "scale": "LINEAR"
+            }
+          }
+        }
+      },
+      {
+        "width": 8,
+        "height": 8,
+        "widget": {
+          "title": "total wikis",
+          "scorecard": {
+            "dimensions": [],
+            "measures": [],
+            "thresholds": [],
+            "timeSeriesQuery": {
+              "timeSeriesFilter": {
+                "aggregation": {
+                  "alignmentPeriod": "86400s",
+                  "crossSeriesReducer": "REDUCE_MEAN",
+                  "groupByFields": [],
+                  "perSeriesAligner": "ALIGN_DELTA"
                 },
-                {
-                  "legendTemplate": "Total non-deleted pages",
-                  "minAlignmentPeriod": "86400s",
-                  "plotType": "LINE",
-                  "targetAxis": "Y1",
-                  "timeSeriesQuery": {
-                    "timeSeriesFilter": {
-                      "aggregation": {
-                        "alignmentPeriod": "86400s",
-                        "crossSeriesReducer": "REDUCE_MEAN",
-                        "groupByFields": [],
-                        "perSeriesAligner": "ALIGN_DELTA"
-                      },
-                      "filter": "metric.type=\"logging.googleapis.com/user/wbaas-3-platform-summary-total_non_deleted_pages\""
-                    }
-                  }
-                }
-              ],
-              "thresholds": [],
-              "timeshiftDuration": "0s",
-              "yAxis": {
-                "label": "y1Axis",
-                "scale": "LINEAR"
-              }
-            }
-          }
-        },
-        {
-          "xPos": 16,
-          "yPos": 8,
-          "width": 8,
-          "height": 8,
-          "widget": {
-            "title": "sign up rate",
-            "scorecard": {
-              "thresholds": [],
-              "timeSeriesQuery": {
-                "timeSeriesFilter": {
-                  "aggregation": {
-                    "alignmentPeriod": "86400s",
-                    "crossSeriesReducer": "REDUCE_MEAN",
-                    "groupByFields": [],
-                    "perSeriesAligner": "ALIGN_DELTA"
-                  },
-                  "filter": "metric.type=\"logging.googleapis.com/user/wbaas-3-platform-summary-users_created_PT24H\""
-                }
-              }
-            }
-          }
-        },
-        {
-          "xPos": 12,
-          "yPos": 16,
-          "width": 8,
-          "height": 8,
-          "widget": {
-            "title": "total items",
-            "scorecard": {
-              "thresholds": [],
-              "timeSeriesQuery": {
-                "timeSeriesFilter": {
-                  "aggregation": {
-                    "alignmentPeriod": "86400s",
-                    "crossSeriesReducer": "REDUCE_PERCENTILE_50",
-                    "groupByFields": [],
-                    "perSeriesAligner": "ALIGN_DELTA"
-                  },
-                  "filter": "metric.type=\"logging.googleapis.com/user/wbaas-3-platform-summary-total_items_count\" resource.type=\"k8s_container\""
-                }
-              }
-            }
-          }
-        },
-        {
-          "xPos": 20,
-          "yPos": 16,
-          "width": 8,
-          "height": 8,
-          "widget": {
-            "title": "total properties",
-            "scorecard": {
-              "thresholds": [],
-              "timeSeriesQuery": {
-                "timeSeriesFilter": {
-                  "aggregation": {
-                    "alignmentPeriod": "86400s",
-                    "crossSeriesReducer": "REDUCE_PERCENTILE_50",
-                    "groupByFields": [],
-                    "perSeriesAligner": "ALIGN_DELTA"
-                  },
-                  "filter": "metric.type=\"logging.googleapis.com/user/wbaas-3-platform-summary-total_properties_count\" resource.type=\"k8s_container\""
-                }
+                "filter": "metric.type=\"logging.googleapis.com/user/wbaas-3-platform-summary-total\" resource.type=\"k8s_container\""
               }
             }
           }
         }
-      ]
-    },
-    "labels": {
-      "production": ""
-    }
+      },
+      {
+        "xPos": 8,
+        "width": 8,
+        "height": 8,
+        "widget": {
+          "title": "edited last 90 days",
+          "scorecard": {
+            "dimensions": [],
+            "measures": [],
+            "thresholds": [],
+            "timeSeriesQuery": {
+              "outputFullDuration": true,
+              "timeSeriesFilter": {
+                "aggregation": {
+                  "alignmentPeriod": "86400s",
+                  "crossSeriesReducer": "REDUCE_MEAN",
+                  "groupByFields": [],
+                  "perSeriesAligner": "ALIGN_DELTA"
+                },
+                "filter": "metric.type=\"logging.googleapis.com/user/wbaas-3-platform-summary-edited_last_90_days\" resource.type=\"k8s_container\""
+              }
+            }
+          }
+        }
+      },
+      {
+        "xPos": 24,
+        "width": 8,
+        "height": 8,
+        "widget": {
+          "title": "deleted wikis",
+          "scorecard": {
+            "dimensions": [],
+            "measures": [],
+            "thresholds": [],
+            "timeSeriesQuery": {
+              "timeSeriesFilter": {
+                "aggregation": {
+                  "alignmentPeriod": "86400s",
+                  "crossSeriesReducer": "REDUCE_MEAN",
+                  "groupByFields": [],
+                  "perSeriesAligner": "ALIGN_DELTA"
+                },
+                "filter": "metric.type=\"logging.googleapis.com/user/wbaas-3-platform-summary-deleted\" resource.type=\"k8s_container\""
+              }
+            }
+          }
+        }
+      },
+      {
+        "xPos": 32,
+        "width": 8,
+        "height": 8,
+        "widget": {
+          "title": "not edited last 90 days",
+          "scorecard": {
+            "dimensions": [],
+            "measures": [],
+            "thresholds": [],
+            "timeSeriesQuery": {
+              "timeSeriesFilter": {
+                "aggregation": {
+                  "alignmentPeriod": "86400s",
+                  "crossSeriesReducer": "REDUCE_MEAN",
+                  "groupByFields": [],
+                  "perSeriesAligner": "ALIGN_DELTA"
+                },
+                "filter": "metric.type=\"logging.googleapis.com/user/wbaas-3-platform-summary-not_edited_last_90_days\" resource.type=\"k8s_container\""
+              }
+            }
+          }
+        }
+      },
+      {
+        "xPos": 16,
+        "width": 8,
+        "height": 8,
+        "widget": {
+          "title": "empty wikis",
+          "scorecard": {
+            "dimensions": [],
+            "measures": [],
+            "thresholds": [],
+            "timeSeriesQuery": {
+              "timeSeriesFilter": {
+                "aggregation": {
+                  "alignmentPeriod": "86400s",
+                  "crossSeriesReducer": "REDUCE_MEAN",
+                  "groupByFields": [],
+                  "perSeriesAligner": "ALIGN_DELTA"
+                },
+                "filter": "metric.type=\"logging.googleapis.com/user/wbaas-3-platform-summary-empty\" resource.type=\"k8s_container\""
+              }
+            }
+          }
+        }
+      },
+      {
+        "xPos": 40,
+        "width": 8,
+        "height": 32,
+        "widget": {
+          "title": "Legend",
+          "text": {
+            "content": "##### edited last 90 days\ncount of wikis that were edited in the last 90 days\n\n##### no edited last 90 days\ncount of wikis that were not edited in the last 90 days\n\n##### Deleted wikis\nSoft-deleted wikis to be deleted\n\n##### Active editors\nperformed an action in the last 30 days\n\n##### Sign up rate\nnumber of users created in the last 24 hours\n",
+            "format": "MARKDOWN",
+            "style": {
+              "backgroundColor": "#FFFFFF",
+              "fontSize": "FS_LARGE",
+              "horizontalAlignment": "H_LEFT",
+              "padding": "P_EXTRA_SMALL",
+              "pointerLocation": "POINTER_LOCATION_UNSPECIFIED",
+              "textColor": "#212121",
+              "verticalAlignment": "V_TOP"
+            }
+          }
+        }
+      },
+      {
+        "yPos": 8,
+        "width": 8,
+        "height": 8,
+        "widget": {
+          "title": "total pages",
+          "scorecard": {
+            "dimensions": [],
+            "measures": [],
+            "thresholds": [],
+            "timeSeriesQuery": {
+              "timeSeriesFilter": {
+                "aggregation": {
+                  "alignmentPeriod": "86400s",
+                  "crossSeriesReducer": "REDUCE_MEAN",
+                  "groupByFields": [],
+                  "perSeriesAligner": "ALIGN_DELTA"
+                },
+                "filter": "metric.type=\"logging.googleapis.com/user/wbaas-3-platform-summary-total_non_deleted_pages\" resource.type=\"k8s_container\""
+              }
+            }
+          }
+        }
+      },
+      {
+        "xPos": 24,
+        "yPos": 8,
+        "width": 8,
+        "height": 8,
+        "widget": {
+          "title": "total active editors",
+          "scorecard": {
+            "dimensions": [],
+            "measures": [],
+            "thresholds": [],
+            "timeSeriesQuery": {
+              "timeSeriesFilter": {
+                "aggregation": {
+                  "alignmentPeriod": "86400s",
+                  "crossSeriesReducer": "REDUCE_MEAN",
+                  "groupByFields": [],
+                  "perSeriesAligner": "ALIGN_DELTA"
+                },
+                "filter": "metric.type=\"logging.googleapis.com/user/wbaas-3-platform-summary-total_non_deleted_active_users\" resource.type=\"k8s_container\""
+              }
+            }
+          }
+        }
+      },
+      {
+        "xPos": 32,
+        "yPos": 8,
+        "width": 8,
+        "height": 8,
+        "widget": {
+          "title": "total editors",
+          "scorecard": {
+            "dimensions": [],
+            "measures": [],
+            "thresholds": [],
+            "timeSeriesQuery": {
+              "timeSeriesFilter": {
+                "aggregation": {
+                  "alignmentPeriod": "86400s",
+                  "crossSeriesReducer": "REDUCE_MEAN",
+                  "groupByFields": [],
+                  "perSeriesAligner": "ALIGN_DELTA"
+                },
+                "filter": "metric.type=\"logging.googleapis.com/user/wbaas-3-platform-summary-total_non_deleted_users\" resource.type=\"k8s_container\""
+              }
+            }
+          }
+        }
+      },
+      {
+        "xPos": 8,
+        "yPos": 8,
+        "width": 8,
+        "height": 8,
+        "widget": {
+          "title": "total edits",
+          "scorecard": {
+            "dimensions": [],
+            "measures": [],
+            "thresholds": [],
+            "timeSeriesQuery": {
+              "timeSeriesFilter": {
+                "aggregation": {
+                  "alignmentPeriod": "86400s",
+                  "crossSeriesReducer": "REDUCE_MEAN",
+                  "groupByFields": [],
+                  "perSeriesAligner": "ALIGN_DELTA"
+                },
+                "filter": "metric.type=\"logging.googleapis.com/user/wbaas-3-platform-summary-total_non_deleted_edits\" resource.type=\"k8s_container\""
+              }
+            }
+          }
+        }
+      },
+      {
+        "xPos": 20,
+        "yPos": 24,
+        "width": 20,
+        "height": 15,
+        "widget": {
+          "title": "editors",
+          "xyChart": {
+            "chartOptions": {
+              "mode": "COLOR"
+            },
+            "dataSets": [
+              {
+                "breakdowns": [],
+                "dimensions": [],
+                "legendTemplate": "Total non-deleted active users",
+                "measures": [],
+                "minAlignmentPeriod": "86400s",
+                "plotType": "LINE",
+                "targetAxis": "Y1",
+                "timeSeriesQuery": {
+                  "timeSeriesFilter": {
+                    "aggregation": {
+                      "alignmentPeriod": "86400s",
+                      "crossSeriesReducer": "REDUCE_MEAN",
+                      "groupByFields": [],
+                      "perSeriesAligner": "ALIGN_DELTA"
+                    },
+                    "filter": "metric.type=\"logging.googleapis.com/user/wbaas-3-platform-summary-total_non_deleted_active_users\""
+                  }
+                }
+              },
+              {
+                "breakdowns": [],
+                "dimensions": [],
+                "legendTemplate": "Total non-deleted users",
+                "measures": [],
+                "minAlignmentPeriod": "86400s",
+                "plotType": "LINE",
+                "targetAxis": "Y1",
+                "timeSeriesQuery": {
+                  "timeSeriesFilter": {
+                    "aggregation": {
+                      "alignmentPeriod": "86400s",
+                      "crossSeriesReducer": "REDUCE_MEAN",
+                      "groupByFields": [],
+                      "perSeriesAligner": "ALIGN_DELTA"
+                    },
+                    "filter": "metric.type=\"logging.googleapis.com/user/wbaas-3-platform-summary-total_non_deleted_users\""
+                  }
+                }
+              }
+            ],
+            "thresholds": [],
+            "timeshiftDuration": "0s",
+            "yAxis": {
+              "label": "y1Axis",
+              "scale": "LINEAR"
+            }
+          }
+        }
+      },
+      {
+        "xPos": 12,
+        "yPos": 39,
+        "width": 16,
+        "height": 16,
+        "widget": {
+          "title": "edits & pages",
+          "xyChart": {
+            "chartOptions": {
+              "mode": "COLOR"
+            },
+            "dataSets": [
+              {
+                "breakdowns": [],
+                "dimensions": [],
+                "legendTemplate": "Total non-deleted edits",
+                "measures": [],
+                "minAlignmentPeriod": "86400s",
+                "plotType": "LINE",
+                "targetAxis": "Y1",
+                "timeSeriesQuery": {
+                  "timeSeriesFilter": {
+                    "aggregation": {
+                      "alignmentPeriod": "86400s",
+                      "crossSeriesReducer": "REDUCE_MEAN",
+                      "groupByFields": [],
+                      "perSeriesAligner": "ALIGN_DELTA"
+                    },
+                    "filter": "metric.type=\"logging.googleapis.com/user/wbaas-3-platform-summary-total_non_deleted_edits\""
+                  }
+                }
+              },
+              {
+                "breakdowns": [],
+                "dimensions": [],
+                "legendTemplate": "Total non-deleted pages",
+                "measures": [],
+                "minAlignmentPeriod": "86400s",
+                "plotType": "LINE",
+                "targetAxis": "Y1",
+                "timeSeriesQuery": {
+                  "timeSeriesFilter": {
+                    "aggregation": {
+                      "alignmentPeriod": "86400s",
+                      "crossSeriesReducer": "REDUCE_MEAN",
+                      "groupByFields": [],
+                      "perSeriesAligner": "ALIGN_DELTA"
+                    },
+                    "filter": "metric.type=\"logging.googleapis.com/user/wbaas-3-platform-summary-total_non_deleted_pages\""
+                  }
+                }
+              }
+            ],
+            "thresholds": [],
+            "timeshiftDuration": "0s",
+            "yAxis": {
+              "label": "y1Axis",
+              "scale": "LINEAR"
+            }
+          }
+        }
+      },
+      {
+        "xPos": 16,
+        "yPos": 8,
+        "width": 8,
+        "height": 8,
+        "widget": {
+          "title": "sign up rate",
+          "scorecard": {
+            "dimensions": [],
+            "measures": [],
+            "thresholds": [],
+            "timeSeriesQuery": {
+              "timeSeriesFilter": {
+                "aggregation": {
+                  "alignmentPeriod": "86400s",
+                  "crossSeriesReducer": "REDUCE_MEAN",
+                  "groupByFields": [],
+                  "perSeriesAligner": "ALIGN_DELTA"
+                },
+                "filter": "metric.type=\"logging.googleapis.com/user/wbaas-3-platform-summary-users_created_PT24H\""
+              }
+            }
+          }
+        }
+      },
+      {
+        "xPos": 12,
+        "yPos": 16,
+        "width": 8,
+        "height": 8,
+        "widget": {
+          "title": "total items",
+          "scorecard": {
+            "dimensions": [],
+            "measures": [],
+            "thresholds": [],
+            "timeSeriesQuery": {
+              "timeSeriesFilter": {
+                "aggregation": {
+                  "alignmentPeriod": "86400s",
+                  "crossSeriesReducer": "REDUCE_PERCENTILE_50",
+                  "groupByFields": [],
+                  "perSeriesAligner": "ALIGN_DELTA"
+                },
+                "filter": "metric.type=\"logging.googleapis.com/user/wbaas-3-platform-summary-total_items_count\" resource.type=\"k8s_container\""
+              }
+            }
+          }
+        }
+      },
+      {
+        "xPos": 20,
+        "yPos": 16,
+        "width": 8,
+        "height": 8,
+        "widget": {
+          "title": "total properties",
+          "scorecard": {
+            "dimensions": [],
+            "measures": [],
+            "thresholds": [],
+            "timeSeriesQuery": {
+              "timeSeriesFilter": {
+                "aggregation": {
+                  "alignmentPeriod": "86400s",
+                  "crossSeriesReducer": "REDUCE_PERCENTILE_50",
+                  "groupByFields": [],
+                  "perSeriesAligner": "ALIGN_DELTA"
+                },
+                "filter": "metric.type=\"logging.googleapis.com/user/wbaas-3-platform-summary-total_properties_count\" resource.type=\"k8s_container\""
+              }
+            }
+          }
+        }
+      }
+    ]
+  },
+  "labels": {
+    "production": ""
   }
+}
