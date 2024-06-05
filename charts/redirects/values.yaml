@@ -1,0 +1,5 @@
+redirects:
+  - host: example.com
+    toLocation: https://example.net
+    statusCode: 302
+    tlsName: tls-example-secret
