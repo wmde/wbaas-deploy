@@ -254,7 +254,7 @@
         "widget": {
           "title": "Legend",
           "text": {
-            "content": "##### edited last 90 days\ncount of wikis that were edited in the last 90 days\n\n##### no edited last 90 days\ncount of wikis that were not edited in the last 90 days\n\n##### Deleted wikis\nSoft-deleted wikis to be deleted\n\n##### Active editors\nperformed an action in the last 30 days\n\n##### Sign up rate\nnumber of users created in the last 24 hours\n",
+            "content": "##### edited last 90 days\ncount of wikis that were edited in the last 90 days\n\n##### no edited last 90 days\ncount of wikis that were not edited in the last 90 days\n\n##### Deleted wikis\nSoft-deleted wikis to be deleted\n\n##### Active users\nperformed an action in the last 30 days\n\n##### Sign up rate\nnumber of users created in the last 24 hours\n",
             "format": "MARKDOWN",
             "style": {
               "backgroundColor": "#FFFFFF",
@@ -298,7 +298,7 @@
         "width": 8,
         "height": 8,
         "widget": {
-          "title": "total active editors",
+          "title": "total active users",
           "scorecard": {
             "dimensions": [],
             "measures": [],
@@ -323,7 +323,7 @@
         "width": 8,
         "height": 8,
         "widget": {
-          "title": "total editors",
+          "title": "total users",
           "scorecard": {
             "dimensions": [],
             "measures": [],
@@ -373,7 +373,7 @@
         "width": 20,
         "height": 15,
         "widget": {
-          "title": "editors",
+          "title": "users & edits",
           "xyChart": {
             "chartOptions": {
               "mode": "COLOR"
@@ -386,7 +386,7 @@
                 "measures": [],
                 "minAlignmentPeriod": "86400s",
                 "plotType": "LINE",
-                "targetAxis": "Y1",
+                "targetAxis": "Y2",
                 "timeSeriesQuery": {
                   "timeSeriesFilter": {
                     "aggregation": {
@@ -406,7 +406,7 @@
                 "measures": [],
                 "minAlignmentPeriod": "86400s",
                 "plotType": "LINE",
-                "targetAxis": "Y1",
+                "targetAxis": "Y2",
                 "timeSeriesQuery": {
                   "timeSeriesFilter": {
                     "aggregation": {
@@ -418,29 +418,7 @@
                     "filter": "metric.type=\"logging.googleapis.com/user/wbaas-3-platform-summary-total_non_deleted_users\""
                   }
                 }
-              }
-            ],
-            "thresholds": [],
-            "timeshiftDuration": "0s",
-            "yAxis": {
-              "label": "y1Axis",
-              "scale": "LINEAR"
-            }
-          }
-        }
-      },
-      {
-        "xPos": 12,
-        "yPos": 39,
-        "width": 16,
-        "height": 16,
-        "widget": {
-          "title": "edits & pages",
-          "xyChart": {
-            "chartOptions": {
-              "mode": "COLOR"
-            },
-            "dataSets": [
+              },
               {
                 "breakdowns": [],
                 "dimensions": [],
@@ -460,11 +438,77 @@
                     "filter": "metric.type=\"logging.googleapis.com/user/wbaas-3-platform-summary-total_non_deleted_edits\""
                   }
                 }
-              },
+              }
+            ],
+            "thresholds": [],
+            "timeshiftDuration": "0s",
+            "y2Axis": {
+              "label": "",
+              "scale": "LINEAR"
+            },
+            "yAxis": {
+              "label": "y1Axis",
+              "scale": "LINEAR"
+            }
+          }
+        }
+      },
+      {
+        "xPos": 12,
+        "yPos": 39,
+        "width": 16,
+        "height": 16,
+        "widget": {
+          "title": "pages, items & properties",
+          "xyChart": {
+            "chartOptions": {
+              "mode": "COLOR"
+            },
+            "dataSets": [
               {
                 "breakdowns": [],
                 "dimensions": [],
                 "legendTemplate": "Total non-deleted pages",
+                "measures": [],
+                "minAlignmentPeriod": "86400s",
+                "plotType": "LINE",
+                "targetAxis": "Y2",
+                "timeSeriesQuery": {
+                  "timeSeriesFilter": {
+                    "aggregation": {
+                      "alignmentPeriod": "86400s",
+                      "crossSeriesReducer": "REDUCE_MEAN",
+                      "groupByFields": [],
+                      "perSeriesAligner": "ALIGN_DELTA"
+                    },
+                    "filter": "metric.type=\"logging.googleapis.com/user/wbaas-3-platform-summary-total_non_deleted_pages\""
+                  }
+                }
+              },
+              {
+                "breakdowns": [],
+                "dimensions": [],
+                "legendTemplate": "Total Items",
+                "measures": [],
+                "minAlignmentPeriod": "86400s",
+                "plotType": "LINE",
+                "targetAxis": "Y2",
+                "timeSeriesQuery": {
+                  "timeSeriesFilter": {
+                    "aggregation": {
+                      "alignmentPeriod": "86400s",
+                      "crossSeriesReducer": "REDUCE_MEAN",
+                      "groupByFields": [],
+                      "perSeriesAligner": "ALIGN_DELTA"
+                    },
+                    "filter": "metric.type=\"logging.googleapis.com/user/wbaas-3-platform-summary-total_items_count\""
+                  }
+                }
+              },
+              {
+                "breakdowns": [],
+                "dimensions": [],
+                "legendTemplate": "Total Properties",
                 "measures": [],
                 "minAlignmentPeriod": "86400s",
                 "plotType": "LINE",
@@ -477,13 +521,17 @@
                       "groupByFields": [],
                       "perSeriesAligner": "ALIGN_DELTA"
                     },
-                    "filter": "metric.type=\"logging.googleapis.com/user/wbaas-3-platform-summary-total_non_deleted_pages\""
+                    "filter": "metric.type=\"logging.googleapis.com/user/wbaas-3-platform-summary-total_properties_count\""
                   }
                 }
               }
             ],
             "thresholds": [],
             "timeshiftDuration": "0s",
+            "y2Axis": {
+              "label": "",
+              "scale": "LINEAR"
+            },
             "yAxis": {
               "label": "y1Axis",
               "scale": "LINEAR"
