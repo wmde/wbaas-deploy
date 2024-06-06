@@ -96,6 +96,11 @@ test: # @HELP Run yamllint tests against the repository
 test:
 	yamllint --no-warnings .
 
+.PHONY: cy
+cy: # @HELP Open cypress
+cy:
+	npx cypress open
+
 skaffold-mediawiki-139: # @HELP Deploy the local mediawiki 1.39 image using skaffold
 skaffold-ui: # @HELP Deploy the local ui image using skaffold
 skaffold-api: # @HELP Deploy the api image using skaffold
