@@ -35,6 +35,7 @@ variable "sql-passwords" {
     "staging-api",
     "staging-mediawiki-db-manager",
     "staging-backup-manager",
+    "staging-observer"
   ]
 }
 
