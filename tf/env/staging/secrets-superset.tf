@@ -1,5 +1,5 @@
 resource "random_password" "superset-passwords" {
-  for_each = toset(["secret", "admin-password"])
+  for_each         = toset(["secret", "admin-password"])
   length           = 32
   special          = true
   override_special = "_%@"
