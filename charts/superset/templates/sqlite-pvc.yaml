@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: {{ include "superset.fullname" . }}-sqlite-pvc
+  labels:
+    {{- include "superset.labels" . | nindent 4 }}
+spec:
+  persistentVolumeReclaimPolicy: Retain
+  storageClass: premium-rwo
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: {{ .Values.storageSize }}
