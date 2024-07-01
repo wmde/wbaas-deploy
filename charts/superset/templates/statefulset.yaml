@@ -1,5 +1,5 @@
 apiVersion: apps/v1
-kind: Deployment
+kind: StatefulSet
 metadata:
   name: {{ include "superset.fullname" . }}
   labels:
@@ -38,10 +38,12 @@ spec:
             httpGet:
               path: /
               port: http
+            initialDelaySeconds: 60
           readinessProbe:
             httpGet:
               path: /
               port: http
+            initialDelaySeconds: 60
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
           env:
@@ -72,9 +74,6 @@ spec:
               subPath: config.py
           command: ["/app/entrypoint.sh"]
       volumes:
-        - name: sqlite
-          persistentVolumeClaim:
-            claimName: {{ include "superset.fullname" . }}-sqlite-pvc
         - name: config
           configMap:
             name: {{ include "superset.fullname" . }}-config
@@ -91,3 +90,15 @@ spec:
       tolerations:
         {{- toYaml . | nindent 8 }}
       {{- end }}
+  volumeClaimTemplates:
+    - metadata:
+        name: sqlite
+        labels:
+          {{- include "superset.labels" . | nindent 10 }}
+      spec:
+        storageClassName: {{ .Values.storageClass }}
+        accessModes:
+          - ReadWriteOnce
+        resources:
+          requests:
+            storage: {{ .Values.storageSize }}

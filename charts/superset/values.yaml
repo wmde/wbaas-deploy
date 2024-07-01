@@ -4,6 +4,7 @@ image:
   tag: 4.0.1
 
 storageSize: 5Gi
+storageClass: standard
 
 secretName: superset-secrets
 secretKeySecretKey: secret
