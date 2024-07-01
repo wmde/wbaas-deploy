@@ -237,6 +237,12 @@ releases:
     chart: ./../../charts/istio-service-mesh
     <<: *default_release
 
+  - name: superset
+    installed: {{ ne .Environment.Name "production" | toYaml }}
+    namespace: default
+    chart: ./../../charts/superset
+    <<: *default_release
+
   ################################
   # LOCAL ONLY
   ################################
