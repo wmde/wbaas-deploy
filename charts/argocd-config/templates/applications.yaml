@@ -9,7 +9,7 @@ spec:
   source:
     path: charts/argocd-apps
     repoURL: {{ .Values.repoUrls.main }}
-    targetRevision: HEAD
+    targetRevision: de/argo-apps-ui
     helm:
       values: |
 {{ toYaml .Values | indent 8 }}
