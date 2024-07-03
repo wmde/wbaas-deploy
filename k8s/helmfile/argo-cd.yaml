@@ -22,7 +22,7 @@ templates:
       - env/{{`{{ .Environment.Name }}`}}/{{`{{ .Release.Name }}`}}.values.yaml.gotmpl
 
 releases:
-  - name: argo-cd-base
+  - name: argocd-base
     namespace: argocd
     chart: argo-cd/argo-cd
     version: '6.7.15'
