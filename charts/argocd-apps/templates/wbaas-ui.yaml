@@ -1,0 +1,31 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: ui
+  namespace: argocd
+  finalizers:
+  - resources-finalizer.argocd.argoproj.io
+spec:
+  destination:
+    namespace: default
+    server: {{ .Values.spec.destination.server }}
+  project: default
+  source:
+    path: charts/ui
+    repoURL: https://github.com/wbstack/charts
+    targetRevision: HEAD
+    helm:
+      values: |
+{{ toYaml .Values | indent 8 }}
+      valuesObject:
+{{ tpl (.Files.Get "env/production/ui.values.yaml.gotmpl") . | indent 8 }}
+{{ if eq .Values.environment "staging" }}
+{{ tpl (.Files.Get "env/local/ui.values.yaml.gotmpl") . | indent 8 }}
+{{ else if eq .Values.environment "local" }}
+{{ tpl (.Files.Get "env/local/ui.values.yaml.gotmpl") . | indent 8 }}
+{{ end }}
+
+  syncPolicy:
+    automated:
+      selfHeal: false
+      prune: false
