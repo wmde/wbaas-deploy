@@ -167,12 +167,6 @@ releases:
     namespace: default
     <<: *default_release
 
-  - name: ui
-    namespace: default
-    chart: wbstack/ui
-    version: 0.3.1
-    <<: *default_release
-
   - name: mediawiki-139
     namespace: default
     chart: wbstack/mediawiki
