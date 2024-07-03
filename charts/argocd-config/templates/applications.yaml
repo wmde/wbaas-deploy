@@ -9,7 +9,7 @@ spec:
   source:
     path: charts/argocd-apps
     repoURL: {{ .Values.repoUrls.main }}
-    targetRevision: de/argo-apps-ui
+    targetRevision: de/argo-apps-ui # debug! needs to be set to HEAD
     helm:
       values: |
 {{ toYaml .Values | indent 8 }}
