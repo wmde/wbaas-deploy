@@ -1,0 +1,53 @@
+gceProject: wikibase-cloud
+gceServiceAccountSecret: secret-wikibase-production-api
+
+certificates:
+  -
+    name: wikibase-cloud-tls
+    commonName: wikibase.cloud
+    dnsNames:
+      - '*.wikibase.cloud'
+      - 'wikibase.cloud'
+    secretName: wikibase-cloud-tls
+    issuerRef: letsencrypt-prod
+
+uiHostName: www.wikibase.cloud
+tlsSecret: wikibase-production-tls # TODO is this not used any more now?
+ingressNameSuffix: wikibase-production
+
+services:
+  app:
+    url: https://www.wikibase.cloud
+    apiUrl: https://api.wikibase.cloud
+    mailer: smtp
+    ingressHosts:
+      - host: api.wikibase.cloud
+        paths:
+          - /()(.*)
+      - host: www.wikibase.cloud
+        paths:
+          - /api(/|$)(.*)
+  sql:
+    storageClass: premium-rwo
+    storageSize: 240Gi
+    api:
+      db: apidb
+      user: apiuser
+  redis:
+    readHost: redis-headless.default.svc.cluster.local
+    writeHost: redis-master.default.svc.cluster.local
+    port: 6379
+    # TODO move these databases out of private
+    databases:
+      apiDb: 2
+      apiCacheDb: 3
+      toolQuickstatements: 10
+      toolWidar: 11
+
+external:
+  letsencrypt:
+    email: thomas.arrow@wikimedia.de
+  recaptcha2:
+    secretName: recaptcha-v2-secrets
+  recaptcha3:
+    secretName: recaptcha-v3-secrets
