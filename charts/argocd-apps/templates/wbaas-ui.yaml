@@ -13,7 +13,7 @@ spec:
   source:
     path: charts/ui
     repoURL: https://github.com/wbstack/charts
-    targetRevision: de/argo-apps-ui
+    targetRevision: HEAD
     helm:
       values: |
 {{ toYaml .Values | indent 8 }}
