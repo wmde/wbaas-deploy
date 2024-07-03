@@ -2,4 +2,4 @@ spec:
   destination:
     server: https://kubernetes.default.svc
 
-environment: local
+environment: production
