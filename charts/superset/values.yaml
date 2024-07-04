@@ -1,0 +1,58 @@
+image:
+  repository: apache/superset
+  pullPolicy: IfNotPresent
+  tag: 4.0.1
+
+storageSize: 5Gi
+storageClass: standard
+
+secretName: superset-secrets
+secretKeySecretKey: secret
+adminPasswordSecretKey: admin-password
+
+entrypoint: |
+  #!/bin/bash
+
+  set -eo pipefail
+
+  if [ ! -f /app/database/superset.db ]; then
+    superset fab create-admin \
+      --username cloud \
+      --firstname Wikibase \
+      --lastname Cloud \
+      --email wikibase-cloud@localhost \
+      --password $ADMIN_PASSWORD
+
+    superset db upgrade
+    superset init
+  fi
+
+  superset fab reset-password \
+    --username cloud \
+    --password $ADMIN_PASSWORD
+
+  pip install mysqlclient==2.1.0
+
+  /usr/bin/run-server.sh
+
+config: |
+  SQLALCHEMY_DATABASE_URI = 'sqlite:////app/database/superset.db'
+  PREVENT_UNSAFE_DB_CONNECTIONS = False
+
+service:
+  type: ClusterIP
+  port: 8080
+
+serviceAnnotations: {}
+
+podAnnotations: {}
+
+securityContext: {}
+
+resources: {}
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}
