@@ -36,6 +36,7 @@ variable "sql-passwords" {
     "production-api",
     "production-mediawiki-db-manager",
     "production-backup-manager",
+    "production-observer"
   ]
 }
 

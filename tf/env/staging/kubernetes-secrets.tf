@@ -1,5 +1,5 @@
 module "wbaas2-k8s-secrets" {
-  source = "../../modules-next/k8s-secrets"
+  source = "../../modules/k8s-secrets"
   providers = {
     kubernetes = kubernetes.wbaas-2
   }
