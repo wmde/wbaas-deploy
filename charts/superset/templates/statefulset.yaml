@@ -6,6 +6,7 @@ metadata:
     {{- include "superset.labels" . | nindent 4 }}
 spec:
   replicas: 1
+  serviceName: {{ include "superset.fullname" . }}
   selector:
     matchLabels:
       {{- include "superset.selectorLabels" . | nindent 6 }}
