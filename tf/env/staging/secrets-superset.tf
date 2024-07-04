@@ -6,6 +6,8 @@ resource "random_password" "superset-passwords" {
 }
 
 resource "kubernetes_secret" "superset-secrets" {
+  provider = kubernetes.wbaas-2
+
   metadata {
     name      = "superset-secrets"
     namespace = "default"
