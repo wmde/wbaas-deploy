@@ -27,7 +27,7 @@ spec:
 {{- $envValues := (tpl (.Files.Get "env/local/ui.values.yaml.gotmpl") . | fromYaml) -}}
 {{- $values = include "merge" (list $values $envValues) -}}
 {{- end }}
-{{- $values | toYaml | nindent 8 }}
+{{- $values | nindent 8 }}
 
   syncPolicy:
     automated:
