@@ -15,6 +15,7 @@ spec:
     repoURL: https://github.com/wbstack/charts
     targetRevision: HEAD
     helm:
+      debug: true
       valuesObject:
 {{ tpl (.Files.Get "env/production/ui.values.yaml.gotmpl") . | indent 8 }}
 {{ if eq .Values.environment "staging" }}
