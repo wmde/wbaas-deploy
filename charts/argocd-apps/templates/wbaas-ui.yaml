@@ -18,7 +18,7 @@ spec:
       parameters:
         - name: helm.debug
           value: "true"
-      valuesObject:
+      values: |
 {{- $values := (tpl (.Files.Get "env/production/ui.values.yaml.gotmpl") . | fromYaml) -}}
 {{- if eq .Values.environment "staging" }}
 {{- $envValues := (tpl (.Files.Get "env/staging/ui.values.yaml.gotmpl") . | fromYaml) -}}
@@ -27,7 +27,7 @@ spec:
 {{- $envValues := (tpl (.Files.Get "env/local/ui.values.yaml.gotmpl") . | fromYaml) -}}
 {{- $values = include "merge" (list $values $envValues) -}}
 {{- end }}
-{{- $values | nindent 8 }}
+{{- $values | toYaml | nindent 8 }}
 
   syncPolicy:
     automated:
