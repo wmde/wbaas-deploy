@@ -18,7 +18,7 @@ spec:
       parameters:
         - name: helm.debug
           value: "true"
-      values: |
+      valuesObject:
 {{- $values := (tpl (.Files.Get "env/production/ui.values.yaml.gotmpl") . | fromYaml) -}}
 {{- if eq .Values.environment "staging" }}
 {{- $envValues := (tpl (.Files.Get "env/staging/ui.values.yaml.gotmpl") . | fromYaml) -}}
