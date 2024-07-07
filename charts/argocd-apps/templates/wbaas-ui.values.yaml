@@ -1,0 +1,11 @@
+{{- define "values-ui" -}}
+{{ .Files.Get "env/production/ui.values.yaml.gotmpl" }}
+---
+
+{{ if eq .Values.environment "staging" }}
+{{ .Files.Get "env/staging/ui.values.yaml.gotmpl" }}
+{{ else if eq .Values.environment "local" }}
+{{ .Files.Get "env/local/ui.values.yaml.gotmpl" }}
+{{ end }}
+
+{{- end -}}

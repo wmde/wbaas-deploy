@@ -19,13 +19,7 @@ spec:
         - name: helm.debug
           value: "true"
       values: |
-{{ tpl (.Files.Get "env/production/ui.values.yaml.gotmpl") . | toYaml | indent 8 }}
-        ---
-{{ if eq .Values.environment "staging" }}
-{{ tpl (.Files.Get "env/staging/ui.values.yaml.gotmpl") . | toYaml | indent 8 }}
-{{ else if eq .Values.environment "local" }}
-{{ tpl (.Files.Get "env/local/ui.values.yaml.gotmpl") . | toYaml | indent 8 }}
-{{ end }}
+        {{- tpl (include "values-ui" .) . | nindent 8 }}
 
   syncPolicy:
     automated:
