@@ -1,4 +1,4 @@
-kubectl 1.27.4 
+kubectl 1.28.9
 minikube 1.31.1
 opentofu 1.6.2
 helm 3.12.2 
