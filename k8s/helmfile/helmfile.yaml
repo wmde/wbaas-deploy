@@ -138,6 +138,7 @@ releases:
     namespace: default
     chart: bitnami/elasticsearch
     version: 19.10.2
+    installed: false
     <<: *default_release
 
   - name: redis
