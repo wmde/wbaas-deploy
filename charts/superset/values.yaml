@@ -47,7 +47,9 @@ serviceAnnotations: {}
 
 podAnnotations: {}
 
-securityContext: {}
+securityContext:
+  fsGroup: 1000
+  fsGroupChangePolicy: Always
 
 resources: {}
 
