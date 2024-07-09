@@ -238,7 +238,6 @@ releases:
     <<: *default_release
 
   - name: superset
-    installed: {{ ne .Environment.Name "production" | toYaml }}
     namespace: default
     chart: ./../../charts/superset
     <<: *default_release
