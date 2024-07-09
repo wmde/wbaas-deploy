@@ -11,8 +11,9 @@ spec:
     repoURL: {{ .Values.repoUrls.main }}
     targetRevision: de/argo-apps-ui # debug! needs to be set to HEAD
     helm:
-      values: |
-{{ toYaml .Values | indent 8 }}
+      valueFiles:
+        - env/production/ui.values.yaml
+        - env/local/ui.values.yaml
   syncPolicy:
     automated:
       prune: true
