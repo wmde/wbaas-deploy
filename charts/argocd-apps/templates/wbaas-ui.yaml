@@ -18,6 +18,7 @@ spec:
       parameters:
         - name: helm.debug
           value: "true"
+          
       valuesObject:
 {{- include "wbaas.values.production.ui" . | nindent 8 }}
 {{- if eq .Values.environment "staging" -}}
