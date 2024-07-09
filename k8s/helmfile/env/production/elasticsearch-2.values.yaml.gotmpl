@@ -10,10 +10,6 @@ extraConfig:
   # T309378
   action.auto_create_index: false
 
-service:
-  annotations:
-    tailscale.com/expose: "true"
-
 master:
   replicaCount: 3
   podAntiAffinityPreset: hard
