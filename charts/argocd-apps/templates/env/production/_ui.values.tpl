@@ -1,3 +1,4 @@
+{{- define "wbaas.values.production.ui" -}}
 image:
   tag: sha-52d3977
 
@@ -16,18 +17,22 @@ ingress:
     nginx.ingress.kubernetes.io/use-regex: "true"
     nginx.ingress.kubernetes.io/from-to-www-redirect: "true"
   hosts:
-  - host: www.wbaas.localhost
+  - host: {{ .Values.uiHostName }}
     paths:
     - /*
-  tls: null
+  tls:
+  - hosts:
+    - {{ .Values.uiHostName }}
+    secretName: {{ .Values.tlsSecret }}
 
 ui:
-  apiUrl: api.wbaas.localhost
-  subdomainSuffix: ".wbaas.localhost"
+  apiUrl: {{ .Values.services.app.apiUrl }}
+  subdomainSuffix: {{ .Values.wbstack.subdomainSuffix }}
   cnameConfigMapKey: cname_record
   configMapName: wbaas-ui-config
-  recaptchaSitekeySecretName: recaptcha-v3-secrets
+  recaptchaSitekeySecretName: {{ .Values.external.recaptcha3.secretName }}
   recaptchaSitekeySecretKey: site_key
 
 podLabels:
   sidecar.istio.io/inject: "true"
+{{- end -}}

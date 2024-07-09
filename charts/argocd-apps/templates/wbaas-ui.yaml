@@ -19,12 +19,12 @@ spec:
         - name: helm.debug
           value: "true"
       valuesObject:
-{{- tpl (.Files.Get "env/production/ui.values.yaml.gotmpl") . | nindent 8 }}
-{{ if eq .Values.environment "staging" }}
-{{- tpl (.Files.Get "env/staging/ui.values.yaml.gotmpl") . | nindent 8 }}
-{{ else if eq .Values.environment "local" }}
-{{- tpl (.Files.Get "env/local/ui.values.yaml.gotmpl") . | nindent 8 }}
-{{ end }}
+{{- include "wbaas.values.production.ui" . | nindent 8 }}
+{{- if eq .Values.environment "staging" -}}
+{{- include "wbaas.values.staging.ui" . | nindent 8 }}
+{{- else if eq .Values.environment "local" -}}
+{{- include "wbaas.values.local.ui" . | nindent 8 }}
+{{- end }}
 
   syncPolicy:
     automated:
