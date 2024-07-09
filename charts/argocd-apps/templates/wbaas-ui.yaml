@@ -18,10 +18,8 @@ spec:
       parameters:
         - name: helm.debug
           value: "true"
-      values: |
-        {{- tpl (.Files.Get "env/production/ui.values.yaml.gotmpl") . | nindent 8 }}
-
       valuesObject:
+{{- tpl (.Files.Get "env/production/ui.values.yaml.gotmpl") . | nindent 8 }}
 {{ if eq .Values.environment "staging" }}
 {{- tpl (.Files.Get "env/staging/ui.values.yaml.gotmpl") . | nindent 8 }}
 {{ else if eq .Values.environment "local" }}
