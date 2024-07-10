@@ -19,12 +19,12 @@ spec:
         - name: helm.debug
           value: "true"
           
-      valuesObject:
-{{- include "wbaas.values.production.ui" . | nindent 8 }}
+      valuesFiles:
+        - "env/production/ui.values.yaml.gotmpl"
 {{- if eq .Values.environment "staging" -}}
-{{- include "wbaas.values.staging.ui" . | nindent 8 }}
+        - "env/staging/ui.values.yaml.gotmpl"
 {{- else if eq .Values.environment "local" -}}
-{{- include "wbaas.values.local.ui" . | nindent 8 }}
+        - "env/local/ui.values.yaml.gotmpl"
 {{- end }}
 
   syncPolicy:

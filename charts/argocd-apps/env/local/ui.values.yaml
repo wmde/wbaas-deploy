@@ -9,6 +9,8 @@ resources:
     cpu: 10m
     memory: 20Mi
 
+foo: local
+
 ingress:
   enabled: true
   annotations:
@@ -19,7 +21,10 @@ ingress:
   - host: www.wbaas.localhost
     paths:
     - /*
-  tls: null
+  tls:
+  - hosts:
+    - www.wikibase.claus
+    secretName: wikibase-production-tls
 
 ui:
   apiUrl: api.wbaas.localhost

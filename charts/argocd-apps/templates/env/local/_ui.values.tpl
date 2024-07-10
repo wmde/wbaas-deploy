@@ -9,5 +9,6 @@ ui:
 foo: bar
 
 ingress:
-  tls: null
+  tls:
+    foo: bar
 {{- end -}}

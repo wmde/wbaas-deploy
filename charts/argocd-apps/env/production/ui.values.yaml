@@ -9,6 +9,8 @@ resources:
     cpu: 10m
     memory: 20Mi
 
+foo: prod
+
 ingress:
   enabled: true
   annotations:
