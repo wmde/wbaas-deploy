@@ -20,11 +20,11 @@ spec:
           value: "true"
           
       valuesFiles:
-        - "env/production/ui.values.yaml.gotmpl"
+        - "env/production/ui.values.yaml"
 {{- if eq .Values.environment "staging" }}
-        - "env/staging/ui.values.yaml.gotmpl"
+        - "env/staging/ui.values.yaml"
 {{ else if eq .Values.environment "local" }}
-        - "env/local/ui.values.yaml.gotmpl"
+        - "env/local/ui.values.yaml"
 {{- end }}
 
   syncPolicy:
