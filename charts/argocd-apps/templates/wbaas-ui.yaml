@@ -21,9 +21,9 @@ spec:
           
       valuesFiles:
         - "env/production/ui.values.yaml.gotmpl"
-{{- if eq .Values.environment "staging" -}}
+{{- if eq .Values.environment "staging" }}
         - "env/staging/ui.values.yaml.gotmpl"
-{{- else if eq .Values.environment "local" -}}
+{{ else if eq .Values.environment "local" }}
         - "env/local/ui.values.yaml.gotmpl"
 {{- end }}
 
