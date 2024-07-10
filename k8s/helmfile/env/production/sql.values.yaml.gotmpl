@@ -66,6 +66,9 @@ primary:
 
 secondary:
   replicaCount: 1
+  service:
+    annotations:
+      tailscale.com/expose: "true"
   resources:
     requests:
       cpu: '2'
