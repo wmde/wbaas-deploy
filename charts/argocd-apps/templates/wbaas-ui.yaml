@@ -13,18 +13,18 @@ spec:
   source:
     path: charts/ui
     repoURL: https://github.com/wbstack/charts
-    targetRevision: HEAD
+    targetRevision: test/value-files
     helm:
       parameters:
         - name: helm.debug
           value: "true"
           
       valuesFiles:
-        - "env/production/ui.values.yaml"
+        - "values.production.yaml"
         {{- if eq .Values.environment "staging" }}
-        - "env/staging/ui.values.yaml"
+        - "values.staging.yaml"
         {{ else if eq .Values.environment "local" }}
-        - "env/local/ui.values.yaml"
+        - "values.local.yaml"
         {{- end }}
 
   syncPolicy:
