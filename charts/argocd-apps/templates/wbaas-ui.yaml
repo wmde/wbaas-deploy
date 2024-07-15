@@ -21,11 +21,11 @@ spec:
           
       valuesFiles:
         - "env/production/ui.values.yaml"
-{{- if eq .Values.environment "staging" }}
+        {{- if eq .Values.environment "staging" }}
         - "env/staging/ui.values.yaml"
-{{ else if eq .Values.environment "local" }}
+        {{ else if eq .Values.environment "local" }}
         - "env/local/ui.values.yaml"
-{{- end }}
+        {{- end }}
 
   syncPolicy:
     automated:
