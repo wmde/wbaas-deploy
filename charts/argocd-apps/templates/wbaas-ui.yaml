@@ -19,7 +19,7 @@ spec:
         - name: helm.debug
           value: "true"
           
-      valuesFiles:
+      valueFiles:
         - "values.production.yaml"
         {{- if eq .Values.environment "staging" }}
         - "values.staging.yaml"
