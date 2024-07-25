@@ -39,9 +39,9 @@ minikube-dashboard:
 	minikube --profile minikube-wbaas dashboard
 
 .PHONY: minikube-tunnel
-minikube-tunnel: # @HELP Open a tunnel to the local cluster and expose it on an IP on the host system
+minikube-tunnel: # @HELP Open a tunnel to the local ingress via kubectl and expose it at port 80 on the host system
 minikube-tunnel:
-	./bin/minikube-tunnel
+	sudo -E kubectl --context minikube-wbaas port-forward -n kube-system service/ingress-nginx-controller 80:80
 
 .PHONY: helmfile-fetch
 helmfile-fetch: # @HELP Fetch all charts defined in the Helmfile. This works across all environments
