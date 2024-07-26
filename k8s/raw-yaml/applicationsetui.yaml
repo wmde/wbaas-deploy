@@ -1,0 +1,42 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: cluster-git
+spec:
+  goTemplate: true
+  goTemplateOptions: ["missingkey=error"]
+  generators:
+    # merge 'parent' generator
+    - merge:
+        mergeKeys:
+          - server
+        generators:
+          - git:
+              repoURL: https://github.com/wmde/wbaas-deploy.git
+              revision: 'de/argo-apps-ui'
+              files:
+                - path: 'charts/argocd-apps/env/production/ui.values.yaml'
+              values:
+                server: foo
+          - git:
+              repoURL: https://github.com/wmde/wbaas-deploy.git
+              revision: 'de/argo-apps-ui'
+              files:
+                - path: 'charts/argocd-apps/env/local/ui.values.yaml'
+              values:
+                server: foo
+
+  template:
+    metadata:
+      name: 'ui'
+    spec:
+      project: default
+      source:
+        repoURL: https://github.com/wbstack/charts.git
+        targetRevision: HEAD
+        path: charts/ui
+        helm:
+          values: '{{toYaml .}}'
+      destination:
+        server: https://kubernetes.default.svc
+        namespace: default
