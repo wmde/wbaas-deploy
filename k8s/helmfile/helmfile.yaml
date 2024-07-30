@@ -104,6 +104,16 @@ releases:
   ################################
   # ALL ENVIRONMENTS
   ################################
+  - name: argocd-config
+    namespace: argocd
+    chart: ../../charts/argocd-config
+    values:
+      - env/{{`{{ .Environment.Name }}`}}/base.yaml
+      - env/{{`{{ .Environment.Name }}`}}/private.yaml
+      - env/production/{{`{{ .Release.Name }}`}}.values.yaml.gotmpl
+      - env/{{`{{ .Environment.Name }}`}}/{{`{{ .Release.Name }}`}}.values.yaml.gotmpl
+    installed: {{ eq .Environment.Name "local" | toYaml }}
+
   - name: redirects
     namespace: default
     chart: ./../../charts/redirects
