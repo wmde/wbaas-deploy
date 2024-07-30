@@ -1,32 +1,54 @@
 apiVersion: argoproj.io/v1alpha1
-kind: Application
+kind: ApplicationSet
 metadata:
   name: ui
   namespace: argocd
-  finalizers:
-  - resources-finalizer.argocd.argoproj.io
 spec:
-  destination:
-    namespace: default
-    server: {{ .Values.spec.destination.server }}
-  project: default
-  source:
-    path: charts/ui
-    repoURL: https://github.com/wbstack/charts
-    targetRevision: test/value-files
-    helm:
-      parameters:
-        - name: helm.debug
-          value: "true"
-      valueFiles:
-        - "values.production.yaml"
-        {{- if eq .Values.environment "staging" }}
-        - "values.staging.yaml"
-        {{ else if eq .Values.environment "local" }}
-        - "values.local.yaml"
-        {{- end }}
+  goTemplate: true
+  goTemplateOptions: ["missingkey=error"]
+  generators:
+    # merge 'parent' generator
+    - merge:
+        mergeKeys:
+          - server
+        generators:
+          - git:
+              repoURL: {{ .Values.repoUrls.main }}
+              revision: 'de/argo-apps-ui'
+              # revision: HEAD
+              files:
+                # - path: 'charts/argocd-apps/env/production/ui.values.yaml'
+                - path: 'k8s/argocd/production/ui.values.yaml'
+              # values:
+                # server: foo
+          - git:
+              repoURL: {{ .Values.repoUrls.main }}
+              revision: 'de/argo-apps-ui'
+              # revision: HEAD
+              files:
+                - path: 'k8s/argocd/local/ui.values.yaml'
+  template:
+    metadata:
+      name: 'ui'
+      namespace: argocd
+      finalizers:
+        - resources-finalizer.argocd.argoproj.io
 
-  syncPolicy:
-    automated:
-      selfHeal: false
-      prune: true
+    spec:
+      project: default
+      destination:
+        server: {{ .Values.spec.destination.server }}
+        namespace: default
+      source:
+        repoURL: {{ .Values.repoUrls.charts }}
+        targetRevision: HEAD
+        path: charts/ui
+        helm:
+          parameters:
+            - name: helm.debug
+              value: "true"
+          values: '{{ toYaml .Values }}'
+      syncPolicy:
+        automated:
+          prune: false
+          selfHeal: false
