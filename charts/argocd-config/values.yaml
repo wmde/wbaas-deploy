@@ -1,0 +1,3 @@
+repoUrls:
+  main: https://github.com/wmde/wbaas-deploy
+  charts: https://github.com/wbstack/charts.git
