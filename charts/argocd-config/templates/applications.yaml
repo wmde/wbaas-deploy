@@ -13,7 +13,7 @@ spec:
     helm:
       parameters:
         - name: helm.debug
-            value: "true"
+          value: "true"
       values: |
 {{ toYaml .Values | indent 8 }}
   syncPolicy:
