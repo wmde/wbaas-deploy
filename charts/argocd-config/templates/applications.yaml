@@ -12,8 +12,8 @@ spec:
     targetRevision: de/argo-apps-ui # debug! needs to be set to HEAD
     helm:
       parameters:
-      - name: helm.debug
-          value: "true"
+        - name: helm.debug
+            value: "true"
       values: |
 {{ toYaml .Values | indent 8 }}
   syncPolicy:
