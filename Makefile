@@ -129,3 +129,8 @@ argo-sync-%:
 .PHONY: argo-sync
 argo-sync: # @HELP Sync app-of-apps in ArgoCD (which contains all other Applications)
 argo-sync: argo-sync-app-of-apps
+
+.PHONY: argo-list
+argo-list:
+	kubectl -n argocd exec statefulsets/argo-cd-base-argocd-application-controller -- argocd --core app list
+
