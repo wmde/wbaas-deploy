@@ -1,8 +1,4 @@
-on:
-  push:
-    paths:
-      - 'k8s/helmfile/env/**'
-      - 'k8s/argocd/**'
+on: push
 name: Check values files
 jobs:
   diff:
