@@ -1,0 +1,4 @@
+#!/bin/bash
+
+kubectl -n argocd exec statefulsets/argo-cd-base-argocd-application-controller -- argocd --core $*
+
