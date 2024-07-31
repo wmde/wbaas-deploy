@@ -137,6 +137,7 @@ releases:
   - name: elasticsearch-2
     namespace: default
     chart: bitnami/elasticsearch
+    installed: false
     version: 19.10.2
     <<: *default_release
 
@@ -239,6 +240,7 @@ releases:
   - name: prometheus-elasticsearch-exporter-2
     namespace: monitoring
     chart: prometheus-community/prometheus-elasticsearch-exporter
+    installed: false
     version: 5.2.0
     <<: *default_release
 
@@ -248,6 +250,7 @@ releases:
     <<: *default_release
 
   - name: superset
+    installed: false
     namespace: default
     chart: ./../../charts/superset
     <<: *default_release
