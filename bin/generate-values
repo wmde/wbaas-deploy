@@ -46,3 +46,5 @@ helmfile \
     --skip-deps \
     write-values
 
+# fix indentation for yamllint action
+yq -I 2 -i "${OUTPUT}"
