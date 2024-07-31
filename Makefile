@@ -124,7 +124,7 @@ argo-sync-ui: # @HELP Sync ui in ArgoCD
 argo-sync-%: # @HELP Sync any Application defined in ArgoCD
 argo-sync-%: APP=$*
 argo-sync-%:
-	kubectl -n argocd exec statefulsets/argo-cd-base-argocd-application-controller -- argocd --core app sync $(APP)
+	./bin/argocli app sync $(APP)
 
 .PHONY: argo-sync
 argo-sync: # @HELP Sync app-of-apps in ArgoCD (which contains all other Applications)
@@ -132,5 +132,5 @@ argo-sync: argo-sync-app-of-apps
 
 .PHONY: argo-list
 argo-list:
-	kubectl -n argocd exec statefulsets/argo-cd-base-argocd-application-controller -- argocd --core app list
+	./bin/argocli app list
 
