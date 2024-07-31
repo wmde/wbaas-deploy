@@ -1,0 +1,48 @@
+#!/bin/bash
+
+function usage() {
+    echo
+    echo "usage: $(basename $0) <environment> <release-name> [output-file-template] [/path/to/helmfile.yaml]"
+    echo
+}
+
+ENVIRONMENT="$1"
+RELEASE="$2"
+
+OUTPUT="../argocd/${ENVIRONMENT}/${RELEASE}.values.yaml" # filepath relative to helmfile.yaml
+HELMFILE="./k8s/helmfile/helmfile.yaml"
+
+if [[ -n "$3" ]]; then
+    OUTPUT="$3"
+fi
+
+if [[ -n "$4" ]]; then
+    HELMFILE="$4"
+fi
+
+if [[ ! -e "${HELMFILE}" ]]; then
+    echo "error: helmfile not found: '${HELMFILE}'"
+    usage
+    exit 1 
+fi
+
+if [[ -z "${ENVIRONMENT}" ]]; then
+    echo "error: missing environment"
+    usage
+    exit 2
+fi
+
+if [[ -z "${RELEASE}" ]]; then
+    echo "error: missing release name"
+    usage
+    exit 3
+fi
+
+helmfile \
+    --file "${HELMFILE}" \
+    --environment "${ENVIRONMENT}" \
+    --selector name="${RELEASE}" \
+    --output-file-template "${OUTPUT}" \
+    --skip-deps \
+    write-values
+
