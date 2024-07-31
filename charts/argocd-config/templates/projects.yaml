@@ -6,7 +6,9 @@ spec:
   description: The {{ .Values.environment }} deployment of wikibase.cloud
   destinations:
   - name: in-cluster
-    namespace: default
+    namespaces:
+      - argocd
+      - default
     server: https://kubernetes.default.svc
   sourceRepos:
   - {{ .Values.repoUrls.deploy }}
