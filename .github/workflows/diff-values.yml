@@ -1,0 +1,24 @@
+on:
+  push:
+    paths:
+      - 'k8s/argocd/*'
+      - 'k8s/helmfile/env/*'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+      - name: Diff generated value files
+        run: >
+          for env_dir in k8s/argocd/*; do
+            env=$(basename $env_dir)
+            for release_file in $env_dir/*.values.yaml; do
+              release=$(basename $release_file .values.yaml)
+              tmp_values_file=/tmp/$env.$release.yml
+              echo checking $k - [$env] [$release]
+              ./bin/generate-values "$env" "$release" $tmp_values_file
+              diff tmp_values_file $release_file
+            done
+          done
