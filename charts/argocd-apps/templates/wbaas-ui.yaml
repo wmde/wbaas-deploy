@@ -16,8 +16,6 @@ spec:
       targetRevision: HEAD
       helm:
         parameters:
-          - name: helm.debug
-            value: "true"
         valueFiles:
           - $values/k8s/argocd/local/ui.values.yaml
     - repoURL: {{ .Values.repoUrls.deploy }}
