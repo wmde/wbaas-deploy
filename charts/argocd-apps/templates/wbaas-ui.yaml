@@ -21,7 +21,7 @@ spec:
         valueFiles:
           - $values/k8s/argocd/local/ui.values.yaml
     - repoURL: {{ .Values.repoUrls.deploy }}
-      targetRevision: HEAD
+      targetRevision: de/argo-ui-simple
       ref: values
 
   syncPolicy:
