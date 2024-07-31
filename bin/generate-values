@@ -12,7 +12,7 @@ ENVIRONMENT="$1"
 RELEASE="$2"
 
 OUTPUT="${ROOT}/k8s/argocd/${ENVIRONMENT}/${RELEASE}.values.yaml"
-HELMFILE="${ROOT}/k8s/helmfile/helmfile.yaml"
+HELMFILE="k8s/helmfile/helmfile.yaml"
 
 if [[ -n "$3" ]]; then
     OUTPUT="$3"
