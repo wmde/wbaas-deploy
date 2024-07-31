@@ -9,4 +9,4 @@ type: Opaque
 data:
   project: {{ "local" | b64enc }}
   type: {{ "git" | b64enc }}
-  url: {{ .Values.repoUrls.main | b64enc }}
+  url: {{ .Values.repoUrls.deploy | b64enc }}

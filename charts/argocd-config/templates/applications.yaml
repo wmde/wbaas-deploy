@@ -8,7 +8,7 @@ spec:
   project: default
   source:
     path: charts/argocd-apps
-    repoURL: {{ .Values.repoUrls.main }}
+    repoURL: {{ .Values.repoUrls.deploy }}
     targetRevision: de/argo-ui-simple # debug! needs to be set to HEAD
     helm:
       parameters:

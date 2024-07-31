@@ -8,5 +8,5 @@ spec:
   - name: in-cluster
     server: https://kubernetes.default.svc
   sourceRepos:
-  - {{ .Values.repoUrls.main }}
+  - {{ .Values.repoUrls.deploy }}
   - {{ .Values.repoUrls.charts }}
