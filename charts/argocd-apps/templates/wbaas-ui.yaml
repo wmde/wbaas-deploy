@@ -9,7 +9,7 @@ spec:
   destination:
     namespace: default
     server: {{ .Values.clusterUrl }}
-  project: default
+  project: {{ .Values.environment }}
   sources:
     - repoURL: {{ .Values.repoUrls.charts }}
       path: charts/ui
