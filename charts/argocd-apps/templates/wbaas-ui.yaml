@@ -10,16 +10,19 @@ spec:
     namespace: default
     server: {{ .Values.clusterUrl }}
   project: default
-  source:
-    path: charts/ui
-    repoURL: {{ .Values.repoUrls.charts }}
-    targetRevision: test/value-files
-    helm:
-      parameters:
-        - name: helm.debug
-          value: "true"
-      valueFiles:
-        - "values.local.yaml"
+  sources:
+    - repoURL: {{ .Values.repoUrls.charts }}
+      path: charts/ui
+      targetRevision: HEAD
+      helm:
+        parameters:
+          - name: helm.debug
+            value: "true"
+        valueFiles:
+          - $values/k8s/argocd/local/ui.values.yaml
+    - repoURL: {{ .Values.repoUrls.deploy }}
+      targetRevision: HEAD
+      ref: values
 
   syncPolicy:
     automated:
