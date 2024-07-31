@@ -1,9 +1,9 @@
 apiVersion: argoproj.io/v1alpha1
 kind: AppProject
 metadata:
-  name: local
+  name: {{ .Values.environment }}
 spec:
-  description: The local deployment of wikibase.cloud
+  description: The {{ .Values.environment }} deployment of wikibase.cloud
   destinations:
   - name: in-cluster
     server: https://kubernetes.default.svc
