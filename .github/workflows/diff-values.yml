@@ -6,14 +6,16 @@ jobs:
     steps:
       - name: Check out repository
         uses: actions/checkout@v4
+      - name: debug
+        run: echo $PATH
       - name: Create helmfile docker shim
         run: >
-          echo 'docker run --rm -v "${PWD}:/wd" ghcr.io/helmfile/helmfile:latest helmfile' \
+          echo 'docker run --rm -v "${PWD}:/wd" ghcr.io/helmfile/helmfile:latest helmfile $*' \
             > /usr/bin/helmfile
           chmod a+x /usr/bin/helmfile
       - name: Create yq docker shim
         run: >
-          echo 'docker run --rm -v "${PWD}:/wd" --entrypoint yq ghcr.io/linuxserver/yq:latest' \
+          echo 'docker run --rm -v "${PWD}:/wd" --entrypoint yq ghcr.io/linuxserver/yq:latest $*' \
             > /usr/bin/yq
           chmod a+x /usr/bin/yq
       - name: Diff generated value files
