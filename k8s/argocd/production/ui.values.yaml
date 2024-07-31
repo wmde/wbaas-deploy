@@ -7,13 +7,13 @@ ingress:
     nginx.ingress.kubernetes.io/use-regex: "true"
   enabled: true
   hosts:
-  - host: www.wikibase.cloud
-    paths:
-    - /*
+    - host: www.wikibase.cloud
+      paths:
+        - /*
   tls:
-  - hosts:
-    - www.wikibase.cloud
-    secretName: wikibase-production-tls
+    - hosts:
+        - www.wikibase.cloud
+      secretName: wikibase-production-tls
 podLabels:
   sidecar.istio.io/inject: "true"
 resources:
