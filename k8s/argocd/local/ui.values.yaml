@@ -7,9 +7,9 @@ ingress:
     nginx.ingress.kubernetes.io/use-regex: "true"
   enabled: true
   hosts:
-  - host: www.wbaas.localhost
-    paths:
-    - /*
+    - host: www.wbaas.localhost
+      paths:
+        - /*
   tls: null
 podLabels:
   sidecar.istio.io/inject: "true"
