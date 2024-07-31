@@ -1,8 +1,4 @@
-on:
-  push:
-    paths:
-      - 'k8s/argocd/*'
-      - 'k8s/helmfile/env/*'
+on: push
 
 jobs:
   build:
