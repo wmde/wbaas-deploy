@@ -12,9 +12,6 @@ spec:
     repoURL: {{ .Values.repoUrls.deploy }}
     targetRevision: de/argo-ui-simple # debug! needs to be set to HEAD
     helm:
-      parameters:
-        - name: helm.debug
-          value: "true"
       values: |
 {{ toYaml .Values | indent 8 }}
   syncPolicy:
