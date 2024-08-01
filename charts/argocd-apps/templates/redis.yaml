@@ -8,12 +8,19 @@ metadata:
 spec:
   destination:
     namespace: default
-    server: https://kubernetes.default.svc
-  project: default
-  source:
-    repoURL: https://github.com/bitnami/charts.git
-    path: bitnami/redis
-    targetRevision: HEAD
+    server: {{ .Values.clusterUrl }}
+  project: {{ .Values.environment }}
+  sources:
+    - repoURL: {{ .Values.repoUrls.bitnami }}
+      path: bitnami/redis
+      targetRevision: HEAD
+      helm:
+        version: 17.3.8
+        valueFiles:
+          - $values/k8s/argocd/local/redis.values.yaml
+    - repoURL: {{ .Values.repoUrls.deploy }}
+      targetRevision: de/argo-redis
+      ref: values
 
   syncPolicy:
     automated:
