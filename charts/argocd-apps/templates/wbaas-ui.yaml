@@ -16,7 +16,7 @@ spec:
       targetRevision: HEAD
       helm:
         valueFiles:
-          - $values/k8s/argocd/local/ui.values.yaml
+          - $values/k8s/argocd/{{ .Values.environment }}/ui.values.yaml
     - repoURL: {{ .Values.repoUrls.deploy }}
       targetRevision: de/argo-ui-simple
       ref: values
