@@ -1,5 +1,6 @@
 environment: production
 
 repoUrls:
-  deploy: https://github.com/wmde/wbaas-deploy
+  deploy: https://github.com/wmde/wbaas-deploy.git
   charts: https://github.com/wbstack/charts.git
+  bitnami: https://github.com/bitnami/charts.git
