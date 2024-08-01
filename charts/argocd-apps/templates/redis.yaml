@@ -17,7 +17,7 @@ spec:
       helm:
         version: 17.3.8
         valueFiles:
-          - $values/k8s/argocd/{{ .Values.environment }}/redis.values.yaml
+          - $values/k8s/argocd/local/redis.values.yaml
     - repoURL: {{ .Values.repoUrls.deploy }}
       targetRevision: de/argo-redis
       ref: values
