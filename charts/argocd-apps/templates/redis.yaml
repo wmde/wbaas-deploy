@@ -12,7 +12,7 @@ spec:
   project: {{ .Values.environment }}
   sources:
     - repoURL: {{ .Values.repoUrls.bitnami }}
-      path: bitnami/redis      
+      path: bitnami/redis
       targetRevision: HEAD
       helm:
         version: 17.3.8
