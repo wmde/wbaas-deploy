@@ -15,7 +15,6 @@ spec:
       path: charts/ui
       targetRevision: HEAD
       helm:
-        parameters:
         valueFiles:
           - $values/k8s/argocd/local/ui.values.yaml
     - repoURL: {{ .Values.repoUrls.deploy }}
