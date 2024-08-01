@@ -81,7 +81,7 @@ releases:
     installed: {{ ne .Environment.Name "local" | toYaml }}
     namespace: cert-manager
     # TODO use something more generic or from wbstack/charts repo
-    chart: ./../../charts/wikibase-cloud-clusterissuers
+    chart: ./../../charts/wikibase-cloud-clusterissuers 
     values:
       - email: {{ .Values.external.letsencrypt.email }}
       - gceProject: {{ .Values.gceProject }}
@@ -107,12 +107,8 @@ releases:
   - name: argocd-config
     namespace: argocd
     chart: ../../charts/argocd-config
-    values:
-      - env/{{`{{ .Environment.Name }}`}}/base.yaml
-      - env/{{`{{ .Environment.Name }}`}}/private.yaml
-      - env/production/{{`{{ .Release.Name }}`}}.values.yaml.gotmpl
-      - env/{{`{{ .Environment.Name }}`}}/{{`{{ .Release.Name }}`}}.values.yaml.gotmpl
     installed: {{ eq .Environment.Name "local" | toYaml }}
+    <<: *default_release
 
   - name: redirects
     namespace: default
