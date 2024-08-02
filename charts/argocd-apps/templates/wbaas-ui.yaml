@@ -18,10 +18,10 @@ spec:
         valueFiles:
           - $values/k8s/argocd/{{ .Values.environment }}/ui.values.yaml
     - repoURL: {{ .Values.repoUrls.deploy }}
-      targetRevision: de/argo-ui-simple
+      targetRevision: de/argo-self-heal-test
       ref: values
 
   syncPolicy:
     automated:
-      selfHeal: true
+      selfHeal: false
       prune: true
