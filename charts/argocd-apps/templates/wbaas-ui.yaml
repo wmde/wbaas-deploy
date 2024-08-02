@@ -23,5 +23,5 @@ spec:
 
   syncPolicy:
     automated:
-      selfHeal: false
+      selfHeal: {{ (ternary "false" "true" (eq .Values.Environment "local")) }}
       prune: true
