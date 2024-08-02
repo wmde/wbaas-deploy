@@ -10,7 +10,7 @@ spec:
   source:
     path: charts/argocd-apps
     repoURL: {{ .Values.repoUrls.deploy }}
-    targetRevision: de/argo-ui-simple # debug! needs to be set to HEAD
+    targetRevision: de/argo-ui-simple #TODO change to HEAD
     helm:
       values: |
 {{ toYaml .Values | indent 8 }}
