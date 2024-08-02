@@ -43,6 +43,7 @@ jobs:
           chmod +x ~/.local/bin/yq
       - name: Diff current values files against generated ones
         run: >
+          set -x;
           for ENV_DIR in k8s/argocd/*; do
             ENV=$(basename "${ENV_DIR}")
 
