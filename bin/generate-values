@@ -6,6 +6,7 @@ function usage() {
     echo
 }
 
+# absolute path of the wbaas-deploy repository
 ROOT=$(realpath $(dirname $(realpath $BASH_SOURCE))/..)
 
 ENVIRONMENT="$1"
