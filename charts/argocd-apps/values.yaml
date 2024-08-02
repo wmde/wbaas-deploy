@@ -1,0 +1,3 @@
+clusterUrl: https://kubernetes.default.svc
+
+# "inherits" values from argocd-config chart
