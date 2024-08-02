@@ -13,12 +13,12 @@ spec:
   sources:
     - repoURL: {{ .Values.repoUrls.charts }}
       path: charts/ui
-      targetRevision: de/ui-add-annotations #TODO change to HEAD
+      targetRevision: HEAD
       helm:
         valueFiles:
           - $values/k8s/argocd/{{ .Values.environment }}/ui.values.yaml
     - repoURL: {{ .Values.repoUrls.deploy }}
-      targetRevision: de/argo-ui-simple #TODO change to HEAD
+      targetRevision: HEAD
       ref: values
 
   syncPolicy:
