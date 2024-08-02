@@ -23,5 +23,6 @@ spec:
 
   syncPolicy:
     automated:
-      selfHeal: true
+      # disable self-healing for local env so we can use skaffold
+      selfHeal: {{- if eq .Values.environment "local" }} false {{ else }} true {{ end}}
       prune: true
