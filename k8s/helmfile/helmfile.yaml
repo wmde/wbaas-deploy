@@ -165,6 +165,7 @@ releases:
     <<: *default_release
 
   - name: ui
+    installed: {{ ne .Environment.Name "local" | toYaml }}
     namespace: default
     chart: wbstack/ui
     version: 0.3.1
