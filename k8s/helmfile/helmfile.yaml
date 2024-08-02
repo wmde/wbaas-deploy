@@ -107,7 +107,7 @@ releases:
   - name: argocd-config
     namespace: argocd
     chart: ../../charts/argocd-config
-    installed: {{ eq .Environment.Name "local" | toYaml }}
+    installed: {{ ne .Environment.Name "production" | toYaml }}
     <<: *default_release
 
   - name: redirects
