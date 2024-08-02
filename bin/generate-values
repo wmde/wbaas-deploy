@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -x
+
 function usage() {
     echo
     echo "usage: $(basename $0) <environment> <release-name> [output-file-template]"
