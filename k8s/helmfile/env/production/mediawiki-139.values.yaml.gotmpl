@@ -7,6 +7,12 @@ replicaCount:
   webapi: 2
   alpha: 1
 
+web:
+  autoscaling:
+    enabled: true
+    minReplicas: 1
+    maxReplicas: 5
+
 mw:
   redis:
     # TODO fixme, no port injected into deployment...
