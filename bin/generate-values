@@ -1,0 +1,58 @@
+#!/bin/bash
+
+function usage() {
+    echo
+    echo "usage: $(basename $0) <environment> <release-name> [output-file-template]"
+    echo
+}
+
+ENVIRONMENT="$1"
+RELEASE="$2"
+
+# absolute path of the wbaas-deploy repository
+ROOT=$(realpath $(dirname $(realpath $BASH_SOURCE))/..)
+OUTPUT_TEMPLATE="${ROOT}/k8s/argocd/${ENVIRONMENT}/${RELEASE}.values.yaml"
+HELMFILE="k8s/helmfile/helmfile.yaml"
+TMP_HELMFILE="$(dirname ${HELMFILE})/.tmp_helmfile.$(mktemp -u XXXXXX).yaml"
+
+if [[ -n "$3" ]]; then
+    OUTPUT_TEMPLATE="$3"
+fi
+
+if [[ ! -e "${HELMFILE}" ]]; then
+    echo "error: helmfile not found: '${HELMFILE}'"
+    usage
+    exit 1 
+fi
+
+if [[ -z "${ENVIRONMENT}" ]]; then
+    echo "error: missing environment"
+    usage
+    exit 2
+fi
+
+if [[ -z "${RELEASE}" ]]; then
+    echo "error: missing release name"
+    usage
+    exit 3
+fi
+
+echo "environment: ${ENVIRONMENT}"
+echo "release: ${RELEASE}"
+
+# modify tmp helmfile by setting each release as "installed", so it always gets processed
+cp "${HELMFILE}" "${TMP_HELMFILE}"
+sed -i 's/installed: .*$/installed: true/g' "${TMP_HELMFILE}"
+
+helmfile \
+    --file "${TMP_HELMFILE}" \
+    --environment "${ENVIRONMENT}" \
+    --selector name="${RELEASE}" \
+    --output-file-template "${OUTPUT_TEMPLATE}" \
+    --skip-deps \
+    write-values
+
+rm "${TMP_HELMFILE}"
+
+# fix indentation in output file for yamllint action
+yq -I 2 -i "${OUTPUT_TEMPLATE}"

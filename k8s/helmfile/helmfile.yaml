@@ -104,6 +104,12 @@ releases:
   ################################
   # ALL ENVIRONMENTS
   ################################
+  - name: argocd-config
+    namespace: argocd
+    chart: ../../charts/argocd-config
+    installed: {{ eq .Environment.Name "local" | toYaml }}
+    <<: *default_release
+
   - name: redirects
     namespace: default
     chart: ./../../charts/redirects
@@ -159,6 +165,7 @@ releases:
     <<: *default_release
 
   - name: ui
+    installed: {{ ne .Environment.Name "local" | toYaml }}
     namespace: default
     chart: wbstack/ui
     version: 0.3.1
