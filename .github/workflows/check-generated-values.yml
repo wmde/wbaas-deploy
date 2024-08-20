@@ -3,44 +3,13 @@ name: Check values files
 jobs:
   diff:
     runs-on: ubuntu-latest
-    env:
-      TMP_DIR: "/tmp/shared"
     steps:
       - name: Check out repository
         uses: actions/checkout@v4
-      - name: Create directories
-        run: |
-          mkdir -p ~/.local/bin
-          mkdir -p "${TMP_DIR}"
-          chmod 777 "${TMP_DIR}"
-      - name: Create helmfile docker shim
-        run: |
-          docker pull ghcr.io/helmfile/helmfile:latest
-
-          echo 'docker run \
-            --rm \
-            --volume "${TMP_DIR}:${TMP_DIR}" \
-            --volume "${PWD}:/workdir" \
-            --workdir /workdir \
-            --user $(id -u):$(id -g) \
-            ghcr.io/helmfile/helmfile:latest helmfile $*' \
-            | tee ~/.local/bin/helmfile
-
-          chmod +x ~/.local/bin/helmfile
-      - name: Create yq docker shim
-        run: |
-          docker pull mikefarah/yq:latest
-
-          echo 'docker run \
-            --rm \
-            --volume "${TMP_DIR}:${TMP_DIR}" \
-            --volume "${PWD}:/workdir" \
-            --workdir /workdir \
-            --user $(id -u):$(id -g) \
-            mikefarah/yq:latest $*' \
-            | tee ~/.local/bin/yq
-
-          chmod +x ~/.local/bin/yq
+      - name: Set up yq
+        uses: frenck/action-setup-yq@v1
+      - name: Set up helmfile
+        uses: helmfile/helmfile-action@v1.9.1
       - name: Diff current values files against generated ones
         run: >
           set -x;
@@ -49,7 +18,7 @@ jobs:
 
             for RELEASE_FILE in "${ENV_DIR}"/*.values.yaml; do
               RELEASE=$(basename "${RELEASE_FILE}" .values.yaml)
-              TMP_VALUES="${TMP_DIR}"/tmp_"${ENV}.${RELEASE}".yml
+              TMP_VALUES=$(mktemp)
 
               echo "checking $RELEASE_FILE - [$ENV] [$RELEASE]"
 
