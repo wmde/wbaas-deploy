@@ -6,8 +6,8 @@ jobs:
     steps:
       - name: Check out repository
         uses: actions/checkout@v4
-      - name: Set up yq
-        uses: frenck/action-setup-yq@v1
+      - name: Set foobar to cool
+        uses: mikefarah/yq@v4.44.3
       - name: Set up helmfile
         uses: helmfile/helmfile-action@v1.9.1
       - name: Diff current values files against generated ones
