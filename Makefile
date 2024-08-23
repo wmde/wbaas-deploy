@@ -131,6 +131,12 @@ argo-sync: # @HELP Sync app-of-apps in ArgoCD (which contains all other Applicat
 argo-sync: argo-sync-app-of-apps
 
 .PHONY: argo-list
+argo-list: # @HELP List current applications and their state in ArgoCD
 argo-list:
 	./bin/argocli app list
+
+.PHONY: argo-port-forward
+argo-port-forward: # @HELP Port forwards the ArgoCD UI to localhost:8080
+argo-port-forward:
+	kubectl -n argocd port-forward deployments/argo-cd-base-argocd-server 8080
 
