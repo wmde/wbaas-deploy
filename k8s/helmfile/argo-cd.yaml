@@ -26,5 +26,4 @@ releases:
     namespace: argocd
     chart: argo-cd/argo-cd
     version: '6.7.15'
-    installed: {{ ne .Environment.Name "production" | toYaml }}
     <<: *default_release
