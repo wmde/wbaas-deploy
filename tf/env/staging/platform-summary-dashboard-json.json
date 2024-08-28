@@ -221,9 +221,11 @@
               "horizontalAlignment": "H_LEFT",
               "verticalAlignment": "V_TOP",
               "padding": "P_EXTRA_SMALL",
-              "fontSize": "FS_LARGE"
+              "fontSize": "FS_LARGE",
+              "pointerLocation": "POINTER_LOCATION_UNSPECIFIED"
             }
-          }
+          },
+          "id": ""
         }
       },
       {
@@ -302,11 +304,18 @@
                 "aggregation": {
                   "alignmentPeriod": "86400s",
                   "perSeriesAligner": "ALIGN_DELTA",
-                  "crossSeriesReducer": "REDUCE_MEAN"
+                  "crossSeriesReducer": "REDUCE_MEAN",
+                  "groupByFields": []
                 }
-              }
-            }
-          }
+              },
+              "unitOverride": "",
+              "outputFullDuration": false
+            },
+            "thresholds": [],
+            "dimensions": [],
+            "measures": []
+          },
+          "id": ""
         }
       },
       {
@@ -325,14 +334,20 @@
                     "aggregation": {
                       "alignmentPeriod": "86400s",
                       "perSeriesAligner": "ALIGN_DELTA",
-                      "crossSeriesReducer": "REDUCE_MEAN"
+                      "crossSeriesReducer": "REDUCE_MEAN",
+                      "groupByFields": []
                     }
-                  }
+                  },
+                  "unitOverride": "",
+                  "outputFullDuration": false
                 },
                 "plotType": "LINE",
                 "legendTemplate": "Total non-deleted active users",
                 "minAlignmentPeriod": "86400s",
-                "targetAxis": "Y2"
+                "targetAxis": "Y2",
+                "dimensions": [],
+                "measures": [],
+                "breakdowns": []
               },
               {
                 "timeSeriesQuery": {
@@ -341,14 +356,20 @@
                     "aggregation": {
                       "alignmentPeriod": "86400s",
                       "perSeriesAligner": "ALIGN_DELTA",
-                      "crossSeriesReducer": "REDUCE_MEAN"
+                      "crossSeriesReducer": "REDUCE_MEAN",
+                      "groupByFields": []
                     }
-                  }
+                  },
+                  "unitOverride": "",
+                  "outputFullDuration": false
                 },
                 "plotType": "LINE",
                 "legendTemplate": "Total non-deleted users",
                 "minAlignmentPeriod": "86400s",
-                "targetAxis": "Y2"
+                "targetAxis": "Y2",
+                "dimensions": [],
+                "measures": [],
+                "breakdowns": []
               },
               {
                 "timeSeriesQuery": {
@@ -357,26 +378,36 @@
                     "aggregation": {
                       "alignmentPeriod": "86400s",
                       "perSeriesAligner": "ALIGN_DELTA",
-                      "crossSeriesReducer": "REDUCE_MEAN"
+                      "crossSeriesReducer": "REDUCE_MEAN",
+                      "groupByFields": []
                     }
-                  }
+                  },
+                  "unitOverride": "",
+                  "outputFullDuration": false
                 },
                 "plotType": "LINE",
                 "legendTemplate": "Total non-deleted edits",
                 "minAlignmentPeriod": "86400s",
-                "targetAxis": "Y1"
+                "targetAxis": "Y1",
+                "dimensions": [],
+                "measures": [],
+                "breakdowns": []
               }
             ],
             "timeshiftDuration": "0s",
+            "thresholds": [],
             "yAxis": {
               "label": "y1Axis",
               "scale": "LINEAR"
             },
-            "chartOptions": {
-              "mode": "COLOR"
-            },
             "y2Axis": {
+              "label": "",
               "scale": "LINEAR"
+            },
+            "chartOptions": {
+              "mode": "COLOR",
+              "showLegend": false,
+              "displayHorizontal": false
             }
           }
         }
@@ -397,7 +428,8 @@
                     "aggregation": {
                       "alignmentPeriod": "86400s",
                       "perSeriesAligner": "ALIGN_DELTA",
-                      "crossSeriesReducer": "REDUCE_MEAN"
+                      "crossSeriesReducer": "REDUCE_MEAN",
+                      "groupByFields": []
                     }
                   }
                 },
@@ -413,7 +445,8 @@
                     "aggregation": {
                       "alignmentPeriod": "86400s",
                       "perSeriesAligner": "ALIGN_DELTA",
-                      "crossSeriesReducer": "REDUCE_MEAN"
+                      "crossSeriesReducer": "REDUCE_MEAN",
+                      "groupByFields": []
                     }
                   }
                 },
@@ -429,7 +462,8 @@
                     "aggregation": {
                       "alignmentPeriod": "86400s",
                       "perSeriesAligner": "ALIGN_DELTA",
-                      "crossSeriesReducer": "REDUCE_MEAN"
+                      "crossSeriesReducer": "REDUCE_MEAN",
+                      "groupByFields": []
                     }
                   }
                 },
@@ -484,12 +518,13 @@
           "scorecard": {
             "timeSeriesQuery": {
               "timeSeriesFilter": {
-                "filter": "metric.type=\"logging.googleapis.com/user/wbaas-2-platform-summary-total_items_count\" resource.type=\"k8s_container\"",
                 "aggregation": {
                   "alignmentPeriod": "86400s",
-                  "perSeriesAligner": "ALIGN_DELTA",
-                  "crossSeriesReducer": "REDUCE_PERCENTILE_50"
-                }
+                  "crossSeriesReducer": "REDUCE_MEAN",
+                  "groupByFields": [],
+                  "perSeriesAligner": "ALIGN_DELTA"
+                },
+                "filter": "metric.type=\"logging.googleapis.com/user/wbaas-2-platform-summary-total_items_count\" resource.type=\"k8s_container\""
               }
             }
           }
@@ -505,12 +540,13 @@
           "scorecard": {
             "timeSeriesQuery": {
               "timeSeriesFilter": {
-                "filter": "metric.type=\"logging.googleapis.com/user/wbaas-2-platform-summary-total_properties_count\" resource.type=\"k8s_container\"",
                 "aggregation": {
                   "alignmentPeriod": "86400s",
-                  "perSeriesAligner": "ALIGN_DELTA",
-                  "crossSeriesReducer": "REDUCE_PERCENTILE_50"
-                }
+                  "crossSeriesReducer": "REDUCE_MEAN",
+                  "groupByFields": [],
+                  "perSeriesAligner": "ALIGN_DELTA"
+                },
+                "filter": "metric.type=\"logging.googleapis.com/user/wbaas-2-platform-summary-total_properties_count\" resource.type=\"k8s_container\""
               }
             }
           }
