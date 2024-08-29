@@ -221,11 +221,9 @@
               "horizontalAlignment": "H_LEFT",
               "verticalAlignment": "V_TOP",
               "padding": "P_EXTRA_SMALL",
-              "fontSize": "FS_LARGE",
-              "pointerLocation": "POINTER_LOCATION_UNSPECIFIED"
+              "fontSize": "FS_LARGE"
             }
-          },
-          "id": ""
+          }
         }
       },
       {
@@ -304,18 +302,11 @@
                 "aggregation": {
                   "alignmentPeriod": "86400s",
                   "perSeriesAligner": "ALIGN_DELTA",
-                  "crossSeriesReducer": "REDUCE_MEAN",
-                  "groupByFields": []
+                  "crossSeriesReducer": "REDUCE_MEAN"
                 }
-              },
-              "unitOverride": "",
-              "outputFullDuration": false
-            },
-            "thresholds": [],
-            "dimensions": [],
-            "measures": []
-          },
-          "id": ""
+              }
+            }
+          }
         }
       },
       {
@@ -334,20 +325,14 @@
                     "aggregation": {
                       "alignmentPeriod": "86400s",
                       "perSeriesAligner": "ALIGN_DELTA",
-                      "crossSeriesReducer": "REDUCE_MEAN",
-                      "groupByFields": []
+                      "crossSeriesReducer": "REDUCE_MEAN"
                     }
-                  },
-                  "unitOverride": "",
-                  "outputFullDuration": false
+                  }
                 },
                 "plotType": "LINE",
                 "legendTemplate": "Total non-deleted active users",
                 "minAlignmentPeriod": "86400s",
-                "targetAxis": "Y2",
-                "dimensions": [],
-                "measures": [],
-                "breakdowns": []
+                "targetAxis": "Y2"
               },
               {
                 "timeSeriesQuery": {
@@ -356,20 +341,14 @@
                     "aggregation": {
                       "alignmentPeriod": "86400s",
                       "perSeriesAligner": "ALIGN_DELTA",
-                      "crossSeriesReducer": "REDUCE_MEAN",
-                      "groupByFields": []
+                      "crossSeriesReducer": "REDUCE_MEAN"
                     }
-                  },
-                  "unitOverride": "",
-                  "outputFullDuration": false
+                  }
                 },
                 "plotType": "LINE",
                 "legendTemplate": "Total non-deleted users",
                 "minAlignmentPeriod": "86400s",
-                "targetAxis": "Y2",
-                "dimensions": [],
-                "measures": [],
-                "breakdowns": []
+                "targetAxis": "Y2"
               },
               {
                 "timeSeriesQuery": {
@@ -378,36 +357,26 @@
                     "aggregation": {
                       "alignmentPeriod": "86400s",
                       "perSeriesAligner": "ALIGN_DELTA",
-                      "crossSeriesReducer": "REDUCE_MEAN",
-                      "groupByFields": []
+                      "crossSeriesReducer": "REDUCE_MEAN"
                     }
-                  },
-                  "unitOverride": "",
-                  "outputFullDuration": false
+                  }
                 },
                 "plotType": "LINE",
                 "legendTemplate": "Total non-deleted edits",
                 "minAlignmentPeriod": "86400s",
-                "targetAxis": "Y1",
-                "dimensions": [],
-                "measures": [],
-                "breakdowns": []
+                "targetAxis": "Y1"
               }
             ],
             "timeshiftDuration": "0s",
-            "thresholds": [],
             "yAxis": {
               "label": "y1Axis",
               "scale": "LINEAR"
             },
             "y2Axis": {
-              "label": "",
               "scale": "LINEAR"
             },
             "chartOptions": {
-              "mode": "COLOR",
-              "showLegend": false,
-              "displayHorizontal": false
+              "mode": "COLOR"
             }
           }
         }
@@ -428,8 +397,7 @@
                     "aggregation": {
                       "alignmentPeriod": "86400s",
                       "perSeriesAligner": "ALIGN_DELTA",
-                      "crossSeriesReducer": "REDUCE_MEAN",
-                      "groupByFields": []
+                      "crossSeriesReducer": "REDUCE_MEAN"
                     }
                   }
                 },
@@ -445,8 +413,7 @@
                     "aggregation": {
                       "alignmentPeriod": "86400s",
                       "perSeriesAligner": "ALIGN_DELTA",
-                      "crossSeriesReducer": "REDUCE_MEAN",
-                      "groupByFields": []
+                      "crossSeriesReducer": "REDUCE_MEAN"
                     }
                   }
                 },
@@ -462,8 +429,7 @@
                     "aggregation": {
                       "alignmentPeriod": "86400s",
                       "perSeriesAligner": "ALIGN_DELTA",
-                      "crossSeriesReducer": "REDUCE_MEAN",
-                      "groupByFields": []
+                      "crossSeriesReducer": "REDUCE_MEAN"
                     }
                   }
                 },
