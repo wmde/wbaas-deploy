@@ -8,6 +8,7 @@ dex:
 
 configs:
   cm:
+    users.anonymous.enabled: true
     admin.enabled: false
 
     ui.bannerpermanent: true
@@ -22,6 +23,20 @@ configs:
           color:white;
         }
     }
+
+  rbac:
+    "policy.default": "role:unauthenticated"
+    "policy.csv": |
+        g, anonymous, role:unauthenticated
+        p, role:unauthenticated, applications, get, */*, allow
+        p, role:unauthenticated, clusters, get, */*, allow
+        p, role:unauthenticated, projects, get, *, allow
+        p, role:unauthenticated, repositories, get, *, allow
+        p, role:unauthenticated, repositories, list, *, allow
+        p, role:unauthenticated, repositories, validate, *, allow
+        p, role:unauthenticated, accounts, get, *, allow
+        p, role:unauthenticated, certificates, get, *, allow
+        p, role:unauthenticated, gpgkeys, get, *, allow
 
 controller:
   resources:
