@@ -521,7 +521,6 @@
                 "aggregation": {
                   "alignmentPeriod": "86400s",
                   "crossSeriesReducer": "REDUCE_MEAN",
-                  "groupByFields": [],
                   "perSeriesAligner": "ALIGN_DELTA"
                 },
                 "filter": "metric.type=\"logging.googleapis.com/user/wbaas-2-platform-summary-total_items_count\" resource.type=\"k8s_container\""
@@ -543,7 +542,6 @@
                 "aggregation": {
                   "alignmentPeriod": "86400s",
                   "crossSeriesReducer": "REDUCE_MEAN",
-                  "groupByFields": [],
                   "perSeriesAligner": "ALIGN_DELTA"
                 },
                 "filter": "metric.type=\"logging.googleapis.com/user/wbaas-2-platform-summary-total_properties_count\" resource.type=\"k8s_container\""
