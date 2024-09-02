@@ -9,8 +9,8 @@ fi
 
 # This creates the PVC (if it doesn't exist) for backups to be saved to
 # It will not be automatically deleted so you may need to clean this up when you are done
-kubectl apply -f backUpSingleWikiPvc.yaml
+kubectl apply -f singleWikiBackupPvc.yaml
 
-kubectl create -f backUpSingleWiki.yaml -o=json --dry-run=client |\
+kubectl create -f singleWikiBackup.yaml -o=json --dry-run=client |\
 jq ".spec.template.spec.containers[0].env += [{\"name\": \"DATABASE_NAME\", \"value\": \"${DATABASE_NAME}\"}]" |\
 kubectl create -f -

@@ -7,6 +7,6 @@ if [[ -z "$DATABASE_NAME"  ]]; then
     exit 1
 fi
 
-kubectl create -f restoreSingleWiki.yaml -o=json --dry-run=client |\
+kubectl create -f singleWikiRestore.yaml -o=json --dry-run=client |\
 jq ".spec.template.spec.containers[0].env += [{\"name\": \"DATABASE_NAME\", \"value\": \"${DATABASE_NAME}\"}]" |\
 kubectl create -f -
