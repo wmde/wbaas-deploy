@@ -1,6 +1,6 @@
 #!/bin/sh
 
-# WBS_DOMAIN should be set to the domain to reindex
+# DATABASE_NAME should be set to the database to backup
 
 kubectl apply -f backUpSingleWikiPvc.yaml
 
