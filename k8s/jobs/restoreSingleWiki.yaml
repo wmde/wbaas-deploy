@@ -1,0 +1,35 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  generateName: restore-single-wiki-
+  namespace: adhoc-jobs
+spec:
+  ttlSecondsAfterFinished: 604800 #7days
+  template:
+    metadata:
+      name: restore-single-wiki
+    spec:
+      volumes:
+        - name: temporary-backup-pvc
+          persistentVolumeClaim:
+            claimName: temporary-backup-pvc
+      containers:
+        - name: restore-single-wiki
+          env:
+            - name: MYSQL_PWD
+              valueFrom:
+                secretKeyRef:
+                  name: sql-secrets-passwords
+                  key: mariadb-root-password
+          image: mariadb:10.5
+
+          command:
+            - 'bash'
+            - '-c'
+            - |
+                mysql --host sql-mariadb-secondary.default.svc.cluster.local ${DATABASE_NAME} < /backup/file.sql
+          volumeMounts:
+            - name: temporary-backup-pvc
+              mountPath: "/backup/"
+
+      restartPolicy: OnFailure
