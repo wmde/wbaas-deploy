@@ -487,8 +487,8 @@
                 "filter": "metric.type=\"logging.googleapis.com/user/wbaas-3-platform-summary-total_items_count\" resource.type=\"k8s_container\"",
                 "aggregation": {
                   "alignmentPeriod": "86400s",
-                  "crossSeriesReducer": "REDUCE_MEAN",
-                  "perSeriesAligner": "ALIGN_DELTA"
+                  "perSeriesAligner": "ALIGN_DELTA",
+                  "crossSeriesReducer": "REDUCE_MEAN"
                 }
               }
             }
@@ -508,8 +508,8 @@
                 "filter": "metric.type=\"logging.googleapis.com/user/wbaas-3-platform-summary-total_properties_count\" resource.type=\"k8s_container\"",
                 "aggregation": {
                   "alignmentPeriod": "86400s",
-                  "crossSeriesReducer": "REDUCE_MEAN",
-                  "perSeriesAligner": "ALIGN_DELTA"
+                  "perSeriesAligner": "ALIGN_DELTA",
+                  "crossSeriesReducer": "REDUCE_MEAN"
                 }
               }
             }
