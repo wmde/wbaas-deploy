@@ -1,5 +1,3 @@
----
-
 apiVersion: batch/v1
 kind: Job
 metadata:
@@ -17,31 +15,21 @@ spec:
             claimName: temporary-backup-pvc
       containers:
         - name: back-up-single-wiki
+          env:
+            - name: MYSQL_PWD
+              valueFrom:
+                secretKeyRef:
+                  name: sql-secrets-passwords
+                  key: mariadb-root-password
           image: mariadb:10.5
 
           command:
             - 'bash'
             - '-c'
             - |
-                mysqldump ${DATABASE_NAME} > /backup/file.sql
+                mysqldump --host sql-mariadb-secondary.default.svc.cluster.local ${DATABASE_NAME} > /backup/file.sql
           volumeMounts:
             - name: temporary-backup-pvc
               mountPath: "/backup/"
 
       restartPolicy: OnFailure
-
----
-
-# some pvc stuff
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: temporary-backup-pvc
-  namespace: adhoc-jobs
-spec:
-  storageClassName: standard
-  accessModes:
-    - ReadWriteOnce
-  resources:
-    requests:
-      storage: 3Gi
