@@ -1,20 +1,20 @@
 apiVersion: batch/v1
 kind: Job
 metadata:
-  generateName: back-up-single-wiki-
+  generateName: backup-single-wiki-
   namespace: adhoc-jobs
 spec:
   ttlSecondsAfterFinished: 604800 #7days
   template:
     metadata:
-      name: back-up-single-wiki
+      name: backup-single-wiki
     spec:
       volumes:
         - name: temporary-backup-pvc
           persistentVolumeClaim:
             claimName: temporary-backup-pvc
       containers:
-        - name: back-up-single-wiki
+        - name: backup-single-wiki
           env:
             - name: MYSQL_PWD
               valueFrom:
@@ -27,7 +27,7 @@ spec:
             - 'bash'
             - '-c'
             - |
-                mysqldump --host sql-mariadb-primary.default.svc.cluster.local ${DATABASE_NAME} > /backup/${DATABASE_NAME}.sql
+                mysqldump --verbose --host sql-mariadb-primary.default.svc.cluster.local ${DATABASE_NAME} > /backup/${DATABASE_NAME}.sql
           volumeMounts:
             - name: temporary-backup-pvc
               mountPath: "/backup/"
