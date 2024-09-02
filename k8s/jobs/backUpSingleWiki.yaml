@@ -13,8 +13,8 @@ spec:
     spec:
       volumes:
         - name: temporary-backup-pvc
-      persistentVolumeClaim:
-        claimName: temporary-backup-pvc
+          persistentVolumeClaim:
+            claimName: temporary-backup-pvc
       containers:
         - name: back-up-single-wiki
           image: mariadb:10.5
@@ -23,9 +23,10 @@ spec:
             - 'bash'
             - '-c'
             - |
-                mysqldump ${DATABASE_NAME} > /some/path/to/a/pv/file.sql
+                mysqldump ${DATABASE_NAME} > /backup/file.sql
           volumeMounts:
-            - mountPath: ""
+            - name: temporary-backup-pvc
+              mountPath: "/backup/"
 
       restartPolicy: OnFailure
 
@@ -36,6 +37,7 @@ apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: temporary-backup-pvc
+  namespace: adhoc-jobs
 spec:
   storageClassName: standard
   accessModes:
