@@ -1,7 +1,14 @@
-#!/bin/sh
+#!/bin/bash
 
 # DATABASE_NAME should be set to the database to backup
 
+if [[ -z "$DATABASE_NAME"  ]]; then
+    echo "DATABASE_NAME not set"
+    exit 1
+fi
+
+# This creates the PVC (if it doesn't exist) for backups to be saved to
+# It will not be automatically deleted so you may need to clean this up when you are done
 kubectl apply -f backUpSingleWikiPvc.yaml
 
 kubectl create -f backUpSingleWiki.yaml -o=json --dry-run=client |\
