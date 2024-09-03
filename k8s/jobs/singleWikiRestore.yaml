@@ -27,8 +27,16 @@ spec:
             - 'bash'
             - '-c'
             - |
-                mysql --show-warnings --host sql-mariadb-primary.default.svc.cluster.local ${DATABASE_NAME} < /backup/${DATABASE_NAME}.sql
-                if [[ $? == 0 ]]; then echo "SQL import successful"; else echo "Error while importing SQL"; fi
+                mysql --show-warnings \
+                --host sql-mariadb-primary.default.svc.cluster.local \
+                ${DATABASE_NAME} \
+                < /backup/${DATABASE_NAME}.sql
+
+                if [[ $? == 0 ]]; then
+                  echo "SQL import successful"
+                else
+                  echo "Error while importing SQL"
+                fi
           volumeMounts:
             - name: temporary-backup-pvc
               mountPath: "/backup/"

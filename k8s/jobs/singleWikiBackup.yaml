@@ -27,7 +27,10 @@ spec:
             - 'bash'
             - '-c'
             - |
-                mysqldump --verbose --host sql-mariadb-primary.default.svc.cluster.local ${DATABASE_NAME} > /backup/${DATABASE_NAME}.sql
+                mysqldump --verbose \
+                --host sql-mariadb-primary.default.svc.cluster.local \
+                ${DATABASE_NAME} \
+                > /backup/${DATABASE_NAME}.sql
           volumeMounts:
             - name: temporary-backup-pvc
               mountPath: "/backup/"
