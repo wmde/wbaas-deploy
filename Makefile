@@ -112,3 +112,31 @@ skaffold-%:
 skaffold-run: # @HELP Run all local modules using skaffold
 skaffold-run:
 	cd ./skaffold && skaffold run --kube-context minikube-wbaas
+
+.PHONY: argo-reset-password
+argo-reset-password: # @HELP Reset the admin password for the ArgoCD of the current context
+argo-reset-password:
+	./bin/reset-argocd-password
+
+argo-sync-app-of-apps:
+argo-sync-ui: # @HELP Sync ui in ArgoCD
+.PHONY: argo-sync-%
+argo-sync-%: # @HELP Sync any Application defined in ArgoCD
+argo-sync-%: APP=$*
+argo-sync-%:
+	./bin/argocli app sync $(APP)
+
+.PHONY: argo-sync
+argo-sync: # @HELP Sync app-of-apps in ArgoCD (which contains all other Applications)
+argo-sync: argo-sync-app-of-apps
+
+.PHONY: argo-list
+argo-list: # @HELP List current applications and their state in ArgoCD
+argo-list:
+	./bin/argocli app list
+
+.PHONY: argo-port-forward
+argo-port-forward: # @HELP Port forwards the ArgoCD UI to localhost:8080
+argo-port-forward:
+	kubectl -n argocd port-forward deployments/argo-cd-base-argocd-server 8080
+

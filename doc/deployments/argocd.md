@@ -57,5 +57,5 @@ This GitHub workflow runs the script to check if the checked-in values files are
       - Forward port `8080` of the deployment `argo-cd-base-argocd-server`
 
         ```
-        kubectl -n argocd port-forward deployments/argo-cd-base-argocd-server 8080`
+        make argo-port-forward
         ```
