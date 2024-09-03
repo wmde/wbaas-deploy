@@ -488,7 +488,7 @@
                 "aggregation": {
                   "alignmentPeriod": "86400s",
                   "perSeriesAligner": "ALIGN_DELTA",
-                  "crossSeriesReducer": "REDUCE_PERCENTILE_50"
+                  "crossSeriesReducer": "REDUCE_MEAN"
                 }
               }
             }
@@ -509,7 +509,7 @@
                 "aggregation": {
                   "alignmentPeriod": "86400s",
                   "perSeriesAligner": "ALIGN_DELTA",
-                  "crossSeriesReducer": "REDUCE_PERCENTILE_50"
+                  "crossSeriesReducer": "REDUCE_MEAN"
                 }
               }
             }
