@@ -246,7 +246,8 @@ releases:
 
   - name: superset
     namespace: default
-    chart: ./../../charts/superset
+    chart: wbstack/superset
+    version: 0.1.0
     <<: *default_release
 
   ################################
