@@ -112,7 +112,8 @@ releases:
 
   - name: redirects
     namespace: default
-    chart: ./../../charts/redirects
+    chart: wbstack/redirects
+    version: 1.0.0
     <<: *default_release
 
   - name: ingress-nginx
