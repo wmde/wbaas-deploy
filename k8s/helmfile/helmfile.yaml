@@ -97,7 +97,8 @@ releases:
   - name: certificates
     installed: {{ ne .Environment.Name "local" | toYaml }}
     namespace: default
-    chart: ./../../charts/certificates
+    chart: wbstack/certificates
+    version: 0.1.0
     <<: *default_release
 
 
