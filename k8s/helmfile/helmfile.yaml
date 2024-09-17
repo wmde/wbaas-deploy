@@ -81,7 +81,8 @@ releases:
     installed: {{ ne .Environment.Name "local" | toYaml }}
     namespace: cert-manager
     # TODO use something more generic or from wbstack/charts repo
-    chart: ./../../charts/wikibase-cloud-clusterissuers
+    chart: wbstack/wikibase-cloud-clusterissuers
+    version: 0.1.0
     values:
       - email: {{ .Values.external.letsencrypt.email }}
       - gceProject: {{ .Values.gceProject }}
