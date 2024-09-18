@@ -245,6 +245,7 @@ releases:
   - name: istio-service-mesh
     namespace: istio-system
     chart: wbstack/istio-service-mesh
+    version: 0.0.1
     <<: *default_release
 
   - name: superset
