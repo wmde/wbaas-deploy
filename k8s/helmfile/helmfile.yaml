@@ -244,7 +244,7 @@ releases:
 
   - name: istio-service-mesh
     namespace: istio-system
-    chart: ./../../charts/istio-service-mesh
+    chart: wbstack/istio-service-mesh
     <<: *default_release
 
   - name: superset
