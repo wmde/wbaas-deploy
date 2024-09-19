@@ -1,0 +1,166 @@
+app:
+  cacheDriver: redis
+  db:
+    connection: mysql
+    name: apidb
+    passwordSecretKey: SQL_INIT_PASSWORD_API
+    passwordSecretName: sql-secrets-init-passwords
+    port: 3306
+    readHost: sql-mariadb-secondary.default.svc.cluster.local
+    user: apiuser
+    writeHost: sql-mariadb-primary.default.svc.cluster.local
+  elasticSearchHost: elasticsearch-1.default.svc.cluster.local:9200
+  elasticSearchSharedIndexHost: elasticsearch-2.default.svc.cluster.local:9200
+  elasticSearchSharedIndexPrefix: wiki_1
+  env: local
+  gce:
+    existingSecret: api-passport-keys
+    projectId: something
+    serviceAccountSecret: null
+  jwtSecretSecretKey: api-app-jwt-secret
+  jwtSecretSecretName: api-app-secrets
+  keySecretKey: api-app-key
+  keySecretName: api-app-secrets
+  logLevel: debug
+  mail:
+    fromaddress: noreply-local@fake.wikibase.dev
+    fromname: Wikibase-dev
+    mailer: smtp
+    smtpPasswordSecretKey: password
+    smtpPasswordSecretName: null
+    smtpUserSecretKey: username
+    smtpUserSecretName: null
+    smtpencryption: null
+    smtphost: mailhog
+    smtpport: 1025
+  name: WBaaS Localhost
+  queryServiceHost: queryservice.default.svc.cluster.local:9999
+  queueConnection: redis
+  recaptcha:
+    badgehide: true
+    minScore: 0.5
+    secretSecretKey: secret_key
+    secretSecretName: recaptcha-v3-secrets
+  redis:
+    cachedb: 3
+    db: 2
+    host: redis-master.default.svc.cluster.local
+    password: null
+    passwordSecretKey: password
+    passwordSecretName: redis-password
+    port: 6379
+    prefix: wikibase_dev_api
+  stackdriver:
+    enabled: false
+    errorReportingEnabled: true
+    loggingEnabled: false
+    tracingEnabled: false
+  url: http://www.wbaas.localhost
+image:
+  tag: 10x.15.1
+ingress:
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    nginx.ingress.kubernetes.io/rewrite-target: /$2
+    nginx.ingress.kubernetes.io/use-regex: "true"
+  enabled: true
+  hosts:
+    - host: api.wbaas.localhost
+      paths:
+        - /()(.*)
+    - host: www.wbaas.localhost
+      paths:
+        - /api(/|$)(.*)
+  tls: null
+platform:
+  backendMwHost: mediawiki-139-app-backend.default.svc.cluster.local
+queue:
+  backoff:
+    - 10
+    - 60
+    - 300
+    - 900
+    - 1500
+  horizon:
+    enabled: true
+    queueNames:
+      - default
+      - manual-intervention
+  mw:
+    db:
+      passwordSecretKey: SQL_INIT_PASSWORD_MW
+      passwordSecretName: sql-secrets-init-passwords
+      readHost: sql-mariadb-secondary.default.svc.cluster.local
+      username: mediawiki-db-manager
+      writeHost: sql-mariadb-primary.default.svc.cluster.local
+  queueNames:
+    - default
+replicaCount:
+  backend: 1
+  queue: 2
+  scheduler: 1
+  web: 1
+resources:
+  backend:
+    limits:
+      cpu: 1000m
+      memory: 600Mi
+    requests:
+      cpu: 500m
+      memory: 300Mi
+  queue:
+    limits:
+      cpu: 250m
+      memory: 512Mi
+    requests:
+      cpu: 100m
+      memory: 256Mi
+  scheduler:
+    limits:
+      cpu: 40m
+      memory: 80Mi
+    requests:
+      cpu: 5m
+      memory: 20Mi
+  web:
+    limits:
+      cpu: 250m
+      memory: 400Mi
+    requests:
+      cpu: 100m
+      memory: 340Mi
+serviceMonitor:
+  additionalLabels:
+    release: kube-prometheus-stack
+  enabled: true
+storage:
+  accessKeySecretKey: rootUser
+  accessKeySecretName: minio-credentials
+  endpoint: http://minio.default.svc.cluster.local:9000
+  secretKeySecretKey: rootPassword
+  secretKeySecretName: minio-credentials
+  url: http://minio.wbaas.localhost/api-assets
+trustedProxy:
+  proxies:
+    - '*'
+useProbes: true
+wbstack:
+  contact:
+    mail:
+      recipient: someone@wikimedia.de
+      sender: contact-<subject>@wikibase.cloud
+  elasticSearch:
+    enabledByDefault: true
+  maxWikisPerUser: null
+  monitoringEmail: wb-cloud-monitoring@wikimedia.de
+  qsBatchMarkFailedAfter: 3
+  qsBatchPendingTimeout: PT300S
+  signupThrottlingLimit: 20
+  signupThrottlingRange: PT24H
+  subdomainSuffix: .wbaas.localhost
+  summaryCreationRateRanges:
+    - PT24H
+    - P30D
+  uiurl: http://wbaas.localhost
+  wikiDbProvisionVersion: mw1.39-wbs1
+  wikiDbUseVersion: mw1.39-wbs1
