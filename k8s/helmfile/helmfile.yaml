@@ -168,7 +168,6 @@ releases:
     <<: *default_release
 
   - name: ui
-    installed: false
     namespace: default
     chart: wbstack/ui
     version: 0.3.1
