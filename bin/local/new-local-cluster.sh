@@ -40,7 +40,7 @@ helmfile --environment local sync
 
 # run initial database migrations in case the pre-install-job failed for some reason
 # https://github.com/wbstack/charts/blob/main/charts/api/templates/pre-install-job.yaml#L39
-kubectl exec -ti deployments/api-app-backend -- bash -c 'php artisan migrate:install; php artisan migrate --force; php artisan passport:client --personal --no-interaction; php artisan passport:client --password --no-interaction'
+#kubectl exec -ti deployments/api-app-backend -- bash -c 'php artisan migrate:install; php artisan migrate --force; php artisan passport:client --personal --no-interaction; php artisan passport:client --password --no-interaction'
 
 echo
 echo "Finished re-initializing local cluster."
