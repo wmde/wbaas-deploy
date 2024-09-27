@@ -112,7 +112,7 @@ resources:
       memory: 300Mi
   queue:
     limits:
-      cpu: 250m
+      cpu: 0
       memory: 512Mi
     requests:
       cpu: 100m

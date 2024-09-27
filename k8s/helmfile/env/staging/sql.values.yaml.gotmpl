@@ -4,7 +4,7 @@ primary:
       cpu: 750m
       memory: 1000Mi
     limits:
-      cpu: 750m
+      cpu: 0
       memory: 1000Mi
   configuration: |-
     [mysqld]
@@ -61,7 +61,7 @@ secondary:
       cpu: 750m
       memory: 900Mi
     limits:
-      cpu: 750m
+      cpu: 0
       memory: 900Mi
   readinessProbe:
     enabled: false
