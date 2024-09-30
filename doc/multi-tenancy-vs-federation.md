@@ -4,7 +4,7 @@ This is done to keep the cost of running each individual Wikibase low. It also r
 
 We use a single instance of Blazegraph for the Wikibase instances we manage. We use the namespace feature to provide segregation of the tenant's data at the database level. We have implemented a custom service to route queries to the correct namespace. We have implemented a customer updater pipeline to allow the queryservice to be updated efficiently. This multi-tenant model is not [federation](https://www.mediawiki.org/wiki/Wikibase/Federation).
 
-We do allow federated querying between Wikibase Cloud instances. We also allow federated querying to Wikidata. We also allow federated querying to the same 3rd party endpoints that Wikidata allows.
+We do allow federated querying between Wikibase Cloud instances, federated querying to Wikidata and also federated querying to the same 3rd party endpoints that Wikidata allows.
 
 We use a single ElasticSearch cluster for all of our Wikibases. In the first half of 2024 moved the data for each Wikibase even closer together and placed them all in the same indices. This substantially reduced costs we were facing due to the overheads ElasticSearch has for each index. Sharing a single cluster or even a single index is not federation.
 
