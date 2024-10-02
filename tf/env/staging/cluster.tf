@@ -83,6 +83,12 @@ resource "google_container_node_pool" "wbaas-2_compute-pool-2" {
       enable_integrity_monitoring = true
       enable_secure_boot          = false
     }
+    # TODO: Remove kubelet_config after T376141
+    kubelet_config {
+      cpu_manager_policy = "none"
+      cpu_cfs_quota      = false
+      pod_pids_limit     = 0
+    }
   }
   upgrade_settings {
     max_surge       = 1
