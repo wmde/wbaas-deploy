@@ -1,7 +1,7 @@
 provider "google" {
   project = "wikibase-cloud"
-  region  = "europe-west3"
-  zone    = "europe-west3-a"
+  region  = local.region
+  zone    = local.zone
 }
 
 terraform {
@@ -27,7 +27,8 @@ data "google_client_config" "wbaas-3" {
 
 # Defer reading the cluster data until the GKE cluster exists.
 data "google_container_cluster" "wbaas-3" {
-  name = local.production_cluster_name
+  name     = local.production_cluster_name
+  location = local.zone
 }
 
 provider "kubernetes" {
