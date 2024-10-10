@@ -62,6 +62,12 @@ trustedProxy:
   proxies: ['*']
 
 resources:
+  backend:
+    limits:
+      cpu: 1000m
+  web:
+    limits:
+      cpu: 250m
   queue:
     requests:
       cpu: 100m
@@ -69,3 +75,6 @@ resources:
     limits:
       cpu: 250m
       memory: 512Mi
+  scheduler:
+    limits:
+      cpu: 40m

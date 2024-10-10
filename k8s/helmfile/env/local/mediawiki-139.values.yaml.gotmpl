@@ -31,3 +31,17 @@ replicaCount:
   web: 1
   webapi: 1
   alpha: 1
+
+resources:
+  web:
+    limits:
+      cpu: 1000m
+  webapi:
+    limits:
+      cpu: 500m
+  alpha:
+    limits:
+      cpu: 500m
+  backend:
+    limits:
+      cpu: 1000m

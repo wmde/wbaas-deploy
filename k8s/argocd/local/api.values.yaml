@@ -103,7 +103,7 @@ replicaCount:
 resources:
   backend:
     limits:
-      cpu: null
+      cpu: 1000m
       memory: 600Mi
     requests:
       cpu: 500m
@@ -117,14 +117,14 @@ resources:
       memory: 256Mi
   scheduler:
     limits:
-      cpu: null
+      cpu: 40m
       memory: 80Mi
     requests:
       cpu: 5m
       memory: 20Mi
   web:
     limits:
-      cpu: null
+      cpu: 250m
       memory: 400Mi
     requests:
       cpu: 100m
