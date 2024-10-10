@@ -163,7 +163,7 @@ releases:
 
   - name: api
     chart: wbstack/api
-    version: "0.31.2"
+    version: '{{- if eq .Environment.Name "production" }} "0.31.2" {{else}} "0.32.0" {{end}}'
     namespace: default
     <<: *default_release
 
