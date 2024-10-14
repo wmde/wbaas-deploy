@@ -27,4 +27,4 @@ releases:
       - name: installCRDs
         value: true
       - name: global.logLevel
-        value: 1
+        value: '"0"'
