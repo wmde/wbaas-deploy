@@ -26,5 +26,3 @@ releases:
     set:
       - name: installCRDs
         value: true
-      - name: global.logLevel
-        value: 1
