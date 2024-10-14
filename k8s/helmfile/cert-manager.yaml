@@ -28,3 +28,4 @@ releases:
         value: true
       - name: logLevel
         value: 1
+
