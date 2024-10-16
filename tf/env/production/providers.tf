@@ -1,6 +1,5 @@
 provider "google" {
   project = "wikibase-cloud"
-  region  = local.region
   zone    = local.zone
 }
 

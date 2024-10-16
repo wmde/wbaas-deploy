@@ -18,6 +18,8 @@ locals {
   staging_cluster_name = "wbaas-2"
   project_id           = "wikibase-cloud"
   email_group          = "wb-cloud-monitoring@wikimedia.de"
+  region                  = "europe-west3"
+  zone                    = "europe-west3-a"
 }
 
 variable "mailgun_api_key" {
