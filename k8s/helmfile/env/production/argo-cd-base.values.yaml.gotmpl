@@ -42,7 +42,7 @@ configs:
 controller:
   resources:
    limits:
-     cpu: 500m
+     cpu: null
      memory: 512Mi
    requests:
      cpu: 250m
@@ -51,7 +51,7 @@ controller:
 applicationSet:
   resources:
     limits:
-      cpu: 100m
+      cpu: null
       memory: 128Mi
     requests:
       cpu: 100m
@@ -60,7 +60,7 @@ applicationSet:
 dex:
   resources:
    limits:
-     cpu: 50m
+     cpu: null
      memory: 64Mi
    requests:
      cpu: 10m
@@ -69,7 +69,7 @@ dex:
 notifications:
   resources:
     limits:
-      cpu: 100m
+      cpu: null
       memory: 128Mi
     requests:
       cpu: 100m
@@ -78,7 +78,7 @@ notifications:
 redis:
   resources:
    limits:
-     cpu: 200m
+     cpu: null
      memory: 128Mi
    requests:
      cpu: 100m
@@ -87,8 +87,8 @@ redis:
 repoServer:
   resources:
    limits:
-     cpu: 50m
-     memory: 128Mi
+     cpu: null
+     memory: 1024Mi
    requests:
      cpu: 10m
      memory: 64Mi
@@ -96,7 +96,6 @@ repoServer:
 server:
   resources:
    limits:
-     cpu: 100m
      memory: 512Mi
    requests:
      cpu: 50m
