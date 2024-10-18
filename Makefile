@@ -120,6 +120,7 @@ argo-reset-password:
 
 argo-sync-app-of-apps:
 argo-sync-ui: # @HELP Sync ui in ArgoCD
+argo-sync-api: # @HELP Sync api in ArgoCD
 .PHONY: argo-sync-%
 argo-sync-%: # @HELP Sync any Application defined in ArgoCD
 argo-sync-%: APP=$*
