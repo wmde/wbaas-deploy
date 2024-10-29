@@ -10,8 +10,7 @@ variable "terraformers" {
     "dat.nguyen@wikimedia.de",
     "leszek.manicki@wikimedia.de",
     "conny.kawohl@wikimedia.de",
-    "andrew.kostka@wikimedia.de",
-    "frederik.ring@wikimedia.de"
+    "andrew.kostka@wikimedia.de"
   ]
 }
 
@@ -20,6 +19,8 @@ locals {
   production_cluster_name = "wbaas-3"
   project_id              = "wikibase-cloud"
   email_group             = "wb-cloud-monitoring@wikimedia.de"
+  region                  = "europe-west3"
+  zone                    = "europe-west3-a"
 }
 
 variable "mailgun_api_key" {
@@ -36,6 +37,7 @@ variable "sql-passwords" {
     "production-api",
     "production-mediawiki-db-manager",
     "production-backup-manager",
+    "production-observer"
   ]
 }
 
@@ -68,4 +70,18 @@ variable "recaptcha_v2_secret" {
   sensitive   = true
   default     = "" # apparently this doesn't mean default is empty string but rather default is not defined. This means it won't prompt the user
   # but also won't override the value that is in the state
+}
+
+variable "tailscale_client_id" {
+  type        = string
+  description = "Client id for Tailscale access"
+  sensitive   = true
+  default     = ""
+}
+
+variable "tailscale_client_secret" {
+  type        = string
+  description = "Client secret for Tailscale access"
+  sensitive   = true
+  default     = ""
 }

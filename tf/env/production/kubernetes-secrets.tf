@@ -1,5 +1,5 @@
 module "wbaas-k8s-secrets" {
-  source = "git::ssh://git@github.com/wmde/wbaas-deploy//tf//modules/k8s-secrets?ref=tf-module-k8s-secrets-3"
+  source = "../../modules/k8s-secrets"
   providers = {
     kubernetes = kubernetes.wbaas-3
   }
@@ -12,6 +12,7 @@ module "wbaas-k8s-secrets" {
   sql_password_api                  = random_password.sql-passwords["production-api"].result
   sql_password_mediawiki_db_manager = random_password.sql-passwords["production-mediawiki-db-manager"].result
   sql_password_backup_manager       = random_password.sql-passwords["production-backup-manager"].result
+  sql_password_observer             = random_password.sql-passwords["production-observer"].result
   redis_password                    = random_password.redis-password.result
   recaptcha_v3_site_key             = var.recaptcha_v3_site_key
   recaptcha_v3_secret               = var.recaptcha_v3_secret

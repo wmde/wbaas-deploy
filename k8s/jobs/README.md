@@ -60,3 +60,19 @@ Should be run immediately after running resetOtherSqlSecretsJob.yaml
 
 This updates the replication password by logging into the secondary pod (not just the service which may already have become unavailable due to replication lag) using the root password.
 This job will need updating if there is more than one replica server to add each additional replica server.
+
+## singleWikiBackup.sh
+Uses the ENV `DATABASE_NAME`
+
+This creates a PVC to store the backups of single wiki databases.
+It then creates a job which uses mysqldump to dump the db specified by `DATABASE_NAME` to .sql files which it stores
+in the above PVC.
+It takes the dump from the primary sql replica to try and ensure consistency.
+Running this job repeatedly will overwrite the previous backup.
+This PVC is not automatically deleted so care should be taken to remove it after use
+
+## singleWikiRestore.sh
+Uses the ENV `DATABASE_NAME`
+
+This works in conjunction with `singleWikiBackup.sh` to restore a database from this temporary backup.
+It uses the primary replica to write to.

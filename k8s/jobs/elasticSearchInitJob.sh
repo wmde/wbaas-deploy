@@ -19,4 +19,5 @@ jq ".spec.template.spec.containers[0].env += [{\"name\": \"CLUSTER_NAME\", \"val
 jq ".spec.template.spec.containers[0].env += [{\"name\": \"MW_WRITE_ONLY_ELASTICSEARCH_HOST\", \"value\": \"${MW_WRITE_ONLY_ELASTICSEARCH_HOST}\"}]" |\
 jq ".spec.template.spec.containers[0].env += [{\"name\": \"MW_WRITE_ONLY_ELASTICSEARCH_PORT\", \"value\": \"${MW_WRITE_ONLY_ELASTICSEARCH_PORT:-9200}\"}]" |\
 jq ".spec.template.spec.containers[0].env += [{\"name\": \"MW_WRITE_ONLY_ELASTICSEARCH_ES6\", \"value\": \"${MW_WRITE_ONLY_ELASTICSEARCH_ES6:-false}\"}]" |\
+jq ".spec.template.spec.containers[0].env += [{\"name\": \"MW_CIRRUSSEARCH_INDEX_BASE_NAME\", \"value\": \"${MW_CIRRUSSEARCH_INDEX_BASE_NAME:-null}\"}]" |\
 kubectl create -f -

@@ -1,5 +1,5 @@
 image:
-  tag: 8x.25.0
+  tag: 10x.16.0
 
 ingress:
   tls: null
@@ -48,7 +48,33 @@ replicaCount:
   web: 1
   backend: 1
   scheduler: 1
-  queue: 1
+  queue: 2
+
+storage:
+  accessKeySecretName: minio-credentials
+  accessKeySecretKey: rootUser
+  secretKeySecretName: minio-credentials
+  secretKeySecretKey: rootPassword
+  endpoint: http://minio.default.svc.cluster.local:9000
+  url: http://minio.wbaas.localhost/api-assets
 
 trustedProxy:
   proxies: ['*']
+
+resources:
+  backend:
+    limits:
+      cpu: 1000m
+  web:
+    limits:
+      cpu: 250m
+  queue:
+    requests:
+      cpu: 100m
+      memory: 256Mi
+    limits:
+      cpu: 250m
+      memory: 512Mi
+  scheduler:
+    limits:
+      cpu: 40m

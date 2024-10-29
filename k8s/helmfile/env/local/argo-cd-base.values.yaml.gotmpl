@@ -1,0 +1,33 @@
+configs:
+  params:
+    server.insecure: "true"
+
+  cm:
+    admin.enabled: "true"
+
+    ui.bannercontent: "LOCAL"
+    ui.bannerurl: "http://www.wbaas.localhost/"
+
+  styles: |
+    .ui-banner {
+        background-color:#6d7f8b;
+
+        a {
+          color:white;
+        }
+    }
+
+global:
+  domain: argo.wbaas.localhost
+
+certificate:
+  enabled: true
+
+server:
+  ingress:
+    enabled: true
+    ingressClassName: nginx
+    annotations:
+      nginx.ingress.kubernetes.io/force-ssl-redirect: "false"
+      nginx.ingress.kubernetes.io/ssl-passthrough: "false"
+    tls: false

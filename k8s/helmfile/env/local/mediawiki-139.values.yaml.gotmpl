@@ -1,5 +1,9 @@
 image:
-  tag: 1.39-7.4-20231004-0
+  tag: 1.39-7.4-20240722-0
+
+web:
+  autoscaling:
+    maxReplicas: 2
 
 mw:
   settings:
@@ -27,3 +31,17 @@ replicaCount:
   web: 1
   webapi: 1
   alpha: 1
+
+resources:
+  web:
+    limits:
+      cpu: 1000m
+  webapi:
+    limits:
+      cpu: 500m
+  alpha:
+    limits:
+      cpu: 500m
+  backend:
+    limits:
+      cpu: 1000m

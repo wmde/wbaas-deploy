@@ -1,0 +1,26 @@
+on: push
+name: Check values files
+jobs:
+  diff:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+      - name: Set up helmfile
+        uses: helmfile/helmfile-action@v1.9.1
+      - name: Diff current values files against generated ones
+        run: >
+          set -x;
+          for ENV_DIR in k8s/argocd/*; do
+            ENV=$(basename "${ENV_DIR}")
+
+            for RELEASE_FILE in "${ENV_DIR}"/*.values.yaml; do
+              RELEASE=$(basename "${RELEASE_FILE}" .values.yaml)
+              TMP_VALUES=$(mktemp)
+
+              echo "checking $RELEASE_FILE - [$ENV] [$RELEASE]"
+
+              ./bin/generate-values "${ENV}" "${RELEASE}" "${TMP_VALUES}"
+              diff "${TMP_VALUES}" "${RELEASE_FILE}"
+            done
+          done

@@ -1,3 +1,6 @@
+image:
+  tag: '1.4'
+
 platform:
   mediawikiBackendHost: mediawiki-139-app-backend.default.svc.cluster.local
 
@@ -8,7 +11,7 @@ resources:
     cpu: 1m
     memory: 18Mi
   limits:
-    cpu: 30m
+    cpu: null
     memory: 50Mi
 
 php:

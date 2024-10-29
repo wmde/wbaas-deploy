@@ -20,17 +20,17 @@ resource "google_container_cluster" "wbaas-2" {
   }
 }
 
-resource "google_container_node_pool" "wbaas-2_large" {
+resource "google_container_node_pool" "wbaas-2_compute-pool-2" {
   cluster    = "wbaas-2"
-  name       = "large-pool"
+  name       = "compute-pool-2"
   node_count = 3
   node_locations = [
     "europe-west3-a",
   ]
   node_config {
     disk_size_gb = 32
-    disk_type    = "pd-standard"
-    machine_type = "n2-standard-8"
+    disk_type    = "pd-ssd"
+    machine_type = "n2-standard-4"
     metadata = {
       "disable-legacy-endpoints" = "true"
     }
@@ -48,9 +48,13 @@ resource "google_container_node_pool" "wbaas-2_large" {
       enable_integrity_monitoring = true
       enable_secure_boot          = false
     }
-    logging_variant = "MAX_THROUGHPUT"
+    # TODO: Remove kubelet_config after T376141
+    kubelet_config {
+      cpu_manager_policy = "none"
+      cpu_cfs_quota      = false
+      pod_pids_limit     = 0
+    }
   }
-
   upgrade_settings {
     max_surge       = 1
     max_unavailable = 0

@@ -2,7 +2,7 @@ platform:
   apiBackendHost: api-app-backend.default.svc.cluster.local
 
 image:
-  tag: "2.2"
+  tag: "2.3"
   repository: ghcr.io/wbstack/queryservice-gateway
   pullPolicy: Always
 
@@ -11,5 +11,5 @@ resources:
     cpu: 125m
     memory: 128Mi
   limits:
-    cpu: 250m
+    cpu: null
     memory: 256Mi

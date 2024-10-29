@@ -23,16 +23,16 @@ resource "google_container_cluster" "wbaas-3" {
 # Be careful altering node pools. If your change results in recreation then there will be a time
 # when there are no nodes in the pool. You may wish to create a new node pool first and then
 # delete the old one.
-resource "google_container_node_pool" "wbaas-3_highmem-16" {
+resource "google_container_node_pool" "wbaas-3_compute-pool-2" {
   cluster    = "wbaas-3"
-  name       = "n2-highmem-16-pool"
+  name       = "compute-pool-2"
   node_count = 3
   node_locations = [
     "europe-west3-a",
   ]
   node_config {
     disk_size_gb = 64
-    disk_type    = "pd-standard"
+    disk_type    = "pd-ssd"
     machine_type = "n2-highmem-16"
     metadata = {
       "disable-legacy-endpoints" = "true"
@@ -53,7 +53,6 @@ resource "google_container_node_pool" "wbaas-3_highmem-16" {
     }
     logging_variant = "MAX_THROUGHPUT"
   }
-
   upgrade_settings {
     max_surge       = 1
     max_unavailable = 0

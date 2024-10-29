@@ -25,7 +25,7 @@ make minikube-delete
 make minikube-start
 
 cd "$WBAAS_DEPLOY_DIR/tf/env/local/"
-terraform apply -auto-approve # bad practice - you won't have a second chance to check for destructive actions
+tofu apply -auto-approve # bad practice - you won't have a second chance to check for destructive actions
 
 cd "$WBAAS_DEPLOY_DIR/k8s/helmfile/"
 helmfile --environment local deps
@@ -37,6 +37,10 @@ set -e
 # workaround in anticipation of apply not finishing up for some reason (happens sometimes on some machines)
 sleep 60
 helmfile --environment local sync
+
+# run initial database migrations in case the pre-install-job failed for some reason
+# https://github.com/wbstack/charts/blob/main/charts/api/templates/pre-install-job.yaml#L39
+#kubectl exec -ti deployments/api-app-backend -- bash -c 'php artisan migrate:install; php artisan migrate --force; php artisan passport:client --personal --no-interaction; php artisan passport:client --password --no-interaction'
 
 echo
 echo "Finished re-initializing local cluster."

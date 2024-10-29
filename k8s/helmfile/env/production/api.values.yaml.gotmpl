@@ -1,19 +1,23 @@
 image:
-  tag: 8x.25.0
+  tag: 10x.16.0
 
 replicaCount:
   web: 1
-  backend: 2
+  backend: 4
   scheduler: 1
-  queue: 1
+  queue: 2
 
 useProbes: true
 
 platform:
   backendMwHost: mediawiki-139-app-backend.default.svc.cluster.local
 
-# This mw db connection is only used by the queue..
 queue:
+  queueNames: ['default']
+  horizon:
+    enabled: true
+    queueNames: ['default', 'manual-intervention']
+  # This mw db connection is only used by the queue..
   mw:
     db:
       readHost: sql-mariadb-secondary.default.svc.cluster.local
@@ -23,6 +27,11 @@ queue:
       passwordSecretName: sql-secrets-init-passwords
       passwordSecretKey: SQL_INIT_PASSWORD_MW
   backoff: [10,60,300,900,1500] # 10s, 1m, 5m, 15m, 30m
+
+serviceMonitor:
+  enabled: true
+  additionalLabels:
+    release: kube-prometheus-stack
 
 ingress:
   tls:
@@ -44,6 +53,8 @@ ingress:
   {{- end }}
 
 wbstack:
+  qsBatchMarkFailedAfter: 3
+  qsBatchPendingTimeout: 'PT300S'
   signupThrottlingRange: 'PT24H'
   signupThrottlingLimit: 20
   summaryCreationRateRanges:
@@ -74,7 +85,9 @@ app:
   jwtSecretSecretName: api-app-secrets
   jwtSecretSecretKey: api-app-jwt-secret
   queryServiceHost: queryservice.default.svc.cluster.local:9999
-  elasticSearchHost: elasticsearch-master.default.svc.cluster.local:9200
+  elasticSearchHost: elasticsearch-1.default.svc.cluster.local:9200
+  elasticSearchSharedIndexHost: elasticsearch-2.default.svc.cluster.local:9200
+  elasticSearchSharedIndexPrefix: wiki_1
   redis:
     prefix: wikibase_production_api
     # TODO is it possible to take advantage of replicas here?
@@ -122,33 +135,38 @@ app:
 trustedProxy:
   proxies: ['10.108.0.0/14']
 
+storage:
+  url: https://storage.googleapis.com/wikibase-cloud-static
+  accessKeySecretName: public-assets-hmac-key
+  secretKeySecretName: public-assets-hmac-key
+
 resources:
   # The backed is a platform critical element, so make sure it is allowed to be a bit silly...
   backend:
     requests:
-      cpu: 300m
+      cpu: 500m
       memory: 300Mi
     limits:
-      cpu: 500m
+      cpu: null
       memory: 600Mi
   web:
     requests:
       cpu: 100m
       memory: 340Mi
     limits:
-      cpu: 250m
+      cpu: null
       memory: 400Mi
   queue:
     requests:
-      cpu: 1m
-      memory: 29Mi
+      cpu: 500m
+      memory: 512Mi
     limits:
-      cpu: 50m
-      memory: 100Mi
+      cpu: null
+      memory: 1024Mi
   scheduler:
     requests:
       cpu: 5m
       memory: 20Mi
     limits:
-      cpu: 40m
+      cpu: null
       memory: 80Mi

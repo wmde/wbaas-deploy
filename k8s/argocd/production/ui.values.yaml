@@ -1,0 +1,32 @@
+image:
+  tag: sha-90c0a8d
+ingress:
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    nginx.ingress.kubernetes.io/from-to-www-redirect: "true"
+    nginx.ingress.kubernetes.io/use-regex: "true"
+  enabled: true
+  hosts:
+    - host: www.wikibase.cloud
+      paths:
+        - /*
+  tls:
+    - hosts:
+        - www.wikibase.cloud
+      secretName: wikibase-production-tls
+podLabels:
+  sidecar.istio.io/inject: "true"
+resources:
+  limits:
+    cpu: null
+    memory: 20Mi
+  requests:
+    cpu: 1m
+    memory: 6Mi
+ui:
+  apiUrl: https://api.wikibase.cloud
+  cnameConfigMapKey: cname_record
+  configMapName: wbaas-ui-config
+  recaptchaSitekeySecretKey: site_key
+  recaptchaSitekeySecretName: recaptcha-v3-secrets
+  subdomainSuffix: .wikibase.cloud

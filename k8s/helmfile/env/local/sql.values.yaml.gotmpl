@@ -43,6 +43,10 @@ primary:
     # 100MB, default & bitnami was 1GB (1073741824)
     max_binlog_size=107374182
 
+    # T373448
+    table_open_cache=5120
+    table_definition_cache=5120
+
     [mysql]
     # https://forums.mysql.com/read.php?103,189835,192421#msg-192421
     default-character-set=UTF8

@@ -1,26 +1,26 @@
 ## Staging
 
-Staging Terraform state is held in a Google Cloud bucket.
-Someone that already has access will need to add you to the `terraformers` variable access list and apply this before you can interact with staging via terraform.
+Staging Opentofu state is held in a Google Cloud bucket.
+Someone that already has access will need to add you to the `terraformers` variable access list and apply this before you can interact with staging via `tofu`.
 
 ### Getting started
 
 ```sh
-terraform init
+tofu init
 ```
 
 Make changes to state
 
 See the changes that will happen with:
 
-```
-terraform plan
+```sh
+tofu plan
 ```
 
 And apply them with:
 
-```
-terraform apply
+```sh
+tofu apply
 ```
 
 ### Importing existing resources
@@ -30,14 +30,4 @@ terraform apply
 
 After import
 
-> As a result of the above command, the resource is recorded in the state file. You can now run terraform plan to see how the configuration compares to the imported resource, and make any adjustments to the configuration to align with the current (or desired) state of the imported object.
-
-#### helm deployment
-
-https://github.com/hashicorp/terraform-provider-helm/pull/394
-
-```
-terraform import helm_release.hello-world hello-kubernetes/hello-world
-terraform import helm_release.hello-custom-message hello-kubernetes/custom-message
-terraform import helm_release.hello-custom-message hello-kubernetes/ingress
-```
+> As a result of the above command, the resource is recorded in the state file. You can now run `tofu plan` to see how the configuration compares to the imported resource, and make any adjustments to the configuration to align with the current (or desired) state of the imported object.

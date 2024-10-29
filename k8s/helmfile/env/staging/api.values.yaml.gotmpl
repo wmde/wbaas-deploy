@@ -1,5 +1,11 @@
 image:
-  tag: 8x.25.0
+  tag: 10x.16.0
+
+replicaCount:
+  web: 1
+  backend: 2
+  scheduler: 1
+  queue: 2
 
 ingress:
   tls:
@@ -41,6 +47,23 @@ app:
     minScore: 0.5
     secretSecretName: {{ .Values.external.recaptcha3.secretName }}
     secretSecretKey: secret_key
+  elasticSearchHost: elasticsearch-1.default.svc.cluster.local:9200
+  elasticSearchSharedIndexHost: elasticsearch-2.default.svc.cluster.local:9200
+  elasticSearchSharedIndexPrefix: wiki_1
 
 trustedProxy:
   proxies: ['10.112.0.0/14']
+
+storage:
+  url: https://storage.googleapis.com/wikibase-dev-static
+  accessKeySecretName: public-assets-hmac-key
+  secretKeySecretName: public-assets-hmac-key
+
+resources:
+  queue:
+    requests:
+      cpu: 100m
+      memory: 256Mi
+    limits:
+      cpu: null
+      memory: 512Mi

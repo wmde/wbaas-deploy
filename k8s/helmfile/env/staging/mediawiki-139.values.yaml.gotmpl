@@ -1,11 +1,21 @@
 image:
-  tag: 1.39-7.4-20231004-0
+  tag: 1.39-7.4-20240722-0
+
+web:
+  autoscaling:
+    maxReplicas: 2
 
 mw:
   settings:
     allowedProxyCidr: "10.112.0.0/14"
   mail:
     domain: "wikibase.dev"
+  elasticsearch:
+    host: elasticsearch-2.default.svc.cluster.local
+    port: 9200
+    es6: false
+  cirrussearch:
+    prefixIds: true
 
 resources:
   web:
@@ -13,26 +23,26 @@ resources:
       cpu: 100m
       memory: 250Mi
     limits:
-      cpu: 400m
+      cpu: null
       memory: 750Mi
   webapi:
     requests:
       cpu: 100m
       memory: 125Mi
     limits:
-      cpu: 500m
+      cpu: null
       memory: 1200Mi
   alpha:
     requests:
       cpu: 50m
       memory: 40Mi
     limits:
-      cpu: 500m
+      cpu: null
       memory: 600Mi
   backend:
     requests:
       cpu: 125m
       memory: 200Mi
     limits:
-      cpu: 1000m
+      cpu: null
       memory: 1200Mi

@@ -1,5 +1,5 @@
 image:
-  tag: sha-9a37f40
+  tag: sha-90c0a8d
 
 ui:
   recaptchaSitekeySecretName: {{ .Values.external.recaptcha3.secretName }}
@@ -7,3 +7,7 @@ ui:
 
 ingress:
   tls: null
+
+resources:
+  limits:
+    cpu: 10m

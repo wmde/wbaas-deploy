@@ -1,11 +1,17 @@
 image:
-  tag: 1.39-7.4-20231004-0
+  tag: 1.39-7.4-20240722-0
 
 replicaCount:
   backend: 2
-  web: 2
+  web: 3
   webapi: 2
   alpha: 1
+
+web:
+  autoscaling:
+    enabled: true
+    minReplicas: 1
+    maxReplicas: 5
 
 mw:
   redis:
@@ -17,8 +23,11 @@ mw:
     passwordSecretName: redis-password
     passwordSecretKey: password
   elasticsearch:
-    host: elasticsearch-master.default.svc.cluster.local
+    host: elasticsearch-2.default.svc.cluster.local
     port: 9200
+    es6: false
+  cirrussearch:
+    prefixIds: true
   mailgun:
     enabled: false
   platform:
@@ -47,29 +56,29 @@ mw:
 resources:
   web:
     requests:
-      cpu: 150m
-      memory: 350Mi
+      cpu: 500m
+      memory: 1600Mi
     limits:
-      cpu: 400m
-      memory: 750Mi
+      cpu: null
+      memory: 2800Mi
   webapi:
     requests:
       cpu: 200m
       memory: 250Mi
     limits:
-      cpu: 500m
+      cpu: null
       memory: 1200Mi
   alpha:
     requests:
       cpu: 50m
       memory: 40Mi
     limits:
-      cpu: 500m
+      cpu: null
       memory: 600Mi
   backend:
     requests:
       cpu: 500m
       memory: 600Mi
     limits:
-      cpu: 1000m
+      cpu: null
       memory: 1200Mi

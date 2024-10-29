@@ -1,0 +1,165 @@
+app:
+  cacheDriver: redis
+  db:
+    connection: mysql
+    name: apidb
+    passwordSecretKey: SQL_INIT_PASSWORD_API
+    passwordSecretName: sql-secrets-init-passwords
+    port: 3306
+    readHost: sql-mariadb-secondary.default.svc.cluster.local
+    user: apiuser
+    writeHost: sql-mariadb-primary.default.svc.cluster.local
+  elasticSearchHost: elasticsearch-1.default.svc.cluster.local:9200
+  elasticSearchSharedIndexHost: elasticsearch-2.default.svc.cluster.local:9200
+  elasticSearchSharedIndexPrefix: wiki_1
+  env: staging
+  gce:
+    existingSecret: api-passport-keys
+    projectId: wikibase-cloud
+    serviceAccountSecret: api-serviceaccount
+  jwtSecretSecretKey: api-app-jwt-secret
+  jwtSecretSecretName: api-app-secrets
+  keySecretKey: api-app-key
+  keySecretName: api-app-secrets
+  logLevel: info
+  mail:
+    fromaddress: noreply@wikibase.dev
+    fromname: Wikibase-dev
+    mailer: smtp
+    smtpPasswordSecretKey: password
+    smtpPasswordSecretName: smtp-credentials
+    smtpUserSecretKey: username
+    smtpUserSecretName: smtp-credentials
+    smtphost: smtp.eu.mailgun.org
+    smtpport: 587
+  name: WBaaS Wikibase Dev
+  queryServiceHost: queryservice.default.svc.cluster.local:9999
+  queueConnection: redis
+  recaptcha:
+    badgehide: true
+    minScore: 0.5
+    secretSecretKey: secret_key
+    secretSecretName: recaptcha-v3-secrets
+  redis:
+    cachedb: 3
+    db: 2
+    host: redis-master.default.svc.cluster.local
+    password: null
+    passwordSecretKey: password
+    passwordSecretName: redis-password
+    port: 6379
+    prefix: wikibase_dev_api
+  stackdriver:
+    enabled: true
+    errorReportingEnabled: true
+    loggingEnabled: false
+    tracingEnabled: false
+  url: https://www.wikibase.dev
+image:
+  tag: 10x.16.0
+ingress:
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    nginx.ingress.kubernetes.io/rewrite-target: /$2
+    nginx.ingress.kubernetes.io/use-regex: "true"
+  enabled: true
+  hosts:
+    - host: api.wikibase.dev
+      paths:
+        - /()(.*)
+    - host: www.wikibase.dev
+      paths:
+        - /api(/|$)(.*)
+  tls:
+    - hosts:
+        - wikibase.dev
+      secretName: wikibase-dev-tls
+platform:
+  backendMwHost: mediawiki-139-app-backend.default.svc.cluster.local
+queue:
+  backoff:
+    - 10
+    - 60
+    - 300
+    - 900
+    - 1500
+  horizon:
+    enabled: true
+    queueNames:
+      - default
+      - manual-intervention
+  mw:
+    db:
+      passwordSecretKey: SQL_INIT_PASSWORD_MW
+      passwordSecretName: sql-secrets-init-passwords
+      readHost: sql-mariadb-secondary.default.svc.cluster.local
+      username: mediawiki-db-manager
+      writeHost: sql-mariadb-primary.default.svc.cluster.local
+  queueNames:
+    - default
+replicaCount:
+  backend: 2
+  queue: 2
+  scheduler: 1
+  web: 1
+resources:
+  backend:
+    limits:
+      cpu: null
+      memory: 600Mi
+    requests:
+      cpu: 500m
+      memory: 300Mi
+  queue:
+    limits:
+      cpu: null
+      memory: 512Mi
+    requests:
+      cpu: 100m
+      memory: 256Mi
+  scheduler:
+    limits:
+      cpu: null
+      memory: 80Mi
+    requests:
+      cpu: 5m
+      memory: 20Mi
+  web:
+    limits:
+      cpu: null
+      memory: 400Mi
+    requests:
+      cpu: 100m
+      memory: 340Mi
+serviceMonitor:
+  additionalLabels:
+    release: kube-prometheus-stack
+  enabled: true
+storage:
+  accessKeySecretName: public-assets-hmac-key
+  secretKeySecretName: public-assets-hmac-key
+  url: https://storage.googleapis.com/wikibase-dev-static
+trustedProxy:
+  proxies:
+    - 10.112.0.0/14
+useProbes: true
+wbstack:
+  contact:
+    mail:
+      recipient: contact.wikibase@wikimedia.de
+      sender: contact-<subject>@wikibase.dev
+  elasticSearch:
+    enabledByDefault: true
+  maxWikisPerUser: 6
+  monitoringEmail: wb-cloud-monitoring+staging@wikimedia.de
+  qsBatchMarkFailedAfter: 3
+  qsBatchPendingTimeout: PT300S
+  signupThrottlingLimit: 20
+  signupThrottlingRange: PT24H
+  subdomainSuffix: .wikibase.dev
+  summaryCreationRateRanges:
+    - PT24H
+    - P30D
+  uiurl: https://wikibase.dev
+  wikiDbProvisionVersion: mw1.39-wbs1
+  wikiDbUseVersion: mw1.39-wbs1

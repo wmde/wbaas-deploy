@@ -1,4 +1,5 @@
 controller:
+  allowSnippetAnnotations: true
   service:
     loadBalancerIP: {{ .Values.ip }}
     externalTrafficPolicy: Local
@@ -6,9 +7,12 @@ controller:
     requests:
       cpu: 0.100
       memory: 150Mi
+    limits:
+      cpu: null
   config:
+    custom-http-errors: "502,503"
     preserve-trailing-slash: true
-    block-user-agents: ~*Seekport\sCrawler.*,~*MJ12bot.*
+    block-user-agents: ~*Seekport\sCrawler.*,~*MJ12bot.*,~Bytespider,~thesis-research-bot
     # https://stackoverflow.com/a/37877244
     log-format-upstream: >-
       $remote_addr - $remote_user [$time_local] "$request_method $scheme://$host$request_uri $server_protocol"
@@ -24,3 +28,39 @@ controller:
         release: kube-prometheus-stack
 defaultBackend:
   enabled: true
+  image:
+    repository: registry.k8s.io/ingress-nginx/nginx-errors
+    tag: v20230505
+  extraConfigMaps:
+    - name: custom-error-pages
+      data:
+        '502': |
+          <!DOCTYPE html>
+          <html>
+            <head><title>Bad Gateway</title></head>
+            <body>
+              <h1>Bad Gateway - 502</h1>
+              <p>You can check the <a target="_blank" href="https://status.wikibase.cloud">Platform Status</a> if this is unexpected.</p>
+            </body>
+          </html>
+        '503': |
+          <!DOCTYPE html>
+          <html>
+            <body>
+            <head><title>Service Unavailable</title></head>
+              <h1>Service Unavailable - 503</h1>
+              <p>You can check the <a target="_blank" href="https://status.wikibase.cloud">Platform Status</a> if this is unexpected.</p>
+            </body>
+          </html>
+  extraVolumes:
+    - name: custom-error-pages
+      configMap:
+        name: custom-error-pages
+        items:
+        - key: "502"
+          path: "502.html"
+        - key: "503"
+          path: "503.html"
+  extraVolumeMounts:
+    - name: custom-error-pages
+      mountPath: /www
