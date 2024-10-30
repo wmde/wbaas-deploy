@@ -23,7 +23,8 @@ Current ADRs include:
 - [9) Terraform style conventions](0009-terraform-style-conventions.md)
 - [10) Backup Bucket Usage](0010-backup-bucket-usage.md)
 - [11) Handling FQDNs](0011-handling-fqdns.md)
-- [12) Stop versioning Terraform modules with git](0012-stop-versioning-terraform-modules-with-git.md)
+- [12) Stop versioning terraform modules with git](0012-stop-versioning-terraform-modules-with-git.md)
+- [13) Use aliases to combine ES indices](0013-use-aliases-to-combine-es-indices.md)
 <!-- toc-end -->
 
 ---
