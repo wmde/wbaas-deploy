@@ -18,7 +18,6 @@ podLabels:
   sidecar.istio.io/inject: "true"
 resources:
   limits:
-    cpu: null
     memory: 20Mi
   requests:
     cpu: 1m
