@@ -18,6 +18,11 @@ jobs:
               RELEASE=$(basename "${RELEASE_FILE}" .values.yaml)
               TMP_VALUES=$(mktemp)
 
+              if [[ $RELEASE == "app-of-apps" ]]; then
+                echo "skipping - $RELEASE_FILE - [$ENV] [$RELEASE]"
+                break
+              fi
+
               echo "checking $RELEASE_FILE - [$ENV] [$RELEASE]"
 
               ./bin/generate-values "${ENV}" "${RELEASE}" "${TMP_VALUES}"

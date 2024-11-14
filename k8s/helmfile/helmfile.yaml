@@ -109,7 +109,7 @@ releases:
   - name: argocd-config
     namespace: argocd
     chart: wbstack/argocd-config
-    version: 1.0.7
+    version: '{{ if eq .Environment.Name "local" }}1.0.8{{ else }}1.0.7{{ end }}'
     <<: *default_release
 
   - name: redirects
