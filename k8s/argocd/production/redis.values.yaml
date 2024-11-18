@@ -43,7 +43,6 @@ replica:
   replicaCount: 1
   resources:
     limits:
-      cpu: null
       memory: 250Mi
     requests:
       cpu: 500m
