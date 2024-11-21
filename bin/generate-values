@@ -16,7 +16,7 @@ RELEASE="$2"
 # absolute path of the wbaas-deploy repository
 ROOT=$(realpath $(dirname $(realpath $BASH_SOURCE))/..)
 OUTPUT_TEMPLATE="${ROOT}/k8s/argocd/${ENVIRONMENT}/${RELEASE}.values.yaml"
-HELMFILE="k8s/helmfile/helmfile.yaml"
+HELMFILE="k8s/helmfile/only-for-argo-value-generation.yaml"
 TMP_HELMFILE="$(dirname ${HELMFILE})/.tmp_helmfile.$(mktemp -u XXXXXX).yaml"
 
 if [[ -n "$3" ]]; then
