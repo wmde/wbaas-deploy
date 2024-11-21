@@ -139,13 +139,6 @@ releases:
     version: 19.10.2
     <<: *default_release
 
-  - name: redis
-    # This is in the default namespace, as the default ns implies staging?
-    namespace: default
-    chart: bitnami/redis
-    version: 17.3.8
-    <<: *default_release
-
   - name: platform-nginx
     namespace: default
     chart: bitnami-legacy/nginx
