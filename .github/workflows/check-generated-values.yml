@@ -18,9 +18,9 @@ jobs:
               RELEASE=$(basename "${RELEASE_FILE}" .values.yaml)
               TMP_VALUES=$(mktemp)
 
-              if [[ $RELEASE == "app-of-apps" ]]; then
+              if [[ $RELEASE =~ ^(app-of-apps|redis-2)$ ]]; then
                 echo "skipping - $RELEASE_FILE - [$ENV] [$RELEASE]"
-                break
+                continue
               fi
 
               echo "checking $RELEASE_FILE - [$ENV] [$RELEASE]"
