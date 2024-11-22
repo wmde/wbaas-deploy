@@ -78,11 +78,11 @@ releases:
   # Only deploy the clusterissuers to production clusters for now, as they won't
   # work locally for now...
   - name: clusterissuers
-    installed: {{ ne .Environment.Name "local" | toYaml }}
+    # installed: {{ ne .Environment.Name "local" | toYaml }}
     namespace: cert-manager
     # TODO use something more generic or from wbstack/charts repo
-    chart: wbstack/wikibase-cloud-clusterissuers
-    version: 0.1.0
+    chart: ../../../charts/charts/wikibase-cloud-clusterissuers
+    # version: 0.1.0
     values:
       - email: {{ .Values.external.letsencrypt.email }}
       - gceProject: {{ .Values.gceProject }}
@@ -96,10 +96,10 @@ releases:
               - 'wikibase.dev'
 
   - name: certificates
-    installed: {{ ne .Environment.Name "local" | toYaml }}
+    # installed: {{ ne .Environment.Name "local" | toYaml }}
     namespace: default
-    chart: wbstack/certificates
-    version: 0.1.0
+    chart: ../../../charts/charts/certificates
+    # version: 0.1.0
     <<: *default_release
 
 
@@ -131,6 +131,12 @@ releases:
     namespace: default
     chart: bitnami-legacy/mariadb
     version: 10.5.0
+    <<: *default_release
+
+  - name: ui
+    namespace: default
+    chart: wbstack/ui
+    version: 0.3.1
     <<: *default_release
 
   - name: elasticsearch-2

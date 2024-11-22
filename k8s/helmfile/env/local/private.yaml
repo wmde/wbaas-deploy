@@ -4,7 +4,7 @@ gcsApiStaticBucket: 'something'
 
 # TODO move this (and many other things) out of private file...
 uiHostName: www.wbaas.localhost
-tlsSecret: wikibase-dev-tls
+tlsSecret: wikibase-local-tls
 
 services:
   queryservice:
@@ -13,8 +13,8 @@ services:
 
   app:
     mailer: smtp
-    url: http://www.wbaas.localhost
-    apiUrl: http://api.wbaas.localhost
+    url: https://www.wbaas.localhost
+    apiUrl: https://api.wbaas.localhost
     ingressHosts:
       - host: api.wbaas.localhost
         paths:

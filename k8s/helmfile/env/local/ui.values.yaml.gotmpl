@@ -6,7 +6,10 @@ ui:
   recaptchaSitekeySecretKey: site_key
 
 ingress:
-  tls: null
+  tls:
+  - hosts:
+    - {{ .Values.uiHostName }}
+    secretName: {{ .Values.tlsSecret }}
 
 resources:
   limits:
