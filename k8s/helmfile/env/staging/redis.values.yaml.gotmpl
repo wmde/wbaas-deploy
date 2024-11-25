@@ -1,1 +1,15 @@
-# staging uses production configuration so this is an empty file
+master:
+  resources:
+    limits:
+      memory: 500Mi
+    requests:
+      cpu: 100m
+      memory: 500Mi
+
+replica:
+  resources:
+    limits:
+      memory: 250Mi
+    requests:
+      cpu: 100m
+      memory: 250Mi
