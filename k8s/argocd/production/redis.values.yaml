@@ -25,7 +25,6 @@ master:
     subPath: ""
   resources:
     limits:
-      cpu: 500m
       memory: 500Mi
     requests:
       cpu: 500m
