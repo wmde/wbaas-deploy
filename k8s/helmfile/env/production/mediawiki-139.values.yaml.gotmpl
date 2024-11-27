@@ -19,6 +19,8 @@ mw:
     # TODO fixme, no "database" ID injected into mediawiki
     readServer: {{ .Values.services.redis.readHost }}
     writeServer: {{ .Values.services.redis.writeHost }}
+    readCacheServer: redis-2-replicas.default.svc.cluster.local
+    writeCacheServer: redis-2-master.default.svc.cluster.local
     password:
     passwordSecretName: redis-password
     passwordSecretKey: password
