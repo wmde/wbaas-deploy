@@ -2,7 +2,23 @@ image:
   tag: 10x.18.1
 
 ingress:
-  tls: null
+  tls:
+  - hosts:
+    - wbaas.localhost
+    secretName: wikibase-local-tls
+  enabled: true
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    nginx.ingress.kubernetes.io/use-regex: "true"
+    nginx.ingress.kubernetes.io/rewrite-target: /$2
+  hosts:
+  {{- range .Values.services.app.ingressHosts }}
+  - host: {{ .host }}
+    paths:
+    {{- range .paths }}
+    - {{ . | quote }}
+    {{- end }}
+  {{- end }}
 
 platform:
   backendMwHost: mediawiki-139-app-backend.default.svc.cluster.local
