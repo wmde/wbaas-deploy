@@ -5,6 +5,7 @@ gcsApiStaticBucket: 'something'
 # TODO move this (and many other things) out of private file...
 uiHostName: www.wbaas.localhost
 tlsSecret: wikibase-local-tls
+ingressNameSuffix: wikibase-local
 
 services:
   queryservice:
