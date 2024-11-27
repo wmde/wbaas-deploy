@@ -1,6 +1,6 @@
 ip: ""
 ingressHost: "*.wbaas.localhost"
-ingressNameSuffix: main
+ingressNameSuffix: wikibase-local
 forceSSL: false
 tls: true
 wbstack:
