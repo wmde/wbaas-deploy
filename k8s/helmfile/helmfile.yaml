@@ -157,7 +157,7 @@ releases:
   - name: mediawiki-139
     namespace: default
     chart: wbstack/mediawiki
-    version: 0.12.0
+    version: '{{ if eq .Environment.Name "production" }} 0.12.0 {{ else }} 0.13.0 {{ end }}'
     <<: *default_release
 
   - name: queryservice-ui
