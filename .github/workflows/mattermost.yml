@@ -13,6 +13,6 @@ jobs:
         run: >
           jq -n --arg t "Pull request opened: [${TITLE}](${HTML_LINK})" '{text: $t}'
           > mattermost.json
-      - uses: mattermost/action-mattermost-notify@1.1.0
+      - uses: mattermost/action-mattermost-notify@2.0.0
         env:
           MATTERMOST_WEBHOOK_URL: ${{ secrets.MATTERMOST_WEBHOOK_URL }}
