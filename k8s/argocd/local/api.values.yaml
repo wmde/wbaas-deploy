@@ -55,7 +55,7 @@ app:
     errorReportingEnabled: true
     loggingEnabled: false
     tracingEnabled: false
-  url: http://www.wbaas.localhost
+  url: https://www.wbaas.localhost
 image:
   tag: 10x.18.1
 ingress:
@@ -161,6 +161,6 @@ wbstack:
   summaryCreationRateRanges:
     - PT24H
     - P30D
-  uiurl: http://wbaas.localhost
+  uiurl: https://wbaas.localhost
   wikiDbProvisionVersion: mw1.39-wbs1
   wikiDbUseVersion: mw1.39-wbs1

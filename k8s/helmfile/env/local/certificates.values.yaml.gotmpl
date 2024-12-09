@@ -1,0 +1,8 @@
+certificates:
+  - name: wikibase-local-tls
+    commonName: wbaas.localhost
+    dnsNames:
+      - '*.wbaas.localhost'
+      - 'wbaas.localhost'
+    secretName: wikibase-local-tls
+    issuerRef: selfsigned-cluster-issuer

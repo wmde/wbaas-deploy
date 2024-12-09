@@ -10,7 +10,10 @@ ingress:
     - host: www.wbaas.localhost
       paths:
         - /*
-  tls: null
+  tls:
+    - hosts:
+        - www.wbaas.localhost
+      secretName: wikibase-local-tls
 podLabels:
   sidecar.istio.io/inject: "true"
 resources:
@@ -21,7 +24,7 @@ resources:
     cpu: 1m
     memory: 6Mi
 ui:
-  apiUrl: http://api.wbaas.localhost
+  apiUrl: https://api.wbaas.localhost
   cnameConfigMapKey: cname_record
   configMapName: wbaas-ui-config
   recaptchaSitekeySecretKey: site_key
