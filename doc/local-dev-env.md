@@ -246,7 +246,7 @@ sudo sh -c 'skaffold completion bash > /usr/share/bash-completion/completions/sk
 ```
 
 ## [Optional] install local CA certificate
-Since we [introduced](https://phabricator.wikimedia.org/T378691) using HTTPS for local ingresses, you will get a scary warning when accessing local web interfaces. This can be mitigated by trusting the local CA certificate that is getting used for self-signing. The easiest way to do this is to save the local CA certificate in a file by accessing the secret it lives in (`wikibase-local-tls`) and importing it in your browser. There is also the possibility to import it into the trust store of your operating system, for example via the tool [mkcert](https://github.com/FiloSottile/mkcert), but you should be aware of the possible consequences this could have for the security of your machine.
+Since we [introduced](https://phabricator.wikimedia.org/T378691) using HTTPS for local ingresses, you will get a scary warning when accessing local web interfaces. This can be mitigated by trusting the local CA certificate that is getting used for self-signing. The easiest way to do this is to save the local CA certificate in a file by accessing the secret it lives in (`wikibase-local-tls`) and importing it in your browser settings. There is also the possibility to import it into the trust store of your operating system, for example via the tool [mkcert](https://github.com/FiloSottile/mkcert), but you should be aware of the possible consequences this could have for the security of your machine.
 
 > [!TIP]
 > Running `make local-ca` will save the certificate to the file `wikibase-local-tls.crt`. It is highly recommended to delete the file again after importing it.
