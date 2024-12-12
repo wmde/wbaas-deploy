@@ -73,11 +73,14 @@ templates:
 
 releases:
   ################################
-  # ALL ENVIRONMENTS
+  # NOT LOCAL
   ################################
-
+  # Only deploy the clusterissuers to production clusters for now, as they won't
+  # work locally for now...
   - name: clusterissuers
+    installed: {{ ne .Environment.Name "local" | toYaml }}
     namespace: cert-manager
+    # TODO use something more generic or from wbstack/charts repo
     chart: wbstack/wikibase-cloud-clusterissuers
     version: 0.1.0
     values:
@@ -93,15 +96,20 @@ releases:
               - 'wikibase.dev'
 
   - name: certificates
+    installed: {{ ne .Environment.Name "local" | toYaml }}
     namespace: default
     chart: wbstack/certificates
     version: 0.1.0
     <<: *default_release
 
+
+  ################################
+  # ALL ENVIRONMENTS
+  ################################
   - name: argocd-config
     namespace: argocd
     chart: wbstack/argocd-config
-    version: '{{ if eq .Environment.Name "production" }} 1.0.10 {{ else }} 1.1.0 {{ end }}'
+    version: '{{ if eq .Environment.Name "production" }} 1.0.10 {{ else }} 0.1.0 {{ end }}'
     <<: *default_release
 
   - name: redirects

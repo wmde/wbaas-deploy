@@ -1,7 +1,8 @@
 ip: ""
 ingressHost: "*.wbaas.localhost"
-forceSSL: true
-tls: true
+ingressNameSuffix: main
+forceSSL: false
+tls: false
 wbstack:
   subdomainSuffix: ".wbaas.localhost"
-  uiurl: https://wbaas.localhost
+  uiurl: http://wbaas.localhost

@@ -4,7 +4,7 @@ EXTERNAL_IP=$(minikube --profile minikube-wbaas kubectl -- -n kube-system get se
 
 trap 'kill -15 $kids; exit 143' EXIT HUP INT TERM
 
-sudo socat tcp-listen:443,reuseaddr,fork tcp:"$EXTERNAL_IP":443 &
+sudo socat tcp-listen:80,reuseaddr,fork tcp:"$EXTERNAL_IP":80 &
 kids=$!
 
 minikube --profile minikube-wbaas tunnel &
