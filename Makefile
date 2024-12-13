@@ -11,8 +11,8 @@ help:
 .PHONY: local-ca
 local-ca: # @HELP Get the CA certificate that is used in the local environment
 local-ca:
-	kubectl get secret wikibase-local-tls -o json | jq -r '.data."ca.crt"' | base64 -d > wikibase-local-tls.crt
-	realpath wikibase-local-tls.crt
+	kubectl get secret wikibase-local-tls -o json | jq -r '.data."ca.crt"' | base64 -d > wikibase-local-ca.crt
+	realpath wikibase-local-ca.crt
 
 .PHONY: minikube-start
 minikube-start: # @HELP Start a local k8s cluster using minikube
