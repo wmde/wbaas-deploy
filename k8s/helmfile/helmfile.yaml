@@ -79,7 +79,7 @@ releases:
   - name: clusterissuers
     namespace: cert-manager
     chart: wbstack/wikibase-cloud-clusterissuers
-    version: 0.2.0
+    version: 0.2.1
     values:
       - email: {{ .Values.external.letsencrypt.email }}
       - gceProject: {{ .Values.gceProject }}
@@ -95,7 +95,7 @@ releases:
   - name: certificates
     namespace: default
     chart: wbstack/certificates
-    version: 0.1.0
+    version: 0.1.1
     <<: *default_release
 
   - name: argocd-config
