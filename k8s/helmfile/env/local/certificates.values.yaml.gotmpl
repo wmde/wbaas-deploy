@@ -5,4 +5,11 @@ certificates:
       - '*.wbaas.localhost'
       - 'wbaas.localhost'
     secretName: wikibase-local-tls
-    issuerRef: selfsigned-cluster-issuer
+    issuerRef: wikibase-local-issuer
+  - name: argocd-server-tls
+    namespace: argocd
+    commonName: argo.wbaas.localhost
+    dnsNames:
+      - 'argo.wbaas.localhost'
+    secretName: argocd-server-tls
+    issuerRef: wikibase-local-issuer
