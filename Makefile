@@ -109,6 +109,9 @@ skaffold-queryservice: # @HELP  Deploy the local queryservice image using skaffo
 skaffold-queryservice-ui: # @HELP Deploy the local queryservice-ui image using skaffold
 skaffold-queryservice-updater: # @HELP Deploy the local queryservice-updater image using skaffold
 skaffold-queryservice-gateway: # @HELP Deploy the local queryservice-gateway image using skaffold
+skaffold-tool-cradle: # @HELP Deploy the local cradle image using skaffold
+skaffold-tool-widar: # @HELP Deploy the local widar image using skaffold
+skaffold-tool-quickstatements: # @HELP Deploy the local quickstatements image using skaffold
 .PHONY: skaffold-%
 skaffold-%: MODULE=$*
 skaffold-%:
