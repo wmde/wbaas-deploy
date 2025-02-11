@@ -3,10 +3,10 @@ replicaCount: 3
 resources:
   limits:
     cpu: null
-    memory: 20Mi
+    memory: 128Mi
   requests:
      cpu: 20m
-     memory: 8Mi
+     memory: 128Mi
 
 serverBlock: |-
 {{ readFile "platform-nginx.nginx.conf" | indent 2 }}
