@@ -13,9 +13,7 @@ resource "google_logging_metric" "production-site-request-count" {
   filter      = <<-EOT
         labels."k8s-pod/app_kubernetes_io/name"="ingress-nginx"
         resource.type="k8s_container"
-        -textPayload:"GoogleStackdriverMonitoring"
-        -textPayload:"cert-manager"
-        -textPayload:"Widar"
+        textPayload=~"^\d*\.\d*\.\d*\.\d*\ - (-|\w) \["
     EOT
   label_extractors = {
     "domain"     = "REGEXP_EXTRACT(textPayload, \"\\\\w+ https:\\\\/\\\\/([^\\\\/]+)\")"
