@@ -1,10 +1,10 @@
 primary:
   resources:
     requests:
-      cpu: 40m
-      memory: 700Mi
-    limits:
       cpu: 750m
+      memory: 1000Mi
+    limits:
+      cpu: null
       memory: 1000Mi
   configuration: |-
     [mysqld]
@@ -36,6 +36,10 @@ primary:
     # 100MB, default & bitnami was 1GB (1073741824)
     max_binlog_size=107374182
 
+    # T373448
+    table_open_cache=5120
+    table_definition_cache=5120
+
     [mysql]
     # https://forums.mysql.com/read.php?103,189835,192421#msg-192421
     default-character-set=UTF8
@@ -51,12 +55,13 @@ primary:
     pid-file=/opt/bitnami/mariadb/tmp/mysqld.pid
 
 secondary:
+  replicaCount: 1
   resources:
     requests:
-      cpu: 100m
-      memory: 660Mi
-    limits:
       cpu: 750m
+      memory: 900Mi
+    limits:
+      cpu: null
       memory: 900Mi
   readinessProbe:
     enabled: false

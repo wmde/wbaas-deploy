@@ -1,0 +1,67 @@
+repositories:
+  - name: wbstack
+    url: https://wbstack.github.io/charts
+  - name: bitnami
+    url: https://charts.bitnami.com/bitnami
+  - name: bitnami-legacy
+    # yamllint disable-line rule:line-length
+    url: https://raw.githubusercontent.com/bitnami/charts/eb5f9a9513d987b519f0ecd732e7031241c50328/bitnami
+  - name: cetic
+    url: https://cetic.github.io/helm-charts
+  - name: codecentric
+    url: https://codecentric.github.io/helm-charts
+  - name: ingress-nginx
+    url: https://kubernetes.github.io/ingress-nginx
+  - name: prometheus-community
+    url: https://prometheus-community.github.io/helm-charts
+  - name: istio
+    url: https://istio-release.storage.googleapis.com/charts
+  - name: minio
+    url: https://charts.min.io
+
+environments:
+  default:
+    kubeContext: INVALID-ENVIRONMENT
+  production:
+    kubeContext: gke_wikibase-cloud_europe-west3-a_wbaas-3
+    values:
+      - ./env/production/base.yaml
+      - ./env/production/private.yaml
+  staging:
+    kubeContext: gke_wikibase-cloud_europe-west3-a_wbaas-2
+    values:
+      - ./env/staging/base.yaml
+      - ./env/staging/private.yaml
+  local:
+    kubeContext: minikube-wbaas
+    values:
+      - ./env/local/base.yaml
+      - ./env/local/private.yaml
+
+---
+
+templates:
+  default: &default_release
+    missingFileHandler: Error
+    values:
+      - env/production/{{`{{ .Release.Name }}`}}.values.yaml.gotmpl
+      - env/{{`{{ .Environment.Name }}`}}/{{`{{ .Release.Name }}`}}.values.yaml.gotmpl
+
+releases:
+  - name: api
+    chart: wbstack/api
+    version: "0.32.0"
+    namespace: default
+    <<: *default_release
+
+  - name: ui
+    namespace: default
+    chart: wbstack/ui
+    version: 0.3.1
+    <<: *default_release
+
+  - name: redis
+    namespace: default
+    chart: bitnami/redis
+    version: 17.3.8
+    <<: *default_release

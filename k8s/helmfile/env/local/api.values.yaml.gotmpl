@@ -1,5 +1,5 @@
 image:
-  tag: "8x.11.1"
+  tag: 10x.18.3
 
 ingress:
   tls: null
@@ -20,6 +20,8 @@ wbstack:
 
 app:
   name: WBaaS Localhost
+  env: local
+  logLevel: debug
   redis:
     prefix: wikibase_dev_api
   mail:
@@ -33,21 +35,46 @@ app:
     smtpPasswordSecretName: null
     smtpPasswordSecretKey: password
   recaptcha:
-    # TODO take these values from secrets...
-    sitekey:
-    secret:
-    sitekeySecretName: recaptcha-v3-dev-secrets
-    sitekeySecretKey: site_key
-    secretSecretName: recaptcha-v3-dev-secrets
+    minScore: 0.5
+    secretSecretName: {{ .Values.external.recaptcha3.secretName }}
     secretSecretKey: secret_key
-    badgehide: true
   # TODO is this needed for local?
   gce:
     serviceAccountSecret: null
-external:
-  letsencrypt:
-    email: thomas.arrow@wikimedia.de
-  recaptcha2:
-    secretName: recaptcha-v2-secrets
-  recaptcha3:
-    secretName: recaptcha-v3-secrets
+  stackdriver:
+    enabled: false
+
+replicaCount:
+  web: 1
+  backend: 1
+  scheduler: 1
+  queue: 2
+
+storage:
+  accessKeySecretName: minio-credentials
+  accessKeySecretKey: rootUser
+  secretKeySecretName: minio-credentials
+  secretKeySecretKey: rootPassword
+  endpoint: http://minio.default.svc.cluster.local:9000
+  url: http://minio.wbaas.localhost/api-assets
+
+trustedProxy:
+  proxies: ['*']
+
+resources:
+  backend:
+    limits:
+      cpu: 1000m
+  web:
+    limits:
+      cpu: 250m
+  queue:
+    requests:
+      cpu: 100m
+      memory: 256Mi
+    limits:
+      cpu: 250m
+      memory: 512Mi
+  scheduler:
+    limits:
+      cpu: 40m

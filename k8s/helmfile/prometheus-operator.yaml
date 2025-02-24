@@ -1,5 +1,26 @@
+environments:
+  default:
+    kubeContext: INVALID-ENVIRONMENT
+  production:
+    kubeContext: gke_wikibase-cloud_europe-west3-a_wbaas-3
+    values:
+      - ./env/production/base.yaml
+      - ./env/production/private.yaml
+  staging:
+    kubeContext: gke_wikibase-cloud_europe-west3-a_wbaas-2
+    values:
+      - ./env/staging/base.yaml
+      - ./env/staging/private.yaml
+  local:
+    kubeContext: minikube-wbaas
+    values:
+      - ./env/local/base.yaml
+      - ./env/local/private.yaml
+
+---
+
 releases:
   - name: prometheus-operator-crds
     namespace: monitoring
-    version: 2.0.0
+    version: '9.0.0'
     chart: prometheus-community/prometheus-operator-crds

@@ -1,0 +1,40 @@
+existingSecret: minio-credentials
+
+image:
+  tag: RELEASE.2023-07-07T07-13-57Z
+
+mode: standalone
+
+replicas: 1
+
+persistence:
+  size: 4Gi
+
+buckets:
+  - name: backups
+    policy: public
+  - name: api-assets
+    policy: public
+
+resources:
+  requests:
+    memory: 0.5Gi
+
+consoleService:
+  port: "80"
+
+consoleIngress:
+  enabled: true
+  path: /
+  hosts:
+    - minio-console.wbaas.localhost
+  annotations:
+    kubernetes.io/ingress.class: nginx
+
+ingress:
+  enabled: true
+  path: /
+  hosts:
+    - minio.wbaas.localhost
+  annotations:
+    kubernetes.io/ingress.class: nginx

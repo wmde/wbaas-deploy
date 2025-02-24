@@ -1,9 +1,16 @@
 image:
-  tag: sha-3a5c4e8
+  tag: sha-049c946
 
 ui:
-  recaptchaSitekeySecretName: recaptcha-v3-dev-secrets
+  recaptchaSitekeySecretName: {{ .Values.external.recaptcha3.secretName }}
   recaptchaSitekeySecretKey: site_key
 
 ingress:
-  tls: null
+  tls:
+  - hosts:
+    - {{ .Values.uiHostName }}
+    secretName: {{ .Values.tlsSecret }}
+
+resources:
+  limits:
+    cpu: 10m

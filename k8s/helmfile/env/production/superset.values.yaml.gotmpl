@@ -1,0 +1,13 @@
+storageSize: 5Gi
+storageClass: premium-rwo
+
+serviceAnnotations:
+  tailscale.com/expose: "true"
+
+resources:
+  requests:
+    cpu: 500m
+    memory: 8Gi
+  limits:
+    cpu: null
+    memory: 8Gi

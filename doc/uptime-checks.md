@@ -2,7 +2,7 @@
 
 # Uptime checks
 
-Uptime checks are defined in terraform and runs against both the staging and production cluster.
+Uptime checks are defined in opentofu and runs against both the staging and production cluster.
 
 These are using the [google_monitoring_uptime_check_config](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/monitoring_uptime_check_config) resource and requires a wiki to be manually setup with some content that the uptime checks are looking for.
 

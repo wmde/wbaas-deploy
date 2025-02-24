@@ -31,7 +31,7 @@ resource "google_monitoring_alert_policy" "alert_policy_queryservice_pv_critical
       aggregations {
         alignment_period     = "120s"
         per_series_aligner   = "ALIGN_MEAN"
-        cross_series_reducer = "REDUCE_SUM"
+        cross_series_reducer = "REDUCE_NONE"
       }
 
       trigger {

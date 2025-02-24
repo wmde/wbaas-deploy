@@ -5,7 +5,7 @@ List of services disks that should get snapshots regularly:
 - SQL replica
 
 ## Initial setup
-In order to set scheduled snapshots up, you can run the script located in [/bin/gce-attach-snapshot-schedule](/bin/gce-attach-snapshot-schedule). This will compose a `gcloud` command you can run to attach the existing snapshot policy to that disks. The snapshot policy is defined in terraform ([/tf/modules/disks/policies.tf](/tf/modules/disks/policies.tf)).
+In order to set scheduled snapshots up, you can run the script located in [/bin/gce-attach-snapshot-schedule](/bin/gce-attach-snapshot-schedule). This will compose a `gcloud` command you can run to attach the existing snapshot policy to that disks. The snapshot policy is defined in opentofu ([/tf/modules/disks/policies.tf](/tf/modules/disks/policies.tf)).
 
 ### Example
 

@@ -8,10 +8,16 @@ help:
 	        { printf "  %-20s %s\n", $$1, $$2 };  \
 	    '
 
+.PHONY: local-ca
+local-ca: # @HELP Get the CA certificate that is used in the local environment
+local-ca:
+	kubectl get secret wikibase-local-tls -o json | jq -r '.data."ca.crt"' | base64 -d > wikibase-local-ca.crt
+	realpath wikibase-local-ca.crt
+
 .PHONY: minikube-start
 minikube-start: # @HELP Start a local k8s cluster using minikube
 minikube-start:
-	minikube --profile minikube-wbaas start --kubernetes-version=1.22.15
+	minikube --profile minikube-wbaas start --kubernetes-version=1.31.2 --container-runtime=docker
 
 .PHONY: minikube-stop
 minikube-stop: # @HELP Stop the local minikube cluster
@@ -61,12 +67,12 @@ helmfile-sync:
 	cd ./k8s/helmfile && helmfile --environment local sync
 
 PHONY: init-%
-init-local: # @HELP Initialize terraform state for your local setup. This does not create any resources. It also downloads any new modules
-init-staging: # @HELP Initialize terraform state for staging. This does not create any resources. It also downloads any new modules
-init-production: # @HELP Initialize terraform state for production. This does not create any resources. It also downloads any new modules
+init-local: # @HELP Initialize tf state for your local setup. This does not create any resources. It also downloads any new modules
+init-staging: # @HELP Initialize tf state for staging. This does not create any resources. It also downloads any new modules
+init-production: # @HELP Initialize tf state for production. This does not create any resources. It also downloads any new modules
 init-%: ENV=$*
 init-%:
-	cd ./tf/env/$(ENV) && terraform init
+	cd ./tf/env/$(ENV) && tofu init
 
 .PHONY: diff-%
 diff-local: # @HELP Diff the repository against the state of your local cluster
@@ -74,7 +80,7 @@ diff-staging: # @HELP Diff the repository against the state of the staging clust
 diff-production: # @HELP Diff the repository against the state of the production cluster
 diff-%: ENV=$*
 diff-%:
-	cd ./tf/env/$(ENV) && terraform plan
+	cd ./tf/env/$(ENV) && tofu plan
 	cd ./k8s/helmfile && helmfile --environment $(ENV) diff --context 5
 
 .PHONY: apply-%
@@ -83,7 +89,7 @@ apply-staging: # @HELP Apply changes in the repository to the staging cluster
 apply-production: # @HELP Apply changes in the repository to the production cluster
 apply-%: ENV=$*
 apply-%:
-	cd ./tf/env/$(ENV) && terraform apply
+	cd ./tf/env/$(ENV) && tofu apply
 	cd ./k8s/helmfile && helmfile --environment $(ENV) --interactive apply --context 5
 
 diff: # @HELP Run diff for both staging and production
@@ -96,7 +102,6 @@ test: # @HELP Run yamllint tests against the repository
 test:
 	yamllint --no-warnings .
 
-skaffold-mediawiki-138: # @HELP Deploy the local mediawiki 1.38 image using skaffold
 skaffold-mediawiki-139: # @HELP Deploy the local mediawiki 1.39 image using skaffold
 skaffold-ui: # @HELP Deploy the local ui image using skaffold
 skaffold-api: # @HELP Deploy the api image using skaffold
@@ -104,6 +109,9 @@ skaffold-queryservice: # @HELP  Deploy the local queryservice image using skaffo
 skaffold-queryservice-ui: # @HELP Deploy the local queryservice-ui image using skaffold
 skaffold-queryservice-updater: # @HELP Deploy the local queryservice-updater image using skaffold
 skaffold-queryservice-gateway: # @HELP Deploy the local queryservice-gateway image using skaffold
+skaffold-tool-cradle: # @HELP Deploy the local cradle image using skaffold
+skaffold-tool-widar: # @HELP Deploy the local widar image using skaffold
+skaffold-tool-quickstatements: # @HELP Deploy the local quickstatements image using skaffold
 .PHONY: skaffold-%
 skaffold-%: MODULE=$*
 skaffold-%:
@@ -113,3 +121,31 @@ skaffold-%:
 skaffold-run: # @HELP Run all local modules using skaffold
 skaffold-run:
 	cd ./skaffold && skaffold run --kube-context minikube-wbaas
+
+.PHONY: argo-reset-password
+argo-reset-password: # @HELP Reset the admin password for the ArgoCD of the current context
+argo-reset-password:
+	./bin/reset-argocd-password
+
+argo-sync-app-of-apps:
+argo-sync-ui: # @HELP Sync ui in ArgoCD
+.PHONY: argo-sync-%
+argo-sync-%: # @HELP Sync any Application defined in ArgoCD
+argo-sync-%: APP=$*
+argo-sync-%:
+	./bin/argocli app sync $(APP)
+
+.PHONY: argo-sync
+argo-sync: # @HELP Sync app-of-apps in ArgoCD (which contains all other Applications)
+argo-sync: argo-sync-app-of-apps
+
+.PHONY: argo-list
+argo-list: # @HELP List current applications and their state in ArgoCD
+argo-list:
+	./bin/argocli app list
+
+.PHONY: argo-port-forward
+argo-port-forward: # @HELP Port forwards the ArgoCD UI to localhost:8080
+argo-port-forward:
+	kubectl -n argocd port-forward deployments/argo-cd-base-argocd-server 8080
+

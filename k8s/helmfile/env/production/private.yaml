@@ -1,18 +1,8 @@
 gceProject: wikibase-cloud
 gceServiceAccountSecret: secret-wikibase-production-api
 
-certificates:
-  -
-    name: wikibase-cloud-tls
-    commonName: wikibase.cloud
-    dnsNames:
-      - '*.wikibase.cloud'
-      - 'wikibase.cloud'
-    secretName: wikibase-cloud-tls
-    issuerRef: letsencrypt-prod
-
 uiHostName: www.wikibase.cloud
-tlsSecret: wikibase-production-tls # TODO is this not used any more now?
+tlsSecret: wikibase-production-tls
 ingressNameSuffix: wikibase-production
 
 services:
@@ -29,7 +19,7 @@ services:
           - /api(/|$)(.*)
   sql:
     storageClass: premium-rwo
-    storageSize: 120Gi
+    storageSize: 240Gi
     api:
       db: apidb
       user: apiuser

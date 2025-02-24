@@ -1,0 +1,194 @@
+{
+    "displayName": "Incoming Traffic",
+    "mosaicLayout": {
+      "columns": 48,
+      "tiles": [
+        {
+          "width": 24,
+          "height": 16,
+          "widget": {
+            "title": "Incoming Requests",
+            "xyChart": {
+              "dataSets": [
+                {
+                  "timeSeriesQuery": {
+                    "timeSeriesFilter": {
+                      "filter": "metric.type=\"logging.googleapis.com/user/production-site-request-count\"",
+                      "aggregation": {
+                        "alignmentPeriod": "60s",
+                        "perSeriesAligner": "ALIGN_RATE"
+                      }
+                    }
+                  },
+                  "plotType": "LINE",
+                  "minAlignmentPeriod": "60s",
+                  "targetAxis": "Y1"
+                }
+              ],
+              "timeshiftDuration": "0s",
+              "yAxis": {
+                "label": "y1Axis",
+                "scale": "LINEAR"
+              },
+              "chartOptions": {
+                "mode": "COLOR"
+              }
+            }
+          }
+        },
+        {
+          "xPos": 24,
+          "width": 24,
+          "height": 16,
+          "widget": {
+            "title": "Incoming requests by domain",
+            "xyChart": {
+              "dataSets": [
+                {
+                  "timeSeriesQuery": {
+                    "timeSeriesFilter": {
+                      "filter": "metric.type=\"logging.googleapis.com/user/production-site-request-count\"",
+                      "aggregation": {
+                        "alignmentPeriod": "60s",
+                        "perSeriesAligner": "ALIGN_RATE",
+                        "crossSeriesReducer": "REDUCE_SUM",
+                        "groupByFields": [
+                          "metric.label.\"domain\""
+                        ]
+                      }
+                    }
+                  },
+                  "plotType": "LINE",
+                  "minAlignmentPeriod": "60s",
+                  "targetAxis": "Y1"
+                }
+              ],
+              "timeshiftDuration": "0s",
+              "yAxis": {
+                "label": "y1Axis",
+                "scale": "LINEAR"
+              },
+              "chartOptions": {
+                "mode": "COLOR"
+              }
+            }
+          }
+        },
+        {
+          "yPos": 16,
+          "width": 24,
+          "height": 16,
+          "widget": {
+            "title": "Incoming requests by httpMethod",
+            "xyChart": {
+              "dataSets": [
+                {
+                  "timeSeriesQuery": {
+                    "timeSeriesFilter": {
+                      "filter": "metric.type=\"logging.googleapis.com/user/production-site-request-count\"",
+                      "aggregation": {
+                        "alignmentPeriod": "60s",
+                        "perSeriesAligner": "ALIGN_RATE",
+                        "crossSeriesReducer": "REDUCE_SUM",
+                        "groupByFields": [
+                          "metric.label.\"httpMethod\""
+                        ]
+                      }
+                    }
+                  },
+                  "plotType": "LINE",
+                  "minAlignmentPeriod": "60s",
+                  "targetAxis": "Y1"
+                }
+              ],
+              "timeshiftDuration": "0s",
+              "yAxis": {
+                "label": "y1Axis",
+                "scale": "LINEAR"
+              },
+              "chartOptions": {
+                "mode": "COLOR"
+              }
+            }
+          }
+        },
+        {
+          "xPos": 24,
+          "yPos": 16,
+          "width": 24,
+          "height": 16,
+          "widget": {
+            "title": "internal server error (5XX) response count",
+            "xyChart": {
+              "dataSets": [
+                {
+                  "timeSeriesQuery": {
+                    "timeSeriesFilter": {
+                      "filter": "metric.type=\"logging.googleapis.com/user/production-site-request-count\" metric.label.\"statuscode\"=monitoring.regex.full_match(\"5\\\\d+\")",
+                      "aggregation": {
+                        "alignmentPeriod": "60s",
+                        "perSeriesAligner": "ALIGN_RATE",
+                        "crossSeriesReducer": "REDUCE_SUM",
+                        "groupByFields": [
+                          "metric.label.\"statuscode\""
+                        ]
+                      }
+                    }
+                  },
+                  "plotType": "STACKED_AREA",
+                  "minAlignmentPeriod": "60s",
+                  "targetAxis": "Y1"
+                }
+              ],
+              "timeshiftDuration": "0s",
+              "yAxis": {
+                "label": "y1Axis",
+                "scale": "LINEAR"
+              },
+              "chartOptions": {
+                "mode": "COLOR"
+              }
+            }
+          }
+        },
+        {
+          "yPos": 32,
+          "width": 24,
+          "height": 16,
+          "widget": {
+            "title": "bad request (4XX) response count",
+            "xyChart": {
+              "dataSets": [
+                {
+                  "timeSeriesQuery": {
+                    "timeSeriesFilter": {
+                      "filter": "metric.type=\"logging.googleapis.com/user/production-site-request-count\" metric.label.\"statuscode\"=monitoring.regex.full_match(\"4\\\\d+\")",
+                      "aggregation": {
+                        "alignmentPeriod": "60s",
+                        "perSeriesAligner": "ALIGN_RATE",
+                        "crossSeriesReducer": "REDUCE_SUM",
+                        "groupByFields": [
+                          "metric.label.\"statuscode\""
+                        ]
+                      }
+                    }
+                  },
+                  "plotType": "STACKED_AREA",
+                  "minAlignmentPeriod": "60s",
+                  "targetAxis": "Y1"
+                }
+              ],
+              "yAxis": {
+                "label": "y1Axis",
+                "scale": "LINEAR"
+              },
+              "chartOptions": {
+                "mode": "COLOR"
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+  

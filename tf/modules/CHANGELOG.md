@@ -1,3 +1,46 @@
+# tf-module-monitoring-26
+- Add alarm on Queryservice Batches Backpressure
+
+# tf-module-monitoring-25
+- Add alarm on low number of available ES shards
+
+# tf-module-buckets-3
+- Add iam members and hmac keys for static assets in module
+
+# tf-module-monitoring-24
+- Fix log group lookup for platform summary dashboard
+
+# tf-module-monitoring-23
+- Attempt to fix logical SQL backup alerting policy (alignment period 1h -> 15m)
+
+# tf-module-monitoring-22
+- Improve logical SQL backup alerting policy (alignment period 60s -> 1h)
+
+# tf-module-monitoring-21
+- Attempt to fix the failed logical SQL backup alerting policy
+
+# tf-module-monitoring-20
+- Add alert policy for critical PV usage (Logical SQL Backup)
+- Fix failed logcial SQL backup alert policy by setting duration to 24h instead of 24h 30m
+
+# tf-module-monitoring-19
+- Change prometheus-elasticsearch metric alerts to group by cluster
+
+# tf-module-monitoring-18
+- Change QueryService PV alert alignment from sum to none
+
+# tf-module-k8s-secrets-3
+- Export missing `smtp-credentials` secret to all given namespaces
+
+# tf-module-k8s-secrets-2
+- Allow consumers to export secrets used by `api` to multiple namespaces
+
+# tf-module-monitoring-17
+- Raise limit for ES metric absence alarm
+
+# tf-module-monitoring-16
+- Add alarm for ElasticSearch cluster health
+
 # tf-module-uptime-5
 - Add uptime check for cirrussearch backed mediawiki api endpoint
 

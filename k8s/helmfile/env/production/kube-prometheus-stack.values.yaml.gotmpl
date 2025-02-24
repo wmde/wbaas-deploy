@@ -12,7 +12,7 @@ prometheus:
     image:
       registry: gke.gcr.io
       repository: prometheus-engine/prometheus
-      tag: v2.35.0-gmp.2-gke.0
+      tag: v2.41.0-gmp.9-gke.0
 
 alertmanager:
   enabled: false
@@ -27,7 +27,10 @@ grafana:
       cpu: 100m
       memory: 128Mi
 
-# turning off all k8s component scraping as we are not
+kube-state-metrics:
+  namespacesDenylist: 'qs-jobs'
+
+# turning off most k8s component scraping as we are not
 # interested right now
 kubeScheduler:
   enabled: false
@@ -46,8 +49,6 @@ kubeEtcd:
 kubeProxy:
   enabled: false
 kubeStateMetrics:
-  enabled: false
+  enabled: true
 nodeExporter:
-  enabled: false
-kubeStateMetrics:
   enabled: false

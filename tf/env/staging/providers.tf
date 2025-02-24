@@ -1,22 +1,22 @@
 provider "google" {
-  project     = "wikibase-cloud"
-  region      = "europe-west3"
-  zone        = "europe-west3-a"
+  project = "wikibase-cloud"
+  region  = local.region
+  zone    = local.zone
 }
 
 terraform {
   required_providers {
     kubernetes = {
-      source = "hashicorp/kubernetes"
+      source  = "hashicorp/kubernetes"
       version = "2.5.0"
     }
     mailgun = {
-      source = "wgebis/mailgun"
+      source  = "wgebis/mailgun"
       version = "0.6.1"
     }
     google = {
-      source = "hashicorp/google"
-      version = "4.53.1"
+      source  = "hashicorp/google"
+      version = "6.17.0"
     }
   }
 }
@@ -27,7 +27,8 @@ data "google_client_config" "wbaas-2" {
 
 # Defer reading the cluster data until the GKE cluster exists.
 data "google_container_cluster" "wbaas-2" {
-  name = local.staging_cluster_name
+  name     = local.staging_cluster_name
+  location = local.zone
 }
 
 provider "kubernetes" {
@@ -40,5 +41,5 @@ provider "kubernetes" {
 }
 
 provider "mailgun" {
-  api_key = "${var.mailgun_api_key}"
-} 
+  api_key = var.mailgun_api_key
+}

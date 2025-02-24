@@ -1,7 +1,7 @@
 locals {
-  sql_backup_bucket_service_admins = ["serviceAccount:${var.static_bucket_writer_account}"]
-  static_backup_bucket_service_admins = [ "serviceAccount:${local.transfer_service_id}" ]
-  user_admins = [for i, username in var.user_object_admins : "user:${username}"]
+  sql_backup_bucket_service_admins    = ["serviceAccount:${var.static_bucket_writer_account}"]
+  static_backup_bucket_service_admins = ["serviceAccount:${local.transfer_service_id}"]
+  user_admins                         = [for i, username in var.user_object_admins : "user:${username}"]
 }
 
 
@@ -26,12 +26,12 @@ resource "google_storage_bucket" "sql-backup" {
 # SQL Backup bucket IAM Policy
 data "google_iam_policy" "sql-backup-policy" {
   binding {
-    role = "roles/storage.objectAdmin"
+    role    = "roles/storage.objectAdmin"
     members = local.sql_backup_bucket_service_admins
   }
 
   binding {
-    role = "roles/storage.admin"
+    role    = "roles/storage.admin"
     members = local.user_admins
   }
 }
@@ -69,12 +69,12 @@ resource "google_storage_bucket" "static-backup" {
 # Backup bucket IAM Policy
 data "google_iam_policy" "transfer_job" {
   binding {
-      role = "roles/storage.objectAdmin"
-      members = local.static_backup_bucket_service_admins
-    }
+    role    = "roles/storage.objectAdmin"
+    members = local.static_backup_bucket_service_admins
+  }
 
   binding {
-    role = "roles/storage.admin"
+    role    = "roles/storage.admin"
     members = local.user_admins
   }
 }
@@ -91,7 +91,7 @@ resource "google_storage_transfer_job" "static-bucket-nightly-backup" {
   transfer_spec {
     gcs_data_source {
       bucket_name = local.gcs_api_static_bucket_name
-      path  = "sites/"
+      path        = "sites/"
     }
     gcs_data_sink {
       bucket_name = local.gcs_api_static_bucket_backup_name
@@ -135,6 +135,26 @@ resource "google_storage_bucket_access_control" "static-writer" {
   bucket = google_storage_bucket.static.name
   role   = "WRITER"
   entity = "user-${var.static_bucket_writer_account}"
+}
+
+resource "google_storage_bucket_iam_member" "public-assets-upload" {
+  role   = "roles/storage.admin"
+  member = "serviceAccount:${var.static_bucket_writer_account}"
+  bucket = google_storage_bucket.static.name
+}
+
+resource "google_storage_hmac_key" "public-assets-upload-key" {
+  service_account_email = var.static_bucket_writer_account
+}
+
+resource "kubernetes_secret" "gcs-hmac-key" {
+  metadata {
+    name = "public-assets-hmac-key"
+  }
+  data = {
+    "access-key" = google_storage_hmac_key.public-assets-upload-key.access_id
+    "secret-key" = google_storage_hmac_key.public-assets-upload-key.secret
+  }
 }
 
 resource "kubernetes_config_map" "storage-bucket" {

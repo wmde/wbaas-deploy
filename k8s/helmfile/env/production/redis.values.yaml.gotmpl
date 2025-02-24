@@ -21,12 +21,11 @@ master:
     storageClass: premium-rwo
   resources:
     requests:
-      cpu: 100m
-      memory: 125Mi
+      cpu: 500m
+      memory: 500Mi
     # Internal limit is 75MB, this for now just stops runaway redis..
     limits:
-      cpu: 200m
-      memory: 150Mi
+      memory: 500Mi
 
 replica:
   replicaCount: 1
@@ -40,11 +39,10 @@ replica:
     storageClass: premium-rwo
   resources:
     requests:
-      cpu: 40m
-      memory: 125Mi
+      cpu: 500m
+      memory: 250Mi
     limits:
-      cpu: 80m
-      memory: 150Mi
+      memory: 250Mi
 
 commonConfiguration: |
   # Enable AOF https://redis.io/topics/persistence#append-only-file

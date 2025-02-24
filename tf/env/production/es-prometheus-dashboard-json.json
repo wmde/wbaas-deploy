@@ -1,0 +1,346 @@
+{
+  "name": "projects/658442145969/dashboards/e771ea98-5c12-4b10-9c85-47d4abceaec7",
+  "displayName": "Elasticsearch Prometheus Overview – Cluster filtering hardcoded",
+  "etag": "5ce2ea3f4c83058d1e8042e7d4c617bf",
+  "mosaicLayout": {
+    "columns": 12,
+    "tiles": [
+      {
+        "yPos": 2,
+        "width": 6,
+        "height": 3,
+        "widget": {
+          "title": "Cluster Health",
+          "timeSeriesTable": {
+            "dataSets": [
+              {
+                "timeSeriesQuery": {
+                  "prometheusQuery": "elasticsearch_cluster_health_status{${Cluster},${Location},${Namespace}}"
+                }
+              }
+            ],
+            "metricVisualization": "NUMBER"
+          }
+        }
+      },
+      {
+        "width": 2,
+        "height": 2,
+        "widget": {
+          "title": "Tripped Breakers",
+          "scorecard": {
+            "timeSeriesQuery": {
+              "prometheusQuery": "sum(increase(elasticsearch_breakers_tripped{${Cluster},${Location},${Namespace}}[3600s]))"
+            },
+            "gaugeView": {
+              "upperBound": 15
+            },
+            "thresholds": [
+              {
+                "value": 10,
+                "color": "RED",
+                "direction": "ABOVE"
+              },
+              {
+                "value": 5,
+                "color": "YELLOW",
+                "direction": "ABOVE"
+              }
+            ]
+          }
+        }
+      },
+      {
+        "xPos": 2,
+        "width": 2,
+        "height": 2,
+        "widget": {
+          "title": "CPU Avg Usage %",
+          "scorecard": {
+            "timeSeriesQuery": {
+              "prometheusQuery": "sum (elasticsearch_process_cpu_percent{${Cluster},${Location},${Namespace}} ) / count (elasticsearch_process_cpu_percent{${Cluster},${Location},${Namespace}} )"
+            },
+            "gaugeView": {
+              "upperBound": 100
+            },
+            "thresholds": [
+              {
+                "value": 80,
+                "color": "RED",
+                "direction": "ABOVE"
+              },
+              {
+                "value": 50,
+                "color": "YELLOW",
+                "direction": "ABOVE"
+              }
+            ]
+          }
+        }
+      },
+      {
+        "xPos": 4,
+        "width": 2,
+        "height": 2,
+        "widget": {
+          "title": "JVM Memory Avg Usage %",
+          "scorecard": {
+            "timeSeriesQuery": {
+              "prometheusQuery": "avg(elasticsearch_jvm_memory_used_bytes{${Cluster},${Location},${Namespace}} / elasticsearch_jvm_memory_max_bytes{${Cluster},${Location},${Namespace}} * 100)"
+            },
+            "gaugeView": {
+              "upperBound": 100
+            },
+            "thresholds": [
+              {
+                "value": 80,
+                "color": "RED",
+                "direction": "ABOVE"
+              },
+              {
+                "value": 50,
+                "color": "YELLOW",
+                "direction": "ABOVE"
+              }
+            ]
+          }
+        }
+      },
+      {
+        "xPos": 6,
+        "width": 2,
+        "height": 2,
+        "widget": {
+          "title": "ES Nodes",
+          "scorecard": {
+            "timeSeriesQuery": {
+              "prometheusQuery": "sum(elasticsearch_cluster_health_number_of_nodes{${Cluster},${Location},${Namespace}})"
+            }
+          }
+        }
+      },
+      {
+        "xPos": 8,
+        "width": 2,
+        "height": 2,
+        "widget": {
+          "title": "ES Data Nodes",
+          "scorecard": {
+            "timeSeriesQuery": {
+              "prometheusQuery": "sum(elasticsearch_cluster_health_number_of_data_nodes{${Cluster},${Location},${Namespace}})"
+            }
+          }
+        }
+      },
+      {
+        "xPos": 10,
+        "width": 2,
+        "height": 2,
+        "widget": {
+          "title": "Pending Tasks",
+          "scorecard": {
+            "timeSeriesQuery": {
+              "prometheusQuery": "sum(elasticsearch_cluster_health_number_of_pending_tasks{${Cluster},${Location},${Namespace}})"
+            }
+          }
+        }
+      },
+      {
+        "xPos": 6,
+        "yPos": 2,
+        "width": 6,
+        "height": 3,
+        "widget": {
+          "title": "Open file descriptors",
+          "timeSeriesTable": {
+            "dataSets": [
+              {
+                "timeSeriesQuery": {
+                  "prometheusQuery": "elasticsearch_process_open_files_count{${Cluster},${Location},${Namespace}}"
+                }
+              }
+            ],
+            "metricVisualization": "NUMBER"
+          }
+        }
+      },
+      {
+        "yPos": 5,
+        "width": 4,
+        "height": 4,
+        "widget": {
+          "title": "OS Load Average over 15min",
+          "xyChart": {
+            "dataSets": [
+              {
+                "timeSeriesQuery": {
+                  "prometheusQuery": "elasticsearch_os_load15{${Cluster},${Location},${Namespace}}"
+                },
+                "plotType": "LINE",
+                "targetAxis": "Y1"
+              }
+            ],
+            "timeshiftDuration": "0s",
+            "yAxis": {
+              "scale": "LINEAR"
+            }
+          }
+        }
+      },
+      {
+        "xPos": 4,
+        "yPos": 5,
+        "width": 4,
+        "height": 4,
+        "widget": {
+          "title": "CPU Usage % ",
+          "xyChart": {
+            "dataSets": [
+              {
+                "timeSeriesQuery": {
+                  "prometheusQuery": "elasticsearch_process_cpu_percent{${Cluster},${Location},${Namespace}}"
+                },
+                "plotType": "LINE",
+                "targetAxis": "Y1"
+              }
+            ],
+            "timeshiftDuration": "0s",
+            "yAxis": {
+              "scale": "LINEAR"
+            }
+          }
+        }
+      },
+      {
+        "xPos": 8,
+        "yPos": 5,
+        "width": 4,
+        "height": 4,
+        "widget": {
+          "title": "JVM Memory Pool Peak Used Bytes",
+          "xyChart": {
+            "dataSets": [
+              {
+                "timeSeriesQuery": {
+                  "prometheusQuery": "elasticsearch_jvm_memory_pool_peak_used_bytes{${Cluster},${Location},${Namespace}}"
+                },
+                "plotType": "LINE",
+                "targetAxis": "Y1"
+              },
+              {
+                "timeSeriesQuery": {
+                  "prometheusQuery": "elasticsearch_jvm_memory_max_bytes{${Cluster},${Location},${Namespace}}"
+                },
+                "plotType": "LINE",
+                "targetAxis": "Y1"
+              }
+            ],
+            "timeshiftDuration": "0s",
+            "yAxis": {
+              "scale": "LINEAR"
+            }
+          }
+        }
+      },
+      {
+        "yPos": 9,
+        "width": 4,
+        "height": 4,
+        "widget": {
+          "title": "Disk Usage %",
+          "xyChart": {
+            "dataSets": [
+              {
+                "timeSeriesQuery": {
+                  "prometheusQuery": "100 * (1-(elasticsearch_filesystem_data_available_bytes{${Cluster},${Location},${Namespace}}/elasticsearch_filesystem_data_size_bytes{${Cluster},${Location},${Namespace}}))"
+                },
+                "plotType": "LINE",
+                "targetAxis": "Y1"
+              }
+            ],
+            "timeshiftDuration": "0s",
+            "yAxis": {
+              "scale": "LINEAR"
+            }
+          }
+        }
+      },
+      {
+        "xPos": 4,
+        "yPos": 9,
+        "width": 4,
+        "height": 4,
+        "widget": {
+          "title": "Network Usage",
+          "xyChart": {
+            "dataSets": [
+              {
+                "timeSeriesQuery": {
+                  "prometheusQuery": "irate(elasticsearch_transport_rx_size_bytes_total{${Cluster},${Location},${Namespace}}[5m])"
+                },
+                "plotType": "LINE",
+                "targetAxis": "Y1"
+              },
+              {
+                "timeSeriesQuery": {
+                  "prometheusQuery": "irate(elasticsearch_transport_tx_size_bytes_total{${Cluster},${Location},${Namespace}}[5m])"
+                },
+                "plotType": "LINE",
+                "targetAxis": "Y1"
+              }
+            ],
+            "timeshiftDuration": "0s",
+            "yAxis": {
+              "scale": "LINEAR"
+            }
+          }
+        }
+      },
+      {
+        "xPos": 8,
+        "yPos": 9,
+        "width": 4,
+        "height": 4,
+        "widget": {
+          "title": "Thread Pool Operations Rejected",
+          "xyChart": {
+            "dataSets": [
+              {
+                "timeSeriesQuery": {
+                  "prometheusQuery": "irate(elasticsearch_thread_pool_rejected_count{${Cluster},${Location},${Namespace}}[5m])"
+                },
+                "plotType": "LINE",
+                "targetAxis": "Y1"
+              }
+            ],
+            "timeshiftDuration": "0s",
+            "yAxis": {
+              "scale": "LINEAR"
+            }
+          }
+        }
+      }
+    ]
+  },
+  "dashboardFilters": [
+    {
+      "labelKey": "cluster",
+      "templateVariable": "Cluster",
+      "stringValue": "wbaas-3",
+      "filterType": "RESOURCE_LABEL",
+      "valueType": "STRING"
+    },
+    {
+      "labelKey": "location",
+      "templateVariable": "Location",
+      "filterType": "RESOURCE_LABEL",
+      "valueType": "STRING"
+    },
+    {
+      "labelKey": "namespace",
+      "templateVariable": "Namespace",
+      "filterType": "RESOURCE_LABEL",
+      "valueType": "STRING"
+    }
+  ]
+}

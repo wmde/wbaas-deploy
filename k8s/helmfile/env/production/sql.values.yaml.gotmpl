@@ -7,11 +7,11 @@ auth:
 primary:
   resources:
     requests:
-      cpu: 40m
-      memory: 4000Mi
+      cpu: '2'
+      memory: 8Gi
     limits:
-      cpu: 750m
-      memory: 4300Mi
+      cpu: null
+      memory: 8Gi
   persistence:
     enabled: true
     size: {{ .Values.services.sql.storageSize | quote }}
@@ -40,11 +40,15 @@ primary:
     # 8MB, default & bitnami was 16MB (16777216)
     tmp_table_size=8388608
     # 80, default & bitnami was 151
-    max_connections=80
+    max_connections=240
     # 7 days, default & bitnami is 0 (keep forever.)
     expire_logs_days=7
     # 100MB, default & bitnami was 1GB (1073741824)
     max_binlog_size=107374182
+
+    # T373448
+    table_open_cache=5120
+    table_definition_cache=5120
 
     [mysql]
     # https://forums.mysql.com/read.php?103,189835,192421#msg-192421
@@ -62,13 +66,16 @@ primary:
 
 secondary:
   replicaCount: 1
+  service:
+    annotations:
+      tailscale.com/expose: "true"
   resources:
     requests:
-      cpu: 100m
-      memory: 4000Mi
+      cpu: '2'
+      memory: 8Gi
     limits:
-      cpu: 750m
-      memory: 4300Mi
+      cpu: null
+      memory: 8Gi
   readinessProbe:
     enabled: true
   persistence:
@@ -97,7 +104,7 @@ secondary:
     # 8MB, default & bitnami was 16MB (16777216)
     tmp_table_size=8388608
     # 80, default & bitnami was 151
-    max_connections=80
+    max_connections=240
     # 7 days, default & bitnami is 0 (keep forever.)
     expire_logs_days=7
     # 100MB, default & bitnami was 1GB (1073741824)

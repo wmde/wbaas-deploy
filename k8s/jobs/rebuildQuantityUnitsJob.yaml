@@ -2,7 +2,9 @@ apiVersion: batch/v1
 kind: Job
 metadata:
   generateName: rebuild-quantity-units-
+  namespace: adhoc-jobs
 spec:
+  ttlSecondsAfterFinished: 604800
   template:
     metadata:
       name: rebuild-quantity-units
