@@ -1,0 +1,3 @@
+[submodule "ssl-test"]
+	path = ssl-test
+	url = git@github.com:deer-wmde/ssl-test.git

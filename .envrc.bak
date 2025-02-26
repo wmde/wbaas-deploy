@@ -1,0 +1,5 @@
+export MINIKUBE_PROFILE=minikube-wbaas
+export MINIKUBE_MEMORY=max
+export MINIKUBE_CPUS=max
+export MINIKUBE_IN_STYLE=false
+
