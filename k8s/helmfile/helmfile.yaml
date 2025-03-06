@@ -81,6 +81,7 @@ releases:
     chart: wbstack/wikibase-cloud-clusterissuers
     version: 0.2.1
     values:
+      - environment: {{ .Environment.Name }}
       - email: {{ .Values.external.letsencrypt.email }}
       - gceProject: {{ .Values.gceProject }}
       # TODO this chart needs certificates for some reason, it probably shouldn't
