@@ -1,15 +1,15 @@
 certificates:
   - name: wikibase-local-tls
-    commonName: wbaas.localhost
+    commonName: wbaas.dev
     dnsNames:
-      - '*.wbaas.localhost'
-      - 'wbaas.localhost'
+      - '*.wbaas.dev'
+      - 'wbaas.dev'
     secretName: wikibase-local-tls
     issuerRef: wikibase-local-issuer
   - name: argocd-server-tls
     namespace: argocd
-    commonName: argo.wbaas.localhost
+    commonName: argo.wbaas.dev
     dnsNames:
-      - 'argo.wbaas.localhost'
+      - 'argo.wbaas.dev'
     secretName: argocd-server-tls
     issuerRef: wikibase-local-issuer

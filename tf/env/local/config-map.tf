@@ -1,7 +1,7 @@
 module "wbaas-config" {
   source = "./../../modules/config-map/wbaas-ui-config"
 
-  cname_record = "sites-1.dyna.wbaas.localhost."
+  cname_record = "sites-1.dyna.wbaas.dev."
 }
 
 resource "kubernetes_config_map" "storage-bucket" {
