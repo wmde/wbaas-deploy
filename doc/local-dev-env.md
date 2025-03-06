@@ -178,7 +178,10 @@ minikube does not provision LoadBalancer service IP addresses as part of normal 
 make minikube-tunnel
 ```
 
-You should now be able to access the ingress via http://www.wbaas.localhost. Most modern browsers will automatically resolve *.localhost to 127.0.0.1. If not, you'll need to edit your hosts file.
+You should now be able to access the ingress via http://www.wbaas.dev/ (*.wbaas.dev should point to 127.0.0.1, otherwise you'll need to edit your hosts file).
+
+> [!NOTE]
+> Previously `*.wbaas.localhost` was used for this purpose
 
 More detailed information on the load balancer can be found in [minikube-load-balancer.md](minikube-load-balancer.md).
 
@@ -186,7 +189,7 @@ More detailed information on the load balancer can be found in [minikube-load-ba
 
 For the local setup, [Mailhog](https://github.com/mailhog/MailHog) is used to capture outbound emails.
 
-You can view those emails by going to http://mailhog.wbaas.localhost/
+You can view those emails by going to http://mailhog.wbaas.dev/
 
 ## Mediawiki debugging 
 ### logging
@@ -215,10 +218,10 @@ Xdebug can be enabled in your minikube cluster if you use mediawiki image with `
 - You can use Xdebug on your VSCode IDE by following these steps:
   * Follow this tutorial in the section "Debug PHP using Xdebug and VS Code" https://php.tutorials24x7.com/blog/how-to-debug-php-using-xdebug-and-visual-studio-code-on-ubuntu
 
-## Create an account on wbaas.localhost
+## Create an account on wbaas.dev
 To use the local wbaas instance you have just setup, you will need to create an invitation code via the api which is needed when creating an account. Follow the [instructions](https://github.com/wbstack/api/blob/main/docs/invitation-codes.md) documented in the wbaas/api repo.
 
-After creating the invitation code, you can visit http://wbaas.localhost/create-account (or click the create account link in the login form) and create an account. All outbound email is captured by Mailhog ([see above](#mailhog--local-emails)) so you can use a made up email address (e.g. `test@example.com`). Verify your email address via the "Account Creation Notificaiton" email captured by Mailhog.
+After creating the invitation code, you can visit http://wbaas.dev/create-account (or click the create account link in the login form) and create an account. All outbound email is captured by Mailhog ([see above](#mailhog--local-emails)) so you can use a made up email address (e.g. `test@example.com`). Verify your email address via the "Account Creation Notificaiton" email captured by Mailhog.
 
 ## [Optional] setup bash completion
 Here is how to get tab completion working for common commands
@@ -275,7 +278,7 @@ Error: plugin "diff" exited with error
 
 it is likely because `make diff-local` uses the `--skip-deps` option when executing `helmfile diff` which skips downloading chart dependencies. To force the fetching of dependencies run `make helmfile-deps` before `make diff-local`. 
 
-### **Why can't I access [wbaas.localhost](http://www.wbaas.localhost)?**
+### **Why can't I access [wbaas.dev](http://www.wbaas.dev)?**
 Here are a few things to try:
   - make sure minikube is running `make minikube-start`
   - make sure the minikube tunnel is running `make minikube-tunnel`

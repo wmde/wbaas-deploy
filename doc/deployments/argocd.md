@@ -52,7 +52,7 @@ This GitHub workflow runs the script to check if the checked-in values files are
 1. Enable admin access by flipping `admin.enabled` to `true` in our values file (or manually in the ConfigMap `argocd-cm`)
     - this is enabled for local clusters by default
 2. Access the web interface and log in (username `admin`)
-    - a) local - http://argo.wbaas.localhost/
+    - a) local - http://argo.wbaas.dev/
     - b) staging/production - https://localhost:8080/
       - Forward port `8080` of the deployment `argo-cd-base-argocd-server`
 
