@@ -1,11 +1,11 @@
 variable "coredns-custom-config" {
   type    = string
   default = <<EOF
-wbaas.localhost:53 {
+wbaas.dev:53 {
   log
   errors
   template IN ANY {
-    match "^(.*)wbaas\.localhost\.$"
+    match "^(.*)wbaas\.dev$"
     answer "{{.Name}} 60 IN CNAME ingress-nginx-controller.kube-system.svc.cluster.local"
   }
 }
