@@ -3,7 +3,7 @@ gceProject: 'something'
 gcsApiStaticBucket: 'something'
 
 # TODO move this (and many other things) out of private file...
-uiHostName: www.wbaas.localhost
+uiHostName: www.wbaas.dev
 tlsSecret: wikibase-local-tls
 ingressNameSuffix: wikibase-local
 
@@ -14,13 +14,13 @@ services:
 
   app:
     mailer: smtp
-    url: https://www.wbaas.localhost
-    apiUrl: https://api.wbaas.localhost
+    url: https://www.wbaas.dev
+    apiUrl: https://api.wbaas.dev
     ingressHosts:
-      - host: api.wbaas.localhost
+      - host: api.wbaas.dev
         paths:
           - /()(.*)
-      - host: www.wbaas.localhost
+      - host: www.wbaas.dev
         paths:
           - /api(/|$)(.*)
 

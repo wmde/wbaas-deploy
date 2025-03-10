@@ -3,7 +3,7 @@ grafana:
   ingress:
     enabled: true
     hosts:
-      - grafana.wbaas.localhost
+      - grafana.wbaas.dev
     paths:
       - path: /
         pathType: Prefix
@@ -27,7 +27,7 @@ prometheus:
   ingress:
     enabled: true
     hosts:
-      - prometheus.wbaas.localhost
+      - prometheus.wbaas.dev
     paths:
       - /
     annotations:
