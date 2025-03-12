@@ -5,21 +5,12 @@ minikube does not provision LoadBalancer service IP addresses as part of normal 
 minikube --profile minikube-wbaas tunnel
 ```
 
-Running the tunnel on linux might require you to forward the traffic to the cluster IP of the nginx-ingress-controller. This can be done by running the following command.
+Running the tunnel on linux might require you to forward the traffic to the cluster IP of the nginx-ingress-controller. This can be done by running the script `/bin/minikube-tunnel`
+You should then be able to access the ingress (currently on port 443), and localhost services such as www.wbaas.dev, mailhog.wbaas.dev, etc.
+`wbaas.dev` is registered by WMDE and is set up to resolve to `127.0.0.1`. If not, you'll need to edit your hosts file.
 
-```sh
-EXTERNAL_IP=$(minikube --profile minikube-wbaas kubectl -- -n kube-system get service nginx-ingress-controller -o template='{{.spec.clusterIP}}')
-sudo socat tcp-listen:80,reuseaddr,fork tcp:"$EXTERNAL_IP":80
-```
+> [!NOTE]
+> Previously `*.wbaas.localhost` was used for this purpose
 
-You should then be able to access the ingress (currently on port 80), and localhost services such as http://www.wbaas.localhost/.
-Most modern browsers will automatically resolve *.localhost to 127.0.0.1.
-If not, you'll need to edit your hosts file.
-
-In order to skip out this LoadBalancer stuff you can get minikube to expose the ingress directly on a port. But this will expose things on a different port and you may run into issues.
-
-```sh
-minikube --profile minikube-wbaas service -n kube-system nginx-ingress-default-backend
-```
-
-Note: There is more to making things work locally than this and we either need to setup dynamic DNS, or we need to be editing our hosts file!
+> [!NOTE]
+> In case the setup can be modified to use a dedicated static ip for the local minikube cluster, wbaas.dev could point to that one instaed of 127.0.0.1 and then the minikube ingress addon can be used: https://kubernetes.io/docs/tasks/access-application-cluster/ingress-minikube/

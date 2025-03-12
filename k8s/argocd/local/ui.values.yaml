@@ -7,12 +7,12 @@ ingress:
     nginx.ingress.kubernetes.io/use-regex: "true"
   enabled: true
   hosts:
-    - host: www.wbaas.localhost
+    - host: www.wbaas.dev
       paths:
         - /*
   tls:
     - hosts:
-        - www.wbaas.localhost
+        - www.wbaas.dev
       secretName: wikibase-local-tls
 podLabels:
   sidecar.istio.io/inject: "true"
@@ -24,9 +24,9 @@ resources:
     cpu: 1m
     memory: 6Mi
 ui:
-  apiUrl: https://api.wbaas.localhost
+  apiUrl: https://api.wbaas.dev
   cnameConfigMapKey: cname_record
   configMapName: wbaas-ui-config
   recaptchaSitekeySecretKey: site_key
   recaptchaSitekeySecretName: recaptcha-v3-secrets
-  subdomainSuffix: .wbaas.localhost
+  subdomainSuffix: .wbaas.dev

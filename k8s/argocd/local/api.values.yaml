@@ -55,7 +55,7 @@ app:
     errorReportingEnabled: true
     loggingEnabled: false
     tracingEnabled: false
-  url: https://www.wbaas.localhost
+  url: https://www.wbaas.dev
 image:
   tag: 10x.18.6
 ingress:
@@ -65,10 +65,10 @@ ingress:
     nginx.ingress.kubernetes.io/use-regex: "true"
   enabled: true
   hosts:
-    - host: api.wbaas.localhost
+    - host: api.wbaas.dev
       paths:
         - /()(.*)
-    - host: www.wbaas.localhost
+    - host: www.wbaas.dev
       paths:
         - /api(/|$)(.*)
   tls: null
@@ -139,7 +139,7 @@ storage:
   endpoint: http://minio.default.svc.cluster.local:9000
   secretKeySecretKey: rootPassword
   secretKeySecretName: minio-credentials
-  url: http://minio.wbaas.localhost/api-assets
+  url: http://minio.wbaas.dev/api-assets
 trustedProxy:
   proxies:
     - '*'
@@ -157,10 +157,10 @@ wbstack:
   qsBatchPendingTimeout: PT300S
   signupThrottlingLimit: 20
   signupThrottlingRange: PT24H
-  subdomainSuffix: .wbaas.localhost
+  subdomainSuffix: .wbaas.dev
   summaryCreationRateRanges:
     - PT24H
     - P30D
-  uiurl: https://wbaas.localhost
+  uiurl: https://wbaas.dev
   wikiDbProvisionVersion: mw1.39-wbs1
   wikiDbUseVersion: mw1.39-wbs1

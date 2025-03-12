@@ -19,17 +19,17 @@ fi
 USER_MAIL="${USER_MAIL:-jane.doe@wikimedia.de}"
 USER_PASS="${USER_PASS:-wikiwikiwiki}"
 USER_WIKI_NAME="${USER_WIKI_NAME:-Local Test Wiki}"
-USER_WIKI_DOMAIN="${USER_WIKI_DOMAIN:-local-test-wiki.wbaas.localhost}"
+USER_WIKI_DOMAIN="${USER_WIKI_DOMAIN:-local-test-wiki.wbaas.dev}"
 USER_WIKI_ADMIN="${USER_WIKI_ADMIN:-Admin}"
 
-TEST_RESPONSE=$(curl -s http://api.wbaas.localhost/healthz)
+TEST_RESPONSE=$(curl -s http://api.wbaas.dev/healthz)
 if [[ "${TEST_RESPONSE}" != "It's Alive" ]]; then
     echo "Error: local api is not available. Is the minikube tunnel open? ('make minikube-tunnel')"
     exit 2
 fi
 
 LOGIN_JSON_DATA=$(jo email="${USER_MAIL}" password="${USER_PASS}")
-LOGIN_RESPONSE=$(curl -s 'http://api.wbaas.localhost/auth/login' \
+LOGIN_RESPONSE=$(curl -s 'http://api.wbaas.dev/auth/login' \
     -X POST \
     -H 'Content-Type: application/json' \
     -H 'Accept: application/json' \
@@ -39,7 +39,7 @@ LOGIN_TOKEN=$(echo "${LOGIN_RESPONSE}" | jq -r '.token')
 [[ -n "$LOGIN_TOKEN" ]] || { echo "error: login failed." 1>&2; exit 1; }
 
 CREATE_WIKI_JSON_DATA=$(jo domain="${USER_WIKI_DOMAIN}" sitename="${USER_WIKI_NAME}" username="${USER_WIKI_ADMIN}")
-CREATE_WIKI_RESPONSE=$(curl -s 'http://api.wbaas.localhost/wiki/create' \
+CREATE_WIKI_RESPONSE=$(curl -s 'http://api.wbaas.dev/wiki/create' \
     -X POST \
     -H 'Content-Type: application/json' \
     -H 'Accept: application/json' \
