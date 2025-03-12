@@ -9,10 +9,10 @@ resource "google_dns_record_set" "local-NS" {
   managed_zone = google_dns_managed_zone.local.name
   name         = google_dns_managed_zone.local.dns_name
   rrdatas = [
-    "ns-cloud-d1.googledomains.com.",
-    "ns-cloud-d2.googledomains.com.",
-    "ns-cloud-d3.googledomains.com.",
-    "ns-cloud-d4.googledomains.com.",
+    "ns-cloud-a1.googledomains.com.",
+    "ns-cloud-a2.googledomains.com.",
+    "ns-cloud-a3.googledomains.com.",
+    "ns-cloud-a4.googledomains.com.",
   ]
   ttl  = 21600
   type = "NS"
@@ -22,7 +22,7 @@ resource "google_dns_record_set" "local-SOA" {
   managed_zone = google_dns_managed_zone.local.name
   name         = google_dns_managed_zone.local.dns_name
   rrdatas = [
-    "ns-cloud-d1.googledomains.com. cloud-dns-hostmaster.google.com. 3 21600 3600 259200 300",
+    "ns-cloud-a1.googledomains.com. cloud-dns-hostmaster.google.com. 1 21600 3600 259200 300",
   ]
   ttl  = 21600
   type = "SOA"
@@ -38,12 +38,12 @@ resource "google_dns_record_set" "local-A" {
   type = "A"
 }
 
-resource "google_dns_record_set" "local-wildcard-A" {
+resource "google_dns_record_set" "local-wildcard-CNAME" {
   managed_zone = google_dns_managed_zone.local.name
   name         = "*.wbaas.dev."
   rrdatas = [
-    "127.0.0.1"
+    google_dns_managed_zone.local.dns_name
   ]
   ttl  = 300
-  type = "A"
+  type = "CNAME"
 }
