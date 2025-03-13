@@ -3,3 +3,6 @@ image:
 
 platform:
   mediawikiBackendHost: mediawiki-139-app-backend.default.svc.cluster.local
+
+extraCert:
+  secretName: {{ .Values.tlsSecret }}
