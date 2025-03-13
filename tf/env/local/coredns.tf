@@ -5,7 +5,7 @@ wbaas.dev:53 {
   log
   errors
   template IN ANY {
-    match "^(.*)wbaas\.dev$"
+    match "^(.*)wbaas\.dev"
     answer "{{.Name}} 60 IN CNAME ingress-nginx-controller.kube-system.svc.cluster.local"
   }
 }
