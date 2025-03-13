@@ -180,19 +180,19 @@ releases:
   - name: tool-cradle
     namespace: default
     chart: wbstack/tool-cradle
-    version: 0.1.2
+    version: 0.2.0
     <<: *default_release
 
   - name: tool-widar
     namespace: default
     chart: wbstack/tool-widar
-    version: 0.2.0
+    version: 0.3.0
     <<: *default_release
 
   - name: tool-quickstatements
     namespace: default
     chart: wbstack/tool-quickstatements
-    version: 0.2.3
+    version: 0.3.0
     <<: *default_release
 
   - name: wbaas-backup
