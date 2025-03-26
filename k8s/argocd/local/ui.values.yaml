@@ -1,5 +1,5 @@
 image:
-  tag: sha-f87cfec
+  tag: sha-645cd82
 ingress:
   annotations:
     kubernetes.io/ingress.class: nginx
