@@ -114,7 +114,7 @@ releases:
   - name: ingress-nginx
     namespace: kube-system
     chart: ingress-nginx/ingress-nginx
-    version: 4.12.1
+    version: 4.11.5
     # TODO: future releases of `helmfile` will bring an `inherit` feature
     # that can be used instead of YAML anchors. When upgrading helmfile, check
     # if we can use this feature here instead.
