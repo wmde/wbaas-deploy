@@ -34,7 +34,7 @@ resource "google_dns_record_set" "local-A" {
   rrdatas = [
     "127.0.0.1"
   ]
-  ttl  = 300
+  ttl  = 21600
   type = "A"
 }
 
@@ -44,6 +44,6 @@ resource "google_dns_record_set" "local-wildcard-CNAME" {
   rrdatas = [
     google_dns_managed_zone.local.dns_name
   ]
-  ttl  = 300
+  ttl  = 21600
   type = "CNAME"
 }
