@@ -19,7 +19,8 @@ data-sql-mariadb-primary-0     Bound    pvc-6d4cd5ace27f6316                    
 data-sql-mariadb-secondary-0   Bound    pvc-e156991c-0d7f-4a26-9414-316482a45c91   65Gi       RWO            premium-rwo           <unset>                 685d
 ```
 
-> [!TIP] In order to minimize potential downtime, do the following steps for mariadb-secondary storage first, and then the primary after that
+> [!TIP]
+> In order to minimize potential downtime, do the following steps for mariadb-secondary storage first, and then the primary after that
 
 1. Monitor Events via `kubectl events data-sql-mariadb-primary-0 --watch`
 2. Patch the individual PVC with new storage size
@@ -32,8 +33,6 @@ data-sql-mariadb-secondary-0   Bound    pvc-e156991c-0d7f-4a26-9414-316482a45c91
 0s (x3 over 10m)        Normal    FileSystemResizeSuccessful   Pod/sql-mariadb-primary-0                            MountVolume.NodeExpandVolume succeeded for volume "pvc-6d4cd5ace27f6316" gke-wbaas-2-compute-pool-2-ee90b82c-9d7g
 0s (x3 over 10m)        Normal    FileSystemResizeSuccessful   PersistentVolumeClaim/data-sql-mariadb-primary-0     MountVolume.NodeExpandVolume succeeded for volume "pvc-6d4cd5ace27f6316" gke-wbaas-2-compute-pool-2-ee90b82c-9d7g
 ```
-
-## Footnotes
 
 [^1]: A small increase in storage claim like 1GB is sufficient for testing
 
