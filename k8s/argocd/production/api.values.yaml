@@ -112,7 +112,7 @@ resources:
     limits:
       memory: 1024Mi
     requests:
-      cpu: 500m
+      cpu: 1m
       memory: 512Mi
   scheduler:
     limits:
