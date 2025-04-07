@@ -19,11 +19,12 @@ data-sql-mariadb-primary-0     Bound    pvc-6d4cd5ace27f6316                    
 data-sql-mariadb-secondary-0   Bound    pvc-e156991c-0d7f-4a26-9414-316482a45c91   65Gi       RWO            premium-rwo           <unset>                 685d
 ```
 
-- In order to minimize potential downtime, do the following steps for mariadb-secondary storage first, and then the primary after that
+> [!TIP] In order to minimize potential downtime, do the following steps for mariadb-secondary storage first, and then the primary after that
+
 1. Monitor Events via `kubectl events data-sql-mariadb-primary-0 --watch`
 2. Patch the individual PVC with new storage size
     - example: `kubectl patch pvc data-sql-mariadb-primary-0 -p '{"spec":{"resources":{"requests": {"storage":"66Gi"}}}}'`
-3. In the logs you should see the `FileSystemResizeSuccessful` event after a short time
+3. In the logs you should see the `FileSystemResizeSuccessful` event after a short time. Now the greater disk storage is available to the existing container.
 ```
 0s (x2 over 11m)        Warning   ExternalExpanding            PersistentVolumeClaim/data-sql-mariadb-primary-0     waiting for an external controller to expand this PVC
 0s (x2 over 11m)        Normal    Resizing                     PersistentVolumeClaim/data-sql-mariadb-primary-0     External resizer is resizing volume pvc-6d4cd5ace27f6316
