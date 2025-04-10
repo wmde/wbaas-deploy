@@ -8,10 +8,18 @@ dex:
 controller:
   resources:
    limits:
-     memory: 1024Mi
+     memory: 512Mi
    requests:
      cpu: 250m
-     memory: 1024Mi
+     memory: 256Mi
+
+notifications:
+  resources:
+    limits:
+      memory: 64Mi
+    requests:
+      cpu: 30m
+      memory: 32Mi
 
 configs:
   cm:
