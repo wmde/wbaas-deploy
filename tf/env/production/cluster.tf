@@ -58,39 +58,3 @@ resource "google_container_node_pool" "wbaas-3_compute-pool-3" {
     max_unavailable = 0
   }
 }
-
-resource "google_container_node_pool" "wbaas-3_compute-pool-4" {
-  cluster    = google_container_cluster.wbaas-3.id
-  name       = "compute-pool-4"
-  node_count = 3
-  node_locations = [
-    "europe-west3-a",
-  ]
-  node_config {
-    disk_size_gb = 64
-    disk_type    = "pd-ssd"
-    machine_type = "n4-highmem-8"
-    metadata = {
-      "disable-legacy-endpoints" = "true"
-    }
-    oauth_scopes = [
-      "https://www.googleapis.com/auth/devstorage.read_only",
-      "https://www.googleapis.com/auth/logging.write",
-      "https://www.googleapis.com/auth/monitoring",
-      "https://www.googleapis.com/auth/service.management.readonly",
-      "https://www.googleapis.com/auth/servicecontrol",
-      "https://www.googleapis.com/auth/trace.append",
-    ]
-    preemptible     = false
-    service_account = "default"
-    shielded_instance_config {
-      enable_integrity_monitoring = true
-      enable_secure_boot          = false
-    }
-    logging_variant = "DEFAULT"
-  }
-  upgrade_settings {
-    max_surge       = 1
-    max_unavailable = 0
-  }
-}
