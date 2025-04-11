@@ -7,8 +7,6 @@ controller:
     requests:
       cpu: 0.100
       memory: 150Mi
-    limits:
-      cpu: null
   config:
     http-snippet: >-
       limit_req_zone $host zone=limit_host:10m rate=15r/s;
