@@ -21,7 +21,7 @@ master:
     storageClass: premium-rwo
   resources:
     requests:
-      cpu: 500m
+      cpu: 20m
       memory: 500Mi
     # Internal limit is 75MB, this for now just stops runaway redis..
     limits:
@@ -39,7 +39,7 @@ replica:
     storageClass: premium-rwo
   resources:
     requests:
-      cpu: 500m
+      cpu: 13m
       memory: 250Mi
     limits:
       memory: 250Mi
