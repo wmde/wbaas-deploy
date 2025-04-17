@@ -25,10 +25,9 @@ master:
     subPath: ""
   resources:
     limits:
-      cpu: 500m
       memory: 500Mi
     requests:
-      cpu: 500m
+      cpu: 30m
       memory: 500Mi
 redisPort: 6379
 replica:
@@ -45,7 +44,7 @@ replica:
     limits:
       memory: 250Mi
     requests:
-      cpu: 500m
+      cpu: 60m
       memory: 250Mi
 sentinel:
   enabled: false
