@@ -264,6 +264,16 @@ Since we [introduced](https://phabricator.wikimedia.org/T378691) using HTTPS for
 
 Run `make test`. This only includes YAML linting for now.
 
+## Accessing the SQL database for debugging
+You can do this using `adminer` which is available at adminer.wbaas.dev.
+You can get the root password by using `bin/get-maria-root-password`.
+The username is `root`.
+You can select the primary server at `sql-mariadb-primary.default.svc.cluster.local`.
+
+`apidb` is the default name of the api database.
+
+You can also port forward sql to your local machine and use something like datagrip.
+
 ## FAQ / Troubleshooting
 ### **Why aren't my changes taking effect after a `tofu apply`?**
 Try restarting the pod(s) that are affected by the changed opentofu configuration by deleting them and waiting for k8s to recreate them (`kubectl delete pod <pod_name>`).
