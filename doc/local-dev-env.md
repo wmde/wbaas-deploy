@@ -185,6 +185,15 @@ You should now be able to access the ingress via http://www.wbaas.dev/ (*.wbaas.
 
 More detailed information on the load balancer can be found in [minikube-load-balancer.md](minikube-load-balancer.md).
 
+## Install local CA certificate
+Since we [introduced](https://phabricator.wikimedia.org/T378691) using HTTPS for local ingresses, you will get a scary warning when accessing local web interfaces. This can be mitigated by trusting the local CA certificate that is getting used for self-signing. The easiest way to do this is to save the local CA certificate in a file by accessing the secret it lives in (`wikibase-local-tls`) and importing it in your browser settings. There is also the possibility to import it into the trust store of your operating system, for example via the tool [mkcert](https://github.com/FiloSottile/mkcert), but you should be aware of the possible consequences this could have for the security of your machine.
+
+> [!TIP]
+> Running `make local-ca` will save the certificate to the file `wikibase-local-tls.crt`. It is highly recommended to delete the file again after importing it.
+
+> [!NOTE]
+> If you recreate your local cluster, you have to re-import the CA certificate, as a new one will get generated and used instead.
+
 ## Mailhog / Local emails
 
 For the local setup, [Mailhog](https://github.com/mailhog/MailHog) is used to capture outbound emails.
@@ -247,15 +256,6 @@ sudo wget https://raw.githubusercontent.com/roboll/helmfile/master/autocomplete/
 # skaffold
 sudo sh -c 'skaffold completion bash > /usr/share/bash-completion/completions/skaffold'
 ```
-
-## [Optional] install local CA certificate
-Since we [introduced](https://phabricator.wikimedia.org/T378691) using HTTPS for local ingresses, you will get a scary warning when accessing local web interfaces. This can be mitigated by trusting the local CA certificate that is getting used for self-signing. The easiest way to do this is to save the local CA certificate in a file by accessing the secret it lives in (`wikibase-local-tls`) and importing it in your browser settings. There is also the possibility to import it into the trust store of your operating system, for example via the tool [mkcert](https://github.com/FiloSottile/mkcert), but you should be aware of the possible consequences this could have for the security of your machine.
-
-> [!TIP]
-> Running `make local-ca` will save the certificate to the file `wikibase-local-tls.crt`. It is highly recommended to delete the file again after importing it.
-
-> [!NOTE]
-> If you recreate your local cluster, you have to re-import the CA certificate, as a new one will get generated and used instead.
 
 ## Testing changes
 [skaffold](https://skaffold.dev) is used to load changes made in other repositories (e.g. `api`, `mediawiki`, `quickstatements`, etc) into the pods running in minikube. See the [README](../skaffold/README.md) in the skaffold directory for details on how to use.
