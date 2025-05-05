@@ -8,6 +8,9 @@ jobs:
         uses: actions/checkout@v4
       - name: Set up helmfile
         uses: helmfile/helmfile-action@v1.9.1
+        with:
+          helmfile-version: 'v0.162.0'
+          helm-version: 'v3.12.2'
       - name: Diff current values files against generated ones
         run: >
           set -x;
