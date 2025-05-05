@@ -15,7 +15,7 @@ ingress:
         - www.wikibase.dev
       secretName: wikibase-dev-tls
 podLabels:
-  sidecar.istio.io/inject: "true"
+  sidecar.istio.io/inject: "false"
 resources:
   limits:
     memory: 20Mi
