@@ -15,7 +15,7 @@ ingress:
         - www.wbaas.dev
       secretName: wikibase-local-tls
 podLabels:
-  sidecar.istio.io/inject: "true"
+  sidecar.istio.io/inject: "false"
 resources:
   limits:
     cpu: 10m
