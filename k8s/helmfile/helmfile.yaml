@@ -79,7 +79,7 @@ releases:
   - name: clusterissuers
     namespace: cert-manager
     chart: wbstack/wikibase-cloud-clusterissuers
-    version: 0.3.0
+    version: '{{ if eq .Environment.Name "production" }} 0.3.0 {{ else }} 0.3.1 {{ end }}'
     values:
       - environment: {{ .Environment.Name }}
       - email: {{ .Values.external.letsencrypt.email }}
