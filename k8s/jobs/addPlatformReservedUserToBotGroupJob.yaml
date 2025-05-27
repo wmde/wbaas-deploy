@@ -15,7 +15,7 @@ spec:
             - '-c'
             - >
                 MW_INSTALL_PATH=/var/www/html/w/
-                php /var/www/html/w/extensions/Wikibase/repo/maintenance/createAndPromoteUser.php
+                php /var/www/html/w/maintenance/createAndPromote.php
                 PlatformReservedUser
                 --bot
                 --force
