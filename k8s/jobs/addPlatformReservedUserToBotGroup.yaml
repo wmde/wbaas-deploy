@@ -14,7 +14,8 @@ spec:
             - '-c'
             - >
                 MW_INSTALL_PATH=/var/www/html/w/
-                php /var/www/html/w/maintenance/createAndPromote.php
-                --custom-groups=bot
-                "PlatformReservedUser"
+                php /var/www/html/w/extensions/Wikibase/repo/maintenance/createAndPromoteUser.php
+                PlatformReservedUser
+                --bot
+                --force
       restartPolicy: Never
