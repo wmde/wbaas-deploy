@@ -4,6 +4,8 @@ metadata:
   generateName: add-pru-to-bot-group-
   namespace: adhoc-jobs
 spec:
+  ttlSecondsAfterFinished: 86400
+  backoffLimit: 1
   template:
     metadata:
       name: add-platform-reserved-user
