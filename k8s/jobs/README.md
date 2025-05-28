@@ -76,3 +76,9 @@ Uses the ENV `DATABASE_NAME`
 
 This works in conjunction with `singleWikiBackup.sh` to restore a database from this temporary backup.
 It uses the primary replica to write to.
+
+## addPlatformReservedUserToBotGroupForAllWikis.sh
+use the ENV `WBS_DOMAIN
+
+This script loops through all wikis and run `addPlatformReservedUser.sh` on each wiki to put `PlatformReservedUser` to bot group.
+Run `list-wiki-domains` first, save it to a file (for example: `domains.txt`), then run `addPlatformReservedUserToBotGroupForAllWikis.sh`.

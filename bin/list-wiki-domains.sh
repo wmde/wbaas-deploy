@@ -1,0 +1,3 @@
+#!/bin/bash
+
+kubectl exec -ti deployments/api-app-backend -- php artisan tinker --execute 'foreach(App\Wiki::get() as $wiki): echo "$wiki->domain" . PHP_EOL; endforeach'
