@@ -57,7 +57,7 @@ app:
     tracingEnabled: false
   url: https://www.wbaas.dev
 image:
-  tag: 10x.19.6
+  tag: sha-d88897f
 ingress:
   annotations:
     kubernetes.io/ingress.class: nginx
