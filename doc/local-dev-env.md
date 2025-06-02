@@ -297,3 +297,17 @@ Here are a few things to try:
 
 ### **API isn't running // Some pods are missing**
 While running an initial `helmfile apply` for setting up all the k8s resources, it can happen that it doesn't complete all deployments, but helm thinks it did. To make sure everything that should be deployed was actually deployed, you can run `make helmfile-sync`.
+
+### **Unable to resolve the current Docker CLI context**
+If you get a warning similar to the below while running a `minikube` command:
+
+```
+$ minikube version
+W0602 10:50:58.273416 2657756 main.go:291] Unable to resolve the current Docker CLI context "default": context "default": context not found: open /home/ollie/.docker/contexts/meta/37a8eec1ce19687d132fe29051dca629d164e2c4958ba141d5f4133a33f0688f/meta.json: no such file or directory
+minikube version: v1.34.0
+commit: 210b148df93a80eb872ecbeb7e35281b3c582c61
+```
+
+Try setting the docker context (even if one is already set):
+* `docker context ls` lists the available contexts
+* `docker context use default` sets the "default" context
