@@ -8,7 +8,11 @@ resource "random_password" "sql-passwords" {
 
 # Used by the sql service for initial setup
 resource "kubernetes_secret" "sql-secrets-passwords" {
-  for_each = toset(["default", "api-jobs", "adhoc-jobs"])
+  for_each = toset([
+    "default",
+    kubernetes_namespace.api-job-namespace.metadata[0].name,
+    kubernetes_namespace.adhoc-job-namespace.metadata[0].name,
+  ])
   metadata {
     name      = "sql-secrets-passwords"
     namespace = each.value
@@ -39,7 +43,6 @@ resource "kubernetes_secret" "sql-secrets-init-passwords" {
     "SQL_INIT_PASSWORD_BACKUPS" = base64encode(random_password.sql-passwords["backup-manager"].result)
     "SQL_INIT_OBSERVER"         = base64encode(random_password.sql-passwords["observer"].result)
   }
-
 }
 
 moved {
