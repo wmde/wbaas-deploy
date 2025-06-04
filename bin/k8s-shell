@@ -36,7 +36,7 @@ while getopts ":r:c:e:l:s:h" option; do
       l)
          TARGET_LABELS=$OPTARG;;
       s)
-         TARGET_SHELL=,$OPTARG;;
+         TARGET_SHELL=$OPTARG;;
       h) # display Help
          Help
          exit;;
