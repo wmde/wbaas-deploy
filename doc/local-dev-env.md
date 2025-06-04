@@ -71,15 +71,15 @@ tofu init
 
 For convenience, you can store local secrets for the cluster in `.tfvars` files which will be ignored by git. 
 
-Create a `terraform.tfvars` file in `tf/env/local` and add the recaptcha secrets to it. You can use [test keys][test-keys] for the v2 secrets. For v3 you will have to create your own secrets via the [v3 admin console](https://www.google.com/recaptcha/admin).
+Create a `terraform.tfvars` file in `tf/env/local` and add the recaptcha secrets to it. You can use [test keys][test-keys] for the v2 secrets. For v3 use the "wbaas.dev v3" keys from the [admin console](https://www.google.com/recaptcha/admin).
 
 [test-keys]: https://developers.google.com/recaptcha/docs/faq#id-like-to-run-automated-tests-with-recaptcha.-what-should-i-do
 
 ```
-recaptcha_v3_dev_site_key = "insert actual secret here"
-recaptcha_v3_dev_secret   = "insert actual secret here"
-recaptcha_v2_dev_site_key = "insert actual secret here"
-recaptcha_v2_dev_secret   = "insert actual secret here"
+recaptcha_v3_dev_site_key = "insert_actual_secret_here"
+recaptcha_v3_dev_secret   = "insert_actual_secret_here"
+recaptcha_v2_dev_site_key = "insert_actual_secret_here"
+recaptcha_v2_dev_secret   = "insert_actual_secret_here"
 ```
 
 To review the changes between what is applied to the infrastructure and the current configuration run:
@@ -100,26 +100,28 @@ tofu apply
 
 Helmfile is a declarative spec for deploying helm charts to k8s clusters.
 
+> [!IMPORTANT]
+> On a new install, the `helmfile apply` command must be run before `helmfile diff` will work
+
 You can see the changes that helmfile will make to your local k8s cluster by running the following command in the `k8s/helmfile` directory:
 
 ```sh
-helmfile --environment local diff --context 5 # shows the diff with 5 lines of context around changes
+# show the diff with 5 lines of context around changes
+helmfile --environment local diff --context 5
 ```
 
 To actually make the changes use:
 
 ```sh
-helmfile --environment local apply
+helmfile --environment local --interactive apply --context 5
 ```
 
 In order to speed things up you can add `--skip-deps` after the `diff` or `apply` commands if you are not expecting to pull in changes.
 
-> **NOTE** \
+> [!NOTE]
 > For convenience, you can (from the root of the repository) run:
 > - `make diff-local` - which will do a `tofu plan` followed by a `helmfile diff`
 > - `make apply-local` - which will do a  `tofu apply` followed by a `helmfile apply`
->
-> Be aware that both these commands run `helmfile` with the `--skip-deps` option. If you need to fetch any changes, make sure to do a `make helmfile-deps` beforehand.
 
 ## Verify everything is running
 
@@ -136,21 +138,26 @@ You should expect to see the following containers with status `Running` (the con
 - api-app-web
 - api-queue
 - api-scheduler
-- elasticsearch-master
+- elasticsearch-2-data
+- elasticsearch-2-master
 - mailhog
 - mediawiki-[version]-app-alpha
 - mediawiki-[version]-app-api
 - mediawiki-[version]-app-backend
 - mediawiki-[version]-app-web
+- minio
 - platform-nginx
 - queryservice
 - queryservice-gateway
 - queryservice-ui
 - queryservice-updater
+- redis-2-master
+- redis-2-replicas
 - redis-master
 - redis-replicas
 - sql-mariadb-primary
 - sql-mariadb-secondary
+- superset
 - tool-cradle
 - tool-quickstatements
 - tool-widar
@@ -163,12 +170,21 @@ and the following containers with status `Completed`:
 You can connect to containers if needed, such as the redis master:
 
 ```sh
-kubectl --context minikube-wbaas exec -it reddis-master-0 -- bash
+kubectl --context minikube-wbaas exec -it redis-master-0 -- bash
 
 # or with the convenience script
 
-./bin/k8s-shell -e local -r redis -l role=master
+./bin/k8s-shell -e local -l app.kubernetes.io/instance=redis,app.kubernetes.io/component=master
 ```
+
+> [!TIP]
+> You can find what labels pods have with the `--show-labels` argument:
+> ```sh
+> # show labels on all pods
+> kubectl get pods --show-labels
+> # show labels on a single pod
+> kubectl get pod <pod-name> --show-labels
+> ```
 
 ### LoadBalancer
 
@@ -230,7 +246,7 @@ Xdebug can be enabled in your minikube cluster if you use mediawiki image with `
 ## Create an account on wbaas.dev
 To use the local wbaas instance you have just setup, you will need to create an invitation code via the api which is needed when creating an account. Follow the [instructions](https://github.com/wbstack/api/blob/main/docs/invitation-codes.md) documented in the wbaas/api repo.
 
-After creating the invitation code, you can visit http://wbaas.dev/create-account (or click the create account link in the login form) and create an account. All outbound email is captured by Mailhog ([see above](#mailhog--local-emails)) so you can use a made up email address (e.g. `test@example.com`). Verify your email address via the "Account Creation Notificaiton" email captured by Mailhog.
+After creating the invitation code, you can visit http://wbaas.dev/create-account (or click the create account link in the login form) and create an account. All outbound email is captured by Mailhog ([see above](#mailhog--local-emails)) so you can use a made up email address (e.g. `test@example.com`). Verify your email address via the "Account Creation Notification" email captured by Mailhog.
 
 ## [Optional] setup bash completion
 Here is how to get tab completion working for common commands
