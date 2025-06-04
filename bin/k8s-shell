@@ -3,21 +3,27 @@
 Help()
 {
    # Display Help
-   echo "Access shells in kubernetes pods in any namespace easily."
+   echo "Usage: k8s-shell -e <environment> [OPTIONS]"
    echo
-   echo "Syntax: k8s-shell [-h|e|r|l|c|s]"
-   echo "options:"
-   echo "c     Count of the match, incase there are multiple instances, defaults to 0"
-   echo "e     Environment to run in. 'local' or 'staging'."
-   echo "l     Additional labels to target (comma seperated), for example 'role=master'"
-   echo "s     Shell to run. 'bash' or 'sh'. Default bash"
-   echo "h     Print this Help."
+   echo "Easily access shells of kubernetes pods in any namespace."
+   echo
+   echo "Arguments:"
+   echo "  -e <environment>  Environment to run in: 'local' or 'staging'"
+   echo
+   echo "Options:"
+   echo "  -l <labels>  Label query (selector) to use to target the pod (comma-separated)"
+   echo "               For example '-l key1=value1,key2=value2'"
+   echo "               Use 'kubectl get pods --show-labels' to discover available labels"
+   echo "  -c <count>   Count of the instance, incase there are multiple [default: 0]"
+   echo "  -s <shell>   Shell to run: 'bash' or 'sh' [default: bash]"
+   echo "  -h           Show this help message and exit"
    echo
    echo "Examples:"
-   echo "      k8s-shell -e local -l release=redis,role=master"
-   echo "      k8s-shell -e local -l app.kubernetes.io/instance=sql,app.kubernetes.io/component=primary"
-   echo "      k8s-shell -e local -l app.kubernetes.io/name=api,app.kubernetes.io/component=queue"
-   echo "      k8s-shell -e local -l app.kubernetes.io/name=api,app.kubernetes.io/component=queue"
+   echo "  k8s-shell -e local -l app.kubernetes.io/instance=redis,app.kubernetes.io/component=master"
+   echo "  k8s-shell -e local -l app.kubernetes.io/instance=sql,app.kubernetes.io/component=primary"
+   echo "  k8s-shell -e local -l app.kubernetes.io/name=api,app.kubernetes.io/component=queue"
+   echo "  k8s-shell -e local -l app.kubernetes.io/name=api,app.kubernetes.io/component=scheduler"
+   echo "  k8s-shell -e local -l app.kubernetes.io/name=elasticsearch,app.kubernetes.io/component=master -c 1"
 }
 
 # Set variable defaults
@@ -53,7 +59,7 @@ if [ "$TARGET_ENVIRONMENT" = "local" ]; then
 fi
 
 # Make the connection
-echo "Targetting environment: $TARGET_ENVIRONMENT. Using k8s context: $K8CONTEXT"
+echo "Targeting environment: $TARGET_ENVIRONMENT. Using k8s context: $K8CONTEXT"
 kubectl --context $K8CONTEXT get pods -A -l ${TARGET_LABELS}
 PODNAME=$(kubectl --context $K8CONTEXT get pods -A -l ${TARGET_LABELS} -o jsonpath="{.items[$TARGET_COUNT].metadata.name}")
 echo "Connecting to pod: $PODNAME with shell: $TARGET_SHELL"
