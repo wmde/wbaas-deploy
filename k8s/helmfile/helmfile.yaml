@@ -227,6 +227,13 @@ releases:
     version: 0.1.0
     <<: *default_release
 
+  - name: mw-statsd-exporter
+    namespace: default
+    chart: prometheus-community/prometheus-statsd-exporter
+    version: 0.13.1
+    <<: *default_release
+    installed: {{ eq .Environment.Name "local" | toYaml }}
+
   ################################
   # LOCAL ONLY
   ################################
