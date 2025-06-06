@@ -32,7 +32,7 @@ https://skaffold.dev/docs/install/
 Inside the `skaffold/` directory run
 
 ```sh
-skaffold run
+skaffold run --kube-context minikube-wbaas 
 ```
 
 This will build local images and apply them to the cluster. Every time you make a change that you wish to deploy to the cluster you will need to run this command.
@@ -50,12 +50,15 @@ Currently the following services are hooked up to skaffold:
 - [tool-widar](https://github.com/wbstack/widar)
 - [tool-quickstatements](https://github.com/wbstack/quickstatements)
 
-These are all configured as seperate modules. To run a single module run
+These are all configured as separate modules. To run a single module run
 ```sh
-skaffold run -m <module>
+skaffold run --kube-context minikube-wbaas -m <module>
 ```
 
+>[!TIP]
+> You can run `make skaffold-run` or `make skaffold-<module>` from the root of this repo, without having to `cd` into this `skaffold` dir
 
 ## Reading
 
 https://skaffold.dev/docs/pipeline-stages/deployers/helm/
+https://skaffold.dev/docs/references/yaml
