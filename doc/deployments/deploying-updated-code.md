@@ -28,6 +28,7 @@ For creating new charts see [creating-a-new-component-chart-version.md](creating
 Otherwise, skip creating a new chart and update the docker image used by altering the values file.
 
  ## Changes to '<component-name>.values.yaml'
+ *Note:* Only do this section if there isn't an automatically generated PR for this component after a tag or commit has been pushed
 - Make sure you are using the latest version of the `main` wbaas-deploy code
 - Make a change to the component's `values.yaml` file to use the new version of the image in the environment you are deploying
 - Commit this change to a branch and push it to github and open a pull request
