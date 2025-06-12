@@ -5,9 +5,9 @@ We deploy Argo CD via helmfile and the community helm charts: https://argoproj.g
 - see [/k8s/helmfile/argo-cd.yaml](../../k8s/helmfile/argo-cd.yaml)
 
 It's basic configuration lives in the values files `argo-cd-base.values.yaml.gotmpl` for each environment.
- - [production](../../k8s/helmfile/env/production/argo-cd-base.values.yaml.gotmpl)
-     - [staging](../../k8s/helmfile/env/staging/argo-cd-base.values.yaml.gotmpl)
-    - [local](../../k8s/helmfile/env/local/argo-cd-base.values.yaml.gotmpl)
+- [production](../../k8s/helmfile/env/production/argo-cd-base.values.yaml.gotmpl)
+- [staging](../../k8s/helmfile/env/staging/argo-cd-base.values.yaml.gotmpl)
+- [local](../../k8s/helmfile/env/local/argo-cd-base.values.yaml.gotmpl)
 
 Currently this means each environment gets it's own instance of Argo CD, which in turn always deploys to the cluster it lives in. We may want to change this in the future, if this prevents us from using certain features or workflows.
 
@@ -45,13 +45,14 @@ This GitHub workflow runs the script to check if the checked-in values files are
 [Automatic Self-Healing](https://argo-cd.readthedocs.io/en/stable/user-guide/auto_sync/#automatic-self-healing) is currently disabled for the local environment. This way, we still can use skaffold to replace resources that get deployed by Argo CD. Otherwise Argo CD would immediately replace them again with the image that is configured in the values files.
 
 ## Admin access
-> Caution! Admin access should only happen in rare circumstances (testing/diagnosing, for example)
+> [!CAUTION]
+> Admin access should only happen in rare circumstances (testing/diagnosing, for example)
 > as we want to maintain the configuration for everything in git.
 
 1. Reset the admin password by running `./bin/get-argocd-password`
 1. Enable admin access by flipping `admin.enabled` to `true` in our values file (or manually in the ConfigMap `argocd-cm`)
     - this is enabled for local clusters by default
-2. Access the web interface and log in (username `admin`)
+1. Access the web interface and log in (username `admin`)
     - a) local - http://argo.wbaas.dev/
     - b) staging/production - https://localhost:8080/
       - Forward port `8080` of the deployment `argo-cd-base-argocd-server`
