@@ -70,3 +70,10 @@ ingest:
   enabled: false
 
 clusterName: {{ .Release.Name }}
+
+volumePermissions:
+  image:
+    repository: bitnami/bitnami-shell-archived
+
+sysctlImage:
+  repository: bitnami/bitnami-shell-archived
