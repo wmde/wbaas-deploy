@@ -23,7 +23,7 @@ In the code Repo:
  - Select the version number, adding it to the changelog
  - Push the CHANGELOG commit to main
  - Tag the CHANGELOG commit with the version number `git tag <version>`
- - Push the tag `git push origin main <tag>`
+ - Push the tag `git push origin <tag>`
 
 ## 2. Creating a new version of that component's chart
 > [!IMPORTANT]
