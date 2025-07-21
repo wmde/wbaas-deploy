@@ -145,10 +145,14 @@ trustedProxy:
     - '*'
 useProbes: true
 wbstack:
+  complaint:
+    mail:
+      recipient: someone@wikimedia.de
+      sender: dsa@wbaas.dev
   contact:
     mail:
       recipient: someone@wikimedia.de
-      sender: contact-<subject>@wikibase.cloud
+      sender: contact-<subject>@wbaas.dev
   elasticSearch:
     enabledByDefault: true
   maxWikisPerUser: null
