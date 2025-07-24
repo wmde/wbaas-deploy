@@ -11,10 +11,42 @@ controller:
       cpu: null
   config:
     http-snippet: >-
+      geo $limit_from_cloud_provider {
+        default 0;
+
+        # AL-3; https://networksdb.io/ips-in-network/47.74.0.0/47.87.255.255
+        47.74.0.0/24 1;
+        47.75.0.0/24 1;
+        47.76.0.0/24 1;
+        47.77.0.0/24 1;
+        47.78.0.0/24 1;
+        47.79.0.0/24 1;
+        47.80.0.0/24 1;
+        47.81.0.0/24 1;
+        47.82.0.0/24 1;
+        47.83.0.0/24 1;
+        47.84.0.0/24 1;
+        47.85.0.0/24 1;
+        47.86.0.0/24 1;
+        47.87.0.0/24 1;
+        0.0.0.0/0 1;
+      }
+
+      map $limit_from_cloud_provider $tight_limit_key {
+        0 "";
+        1 "fromcloud";
+      }
+
+      limit_req_zone $tight_limit_key zone=cloud_provider_req_zone:10m rate=1r/s;
+      # limit_req zone=cloud_provider_req_zone burst=20 delay=10;
+      limit_req zone=cloud_provider_req_zone burst=1 delay=1;
+
       limit_req_zone $host zone=limit_host:10m rate=10r/s;
       limit_req zone=limit_host burst=20 delay=10;
+      
       limit_req_zone $binary_remote_addr$host zone=limit_ip_host:10m rate=5r/s;
       limit_req zone=limit_ip_host burst=30 delay=10;
+      
     limit-req-status-code: 429
     limit-conn-status-code: 429
     custom-http-errors: "502,503"
