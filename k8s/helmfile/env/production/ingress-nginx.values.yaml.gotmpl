@@ -36,8 +36,8 @@ controller:
         1 "fromcloud";
       }
 
-      limit_req_zone $tight_limit_key zone=cloud_provider:10m rate=5r/s;
-      limit_req zone=cloud_provider burst=20 nodelay;
+      limit_req_zone $tight_limit_key zone=cloud_provider:10m rate=1r/s;
+      limit_req zone=cloud_provider nodelay;
 
       limit_req_zone $host zone=limit_host:10m rate=10r/s;
       limit_req zone=limit_host burst=20 delay=10;
