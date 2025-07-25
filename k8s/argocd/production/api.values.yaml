@@ -139,6 +139,10 @@ trustedProxy:
     - 10.108.0.0/14
 useProbes: true
 wbstack:
+  complaint:
+    mail:
+      recipient: dsa-meldung@wikimedia.de
+      sender: dsa@wikibase.cloud
   contact:
     mail:
       recipient: contact.wikibase@wikimedia.de

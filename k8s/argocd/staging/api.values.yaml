@@ -140,6 +140,10 @@ trustedProxy:
     - 10.112.0.0/14
 useProbes: true
 wbstack:
+  complaint:
+    mail:
+      recipient: wikibase-cloud@wikimedia.de
+      sender: dsa@wikibase.dev
   contact:
     mail:
       recipient: contact.wikibase@wikimedia.de
