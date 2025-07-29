@@ -1,7 +1,7 @@
 # Handling High Traffic
 
 ## Introduction
-Starting in 2025 Wikibase cloud started occasionally receiving a large amount of traffic.
+Starting in 2025 Wikibase cloud started occasionally receiving a large amount of traffic. This traffic seems to also have been very expensive to handle because it hits pages like RecentChanges with various parameters so they are not cached.
 
 This has caused a number of incidents:
 - [Status Page: Ingress OOM](https://wmde.github.io/wikibase-cloud-status/issues/2025-02-10-nginx-oom/) / [T385969](https://phabricator.wikimedia.org/T385969)
