@@ -26,7 +26,7 @@ We rate limit per ip. That is for any single given IP we limit the rate of conne
 We rate limit per Wikibase we host. That is there is a rate-limit for the number of connections to e.g. `coffeebase.wikibase.cloud` from any source.
 
 #### rate limits from specific groups
-When we have seen bad traffic from a given IP range we may introduce shared limits for this IP range. Initially this was for a Data Center from a specific cloud provider that was generating wildly excess traffic.
+When we have seen bad traffic from a given IP range we may introduce shared limits for this IP range. [Initially](https://github.com/wmde/wbaas-deploy/pull/2191) this was for a Data Center from a specific cloud provider that was generating wildly excess traffic.
 
 ### Setting `$wgMaxExecutionTimeForExpensiveQueries`
 [The config setting docs](https://www.mediawiki.org/wiki/Manual:$wgMaxExecutionTimeForExpensiveQueries) describes that this let's us set a more restrictive execution time for more expensive pages in MediaWiki. We set this in [T399804](https://phabricator.wikimedia.org/T399804)
