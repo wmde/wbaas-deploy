@@ -4,8 +4,8 @@
 Starting in 2025 Wikibase cloud started occasionally receiving a large amount of traffic.
 
 This has caused a number of incidents:
-- https://wmde.github.io/wikibase-cloud-status/issues/2025-02-10-nginx-oom/ / T385969
-- https://wmde.github.io/wikibase-cloud-status/issues/2025-07-15-scrapers-again/ / T399439 and T400046
+- [Status Page: Ingress OOM](https://wmde.github.io/wikibase-cloud-status/issues/2025-02-10-nginx-oom/) / [T385969](https://phabricator.wikimedia.org/T385969)
+- [Status Page: Scrapers Again](https://wmde.github.io/wikibase-cloud-status/issues/2025-07-15-scrapers-again/) / [T399439](https://phabricator.wikimedia.org/T399439) and [T400046](https://phabricator.wikimedia.org/T400046)
 
 It's wasted quite a lot of engineering time; if you come here after dealing with this in the future, please update below.
 
@@ -28,3 +28,5 @@ We rate limit per Wikibase we host. That is there is a rate-limit for the number
 #### rate limits from specific groups
 When we have seen bad traffic from a given IP range we may introduce shared limits for this IP range. Initially this was for a Data Center from a specific cloud provider that was generating wildly excess traffic.
 
+### Setting `$wgMaxExecutionTimeForExpensiveQueries`
+[The config setting docs](https://www.mediawiki.org/wiki/Manual:$wgMaxExecutionTimeForExpensiveQueries) describes that this let's us set a more restrictive execution time for more expensive pages in MediaWiki. We set this in [T399804](https://phabricator.wikimedia.org/T399804)
