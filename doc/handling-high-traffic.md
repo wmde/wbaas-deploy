@@ -18,6 +18,7 @@ We have a robots.txt in the [platform nginx](../k8s/helmfile/env/production/plat
 
 ### rate limiting
 These are set in the [ingress-nginx](../k8s/helmfile/env/production/ingress-nginx.values.yaml.gotmpl)
+
 #### rate limits per unique IP
 We rate limit per ip. That is for any single given IP we limit the rate of connections.
 
