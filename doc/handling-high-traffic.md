@@ -7,7 +7,7 @@ This has caused a number of incidents:
 - https://wmde.github.io/wikibase-cloud-status/issues/2025-02-10-nginx-oom/ / T385969
 - https://wmde.github.io/wikibase-cloud-status/issues/2025-07-15-scrapers-again/ / T399439 and T400046
 
-It's wasted quite a lot of engineering time; if you come here after dealing with this in the future why not update below.
+It's wasted quite a lot of engineering time; if you come here after dealing with this in the future, please update below.
 
 Wasted Engineering days: 26
 
