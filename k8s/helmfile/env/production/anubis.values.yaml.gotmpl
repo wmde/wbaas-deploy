@@ -1,0 +1,48 @@
+image:
+  tag: "v1.21.3"
+
+config:
+  difficulty: 4
+  cookie:
+    expiration: "24h"
+  target: "http://platform-nginx.default.svc.cluster.local:8080"
+
+# see https://github.com/TecharoHQ/anubis/blob/v1.21.3/data/botPolicies.yaml
+botPolicy:
+  bots:
+    - import: (data)/bots/_deny-pathological.yaml
+    - import: (data)/bots/aggressive-brazilian-scrapers.yaml
+    - import: (data)/meta/ai-block-permissive.yaml
+    - import: (data)/crawlers/_allow-good.yaml
+    - import: (data)/clients/x-firefox-ai.yaml
+    - import: (data)/common/keep-internet-working.yaml
+    - name: generic-browser
+      user_agent_regex: >-
+        Mozilla|Opera
+      action: WEIGH
+      weight:
+        adjust: 10
+
+ingress:
+  enabled: true
+  className: "nginx"
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
+  hosts:
+    - host: {{ .Values.ingressHost | quote }}
+      paths:
+        - path: /
+          pathType: ImplementationSpecific
+  tls:
+    - secretName: {{ .Values.tlsSecret | quote }}
+      hosts:
+        - {{ .Values.ingressHost | quote }}
+
+resources:
+  limits:
+    cpu: 750m
+    memory: 256Mi
+  requests:
+    cpu: 250m
+    memory: 256Mi
