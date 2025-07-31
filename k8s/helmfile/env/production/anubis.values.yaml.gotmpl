@@ -39,6 +39,11 @@ ingress:
       hosts:
         - {{ .Values.ingressHost | quote }}
 
+serviceMonitor:
+  enabled: true
+  additionalLabels:
+    release: kube-prometheus-stack
+
 resources:
   limits:
     cpu: 750m
