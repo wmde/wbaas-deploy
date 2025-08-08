@@ -141,13 +141,12 @@ releases:
   - name: anubis
     namespace: default
     chart: wbstack/anubis
-    installed: {{ ne .Environment.Name "production" | toYaml }}
     <<: *default_release
 
   - name: platform-apps-ingress
     namespace: default
     chart: wbstack/wikibase-ingress
-    installed: {{ eq .Environment.Name "production" | toYaml }}
+    installed: false
     values:
       - ingressNameSuffix: {{ .Values.ingressNameSuffix | toYaml }}
       - ingressHost: {{ .Values.ingressHost | toYaml }}
