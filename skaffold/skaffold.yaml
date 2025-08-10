@@ -40,7 +40,7 @@ profiles:
       - kubeContext: minikube-wbaas
     build:
       artifacts:
-        - image: local/skaffold/wbaas/mediawiki
+        - image: mediawiki
           context: ./../../mediawiki
           docker:
             buildArgs:
@@ -56,20 +56,14 @@ profiles:
         releases:
           - name: mediawiki-139
             chartPath: ./../../charts/charts/mediawiki
-            valuesFiles:
-              - ".tmp.values.mediawiki-139.yaml"
-              - NeverPull.yaml
-            artifactOverrides:
-              image: local/skaffold/wbaas/mediawiki
-            imageStrategy:
-              helm: {}
-        hooks:
-          before:
-            - host:
-                command: [ "./helmfile-values", "-e", "local", "-r", "mediawiki-139", "-n" ]
+            setValueTemplates:
+              image.repository: "{{.IMAGE_REPO_mediawiki}}"
+              image.tag: "{{.IMAGE_TAG_mediawiki}}@{{.IMAGE_DIGEST_mediawiki}}"
+            setValues:
+              image.pullPolicy: "IfNotPresent"
+            
 metadata:
   name: mediawiki-139
-
 ---
 
 apiVersion: skaffold/v2beta23
