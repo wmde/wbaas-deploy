@@ -7,7 +7,7 @@ This means if you apply any changes to shared resources (e.g. using helmfile or 
 
 ### All changes to `main` should be prepared as PRs.
 
-In an ideal world they should be approved by a second engineer before merging. However, this isn't always possible. If an urgent change needs to be made (e.g. to fix production) it's more important that `main` reflacts the reality of the cluster than that the PR is review before merging. Engineers can always ask for review from their colleagues after merging or seek external review in these edge cases where there is no-one in the team at the time.
+In an ideal world they should be approved by a second engineer before merging. However, this isn't always possible. If an urgent change needs to be made (e.g. to fix production) it's more important that `main` reflects the reality of the cluster than that the PR is review before merging. Engineers can always ask for review from their colleagues after merging or seek external review in these edge cases where there is no-one in the team at the time.
 
 ### Principles for merging PRs
 - If one merges a PR it must be immediately deployed.

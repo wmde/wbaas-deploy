@@ -2,7 +2,7 @@
 
 ## Documentation
 - [Working with this repository](working-with-this-repo.md)
-- [Local development enviroment](local-dev-env.md)
+- [Local development environment](local-dev-env.md)
 - [Deployments](deployments/README.md)
 - [Backups](backups/README.md)
 - [Uptime checks](uptime-checks.md)
