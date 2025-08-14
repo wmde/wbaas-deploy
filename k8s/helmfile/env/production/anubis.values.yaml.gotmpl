@@ -33,7 +33,7 @@ ingress:
     - host: {{ .Values.ingressHost | quote }}
       paths:
         - path: /
-          pathType: ImplementationSpecific
+          pathType: Prefix
   tls:
     - secretName: {{ .Values.tlsSecret | quote }}
       hosts:
