@@ -187,6 +187,57 @@
               }
             }
           }
+        },
+        {
+          "yPos": 32,
+          "xPos": 24,
+          "height": 16,
+          "width": 24,
+          "widget": {
+            "title": "Anubis: Challenges Issued + Proxied Requests",
+            "xyChart": {
+              "chartOptions": {
+                "mode": "COLOR"
+              },
+              "dataSets": [
+                {
+                  "legendTemplate": "Challenges Issued",
+                  "minAlignmentPeriod": "60s",
+                  "plotType": "LINE",
+                  "targetAxis": "Y1",
+                  "timeSeriesQuery": {
+                    "timeSeriesFilter": {
+                      "aggregation": {
+                        "alignmentPeriod": "60s",
+                        "crossSeriesReducer": "REDUCE_SUM",
+                        "perSeriesAligner": "ALIGN_RATE"
+                      },
+                      "filter": "metric.type=\"prometheus.googleapis.com/anubis_challenges_issued/counter\" resource.type=\"prometheus_target\""
+                    }
+                  }
+                },
+                {
+                  "legendTemplate": "Proxied Requests",
+                  "minAlignmentPeriod": "60s",
+                  "plotType": "LINE",
+                  "targetAxis": "Y1",
+                  "timeSeriesQuery": {
+                    "timeSeriesFilter": {
+                      "aggregation": {
+                        "alignmentPeriod": "60s",
+                        "crossSeriesReducer": "REDUCE_SUM",
+                        "perSeriesAligner": "ALIGN_RATE"
+                      },
+                      "filter": "metric.type=\"prometheus.googleapis.com/anubis_proxied_requests_total/counter\" resource.type=\"prometheus_target\""
+                    }
+                  }
+                }
+              ],
+              "yAxis": {
+                "scale": "LINEAR"
+              }
+            }
+          }
         }
       ]
     }
