@@ -1,3 +1,18 @@
+image:
+  registry: ghcr.io
+  repository: wbstack/nginx
+  tag: 1.17.10-debian-10-r11
+
+# see https://github.com/wbstack/bitnami-legacy/blob/nginx/5.2.4/bitnami/nginx/values.yaml#L49
+cloneStaticSiteFromGit:
+  # Depends on an image which may no longer exist
+  enabled: false
+
+# see https://github.com/wbstack/bitnami-legacy/blob/nginx/5.2.4/bitnami/nginx/values.yaml#L251
+metrics:
+  # Depends on an image which may no longer exist
+  enabled: false
+
 replicaCount: 3
 
 resources:
