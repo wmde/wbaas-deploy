@@ -1,11 +1,9 @@
 repositories:
   - name: wbstack
     url: https://wbstack.github.io/charts
-  - name: bitnami
-    url: https://charts.bitnami.com/bitnami
   - name: bitnami-legacy
     # yamllint disable-line rule:line-length
-    url: https://raw.githubusercontent.com/wbstack/bitnami-legacy/eb5f9a9513d987b519f0ecd732e7031241c50328/bitnami
+    url: https://raw.githubusercontent.com/wbstack/bitnami-legacy/14b6efaa84c7ed5684885ca8d29479fe6e3ed973/bitnami
   - name: cetic
     url: https://cetic.github.io/helm-charts
   - name: codecentric
@@ -102,7 +100,7 @@ releases:
   - name: argocd-config
     namespace: argocd
     chart: wbstack/argocd-config
-    version: 1.1.0
+    version: 2.0.1
     <<: *default_release
 
   - name: redirects
@@ -128,7 +126,7 @@ releases:
 
   - name: elasticsearch-2
     namespace: default
-    chart: bitnami/elasticsearch
+    chart: bitnami-legacy/elasticsearch
     version: 19.10.2
     <<: *default_release
 
