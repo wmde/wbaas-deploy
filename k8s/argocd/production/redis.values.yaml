@@ -14,6 +14,10 @@ commonConfiguration: |
   # Auto AOF file rewriting
   auto-aof-rewrite-percentage 100
   auto-aof-rewrite-min-size 85mb
+image:
+  registry: ghcr.io
+  repository: wbstack/redis
+  tag: 7.0.5-debian-11-r15
 master:
   persistence:
     accessModes:

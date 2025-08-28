@@ -1,3 +1,7 @@
+image:
+  registry: ghcr.io
+  repository: wbstack/redis
+  tag: 7.2.5-debian-12-r4
 architecture: replication
 auth:
   enabled: true
