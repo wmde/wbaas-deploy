@@ -73,7 +73,11 @@ clusterName: {{ .Release.Name }}
 
 volumePermissions:
   image:
-    repository: bitnami/bitnami-shell-archived
+    registry: ghcr.io
+    repository: wbstack/bitnami-shell-archived
+    tag: 11-debian-11-r123
 
 sysctlImage:
-  repository: bitnami/bitnami-shell-archived
+  registry: ghcr.io
+  repository: wbstack/bitnami-shell-archived
+  tag: 11-debian-11-r123
