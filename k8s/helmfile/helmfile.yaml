@@ -1,9 +1,10 @@
 repositories:
   - name: wbstack
     url: https://wbstack.github.io/charts
-  - name: bitnami
-    url: https://charts.bitnami.com/bitnami
   - name: bitnami-legacy
+    # yamllint disable-line rule:line-length
+    url: https://raw.githubusercontent.com/wbstack/bitnami-legacy/ed0cf51bf0d2f21a99dda8269b806d2a20648986/bitnami
+  - name: bitnami-legacy-pre-2022
     # yamllint disable-line rule:line-length
     url: https://raw.githubusercontent.com/wbstack/bitnami-legacy/eb5f9a9513d987b519f0ecd732e7031241c50328/bitnami
   - name: cetic
@@ -122,19 +123,19 @@ releases:
 
   - name: sql
     namespace: default
-    chart: bitnami-legacy/mariadb
+    chart: bitnami-legacy-pre-2022/mariadb
     version: 10.5.0
     <<: *default_release
 
   - name: elasticsearch-2
     namespace: default
-    chart: bitnami/elasticsearch
+    chart: bitnami-legacy/elasticsearch
     version: 19.10.2
     <<: *default_release
 
   - name: platform-nginx
     namespace: default
-    chart: bitnami-legacy/nginx
+    chart: bitnami-legacy-pre-2022/nginx
     version: 5.2.4
     <<: *default_release
 
