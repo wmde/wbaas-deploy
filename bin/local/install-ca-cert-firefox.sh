@@ -34,7 +34,6 @@ CERT_PATH="/tmp/wikibase-local-ca.crt"
 
 kubectl get secret wikibase-local-tls -o json | jq -r '.data."ca.crt"' | base64 -d > "${CERT_PATH}"
 
-certutil -d sql:"${FIREFOX_PROFILE}" -D -n "${CERT_NAME}" 
 certutil -d sql:"${FIREFOX_PROFILE}" -A -n "${CERT_NAME}" -t 'C,,' -i "${CERT_PATH}"
 certutil -d sql:"${FIREFOX_PROFILE}" -L -n "${CERT_NAME}"
 
