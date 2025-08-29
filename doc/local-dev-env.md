@@ -205,7 +205,10 @@ More detailed information on the load balancer can be found in [minikube-load-ba
 Since we [introduced](https://phabricator.wikimedia.org/T378691) using HTTPS for local ingresses, you will get a scary warning when accessing local web interfaces. This can be mitigated by trusting the local CA certificate that is getting used for self-signing. The easiest way to do this is to save the local CA certificate in a file by accessing the secret it lives in (`wikibase-local-tls`) and importing it in your browser settings. There is also the possibility to import it into the trust store of your operating system, for example via the tool [mkcert](https://github.com/FiloSottile/mkcert), but you should be aware of the possible consequences this could have for the security of your machine.
 
 > [!TIP]
-> Running `make local-ca` will save the certificate to the file `wikibase-local-tls.crt`. It is highly recommended to delete the file again after importing it.
+> Running `make local-ca-firefox` will import the current certificate automatically into your firefox profile, if you have set `FIREFOX_PROFILE`. See [install-ca-cert-firefox.sh](/bin/local/install-ca-cert-firefox.sh)
+
+> [!TIP]
+> Running `make local-ca` will save the certificate to the file `wikibase-local-tls.crt`.
 
 > [!NOTE]
 > If you recreate your local cluster, you have to re-import the CA certificate, as a new one will get generated and used instead.
