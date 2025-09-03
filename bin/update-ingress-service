@@ -1,0 +1,27 @@
+#!/bin/bash
+
+function usage() {
+    echo "usage: $(basename $0) <service>"
+}
+
+SERVICE=$1
+if [[ -z "${SERVICE}" ]]; then
+    usage
+    exit 1
+fi
+
+INGRESSES=$(kubectl get ingress -l wbstack-ingress-generation -o json)
+
+echo "$INGRESSES" > "wbstack-ingresses-$(date +%s).json.bak"
+
+UPDATED_INGRESSES=$(echo "$INGRESSES" | jq '.items[].spec.rules[].http.paths[].backend.service.name="'$SERVICE'"')
+
+kubectl diff -f <(echo "$UPDATED_INGRESSES")
+
+read -p "Do you want to deploy these changes? (y/N): " CONFIRMATION
+if [[ ! $CONFIRMATION =~ ^[Yy]$ ]]; then
+    echo "canceled"
+    exit 1
+fi
+
+kubectl apply -f <(echo "$UPDATED_INGRESSES")
