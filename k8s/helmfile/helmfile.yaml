@@ -1,8 +1,6 @@
 repositories:
   - name: wbstack
     url: https://wbstack.github.io/charts
-  - name: bitnami-legacy
-    url: https://raw.githubusercontent.com/wbstack/bitnami-legacy/14b6efaa84c7ed5684885ca8d29479fe6e3ed973/bitnami
   - name: cetic
     url: https://cetic.github.io/helm-charts
   - name: codecentric
@@ -119,19 +117,19 @@ releases:
 
   - name: sql
     namespace: default
-    chart: bitnami-legacy/mariadb
+    chart: https://github.com/wbstack/bitnami-legacy/releases/download/mariadb%2F10.5.0/mariadb-10.5.0.tgz
     version: 10.5.0
     <<: *default_release
 
   - name: elasticsearch-2
     namespace: default
-    chart: bitnami-legacy/elasticsearch
+    chart: https://github.com/wbstack/bitnami-legacy/releases/download/elasticsearch%2F19.10.2/elasticsearch-19.10.2.tgz
     version: 19.10.2
     <<: *default_release
 
   - name: platform-nginx
     namespace: default
-    chart: bitnami-legacy/nginx
+    chart: https://github.com/wbstack/bitnami-legacy/releases/download/nginx%2F5.2.4/nginx-5.2.4.tgz
     version: 5.2.4
     <<: *default_release
 
