@@ -120,15 +120,13 @@ releases:
   - name: redis
     installed: {{ eq .Environment.Name "local" | toYaml }}
     namespace: default
-    chart: bitnami-legacy/redis
-    version: 17.3.8
+    chart: https://github.com/wbstack/bitnami-legacy/releases/download/redis/17.3.8/redis-17.3.8.tgz
     <<: *default_release
 
   - name: redis-2
     installed: {{ eq .Environment.Name "local" | toYaml }}
     namespace: default
-    chart: bitnami-legacy/redis
-    version: 19.6.4
+    chart: https://github.com/wbstack/bitnami-legacy/releases/download/redis/19.6.4/redis-19.6.4.tgz
     <<: *default_release
 
   - name: redirects
