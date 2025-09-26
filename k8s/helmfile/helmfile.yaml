@@ -95,9 +95,35 @@ releases:
     <<: *default_release
 
   - name: argocd-config
+    installed: {{ ne .Environment.Name "local" | toYaml }}
     namespace: argocd
     chart: wbstack/argocd-config
     version: 2.0.1
+
+  - name: api
+    installed: {{ eq .Environment.Name "local" | toYaml }}
+    chart: wbstack/api
+    version: 0.33.0
+    namespace: default
+    <<: *default_release
+
+  - name: ui
+    installed: {{ eq .Environment.Name "local" | toYaml }}
+    namespace: default
+    chart: wbstack/ui
+    version: 0.4.0
+    <<: *default_release
+
+  - name: redis
+    installed: {{ eq .Environment.Name "local" | toYaml }}
+    namespace: default
+    chart: https://github.com/wbstack/bitnami-legacy/releases/download/redis/17.3.8/redis-17.3.8.tgz
+    <<: *default_release
+
+  - name: redis-2
+    installed: {{ eq .Environment.Name "local" | toYaml }}
+    namespace: default
+    chart: https://github.com/wbstack/bitnami-legacy/releases/download/redis/19.6.4/redis-19.6.4.tgz
     <<: *default_release
 
   - name: redirects
@@ -146,6 +172,12 @@ releases:
       - tls: {{ .Values.tls | toYaml }}
 
   - name: mediawiki-139
+    namespace: default
+    chart: wbstack/mediawiki
+    version: 0.13.0
+    <<: *default_release
+
+  - name: mediawiki-143
     namespace: default
     chart: wbstack/mediawiki
     version: 0.13.0
