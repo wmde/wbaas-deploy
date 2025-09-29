@@ -97,7 +97,7 @@ releases:
   - name: argocd-config
     namespace: argocd
     chart: wbstack/argocd-config
-    version: 2.0.1
+    version: '{{ if eq .Environment.Name "production" }} 2.0.1 {{ else }} 2.1.0 {{ end }}'
     <<: *default_release
 
   - name: redirects
@@ -223,6 +223,18 @@ releases:
     namespace: default
     chart: wbstack/superset
     version: 0.1.0
+    <<: *default_release
+
+  - name: redis
+    installed: {{ ne .Environment.Name "production" | toYaml }}
+    namespace: default
+    chart: https://github.com/wbstack/bitnami-legacy/releases/download/redis/17.3.8/redis-17.3.8.tgz
+    <<: *default_release
+
+  - name: redis-2
+    installed: {{ ne .Environment.Name "production" | toYaml }}
+    namespace: default
+    chart: https://github.com/wbstack/bitnami-legacy/releases/download/redis/19.6.4/redis-19.6.4.tgz
     <<: *default_release
 
   ################################

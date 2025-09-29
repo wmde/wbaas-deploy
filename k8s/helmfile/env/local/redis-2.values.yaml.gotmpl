@@ -1,0 +1,46 @@
+image:
+  registry: ghcr.io
+  repository: wbstack/redis
+  tag: 7.2.5-debian-12-r4
+
+commonConfiguration: |
+  # Enable AOF https://redis.io/topics/persistence#append-only-file
+  appendonly yes
+  # Disable RDB persistence, AOF persistence already enabled.
+  save ""
+  # Control memory usage
+  maxmemory 50mb
+  maxmemory-policy volatile-lru
+  # Auto AOF file rewriting
+  auto-aof-rewrite-percentage 100
+  auto-aof-rewrite-min-size 60mb
+
+master:
+  persistence:
+    storageClass: null
+  livenessProbe:
+    enabled: false
+  readinessProbe:
+    enabled: false
+  resources:
+    limits:
+      cpu: 50m
+      memory: 90Mi
+    requests:
+      cpu: 10m
+      memory: 62Mi
+
+replica:
+  persistence:
+    storageClass: null
+  livenessProbe:
+    enabled: false
+  readinessProbe:
+    enabled: false
+  resources:
+    limits:
+      cpu: 50m
+      memory: 90Mi
+    requests:
+      cpu: 10m
+      memory: 60Mi
