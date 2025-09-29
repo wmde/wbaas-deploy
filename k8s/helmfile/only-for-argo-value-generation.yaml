@@ -58,3 +58,15 @@ releases:
     chart: wbstack/ui
     version: 0.3.1
     <<: *default_release
+
+  - name: redis
+    namespace: default
+    chart: bitnami/redis
+    version: 17.3.8
+    <<: *default_release
+
+  - name: redis-2
+    namespace: default
+    chart: bitnami-legacy/redis
+    version: 19.6.4
+    <<: *default_release
