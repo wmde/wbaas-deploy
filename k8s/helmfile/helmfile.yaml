@@ -97,7 +97,7 @@ releases:
   - name: argocd-config
     namespace: argocd
     chart: wbstack/argocd-config
-    version: 2.1.1
+    version: 2.1.2
     <<: *default_release
 
   - name: redirects
