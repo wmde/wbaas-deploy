@@ -1,0 +1,44 @@
+image:
+  tag: sha-64a8388
+
+web:
+  autoscaling:
+    maxReplicas: 2
+
+mw:
+  settings:
+    allowedProxyCidr: "10.112.0.0/14"
+  mail:
+    domain: "wikibase.dev"
+  elasticsearch:
+    host: elasticsearch-2.default.svc.cluster.local
+    port: 9200
+    es6: false
+  cirrussearch:
+    prefixIds: true
+
+resources:
+  web:
+    requests:
+      cpu: 100m
+      memory: 250Mi
+    limits:
+      memory: 750Mi
+  webapi:
+    requests:
+      cpu: 100m
+      memory: 125Mi
+    limits:
+      memory: 1200Mi
+  alpha:
+    requests:
+      cpu: 50m
+      memory: 40Mi
+    limits:
+      memory: 600Mi
+  backend:
+    requests:
+      cpu: 125m
+      memory: 200Mi
+    limits:
+      memory: 1200Mi
