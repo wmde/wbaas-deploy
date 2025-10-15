@@ -73,7 +73,7 @@ ingress:
         - /api(/|$)(.*)
   tls: null
 platform:
-  backendMwHost: mediawiki-139-app-backend.default.svc.cluster.local
+  backendMwHost: mediawiki-143-app-backend.default.svc.cluster.local
 queue:
   backoff:
     - 10
@@ -166,5 +166,5 @@ wbstack:
     - PT24H
     - P30D
   uiurl: https://wbaas.dev
-  wikiDbProvisionVersion: mw1.39-wbs1
-  wikiDbUseVersion: mw1.39-wbs1
+  wikiDbProvisionVersion: mw1.43-wbs1
+  wikiDbUseVersion: mw1.43-wbs1
