@@ -12,7 +12,7 @@ app:
   markDoneEndpoint: http://api-app-backend.default.svc.cluster.local/backend/qs/markDone
   markNotDoneEndpoint: http://api-app-backend.default.svc.cluster.local/backend/qs/markNotDone
   wikibaseScheme: http
-  extraJvmOpts: "-XshowSettings:vm -XX:+UseContainerSupport -XX:+ExitOnOutOfMemoryError -Xms128m -Xmx256m -XX:MetaspaceSize=20m -XX:MaxMetaspaceSize=30m"
+  extraJvmOpts: "-XshowSettings:vm -XX:+UseContainerSupport -XX:+ExitOnOutOfMemoryError -Xms128m -Xmx512m -XX:MetaspaceSize=20m -XX:MaxMetaspaceSize=30m"
 
 resources:
   requests:
