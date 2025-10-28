@@ -1,0 +1,193 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: wikibase-poc
+---
+# MySQL Deployment
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mysql-primary
+  namespace: wikibase-poc
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mysql-primary
+  template:
+    metadata:
+      labels:
+        app: mysql-primary
+    spec:
+      containers:
+        - name: mysql
+          image: mysql:8.0
+          env:
+            - name: MYSQL_ROOT_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: mysql-root-secret
+                  key: password
+            - name: MYSQL_DATABASE
+              value: mwdb_poc
+            - name: MYSQL_USER
+              valueFrom:
+                secretKeyRef:
+                  name: mwuser-secret
+                  key: user
+            - name: MYSQL_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: mwuser-secret
+                  key: password
+          ports:
+            - containerPort: 3306
+          volumeMounts:
+            - name: mysql-data
+              mountPath: /var/lib/mysql
+      volumes:
+        - name: mysql-data
+          emptyDir: {}
+---
+# MySQL Service
+apiVersion: v1
+kind: Service
+metadata:
+  name: mysql-primary
+  namespace: wikibase-poc
+spec:
+  selector:
+    app: mysql-primary
+  ports:
+    - protocol: TCP
+      port: 3306
+      targetPort: 3306
+---
+# MediaWiki Job: Auto-install
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: mediawiki-install
+  namespace: wikibase-poc
+spec:
+  template:
+    metadata:
+      name: mediawiki-install
+    spec:
+      restartPolicy: Never
+      containers:
+        - name: mediawiki
+          image: mediawiki:1.43
+          env:
+            - name: MW_DB_HOST
+              value: mysql-primary.wikibase-poc.svc.cluster.local
+            - name: MW_DB_NAME
+              value: mwdb_poc
+            - name: MW_DB_USER
+              valueFrom:
+                secretKeyRef:
+                  name: mwuser-secret
+                  key: user
+            - name: MW_DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: mwuser-secret
+                  key: password
+            - name: MYSQL_ROOT_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: mysql-root-secret
+                  key: password
+            - name: MW_SITE_NAME
+              valueFrom:
+                secretKeyRef:
+                  name: mwadmin-secret
+                  key: site_name
+            - name: MW_ADMIN_USER
+              valueFrom:
+                secretKeyRef:
+                  name: mwadmin-secret
+                  key: admin_user
+            - name: MW_ADMIN_PASS
+              valueFrom:
+                secretKeyRef:
+                  name: mwadmin-secret
+                  key: admin_pass
+            - name: MW_ADMIN_EMAIL
+              valueFrom:
+                secretKeyRef:
+                  name: mwadmin-secret
+                  key: email
+            - name: MW_SCRIPT_PATH
+              valueFrom:
+                secretKeyRef:
+                  name: mwadmin-secret
+                  key: script_path
+          command: ["bash", "-c"]
+          args:
+            - |
+              echo "Starting MediaWiki installation..."
+              php maintenance/install.php \
+                --dbtype mysql \
+                --dbserver "$MW_DB_HOST" \
+                --dbname "$MW_DB_NAME" \
+                --dbuser "$MW_DB_USER" \
+                --dbpass "$MW_DB_PASSWORD" \
+                --installdbuser root \
+                --installdbpass "$MYSQL_ROOT_PASSWORD" \
+                --scriptpath "$MW_SCRIPT_PATH" \
+                "$MW_SITE_NAME" \
+                "$MW_ADMIN_USER" \
+                --pass "$MW_ADMIN_PASS"
+---
+# MediaWiki Deployment
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mediawiki-poc
+  namespace: wikibase-poc
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mediawiki-poc
+  template:
+    metadata:
+      labels:
+        app: mediawiki-poc
+    spec:
+      containers:
+        - name: mediawiki
+          image: mediawiki:1.43
+          env:
+            - name: MW_DB_HOST
+              value: mysql-primary.wikibase-poc.svc.cluster.local
+            - name: MW_DB_NAME
+              value: mwdb_poc
+            - name: MW_DB_USER
+              valueFrom:
+                secretKeyRef:
+                  name: mwuser-secret
+                  key: user
+            - name: MW_DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: mwuser-secret
+                  key: password
+          ports:
+            - containerPort: 80
+---
+# MediaWiki Service
+apiVersion: v1
+kind: Service
+metadata:
+  name: mediawiki-poc
+  namespace: wikibase-poc
+spec:
+  selector:
+    app: mediawiki-poc
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80
+  type: ClusterIP
