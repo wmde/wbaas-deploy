@@ -42,6 +42,10 @@ helmfile --environment local sync
 # https://github.com/wbstack/charts/blob/main/charts/api/templates/pre-install-job.yaml#L39
 #kubectl exec -ti deployments/api-app-backend -- bash -c 'php artisan migrate:install; php artisan migrate --force; php artisan passport:client --personal --no-interaction; php artisan passport:client --password --no-interaction'
 
+if [[ -d "${FIREFOX_PROFILE}" ]]; then
+  "$WBAAS_DEPLOY_DIR/bin/local/install-ca-cert-firefox.sh"
+fi
+
 echo
 echo "Finished re-initializing local cluster."
 echo "To also create a local user account, open the minikube tunnel and run './bin/local/create-local-user.sh'."

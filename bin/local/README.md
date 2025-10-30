@@ -30,9 +30,9 @@ Creates a new wikibase with a local user account. The minikube tunnel needs to b
 
 It does this in two steps:
 1. Obtaining an auth token
-    - by `POST`ing to `http://api.wbaas.localhost/auth/login`
+    - by `POST`ing to `http://api.wbaas.dev/auth/login`
 2. Requesting a new wikibase
-    - by `POST`ing to `http://api.wbaas.localhost/wiki/create`
+    - by `POST`ing to `http://api.wbaas.dev/wiki/create`
 
 #### Default credentials
 You can use environment variables to overwrite the defaults:
@@ -40,7 +40,7 @@ You can use environment variables to overwrite the defaults:
 USER_MAIL="${USER_MAIL:-jane.doe@wikimedia.de}"
 USER_PASS="${USER_PASS:-wikiwikiwiki}"
 USER_WIKI_NAME="${USER_WIKI_NAME:-Local Test Wiki}"
-USER_WIKI_DOMAIN="${USER_WIKI_DOMAIN:-local-test-wiki.wbaas.localhost}"
+USER_WIKI_DOMAIN="${USER_WIKI_DOMAIN:-local-test-wiki.wbaas.dev}"
 USER_WIKI_ADMIN="${USER_WIKI_ADMIN:-Admin}"
 ```
 

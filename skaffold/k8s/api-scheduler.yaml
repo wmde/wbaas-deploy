@@ -8,7 +8,7 @@ metadata:
     app.kubernetes.io/name: api
     app.kubernetes.io/version: "1.0"
     argocd.argoproj.io/instance: api
-    helm.sh/chart: api-0.32.1
+    helm.sh/chart: api-0.33.0
   name: api-scheduler
   namespace: default
 spec:
@@ -41,17 +41,17 @@ spec:
         - name: APP_DEBUG
           value: "false"
         - name: APP_URL
-          value: https://www.wbaas.localhost
+          value: https://www.wbaas.dev
         - name: APP_TIMEZONE
           value: UTC
         - name: WBSTACK_SUBDOMAIN_SUFFIX
-          value: .wbaas.localhost
+          value: .wbaas.dev
         - name: WBSTACK_UI_URL
-          value: https://wbaas.localhost
+          value: https://wbaas.dev
         - name: WBSTACK_WIKI_DB_PROVISION_VERSION
-          value: mw1.39-wbs1
+          value: mw1.43-wbs1
         - name: WBSTACK_WIKI_DB_USE_VERSION
-          value: mw1.39-wbs1
+          value: mw1.43-wbs1
         - name: WBSTACK_SUMMARY_CREATION_RATE_RANGES
           value: PT24H,P30D
         - name: WBSTACK_SIGNUP_THROTTLING_LIMIT
@@ -65,7 +65,11 @@ spec:
         - name: WBSTACK_CONTACT_MAIL_RECIPIENT
           value: someone@wikimedia.de
         - name: WBSTACK_CONTACT_MAIL_SENDER
-          value: contact-<subject>@wikibase.cloud
+          value: contact-<subject>@wbaas.dev
+        - name: WBSTACK_COMPLAINT_MAIL_RECIPIENT
+          value: someone@wikimedia.de
+        - name: WBSTACK_COMPLAINT_MAIL_SENDER
+          value: dsa@wbaas.dev
         - name: WBSTACK_ELASTICSEARCH_ENABLED_BY_DEFAULT
           value: "true"
         - name: TRUSTED_PROXY_PROXIES
@@ -77,7 +81,7 @@ spec:
         - name: QUERY_SERVICE_HOST
           value: queryservice.default.svc.cluster.local:9999
         - name: PLATFORM_MW_BACKEND_HOST
-          value: mediawiki-139-app-backend.default.svc.cluster.local
+          value: mediawiki-143-app-backend.default.svc.cluster.local
         - name: REDIS_HOST
           value: redis-master.default.svc.cluster.local
         - name: REDIS_PASSWORD

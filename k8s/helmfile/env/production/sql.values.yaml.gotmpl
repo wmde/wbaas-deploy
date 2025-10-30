@@ -1,3 +1,18 @@
+image:
+  registry: ghcr.io
+  repository: wbstack/mariadb
+  tag: 10.5.15-debian-10-r52
+
+# see https://github.com/wbstack/bitnami-legacy/blob/mariadb/10.5.0/bitnami/mariadb/values.yaml#L928
+volumePermissions:
+  # Depends on an image which may no longer exist
+  enabled: false
+
+# see https://github.com/wbstack/bitnami-legacy/blob/mariadb/10.5.0/bitnami/mariadb/values.yaml#L961
+metrics:
+  # Depends on an image which may no longer exist
+  enabled: false
+
 architecture: replication
 
 auth:
@@ -7,10 +22,9 @@ auth:
 primary:
   resources:
     requests:
-      cpu: '2'
+      cpu: 100m
       memory: 8Gi
     limits:
-      cpu: null
       memory: 8Gi
   persistence:
     enabled: true
@@ -71,10 +85,9 @@ secondary:
       tailscale.com/expose: "true"
   resources:
     requests:
-      cpu: '2'
+      cpu: 400m
       memory: 8Gi
     limits:
-      cpu: null
       memory: 8Gi
   readinessProbe:
     enabled: true
@@ -125,9 +138,6 @@ secondary:
 
 global:
   storageClass: {{ .Values.services.sql.storageClass | quote }}
-
-metrics:
-  enabled: false
 
 initdbScripts:
   # https://docs.bitnami.com/kubernetes/infrastructure/mariadb/configuration/customize-new-instance/

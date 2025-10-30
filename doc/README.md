@@ -10,3 +10,4 @@
 - [Importing resources into Opentofu](importing-resources-into-opentofu.md)
 - [Setting up local access to GKE cluster](gke-cluster-access.md)
 - [Querying Prometheus using the Google Cloud Console](querying-prometheus.md)
+- [Handling High Traffic](handling-high-traffic.md)

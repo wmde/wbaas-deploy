@@ -1,7 +1,7 @@
 ## Creating a new version of that component's chart
 In the charts repo:
 - Pull the latest charts code
-- Bump the image version used in the chart `values.yaml` file (see the version in the last step)
+- Bump the image version used in the chart's `values.yaml` file (see the version in the last step)
 - Bump the version of the chart in `Chart.yaml`
 - Write the change log
 - Make a commit, push it to a branch and open a PR
@@ -30,5 +30,5 @@ We're going to prepare a change that will work locally and on staging.
 We're going to prepare a change that will production. It will keep the local and staging changes.
 - Make sure you are using the latest version of the `main` wbaas-deploy code
 - Make a change to helmfile.yaml to use the new version of the chart in every environment
-    - This will mean REMOVING the construct we used before like `'{{ if eq .Environment.Name "production" }}<old-version>{{ else }}<new-version>{{ end }}'` and repacing it with just the new image e.g. `<new-version>`
+    - This will mean REMOVING the construct we used before like `'{{ if eq .Environment.Name "production" }}<old-version>{{ else }}<new-version>{{ end }}'` and replacing it with just the new image e.g. `<new-version>`
 - Commit this change to a branch and push it to github and open a pull request

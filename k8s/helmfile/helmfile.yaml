@@ -1,11 +1,6 @@
 repositories:
   - name: wbstack
     url: https://wbstack.github.io/charts
-  - name: bitnami
-    url: https://charts.bitnami.com/bitnami
-  - name: bitnami-legacy
-    # yamllint disable-line rule:line-length
-    url: https://raw.githubusercontent.com/bitnami/charts/eb5f9a9513d987b519f0ecd732e7031241c50328/bitnami
   - name: cetic
     url: https://cetic.github.io/helm-charts
   - name: codecentric
@@ -79,8 +74,9 @@ releases:
   - name: clusterissuers
     namespace: cert-manager
     chart: wbstack/wikibase-cloud-clusterissuers
-    version: 0.2.1
+    version: 0.3.1
     values:
+      - environment: {{ .Environment.Name }}
       - email: {{ .Values.external.letsencrypt.email }}
       - gceProject: {{ .Values.gceProject }}
       # TODO this chart needs certificates for some reason, it probably shouldn't
@@ -101,19 +97,19 @@ releases:
   - name: argocd-config
     namespace: argocd
     chart: wbstack/argocd-config
-    version: 1.1.0
+    version: 2.1.2
     <<: *default_release
 
   - name: redirects
     namespace: default
     chart: wbstack/redirects
-    version: 1.0.0
+    version: 2.0.0
     <<: *default_release
 
   - name: ingress-nginx
     namespace: kube-system
     chart: ingress-nginx/ingress-nginx
-    version: 4.10.1
+    version: 4.12.1
     # TODO: future releases of `helmfile` will bring an `inherit` feature
     # that can be used instead of YAML anchors. When upgrading helmfile, check
     # if we can use this feature here instead.
@@ -121,25 +117,28 @@ releases:
 
   - name: sql
     namespace: default
-    chart: bitnami-legacy/mariadb
-    version: 10.5.0
+    chart: https://github.com/wbstack/bitnami-legacy/releases/download/mariadb%2F10.5.0/mariadb-10.5.0.tgz
     <<: *default_release
 
   - name: elasticsearch-2
     namespace: default
-    chart: bitnami/elasticsearch
-    version: 19.10.2
+    chart: https://github.com/wbstack/bitnami-legacy/releases/download/elasticsearch%2F19.10.2/elasticsearch-19.10.2.tgz
     <<: *default_release
 
   - name: platform-nginx
     namespace: default
-    chart: bitnami-legacy/nginx
-    version: 5.2.4
+    chart: https://github.com/wbstack/bitnami-legacy/releases/download/nginx%2F5.2.4/nginx-5.2.4.tgz
+    <<: *default_release
+
+  - name: anubis
+    namespace: default
+    chart: wbstack/anubis
     <<: *default_release
 
   - name: platform-apps-ingress
     namespace: default
     chart: wbstack/wikibase-ingress
+    installed: false
     values:
       - ingressNameSuffix: {{ .Values.ingressNameSuffix | toYaml }}
       - ingressHost: {{ .Values.ingressHost | toYaml }}
@@ -149,7 +148,14 @@ releases:
   - name: mediawiki-139
     namespace: default
     chart: wbstack/mediawiki
-    version: 0.13.0
+    version: 0.13.1
+    <<: *default_release
+
+  - name: mediawiki-143
+    namespace: default
+    chart: wbstack/mediawiki
+    version: 0.13.1
+    installed: {{ ne .Environment.Name "production" | toYaml }}
     <<: *default_release
 
   - name: queryservice-ui
@@ -179,19 +185,19 @@ releases:
   - name: tool-cradle
     namespace: default
     chart: wbstack/tool-cradle
-    version: 0.1.2
+    version: 0.2.0
     <<: *default_release
 
   - name: tool-widar
     namespace: default
     chart: wbstack/tool-widar
-    version: 0.2.0
+    version: 0.3.0
     <<: *default_release
 
   - name: tool-quickstatements
     namespace: default
     chart: wbstack/tool-quickstatements
-    version: 0.2.3
+    version: 0.3.0
     <<: *default_release
 
   - name: wbaas-backup
@@ -224,6 +230,16 @@ releases:
     namespace: default
     chart: wbstack/superset
     version: 0.1.0
+    <<: *default_release
+
+  - name: redis
+    namespace: default
+    chart: https://github.com/wbstack/bitnami-legacy/releases/download/redis/17.3.8/redis-17.3.8.tgz
+    <<: *default_release
+
+  - name: redis-2
+    namespace: default
+    chart: https://github.com/wbstack/bitnami-legacy/releases/download/redis/19.6.4/redis-19.6.4.tgz
     <<: *default_release
 
   ################################

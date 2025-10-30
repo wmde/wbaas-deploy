@@ -1,10 +1,9 @@
 primary:
   resources:
     requests:
-      cpu: 750m
+      cpu: 10m
       memory: 1000Mi
     limits:
-      cpu: null
       memory: 1000Mi
   configuration: |-
     [mysqld]
@@ -58,10 +57,9 @@ secondary:
   replicaCount: 1
   resources:
     requests:
-      cpu: 750m
+      cpu: 10m
       memory: 900Mi
     limits:
-      cpu: null
       memory: 900Mi
   readinessProbe:
     enabled: false

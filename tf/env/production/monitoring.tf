@@ -13,14 +13,13 @@ resource "google_logging_metric" "production-site-request-count" {
   filter      = <<-EOT
         labels."k8s-pod/app_kubernetes_io/name"="ingress-nginx"
         resource.type="k8s_container"
-        -textPayload:"GoogleStackdriverMonitoring"
-        -textPayload:"cert-manager"
-        -textPayload:"Widar"
+        textPayload=~"^\d*\.\d*\.\d*\.\d*\ - (-|\w) \["
+        resource.labels.cluster_name="wbaas-3"
     EOT
   label_extractors = {
-    "domain"     = "REGEXP_EXTRACT(textPayload, \"\\\\w+ https:\\\\/\\\\/([^\\\\/]+)\")"
-    "httpMethod" = "REGEXP_EXTRACT(textPayload, \"(\\\\w+) https:\\\\/\\\\/[^ ]+ [^ ]+ \\\\d+\")"
-    "statuscode" = "REGEXP_EXTRACT(textPayload, \"\\\\w+ https:\\\\/\\\\/[^ ]+ [^ ]+ (\\\\d+)\")"
+    "domain"     = "REGEXP_EXTRACT(textPayload, \"^(?:[0-9\\\\.]+) - - \\\\[[^\\\\]]+\\\\] \\\\\\\"(?:GET|POST|PUT|DELETE|HEAD|OPTIONS|PATCH) https?:\\\\/\\\\/([^\\\\/\\\\s]+)[^\\\\\\\"]*\\\\\\\" \\\\d{3}\")"
+    "httpMethod" = "REGEXP_EXTRACT(textPayload, \"^(?:[0-9\\\\.]+) - - \\\\[[^\\\\]]+\\\\] \\\\\\\"(GET|POST|PUT|DELETE|HEAD|OPTIONS|PATCH) https?:\\\\/\\\\/[^\\\\/\\\\s]+[^\\\\\\\"]*\\\\\\\" \\\\d{3}\")"
+    "statuscode" = "REGEXP_EXTRACT(textPayload, \"^(?:[0-9\\\\.]+) - - \\\\[[^\\\\]]+\\\\] \\\\\\\"(?:GET|POST|PUT|DELETE|HEAD|OPTIONS|PATCH) https?:\\\\/\\\\/[^\\\\/\\\\s]+[^\\\\\\\"]*\\\\\\\" (\\\\d{3})\")"
   }
   name    = "production-site-request-count"
   project = "wikibase-cloud"

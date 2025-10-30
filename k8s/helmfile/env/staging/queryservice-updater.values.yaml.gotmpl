@@ -1,2 +1,9 @@
 app:
   extraJvmOpts: "-XshowSettings:vm -XX:+UseContainerSupport -XX:+ExitOnOutOfMemoryError -Xms15m -Xmx30m -XX:MetaspaceSize=20m -XX:MaxMetaspaceSize=30m"
+
+resources:
+  requests:
+    cpu: 80m
+    memory: 60Mi
+  limits:
+    memory: 120Mi

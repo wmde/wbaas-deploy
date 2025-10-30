@@ -71,15 +71,15 @@ tofu init
 
 For convenience, you can store local secrets for the cluster in `.tfvars` files which will be ignored by git. 
 
-Create a `terraform.tfvars` file in `tf/env/local` and add the recaptcha secrets to it. You can use [test keys][test-keys] for the v2 secrets. For v3 you will have to create your own secrets via the [v3 admin console](https://www.google.com/recaptcha/admin).
+Create a `terraform.tfvars` file in `tf/env/local` and add the recaptcha secrets to it. You can use [test keys][test-keys] for the v2 secrets. For v3 use the "wbaas.dev v3" keys from the [admin console](https://www.google.com/recaptcha/admin).
 
 [test-keys]: https://developers.google.com/recaptcha/docs/faq#id-like-to-run-automated-tests-with-recaptcha.-what-should-i-do
 
 ```
-recaptcha_v3_dev_site_key = "insert actual secret here"
-recaptcha_v3_dev_secret   = "insert actual secret here"
-recaptcha_v2_dev_site_key = "insert actual secret here"
-recaptcha_v2_dev_secret   = "insert actual secret here"
+recaptcha_v3_dev_site_key = "insert_actual_secret_here"
+recaptcha_v3_dev_secret   = "insert_actual_secret_here"
+recaptcha_v2_dev_site_key = "insert_actual_secret_here"
+recaptcha_v2_dev_secret   = "insert_actual_secret_here"
 ```
 
 To review the changes between what is applied to the infrastructure and the current configuration run:
@@ -100,26 +100,28 @@ tofu apply
 
 Helmfile is a declarative spec for deploying helm charts to k8s clusters.
 
+> [!IMPORTANT]
+> On a new install, the `helmfile apply` command must be run before `helmfile diff` will work
+
 You can see the changes that helmfile will make to your local k8s cluster by running the following command in the `k8s/helmfile` directory:
 
 ```sh
-helmfile --environment local diff --context 5 # shows the diff with 5 lines of context around changes
+# show the diff with 5 lines of context around changes
+helmfile --environment local diff --context 5
 ```
 
 To actually make the changes use:
 
 ```sh
-helmfile --environment local apply
+helmfile --environment local --interactive apply --context 5
 ```
 
 In order to speed things up you can add `--skip-deps` after the `diff` or `apply` commands if you are not expecting to pull in changes.
 
-> **NOTE** \
+> [!NOTE]
 > For convenience, you can (from the root of the repository) run:
 > - `make diff-local` - which will do a `tofu plan` followed by a `helmfile diff`
 > - `make apply-local` - which will do a  `tofu apply` followed by a `helmfile apply`
->
-> Be aware that both these commands run `helmfile` with the `--skip-deps` option. If you need to fetch any changes, make sure to do a `make helmfile-deps` beforehand.
 
 ## Verify everything is running
 
@@ -136,21 +138,26 @@ You should expect to see the following containers with status `Running` (the con
 - api-app-web
 - api-queue
 - api-scheduler
-- elasticsearch-master
+- elasticsearch-2-data
+- elasticsearch-2-master
 - mailhog
 - mediawiki-[version]-app-alpha
 - mediawiki-[version]-app-api
 - mediawiki-[version]-app-backend
 - mediawiki-[version]-app-web
+- minio
 - platform-nginx
 - queryservice
 - queryservice-gateway
 - queryservice-ui
 - queryservice-updater
+- redis-2-master
+- redis-2-replicas
 - redis-master
 - redis-replicas
 - sql-mariadb-primary
 - sql-mariadb-secondary
+- superset
 - tool-cradle
 - tool-quickstatements
 - tool-widar
@@ -163,12 +170,21 @@ and the following containers with status `Completed`:
 You can connect to containers if needed, such as the redis master:
 
 ```sh
-kubectl --context minikube-wbaas exec -it reddis-master-0 -- bash
+kubectl --context minikube-wbaas exec -it redis-master-0 -- bash
 
 # or with the convenience script
 
-./bin/k8s-shell -e local -r redis -l role=master
+./bin/k8s-shell -e local -l app.kubernetes.io/instance=redis,app.kubernetes.io/component=master
 ```
+
+> [!TIP]
+> You can find what labels pods have with the `--show-labels` argument:
+> ```sh
+> # show labels on all pods
+> kubectl get pods --show-labels
+> # show labels on a single pod
+> kubectl get pod <pod-name> --show-labels
+> ```
 
 ### LoadBalancer
 
@@ -178,15 +194,30 @@ minikube does not provision LoadBalancer service IP addresses as part of normal 
 make minikube-tunnel
 ```
 
-You should now be able to access the ingress via http://www.wbaas.localhost. Most modern browsers will automatically resolve *.localhost to 127.0.0.1. If not, you'll need to edit your hosts file.
+You should now be able to access the ingress via http://www.wbaas.dev/ (*.wbaas.dev should point to 127.0.0.1, otherwise you'll need to edit your hosts file).
+
+> [!NOTE]
+> Previously `*.wbaas.localhost` was used for this purpose
 
 More detailed information on the load balancer can be found in [minikube-load-balancer.md](minikube-load-balancer.md).
+
+## Install local CA certificate
+Since we [introduced](https://phabricator.wikimedia.org/T378691) using HTTPS for local ingresses, you will get a scary warning when accessing local web interfaces. This can be mitigated by trusting the local CA certificate that is getting used for self-signing. The easiest way to do this is to save the local CA certificate in a file by accessing the secret it lives in (`wikibase-local-tls`) and importing it in your browser settings. There is also the possibility to import it into the trust store of your operating system, for example via the tool [mkcert](https://github.com/FiloSottile/mkcert), but you should be aware of the possible consequences this could have for the security of your machine.
+
+> [!TIP]
+> Running `make local-ca-firefox` will import the current certificate automatically into your firefox profile, if you have set `FIREFOX_PROFILE`. See [install-ca-cert-firefox.sh](/bin/local/install-ca-cert-firefox.sh)
+
+> [!TIP]
+> Running `make local-ca` will save the certificate to the file `wikibase-local-tls.crt`.
+
+> [!NOTE]
+> If you recreate your local cluster, you have to re-import the CA certificate, as a new one will get generated and used instead.
 
 ## Mailhog / Local emails
 
 For the local setup, [Mailhog](https://github.com/mailhog/MailHog) is used to capture outbound emails.
 
-You can view those emails by going to http://mailhog.wbaas.localhost/
+You can view those emails by going to http://mailhog.wbaas.dev/
 
 ## Mediawiki debugging 
 ### logging
@@ -215,10 +246,10 @@ Xdebug can be enabled in your minikube cluster if you use mediawiki image with `
 - You can use Xdebug on your VSCode IDE by following these steps:
   * Follow this tutorial in the section "Debug PHP using Xdebug and VS Code" https://php.tutorials24x7.com/blog/how-to-debug-php-using-xdebug-and-visual-studio-code-on-ubuntu
 
-## Create an account on wbaas.localhost
+## Create an account on wbaas.dev
 To use the local wbaas instance you have just setup, you will need to create an invitation code via the api which is needed when creating an account. Follow the [instructions](https://github.com/wbstack/api/blob/main/docs/invitation-codes.md) documented in the wbaas/api repo.
 
-After creating the invitation code, you can visit http://wbaas.localhost/create-account (or click the create account link in the login form) and create an account. All outbound email is captured by Mailhog ([see above](#mailhog--local-emails)) so you can use a made up email address (e.g. `test@example.com`). Verify your email address via the "Account Creation Notificaiton" email captured by Mailhog.
+After creating the invitation code, you can visit http://wbaas.dev/create-account (or click the create account link in the login form) and create an account. All outbound email is captured by Mailhog ([see above](#mailhog--local-emails)) so you can use a made up email address (e.g. `test@example.com`). Verify your email address via the "Account Creation Notification" email captured by Mailhog.
 
 ## [Optional] setup bash completion
 Here is how to get tab completion working for common commands
@@ -245,21 +276,22 @@ sudo wget https://raw.githubusercontent.com/roboll/helmfile/master/autocomplete/
 sudo sh -c 'skaffold completion bash > /usr/share/bash-completion/completions/skaffold'
 ```
 
-## [Optional] install local CA certificate
-Since we [introduced](https://phabricator.wikimedia.org/T378691) using HTTPS for local ingresses, you will get a scary warning when accessing local web interfaces. This can be mitigated by trusting the local CA certificate that is getting used for self-signing. The easiest way to do this is to save the local CA certificate in a file by accessing the secret it lives in (`wikibase-local-tls`) and importing it in your browser settings. There is also the possibility to import it into the trust store of your operating system, for example via the tool [mkcert](https://github.com/FiloSottile/mkcert), but you should be aware of the possible consequences this could have for the security of your machine.
-
-> [!TIP]
-> Running `make local-ca` will save the certificate to the file `wikibase-local-tls.crt`. It is highly recommended to delete the file again after importing it.
-
-> [!NOTE]
-> If you recreate your local cluster, you have to re-import the CA certificate, as a new one will get generated and used instead.
-
 ## Testing changes
 [skaffold](https://skaffold.dev) is used to load changes made in other repositories (e.g. `api`, `mediawiki`, `quickstatements`, etc) into the pods running in minikube. See the [README](../skaffold/README.md) in the skaffold directory for details on how to use.
 
 ## Tests
 
 Run `make test`. This only includes YAML linting for now.
+
+## Accessing the SQL database for debugging
+You can do this using `adminer` which is available at adminer.wbaas.dev.
+You can get the root password by using `bin/get-maria-root-password`.
+The username is `root`.
+You can select the primary server at `sql-mariadb-primary.default.svc.cluster.local`.
+
+`apidb` is the default name of the api database.
+
+You can also port forward sql to your local machine and use something like datagrip.
 
 ## FAQ / Troubleshooting
 ### **Why aren't my changes taking effect after a `tofu apply`?**
@@ -275,7 +307,7 @@ Error: plugin "diff" exited with error
 
 it is likely because `make diff-local` uses the `--skip-deps` option when executing `helmfile diff` which skips downloading chart dependencies. To force the fetching of dependencies run `make helmfile-deps` before `make diff-local`. 
 
-### **Why can't I access [wbaas.localhost](http://www.wbaas.localhost)?**
+### **Why can't I access [wbaas.dev](http://www.wbaas.dev)?**
 Here are a few things to try:
   - make sure minikube is running `make minikube-start`
   - make sure the minikube tunnel is running `make minikube-tunnel`
@@ -284,3 +316,17 @@ Here are a few things to try:
 
 ### **API isn't running // Some pods are missing**
 While running an initial `helmfile apply` for setting up all the k8s resources, it can happen that it doesn't complete all deployments, but helm thinks it did. To make sure everything that should be deployed was actually deployed, you can run `make helmfile-sync`.
+
+### **Unable to resolve the current Docker CLI context**
+If you get a warning similar to the below while running a `minikube` command:
+
+```
+$ minikube version
+W0602 10:50:58.273416 2657756 main.go:291] Unable to resolve the current Docker CLI context "default": context "default": context not found: open /home/ollie/.docker/contexts/meta/37a8eec1ce19687d132fe29051dca629d164e2c4958ba141d5f4133a33f0688f/meta.json: no such file or directory
+minikube version: v1.34.0
+commit: 210b148df93a80eb872ecbeb7e35281b3c582c61
+```
+
+Try setting the docker context (even if one is already set):
+* `docker context ls` lists the available contexts
+* `docker context use default` sets the "default" context

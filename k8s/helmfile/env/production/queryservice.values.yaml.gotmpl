@@ -1,5 +1,5 @@
 image:
-  tag: "0.3.135-wbstack.6"
+  tag: "0.3.135-wbstack.7"
   repository: ghcr.io/wbstack/queryservice
   pullPolicy: Always
 
@@ -8,7 +8,7 @@ app:
 
 resources:
   requests:
-    cpu: 0.5
+    cpu: 50m
     memory: "3048Mi"
   limits:
     cpu: null
@@ -19,7 +19,7 @@ persistence:
   annotations: {}
   accessMode: ReadWriteOnce
   storageClass: "premium-rwo"
-  size: "40Gi"
+  size: "80Gi"
 
 allowListStatic: |
   https://query.wikidata.org/bigdata/namespace/categories/sparql

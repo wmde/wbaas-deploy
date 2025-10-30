@@ -14,6 +14,12 @@ local-ca:
 	kubectl get secret wikibase-local-tls -o json | jq -r '.data."ca.crt"' | base64 -d > wikibase-local-ca.crt
 	realpath wikibase-local-ca.crt
 
+
+.PHONY: local-ca-firefox
+local-ca-firefox: # @HELP Install the minikube cluster CA certificate into your firefox profile ($FIREFOX_PROFILE)
+local-ca-firefox:
+	./bin/local/install-ca-cert-firefox.sh
+
 .PHONY: minikube-start
 minikube-start: # @HELP Start a local k8s cluster using minikube
 minikube-start:

@@ -55,7 +55,7 @@ app:
     tracingEnabled: false
   url: https://www.wikibase.cloud
 image:
-  tag: 10x.18.2
+  tag: sha-1562a97
 ingress:
   annotations:
     kubernetes.io/ingress.class: nginx
@@ -106,13 +106,13 @@ resources:
     limits:
       memory: 600Mi
     requests:
-      cpu: 500m
+      cpu: 200m
       memory: 300Mi
   queue:
     limits:
       memory: 1024Mi
     requests:
-      cpu: 500m
+      cpu: 1m
       memory: 512Mi
   scheduler:
     limits:
@@ -139,6 +139,10 @@ trustedProxy:
     - 10.108.0.0/14
 useProbes: true
 wbstack:
+  complaint:
+    mail:
+      recipient: dsa-meldung@wikimedia.de
+      sender: dsa@wikibase.cloud
   contact:
     mail:
       recipient: contact.wikibase@wikimedia.de

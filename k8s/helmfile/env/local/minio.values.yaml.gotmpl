@@ -27,7 +27,7 @@ consoleIngress:
   enabled: true
   path: /
   hosts:
-    - minio-console.wbaas.localhost
+    - minio-console.wbaas.dev
   annotations:
     kubernetes.io/ingress.class: nginx
 
@@ -35,6 +35,6 @@ ingress:
   enabled: true
   path: /
   hosts:
-    - minio.wbaas.localhost
+    - minio.wbaas.dev
   annotations:
     kubernetes.io/ingress.class: nginx

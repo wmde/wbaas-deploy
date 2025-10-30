@@ -50,7 +50,7 @@ SCRIPT_DIR="$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 OUTPUT_YAML=$SCRIPT_DIR/.tmp.values.$TARGET_RELEASE.yaml
 
 # Run the commands
-echo "Targetting environment: $TARGET_ENVIRONMENT and release: $TARGET_RELEASE"
+echo "Targeting environment: $TARGET_ENVIRONMENT and release: $TARGET_RELEASE"
 cd $SCRIPT_DIR/../k8s/helmfile && \
 helmfile --environment $TARGET_ENVIRONMENT --selector name=$TARGET_RELEASE write-values --skip-deps --output-file-template $OUTPUT_YAML
 

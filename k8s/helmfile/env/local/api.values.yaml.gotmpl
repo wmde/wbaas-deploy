@@ -1,22 +1,26 @@
 image:
-  tag: 10x.18.2
+  tag: sha-1562a97
 
 ingress:
   tls: null
 
 platform:
-  backendMwHost: mediawiki-139-app-backend.default.svc.cluster.local
+  backendMwHost: mediawiki-143-app-backend.default.svc.cluster.local
 
 wbstack:
-  wikiDbProvisionVersion: mw1.39-wbs1
-  wikiDbUseVersion: mw1.39-wbs1
+  wikiDbProvisionVersion: mw1.43-wbs1
+  wikiDbUseVersion: mw1.43-wbs1
   maxWikisPerUser: null
   elasticSearch:
     enabledByDefault: true
   contact:
     mail:
       recipient: someone@wikimedia.de
-      sender: contact-<subject>@wikibase.cloud
+      sender: contact-<subject>@wbaas.dev
+  complaint:
+    mail:
+      recipient: someone@wikimedia.de
+      sender: dsa@wbaas.dev
 
 app:
   name: WBaaS Localhost
@@ -56,7 +60,7 @@ storage:
   secretKeySecretName: minio-credentials
   secretKeySecretKey: rootPassword
   endpoint: http://minio.default.svc.cluster.local:9000
-  url: http://minio.wbaas.localhost/api-assets
+  url: http://minio.wbaas.dev/api-assets
 
 trustedProxy:
   proxies: ['*']

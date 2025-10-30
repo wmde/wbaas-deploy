@@ -1,0 +1,24 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  generateName: add-pru-to-bot-group-
+  namespace: adhoc-jobs
+spec:
+  ttlSecondsAfterFinished: 86400
+  backoffLimit: 1
+  template:
+    metadata:
+      name: add-platform-reserved-user
+    spec:
+      containers:
+        - name: add-pru-to-bot-group
+          command:
+            - 'bash'
+            - '-c'
+            - >
+                MW_INSTALL_PATH=/var/www/html/w/
+                php /var/www/html/w/maintenance/createAndPromote.php
+                PlatformReservedUser
+                --bot
+                --force
+      restartPolicy: Never

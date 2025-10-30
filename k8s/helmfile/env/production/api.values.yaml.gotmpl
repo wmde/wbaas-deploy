@@ -1,5 +1,5 @@
 image:
-  tag: 10x.18.2
+  tag: sha-1562a97
 
 replicaCount:
   web: 1
@@ -72,6 +72,10 @@ wbstack:
     mail:
       recipient: contact.wikibase@wikimedia.de
       sender: contact-<subject>@wikibase.cloud
+  complaint:
+    mail:
+      recipient: dsa-meldung@wikimedia.de
+      sender: dsa@wikibase.cloud
 
 app:
   name: WBaaS Wikibase Production
@@ -144,7 +148,7 @@ resources:
   # The backed is a platform critical element, so make sure it is allowed to be a bit silly...
   backend:
     requests:
-      cpu: 500m
+      cpu: 200m
       memory: 300Mi
     limits:
       memory: 600Mi
@@ -156,7 +160,7 @@ resources:
       memory: 400Mi
   queue:
     requests:
-      cpu: 500m
+      cpu: 1m
       memory: 512Mi
     limits:
       memory: 1024Mi

@@ -11,6 +11,8 @@ configs:
     users.anonymous.enabled: true
     admin.enabled: false
 
+    timeout.reconciliation: 60s
+
     ui.bannerpermanent: true
     ui.bannerposition: "top"
     ui.bannercontent: "PRODUCTION"
@@ -42,10 +44,10 @@ configs:
 controller:
   resources:
    limits:
-     memory: 512Mi
+     memory: 700Mi
    requests:
      cpu: 250m
-     memory: 256Mi
+     memory: 512Mi
 
 applicationSet:
   resources:
@@ -76,8 +78,8 @@ repoServer:
    limits:
      memory: 1024Mi
    requests:
-     cpu: 10m
-     memory: 64Mi
+     cpu: 250m
+     memory: 128Mi
 
 server:
   resources:

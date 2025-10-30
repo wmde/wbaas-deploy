@@ -1,5 +1,9 @@
 resource "kubernetes_secret" "recaptcha-v3-secrets" {
-  for_each = toset(["default", "api-jobs", "adhoc-jobs"])
+  for_each = toset([
+    "default",
+    kubernetes_namespace.api-job-namespace.metadata[0].name,
+    kubernetes_namespace.adhoc-job-namespace.metadata[0].name,
+  ])
   metadata {
     name = "recaptcha-v3-secrets"
     # default as staging
@@ -18,7 +22,11 @@ moved {
 }
 
 resource "kubernetes_secret" "recaptcha-v2-secrets" {
-  for_each = toset(["default", "api-jobs", "adhoc-jobs"])
+  for_each = toset([
+    "default",
+    kubernetes_namespace.api-job-namespace.metadata[0].name,
+    kubernetes_namespace.adhoc-job-namespace.metadata[0].name,
+  ])
   metadata {
     name = "recaptcha-v2-secrets"
     # default as staging

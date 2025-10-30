@@ -1,5 +1,5 @@
 locals {
-  sql_pv_critical_utilization_threshold = 0.85 # 85%, alert triggers if metric is above this value
+  sql_pv_critical_utilization_threshold = 0.7 # 70%, alert triggers if metric is above this value
 }
 
 resource "google_monitoring_alert_policy" "alert_policy_sql_primary_pv_critical_utilization" {

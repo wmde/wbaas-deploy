@@ -2,8 +2,9 @@ operatorConfig:
   defaultTags:
     - "tag:k8s-operator-production"
   resources:
+    requests:
+      cpu: 15m
     limits:
-      cpu: 750m
       memory: 1Gi
 
 proxyConfig:
