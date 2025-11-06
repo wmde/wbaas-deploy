@@ -1,8 +1,8 @@
 # User Administration
-Currently the Platoform UI only offers limited ways for a user to manage their wikibase.cloud user account, and manual intervention becomes necessary upon request. For certain scenarios we created code to perform these actions, in order to reduce mistakes and inconsistent database states.
+Currently the Platform UI only offers limited ways for a user to manage their wikibase.cloud user account, and manual intervention becomes necessary upon request. For certain scenarios we created code to perform these actions, in order to reduce mistakes and inconsistent database states.
 
 ## Changing an Email Address
-[User/ChangeEmail Command](https://github.com/wbstack/api/blob/main/app/Console/Commands/User/ChangeEmail.php):
+[User/ChangeEmail Command](https://github.com/wbstack/api/blob/main/app/Console/Commands/User/ChangeEmail.php)
 ```
 $ kubectl exec -ti deployments/api-app-backend -- php artisan wbs-user:change-email --from=foobar@foo.foo --to=barbar@bar.com
 Successfully changed user email from 'foobar@foo.foo' to 'barbar@bar.com'
@@ -25,11 +25,13 @@ Information about email and password hash was deleted.
 
 ## Soft-Deleting a Wiki
 [Wiki/Delete Command](https://github.com/wbstack/api/blob/main/app/Console/Commands/Wiki/Delete.php)
-
 ```
 $ kubectl exec -ti deployments/api-app-backend -- php artisan wbs-wiki:delete domain 'fjdsjkfdskjfdskjfds.wbaas.dev'
 Success!
 ```
+
+- This Commands first argument defines the key it should look for in the database via the second argument
+  - Domain is recommended, as there is less potential for mistakes then with numeral IDs
 
 ### Restoring a Soft-Deleted Wiki
 In case you need to restore a soft-deleted wiki, there currently is not a ready Command there yet for this, and it is recommended to create one if ever needed. However, in emergencies it can also be achieved via `artisan tinker`. A session could look like this:
