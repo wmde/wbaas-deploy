@@ -1,0 +1,66 @@
+image:
+  registry: ghcr.io
+  repository: wbstack/nginx
+  tag: 1.17.10-debian-10-r11
+
+# see https://github.com/wbstack/bitnami-legacy/blob/nginx/5.2.4/bitnami/nginx/values.yaml#L49
+cloneStaticSiteFromGit:
+  # Depends on an image which may no longer exist
+  enabled: false
+
+# see https://github.com/wbstack/bitnami-legacy/blob/nginx/5.2.4/bitnami/nginx/values.yaml#L251
+metrics:
+  # Depends on an image which may no longer exist
+  enabled: false
+
+replicaCount: 3
+
+resources:
+  limits:
+    cpu: null
+    memory: 128Mi
+  requests:
+     cpu: 20m
+     memory: 128Mi
+
+serverBlock: |-
+{{ readFile "mediawiki-proxy-nginx.nginx.conf" | indent 2 }}
+
+livenessProbe:
+  httpGet:
+    path: /kube-probe
+    port: http
+  initialDelaySeconds: 30
+  timeoutSeconds: 5
+  failureThreshold: 6
+readinessProbe:
+  httpGet:
+    path: /kube-probe
+    port: http
+  initialDelaySeconds: 5
+  timeoutSeconds: 3
+  periodSeconds: 5
+
+service:
+  type: ClusterIP
+  port: 8080
+
+ingress:
+  enabled: false
+metrics:
+  enabled: false
+cloneStaticSiteFromGit:
+  enabled: false
+
+affinity:
+  podAntiAffinity:
+    preferredDuringSchedulingIgnoredDuringExecution:
+      - weight: 100
+        podAffinityTerm:
+          labelSelector:
+            matchExpressions:
+              - key: "app.kubernetes.io/instance"
+                operator: In
+                values:
+                  - platform-nginx
+          topologyKey: "kubernetes.io/hostname"

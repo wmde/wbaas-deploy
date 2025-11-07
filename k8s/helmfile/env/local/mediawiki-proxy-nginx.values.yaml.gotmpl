@@ -1,0 +1,8 @@
+replicaCount: 1
+
+serverBlock: |-
+{{ readFile "mediawiki-proxy-nginx.nginx.conf" | indent 2 }}
+
+resources:
+  limits:
+    cpu: 50m

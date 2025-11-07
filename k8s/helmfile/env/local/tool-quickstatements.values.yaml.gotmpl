@@ -2,7 +2,7 @@ image:
   tag: sha-dd511e1
 
 platform:
-  mediawikiBackendHost: mediawiki-143-app-backend.default.svc.cluster.local
+  mediawikiBackendHost: mediawiki-proxy-nginx.default.svc.cluster.local
 
 extraCert:
   secretName: {{ .Values.tlsSecret }}

@@ -2,7 +2,8 @@ image:
   tag: sha-0fb9800
 
 platform:
-  mediawikiBackendHost: mediawiki-143-app-backend.default.svc.cluster.local
+  #mediawikiBackendHost: mediawiki-143-app-backend.default.svc.cluster.local
+  mediawikiBackendHost: mediawiki-proxy-nginx.default.svc.cluster.local
 
 extraCert:
   secretName: {{ .Values.tlsSecret }}
