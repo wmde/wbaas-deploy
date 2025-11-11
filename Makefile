@@ -23,7 +23,7 @@ local-ca-firefox:
 .PHONY: minikube-start
 minikube-start: # @HELP Start a local k8s cluster using minikube
 minikube-start:
-	minikube --profile minikube-wbaas start --kubernetes-version=1.31.2 --container-runtime=docker
+	minikube --profile minikube-wbaas start --kubernetes-version=1.33.5 --container-runtime=docker
 
 .PHONY: minikube-stop
 minikube-stop: # @HELP Stop the local minikube cluster
