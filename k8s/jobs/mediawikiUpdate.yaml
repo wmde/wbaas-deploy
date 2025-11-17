@@ -1,0 +1,26 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  generateName: mediawiki-update-
+  namespace: adhoc-jobs
+spec:
+  ttlSecondsAfterFinished: 86400
+  backoffLimit: 0
+  template:
+    metadata:
+      name: mediawiki-update
+    spec:
+      containers:
+        - name: mediawiki-update
+          command:
+            - bash
+            - -c
+            - |
+              set -euo pipefail
+              export MW_INSTALL_PATH=/var/www/html/w/
+              php /var/www/html/w/maintenance/update.php \
+                --skip-config-validation \
+                --skip-external-dependencies \
+                --quick \
+                --force
+      restartPolicy: Never
