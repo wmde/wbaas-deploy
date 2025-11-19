@@ -6,14 +6,16 @@ set -euo pipefail
 # Note: The Job runs update.php with flags: --skip-config-validation, --skip-external-dependencies, --quick, --force.
 # Tail logs with: "kubectl logs -n adhoc-jobs -l job-name=$(kubectl get jobs -n adhoc-jobs -o jsonpath="{.items[-1:].metadata.name}") --timestamps -f"
 
-# Step 1: Find a running MediaWiki backend pod
+# Step 1: Find a running MediaWiki 1.43 backend pod
 MW_POD=$(kubectl get pods \
   --field-selector='status.phase=Running' \
-  -l app.kubernetes.io/name=mediawiki,app.kubernetes.io/component=app-backend \
-  -o jsonpath="{.items[0].metadata.name}")
+  -l app.kubernetes.io/name=mediawiki \
+  -l app.kubernetes.io/component=app-backend \
+  -l app.kubernetes.io/instance=mediawiki-143 \
+  -o jsonpath="{.items[0].metadata.name}" 2>/dev/null)
 
 if [[ -z "${MW_POD}" ]]; then
-  echo "No running MediaWiki backend pod found (label selector: name=mediawiki, component=app-backend)." >&2
+  echo "No running MediaWiki 1.43 backend pod found." >&2
   exit 1
 fi
 
