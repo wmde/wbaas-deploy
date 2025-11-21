@@ -35,6 +35,5 @@ kubectl create -f mediawikiUpdate.yaml -o=json --dry-run=client | \
   jq -s '.[0].spec.template.spec.containers[0].image = .[1].spec.containers[0].image' - mw_pod.json | \
   jq '.[0].spec.template.spec.containers[0].env = .[1].spec.containers[0].env' | \
   jq --arg wbs "$WBS_DOMAIN" --arg mwver "$MW_VERSION" '.[0].spec.template.spec.containers[0].env += [{"name": "WBS_DOMAIN", "value": $wbs}, {"name": "MW_VERSION", "value": $mwver}]' | \
-  jq '.[0].spec.template.spec.containers[0].env += [{"name": "PLATFORM_API_BACKEND_HOST", "value": "bc72affc51364420b33a1dbea0df748c.api.mockbin.io"}]' | \
   jq '.[0]' | \
   kubectl create -f -
