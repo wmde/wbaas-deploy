@@ -1,0 +1,36 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  generateName: mediawiki-update-
+  namespace: adhoc-jobs
+spec:
+  ttlSecondsAfterFinished: 86400
+  backoffLimit: 0
+  template:
+    metadata:
+      name: mediawiki-update
+    spec:
+      containers:
+        - name: mediawiki-update
+          command:
+            - bash
+            - -c
+            - |
+                curl -X POST \
+                "http://${PLATFORM_API_BACKEND_HOST}/backend/setWikiReadOnly?domain=${WBS_DOMAIN}&readOnly=true"
+
+                export MW_INSTALL_PATH=/var/www/html/w/
+
+                php /var/www/html/w/maintenance/run.php update --quick
+                status=$?
+                if [ "$status" -eq 0 ]; then
+                  echo "'update.php' exit with code 0, Mediawiki update succeeded on ${WBS_DOMAIN}, database version updated to ${MW_VERSION}, readOnly mode will be disabled"
+                curl --fail -X POST \
+                  "http://${PLATFORM_API_BACKEND_HOST}/backend/setWikiDbVersion?domain=${WBS_DOMAIN}&dbVersion=${MW_VERSION}"
+                curl --fail -X POST \
+                  "http://${PLATFORM_API_BACKEND_HOST}/backend/setWikiReadOnly?domain=${WBS_DOMAIN}&readOnly=false"
+                else
+                  echo "update.php failed to run and exit with code $status" >&2
+                  exit 1
+                fi
+      restartPolicy: Never
