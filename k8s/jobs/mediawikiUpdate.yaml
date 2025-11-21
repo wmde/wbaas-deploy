@@ -21,7 +21,7 @@ spec:
 
                 export MW_INSTALL_PATH=/var/www/html/w/
 
-                php /var/www/html/w/maintenance/update.php --quick
+                php /var/www/html/w/maintenance/run.php update --quick
                 status=$?
                 if [ "$status" -eq 0 ]; then
                   echo "'update.php' exit with code 0, Mediawiki update succeeded on ${WBS_DOMAIN}, database version updated to ${MW_VERSION}, readOnly mode will be disabled"
