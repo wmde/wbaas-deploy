@@ -16,11 +16,19 @@ spec:
             - bash
             - -c
             - |
-              set -euo pipefail
+              curl -X POST \
+                "http://${PLATFORM_API_BACKEND_HOST}/backend/setWikiReadOnly?domain=${WBS_DOMAIN}&readOnly=true"
+
               export MW_INSTALL_PATH=/var/www/html/w/
-              php /var/www/html/w/maintenance/update.php \
-                --skip-config-validation \
-                --skip-external-dependencies \
-                --quick \
-                --force
+
+              if php /var/www/html/w/maintenance/update.php --quick; then
+                echo "'update.php' exit with code 0, Mediawiki update succeeded on ${WBS_DOMAIN}, database version updated to ${MW_VERSION}, readOnly mode will be disabled"
+                curl --fail -X POST \
+                  "http://${PLATFORM_API_BACKEND_HOST}/backend/setWikiDbVersion?domain=${WBS_DOMAIN}&dbVersion=${MW_VERSION}"
+                curl --fail -X POST \
+                  "http://${PLATFORM_API_BACKEND_HOST}/backend/setWikiReadOnly?domain=${WBS_DOMAIN}&readOnly=false"
+              else
+                echo "update.php failed to run and exit with code 1" >&2
+                exit 1
+              fi
       restartPolicy: Never
