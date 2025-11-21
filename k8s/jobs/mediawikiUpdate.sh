@@ -3,7 +3,7 @@ set -euo pipefail
 
 # Run MediaWiki "update.php" script in a k8s job. This can be used to update a specific wiki
 # Usage: "./mediawikiUpdate.sh <wbs_domain> <mediawiki_backend_pod> <mw_version>"
-# Example: ./mediawikiUpdate.sh test1.wbaas.dev mediawiki-143 wm1.43-wbs1
+# Example: ./mediawikiUpdate.sh mywayordatway.wikibase.dev mediawiki-143 mw1.43-wbs1
 
 if [[ $# -lt 3 ]]; then
   echo "Update: $0 <wbs_domain> <mediawiki_backend_pod> <mw_version>" >&2
@@ -35,6 +35,6 @@ kubectl create -f mediawikiUpdate.yaml -o=json --dry-run=client | \
   jq -s '.[0].spec.template.spec.containers[0].image = .[1].spec.containers[0].image' - mw_pod.json | \
   jq '.[0].spec.template.spec.containers[0].env = .[1].spec.containers[0].env' | \
   jq --arg wbs "$WBS_DOMAIN" --arg mwver "$MW_VERSION" '.[0].spec.template.spec.containers[0].env += [{"name": "WBS_DOMAIN", "value": $wbs}, {"name": "MW_VERSION", "value": $mwver}]' | \
-  jq '.[0].spec.template.spec.containers[0].env += [{"name": "PLATFORM_API_BACKEND_HOST", "value": "https://bc72affc51364420b33a1dbea0df748c.api.mockbin.io/"}]' | \
+  jq '.[0].spec.template.spec.containers[0].env += [{"name": "PLATFORM_API_BACKEND_HOST", "value": "bc72affc51364420b33a1dbea0df748c.api.mockbin.io"}]' | \
   jq '.[0]' | \
   kubectl create -f -
