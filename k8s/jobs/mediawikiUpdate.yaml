@@ -16,6 +16,7 @@ spec:
             - bash
             - -c
             - |
+                set -o pipefail
                 curl -X POST \
                 "http://${PLATFORM_API_BACKEND_HOST}/backend/setWikiReadOnly?domain=${WBS_DOMAIN}&readOnly=true"
 

@@ -1,5 +1,5 @@
 #!/bin/bash
-set -eo pipefail
+set -o pipefail
 
 # Run MediaWiki update.php for all wikis from a list of domains.
 # Usage:
