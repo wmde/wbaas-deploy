@@ -2,17 +2,17 @@
 set -euo pipefail
 
 # Run MediaWiki "update.php" script in a k8s job. This can be used to update a specific wiki
-# Usage: "./mediawikiUpdate.sh <wbs_domain> <mediawiki_backend_pod> <mw_version>"
-# Example: ./mediawikiUpdate.sh mywayordatway.wikibase.dev mediawiki-143 mw1.43-wbs1
+# Usage: "./mediawikiUpdate.sh <wbs_domain>"
+# Example: ./mediawikiUpdate.sh mywayordatway.wikibase.dev
 
 if [[ $# -lt 3 ]]; then
-  echo "Update: $0 <wbs_domain> <mediawiki_backend_pod> <mw_version>" >&2
+  echo "Update: $0 <wbs_domain>" >&2
   exit 1
 fi
 
 WBS_DOMAIN=$1
-MEDIAWIKI_BACKEND_POD=$2
-MW_VERSION=$3
+MEDIAWIKI_BACKEND_POD=mediawiki-143
+MW_VERSION=mw1.43-wbs
 
 # Step 1: Find a running MediaWiki backend pod (update instance as needed)
 MW_POD=$(kubectl get pods \
