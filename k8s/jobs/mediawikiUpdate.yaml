@@ -27,7 +27,7 @@ spec:
                 }
 
                 log_info "Setting ${WBS_DOMAIN} to read-only"
-                curl -X POST \
+                curl --fail --location --silent --request PUT \
                 "http://${PLATFORM_API_BACKEND_HOST}/backend/setWikiReadOnly?domain=${WBS_DOMAIN}&readOnly=true"
 
                 export MW_INSTALL_PATH=/var/www/html/w/
