@@ -13,11 +13,11 @@ MW_POD=$(kubectl get pods \
   --field-selector='status.phase=Running' \
   -l app.kubernetes.io/name=mediawiki \
   -l app.kubernetes.io/component=app-backend \
-  -l app.kubernetes.io/instance="${MEDIAWIKI_BACKEND_POD_INSTANCE}" \
+  -l app.kubernetes.io/instance="${MEDIAWIKI_BACKEND_INSTANCE_LABEL}" \
   -o jsonpath="{.items[0].metadata.name}" 2>/dev/null)
 
 if [[ -z "${MW_POD}" ]]; then
-  echo "No running MediaWiki backend pod found with name ${MEDIAWIKI_BACKEND_POD_INSTANCE}." >&2
+  echo "No running MediaWiki backend pod found with name ${MEDIAWIKI_BACKEND_INSTANCE_LABEL}." >&2
   exit 1
 fi
 
