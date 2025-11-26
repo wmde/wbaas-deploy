@@ -1,5 +1,5 @@
 #!/bin/bash
-# Error if something terminates with a non-zero exit code (even in a pipe) of if referncing an unbound variable
+# Error if something terminates with a non-zero exit code (even in a pipe) or if referencing an unbound variable
 # this means we don't need to check all variables are defined
 set -euo pipefail
 
