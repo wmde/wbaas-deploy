@@ -37,14 +37,14 @@ spec:
                 status=$?
                 if [ "$status" -eq 0 ]; then
                   log_info "update.php completed successfully for ${WBS_DOMAIN}"
-                  echo "'run.php update --quick' exited with code 0"
-                  echo "Mediawiki update succeeded on ${WBS_DOMAIN}"
+                  log_info "'run.php update --quick' exited with code 0"
+                  log_info "Mediawiki update succeeded on ${WBS_DOMAIN}"
                   curl --fail --location --silent --request PUT \
                     "http://${PLATFORM_API_BACKEND_HOST}/backend/setWikiDbVersion?domain=${WBS_DOMAIN}&dbVersion=${MW_VERSION}"
-                  echo "database version updated to ${MW_VERSION}"
+                  log_info "database version updated to ${MW_VERSION}"
                   curl --fail --location --silent --request PUT \
                     "http://${PLATFORM_API_BACKEND_HOST}/backend/setWikiReadOnly?domain=${WBS_DOMAIN}&readOnly=false"
-                  echo "readOnly mode will be disabled for ${WBS_DOMAIN}"
+                  log_info "readOnly mode will be disabled for ${WBS_DOMAIN}"
                 else
                   log_error "update.php failed to run and exit with code $status"
                   echo "update.php failed to run and exit with code $status" >&2

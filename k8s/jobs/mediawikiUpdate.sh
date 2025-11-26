@@ -5,7 +5,7 @@ set -euo pipefail
 # Usage: "./mediawikiUpdate.sh <wbs_domain>"
 # Example: ./mediawikiUpdate.sh mywayordatway.wikibase.dev
 
-if [[ $# -lt 3 ]]; then
+if [[ $# -ne 1 ]]; then
   echo "Update: $0 <wbs_domain>" >&2
   exit 1
 fi
