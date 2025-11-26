@@ -3,9 +3,9 @@
 # this means we don't need to check all variables are defined
 set -euo pipefail
 
-# Example of variables to set
+# Example of ENV variables to set
 # WBS_DOMAIN=coffeebase.wikibase.cloud
-# MEDIAWIKI_BACKEND_POD_INSTANCE=mediawiki-143
+# MEDIAWIKI_BACKEND_INSTANCE_LABEL=mediawiki-143
 # MW_VERSION=mw1.43-wbs1
 
 # find a running a suitable MediaWiki backend pod to reuse the image and environment variables from
