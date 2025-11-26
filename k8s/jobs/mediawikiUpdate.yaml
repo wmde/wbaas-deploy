@@ -26,7 +26,7 @@ spec:
                   printf 'ERROR: %s\n' "$*" >&2
                 }
 
-                log_info "Setting ${WBS_DOMAIN} to read-only"
+                log_info "Setting ${WBS_DOMAIN} to readOnly"
                 curl --fail --location --silent --request PUT \
                 "http://${PLATFORM_API_BACKEND_HOST}/backend/setWikiReadOnly?domain=${WBS_DOMAIN}&readOnly=true"
 
@@ -37,11 +37,14 @@ spec:
                 status=$?
                 if [ "$status" -eq 0 ]; then
                   log_info "update.php completed successfully for ${WBS_DOMAIN}"
-                  echo "'update.php' exit with code 0, Mediawiki update succeeded on ${WBS_DOMAIN}, database version updated to ${MW_VERSION}, readOnly mode will be disabled"
+                  echo "'run.php update --quick' exited with code 0"
+                  echo "Mediawiki update succeeded on ${WBS_DOMAIN}"
                   curl --fail --location --silent --request PUT \
                     "http://${PLATFORM_API_BACKEND_HOST}/backend/setWikiDbVersion?domain=${WBS_DOMAIN}&dbVersion=${MW_VERSION}"
+                  echo "database version updated to ${MW_VERSION}"
                   curl --fail --location --silent --request PUT \
                     "http://${PLATFORM_API_BACKEND_HOST}/backend/setWikiReadOnly?domain=${WBS_DOMAIN}&readOnly=false"
+                  echo "readOnly mode will be disabled for ${WBS_DOMAIN}"
                 else
                   log_error "update.php failed to run and exit with code $status"
                   echo "update.php failed to run and exit with code $status" >&2
