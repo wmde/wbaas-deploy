@@ -36,6 +36,6 @@ kubectl create -f mediawikiUpdate.yaml -o=json --dry-run=client | \
   # set two specific ENV vars in the job from ENV vars in this script
   jq --arg wbs "$WBS_DOMAIN" --arg mwver "$MW_VERSION" '.[0].spec.template.spec.containers[0].env += [{"name": "WBS_DOMAIN", "value": $wbs}, {"name": "MW_VERSION", "value": $mwver}]' | \
   # return just the Job spec (dropping the existing Pod one)
-  jq '.[0]' > /tmp/jobspec.yaml
+  jq '.[0]' | \
   # create the now fully formed Job from the spec
-  # kubectl create -f -
+  kubectl create -f -
