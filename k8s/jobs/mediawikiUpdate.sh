@@ -17,7 +17,7 @@ MW_POD=$(kubectl get pods \
   -o jsonpath="{.items[0].metadata.name}" 2>/dev/null)
 
 if [[ -z "${MW_POD}" ]]; then
-  echo "No running MediaWiki backend pod found with name ${MEDIAWIKI_BACKEND_INSTANCE_LABEL}." >&2
+  echo "No running MediaWiki backend pod found with instance label ${MEDIAWIKI_BACKEND_INSTANCE_LABEL}." >&2
   exit 1
 fi
 
