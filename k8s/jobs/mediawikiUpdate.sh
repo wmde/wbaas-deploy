@@ -12,7 +12,7 @@ fi
 
 WBS_DOMAIN=$1
 MEDIAWIKI_BACKEND_POD=mediawiki-143
-MW_VERSION=mw1.43-wbs
+MW_VERSION=mw1.43-wbs1
 
 # Step 1: Find a running MediaWiki backend pod (update instance as needed)
 MW_POD=$(kubectl get pods \
