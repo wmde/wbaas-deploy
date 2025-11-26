@@ -1,5 +1,5 @@
 #!/bin/bash
-set -o pipefail
+set -euo pipefail
 
 # Run MediaWiki "update.php" script in a k8s job. This can be used to update a specific wiki
 # Usage: "./mediawikiUpdate.sh <wbs_domain>"
