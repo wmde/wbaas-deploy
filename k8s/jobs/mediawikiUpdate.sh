@@ -21,7 +21,6 @@ if [[ -z "${MW_POD}" ]]; then
   exit 1
 fi
 
-# store the yaml pod in temporary file
 tmp_file=$(mktemp --suffix=.json)
 kubectl get pod "$MW_POD" -o=json > "$tmp_file"
 
