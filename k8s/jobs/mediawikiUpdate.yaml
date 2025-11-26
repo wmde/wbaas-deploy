@@ -33,7 +33,6 @@ spec:
                 export MW_INSTALL_PATH=/var/www/html/w/
 
                 log_info "Running MediaWiki update.php for ${WBS_DOMAIN}"
-                
                 # temporarily don't exit on error so we can act on the status
                 set +e
                 php /var/www/html/w/maintenance/run.php update --quick
