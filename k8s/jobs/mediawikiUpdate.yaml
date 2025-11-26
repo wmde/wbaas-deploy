@@ -16,7 +16,7 @@ spec:
             - bash
             - -c
             - |
-                set -o pipefail
+                set -euo pipefail
 
                 log_info() {
                   printf 'INFO: %s\n' "$*"
