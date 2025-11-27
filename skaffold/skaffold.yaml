@@ -120,27 +120,13 @@ profiles:
       - kubeContext: minikube-wbaas
     build:
       artifacts:
-        - image: local/skaffold/wbaas/api
+        - image: ghcr.io/wbstack/api
           context: ./../../api
       local:
         useDockerCLI: true
     deploy:
       kubeContext: minikube-wbaas
-      helm:
-        releases:
-          - name: api
-            chartPath: ./../../charts/charts/api
-            valuesFiles:
-              - ".tmp.values.api.yaml"
-              - NeverPull.yaml
-            artifactOverrides:
-              image: local/skaffold/wbaas/api
-            imageStrategy:
-              helm: {}
-        hooks:
-          before:
-            - host:
-                command: [ "./helmfile-values", "-e", "local", "-r", "api", "-n" ]
+      kubectl: {}
 metadata:
   name: api
 
