@@ -46,6 +46,8 @@ spec:
                     "http://${PLATFORM_API_BACKEND_HOST}/backend/setWikiDbVersion?domain=${WBS_DOMAIN}&dbVersion=${MW_VERSION}"
                   log_info "database version updated to ${MW_VERSION}"
                   curl --fail --location --silent --request PUT \
+                  log_info "Pause for 2 minutes before disabling readOnly mood"
+                  sleep 120
                     "http://${PLATFORM_API_BACKEND_HOST}/backend/setWikiReadOnly?domain=${WBS_DOMAIN}&readOnly=0"
                   log_info "readOnly mode will be disabled for ${WBS_DOMAIN}"
                 else
