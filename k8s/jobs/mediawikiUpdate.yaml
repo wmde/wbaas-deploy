@@ -52,7 +52,6 @@ spec:
                   log_info "readOnly mode will be disabled for ${WBS_DOMAIN}"
                 else
                   log_error "update.php failed to run and exit with code $status"
-                  log_error "update.php failed to run and exit with code $status"
                   exit 1
                 fi
       restartPolicy: Never
