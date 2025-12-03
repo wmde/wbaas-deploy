@@ -82,3 +82,20 @@ use the ENV `WBS_DOMAIN
 
 This script loops through all wikis and run `addPlatformReservedUser.sh` on each wiki to put `PlatformReservedUser` to bot group.
 Run `list-wiki-domains` first, save it to a file (for example: `domains.txt`), then run `addPlatformReservedUserToBotGroupForAllWikis.sh`.
+
+## mediawikiUpdate.sh
+Example of ENV variables to set
+```sh
+WBS_DOMAIN=coffeebase.wikibase.cloud
+MEDIAWIKI_BACKEND_INSTANCE_LABEL=mediawiki-143
+MW_VERSION=mw1.43-wbs1
+```
+
+Creates a Job that spins up it's own mediawiki pod to run the mediawiki update maintenance script (`run.php update --quick`)
+
+- Before that script is ran the wiki gets set to read-only mode
+- After it has run the dbVersion gets updated in the API
+- and read-only mode gets disabled again after two minutes (nginx cache TTL)
+
+## verifyMediaWikiUpdates.sh
+Reports status for k8s Jobs kicked off via `mediawikiUpdate.sh`. Filters for them via namespace `adhoc-jobs` and the metadata label `wikiDomain`.
