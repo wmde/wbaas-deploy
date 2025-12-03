@@ -10,7 +10,7 @@ replicaCount:
 useProbes: true
 
 platform:
-  backendMwHost: mediawiki-139-app-backend.default.svc.cluster.local
+  backendMwHost: mediawiki-143-app-backend.default.svc.cluster.local
 
 queue:
   queueNames: ['default']
@@ -62,8 +62,8 @@ wbstack:
     - 'P30D'
   subdomainSuffix: {{ .Values.wbstack.subdomainSuffix }}
   uiurl: {{ .Values.wbstack.uiurl }}
-  wikiDbProvisionVersion: mw1.39-wbs1
-  wikiDbUseVersion: mw1.39-wbs1
+  wikiDbProvisionVersion: mw1.43-wbs1
+  wikiDbUseVersion: mw1.43-wbs1
   maxWikisPerUser: 6
   monitoringEmail: "wb-cloud-monitoring@wikimedia.de"
   elasticSearch:
