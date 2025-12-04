@@ -36,5 +36,7 @@ kubectl create -f mediawikiUpdate.yaml -o=json --dry-run=client | \
   jq --arg wbs "$WBS_DOMAIN" --arg mwver "$MW_VERSION" '.[0].spec.template.spec.containers[0].env += [{"name": "WBS_DOMAIN", "value": $wbs}, {"name": "MW_VERSION", "value": $mwver}]' | \
   # return just the Job spec (dropping the existing Pod one)
   jq '.[0]' | \
+  # add a k8s label to the job object with the wiki domain
+  jq --arg wbs "$WBS_DOMAIN" '.metadata.labels += {"wikiDomain": $wbs}' | \
   # create the now fully formed Job from the spec
   kubectl create -f -

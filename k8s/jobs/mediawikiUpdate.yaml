@@ -45,13 +45,12 @@ spec:
                   curl --fail --location --silent --request PUT \
                     "http://${PLATFORM_API_BACKEND_HOST}/backend/setWikiDbVersion?domain=${WBS_DOMAIN}&dbVersion=${MW_VERSION}"
                   log_info "database version updated to ${MW_VERSION}"
-                  log_info "Pause for 2 minutes before disabling readOnly mood"
+                  log_info "Pause for 2 minutes before disabling readOnly mode"
                   sleep 120
                   curl --fail --location --silent --request PUT \
                     "http://${PLATFORM_API_BACKEND_HOST}/backend/setWikiReadOnly?domain=${WBS_DOMAIN}&readOnly=0"
                   log_info "readOnly mode will be disabled for ${WBS_DOMAIN}"
                 else
-                  log_error "update.php failed to run and exit with code $status"
                   log_error "update.php failed to run and exit with code $status"
                   exit 1
                 fi
