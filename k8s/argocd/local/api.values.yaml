@@ -72,8 +72,6 @@ ingress:
       paths:
         - /api(/|$)(.*)
   tls: null
-platform:
-  backendMwHost: mediawiki-143-app-backend.default.svc.cluster.local
 queue:
   backoff:
     - 10
