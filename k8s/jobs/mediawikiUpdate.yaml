@@ -26,9 +26,28 @@ spec:
                   printf 'ERROR: %s\n' "$*" >&2
                 }
 
+                ### prepare the update
+
                 log_info "Setting ${WBS_DOMAIN} to readOnly"
                 curl --fail --location --silent --request PUT \
                 "http://${PLATFORM_API_BACKEND_HOST}/backend/setWikiReadOnly?domain=${WBS_DOMAIN}&readOnly=1"
+
+                log_info "Processing MediaWiki jobs for ${WBS_DOMAIN}"
+
+                JOBS_TO_GO=1
+                while [ "$JOBS_TO_GO" != "0" ]
+                do
+                    echo "Running 1000 jobs"
+                    php w/maintenance/runJobs.php --maxjobs 1000
+                    echo Waiting for 1 seconds...
+                    sleep 1
+                    JOBS_TO_GO=$(php w/maintenance/showJobs.php | tr -d '[:space:]')
+                    echo $JOBS_TO_GO jobs to go
+                done
+
+                log_info "Finished processing jobs for MediaWiki for ${WBS_DOMAIN}"
+
+                ### run the update
 
                 export MW_INSTALL_PATH=/var/www/html/w/
 
@@ -37,6 +56,9 @@ spec:
                 set +e
                 php /var/www/html/w/maintenance/run.php update --quick
                 status=$?
+
+                ### cleanup
+
                 set -e
                 if [ "$status" -eq 0 ]; then
                   log_info "update.php completed successfully for ${WBS_DOMAIN}"
