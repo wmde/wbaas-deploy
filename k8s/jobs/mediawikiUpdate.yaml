@@ -27,7 +27,7 @@ spec:
                 }
 
                 log_info "Processing MediaWiki jobs for ${WBS_DOMAIN}"
-                
+
                 JOBS_TO_GO=1
                 while [ "$JOBS_TO_GO" != "0" ]
                 do
