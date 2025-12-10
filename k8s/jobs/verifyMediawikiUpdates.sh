@@ -21,4 +21,4 @@ echo
 echo "Incomplete jobs:"
 echo "$INCOMPLETE"
 echo
-echo "Number of completed jobs: $INCOMPLETE_COUNT"
+echo "Number of incomplete jobs: $INCOMPLETE_COUNT"
