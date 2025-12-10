@@ -14,11 +14,12 @@ INCOMPLETE_COUNT=$(echo "$INCOMPLETE" | grep -cv '^[[:space:]]*$')
 echo "Completed jobs:"
 echo "$COMPLETED"
 echo 
-echo "Number of completed jobs: $COMPLETED_COUNT"
-echo
-echo '---'
-echo
 echo "Incomplete jobs:"
 echo "$INCOMPLETE"
 echo
+echo '---'
+echo
+echo "Number of completed jobs: $COMPLETED_COUNT"
+echo
 echo "Number of incomplete jobs: $INCOMPLETE_COUNT"
+echo
