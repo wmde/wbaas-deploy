@@ -8,17 +8,18 @@ INCOMPLETE=$(echo $JOBS | jq -r '.items[] | select((.status.succeeded // 0) < 1 
 # alternative query for incomplete jobs without wikiDomain label
 #INCOMPLETE=$(echo $JOBS | jq -r '.items[] | select((.status.succeeded // 0) < 1) | "\(.metadata.name)"')
 
-COMPLETED_COUNT=$(printf "%s" "$COMPLETED" | wc -l)
-INCOMPLETE_COUNT=$(printf "%s" "$INCOMPLETE" | wc -l)
+COMPLETED_COUNT=$(echo "$COMPLETED" | grep -cv '^[[:space:]]*$')
+INCOMPLETE_COUNT=$(echo "$INCOMPLETE" | grep -cv '^[[:space:]]*$')
 
 echo "Completed jobs:"
 echo "$COMPLETED"
 echo 
-echo "Number of completed jobs: $COMPLETED_COUNT"
-echo
-echo '---'
-echo
 echo "Incomplete jobs:"
 echo "$INCOMPLETE"
 echo
-echo "Number of completed jobs: $INCOMPLETE_COUNT"
+echo '---'
+echo
+echo "Number of completed jobs: $COMPLETED_COUNT"
+echo
+echo "Number of incomplete jobs: $INCOMPLETE_COUNT"
+echo
