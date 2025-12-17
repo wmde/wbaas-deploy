@@ -148,6 +148,7 @@ releases:
   - name: mediawiki-139
     namespace: default
     chart: wbstack/mediawiki
+    installed: false
     version: 0.13.1
     <<: *default_release
 
