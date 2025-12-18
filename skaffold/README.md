@@ -40,7 +40,7 @@ This will build local images and apply them to the cluster. Every time you make 
 Currently the following services are hooked up to skaffold:
 
 - [ui](https://github.com/wbstack/ui/)
-- [mediawiki-139](https://github.com/wbstack/mediawiki/)
+- [mediawiki-143](https://github.com/wbstack/mediawiki/)
 - [api](https://github.com/wbstack/api)
 - [queryservice-gateway](https://github.com/wbstack/queryservice-gateway)
 - [queryservice-ui](https://github.com/wbstack/queryservice-ui)
