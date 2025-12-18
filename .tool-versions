@@ -1,11 +1,8 @@
-kubectl 1.31.2
-minikube 1.34.0
-opentofu 1.8.1
-helm 3.12.2 
-helmfile 0.162.0
-skaffold 2.9.0 
-yq 4.34.2
-minio 2023-08-09T23-30-22Z
-mc 2023-08-08T17-23-59Z
-istioctl 1.19.3
+kubectl 1.33.3
+minikube 1.36.0
+opentofu 1.10.7
+helm 3.17.4
+helmfile 0.171.0
+skaffold 2.16.1
+yq 4.47.1
 
