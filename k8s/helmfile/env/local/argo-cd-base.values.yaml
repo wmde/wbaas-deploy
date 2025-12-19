@@ -38,7 +38,7 @@ notifications:
 
   subscriptions:
     - recipients:
-      - mattermost:3kk8aywgrjf4fmxfqkm6fusbcr
+        - mattermost:3kk8aywgrjf4fmxfqkm6fusbcr
 
   templates:
     template.app-sync-succeeded: |
