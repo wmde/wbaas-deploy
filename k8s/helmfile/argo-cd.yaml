@@ -14,16 +14,12 @@ repositories:
   - name: argo-cd
     url: https://argoproj.github.io/argo-helm
 
-templates:
-  default: &default_release
-    missingFileHandler: Error
-    values:
-      - env/production/{{`{{ .Release.Name }}`}}.values.yaml.gotmpl
-      - env/{{`{{ .Environment.Name }}`}}/{{`{{ .Release.Name }}`}}.values.yaml.gotmpl
-
 releases:
   - name: argo-cd-base
     namespace: argocd
     chart: argo-cd/argo-cd
-    version: '7.6.11'
-    <<: *default_release
+    version: '9.1.9'
+    missingFileHandler: Error
+    values:
+      - env/production/{{`{{ .Release.Name }}`}}.values.yaml
+      - env/{{`{{ .Environment.Name }}`}}/{{`{{ .Release.Name }}`}}.values.yaml
