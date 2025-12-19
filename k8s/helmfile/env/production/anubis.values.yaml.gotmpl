@@ -10,6 +10,13 @@ config:
 # see https://github.com/TecharoHQ/anubis/blob/v1.21.3/data/botPolicies.yaml
 botPolicy:
   bots:
+    - name: allow-api-requests
+      action: ALLOW
+      expression:
+        any:
+          - 'path.startsWith("/w/api.php")'
+          - 'path.startsWith("/w/rest.php")'
+          - 'path.startsWith("/query/sparql")'
     - import: (data)/bots/_deny-pathological.yaml
     - import: (data)/bots/aggressive-brazilian-scrapers.yaml
     - import: (data)/meta/ai-block-permissive.yaml
