@@ -13,7 +13,7 @@ Here are examples of commands you can run to create JSON and XML dumps of Wikiba
 ## JSON
 ### Dump
 ```
-kubectl exec -ti deployments/mediawiki-139-app-backend -- bash -c 'WBS_DOMAIN=coffeebase.wikibase.cloud php w/extensions/Wikibase/repo/maintenance/dumpJson.php 2>/dev/null' > 2025-02-26-coffeebase.wikibase.cloud.json
+kubectl exec -ti deployments/mediawiki-143-app-backend -- bash -c 'WBS_DOMAIN=coffeebase.wikibase.cloud php w/extensions/Wikibase/repo/maintenance/dumpJson.php 2>/dev/null' > 2025-02-26-coffeebase.wikibase.cloud.json
 ```
 
 ### Verify
@@ -24,7 +24,7 @@ jq -e . 2025-02-26-coffeebase.wikibase.cloud.json >/dev/null; echo $?
 ## XML
 ### Dump
 ```
-kubectl exec -ti deployments/mediawiki-139-app-backend -- bash -c 'WBS_DOMAIN=coffeebase.wikibase.cloud php w/maintenance/dumpBackup.php --full --quiet 2>/dev/null' > 2025-02-26-coffeebase.wikibase.cloud.xml
+kubectl exec -ti deployments/mediawiki-143-app-backend -- bash -c 'WBS_DOMAIN=coffeebase.wikibase.cloud php w/maintenance/dumpBackup.php --full --quiet 2>/dev/null' > 2025-02-26-coffeebase.wikibase.cloud.xml
 ```
 
 ### Verify

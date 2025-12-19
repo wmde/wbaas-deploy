@@ -40,46 +40,6 @@ profiles:
       - kubeContext: minikube-wbaas
     build:
       artifacts:
-        - image: local/skaffold/wbaas/mediawiki-139
-          context: ./../../mediawiki
-          docker:
-            buildArgs:
-              LOCALIZATION_CACHE_THREAD_COUNT: 4
-              LOCALIZATION_CACHE_ADDITIONAL_PARAMS: "--lang=en,sv,de"
-              INSTALL_PROFILING_DEPS: 1
-              INSTALL_XDEBUG: 1
-      local:
-        useDockerCLI: true
-    deploy:
-      kubeContext: minikube-wbaas
-      helm:
-        releases:
-          - name: mediawiki-139
-            chartPath: ./../../charts/charts/mediawiki
-            valuesFiles:
-              - ".tmp.values.mediawiki-139.yaml"
-              - NeverPull.yaml
-            artifactOverrides:
-              image: local/skaffold/wbaas/mediawiki-139
-            imageStrategy:
-              helm: {}
-        hooks:
-          before:
-            - host:
-                command: [ "./helmfile-values", "-e", "local", "-r", "mediawiki-139", "-n" ]
-metadata:
-  name: mediawiki-139
-
----
-
-apiVersion: skaffold/v2beta23
-kind: Config
-profiles:
-  - name: local
-    activation:
-      - kubeContext: minikube-wbaas
-    build:
-      artifacts:
         - image: local/skaffold/wbaas/mediawiki-143
           context: ./../../mediawiki
           docker:

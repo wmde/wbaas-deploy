@@ -145,13 +145,6 @@ releases:
       - forceSSL: {{ .Values.forceSSL | toYaml }}
       - tls: {{ .Values.tls | toYaml }}
 
-  - name: mediawiki-139
-    namespace: default
-    chart: wbstack/mediawiki
-    installed: false
-    version: 0.13.1
-    <<: *default_release
-
   - name: mediawiki-143
     namespace: default
     chart: wbstack/mediawiki
