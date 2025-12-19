@@ -85,3 +85,10 @@ variable "tailscale_client_secret" {
   sensitive   = true
   default     = ""
 }
+
+variable "botstopper_image_pull_json_secret" {
+  type        = string
+  description = "String contents of a docker/config.json to pull the botstopper image generated using `kubectl create secret` as per the botstopper docs"
+  sensitive   = true
+  default     = ""
+}
