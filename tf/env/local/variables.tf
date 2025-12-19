@@ -33,3 +33,9 @@ variable "recaptcha_v2_secret" {
   description = "Secret key to access recaptcha v2"
   sensitive   = true
 }
+
+variable "botstopper_image_pull_json_secret" {
+  type        = string
+  description = "Base64 Encoding of a docker/config.json to pull the botstopper image"
+  sensitive   = true
+}
