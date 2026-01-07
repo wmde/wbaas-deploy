@@ -70,7 +70,7 @@ resource "google_dns_record_set" "dev-wildcard-A" {
 resource "google_dns_record_set" "dev-MailGun-record" {
   for_each = {
     for record in mailgun_domain.default.sending_records :
-    "${record.name}" => record
+    "${record.name}-${record.record_type}-${md5(record.value)}" => record
   }
   name         = "${each.value.name}."
   managed_zone = google_dns_managed_zone.dev.name
