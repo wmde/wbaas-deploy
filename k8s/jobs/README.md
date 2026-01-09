@@ -91,7 +91,7 @@ Example of ENV variables to set
 ```sh
 WBS_DOMAIN=coffeebase.wikibase.cloud
 MEDIAWIKI_BACKEND_INSTANCE_LABEL=mediawiki-143
-MW_VERSION=mw1.43-wbs1
+MW_VERSION=mw1.43-wbs2
 ```
 
 Creates a Job that spins up it's own mediawiki pod to run the mediawiki update maintenance script (`run.php update --quick`)
