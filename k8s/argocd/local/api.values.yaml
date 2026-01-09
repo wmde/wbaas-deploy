@@ -164,5 +164,5 @@ wbstack:
     - PT24H
     - P30D
   uiurl: https://wbaas.dev
-  wikiDbProvisionVersion: mw1.43-wbs1
-  wikiDbUseVersion: mw1.43-wbs1
+  wikiDbProvisionVersion: mw1.43-wbs2
+  wikiDbUseVersion: mw1.43-wbs2
