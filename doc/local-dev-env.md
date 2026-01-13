@@ -71,7 +71,10 @@ tofu init
 
 For convenience, you can store local secrets for the cluster in `.tfvars` files which will be ignored by git. 
 
-Create a `terraform.tfvars` file in `tf/env/local` and add the recaptcha secrets to it. You can use [test keys][test-keys] for the v2 secrets. For v3 use the "wbaas.dev v3" keys from the [admin console](https://www.google.com/recaptcha/admin).
+Create a `terraform.tfvars` file in `tf/env/local` and add the needed local secrets to it.
+
+### Recaptcha
+You can use [test keys][test-keys] for the v2 secrets. For v3 use the "wbaas.dev v3" keys from the [admin console](https://www.google.com/recaptcha/admin).
 
 [test-keys]: https://developers.google.com/recaptcha/docs/faq#id-like-to-run-automated-tests-with-recaptcha.-what-should-i-do
 
@@ -81,6 +84,25 @@ recaptcha_v3_dev_secret   = "insert_actual_secret_here"
 recaptcha_v2_dev_site_key = "insert_actual_secret_here"
 recaptcha_v2_dev_secret   = "insert_actual_secret_here"
 ```
+
+### Botstopper
+We need a secret to pull the botstopper image from a private GitHub Container Registry. Unfortunately this secret is only available to WMDE staff or to others who have access to this registry.
+
+The string of a dockerconfig.json looks like:
+```
+botstopper_image_pull_json_secret = <<EOT
+{
+    "auths": {
+        "ghcr.io": {
+            "password": "ghp_<rest of github token>",
+            "auth": "<auth string>"
+        }
+    }
+}
+EOT
+```
+
+You can reach out to your fellow engineers for this.
 
 To review the changes between what is applied to the infrastructure and the current configuration run:
 
