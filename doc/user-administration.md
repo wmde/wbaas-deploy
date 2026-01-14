@@ -11,7 +11,7 @@ Note: a verification mail was sent to the new address ('barbar@bar.com').
 
 As the output suggests, the user then has to verify this new email address. The old one is now not longer used.
 
-## Disabling an User Account
+## Disabling a User Account
 [User/Disable Command](https://github.com/wbstack/api/blob/main/app/Console/Commands/User/Disable.php)
 ```
 $ kubectl exec -ti deployments/api-app-backend -- php artisan wbs-user:disable --email='mail@example.com'
@@ -75,4 +75,15 @@ Psy Shell v0.12.0 (PHP 8.2.29 — cli) by Justin Hileman
     +domain_decoded: "fjdsjkfdskjfdskjfds.wbaas.dev",
   }
 ```
+
+## Checking if user email exist in api db and/or wiki db
+[User/ CheckEmail command](https://github.com/wbstack/api/blob/5fafbcee36df22422d8dc85eb32c1549cff3357a/app/Console/Commands/User/CheckUserEmailExist.php)
+```
+$ kubectl exec -ti deployments/api-app-backend -- php artisan wbs-user:check-email wbcuser@mail.com notfounduser@mail.com
+FOUND: wbcuser@mail.com in location.user
+---------------------------------------------------
+NOT FOUND: notfounduser@mail.com
+---------------------------------------------------
+```
+This command expect an email or a list of emails separated by space
 
