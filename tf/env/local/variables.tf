@@ -36,6 +36,6 @@ variable "recaptcha_v2_secret" {
 
 variable "botstopper_image_pull_json_secret" {
   type        = string
-  description = "Base64 Encoding of a docker/config.json to pull the botstopper image"
+  description = "String contents of a docker/config.json to pull the botstopper image generated using `kubectl create secret` as per the botstopper docs"
   sensitive   = true
 }
