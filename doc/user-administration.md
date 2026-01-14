@@ -76,7 +76,7 @@ Psy Shell v0.12.0 (PHP 8.2.29 — cli) by Justin Hileman
   }
 ```
 
-## Checking if user email exist in api db and/or wiki db
+## Checking if user email exists in api db and/or wiki db
 [User/ CheckEmail command](https://github.com/wbstack/api/blob/5fafbcee36df22422d8dc85eb32c1549cff3357a/app/Console/Commands/User/CheckUserEmailExist.php)
 ```
 $ kubectl exec -ti deployments/api-app-backend -- php artisan wbs-user:check-email wbcuser@mail.com notfounduser@mail.com
