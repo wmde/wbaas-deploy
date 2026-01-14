@@ -85,5 +85,5 @@ FOUND: wbcuser@mail.com in location.user
 NOT FOUND: notfounduser@mail.com
 ---------------------------------------------------
 ```
-This command expect an email or a list of emails separated by space
+This command expects an email or a list of emails separated by space
 
