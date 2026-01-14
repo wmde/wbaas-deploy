@@ -88,7 +88,7 @@ recaptcha_v2_dev_secret   = "insert_actual_secret_here"
 ### Botstopper
 We need a secret to pull the botstopper image from a private GitHub Container Registry. Unfortunately this secret is only available to WMDE staff or to others who have access to this registry.
 
-The string of a dockerconfig.json looks like:
+This secret looks like:
 ```
 botstopper_image_pull_json_secret = <<EOT
 {
