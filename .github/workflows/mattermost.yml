@@ -5,14 +5,9 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    if: ${{ github.actor != 'dependabot[bot]' }}
     steps:
-      - name: Create the Mattermost Message
-        env:
-          TITLE: ${{ github.event.pull_request.title }}
-          HTML_LINK: ${{ github.event.pull_request.html_url }}
-        run: >
-          jq -n --arg t "Pull request opened: [${TITLE}](${HTML_LINK})" '{text: $t}'
-          > mattermost.json
-      - uses: mattermost/action-mattermost-notify@1.1.0
-        env:
+      - uses: mattermost/action-mattermost-notify@2.0.0
+        with:
           MATTERMOST_WEBHOOK_URL: ${{ secrets.MATTERMOST_WEBHOOK_URL }}
+          TEXT: "Pull request opened: [${{ github.event.pull_request.title }}](${{ github.event.pull_request.html_url }})"
