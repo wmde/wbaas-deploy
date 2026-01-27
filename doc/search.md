@@ -92,4 +92,7 @@ kubectl exec deployments/api-scheduler -- bash -c "php artisan job:dispatchNow E
   }
 }
 ```
+## Implications
 
+Changes that affect how data is indexed or analyzed (for example, language handling) require creating new shared indices and re-indexing all Wikibases.
+This will require some form of migration to ensure that existing data is properly backfilled and that aliases continue to point to the correct indices during the transition.
