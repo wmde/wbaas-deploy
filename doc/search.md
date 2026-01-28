@@ -78,6 +78,36 @@ For example:
 kubectl exec deployments/api-scheduler -- bash -c "php artisan job:dispatchNow ElasticSearchAliasInit $wiki"
 ```
 
+## Shared-index alias model
+
+```mermaid
+graph LR
+  subgraph Elasticsearch
+    SI1[shared_prefix_content_first]
+    SI2[shared_prefix_general_first]
+  end
+
+  subgraph Wiki A
+    A1[alias: mwdb_A_content]
+    A2[alias: mwdb_A_general]
+  end
+
+  subgraph Wiki B
+    B1[alias: mwdb_B_content]
+    B2[alias: mwdb_B_general]
+  end
+
+  A1 --> SI1
+  A2 --> SI2
+  B1 --> SI1
+  B2 --> SI2
+
+  noteA[Filter: prefix wiki = mwdb_A-] --> A1
+  noteA --> A2
+  noteB[Filter: prefix wiki = mwdb_B-] --> B1
+  noteB --> B2
+```
+
 ## Example Alias
 
 ```json
