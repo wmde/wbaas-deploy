@@ -109,6 +109,7 @@ graph LR
 ```
 
 The diagram shows two indices (`content` and `general`) that store data for both `Wiki A` and `Wiki B`, and a set of aliases for each wiki that point to those indices. Each alias can:
+
 * `filter`: a prefix filter on the wiki field (e.g., `mwdb_A-`) so any searches with that alias can only see data belonging to that wiki.
 * `routing`: alias is used as a routing key so searches in that wiki hit the right place.
 
