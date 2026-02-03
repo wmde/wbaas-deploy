@@ -125,6 +125,12 @@ releases:
     chart: https://github.com/wbstack/bitnami-legacy/releases/download/elasticsearch%2F19.10.2/elasticsearch-19.10.2.tgz
     <<: *default_release
 
+  - name: elasticsearch-3
+    namespace: default
+    installed: {{ eq .Environment.Name "local" | toYaml }}
+    chart: https://github.com/wbstack/bitnami-legacy/releases/download/elasticsearch%2F19.10.2/elasticsearch-19.10.2.tgz
+    <<: *default_release
+
   - name: platform-nginx
     namespace: default
     chart: https://github.com/wbstack/bitnami-legacy/releases/download/nginx%2F5.2.4/nginx-5.2.4.tgz

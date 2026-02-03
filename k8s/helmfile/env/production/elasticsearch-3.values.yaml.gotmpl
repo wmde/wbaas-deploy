@@ -1,0 +1,83 @@
+image:
+  registry: ghcr.io
+  repository: wbstack/elasticsearch
+  tag: 7.10.2-20231116-0
+
+labels:
+  sidecar.istio.io/inject: "false"
+
+extraConfig:
+  # T309378
+  action.auto_create_index: false
+
+master:
+  replicaCount: 3
+  podAntiAffinityPreset: hard
+  heapSize: 4000m
+  resources:
+    requests:
+      cpu: "15m"
+      memory: "8Gi"
+    limits:
+      cpu: null
+      memory: "8Gi"
+  persistence:
+    enabled: true
+    accessModes: [ "ReadWriteOnce" ]
+    storageClass: "premium-rwo"
+    size: 5Gi
+  startupProbe:
+    enabled: true
+    periodSeconds: 10
+    failureThreshold: 1440
+  pdb:
+    create: true
+    minAvailable: 2
+
+data:
+  replicaCount: 2
+  podAntiAffinityPreset: hard
+  heapSize: 8000m
+  resources:
+    requests:
+      cpu: "100m"
+      memory: "18Gi"
+    limits:
+      cpu: null
+      memory: "18Gi"
+  persistence:
+    enabled: true
+    accessModes: [ "ReadWriteOnce" ]
+    storageClass: "premium-rwo"
+    size: 50Gi
+  customStartupProbe:
+    periodSeconds: 10
+    failureThreshold: 2160
+    initialDelaySeconds: 90
+    timeoutSeconds: 5
+    successThreshold: 1
+    exec:
+      command:
+        - /opt/bitnami/scripts/elasticsearch/healthcheck-cluster.sh
+  pdb:
+    create: true
+    minAvailable: 1
+
+coordinating:
+  replicaCount: 0
+
+ingest:
+  enabled: false
+
+clusterName: {{ .Release.Name }}
+
+volumePermissions:
+  image:
+    registry: ghcr.io
+    repository: wbstack/bitnami-shell-archived
+    tag: 11-debian-11-r123
+
+sysctlImage:
+  registry: ghcr.io
+  repository: wbstack/bitnami-shell-archived
+  tag: 11-debian-11-r123
