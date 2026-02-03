@@ -127,7 +127,6 @@ releases:
 
   - name: elasticsearch-3
     namespace: default
-    installed: {{ neq .Environment.Name "production" | toYaml }}
     chart: https://github.com/wbstack/bitnami-legacy/releases/download/elasticsearch%2F19.10.2/elasticsearch-19.10.2.tgz
     <<: *default_release
 
