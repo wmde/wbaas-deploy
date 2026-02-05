@@ -1,5 +1,5 @@
 chartVersions:
   wbaasUi: 0.4.0
-  wbaasApi: 0.35.0
+  wbaasApi: 0.36.0
   redis: 17.3.8
   redis2: 19.6.4
