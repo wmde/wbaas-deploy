@@ -55,7 +55,7 @@ app:
     tracingEnabled: false
   url: https://www.wikibase.cloud
 image:
-  tag: sha-9956e88
+  tag: sha-501a140
 ingress:
   annotations:
     kubernetes.io/ingress.class: nginx
@@ -158,5 +158,5 @@ wbstack:
     - PT24H
     - P30D
   uiurl: https://wikibase.cloud
-  wikiDbProvisionVersion: mw1.43-wbs1
-  wikiDbUseVersion: mw1.43-wbs1
+  wikiDbProvisionVersion: mw1.43-wbs2
+  wikiDbUseVersion: mw1.43-wbs2

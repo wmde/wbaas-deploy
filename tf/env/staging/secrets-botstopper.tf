@@ -9,6 +9,8 @@
 # n.b. in Jan 2026 the username is not checked by github hence the placeholder
 resource "kubernetes_secret" "botstopper-image-pull" {
 
+  provider = kubernetes.wbaas-2
+
   metadata {
     namespace = "default"
     name      = "botstopper-image-pull"
