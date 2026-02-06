@@ -48,7 +48,7 @@ app:
     minScore: 0.5
     secretSecretName: {{ .Values.external.recaptcha3.secretName }}
     secretSecretKey: secret_key
-  elasticSearchHost: elasticsearch-1.default.svc.cluster.local:9200
+  elasticSearchHost: elasticsearch-2.default.svc.cluster.local:9200,elasticsearch-3.default.svc.cluster.local:9200
   elasticSearchSharedIndexHost: elasticsearch-2.default.svc.cluster.local:9200
   elasticSearchSharedIndexPrefix: wiki_1
 
