@@ -25,5 +25,5 @@ releases:
   - name: argo-cd-base
     namespace: argocd
     chart: argo-cd/argo-cd
-    version: '9.1.9'
+    version: '{{ if eq .Environment.Name "production" }} 7.6.11 {{ else }} 9.1.9 {{ end }}'
     <<: *default_release
