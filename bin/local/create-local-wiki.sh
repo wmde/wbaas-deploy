@@ -16,8 +16,6 @@ fi
 
 # This script should create a wiki for a user account on a local wbaas cluster with the credentials below. Do not use this in production! 
 
-COOKIE_JAR="${XDG_STATE_HOME:-$HOME/.local/state}/wbaas.dev/cookies.txt"
-
 USER_MAIL="${USER_MAIL:-jane.doe@wikimedia.de}"
 USER_PASS="${USER_PASS:-wikiwikiwiki}"
 USER_WIKI_NAME="${USER_WIKI_NAME:-Local Test Wiki}"
@@ -25,6 +23,14 @@ USER_WIKI_DOMAIN="${USER_WIKI_DOMAIN:-local-test-wiki.wbaas.dev}"
 USER_WIKI_ADMIN="${USER_WIKI_ADMIN:-Admin}"
 
 API_URL="https://www.wbaas.dev/api"
+
+## Setup
+COOKIE_JAR="${XDG_STATE_HOME:-$HOME/.local/state}/wbaas.dev/cookies.txt"
+COOKIE_JAR_DIR=$(dirname "${COOKIE_JAR}")
+
+if [[ ! -d "${COOKIE_JAR_DIR}" ]]; then
+  mkdir -p "${COOKIE_JAR_DIR}"
+fi
 
 ## Check if API is reachable
 TEST_RESPONSE=$(curl --insecure --location --silent ${API_URL}/healthz)
