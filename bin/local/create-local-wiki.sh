@@ -26,11 +26,8 @@ API_URL="https://www.wbaas.dev/api"
 
 ## Setup
 COOKIE_JAR="${XDG_STATE_HOME:-$HOME/.local/state}/wbaas.dev/cookies.txt"
-COOKIE_JAR_DIR=$(dirname "${COOKIE_JAR}")
 
-if [[ ! -d "${COOKIE_JAR_DIR}" ]]; then
-  mkdir -p "${COOKIE_JAR_DIR}"
-fi
+mkdir -p "$(dirname ${COOKIE_JAR})"
 
 ## Check if API is reachable
 TEST_RESPONSE=$(curl --insecure --location --silent ${API_URL}/healthz)
