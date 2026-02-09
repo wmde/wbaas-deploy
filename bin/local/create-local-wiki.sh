@@ -16,7 +16,7 @@ fi
 
 # This script should create a wiki for a user account on a local wbaas cluster with the credentials below. Do not use this in production! 
 
-COOKIE_JAR=~/".wbaas.dev.cookies.txt"
+COOKIE_JAR="${XDG_STATE_HOME:-$HOME/.local/state}/wbaas.dev/cookies.txt"
 
 USER_MAIL="${USER_MAIL:-jane.doe@wikimedia.de}"
 USER_PASS="${USER_PASS:-wikiwikiwiki}"
