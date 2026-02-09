@@ -10,6 +10,7 @@ app:
     user: apiuser
     writeHost: sql-mariadb-primary.default.svc.cluster.local
   elasticSearchHost: elasticsearch-2.default.svc.cluster.local:9200,elasticsearch-3.default.svc.cluster.local:9200
+  elasticSearchSharedIndexHost: elasticsearch-2.default.svc.cluster.local:9200
   elasticSearchSharedIndexPrefix: wiki_1
   env: local
   gce:
