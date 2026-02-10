@@ -1,5 +1,5 @@
 image:
-  tag: sha-501a140
+  tag: sha-12df621
 
 replicaCount:
   web: 1
@@ -86,7 +86,7 @@ app:
   jwtSecretSecretName: api-app-secrets
   jwtSecretSecretKey: api-app-jwt-secret
   queryServiceHost: queryservice.default.svc.cluster.local:9999
-  elasticSearchHost: elasticsearch-1.default.svc.cluster.local:9200
+  elasticSearchHost: elasticsearch-2.default.svc.cluster.local:9200,elasticsearch-3.default.svc.cluster.local:9200
   elasticSearchSharedIndexHost: elasticsearch-2.default.svc.cluster.local:9200
   elasticSearchSharedIndexPrefix: wiki_1
   redis:
