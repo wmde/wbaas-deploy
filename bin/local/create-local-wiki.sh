@@ -49,7 +49,7 @@ LOGIN_MAIL=$(echo "${LOGIN_RESPONSE}" | jq -r '.user.email')
 
 
 ## Create wiki
-CREATE_WIKI_JSON_DATA=$(jo domain="${USER_WIKI_DOMAIN}" sitename="${USER_WIKI_NAME}" username="${USER_WIKI_ADMIN} profile="$(jo purpose="decide_later" temporality="decide_later"))
+CREATE_WIKI_JSON_DATA=$(jo domain="${USER_WIKI_DOMAIN}" sitename="${USER_WIKI_NAME}" username="${USER_WIKI_ADMIN}" profile="$(jo purpose="decide_later" temporality="decide_later")")
 curl --insecure --location "${API_URL}/wiki/create" \
     -X POST \
     -H 'Content-Type: application/json' \
