@@ -27,10 +27,10 @@ API_URL="https://www.wbaas.dev/api"
 ## Setup
 COOKIE_JAR="${XDG_STATE_HOME:-$HOME/.local/state}/wbaas.dev/cookies.txt"
 
-mkdir -p "$(dirname ${COOKIE_JAR})"
+mkdir -p "$(dirname "${COOKIE_JAR}")"
 
 ## Check if API is reachable
-TEST_RESPONSE=$(curl --insecure --location --silent ${API_URL}/healthz)
+TEST_RESPONSE=$(curl --insecure --location --silent "${API_URL}/healthz")
 if [[ "${TEST_RESPONSE}" != "It's Alive" ]]; then
     echo "Error: local api is not available. Is the minikube tunnel open? ('make minikube-tunnel')"
     exit 2
@@ -50,11 +50,11 @@ LOGIN_MAIL=$(echo "${LOGIN_RESPONSE}" | jq -r '.user.email')
 
 ## Create wiki
 CREATE_WIKI_JSON_DATA=$(jo domain="${USER_WIKI_DOMAIN}" sitename="${USER_WIKI_NAME}" username="${USER_WIKI_ADMIN}" profile="$(jo purpose="decide_later" temporality="decide_later")")
-curl --insecure --location "${API_URL}/wiki/create" \
+CREATE_WIKI_RESPONSE=$(curl --insecure --location "${API_URL}/wiki/create" \
     -X POST \
     -H 'Content-Type: application/json' \
     -H 'Accept: application/json' \
     --cookie "${COOKIE_JAR}" \
-    --data-raw "${CREATE_WIKI_JSON_DATA}"
+    --data-raw "${CREATE_WIKI_JSON_DATA}")
 
 echo "$CREATE_WIKI_RESPONSE"
