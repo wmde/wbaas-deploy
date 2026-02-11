@@ -54,7 +54,7 @@ app:
     tracingEnabled: false
   url: https://www.wikibase.cloud
 image:
-  tag: sha-12df621
+  tag: sha-8f25277
 ingress:
   annotations:
     kubernetes.io/ingress.class: nginx
