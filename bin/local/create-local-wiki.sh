@@ -47,9 +47,12 @@ LOGIN_RESPONSE=$(curl --insecure --location --silent --cookie-jar "${COOKIE_JAR}
 LOGIN_MAIL=$(echo "${LOGIN_RESPONSE}" | jq -r '.user.email')
 [[ "$LOGIN_MAIL" == "$USER_MAIL" ]] || { echo "error: login failed." 1>&2; exit 1; }
 
-
 ## Create wiki
-CREATE_WIKI_JSON_DATA=$(jo -- domain="${USER_WIKI_DOMAIN}" sitename="${USER_WIKI_NAME}" username="${USER_WIKI_ADMIN}" -s profile="$(jo purpose=decide_later temporality=decide_later)")
+CREATE_WIKI_JSON_DATA=$(jo -- \
+    domain="${USER_WIKI_DOMAIN}" \
+    sitename="${USER_WIKI_NAME}" \
+    username="${USER_WIKI_ADMIN}" \
+    -s profile="$(jo purpose=decide_later temporality=decide_later)")
 CREATE_WIKI_RESPONSE=$(curl --insecure --location --silent "${API_URL}/wiki/create" \
     -X POST \
     -H 'Content-Type: application/json' \
