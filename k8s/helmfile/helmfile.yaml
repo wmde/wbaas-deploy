@@ -198,6 +198,11 @@ releases:
     version: 0.4.0
     <<: *default_release
 
+  - name: tool-querybuilder
+    namespace: default
+    chart: ../../../charts/charts/tool-querybuilder
+    <<: *default_release
+
   - name: wbaas-backup
     namespace: default
     chart: wbstack/wbaas-backup
