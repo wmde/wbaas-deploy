@@ -39,3 +39,9 @@ variable "botstopper_image_pull_json_secret" {
   description = "String contents of a docker/config.json to pull the botstopper image generated using `kubectl create secret` as per the botstopper docs"
   sensitive   = true
 }
+
+variable "mattermost_bot_token" {
+  type        = string
+  description = "Base64 Encoding of a docker/config.json to pull the botstopper image"
+  sensitive   = true
+}
