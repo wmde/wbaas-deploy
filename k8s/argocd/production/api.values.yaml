@@ -100,14 +100,10 @@ replicaCount:
   web: 1
 resources:
   backend:
-    limits:
-      memory: 600Mi
     requests:
       cpu: 200m
       memory: 300Mi
   queue:
-    limits:
-      memory: 1024Mi
     requests:
       cpu: 40m
       memory: 512Mi
