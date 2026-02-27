@@ -75,7 +75,7 @@ Configuration:
 For example:
 
 ```sh
-kubectl exec deployments/api-scheduler -- bash -c "php artisan job:dispatchNow ElasticSearchAliasInit $wiki"
+kubectl exec deployments/api-scheduler -- bash -c "php artisan job:dispatchNow ElasticSearchAliasInit <wiki_id> <elasticsearch-host>"
 ```
 
 ## Shared-index alias model
