@@ -30,7 +30,10 @@ mw:
     host: elasticsearch-3.default.svc.cluster.local
     port: 9200
     es6: false
-
+  writeOnlyElasticsearch:
+    host: elasticsearch-2.default.svc.cluster.local
+    port: 9200
+    es6: false
 replicaCount:
   backend: 1
   web: 1
