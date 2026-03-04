@@ -26,9 +26,6 @@ mw:
     sitekeySecretKey: site_key
     secretkeySecretName: {{ .Values.external.recaptcha2.secretName }}
     secretkeySecretKey: secret_key
-  elasticsearch:
-    host: elasticsearch-3.default.svc.cluster.local
-    port: 9200
 
 replicaCount:
   backend: 1
