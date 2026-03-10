@@ -222,7 +222,6 @@ releases:
     namespace: monitoring
     chart: prometheus-community/prometheus-elasticsearch-exporter
     version: 7.2.1
-    installed: {{ ne .Environment.Name "production" | toYaml }}
     <<: *default_release
 
   - name: istio-service-mesh
