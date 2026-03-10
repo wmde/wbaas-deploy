@@ -2,7 +2,7 @@ kubectl 1.33.3
 minikube 1.36.0
 opentofu 1.10.7
 helm 3.17.4
-helmfile 0.171.0
+helmfile v1.4.1
 skaffold 2.16.1
 yq 4.47.1
 
