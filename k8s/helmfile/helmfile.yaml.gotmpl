@@ -51,10 +51,10 @@ helmfiles:
   - path: istio-control-plane.yaml
     values:
       - foo: null
-  - path: argo-cd.yaml
+  - path: argo-cd.yaml.gotmpl
     values:
       - foo: null
-  - path: tailscale-operator.yaml
+  - path: tailscale-operator.yaml.gotmpl
     values:
       - foo: null
 ---
