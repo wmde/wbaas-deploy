@@ -120,12 +120,6 @@ releases:
     chart: https://github.com/wbstack/bitnami-legacy/releases/download/mariadb%2F10.5.0/mariadb-10.5.0.tgz
     <<: *default_release
 
-  - name: elasticsearch-2
-    namespace: default
-    installed: false
-    chart: https://github.com/wbstack/bitnami-legacy/releases/download/elasticsearch%2F19.10.2/elasticsearch-19.10.2.tgz
-    <<: *default_release
-
   - name: elasticsearch-3
     namespace: default
     chart: https://github.com/wbstack/bitnami-legacy/releases/download/elasticsearch%2F19.10.2/elasticsearch-19.10.2.tgz
@@ -211,13 +205,6 @@ releases:
     chart: prometheus-community/kube-prometheus-stack
     # https://github.com/roboll/helmfile/issues/1124
     disableValidation: true
-    <<: *default_release
-
-  - name: prometheus-elasticsearch-exporter-2
-    namespace: monitoring
-    chart: prometheus-community/prometheus-elasticsearch-exporter
-    version: 5.2.0
-    installed: false
     <<: *default_release
 
   - name: prometheus-elasticsearch-exporter-3
