@@ -122,7 +122,7 @@ releases:
 
   - name: elasticsearch-2
     namespace: default
-    installed: {{ eq .Environment.Name "production" | toYaml }}
+    installed: false
     chart: https://github.com/wbstack/bitnami-legacy/releases/download/elasticsearch%2F19.10.2/elasticsearch-19.10.2.tgz
     <<: *default_release
 
@@ -217,7 +217,7 @@ releases:
     namespace: monitoring
     chart: prometheus-community/prometheus-elasticsearch-exporter
     version: 5.2.0
-    installed: {{ eq .Environment.Name "production" | toYaml }}
+    installed: false
     <<: *default_release
 
   - name: prometheus-elasticsearch-exporter-3
