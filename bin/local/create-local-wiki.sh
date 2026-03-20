@@ -52,7 +52,8 @@ CREATE_WIKI_JSON_DATA=$(jo -- \
     domain="${USER_WIKI_DOMAIN}" \
     sitename="${USER_WIKI_NAME}" \
     username="${USER_WIKI_ADMIN}" \
-    -s profile="$(jo purpose=decide_later temporality=decide_later)")
+    -s profile="$(jo purpose=decide_later temporality=decide_later)") \
+    knowledgeEquityResponse="$(jo selectedOption="unsure" freeTextResponse="")"
 CREATE_WIKI_RESPONSE=$(curl --insecure --location --silent "${API_URL}/wiki/create" \
     -X POST \
     -H 'Content-Type: application/json' \
