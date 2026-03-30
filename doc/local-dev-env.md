@@ -79,10 +79,10 @@ You can use [test keys][test-keys] for the v2 secrets. For v3 use the "wbaas.dev
 [test-keys]: https://developers.google.com/recaptcha/docs/faq#id-like-to-run-automated-tests-with-recaptcha.-what-should-i-do
 
 ```
-recaptcha_v3_dev_site_key = "insert_actual_secret_here"
-recaptcha_v3_dev_secret   = "insert_actual_secret_here"
-recaptcha_v2_dev_site_key = "insert_actual_secret_here"
-recaptcha_v2_dev_secret   = "insert_actual_secret_here"
+recaptcha_v3_site_key = "insert_actual_secret_here"
+recaptcha_v3_secret   = "insert_actual_secret_here"
+recaptcha_v2_site_key = "insert_actual_secret_here"
+recaptcha_v2_secret   = "insert_actual_secret_here"
 ```
 
 ### Botstopper
@@ -100,6 +100,7 @@ botstopper_image_pull_json_secret = <<EOT
     }
 }
 EOT
+
 ```
 
 You can reach out to your fellow engineers for this.
