@@ -21,5 +21,5 @@ releases:
     version: '9.1.9'
     missingFileHandler: Error
     values:
-      - env/production/{{`{{ .Release.Name }}`}}.values.yaml.gotmpl
-      - env/{{`{{ .Environment.Name }}`}}/{{`{{ .Release.Name }}`}}.values.yaml.gotmpl
+      - env/production/{{`{{ .Release.Name }}`}}.values.yaml
+      - env/{{`{{ .Environment.Name }}`}}/{{`{{ .Release.Name }}`}}.values.yaml

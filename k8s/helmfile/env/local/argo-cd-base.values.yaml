@@ -1,0 +1,57 @@
+configs:
+  params:
+    server.insecure: "true"
+
+  cm:
+    admin.enabled: "true"
+
+    ui.bannercontent: "LOCAL"
+    ui.bannerurl: "http://www.wbaas.dev/"
+
+  styles: |
+    .ui-banner {
+        background-color:#6d7f8b;
+
+        a {
+          color:white;
+        }
+    }
+
+global:
+  domain: argo.wbaas.dev
+
+certificate:
+  enabled: true
+
+server:
+  ingress:
+    enabled: true
+    ingressClassName: nginx
+
+notifications:
+  notifiers:
+    service.mattermost: |
+      apiURL: https://mattermost.wikimedia.de
+      token: $mattermost-token
+  secret:
+    create: false
+
+  subscriptions:
+    - recipients:
+        - mattermost:3kk8aywgrjf4fmxfqkm6fusbcr
+
+  templates:
+    template.app-sync-succeeded: |
+      mattermost:
+        attachments: '[{"title":"{{.app.status.sync.status}} {{.app.metadata.name}} on {{.app.spec.project}}","title_link":"{{.context.argocdUrl}}/applications/{{.app.metadata.name}}","color":"#18be52","fields":[{"title":"Timestamp","value":"{{.app.status.operationState.finishedAt}}","short":true},{"title":"Details","value":"{{.context.argocdUrl}}/applications/{{.app.metadata.name}}?operation=true .","short":true}]}]'
+
+  triggers:
+    # trigger.on-deleted: |
+    #   oncePer: app.status.sync.revision
+    #   send: [app-deleted]
+
+    trigger.on-sync-succeeded: |
+      - description: Application syncing has succeeded
+        send:
+        - app-sync-succeeded
+        when: "true"
