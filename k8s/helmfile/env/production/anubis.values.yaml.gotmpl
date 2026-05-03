@@ -14,6 +14,9 @@ config:
 # see https://github.com/TecharoHQ/anubis/blob/v1.21.3/data/botPolicies.yaml
 botPolicy:
   bots:
+    - name: allow-head-requests
+      action: ALLOW
+      expression: 'method == "HEAD"'
     - name: allow-api-requests
       action: ALLOW
       expression:
