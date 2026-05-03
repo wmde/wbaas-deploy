@@ -72,7 +72,7 @@ helmfile-sync: # @HELP Sync all resources defined in the Helmfile. This can help
 helmfile-sync:
 	cd ./k8s/helmfile && helmfile --environment local sync
 
-PHONY: init-%
+.PHONY: init-%
 init-local: # @HELP Initialize tf state for your local setup. This does not create any resources. It also downloads any new modules
 init-staging: # @HELP Initialize tf state for staging. This does not create any resources. It also downloads any new modules
 init-production: # @HELP Initialize tf state for production. This does not create any resources. It also downloads any new modules
