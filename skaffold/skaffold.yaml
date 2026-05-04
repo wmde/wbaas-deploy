@@ -87,6 +87,11 @@ profiles:
     deploy:
       kubeContext: minikube-wbaas
       helm:
+        flags:
+          install:
+            - --take-ownership
+          upgrade:
+            - --take-ownership
         releases:
           - name: api
             chartPath: ./../../charts/charts/api
