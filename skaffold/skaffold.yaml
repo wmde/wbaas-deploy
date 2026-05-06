@@ -17,16 +17,12 @@ profiles:
           - name: ui
             chartPath: ./../../charts/charts/ui
             valuesFiles:
-              - ".tmp.values.ui.yaml"
+              - "../k8s/argocd/local/ui.values.yaml"
               - NeverPull.yaml
             artifactOverrides:
               image: local/skaffold/wbaas/ui
             imageStrategy:
               helm: {}
-        hooks:
-          before:
-            - host:
-                command: [ "./helmfile-values", "-e", "local", "-r", "ui", "-n" ]
 metadata:
   name: ui
 
@@ -96,16 +92,12 @@ profiles:
           - name: api
             chartPath: ./../../charts/charts/api
             valuesFiles:
-              - ".tmp.values.api.yaml"
+              - "../k8s/argocd/local/ui.values.yaml"
               - NeverPull.yaml
             artifactOverrides:
               image: local/skaffold/wbaas/api
             imageStrategy:
               helm: {}
-        hooks:
-          before:
-            - host:
-                command: [ "./helmfile-values", "-e", "local", "-r", "api", "-n" ]
 metadata:
   name: api
 
