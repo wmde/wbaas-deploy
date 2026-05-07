@@ -21,6 +21,5 @@ jobs:
           wget "https://github.com/koalaman/shellcheck/releases/download/$VERSION/shellcheck-$VERSION.linux.x86_64.tar.xz"
           tar -xf "shellcheck-$VERSION.linux.x86_64.tar.xz"
           sudo cp "shellcheck-$VERSION/shellcheck" /usr/bin/
-
       - name: Check Shell scripts
         run: ./bin/run-shellcheck
