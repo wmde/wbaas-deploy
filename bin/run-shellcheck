@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+# based on https://github.com/bewuethr/shellcheck-action/blob/main/runshellcheck
+
 find . \
 	-type d -name '.git' -prune \
 	-or \
