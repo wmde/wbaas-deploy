@@ -4,10 +4,8 @@
 # more information: https://github.com/koalaman/shellcheck/wiki/Recursiveness
 
 find . \
-	# ignore .git internals
 	-type d -name '.git' -prune \
 	-or \
-	# ignore terraform temp files
 	-type f -path '*/.terraform/*' -prune \
 	-or \
 	-type f \( \
