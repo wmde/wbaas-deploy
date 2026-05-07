@@ -3,8 +3,10 @@
 # based on https://github.com/bewuethr/shellcheck-action/blob/main/runshellcheck
 
 find . \
+	# ignore .git internals
 	-type d -name '.git' -prune \
 	-or \
+	# ignore terraform temp files
 	-type f -path '*/.terraform/*' -prune \
 	-or \
 	-type f \( \
