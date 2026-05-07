@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
 # based on https://github.com/bewuethr/shellcheck-action/blob/main/runshellcheck
+# more information: https://github.com/koalaman/shellcheck/wiki/Recursiveness
 
 find . \
 	# ignore .git internals
