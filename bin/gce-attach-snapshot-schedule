@@ -4,18 +4,18 @@
 PVC="data-sql-mariadb-secondary-0"
 
 CONTEXT=$(kubectl config current-context)
-CLUSTER=$(echo $CONTEXT | awk -F '_' '{print $NF}')
+CLUSTER=$(echo "${CONTEXT}" | awk -F '_' '{print $NF}')
 
 SNAPSHOT_POLICY=$(gcloud compute resource-policies list --filter="$CLUSTER" --format='value(name)')
 
-PV=$(kubectl get pvc ${PVC} -o jsonpath="{.spec.volumeName}")
+PV=$(kubectl get pvc "${PVC}" -o jsonpath="{.spec.volumeName}")
 
 # matches metadata of disks provisioned via bitnami mariadb chart
-DISK=$(kubectl get pv ${PV} -o jsonpath="{.spec.csi.volumeHandle}" | awk -F '/' '{print $NF}')
+DISK=$(kubectl get pv "${PV}" -o jsonpath="{.spec.csi.volumeHandle}" | awk -F '/' '{print $NF}')
 
 # if the $DISK is empty, check if it was provisioned by opentofu
 if [[ -z "$DISK" ]]; then
-    DISK=$(kubectl get pv ${PV} -o jsonpath="{.spec.gcePersistentDisk.pdName}")
+    DISK=$(kubectl get pv "${PV}" -o jsonpath="{.spec.gcePersistentDisk.pdName}")
 fi
 
 LOCATION=$(gcloud compute disks list --filter="name=('${DISK}')" --format='value(location())')

@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/bash
 
 Help()
 {
@@ -20,7 +20,7 @@ Help()
 
 # Check setup of yq
 yqtest=$(which yq)
-if [ -z $yqtest ]
+if [ -z "$yqtest" ]
 then
    echo "This script needs yq installed https://mikefarah.gitbook.io/yq/"
     exit 1
@@ -40,7 +40,7 @@ while getopts ":r:e:hn" option; do
          TARGET_ENVIRONMENT=$OPTARG;;
       n)
          REMOVE_IMAGE_YAML=1;;
-      h) # display Help
+      *) # display Help
          Help
          exit;;
    esac
@@ -51,12 +51,12 @@ OUTPUT_YAML=$SCRIPT_DIR/.tmp.values.$TARGET_RELEASE.yaml
 
 # Run the commands
 echo "Targeting environment: $TARGET_ENVIRONMENT and release: $TARGET_RELEASE"
-cd $SCRIPT_DIR/../k8s/helmfile && \
-helmfile --environment $TARGET_ENVIRONMENT --selector name=$TARGET_RELEASE write-values --skip-deps --output-file-template $OUTPUT_YAML
+cd "$SCRIPT_DIR"/../k8s/helmfile && \
+helmfile --environment "$TARGET_ENVIRONMENT" --selector name="$TARGET_RELEASE" write-values --skip-deps --output-file-template "$OUTPUT_YAML"
 
 if [[ "$REMOVE_IMAGE_YAML" == 1 ]]; then
-   yq eval 'del(.image)' --no-colors $OUTPUT_YAML > $OUTPUT_YAML.altered
-   mv $OUTPUT_YAML.altered $OUTPUT_YAML
+   yq eval 'del(.image)' --no-colors "$OUTPUT_YAML" > "$OUTPUT_YAML".altered
+   mv "$OUTPUT_YAML".altered "$OUTPUT_YAML"
 fi
 
-cat $SCRIPT_DIR/.tmp.values.$TARGET_RELEASE.yaml
+cat "$SCRIPT_DIR"/.tmp.values."$TARGET_RELEASE".yaml

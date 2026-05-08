@@ -48,6 +48,7 @@ LOGIN_MAIL=$(echo "${LOGIN_RESPONSE}" | jq -r '.user.email')
 [[ "$LOGIN_MAIL" == "$USER_MAIL" ]] || { echo "error: login failed." 1>&2; exit 1; }
 
 ## Create wiki
+# shellcheck disable=SC2034
 CREATE_WIKI_JSON_DATA=$(jo -- \
     domain="${USER_WIKI_DOMAIN}" \
     sitename="${USER_WIKI_NAME}" \
