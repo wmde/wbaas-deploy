@@ -15,11 +15,5 @@ jobs:
       - name: Check if Opentofu files are properly formatted
         run: tofu fmt -recursive -check tf
 
-      - name: Install shellcheck # https://github.com/koalaman/shellcheck/wiki/GitHub-Actions#version-pinning
-        run: |
-          VERSION="v0.11.0"
-          wget "https://github.com/koalaman/shellcheck/releases/download/$VERSION/shellcheck-$VERSION.linux.x86_64.tar.xz"
-          tar -xf "shellcheck-$VERSION.linux.x86_64.tar.xz"
-          sudo cp "shellcheck-$VERSION/shellcheck" /usr/bin/
       - name: Check Shell scripts
         run: ./bin/run-shellcheck
