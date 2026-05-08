@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/bash
 
 Help()
 {
@@ -32,7 +32,7 @@ while getopts ":e:f:r:h" option; do
          ENVIRONMENT2=$OPTARG;;
       r)
          RELEASE=$OPTARG;;
-      h) # display Help
+      *) # display Help
          Help
          exit;;
    esac
@@ -42,5 +42,5 @@ SCRIPT_DIR="$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 HELMFILE_DIR="$SCRIPT_DIR/../k8s/helmfile"
 
 echo "RED is $ENVIRONMENT1, GREEN is $ENVIRONMENT2"
-diff $HELMFILE_DIR/env/$ENVIRONMENT1/$RELEASE.values.yaml.gotmpl $HELMFILE_DIR/env/$ENVIRONMENT2/$RELEASE.values.yaml.gotmpl  --color
+diff "$HELMFILE_DIR/env/$ENVIRONMENT1/$RELEASE.values.yaml.gotmpl" "$HELMFILE_DIR/env/$ENVIRONMENT2/$RELEASE.values.yaml.gotmpl"  --color
 echo "RED is $ENVIRONMENT1, GREEN is $ENVIRONMENT2"

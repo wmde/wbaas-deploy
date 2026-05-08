@@ -1,4 +1,4 @@
 #!/bin/bash
 
+# shellcheck disable=SC2016
 kubectl exec -ti deployments/api-app-backend -- php artisan tinker --execute 'foreach(App\Wiki::get() as $wiki): echo "$wiki->domain" . "\n"; endforeach'
-

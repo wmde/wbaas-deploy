@@ -21,7 +21,7 @@ USER_PASS="${USER_PASS:-wikiwikiwiki}"
 
 echo
 echo "> Creating local user '${USER_MAIL}' ..."
-kubectl --context ${KUBE_CONTEXT} exec deployments/api-app-backend -- \
+kubectl --context "${KUBE_CONTEXT}" exec deployments/api-app-backend -- \
     php artisan tinker --execute \
         "(new UserCreateJob('${USER_MAIL}', '${USER_PASS}'))->handle(); \$user = User::firstWhere('email', '${USER_MAIL}'); \$user->markEmailAsVerified(); \$user->save(); echo PHP_EOL . \$user;"
 
