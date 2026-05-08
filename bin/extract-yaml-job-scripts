@@ -1,0 +1,29 @@
+#!/bin/bash
+
+if [[ -n "${CI}" ]]; then
+    set -x
+fi
+
+# absolute path of the wbaas-deploy repository
+# shellcheck disable=SC2046,SC2128,2086
+ROOT=$(realpath $(dirname $(realpath $BASH_SOURCE))/..)
+EXTRACTED_SCRIPTS_DIR="$ROOT/k8s/jobs/.extracted"
+
+rm -Rfv "$ROOT/k8s/jobs/.extracted"/*_extracted.sh
+mkdir -p "$EXTRACTED_SCRIPTS_DIR"
+
+for file in "$ROOT"/k8s/jobs/*.yaml; do
+  BASENAME=$(basename "$file")
+  TMP_FILE="${EXTRACTED_SCRIPTS_DIR}/${BASENAME}_extracted.sh"
+  SCRIPT_SHELL=$(cat "$file" | yq '.spec.template.spec.containers[0].command[0]')
+
+  if [[ "$SCRIPT_SHELL" == "null" ]]; then
+    continue
+  fi
+
+  SCRIPT=$(cat "$file" | yq '.spec.template.spec.containers[0].command[2]')
+  echo "#!/usr/bin/env $SCRIPT_SHELL" > "$TMP_FILE"
+  echo "$SCRIPT" >> "$TMP_FILE"
+
+  echo "extracted $TMP_FILE"
+done
