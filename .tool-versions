@@ -5,4 +5,3 @@ helm 3.17.4
 helmfile 1.4.3
 skaffold 2.16.1
 yq 4.47.1
-shellcheck 0.11.0
