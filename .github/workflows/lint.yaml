@@ -15,5 +15,5 @@ jobs:
       - name: Check if Opentofu files are properly formatted
         run: tofu fmt -recursive -check tf
 
-      - name: Check Shell scripts
-        run: ./bin/run-shellcheck
+      - name: Check shell scripts with shellcheck and shfmt
+        run: ./bin/check-shell-scripts
