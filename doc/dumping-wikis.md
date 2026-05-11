@@ -31,3 +31,8 @@ kubectl exec -ti deployments/mediawiki-143-app-backend -- bash -c 'WBS_DOMAIN=co
 ```
 xmllint --noout 2025-02-26-coffeebase.wikibase.cloud.xml; echo $?
 ```
+## RDF
+### Dump
+```
+kubectl exec -ti deployments/mediawiki-143-app-backend -- bash -c 'WBS_DOMAIN=coffeebase.wikibase.cloud php w/maintenance/dumpRdf.php --full --quiet 2>/dev/null' > 2025-02-26-coffeebase.wikibase.cloud.rdf
+```
