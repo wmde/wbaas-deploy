@@ -1,4 +1,5 @@
 #!/bin/bash
 
+# PHP code is intentionally wrapped in single quotes to prevent being interpreted by the shell
 # shellcheck disable=SC2016
 kubectl exec -ti deployments/api-app-backend -- php artisan tinker --execute 'foreach(App\Wiki::get() as $wiki): echo "$wiki->domain" . "\n"; endforeach'
