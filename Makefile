@@ -118,9 +118,9 @@ lint-terraform:
 	tofu fmt -recursive -check tf
 
 .PHONY: lint-shell
-lint-shell: # @HELP Run shellcheck against the repository
+lint-shell: # @HELP Run shellcheck and shfmt against the repository
 lint-shell:
-	./bin/run-shellcheck
+	./bin/check-shell-scripts
 
 skaffold-mediawiki-143: # @HELP Deploy the local mediawiki 1.43 image using skaffold
 skaffold-ui: # @HELP Deploy the local ui image using skaffold
