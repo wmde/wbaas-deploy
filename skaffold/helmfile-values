@@ -59,4 +59,4 @@ if [[ "$REMOVE_IMAGE_YAML" == 1 ]]; then
    mv "$OUTPUT_YAML".altered "$OUTPUT_YAML"
 fi
 
-cat "$SCRIPT_DIR"/.tmp.values."$TARGET_RELEASE".yaml
+cat "$SCRIPT_DIR/.tmp.values.$TARGET_RELEASE.yaml"
