@@ -13,8 +13,7 @@ function usage() {
 ENVIRONMENT="$1"
 RELEASE="$2"
 
-# shellcheck disable=SC2046,SC2128,2086
-ROOT=$(realpath $(dirname $(realpath $BASH_SOURCE))/..) # absolute path of the wbaas-deploy repository
+ROOT=$(git rev-parse --show-toplevel)
 OUTPUT_TEMPLATE="${ROOT}/k8s/argocd/${ENVIRONMENT}/${RELEASE}.values.yaml"
 HELMFILE="k8s/helmfile/only-for-argo-value-generation.yaml"
 TMP_HELMFILE="$(dirname ${HELMFILE})/.tmp_helmfile.$(mktemp -u XXXXXX).yaml"
