@@ -1,0 +1,9 @@
+color=always
+
+## Disable checks
+# In case it should be needed to disable certain checks someday, add them here.
+# See wiki for details, e.g. https://github.com/koalaman/shellcheck/wiki/SC1064
+# Example: disable=SC1064
+# 
+
+
