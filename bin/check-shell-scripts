@@ -22,7 +22,6 @@ find . \
 		--indent 4 \
 		--binary-next-line \
 		--case-indent \
-		--func-next-line \
 		{} + \
         -exec docker run --rm -t -v "$(pwd):/mnt" koalaman/shellcheck:v0.11.0 {} +
 
