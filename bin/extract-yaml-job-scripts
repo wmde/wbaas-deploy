@@ -5,8 +5,7 @@ if [[ -n "${CI}" ]]; then
 fi
 
 # absolute path of the wbaas-deploy repository
-# shellcheck disable=SC2046,SC2128,2086
-ROOT=$(realpath $(dirname $(realpath $BASH_SOURCE))/..)
+ROOT=$(git rev-parse --show-toplevel)
 EXTRACTED_SCRIPTS_DIR="$ROOT/k8s/jobs/.extracted"
 
 rm -Rfv "$ROOT/k8s/jobs/.extracted"/*_extracted.sh
