@@ -1,19 +1,18 @@
 #!/usr/bin/env bash
 
-Help()
-{
-   # Display Help
-   echo "Access kuberneetes events easily."
-   echo
-   echo "Syntax: k8s-events [-h|e|w]"
-   echo "options:"
-   echo "e     Environment to run in. 'local' or 'staging'."
-   echo "w     Watch events, rather than just printing the current set"
-   echo "h     Print this Help."
-   echo
-   echo "Examples:"
-   echo "      k8s-events -e local"
-   echo "      k8s-events -e local -w"
+Help() {
+    # Display Help
+    echo "Access kuberneetes events easily."
+    echo
+    echo "Syntax: k8s-events [-h|e|w]"
+    echo "options:"
+    echo "e     Environment to run in. 'local' or 'staging'."
+    echo "w     Watch events, rather than just printing the current set"
+    echo "h     Print this Help."
+    echo
+    echo "Examples:"
+    echo "      k8s-events -e local"
+    echo "      k8s-events -e local -w"
 }
 
 # Set variable defaults
@@ -23,15 +22,18 @@ OPTIONAL_WATCH=""
 
 # Get the options
 while getopts ":e:wh" option; do
-   case $option in
-      e)
-         TARGET_ENVIRONMENT=$OPTARG;;
-      w)
-         OPTIONAL_WATCH="--watch";;
-      *) # display Help
-         Help
-         exit;;
-   esac
+    case $option in
+        e)
+            TARGET_ENVIRONMENT=$OPTARG
+            ;;
+        w)
+            OPTIONAL_WATCH="--watch"
+            ;;
+        *) # display Help
+            Help
+            exit
+            ;;
+    esac
 done
 
 # Parse user input
