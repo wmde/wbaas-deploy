@@ -43,7 +43,7 @@ while getopts ":r:c:e:l:s:h" option; do
          TARGET_LABELS=$OPTARG;;
       s)
          TARGET_SHELL=$OPTARG;;
-      h) # display Help
+      *) # display Help
          Help
          exit;;
    esac
@@ -60,7 +60,7 @@ fi
 
 # Make the connection
 echo "Targeting environment: $TARGET_ENVIRONMENT. Using k8s context: $K8CONTEXT"
-kubectl --context $K8CONTEXT get pods -A -l ${TARGET_LABELS}
-PODNAME=$(kubectl --context $K8CONTEXT get pods -A -l ${TARGET_LABELS} -o jsonpath="{.items[$TARGET_COUNT].metadata.name}")
+kubectl --context "$K8CONTEXT" get pods -A -l "${TARGET_LABELS}"
+PODNAME=$(kubectl --context "$K8CONTEXT" get pods -A -l "${TARGET_LABELS}" -o jsonpath="{.items[$TARGET_COUNT].metadata.name}")
 echo "Connecting to pod: $PODNAME with shell: $TARGET_SHELL"
-kubectl --context $K8CONTEXT  exec -it $PODNAME -- $TARGET_SHELL
+kubectl --context "$K8CONTEXT"  exec -it "$PODNAME" -- "$TARGET_SHELL"
