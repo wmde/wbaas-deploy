@@ -15,7 +15,7 @@ fi
 
 # This script should re-create your local minikube cluster without requiring any additional input (can take about ~20 minutes)
 
-WBAAS_DEPLOY_DIR=$(realpath $(dirname $0)/../../)
+WBAAS_DEPLOY_DIR=$(git rev-parse --show-toplevel)
 
 echo "⚠️ DELETING your local cluster in 10 seconds ... all data will be lost! (press ctrl+c NOW to cancel) ⚠️"
 sleep 10

@@ -18,9 +18,10 @@ marker=${3:-toc}
 
 generate_toc () {
   for doc in $docs_pattern; do
-    title=$(cat $doc | grep "^#\s.*" | sed 's/# //' | sed 's/[[:blank:]]*{#.*}//' | head -n 1)
+    title=$(cat "$doc" | grep "^#\s.*" | sed 's/# //' | sed 's/[[:blank:]]*{#.*}//' | head -n 1)
+    # shellcheck disable=SC2028
     echo -n "- [$title]($doc)\n"
   done
 }
 
-sed -i "/<!-- $marker-start -->/,/<!-- $marker-end -->/c\<!-- $marker-start -->\n$(generate_toc)\<!-- $marker-end -->" $target
+sed -i "/<!-- $marker-start -->/,/<!-- $marker-end -->/c\<!-- $marker-start -->\n$(generate_toc)\<!-- $marker-end -->" "$target"
