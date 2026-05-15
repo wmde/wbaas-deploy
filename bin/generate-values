@@ -25,7 +25,7 @@ fi
 if [[ ! -e "${HELMFILE}" ]]; then
     echo "error: helmfile not found: '${HELMFILE}'"
     usage
-    exit 1 
+    exit 1
 fi
 
 if [[ -z "${ENVIRONMENT}" ]]; then

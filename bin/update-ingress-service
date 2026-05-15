@@ -18,7 +18,7 @@ fi
 
 INGRESSES=$(kubectl get ingress -l wbstack-ingress-generation -o json)
 
-echo "$INGRESSES" > "wbstack-ingresses-$(date +%s).json.bak"
+echo "$INGRESSES" >"wbstack-ingresses-$(date +%s).json.bak"
 
 UPDATED_INGRESSES=$(echo "$INGRESSES" | jq --arg service "${SERVICE}" '.items[].spec.rules[].http.paths[].backend.service.name="$service"')
 

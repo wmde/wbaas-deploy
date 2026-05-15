@@ -11,10 +11,16 @@ if [[ "${KUBE_CONTEXT}" != "minikube-wbaas" ]]; then
 fi
 #####################################################################################
 
-[[ $(type -P "jq") ]] || { echo "error: 'jq' is not installed." 1>&2; exit 1; }
-[[ $(type -P "jo") ]] || { echo "error: 'jo' is not installed." 1>&2; exit 1; }
+[[ $(type -P "jq") ]] || {
+    echo "error: 'jq' is not installed." 1>&2
+    exit 1
+}
+[[ $(type -P "jo") ]] || {
+    echo "error: 'jo' is not installed." 1>&2
+    exit 1
+}
 
-# This script should create a wiki for a user account on a local wbaas cluster with the credentials below. Do not use this in production! 
+# This script should create a wiki for a user account on a local wbaas cluster with the credentials below. Do not use this in production!
 
 USER_MAIL="${USER_MAIL:-jane.doe@wikimedia.de}"
 USER_PASS="${USER_PASS:-wikiwikiwiki}"
@@ -45,7 +51,10 @@ LOGIN_RESPONSE=$(curl --insecure --location --silent --cookie-jar "${COOKIE_JAR}
     --data-raw "${LOGIN_JSON_DATA}")
 
 LOGIN_MAIL=$(echo "${LOGIN_RESPONSE}" | jq -r '.user.email')
-[[ "$LOGIN_MAIL" == "$USER_MAIL" ]] || { echo "error: login failed." 1>&2; exit 1; }
+[[ "$LOGIN_MAIL" == "$USER_MAIL" ]] || {
+    echo "error: login failed." 1>&2
+    exit 1
+}
 
 ## Create wiki
 CREATE_WIKI_JSON_DATA=$(jo -- \
