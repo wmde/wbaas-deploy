@@ -9,6 +9,7 @@ As currently we can not purely increase the storage size with our configuration 
 - Before applying the change via helmfile, you need to delete the SQL StatefulSets first [^2]
   - `kubectl delete statefulset sql-mariadb-primary --cascade=orphan`
   - `kubectl delete statefulset sql-mariadb-secondary --cascade=orphan`
+- Then apply via helmfile.
 
 ## PVC Patching
 - Get an overview of relevant PVCs
@@ -20,18 +21,21 @@ data-sql-mariadb-secondary-0   Bound    pvc-e156991c-0d7f-4a26-9414-316482a45c91
 ```
 
 > [!TIP]
-> In order to minimize potential downtime, do the following steps for mariadb-secondary storage first, and then the primary after that
+> In order to minimize potential downtime, do the following steps for the **secondary** storage first, and then if successfull, follow up with the primary after that.
 
-1. Monitor Events via `kubectl events data-sql-mariadb-primary-0 --watch`
+1. Monitor Events via `kubectl events data-sql-mariadb-secondary-0 --watch`
 2. Patch the individual PVC with new storage size
-    - example: `kubectl patch pvc data-sql-mariadb-primary-0 -p '{"spec":{"resources":{"requests": {"storage":"66Gi"}}}}'`
-3. In the logs you should see the `FileSystemResizeSuccessful` event after a short time. Now the greater disk storage is available to the existing container.
+    - example: `kubectl patch pvc data-sql-mariadb-secondary-0 -p '{"spec":{"resources":{"requests": {"storage":"66Gi"}}}}'`
+3. In the logs you should see the `FileSystemResizeSuccessful` event after a short time (around a minute).
+4. Done! Now the greater disk storage is available to the existing container. No restart of workloads is required.
+
 ```
-0s (x2 over 11m)        Warning   ExternalExpanding            PersistentVolumeClaim/data-sql-mariadb-primary-0     waiting for an external controller to expand this PVC
-0s (x2 over 11m)        Normal    Resizing                     PersistentVolumeClaim/data-sql-mariadb-primary-0     External resizer is resizing volume pvc-6d4cd5ace27f6316
-0s (x2 over 11m)        Normal    FileSystemResizeRequired     PersistentVolumeClaim/data-sql-mariadb-primary-0     Require file system resize of volume on node
-0s (x3 over 10m)        Normal    FileSystemResizeSuccessful   Pod/sql-mariadb-primary-0                            MountVolume.NodeExpandVolume succeeded for volume "pvc-6d4cd5ace27f6316" gke-wbaas-2-compute-pool-2-ee90b82c-9d7g
-0s (x3 over 10m)        Normal    FileSystemResizeSuccessful   PersistentVolumeClaim/data-sql-mariadb-primary-0     MountVolume.NodeExpandVolume succeeded for volume "pvc-6d4cd5ace27f6316" gke-wbaas-2-compute-pool-2-ee90b82c-9d7g
+$ kubectl events data-sql-mariadb-secondary-0 --for='PersistentVolumeClaim/data-sql-mariadb-secondary-0'
+LAST SEEN   TYPE     REASON                       OBJECT                                               MESSAGE
+7m14s       Normal   Resizing                     PersistentVolumeClaim/data-sql-mariadb-secondary-0   External resizer is resizing volume pv-sql-secondary-restored-on-230517
+7m14s       Normal   ExternalExpanding            PersistentVolumeClaim/data-sql-mariadb-secondary-0   waiting for an external controller to expand this PVC
+7m9s        Normal   FileSystemResizeRequired     PersistentVolumeClaim/data-sql-mariadb-secondary-0   Require file system resize of volume on node
+6m4s        Normal   FileSystemResizeSuccessful   PersistentVolumeClaim/data-sql-mariadb-secondary-0   MountVolume.NodeExpandVolume succeeded for volume "pv-sql-secondary-restored-on-230517" gke-wbaas-3-compute-pool-5-d4d27853-38gc
 ```
 
 [^1]: A small increase in storage claim like 1GB is sufficient for testing
