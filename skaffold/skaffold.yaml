@@ -92,7 +92,7 @@ profiles:
           - name: api
             chartPath: ./../../charts/charts/api
             valuesFiles:
-              - "../k8s/argocd/local/ui.values.yaml"
+              - "../k8s/argocd/local/api.values.yaml"
               - NeverPull.yaml
             artifactOverrides:
               image: local/skaffold/wbaas/api
