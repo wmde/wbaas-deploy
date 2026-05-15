@@ -1,6 +1,8 @@
 #!/bin/bash
 
-if [[ -n "${CI}" ]]; then
+set -euo pipefail
+
+if [[ -n "${CI:-}" ]]; then
     set -x
 fi
 
@@ -15,8 +17,8 @@ RELEASE="$2"
 
 ROOT=$(git rev-parse --show-toplevel)
 OUTPUT_TEMPLATE="${ROOT}/k8s/argocd/${ENVIRONMENT}/${RELEASE}.values.yaml"
-HELMFILE="k8s/helmfile/only-for-argo-value-generation.yaml"
-TMP_HELMFILE="$(dirname ${HELMFILE})/.tmp_helmfile.$(mktemp -u XXXXXX).yaml"
+HELMFILE="${ROOT}/k8s/helmfile/only-for-argo-value-generation.yaml"
+TMP_HELMFILE="$(dirname "${HELMFILE}")/.tmp_helmfile.$(mktemp -u XXXXXX).yaml.gotmpl"
 
 if [[ -n "$3" ]]; then
     OUTPUT_TEMPLATE="$3"
