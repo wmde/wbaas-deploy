@@ -23,6 +23,10 @@ profiles:
               image: local/skaffold/wbaas/ui
             imageStrategy:
               helm: {}
+        hooks:
+          before:
+            - host:
+                command: [ "../bin/generate-values", "local", "ui" ]
 metadata:
   name: ui
 
@@ -98,6 +102,10 @@ profiles:
               image: local/skaffold/wbaas/api
             imageStrategy:
               helm: {}
+        hooks:
+          before:
+            - host:
+                command: [ "../bin/generate-values", "local", "api" ]
 metadata:
   name: api
 
