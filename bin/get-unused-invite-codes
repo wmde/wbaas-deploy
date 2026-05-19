@@ -9,8 +9,8 @@ NEEDED_CONTEXT="gke_wikibase-cloud_europe-west3-a_wbaas-3"
 CONTEXT_CHANGED=$(false)
 
 if [[ "$CONTEXT" != "$NEEDED_CONTEXT" ]]; then
-	kubectl config use-context "$NEEDED_CONTEXT"   
-	CONTEXT_CHANGED=$(true)
+    kubectl config use-context "$NEEDED_CONTEXT"
+    CONTEXT_CHANGED=$(true)
 fi
 
 echo
@@ -21,6 +21,5 @@ echo "https://docs.google.com/spreadsheets/d/1EpQ2LYRfmDlu9ZfuPX5dRwo1nLmg3cBs3-
 echo
 
 if $CONTEXT_CHANGED; then
-	kubectl config use-context "$CONTEXT"
+    kubectl config use-context "$CONTEXT"
 fi
-
