@@ -304,7 +304,7 @@ sudo sh -c 'skaffold completion bash > /usr/share/bash-completion/completions/sk
 
 ## Tests
 
-Run `make test`. This only includes YAML linting for now.
+Run `make lint` to run linting for YAML, Terraform and Shell scripts.
 
 ## Accessing the SQL database for debugging
 You can do this using `adminer` which is available at adminer.wbaas.dev.
