@@ -11,17 +11,16 @@ find . \
     -type f -path '*/.terraform/*' -prune \
     -or \
     -type f \( \
-      -exec sh -c 'file --brief "$1" \
+    -exec sh -c 'file --brief "$1" \
             | grep --quiet --extended-regexp \
               "((POSIX|Korn|Bourne-Again) shell|/usr/bin/env k?sh) script"' _ {} \; \
-      -or \
-      -name '*.sh' -or -name '*.bash' -or -name '*.ksh' \
+    -or \
+    -name '*.sh' -or -name '*.bash' -or -name '*.ksh' \
     \) \
-        -exec docker run --rm -t -v "$(pwd):/mnt" -w /mnt -u "$(id -u):$(id -g)" mvdan/shfmt:v3 \
-		--diff \
-		--indent 4 \
-		--binary-next-line \
-		--case-indent \
-		{} + \
-        -exec docker run --rm -t -v "$(pwd):/mnt" koalaman/shellcheck:v0.11.0 {} +
-
+    -exec docker run --rm -t -v "$(pwd):/mnt" -w /mnt -u "$(id -u):$(id -g)" mvdan/shfmt:v3 \
+    --diff \
+    --indent 4 \
+    --binary-next-line \
+    --case-indent \
+    {} + \
+    -exec docker run --rm -t -v "$(pwd):/mnt" koalaman/shellcheck:v0.11.0 {} +

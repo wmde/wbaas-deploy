@@ -11,16 +11,16 @@
 while read -r domain; do
     echo "---------------------------"
     echo "$domain"
-    
+
     URL="http://localhost:8080/w/api.php?action=query&meta=siteinfo&siprop=statistics&format=json"
     RESULT=$(curl "$URL" -L -H 'Accept: application/json' -H "host: $domain")
-    
+
     SEARCH_URL="http://localhost:8080/w/api.php?action=wbsearchentities&search=a&format=json&errorformat=plaintext&language=en&uselang=en&type=item"
     SEARCH_RESULT=$(curl "$SEARCH_URL" -H 'Accept: application/json' -H "host: $domain")
 
     COUNT_QUERY="SELECT (COUNT(?s) AS ?count) WHERE { ?s ?p ?o }"
     QUERY_RESULT=$(curl -X POST http://localhost:8181 --data-raw "query=$COUNT_QUERY" -H 'Accept: application/json' -H "host: $domain")
-    
+
     echo "$RESULT" | jq
     echo "$SEARCH_RESULT" | jq
     echo "$QUERY_RESULT" | jq

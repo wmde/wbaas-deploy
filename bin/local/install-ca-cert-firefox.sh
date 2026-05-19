@@ -3,7 +3,7 @@
 # Installs (and replaces) the current local minikube CA certificate into your firefox profile
 # FIREFOX_PROFILE needs to be set, for example via direnv or ~/.profile
 #
-# With 'ls -lt ~/.mozilla/firefox/' it should be possible to find out which is your currently used profile 
+# With 'ls -lt ~/.mozilla/firefox/' it should be possible to find out which is your currently used profile
 # when comparing the modification dates of the directories (latest one = that's probably it)
 #
 # If this script fails with something like 'dial tcp [::1]:8080: connect: connection refused"'
@@ -21,9 +21,9 @@ if [[ "${KUBE_CONTEXT}" != "minikube-wbaas" ]]; then
 fi
 
 if [[ -z "${FIREFOX_PROFILE}" || ! -d "${FIREFOX_PROFILE}" ]]; then
-  echo "Please set '\$FIREFOX_PROFILE', should look something like ~/.mozilla/firefox/1234.default"
-  echo "Current value: '${FIREFOX_PROFILE}'"
-  exit 2
+    echo "Please set '\$FIREFOX_PROFILE', should look something like ~/.mozilla/firefox/1234.default"
+    echo "Current value: '${FIREFOX_PROFILE}'"
+    exit 2
 fi
 
 set -euo pipefail
@@ -32,7 +32,7 @@ FIREFOX_PROFILE=$(realpath "${FIREFOX_PROFILE}")
 CERT_NAME='wikibase-local-root-ca'
 CERT_PATH="/tmp/wikibase-local-ca.crt"
 
-kubectl get secret wikibase-local-tls -o json | jq -r '.data."ca.crt"' | base64 -d > "${CERT_PATH}"
+kubectl get secret wikibase-local-tls -o json | jq -r '.data."ca.crt"' | base64 -d >"${CERT_PATH}"
 
 certutil -d sql:"${FIREFOX_PROFILE}" -A -n "${CERT_NAME}" -t 'C,,' -i "${CERT_PATH}"
 certutil -d sql:"${FIREFOX_PROFILE}" -L -n "${CERT_NAME}"
