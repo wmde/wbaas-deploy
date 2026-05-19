@@ -7,6 +7,6 @@ while read -r namespace; do
 
     DELETE_QUERY="DELETE WHERE {<http://wikiba.se/ontology#Dump> <http://schema.org/dateModified> ?time}"
     RESULT=$(curl -X POST "http://localhost:9999/bigdata/namespace/$namespace/sparql/" --silent --data-raw "update=$DELETE_QUERY" -H 'Accept: application/sparql-results+json')
-    echo "$RESULT";
+    echo "$RESULT"
 
 done <"$1"

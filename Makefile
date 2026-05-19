@@ -103,10 +103,24 @@ diff: diff-staging diff-production
 apply: # @HELP Run apply for both staging and production
 apply: apply-staging apply-production
 
-.PHONY: test
-test: # @HELP Run yamllint tests against the repository
-test:
+.PHONY: lint
+lint: # @HELP Run linting tests
+lint: lint-yaml lint-terraform lint-shell
+
+.PHONY: lint-yaml
+lint-yaml: # @HELP Run yamllint tests against the repository
+lint-yaml:
 	yamllint --no-warnings .
+
+.PHONY: lint-terraform
+lint-terraform: # @HELP Run terraform linting against the repository
+lint-terraform:
+	tofu fmt -recursive -check tf
+
+.PHONY: lint-shell
+lint-shell: # @HELP Run shellcheck and shfmt against the repository
+lint-shell:
+	./bin/check-shell-scripts
 
 skaffold-mediawiki-143: # @HELP Deploy the local mediawiki 1.43 image using skaffold
 skaffold-ui: # @HELP Deploy the local ui image using skaffold
