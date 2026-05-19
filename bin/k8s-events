@@ -28,7 +28,7 @@ while getopts ":e:wh" option; do
          TARGET_ENVIRONMENT=$OPTARG;;
       w)
          OPTIONAL_WATCH="--watch";;
-      h) # display Help
+      *) # display Help
          Help
          exit;;
    esac
@@ -45,4 +45,4 @@ fi
 
 # Running the command
 echo "Targetting environment: $TARGET_ENVIRONMENT. Using k8s context: $K8CONTEXT"
-kubectl --context $K8CONTEXT get event $OPTIONAL_WATCH
+kubectl --context "$K8CONTEXT" get event "$OPTIONAL_WATCH"
