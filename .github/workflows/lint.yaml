@@ -12,6 +12,7 @@ jobs:
 
       - name: Install Opentofu
         uses: opentofu/setup-opentofu@v1
+
       - name: Check if Opentofu files are properly formatted
         run: tofu fmt -recursive -check tf
 
