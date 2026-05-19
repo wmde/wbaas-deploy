@@ -43,7 +43,7 @@ helmfile --environment local sync
 #kubectl exec -ti deployments/api-app-backend -- bash -c 'php artisan migrate:install; php artisan migrate --force; php artisan passport:client --personal --no-interaction; php artisan passport:client --password --no-interaction'
 
 if [[ -d "${FIREFOX_PROFILE}" ]]; then
-  "$WBAAS_DEPLOY_DIR/bin/local/install-ca-cert-firefox.sh"
+    "$WBAAS_DEPLOY_DIR/bin/local/install-ca-cert-firefox.sh"
 fi
 
 echo
