@@ -114,6 +114,15 @@ releases:
     # that can be used instead of YAML anchors. When upgrading helmfile, check
     # if we can use this feature here instead.
     <<: *default_release
+    set:
+    - name: controller.image.registry
+      value: ghcr.io
+    - name: controller.image.image
+      value: porter-dev/ingress-nginx-controller
+    - name: controller.image.tag
+      value: v1.15.5
+    - name: controller.image.digest
+      value: null
 
   - name: sql
     namespace: default
