@@ -150,7 +150,7 @@ wbstack:
   monitoringEmail: wb-cloud-monitoring@wikimedia.de
   qsBatchMarkFailedAfter: 3
   qsBatchPendingTimeout: PT300S
-  signupThrottlingLimit: 100
+  signupThrottlingLimit: 20
   signupThrottlingRange: PT24H
   subdomainSuffix: .wikibase.cloud
   summaryCreationRateRanges:
