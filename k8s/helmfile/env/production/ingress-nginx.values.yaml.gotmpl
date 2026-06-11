@@ -9,6 +9,11 @@ controller:
       memory: 150Mi
     limits:
       cpu: null
+    image:
+      registry: ghcr.io
+      image: porter-dev/ingress-nginx-controller
+      tag: v1.15.5
+      digest: null
   config:
     http-snippet: >-
       geo $limit_from_cloud_provider {
