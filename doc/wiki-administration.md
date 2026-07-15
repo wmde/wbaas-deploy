@@ -57,4 +57,6 @@ Psy Shell v0.12.0 (PHP 8.2.29 — cli) by Justin Hileman
 ```
 
 ## Removing a Wikibase Logo and restoring the default
-kubectl exec -it deployment/api-app-backend -- sh -c "php artisan tinker --execute=\"Wiki::where(['domain' => '<Wikibase Domain e.g. coffeebase.wikibase.dev>'])->first()->deleteSetting('wgLogo');\"" 
+```
+kubectl exec -it deployment/api-app-backend -- sh -c "php artisan tinker --execute=\"Wiki::where(['domain' => '<Wikibase Domain e.g. coffeebase.wikibase.dev>'])->first()->deleteSetting('wgLogo');\""
+```
