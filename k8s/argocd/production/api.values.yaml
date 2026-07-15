@@ -54,7 +54,7 @@ app:
     tracingEnabled: false
   url: https://www.wikibase.cloud
 image:
-  tag: sha-c9b333f
+  tag: sha-5032236
 ingress:
   annotations:
     kubernetes.io/ingress.class: nginx
@@ -150,7 +150,7 @@ wbstack:
   monitoringEmail: wb-cloud-monitoring@wikimedia.de
   qsBatchMarkFailedAfter: 3
   qsBatchPendingTimeout: PT300S
-  signupThrottlingLimit: 20
+  signupThrottlingLimit: 250
   signupThrottlingRange: PT24H
   subdomainSuffix: .wikibase.cloud
   summaryCreationRateRanges:

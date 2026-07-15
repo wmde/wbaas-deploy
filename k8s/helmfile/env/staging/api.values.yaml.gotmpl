@@ -1,5 +1,5 @@
 image:
-  tag: sha-c9b333f
+  tag: sha-5032236
 
 replicaCount:
   web: 1
@@ -14,6 +14,8 @@ ingress:
     secretName: wikibase-dev-tls
 
 wbstack:
+  signupThrottlingLimit: 20
+  signupThrottlingRange: 'PT24H'
   wikiDbProvisionVersion: mw1.43-wbs2
   wikiDbUseVersion: mw1.43-wbs2
   monitoringEmail: "wb-cloud-monitoring+staging@wikimedia.de"
