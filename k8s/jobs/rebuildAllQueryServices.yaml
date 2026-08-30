@@ -1,0 +1,19 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  generateName: generate-rebuild-queryservice-jobs-job-
+  namespace: default
+spec:
+  ttlSecondsAfterFinished: 604800
+  template:
+    metadata:
+      name: generate-rebuild-queryservice-jobs
+    spec:
+      containers:
+        - name: generate-rebuild-queryservice
+          command:
+            - 'bash'
+            - '-c'
+            - >
+              php -d memory_limit=-1 artisan wbs-qs:rebuild --chunkSize 100
+      restartPolicy: Never
