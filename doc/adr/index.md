@@ -25,6 +25,7 @@ Current ADRs include:
 - [11) Handling FQDNs](0011-handling-fqdns.md)
 - [12) Stop versioning terraform modules with git](0012-stop-versioning-terraform-modules-with-git.md)
 - [13) Use aliases to combine ES indices](0013-use-aliases-to-combine-es-indices.md)
+- [14) ArgoCD as Candidate for a Continous Deployment System](0014-argocd-candidate-for-cd.md)
 <!-- toc-end -->
 
 ---
