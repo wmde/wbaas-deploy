@@ -1,2 +1,3 @@
 wikibase-local-ca.crt
 *.bak
+.extracted
