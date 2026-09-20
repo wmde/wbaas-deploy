@@ -11,6 +11,24 @@ Note: a verification mail was sent to the new address ('barbar@bar.com').
 
 As the output suggests, the user then has to verify this new email address. The old one is now not longer used.
 
+## Sending a reverification email
+[UserVerificationCreateTokenAndSendJob](https://github.com/wbstack/api/blob/main/app/Jobs/UserVerificationCreateTokenAndSendJob.php)
+```
+$ kubectl exec -it deployments/api-app-backend -- php artisan tinker
+> $user = User::whereEmail('<user_email>')->firstOrFail();
+
+[!] Aliasing 'User' to 'App\User' for this Tinker session.
+= App\User {
+  <user object will be displayed here>
+}
+
+> UserVerificationCreateTokenAndSendJob::newForReverification($user)->handle();
+
+[!] Aliasing 'UserVerificationCreateTokenAndSendJob' to 'App\Jobs\UserVerificationCreateTokenAndSendJob' for this Tinker session.
+= null
+```
+Despite the output of `null`, this will run Laravel job and send the reverification email. You can check the [Mailgun logs](https://app.eu.mailgun.com/mg/reporting/logs) to confirm.
+
 ## Disabling a User Account
 [User/Disable Command](https://github.com/wbstack/api/blob/main/app/Console/Commands/User/Disable.php)
 ```
