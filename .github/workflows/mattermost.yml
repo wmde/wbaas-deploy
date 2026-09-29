@@ -5,7 +5,8 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    if: ${{ github.actor != 'dependabot[bot]' }}
+    # Don't run this job if the PR was created by Dependabot or from an external repository
+    if: ${{ github.actor != 'dependabot[bot]' && github.event.pull_request.head.repo.full_name == github.repository }}
     steps:
       - uses: mattermost/action-mattermost-notify@2.0.0
         with:
