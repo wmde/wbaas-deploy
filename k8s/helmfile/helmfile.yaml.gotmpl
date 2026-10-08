@@ -97,7 +97,7 @@ releases:
   - name: argocd-config
     namespace: argocd
     chart: wbstack/argocd-config
-    version: '{{ if eq .Environment.Name "production" }} 2.1.5 {{ else }} 2.2.0 {{ end }}'
+    version: 2.2.0
     <<: *default_release
 
   - name: redirects
