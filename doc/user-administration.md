@@ -12,22 +12,9 @@ Note: a verification mail was sent to the new address ('barbar@bar.com').
 As the output suggests, the user then has to verify this new email address. The old one is now not longer used.
 
 ## Sending a reverification email
-[UserVerificationCreateTokenAndSendJob](https://github.com/wbstack/api/blob/main/app/Jobs/UserVerificationCreateTokenAndSendJob.php)
-```
-$ kubectl exec -it deployments/api-app-backend -- php artisan tinker
-> $user = User::whereEmail('<user_email>')->firstOrFail();
+[UserVerificationCreateTokenAndSendJob](https://github.com/wbstack/api/blob/main/app/Jobs/UserVerificationCreateTokenAndSendJob.php) is the application job that can send reverification emails.
 
-[!] Aliasing 'User' to 'App\User' for this Tinker session.
-= App\User {
-  <user object will be displayed here>
-}
-
-> UserVerificationCreateTokenAndSendJob::newForReverification($user)->handle();
-
-[!] Aliasing 'UserVerificationCreateTokenAndSendJob' to 'App\Jobs\UserVerificationCreateTokenAndSendJob' for this Tinker session.
-= null
-```
-Despite the output of `null`, this will run Laravel job and send the reverification email. You can check the [Mailgun logs](https://app.eu.mailgun.com/mg/reporting/logs) to confirm.
+Our preference is for this job to be triggered by the user via the UI and [`/user/sendVerifyEmail`](https://github.com/wbstack/api/blob/9894d34e9ebd521c3554512c0dce4d339088e400/routes/api.php#L42) endpoint. This helps reduces the support load and risk of technical support social engineering attempts being successful.
 
 ## Disabling a User Account
 [User/Disable Command](https://github.com/wbstack/api/blob/main/app/Console/Commands/User/Disable.php)
