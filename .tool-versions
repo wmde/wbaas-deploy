@@ -1,5 +1,5 @@
 kubectl 1.33.3
-minikube 1.36.0
+minikube 1.39.0
 opentofu 1.10.7
 helm 3.21.2
 helmfile 1.4.3
