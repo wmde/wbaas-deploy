@@ -11,6 +11,11 @@ Note: a verification mail was sent to the new address ('barbar@bar.com').
 
 As the output suggests, the user then has to verify this new email address. The old one is now not longer used.
 
+## Sending a reverification email
+[UserVerificationCreateTokenAndSendJob](https://github.com/wbstack/api/blob/main/app/Jobs/UserVerificationCreateTokenAndSendJob.php) is the application job that can send reverification emails.
+
+Our preference is for this job to be triggered by the user via the UI and [`/user/sendVerifyEmail`](https://github.com/wbstack/api/blob/9894d34e9ebd521c3554512c0dce4d339088e400/routes/api.php#L42) endpoint. This helps reduces the support load and risk of technical support social engineering attempts being successful.
+
 ## Disabling a User Account
 [User/Disable Command](https://github.com/wbstack/api/blob/main/app/Console/Commands/User/Disable.php)
 ```
