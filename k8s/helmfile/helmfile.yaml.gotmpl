@@ -195,7 +195,6 @@ releases:
     namespace: default
     chart: wbstack/wbaas-backup
     version: 0.1.0
-    installed: {{ if eq .Environment.Name "local" }} false {{ else }} true {{ end }}
     <<: *default_release
 
   - name: kube-prometheus-stack
