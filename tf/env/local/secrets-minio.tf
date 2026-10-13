@@ -15,4 +15,3 @@ resource "kubernetes_secret" "minio-credentials" {
     "rootUser" = "minio"
   }
 }
-
