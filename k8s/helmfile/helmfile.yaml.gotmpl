@@ -254,3 +254,9 @@ releases:
     values:
       - env/local/mailhog.values.yaml.gotmpl
 
+  - name: minio
+    installed: {{ eq .Environment.Name "local" | toYaml }}
+    namespace: default
+    chart: git::https://github.com/pgsty/silo.git@helm/silo?ref=RELEASE.2026-09-16T00-00-00Z
+    values:
+      - env/local/minio.values.yaml.gotmpl
