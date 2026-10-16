@@ -14,11 +14,10 @@ prometheus:
   prometheusSpec:
     resources:
       requests:
-        cpu: "100m"
-        memory: "0.1Gi"
+        cpu: "200m"
+        memory: "1Gi"
       limits:
-        cpu: "100m"
-        memory: "0.1Gi"
+        memory: "2Gi"
     image:
       registry: quay.io
       repository: prometheus/prometheus
