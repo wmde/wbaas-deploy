@@ -6,4 +6,3 @@ serviceMonitor:
   interval: 2m
   labels:
     release: kube-prometheus-stack
-
