@@ -1,8 +1,0 @@
-operator:
-  namespace: trivy-system
-  scanJobTimeout: 60m
-serviceMonitor:
-  enabled: true
-  interval: 2m
-  labels:
-    release: kube-prometheus-stack
