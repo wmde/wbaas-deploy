@@ -134,7 +134,10 @@ skaffold-tool-widar: # @HELP Deploy the local widar image using skaffold
 skaffold-tool-quickstatements: # @HELP Deploy the local quickstatements image using skaffold
 .PHONY: skaffold-%
 skaffold-%: MODULE=$*
+# Skaffold reads values files before running pre-deploy hooks; create the local
+# values file first so a fresh checkout doesn't fail with a missing-file error.
 skaffold-%:
+	cd ./skaffold && ./helmfile-values -e local -r $(MODULE) -n
 	cd ./skaffold && skaffold run --kube-context minikube-wbaas -m $(MODULE)
 
 .PHONY: skaffold-run
