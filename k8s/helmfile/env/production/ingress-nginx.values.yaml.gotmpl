@@ -15,9 +15,6 @@ controller:
     tag: v1.15.5
     digest: null
   config:
-    server-snippet: |
-      default_type text/html;
-      return 500 "This site is temporarily unavailable due to emergency maintenance. See <a href='https://wmde.github.io/wikibase-cloud-status'>https://wmde.github.io/wikibase-cloud-status</a> for updates.";
     http-snippet: >-
       geo $limit_from_cloud_provider {
         default 0;
