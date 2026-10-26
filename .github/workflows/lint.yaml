@@ -11,7 +11,7 @@ jobs:
         uses: ibiqlik/action-yamllint@v3
 
       - name: Install Opentofu
-        uses: opentofu/setup-opentofu@v1
+        uses: opentofu/setup-opentofu@v2
 
       - name: Check if Opentofu files are properly formatted
         run: tofu fmt -recursive -check tf
