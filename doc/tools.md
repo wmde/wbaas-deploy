@@ -3,6 +3,34 @@
 This is a collection of some useful tools to interface with our setup. It's not mandatory to use them, but they can be helpful.
 If a tool directly interfaces with one of the deployed services, it's often necessary to forward a network port to your local machine.  
 
+## Docker
+### skopeo
+- https://www.redhat.com/en/topics/containers/what-is-skopeo
+- https://github.com/podman-container-tools/skopeo
+
+> With Skopeo, you can inspect images on a remote registry without having to download the entire image with all its layers, making it a lightweight and modular solution for working with container images across different formats, including Open Container Initiative (OCI) and Docker images.
+
+This tool can be handy to check available image tags on image registries. Usually available on webinterfaces like github or hub.docker.com, it get's more tricky when authentication is required. In our case, the anubis botstopper image is an example of that. After authenticating with the [credentials](https://github.com/wmde/wbaas-deploy/blob/main/doc/local-dev-env.md#botstopper), you can list available image tags for example like this:
+```
+$ skopeo list-tags docker://ghcr.io/techarohq/botstopper/anubis | grep v
+        "v1.22.1",
+        "v1.22.4",
+        "v1.23.1",
+        "v1.23.2",
+        "v1.23.3",
+        "v1.24.0",
+        "v1.25.0",
+        "v1.26.2-pre1",
+        "v1.26.2",
+        "v1.26.3",
+        "v1.26.4",
+        "v1.27.0-pre2",
+        "v1.27.0",
+        "v1.28.0-pre2",
+        "v1.28.1-dirty",
+        "v1.28.1"
+```
+
 ## Kubernetes
 ### kubie
 - https://blog.sbstp.ca/introducing-kubie/
@@ -116,3 +144,4 @@ docker run --network host elastichq/elasticsearch-hq
 ```
 
 It is then accessible in your browser: http://localhost:5000
+
