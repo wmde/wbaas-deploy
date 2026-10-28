@@ -6,11 +6,3 @@ serverBlock: |-
 resources:
   limits:
     cpu: 50m
-
-# TODO: Remove the following after deploying to production
-
-image:
-  repository: nginx/nginx-unprivileged
-  tag: 1.30.6-alpine-slim
-
-nameOverride: nginx
