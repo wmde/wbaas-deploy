@@ -2,11 +2,3 @@ replicaCount: 2
 
 serverBlock: |-
 {{ readFile "platform-nginx.nginx.conf" | indent 2 }}
-
-# TODO: Remove the following after deploying to production
-
-image:
-  repository: nginx/nginx-unprivileged
-  tag: 1.30.6-alpine-slim
-
-nameOverride: nginx

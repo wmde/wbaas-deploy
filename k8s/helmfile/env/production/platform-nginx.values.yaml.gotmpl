@@ -1,23 +1,12 @@
 image:
-  registry: ghcr.io
-  repository: wbstack/nginx
-  tag: 1.17.10-debian-10-r11
-
-# see https://github.com/wbstack/bitnami-legacy/blob/nginx/5.2.4/bitnami/nginx/values.yaml#L49
-cloneStaticSiteFromGit:
-  # Depends on an image which may no longer exist
-  enabled: false
-
-# see https://github.com/wbstack/bitnami-legacy/blob/nginx/5.2.4/bitnami/nginx/values.yaml#L251
-metrics:
-  # Depends on an image which may no longer exist
-  enabled: false
+  tag: 1.30.6-alpine-slim
 
 replicaCount: 3
 
+nameOverride: nginx
+
 resources:
   limits:
-    cpu: null
     memory: 128Mi
   requests:
      cpu: 20m
@@ -40,17 +29,6 @@ readinessProbe:
   initialDelaySeconds: 5
   timeoutSeconds: 3
   periodSeconds: 5
-
-service:
-  type: ClusterIP
-  port: 8080
-
-ingress:
-  enabled: false
-metrics:
-  enabled: false
-cloneStaticSiteFromGit:
-  enabled: false
 
 affinity:
   podAntiAffinity:
