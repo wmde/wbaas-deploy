@@ -6,10 +6,6 @@ image:
 podSecurityContext:
   runAsNonRoot: true
 
-service:
-  type: ClusterIP
-  port: 6379
-
 # Resource limits/requests for the main Valkey container
 resources: {}
   # Example:
