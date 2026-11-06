@@ -25,7 +25,7 @@ We almost immediately discounted a solution based on introducing new Kubernetes 
 - we expect to want to deprecate our usage of Ingress
 
 ## Altering the services
-Altering all 6 services would be a lot of maintenance overhead and they are in a variety of languages. Each additional service added to the platform would also require modifications first and increase that maintenance burden.
+Altering all 6 services, implemented in a variety of languages would be a lot of maintenance overhead. Each additional service added to the platform would also require modifications first and increase that maintenance burden.
 
 ## Using Gateway API
 We currently rely on Ingresses and `ingress-nginx` for handling incoming traffic. While Ingress is not deprecated `ingress-nginx` is deprecated and now maintained by 3rd parties. The natural successor to the Kubernetes [Ingress][0] api seems to be the [Gateway API][1]. We will eventually need to migrate to this. Currently the team has no experience of these APIs and has not done any due diligence to select a specific implementation of this API. We spent a morning experimenting with Kgateway, a specific implementation of this API. We made good progress but it was clear the team would need to learn a lot. We did not build a working prototype. Working in this area involves a larger blast radius and could impact things such as other traffic entering the cluster, TLS termination, DNS, Customs Domains etc.
