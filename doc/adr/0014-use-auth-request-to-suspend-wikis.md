@@ -11,7 +11,7 @@ We need to be able to suspend Wikis and their associated tools when they are bot
 
 We need to show a user friendly HTML suspension page for suspended Wikis.
 
-We track suspensions in the platform API.
+We track suspensions in the Platform API.
 
 We considered 3 initial options for handling suspensions:
 - altering all 6 services at the application to check if they are suspended
@@ -37,16 +37,16 @@ Using [lua][2] feels an easy way to implement this suspension logic in NGINX. lu
 ## Using `auth_request` in `platform-nginx`
 We already use the [`auth_request`][4] functionality from NGINX to decide at the `platform-nginx` layer which version of MediaWiki services we will use (see [`platform-nginx.nginx.conf`][5]). This pattern is hard to reason with because NGINX configuration is very complex to reason with. We probably want to get rid of this pattern eventually. This doesn't rely on any specific Kubernetes technology. This could allow prototyping without Kubernetes. We may well want to eventually remove the `platform-nginx` layer totally. In an afternoon we produced a working prototype of a suspension solution based on `auth_request`.
 
-We considered a push model from the platform api of suspensions to a ConfigMap and concluded that this would necessitate a regularly running Job that we wanted to avoid.
+We considered a push model from the Platform API of suspensions to a ConfigMap and concluded that this would necessitate a regularly running Job that we wanted to avoid.
 
-We considered a pull model from the platform api to see at request time (probably with caching) if a given Wiki is suspended.
+We considered a pull model from the Platform API to see at request time (probably with caching) if a given Wiki is suspended.
 
 ## Decision
 
 We will build a solution based on `auth_request` in `platform-nginx`
 
 ## Consequences
-* We will need a new platform API endpoint that will return information about the suspension state of a Wiki in an HTTP Header.
+* We will need a new Platform API endpoint that will return information about the suspension state of a Wiki in an HTTP Header.
 * We will need to address any internal tooling that requires accessing Wikis.
 * We will need to do work on Gateway API migration in the future.
 * We may wish to rework this implementation at that time.
