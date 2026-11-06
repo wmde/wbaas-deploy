@@ -25,6 +25,7 @@ Current ADRs include:
 - [11) Handling FQDNs](0011-handling-fqdns.md)
 - [12) Stop versioning terraform modules with git](0012-stop-versioning-terraform-modules-with-git.md)
 - [13) Use aliases to combine ES indices](0013-use-aliases-to-combine-es-indices.md)
+- [14) Use auth_request to suspend wikis](0014-use-auth-request-to-suspend-wikis.md)
 <!-- toc-end -->
 
 ---
