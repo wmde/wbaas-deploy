@@ -46,10 +46,10 @@ We considered a pull model from the platform api to see at request time (probabl
 We will build a solution based on auth_request in platform-NGINX
 
 ## Consequences
-We will need a new platform API endpoint that will return information about the suspension state of a Wiki in an HTTP Header.
-We will need to address any internal tooling that requires accessing Wikis.
-We will need to do work on Gateway API migration in the future.
-We may wish to rework this implementation at that time.
+* We will need a new platform API endpoint that will return information about the suspension state of a Wiki in an HTTP Header.
+* We will need to address any internal tooling that requires accessing Wikis.
+* We will need to do work on Gateway API migration in the future.
+* We may wish to rework this implementation at that time.
 
 ---
 
