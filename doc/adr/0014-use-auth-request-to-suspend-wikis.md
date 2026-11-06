@@ -21,7 +21,7 @@ We considered 3 initial options for handling suspensions:
 - using the gateway api
 
 ## Altering the services
-Altering all 6 services would be a lot of overhead maintenance and they are in a variety of languages.
+Altering all 6 services would be a lot of maintenance overhead and they are in a variety of languages. Each additional service added to the platform would also require modifications first and increase that maintenance burden.
 
 
 ## Using Gateway API
