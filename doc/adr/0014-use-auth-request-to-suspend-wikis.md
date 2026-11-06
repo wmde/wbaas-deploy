@@ -43,3 +43,7 @@ We will need a new platform API endpoint that will return information about the 
 We will need to address any internal tooling that requires accessing Wikis.
 We will need to do work on Gateway API migration in the future.
 We may wish to rework this implementation at that time.
+
+---
+
+[1] https://github.com/wmde/wbaas-deploy/blob/main/k8s/helmfile/env/production/platform-nginx.nginx.conf#L345
