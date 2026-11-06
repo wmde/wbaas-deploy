@@ -21,7 +21,7 @@ We considered 3 initial options for handling suspensions:
 - using the gateway api
 
 We almost immediately discounted a solution based on introducing new [Ingress][0] objects because:
-- we may need to suspend many Wikis; potentially 1000s which we believe the ingress controller will not be able to handle (or the ConfigMap will become too large)
+- we may need to suspend many Wikis; potentially 1,000s which we believe the ingress controller will not be able to handle (or the ConfigMap will become too large)
 - we expect to want to deprecate our usage of Ingress
 
 ## Altering the services
