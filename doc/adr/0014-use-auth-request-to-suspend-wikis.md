@@ -13,15 +13,15 @@ We need to show a user friendly HTML suspension page for suspended Wikis.
 
 We track suspensions in the Platform API.
 
-We considered 3 initial options for handling suspensions:
+We investigated 3 options for handling suspensions:
 - altering all 6 services at the application to check if they are suspended
 - using the `platform-nginx` with two sub options
   - using `auth_request`
   - using lua
-- using the gateway api
+- using the Kubernetes Gateway API
 
-We almost immediately discounted a solution based on introducing new [Ingress][0] objects because:
-- we may need to suspend many Wikis; potentially 1,000s which we believe the ingress controller will not be able to handle (or the ConfigMap will become too large)
+We almost immediately discounted a solution based on introducing new Kubernetes [Ingress][0] objects because:
+- we may need to suspend many Wikis; potentially 1,000s which we believe the ingress controller will not be able to handle (or that the ConfigMap will become too large)
 - we expect to want to deprecate our usage of Ingress
 
 ## Altering the services
