@@ -7,7 +7,7 @@ Date: 2026-11-05
 proposed
 
 ## Context
-We need to be able to suspend Wikis and their assosciated tools when they are both automatically and manually suspended. We have at least 6 services: MediaWiki, Quickstatements, Cradle, Widar, Queryservice-UI and Queryservice that need to be suspended when a Wiki is suspended.
+We need to be able to suspend Wikis and their associated tools when they are both automatically and manually suspended. We have at least 6 services: MediaWiki, Quickstatements, Cradle, Widar, Queryservice-UI and Queryservice that need to be suspended when a Wiki is suspended.
 
 We need to show a user friendly HTML suspension page for suspended Wikis.
 
@@ -28,14 +28,14 @@ We almost immediately discounted a solution based on introducing new Ingress[0] 
 Altering all 6 services would be a lot of maintenance overhead and they are in a variety of languages. Each additional service added to the platform would also require modifications first and increase that maintenance burden.
 
 ## Using Gateway API
-We currently rely on Ingresses and ingress-nginx for handling incoming traffic. While Ingress is not deprecated ingress-nginx is deprecated and now maintained by 3rd parties. The natural succeessor to the Kubernetes Ingress api seems to be the Gateway API[0][1]. We will eventually need to migrate to this. Currently the team has no experience of these APIs and has not done any due dilligence to select a specific implementation of this API. We spent a morning experimenting with Kgateway, a specific implementation of this API. We made good progress but it was clear the team would need to learn a lot. We did not build a working prototype. Working in this area involves a larger blast radius and could impact thing such as other traffic entering the cluster, TLS termination, DNS, Customs Domains etc.
+We currently rely on Ingresses and ingress-nginx for handling incoming traffic. While Ingress is not deprecated ingress-nginx is deprecated and now maintained by 3rd parties. The natural successor to the Kubernetes Ingress api seems to be the Gateway API[0][1]. We will eventually need to migrate to this. Currently the team has no experience of these APIs and has not done any due dilligence to select a specific implementation of this API. We spent a morning experimenting with Kgateway, a specific implementation of this API. We made good progress but it was clear the team would need to learn a lot. We did not build a working prototype. Working in this area involves a larger blast radius and could impact thing such as other traffic entering the cluster, TLS termination, DNS, Customs Domains etc.
 
 ## Using lua in platform-NGINX
 Using lua[2] feels an easy way to implement this suspension logic in NGINX. lua support is not present in the fully open-source version of NGINX. Lua support is available in OpenResty[3] but we do not use this distribution and are unsure of its compatibility to the extent we don't want to investigate it further.
 
 
 ## Using auth_request in platform-NGINX
-We already use auth_request[4] functionality from NGINX to decide at the platform-nginx layer which version of MediaWiki services we will use[5]. This pattern is hard to reason with because nginx configuration is very complex to reason with. We probably want to get rid of this pattern eventually. This doesn't rely on any specifc Kubernetes technology. This could allow prototyping without Kubernetes. We may well want to eventually remove the platform-nginx layer totally. In an afternoon we produced a working prototype of suspension solution based on this technology.
+We already use auth_request[4] functionality from NGINX to decide at the platform-nginx layer which version of MediaWiki services we will use[5]. This pattern is hard to reason with because nginx configuration is very complex to reason with. We probably want to get rid of this pattern eventually. This doesn't rely on any specific Kubernetes technology. This could allow prototyping without Kubernetes. We may well want to eventually remove the platform-nginx layer totally. In an afternoon we produced a working prototype of suspension solution based on this technology.
 
 We considered a push model from the platform api of suspensions to a ConfigMap and concluded that this would necessitate a regularly running Job that we wanted to avoid.
 
