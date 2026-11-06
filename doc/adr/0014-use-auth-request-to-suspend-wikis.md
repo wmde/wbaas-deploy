@@ -1,6 +1,6 @@
 # 14) Use auth_request to suspend wikis {#adr_0014}
 
-Date: 2026-11-05    
+Date: 2026-11-05
 
 ## Status
 
