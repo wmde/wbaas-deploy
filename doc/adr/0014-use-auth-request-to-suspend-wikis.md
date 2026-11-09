@@ -4,7 +4,7 @@ Date: 2026-11-05
 
 ## Status
 
-proposed
+Accepted
 
 ## Context
 We need to be able to suspend Wikis and their associated tools when they are both automatically and manually suspended. We have at least 6 services: MediaWiki, Quickstatements, Cradle, Widar, Queryservice-UI and Queryservice that need to be suspended when a Wiki is suspended.
