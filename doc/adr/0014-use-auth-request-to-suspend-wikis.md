@@ -34,11 +34,11 @@ We currently rely on Ingresses and `ingress-nginx` for handling incoming traffic
 Using [lua][2] feels like an easy way to implement this suspension logic in NGINX. Lua support is not present in the fully open-source version of NGINX. Lua support is available in [OpenResty][3], but we do not use this distribution and are unsure of its compatibility to the extent we don't want to investigate it further.
 
 ## Using `auth_request` in `platform-nginx`
-We already use the [`auth_request`][4] functionality from NGINX to decide at the `platform-nginx` layer which version of MediaWiki services we will use (see [`platform-nginx.nginx.conf`][5]). This pattern is hard to reason with because NGINX configuration is very complex to reason with. We probably want to get rid of this pattern eventually. This doesn't rely on any specific Kubernetes technology. This could allow prototyping without Kubernetes. We may well want to eventually remove the `platform-nginx` layer totally. In an afternoon we produced a working prototype of a suspension solution based on `auth_request`.
+We already use the [`auth_request`][4] functionality from NGINX to decide at the `platform-nginx` layer which version of MediaWiki to use (see [`platform-nginx.nginx.conf`][5]). This pattern is hard to reason with due to NGINX's complex configuration. We probably want to get rid of this pattern eventually. This doesn't rely on any specific Kubernetes technology so could allow prototyping without Kubernetes (e.g. in Docker Compose). We may well want to eventually remove the `platform-nginx` layer totally. In an afternoon we produced a working prototype of a suspension solution based on `auth_request`.
 
 We considered a push model from the Platform API of suspensions to a ConfigMap and concluded that this would necessitate a regularly running Job that we wanted to avoid.
 
-We considered a pull model from the Platform API to see at request time (probably with caching) if a given Wiki is suspended.
+We considered a pull model from the Platform API to determine at request time (probably with caching) if a given Wiki is suspended.
 
 ## Decision
 
