@@ -110,7 +110,7 @@ server {
 
         location @wiki_suspended {
                 default_type text/html;
-                return 403 '<body>Wiki suspended test</body>';
+                return 403 {{ readFile "../production/platform-nginx.wiki-suspended.html" | quote }};
         }
 
         location = /robots.txt {
