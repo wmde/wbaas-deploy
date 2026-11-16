@@ -110,6 +110,8 @@ server {
 
         location @wiki_suspended {
                 default_type text/html;
+                # This file must not contain any NGINX syntax such as dollar signs for variables
+                # If you need to make this more robust then consider adding it to the chart with a ConfigMap
                 return 403 {{ readFile "../production/platform-nginx.wiki-suspended.html" | quote }};
         }
 
