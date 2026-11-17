@@ -1,0 +1,58 @@
+image:
+ registry: ghcr.io
+ repository: wbstack/valkey
+ tag: "9.1.3-alpine"
+
+podSecurityContext:
+  runAsNonRoot: true
+
+# Resource limits/requests for the main Valkey container
+resources: {}
+  # Example:
+  # limits:
+  #   cpu: 100m
+  #   memory: 128Mi
+  # requests:
+  #   cpu: 100m
+  #   memory: 128Mi
+
+# Content for valkey.conf (will be mounted via ConfigMap)
+valkeyConfig: ""
+
+auth:
+  # Enable ACL-based authentication
+  # IMPORTANT: When authentication is enabled, the 'default' user MUST be defined in either
+  # aclUsers or aclConfig. Without a default user, anyone can access the database without
+  # credentials, creating a security risk.
+  enabled: false
+
+  # Use an existing secret for user passwords. Key defaults to username.
+  # Supports templating, e.g.: "users-{{ .Release.Name }}"
+  usersExistingSecret: ""
+
+  # Map of users to create with ACL permissions.
+  # If usersExistingSecret is set, passwords from the secret take priority over inline passwords.
+  # NOTE: If using aclUsers, the 'default' user must be included here.
+  aclUsers: {}
+  # Example:
+  # default:
+  #   permissions: "~* &* +@all"
+  #   password: "secretpass"        # Inline password (fallback if usersExistingSecret not set)
+  #   passwordKey: "admin-pwd"      # Key in usersExistingSecret (defaults to username)
+  # read-user:
+  #   permissions: "~* -@all +@read +ping +info"
+  # Inline ACL configuration that will be appended after generated users.
+  # NOTE: If using aclConfig, ensure the 'default' user is defined here.
+  aclConfig: ""
+  # Example:
+  # aclConfig: |
+  #   user default on >secretpass ~* &* +@all
+
+
+# Valkey logging level: debug, verbose, notice, warning
+valkeyLogLevel: "notice"
+# Environment variables to inject into Valkey container
+
+env: {}
+  # Example:
+  # LOG_LEVEL: info
