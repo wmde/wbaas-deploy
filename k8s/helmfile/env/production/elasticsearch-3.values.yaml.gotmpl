@@ -79,3 +79,8 @@ sysctlImage:
   registry: ghcr.io
   repository: wbstack/bitnami-shell-archived
   tag: 11-debian-11-r123
+
+extraEnvVars:
+  # Disable hardware-accelerated Base64 encoding/decoding (T445297)
+  - name: ES_JAVA_OPTS
+    value: "-XX:-UseBASE64Intrinsics"
