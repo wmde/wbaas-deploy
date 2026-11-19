@@ -7,6 +7,9 @@ web:
 
 mw:
   environment: staging
+  redis:
+    readCacheServer: valkey-cache-read.default.svc.cluster.local
+    writeCacheServer: valkey-cache.default.svc.cluster.local
   settings:
     allowedProxyCidr: "10.112.0.0/14"
   mail:

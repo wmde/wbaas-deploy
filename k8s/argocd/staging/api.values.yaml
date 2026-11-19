@@ -42,7 +42,7 @@ app:
   redis:
     cachedb: 3
     db: 2
-    host: redis-master.default.svc.cluster.local
+    host: valkey-main.default.svc.cluster.local
     password: null
     passwordSecretKey: password
     passwordSecretName: redis-password

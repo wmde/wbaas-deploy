@@ -7,6 +7,9 @@ web:
 
 mw:
   environment: local
+  redis:
+    readCacheServer: valkey-cache-read.default.svc.cluster.local
+    writeCacheServer: valkey-cache.default.svc.cluster.local
   settings:
     # Enable this to increase verbosity of logging in mw pods
     # This is very useful when debugging locally but may interfere with jobs
