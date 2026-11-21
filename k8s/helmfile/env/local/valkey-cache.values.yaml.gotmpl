@@ -1,0 +1,25 @@
+image:
+  tag: 9.1.3-alpine
+
+persistence:
+  storageClass: ""
+
+resources:
+  requests:
+    cpu: 10m
+    memory: 75Mi
+  limits:
+    cpu: 75m
+    memory: 100Mi
+
+extraConfig: |
+  # Enable AOF https://redis.io/topics/persistence#append-only-file
+  appendonly yes
+  # Disable RDB persistence, AOF persistence already enabled.
+  save ""
+  # Control memory usage
+  maxmemory 50mb
+  maxmemory-policy volatile-lru
+  # Auto AOF file rewriting
+  auto-aof-rewrite-percentage 100
+  auto-aof-rewrite-min-size 60mb

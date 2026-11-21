@@ -1,0 +1,41 @@
+image:
+  tag: 9.1.3-alpine
+
+replica:
+  enabled: true
+  replicas: 2
+
+persistence:
+  enabled: true
+  size: 1Gi
+  storageClass: premium-rwo
+
+auth:
+  enabled: true
+  usersExistingSecret: redis-password
+  aclUsers:
+    default:
+      permissions: "~* &* +@all"
+      passwordKey: password
+
+resources:
+  requests:
+    cpu: 20m
+    memory: 500Mi
+  limits:
+    memory: 500Mi
+
+extraConfig: |
+  # Enable AOF https://redis.io/topics/persistence#append-only-file
+  appendonly yes
+  # Disable RDB persistence, AOF persistence already enabled.
+  save ""
+  # Control memory usage
+  maxmemory 75mb
+  maxmemory-policy volatile-lru
+  # Auto AOF file rewriting
+  auto-aof-rewrite-percentage 100
+  auto-aof-rewrite-min-size 85mb
+
+metrics:
+  enabled: true
