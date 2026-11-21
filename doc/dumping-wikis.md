@@ -36,3 +36,10 @@ xmllint --noout 2025-02-26-coffeebase.wikibase.cloud.xml; echo $?
 ```
 kubectl exec -ti deployments/mediawiki-143-app-backend -- bash -c 'WBS_DOMAIN=coffeebase.wikibase.cloud php w/maintenance/dumpRdf.php --full --quiet 2>/dev/null' > 2025-02-26-coffeebase.wikibase.cloud.rdf
 ```
+
+## SQL
+### Dump
+Examples:
+- https://phabricator.wikimedia.org/T355801#9524517
+- https://phabricator.wikimedia.org/T414893
+
