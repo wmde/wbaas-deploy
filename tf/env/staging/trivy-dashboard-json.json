@@ -1,0 +1,415 @@
+{
+  "displayName": "Vulnerability Reports (Staging)",
+  "dashboardFilters": [],
+  "description": "Visualizations of trivy reports - T442503",
+  "labels": {},
+  "mosaicLayout": {
+    "columns": 48,
+    "tiles": [
+      {
+        "height": 6,
+        "width": 12,
+        "widget": {
+          "title": "Critical",
+          "id": "",
+          "scorecard": {
+            "blankView": {},
+            "breakdowns": [],
+            "dimensions": [],
+            "measures": [],
+            "thresholds": [
+              {
+                "color": "RED",
+                "direction": "ABOVE",
+                "label": "",
+                "targetAxis": "TARGET_AXIS_UNSPECIFIED",
+                "value": 0
+              }
+            ],
+            "timeSeriesQuery": {
+              "outputFullDuration": false,
+              "prometheusQuery": "sum(max by (image_digest) (trivy_image_vulnerabilities{cluster=\"wbaas-2\", severity=\"Critical\"}))",
+              "unitOverride": ""
+            }
+          }
+        }
+      },
+      {
+        "xPos": 12,
+        "height": 6,
+        "width": 12,
+        "widget": {
+          "title": "High",
+          "id": "",
+          "scorecard": {
+            "blankView": {},
+            "breakdowns": [],
+            "dimensions": [],
+            "measures": [],
+            "thresholds": [
+              {
+                "color": "YELLOW",
+                "direction": "ABOVE",
+                "label": "",
+                "targetAxis": "TARGET_AXIS_UNSPECIFIED",
+                "value": 0
+              }
+            ],
+            "timeSeriesQuery": {
+              "outputFullDuration": false,
+              "prometheusQuery": "sum(max by (image_digest) (trivy_image_vulnerabilities{cluster=\"wbaas-2\", severity=\"High\"}))",
+              "unitOverride": ""
+            }
+          }
+        }
+      },
+      {
+        "xPos": 24,
+        "height": 6,
+        "width": 12,
+        "widget": {
+          "title": "Medium",
+          "id": "",
+          "scorecard": {
+            "blankView": {},
+            "breakdowns": [],
+            "dimensions": [],
+            "measures": [],
+            "thresholds": [],
+            "timeSeriesQuery": {
+              "outputFullDuration": false,
+              "prometheusQuery": "sum(max by (image_digest) (trivy_image_vulnerabilities{cluster=\"wbaas-2\", severity=\"Medium\"}))",
+              "unitOverride": ""
+            }
+          }
+        }
+      },
+      {
+        "xPos": 36,
+        "height": 6,
+        "width": 12,
+        "widget": {
+          "title": "Low",
+          "id": "",
+          "scorecard": {
+            "blankView": {},
+            "breakdowns": [],
+            "dimensions": [],
+            "measures": [],
+            "thresholds": [],
+            "timeSeriesQuery": {
+              "outputFullDuration": false,
+              "prometheusQuery": "sum(max by (image_digest) (trivy_image_vulnerabilities{cluster=\"wbaas-2\", severity=\"Low\"}))",
+              "unitOverride": ""
+            }
+          }
+        }
+      },
+      {
+        "yPos": 6,
+        "height": 20,
+        "width": 48,
+        "widget": {
+          "title": "Low",
+          "id": "",
+          "timeSeriesTable": {
+            "columnSettings": [],
+            "dataSets": [
+              {
+                "tableTemplate": "",
+                "timeSeriesQuery": {
+                  "outputFullDuration": false,
+                  "prometheusQuery": "max by (image) (label_join(trivy_image_vulnerabilities{cluster=\"wbaas-2\", severity=\"Low\"}, \"image\", \":\", \"image_repository\", \"image_tag\")) > 0",
+                  "unitOverride": ""
+                }
+              }
+            ],
+            "displayColumnType": false,
+            "metricVisualization": "BAR"
+          }
+        }
+      },
+      {
+        "yPos": 6,
+        "height": 20,
+        "width": 48,
+        "widget": {
+          "title": "Per image",
+          "id": "",
+          "singleViewGroup": {
+            "displayType": "TAB"
+          }
+        }
+      },
+      {
+        "yPos": 6,
+        "height": 20,
+        "width": 48,
+        "widget": {
+          "title": "Medium",
+          "id": "",
+          "timeSeriesTable": {
+            "columnSettings": [],
+            "dataSets": [
+              {
+                "tableTemplate": "",
+                "timeSeriesQuery": {
+                  "outputFullDuration": false,
+                  "prometheusQuery": "max by (image) (label_join(trivy_image_vulnerabilities{cluster=\"wbaas-2\", severity=\"Medium\"}, \"image\", \":\", \"image_repository\", \"image_tag\")) > 0",
+                  "unitOverride": ""
+                }
+              }
+            ],
+            "displayColumnType": false,
+            "metricVisualization": "BAR"
+          }
+        }
+      },
+      {
+        "yPos": 6,
+        "height": 20,
+        "width": 48,
+        "widget": {
+          "title": "High",
+          "id": "",
+          "timeSeriesTable": {
+            "columnSettings": [],
+            "dataSets": [
+              {
+                "tableTemplate": "",
+                "timeSeriesQuery": {
+                  "outputFullDuration": false,
+                  "prometheusQuery": "max by (image) (label_join(trivy_image_vulnerabilities{cluster=\"wbaas-2\", severity=\"High\"}, \"image\", \":\", \"image_repository\", \"image_tag\")) > 0",
+                  "unitOverride": ""
+                }
+              }
+            ],
+            "displayColumnType": false,
+            "metricVisualization": "BAR"
+          }
+        }
+      },
+      {
+        "yPos": 6,
+        "height": 20,
+        "width": 48,
+        "widget": {
+          "title": "Critical",
+          "id": "",
+          "timeSeriesTable": {
+            "columnSettings": [],
+            "dataSets": [
+              {
+                "tableTemplate": "",
+                "timeSeriesQuery": {
+                  "outputFullDuration": false,
+                  "prometheusQuery": "max by (image) (label_join(trivy_image_vulnerabilities{cluster=\"wbaas-2\", severity=\"Critical\"}, \"image\", \":\", \"image_repository\", \"image_tag\")) > 0",
+                  "unitOverride": ""
+                }
+              }
+            ],
+            "displayColumnType": false,
+            "metricVisualization": "BAR"
+          }
+        }
+      },
+      {
+        "yPos": 26,
+        "height": 16,
+        "width": 48,
+        "widget": {
+          "title": "Low",
+          "id": "",
+          "xyChart": {
+            "chartOptions": {
+              "displayHorizontal": false,
+              "mode": "COLOR",
+              "showLegend": false
+            },
+            "dataSets": [
+              {
+                "breakdowns": [],
+                "dimensions": [],
+                "legendTemplate": "",
+                "measures": [],
+                "plotType": "LINE",
+                "sort": [],
+                "targetAxis": "Y1",
+                "timeSeriesQuery": {
+                  "outputFullDuration": false,
+                  "prometheusQuery": "sum by (severity) (max by (image_digest, severity) (trivy_image_vulnerabilities{cluster=\"wbaas-2\", severity=\"Low\"}))",
+                  "unitOverride": ""
+                }
+              }
+            ],
+            "thresholds": [],
+            "yAxis": {
+              "label": "",
+              "scale": "LINEAR"
+            }
+          }
+        }
+      },
+      {
+        "yPos": 26,
+        "height": 16,
+        "width": 48,
+        "widget": {
+          "title": "Over time",
+          "id": "",
+          "singleViewGroup": {
+            "displayType": "TAB"
+          }
+        }
+      },
+      {
+        "yPos": 26,
+        "height": 16,
+        "width": 48,
+        "widget": {
+          "title": "Medium",
+          "id": "",
+          "xyChart": {
+            "chartOptions": {
+              "displayHorizontal": false,
+              "mode": "COLOR",
+              "showLegend": false
+            },
+            "dataSets": [
+              {
+                "breakdowns": [],
+                "dimensions": [],
+                "legendTemplate": "",
+                "measures": [],
+                "plotType": "LINE",
+                "sort": [],
+                "targetAxis": "Y1",
+                "timeSeriesQuery": {
+                  "outputFullDuration": false,
+                  "prometheusQuery": "sum by (severity) (max by (image_digest, severity) (trivy_image_vulnerabilities{cluster=\"wbaas-2\", severity=\"Medium\"}))",
+                  "unitOverride": ""
+                }
+              }
+            ],
+            "thresholds": [],
+            "yAxis": {
+              "label": "",
+              "scale": "LINEAR"
+            }
+          }
+        }
+      },
+      {
+        "yPos": 26,
+        "height": 16,
+        "width": 48,
+        "widget": {
+          "title": "High",
+          "id": "",
+          "xyChart": {
+            "chartOptions": {
+              "displayHorizontal": false,
+              "mode": "COLOR",
+              "showLegend": false
+            },
+            "dataSets": [
+              {
+                "breakdowns": [],
+                "dimensions": [],
+                "legendTemplate": "",
+                "measures": [],
+                "plotType": "LINE",
+                "sort": [],
+                "targetAxis": "Y1",
+                "timeSeriesQuery": {
+                  "outputFullDuration": false,
+                  "prometheusQuery": "sum by (severity) (max by (image_digest, severity) (trivy_image_vulnerabilities{cluster=\"wbaas-2\", severity=\"High\"}))",
+                  "unitOverride": ""
+                }
+              }
+            ],
+            "thresholds": [],
+            "yAxis": {
+              "label": "",
+              "scale": "LINEAR"
+            }
+          }
+        }
+      },
+      {
+        "yPos": 26,
+        "height": 16,
+        "width": 48,
+        "widget": {
+          "title": "Critical",
+          "id": "",
+          "xyChart": {
+            "chartOptions": {
+              "displayHorizontal": false,
+              "mode": "COLOR",
+              "showLegend": false
+            },
+            "dataSets": [
+              {
+                "breakdowns": [],
+                "dimensions": [],
+                "legendTemplate": "",
+                "measures": [],
+                "plotType": "LINE",
+                "sort": [],
+                "targetAxis": "Y1",
+                "timeSeriesQuery": {
+                  "outputFullDuration": false,
+                  "prometheusQuery": "sum by (severity) (max by (image_digest, severity) (trivy_image_vulnerabilities{cluster=\"wbaas-2\", severity=\"Critical\"}))",
+                  "unitOverride": ""
+                }
+              }
+            ],
+            "thresholds": [],
+            "yAxis": {
+              "label": "",
+              "scale": "LINEAR"
+            }
+          }
+        }
+      },
+      {
+        "yPos": 26,
+        "height": 16,
+        "width": 48,
+        "widget": {
+          "title": "All severities",
+          "id": "",
+          "xyChart": {
+            "chartOptions": {
+              "displayHorizontal": false,
+              "mode": "COLOR",
+              "showLegend": false
+            },
+            "dataSets": [
+              {
+                "breakdowns": [],
+                "dimensions": [],
+                "legendTemplate": "",
+                "measures": [],
+                "plotType": "LINE",
+                "sort": [],
+                "targetAxis": "Y1",
+                "timeSeriesQuery": {
+                  "outputFullDuration": false,
+                  "prometheusQuery": "sum by (severity) (max by (image_digest, severity) (trivy_image_vulnerabilities{cluster=\"wbaas-2\"}))",
+                  "unitOverride": ""
+                }
+              }
+            ],
+            "thresholds": [],
+            "yAxis": {
+              "label": "",
+              "scale": "LINEAR"
+            }
+          }
+        }
+      }
+    ]
+  }
+}
