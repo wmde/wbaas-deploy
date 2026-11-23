@@ -2,11 +2,6 @@ controller:
   resources:
     limits:
       cpu: 100m
-  image:
-    registry: ghcr.io
-    image: porter-dev/ingress-nginx-controller
-    tag: v1.15.16
-    digest: null
 
   admissionWebhooks:
     enabled: false
