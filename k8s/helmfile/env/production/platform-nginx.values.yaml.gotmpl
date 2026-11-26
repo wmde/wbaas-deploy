@@ -12,8 +12,8 @@ resources:
      cpu: 20m
      memory: 128Mi
 
-serverBlock: |-
-{{ readFile "platform-nginx.nginx.conf" | indent 2 }}
+serverBlock: |
+  {{- tpl (readFile "platform-nginx.nginx.conf.gotmpl") . | nindent 2 }}
 
 livenessProbe:
   httpGet:

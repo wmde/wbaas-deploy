@@ -233,19 +233,30 @@ server {
 
         proxy_max_temp_file_size                1024m;
 
+        # TODO: investigate if we need to adjust caching to balance load against freshness
+        # global auth_request config; set `auth_request off;` for locations that shouldn't use it
+        auth_request /host;
+        error_page 401 = /wiki_not_found;
+        error_page 403 = @wiki_suspended;
+        auth_request_set $mw_alpha_host $upstream_http_x_mw_alpha_host;
+        auth_request_set $mw_api_host $upstream_http_x_mw_api_host;
+        auth_request_set $mw_web_host $upstream_http_x_mw_web_host;
+
         ############# Locations #############
 
         location = /kube-probe {
+                auth_request off;
                 add_header Content-Type text/plain;
                 return 200 'gangnam style!';
         }
 
         location = /host {
                 internal;
+                auth_request off;
                 proxy_intercept_errors on;
                 error_page 404 = /return_401;
                 proxy_buffering on;
-                proxy_pass http://api-app-backend.default.svc.cluster.local/backend/getWikiHostsForDomain?domain=$host;
+                proxy_pass http://api-app-backend.default.svc.cluster.local/backend/wiki/platformNginxInfo?domain=$host;
                 proxy_pass_request_body off;
                 proxy_set_header Content-Length "";
                 proxy_set_header X-Original-URI $request_uri;
@@ -256,20 +267,31 @@ server {
                 proxy_ignore_headers Vary;
                 proxy_set_header Accept-Encoding "";
                 add_header X-Cache-Status $upstream_cache_status;
-	}
+        }
 
         location = /return_401 {
                 internal;
+                auth_request off;
                 return 401;
         }
 
-        location = /host_error {
+        location = /wiki_not_found {
                 internal;
+                auth_request off;
                 default_type text/html;
                 return 404 '<body>You have requested the domain: $host. But that wiki can not currently be loaded.<br/>It may never have existed or it might now be deleted.<br/>You can check the platform status at <a href="https://status.wikibase.cloud">status.wikibase.cloud</a>.</body>';
         }
 
+        location @wiki_suspended {
+                auth_request off;
+                default_type text/html;
+                # This file must not contain any NGINX syntax such as dollar signs for variables
+                # If you need to make this more robust then consider adding it to the chart with a ConfigMap
+                return 403 {{ readFile "platform-nginx.wiki-suspended.html" | quote }};
+        }
+
         location = /robots.txt {
+                auth_request off;
                 add_header Content-Type text/plain;
                 return 200 $robots;
         }
@@ -340,11 +362,6 @@ server {
         }
 
         location ~* "^/()(.*)" {
-                auth_request /host;
-                error_page 401 = /host_error;
-                auth_request_set $mw_web_host $upstream_http_x_web_host;
-                auth_request_set $mw_api_host $upstream_http_x_api_host;
-                auth_request_set $mw_alpha_host $upstream_http_x_alpha_host;
                 add_header X-WBSTACK-MW-HOST $mw_host;
                 proxy_pass http://$mw_host:80;
                 rewrite "(?i)/()(.*)" /$2 break;
