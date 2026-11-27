@@ -1,7 +1,7 @@
 replicaCount: 1
 
-serverBlock: |-
-{{ readFile "platform-nginx.nginx.conf" | indent 2 }}
+serverBlock: |
+  {{- tpl (readFile "platform-nginx.nginx.conf.gotmpl") . | nindent 2 }}
 
 resources:
   limits:
